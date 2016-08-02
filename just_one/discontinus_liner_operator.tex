@@ -1,0 +1,33 @@
+\documentclass[a4j]{jarticle}
+\usepackage{../math_note}
+
+\begin{document}
+ノルム空間$X$を考える．
+このノルム空間が十分いい性質を持つとして不連続線形作用素の例を作り，
+その後でこの構成のために必要な$X$の性質を纏める．
+
+まず，$X$が加算濃度の正規直交基底$\{ \phi_n \}_{n \in \N}$を持つとする．
+すると
+\[ B:=\{b_n\}_{n \in \N}=\left\{\frac{1}{n} \phi_n \right\}_{n \in \N} \]
+は0に収束するCauchy列でありしかも$X$の基底である．
+これに対し，
+0に収束しないCauchy列$A:=\{ a_n \}_{n \in \N}$をとる
+\footnote{例えば$\{ \phi_n \}_{n \in \N}$とは異なる正規直交基底$\{ \psi_n \}_{n \in \N}$をとり，$a_n=e^{1/n} \psi_n$とする．}．
+これは明らかに$B$と線形独立である．
+
+さて，線形作用素$T:X \to X$を
+\[ Tb_n=a_n \]
+となるように取る．
+$B$は基底だったから，これは正しく定義できる．
+そうすれば$\lim_{n \to \infty} Tb_n=\lim_{n \to \infty} a_n \neq 0$が成立する．
+$\lim_{n \to \infty} b_n=0$であったから，$T$は不連続線形作用素．
+
+上の構成には，$X$が以下の条件を満たすことが必要である．
+\begin{enumerate}[i)]
+    \item 完備でない
+    \item 有限次元でない
+\end{enumerate}
+完備であればBarelのカテゴリー定理から$X$は加算基底を持たない．
+有限次元であれば非完備にならない．
+
+\end{document}

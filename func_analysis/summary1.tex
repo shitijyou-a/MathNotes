@@ -1,0 +1,521 @@
+\documentclass[a4j]{jarticle}
+\usepackage{../math_note}
+
+\newcommand{\dom}{\mathscr{D}}
+\newcommand{\range}{\mathscr{R}}
+\newcommand{\spB}[2]{B(\mathscr{#1}, \mathscr{#2})}
+\newcommand{\spX}{\mathscr{X}}
+\newcommand{\spY}{\mathscr{Y}}
+
+\begin{document}
+    \section{第1,2章/空間}
+    \subsection{定義}
+        \begin{Def}
+            集合$V$，体$k$，
+            2つの演算子$+:V \times V \to V$と$\ast: k \times V \to V$の組$(V,k,+,\ast)$を\textbf{線形空間}と呼ぶ．
+            ただし$\alpha, \beta \in k$と$u,v \in V$が取れるものとする．
+            \begin{description}
+                \setlength{\leftskip}{0.5truecm}
+                \item[V1] $V$は加法$+$について群を成す
+                \item[V2] $\alpha(u+v)=\alpha u+\alpha v$
+                \item[V3] $(\alpha+\beta)u=\alpha u+\beta u$
+                \item[V4] $(\alpha \beta)u=\alpha (\beta u)$
+                \item[V5] $1 u=u$~(ただし左辺の1は$k$の乗法単位)
+            \end{description}
+            スカラー倍の演算子$\ast$は略記した．
+            また，加法の演算子+には
+            $+_{V}:V \times V \to V$と$+_{k}: k \times k \to k$の2つがあるが，
+            混同のおそれが無いためどちらも+で表した．
+        \end{Def}
+
+        \begin{Def}
+            $\C$上の線形空間$V$に対し，以下の条件を満たす
+            対応$\| \cdot \|: V \to \R $を\textbf{ノルム}と呼ぶ．
+            ただし$\alpha \in \C$と$x, y \in V$が取れるものとする．
+            \begin{description}
+                \setlength{\leftskip}{0.5truecm}
+                \item[N1] $\|x\|=0 \iff x=0$
+                \item[N2] $\|\alpha x\| =|\alpha| \|x\|$
+                \item[N3] $\|x+y\| \leq \|x\|+\|y\|$
+            \end{description}
+            $\|x\| \geq 0$を仮定することも多いが，これは上の(N3)で$y=-x$とすれば導出できる．
+            ノルムを備えた線形空間を\textbf{ノルム空間}と呼ぶ．
+        \end{Def}
+        これは大きさの概念を抽象化したものである．
+        これを利用し，差の大きさとして標準的な距離を定めることが出来る．
+        すなわち，任意の2点$x,y$の距離を$d(x,y)=\|x-y\|$とすると
+        これは距離の公理を満たす．
+
+        \begin{Def}
+            $\C$上の線形空間$V$に対し，以下の条件を満たす
+            対応$(\cdot, \cdot): V \times V \to \C $を\textbf{内積}と呼ぶ．
+            ただし$\alpha \in \C$と$u, v, w \in V$が取れるものとする．
+            \begin{description}
+                \setlength{\leftskip}{0.5truecm}
+                \item[I1] $(u,v)=\overline{(v,u)}$
+                \item[I2] $(\alpha u, v) =\alpha (u,v)$
+                \item[I4] $(u+v,w)=(u,w)+(v,w)$
+                \item[I5] $(u,u) \geq 0$
+                \item[I6] $(u,u)=0 \iff u=0$
+            \end{description}
+            内積を備えた線形空間を\textbf{内積空間}(あるいは前Hilbert空間)と呼ぶ．
+            また，\[ \|x\|=(x,x)^{1/2} \]と置くと，これはノルムの定義を満たす．
+            したがって内積空間はノルム空間とすることが出来る．
+            このノルムは\textbf{内積が定めるノルム}を呼ばれる．
+        \end{Def}
+        ノルムが大きさの概念を抽象化したものであるのに対し，
+        内積は大きさと角度の概念を抽象化したものである．
+        別の言い方をすれば，これはより一般的な「近さ」を抽象化したものである．
+        % グラフにノルムを入れることは出来るか？
+
+        \begin{Def}
+            ノルム空間$(V, \| \cdot \|)$について，
+            点列$\{ u_n \}_{n \in \N}$が以下の論理式を満たすとき，
+            点列$\{ u_n \}$を\textbf{Cauchy列}と呼ぶ．
+            \[ \forall \varepsilon>0,~ \exists N \in \N (\forall m,n>N,~ \| u_m-u_n \|<\varepsilon) \]
+        \end{Def}
+
+        \begin{Def}
+            空間$X$に含まれる任意のCauchy列が$X$の元に収束するとき，空間$X$は\textbf{完備}であると呼ばれる．
+        \end{Def}
+
+        \begin{Def}
+            完備なノルム空間を\textbf{Banach空間}，
+            内積が定めるノルムについて完備な内積空間を\textbf{Hilbert空間}と呼ぶ．
+        \end{Def}
+
+        \begin{Def}
+            線形空間$\spX$の空でない部分集合$\mathscr{M}$が
+            \[ u, v \in \mathscr{M},~ \alpha, \beta \in \C,~ \alpha u+ \beta v \in \mathscr{M} \]
+            を満たすとき，$\mathscr{M}$は$\spX$の（線形）\textbf{部分空間}と呼ぶ．
+            特にノルム空間の部分空間であって閉集合であるものを\textbf{閉部分空間}と呼ぶ．
+        \end{Def}
+        これに関しては後の定理\ref{them1:28}, 系\ref{cor1:29}が重要である．
+
+        \begin{Def}
+            $\C$上の線形空間として有限次元を持つノルム空間を\textbf{有限次元ノルム空間}と呼ぶ．
+        \end{Def}
+        これに関しては定理\ref{them1:37}が重要である．
+        すなわち，有限次元ノルム空間は完備である．
+
+        \begin{Def}
+            Hilbert空間$\mathscr{H}$の空でない\kenten{閉部分集合}$\mathscr{M}$に対して，
+            \[ \mathscr{M}^{\perp}=\{ u \in \mathscr{H} : \forall v \in \mathscr{M},~ (u,v)=0\} \]
+            を$\mathscr{M}$の\textbf{直交補空間}と呼ぶ．
+        \end{Def}
+
+        \begin{Def}
+            任意の有界閉部分集合がコンパクトであるようなノルム空間を\textbf{局所コンパクト}であると言う．
+        \end{Def}
+
+    \subsection{例}
+        \begin{Example}[例1.17, p.8]
+            閉区間$[a,b]( \subset \R)$から$\C$への連続な関数全体を$C[a,b]$と表す．
+            ノルムを\[ \|u\|=\displaystyle{\sup_{x \in [a,b]}{|u(x)|}} \]として入れると，
+            $C[a,b]$はBanach空間である．
+        \end{Example}
+        上のことを証明する際は教科書の例1.9(p.5), 1.13(p.6)も参照のこと．
+
+        \begin{Example}[例1.18, p.9]
+            点列$\{u_n\}_{n \in \N}$で
+            $\sum_{n \in \N}{|u_n|}<\infty$であるもの全体の集合を$l^1$と書く．
+            スカラー集合は$\C$，線形演算は項毎のものとし，ノルムを\[ \|u\|=\sum_{n \in \N}{|u_n|} \]で定義する．
+            この時，$l^1$はBanach空間である．
+        \end{Example}
+        \begin{Example}[例1.19, p.10]
+            点列$\{u_n\}_{n \in \N} \subset \C$で
+            $\sup_{n \in \N}{|u_n|}<\infty$であるもの全体の集合を$l^{\infty}$と書く．
+            $l^{\infty}$に於けるノルムを\[ \|u\|=\sup_{n \in \N}{|u_n|} \]で定義する．
+            この時，$l^{\infty}$はBanach空間である．
+        \end{Example}
+        \begin{Example}[例1.33, p.19]
+            閉区間$[a,b] \subset \R$について，
+            $[a,b]$から$\C$への$C^m$級関数全体を$C^m[a,b]$と表す．
+            これは$C[a,b]$の部分空間であり，$C[a,b]$の中で稠密．
+            $C^m[a,b]$にノルムを
+            \[ \|u\|=\sum_{j=0}^{m}{ \sup_{x \in [a,b]}{\left| \frac{d^j u}{dx^j}(x) \right|} } \]
+            として入れると，
+            $C^m[a,b]$はBanach空間である．
+        \end{Example}
+
+        次の二つは特に関数解析学で重要である．
+        \begin{Example}[\S 2.3, p.37-40]
+            $\Omega$を$\R^n$の可測集合とし，$|\Omega|>0$とする．
+            $\Omega$上の可積分関数全体を，
+            $u=v (a.e.)$な元を同一視するという同値関係で割ったものを$L^1(\Omega)$と呼ぶ．
+            これはノルム\[ \|u\|_{L^1}:=\int_{\Omega}{|u(x)|dx} \]によってBanach空間となる．
+        \end{Example}
+        \begin{Example}[\S 2.4, p.40-45]
+            $\Omega$を前と同じものとする．また，$p$は$1 \leq p < \infty$を満たす実数とする．
+            $\Omega$上の可測関数で，
+            \[ \|u\|_{L^p}:=\left( \int_{\Omega}{|u(x)|^p dx} \right)^{\frac{1}{p}} < \infty \]
+            を満たすもの全体を$\mathscr{L}^p(\Omega)$と書く．
+            このノルム$\|u\|_{L^p}$についてMinkowshiの不等式（三角不等式）及びH\"olderの不等式が成立する．
+            $\mathscr{L}^p(\Omega)$を$u=v (a.e.)$な元を同一視するという同値関係で割ったものを$L^p(\Omega)$と呼ぶ．
+            これはノルム$\|u\|_{L^p}$によってBanach空間となる．
+        \end{Example}
+
+    \subsection{定理・命題・補題・系}
+    \subsubsection{ノルム・内積の基本的性質}
+    \begin{Them}
+        ノルム空間$(V, \| \cdot \|)$について，ノルム$\|u\|: V \to \C$は連続関数である．
+    \end{Them}
+    \begin{Them}[定理1.24, p.14]
+        内積空間$(V, (\cdot, \cdot))$について，
+        内積$(u, v): V \times V \to \C$は$u,v$両方について連続関数である．
+    \end{Them}
+    \begin{Them}[Schwarzの不等式, 定理1.21, p.13]
+        内積空間$(V, (\cdot, \cdot))$に対して，
+        \[ \forall u, v \in V,~ |(u,v)| \leq \|u\|\|v\| \]
+        ただしここに有る$\| \cdot \|$は内積が定めるノルムである．
+    \end{Them}
+
+    \subsubsection{閉部分空間}
+    \begin{Them}[定理1.28, p17] \label{them1:28}
+        Banach空間$\spX$の部分空間$\mathscr{M}$を考える．
+        $\mathscr{M}$のノルムを$\spX$のノルムを$\mathscr{M}$に制限したものとした時に
+        $\mathscr{M}$もBanach空間になるための必要十分条件は，$\mathscr{M}$が$\spX$の閉部分空間であること．
+    \end{Them}
+    \begin{Cor}[系1.29, p.18] \label{cor1:29}
+        Hilbert空間$\spX$の部分空間$\mathscr{M}$を考える．
+        $\mathscr{M}$の内積を$\spX$の内積を$\mathscr{M}$に制限したものとした時に
+        $\mathscr{M}$もHilbert空間になるための必要十分条件は，$\mathscr{M}$が$\spX$の閉部分空間であること．
+    \end{Cor}
+
+    \subsubsection{有限次元ノルム空間}
+    \begin{Them}[補題1.38, p.22] \label{them1:38}
+        ノルム空間$X$の元$u$を適当な$X$の基底$\{ \phi_1, \dots, \phi_n \}$を用いて
+        $u=\alpha_1 \phi_1+\dots+\alpha_n \phi_n (\alpha_k \in \C)$と表したとする．
+        $||| u |||:=\sup_{k=1,\dots,n}{|\alpha_k|}$とおくと，これはノルムであり，
+        しかも任意の有限次元ノルム空間に備えられた任意のノルムと$||| \cdot |||$は同値である．
+    \end{Them}
+    このノルム$||| \cdot |||$について任意の有限次元ノルム空間が完備であることを示すことが出来る．
+    \begin{Them}[定理1.37, p.22] \label{them1:37}
+        有限次元ノルム空間は完備である．
+    \end{Them}
+
+    \subsubsection{局所コンパクト性}
+    \begin{Them}
+        ノルム空間$\spX$の
+        単位球$\mathcal{S}=\{u \in \spX : \|u\|=1\}$がコンパクト集合ならば，
+        $\spX$は有限次元である．
+    \end{Them}
+
+    \section{第1,7,8/作用素}
+    \subsection{定義}
+    \subsubsection{一般の作用素}
+    \begin{Def}
+        線形空間$\spX$の部分集合$\dom$から
+        線形空間$\spY$への写像$T$を，
+        $\spX$から$\spY$への\textbf{作用素}と呼ぶ．
+        $\dom$は$T$の定義域と呼ばれ，$\dom(T)$で表す．
+        $\{v \in \spY : \exists u \in \dom(T),~ v=Tu\}$
+        は$T$の値域と呼ばれ，$\range(T)$で表す．
+    \end{Def}
+    一般に，\kenten{作用素はその原像全体で定義されているとは限らない}．
+
+    \begin{Def}
+        ノルム空間$\spX, \spY$について，
+        線形作用素$T:\spX \to \spY$が
+        \[ \forall u \in \spX, \| Tu \|=\|u\| \]
+        を満たすとき，$T$は\textbf{等長}であるという．
+        等長な作用素は単射である．
+    \end{Def}
+
+    \begin{Def}
+        Hilbert空間$\spX, \spY$について，
+        $\dom(T)=\spX, \range(T)=\spY$かつ等長な作用素$T:\spX \to \spY$を\textbf{ユニタリ作用素}と呼ぶ．
+        $\spX$から$\spY$へのユニタリ作用素が存在するとき，
+        $\spX$と$\spY$は\textbf{Hilbert空間として同型}であるという．
+    \end{Def}
+
+    \begin{Def}
+        作用素$S,T$を写像と見た時，すなわち，どちらも空間全体で定義されている時の合成写像を\textbf{作用素の積}と呼ぶ．
+        また，$ST, TS$のどちらも恒等写像であるとき，
+        $S$と$T$は互いに\textbf{逆作用素}であると言い，$S=T^{-1}, T=S^{-1}$と書く．
+    \end{Def}
+
+    \begin{Def}
+        2つの作用素$S,T:\spX \to \spY$が
+        \[ \dom(S) \subset \dom(T); \forall u \in \dom(S), Tu=Su \]
+        を満たすとき，$T$は$S$の\textbf{拡張}である，または$S$は$T$の\textbf{縮少}であるという．
+    \end{Def}
+
+    \subsubsection{線形作用素}
+    \begin{Def}
+        作用素$T:\spX \to \spY$が
+        \[ \forall u,v \in \dom,~ \forall \alpha, \beta \in \C, T(\alpha u+\beta v)=\alpha Tu+\beta Tv \]
+        を満たすとき，$T$は\textbf{線形作用素}であると言う．
+    \end{Def}
+
+    \begin{Def}
+        2つの線形作用素$T:\spX \to \spY$と$S:\spY \to \mathscr{Z}$について，
+        積$ST$を
+        \[ (ST)u:=S(Tu);~ \dom(ST)=\{ u \in \dom(T) : Tu \in \dom(S) \} \]
+        定める．この時，結合律が成り立つ．
+
+        さらに$P, Q:\spX \to \spY$について
+        和$P+Q$を以下のように定める．
+        \[ (P+Q)u:=Pu+Qu; \dom(P+Q)=\dom(P) \cap \dom(Q)  \]
+        これについて，$(P_1+P_2)Q=P_1 Q+P_2 Q$は成り立つが，
+        $P(Q_1+Q_2)=P Q_1+P Q_2$が成り立つとは限らない\footnote{教科書p.154}．
+
+        スカラー倍$\alpha P$を以下で定める．
+        \[ (\alpha T)u:=\alpha (Tu); \dom(\alpha T)=\dom(T) \]
+    \end{Def}
+    次節で定める$B(\spX)$では，これらが環を成す．
+    しかも$\spX$がBanach空間であれば，$B(\spX)$もBanach空間になる．
+
+    \subsubsection{有界線形作用素}
+    \begin{Def}
+        線形作用素$T:\spX \to \spY$が
+        \[ \exists M \geq 0,~ \forall u \in \dom(T),~ \|Tu\|_{\spY} \leq M \|u\|_{\spX} \]
+        を満たすとき，$T$は\textbf{有界}であるという．
+    \end{Def}
+
+    \begin{Def}
+        ノルム空間$\spX$からノルム空間$\spY$への作用素$T$について，
+        $u \in \dom(T)$において連続であるとは，
+        \[ \forall \{ u_n\}_{n \in \N} \subset \dom(T), \lim_{n \to \infty}u_n=u \implies \lim_{n \to \infty}T u_n=Tu  \]
+        が成り立つことである．
+        $T$が任意の$u \in \dom(T)$で連続であれば，単に$T$は\textbf{連続}であるという．
+    \end{Def}
+    $T$が有界ならば$\|T(u_n-u)\| \leq M\|u_n-u\| \to 0(n \to \infty)$より$T$は連続である．
+    線形作用素ならば逆が成り立つことも言える．
+    定理\ref{them7:1}参照．
+
+    \begin{Def}
+        ノルム空間$\spX(\neq \{0\})$からノルム空間$\spY$への\kenten{有界線形作用素}で，
+        $\spX$全体で定義されているもの全体の集合を$B(\spX, \spY)$と書く．
+        また，$B(\spX):=B(\spX, \spY)$とする．
+    \end{Def}
+    おそらく$B$はBoundedから来ているのだろう．
+    定理\ref{them7:1}から，$B(\spX, \spY)$は連続な線形作用素の集合とも言える．
+    以降では$B(\spX, \spY)$の元及び空間自体が主な考察対象となる．
+
+    \begin{Def}
+        $\spB{X}{Y}$の元$T$のノルムを
+        \[
+            \|T\|
+            :=\sup_{\|u\| \leq 1}{\|Tu\|_{\spY}}
+            =\sup_{\|u\|=1}{\|Tu\|_{\spY}}
+            =\sup_{\|u\| \neq 0}{ \frac{\|Tu\|_{\spY}}{\|u\|_{\spX}} }
+        \]
+        で定める．
+        これらが等しいことは$T$の線形性とノルムの定義から容易に示される．
+        この時，任意の$u \in \spX$で$\|Tu\| \leq \|T\| \|u\|$
+        \footnote{当然ながら$\|Tu\|_{\spY} \leq \|T\|_{\spB{X}{Y}} \|u\|_{\spX} $の事}
+        が成り立つ．
+    \end{Def}
+    以上で定められた，有界線形作用素同士の演算とノルムについて，定理\ref{them7:6}が重要である．
+
+    \begin{Def}
+        $T_n (n=1,2,\dots),~ T \in \spB{X}{Y}$とする．
+        \[ \|T_n-T\|_{\spB{X}{Y}} \to 0 ~(n \to \infty) \]
+        が成り立つとき，
+        $T_n$は$T$に\textbf{一様収束}する，あるいは\textbf{ノルム収束}するという．
+    \end{Def}
+    \begin{Def}
+        $T_n (n=1,2,\dots),~ T \in \spB{X}{Y}$とする．
+        \[ \|T_n u-T u\|_{\spY} \to 0 ~(n \to \infty) \]
+        が成り立つとき，$T_n$は$T$に\textbf{強収束}すると言い，
+        \[ \operatorname{s-lim}_{n \to \infty}{T_n}=T,~~ T_n \to T \mbox{(強)} \]
+        などと書く．
+        $T$は$T_n$の\textbf{強極限}という．これは存在すれば一意である．
+    \end{Def}
+    \begin{Def}
+    \end{Def}
+
+    \subsubsection{閉作用素}
+    \begin{Def}[閉作用素/1]
+        線形作用素$T: \spX \to \spY$が以下の条件を満たすとき，
+        $T$は\textbf{閉作用素}であるという．
+        \begin{center}
+            グラフ$\{ (u, Tu) : u \in \spX \}$は$\spX \times \spY$の閉集合である．
+        \end{center}
+    \end{Def}
+    これについては閉グラフ定理(定理\ref{them7:33})が重要である．
+    上に述べたのは意味が取りやすい閉作用素の定義であるが，
+    他に証明をする際に使われる定義が有る．
+    \begin{Def}[閉作用素/2]
+        線形作用素$T: \spX \to \spY$が以下の条件を満たすとき，
+        $T$は閉作用素であるという．
+        \begin{center}
+            $\dom(T)$は\textbf{グラフ・ノルム}$\|u\|_{\spX}+\|Tu\|_\spY$に関して完備である．
+        \end{center}
+    \end{Def}
+
+    \begin{Def}
+        閉作用素であるような拡張を持つ作用素を\textbf{前閉作用素}と呼ぶ．
+        また，その閉作用素であるような拡張を\textbf{閉拡大}と呼ぶ．
+        最小 \footnote{定義域の包含関係について順序を定めている．} の閉拡大を\textbf{閉包}と呼ぶ．
+    \end{Def}
+    より詳しく，どのような特徴を持つ作用素が前閉作用素なのか，
+    ということは定理\ref{them7:20}が明らかにしている．
+
+    \subsubsection{共役空間}
+    \begin{Def}
+        $\spX^{\ast}=B(\spX, \C)$はすでに定めたノルム
+        \[ \|f\|=\sup_{u \in \spX, \| u \| \neq 0}{ \frac{|f(u)|}{\|u\|} } \]
+        によってBanach空間となる
+        \footnote{$\spX^{\ast}$の元$f$による$u \in \spX$の像は$fu$でなく$f(u)$や$\langle u,f \rangle$と書く．}．
+        $\spX^{\ast}$を$\spX$の\textbf{双対空間}あるいは\textbf{共役空間}と呼ぶ．
+        また，$\spX^{\ast}$の元は\textbf{汎関数}と呼ばれる．
+    \end{Def}
+    \begin{Def}
+        ノルム空間$\spX, \spY$について
+        $T \in \spB{X}{Y}$と以下のような関係を持つ$T^{\ast} \in \spB{X^{\ast}}{Y^{\ast}}$を
+        $T$の\textbf{共役作用素}と呼ぶ．
+        \begin{align*}
+            \|T^{\ast}\|_{\spB{X^{\ast}}{Y^{\ast}}}=\|T\|_{\spB{X}{Y}} \\
+            \forall u \in \spX,~ \forall g \in \mathscr{Y^{\ast}},~ (T^{\ast}g)(u)=g(Tu)
+        \end{align*}
+    \end{Def}
+    \begin{Def}
+        Banach空間$\spX$に対し，作用素$\kappa$を
+        \begin{align*}
+            \kappa: \spX \to \spX^{\ast \ast}     &;u \mapsto \phi_{u} \\
+            \phi_u: \mathscr{X^{\ast}} \to \C \hspace{3truemm}&;f \mapsto f(u)
+        \end{align*}
+        のように定める．
+        $\kappa$により$\spX$は$\spX^{\ast \ast}$の中に同型に埋め込まれる（定理\ref{them8:23}）．
+        $\range(\kappa)=\spX^{\ast \ast}$であった時，
+        すなわち$\kappa$が$\spX$から$\spX^{\ast \ast}$への同型写像となるとき，
+        $\spX$を\textbf{反射的}あるいは\textbf{回帰的}であると言う．
+    \end{Def}
+
+    \subsection{例}
+    % Fourier変換
+
+    \subsection{定理・命題・補題・系}
+    \begin{Them}[定理7.1, p.148] \label{them7:1}
+        線形作用素$T$が連続ならば$T$は有界である．
+        \footnote{線形作用素$T$は0で連続ならば定義域全体で連続．
+        実際，任意の点$a$について，0へ収束する列$\{u_n\}$を元に$a$へ収束する列を$\{a+u_n\}$の様に作れる．
+        $T$が0で連続であれば，$T$の線形性と三角不等式から$\|T(a+u_n)\| \leq \|Ta\|+\|Tu_n\| \to \|Ta\|~(n \to \infty)$．
+        よって$T$は任意の$a$で連続．}
+    \end{Them}
+
+    \begin{Them}[定理7.6, p.150] \label{them7:6}
+        $\spY$がBanach空間であるとき，$\spB{X}{Y}$はBanach空間になる．
+    \end{Them}
+
+    \begin{Them}[定理7.8, p.153] \label{them7:8}
+        $T_n, T \in \spB{X}{Y}$の時，$\|T_n - T\| \to 0$（一様収束）は次のことと同値である:
+        $T_n$は$\spX$の閉単位球上で一様収束する．すなわち，
+        \[ \forall \epsilon>0,~ \exists n_0~ ( \forall n>n_0,~ \forall u \in \spX~ (\|u\| \leq 1 \implies \|T_n u - T u\|<\epsilon)) \]
+    \end{Them}
+    \begin{Them}[定理7.20 (i), p.166] \label{them7:20}
+        $T$が前閉作用素であるための必要十分条件は，
+        \[ \forall \{ u_n \}_{n \in \N} \subset \dom(T)~ ((\lim_{n \to \infty}u_n=0  \wedge \lim_{n \to \infty}Tu_n=v) \implies v=0) \]
+    \end{Them}
+
+    \begin{Them}[定理7.21, p.166, 一様有界性の原理] \label{them7:21}
+        $\spX$を\kenten{Banach空間}，$\spY$を\kenten{ノルム空間}であるとし，
+        $\{ T_{\lambda} \}_{\lambda \in \Lambda} \subset \spB{X}{Y}$を作用素の族とする．
+        この時，$\spX$の各点$u$で$\{ T_{\lambda}u \}_{\lambda \in \Lambda} \subset \spY$が
+        有界ならば，$\{ T_{\lambda} \}_{\lambda \in \Lambda}$は一様に有界である．
+    \end{Them}
+    これはthree basic principlesの第1のもの．
+
+    \begin{Them}[定理7.23, p.167, Baireのカテゴリー定理] \label{them7:23}
+        $\spX$を\kenten{完備な距離空間}であるとする．
+        高々加算個の$\spX$の閉集合$\spX_n ~(n=1,2,\dots)$が
+        $\spX$を覆う（$\spX=\bigcup_{n=1}^{\infty}{\spX_n}$）ならば，
+        少なくとも1つの$\spX_n$は$\spX$の開球を含む．
+    \end{Them}
+    これを元に次が示される．
+
+    \begin{Them}[定理7.30, p.170, 開写像原理] \label{them7:30}
+        $\spX, \spY$をBanach空間とし，$\spB{X}{Y}$とする．
+        もし$\range(T)=\spY$ならば，$T$は開写像である．
+    \end{Them}
+    これはthree basic principlesの第2のもの．
+
+    \begin{Them}[定理7.33, p.172, 閉グラフ定理] \label{them7:33}
+        $\spX, \spY$はBanach空間，
+        $T$は$\spX$から$\spY$への閉作用素とする．
+        この時，$\dom(T)=\spX$ならば$T \in \spB{X}{Y}$．
+    \end{Them}
+
+    \begin{Cor}[系7.34, p.172] \label{cor7:34}
+        $\spX, \spY$はBanach空間，
+        $T$は$\spX$から$\spY$への閉作用素とする．
+        $T$が1対1かつ$\range(T)=\spY$ならば$T^{-1} \in \spB{X}{Y}$
+    \end{Cor}
+
+%    \begin{Them}[定理7., p.] \label{them7:}
+%    \end{Them}
+
+    \begin{Them}[定理8.3, p.176] \label{them8:3}
+        $\spX$をノルム空間，$f \in \spX^{\ast}$とするとき，次のことが成り立つ．
+        \begin{enumerate}[i)]
+            \setlength{\leftskip}{5truemm}
+            \item $\mKer f=\{ u \in \spX : f(u)=0 \}$は$\spX$の閉部分空間．
+            \item $f\neq 0$とし，$u_0 \not \in \mKer f$とすると，任意の$u \in \spX$は
+                  \[ u=u'+\alpha u_0 ~~ u' \in \mKer f,~ \alpha \in \C \]
+                  と一意に表される．ここで$\alpha$は$\alpha = f(u)/f(u_0)$で与えられる．
+              \item $\spX$が\kenten{Hilbert空間}で$f \neq 0$ならば，$(\mKer f)^{\perp}$は1次元である．
+        \end{enumerate}
+    \end{Them}
+    \begin{Them}[定理8.5, p.177, Rieszの表現定理] \label{them8:5}
+        $\mathscr{H}$をHilbert空間とすると，任意の$f \in \mathscr{H}^{\ast}$は
+        有る$v \in \mathscr{H}$によって$f_v(\cdot)=(\cdot,v)$と表される．
+        $v$は$f$によって一意に定まる．
+    \end{Them}
+    このことからHilbert空間が反射的である（$\mathscr{H} \simeq \mathscr{H}^{\ast\ast}$）ことが示される．
+
+    Rieszの表現定理は$\mathscr{H}^{\ast}$が十分広いことも言っている．
+    Banach空間$\spX$の双対空間$\spX^{\ast}$の場合，
+    1次元の部分空間を作ることは簡単に出来る
+    \footnote{p.181参照．適当に$u_0 \in \spX, c \in \C$をとり，$f(\alpha u_0)=c \alpha$とする．}．
+    しかし$\spX^{\ast}$が十分広い空間であることはまったく自明でない．
+    これは以下の定理によって示される．
+    \begin{Them}[定理8.11, p.182, Hahn-Banachの拡張定理] \label{them8:11}
+        $\spX$を\kenten{実線形空間}とする．
+        $p:\spX \to \R$は（線形とは限らない）汎関数とし，以下を満たすとする．
+        \begin{enumerate}[i)]
+            \setlength{\leftskip}{5truemm}
+            \item $\forall u, v \in \spX,~ p(u+v) \leq p(u)+p(v)$ 
+            \item $\forall x \in \spX,~ \alpha \in \R_{\geq 0},~ p(\alpha x) = \alpha p(x)$
+        \end{enumerate}
+        この条件はまとめて劣線形性と呼ばれる．
+        $f$は$\spX$の部分空間$\mathscr{M}$で定義された線形汎関数で，
+        \[ \forall u \in \mathscr{M},~ f(u) \leq p(u) \]
+        を満たすものとする．
+        その時$f$はこの不等式と線形性を保ったまま，$\spX$全体に拡張される．
+    \end{Them}
+    これはthree basic principlesの第3のもの．
+    複素線形空間でも同様の定理が成立する．
+
+    \begin{Them}[定理8.13, p.184] \label{them8:13}
+        $\spX$を\kenten{複素線形空間}とする．
+        $p:\spX \to \R$は（線形とは限らない）汎関数とし，以下を満たすとする．
+        \begin{enumerate}[i)]
+            \setlength{\leftskip}{5truemm}
+            \item $p(u) \geq 0$
+            \item $\forall u, v \in \spX,~ p(u+v) \leq p(u)+p(v)$ 
+            \item $\forall x \in \spX,~ \alpha \in \R_{\geq 0},~ p(\alpha x) = \alpha p(x)$
+        \end{enumerate}
+        この性質を持つ$p$を$\spX$上のセミノルム(semi-norm)と言う．
+        $f$は$\spX$の部分空間$\mathscr{M}$で定義された線形汎関数で，
+        \[ \forall u \in \mathscr{M},~ 0 \leq |f(u)| \leq p(u) \]
+        を満たすものとする．
+        その時$f$はこの不等式と線形性を保ったまま，$\spX$全体に拡張される．
+    \end{Them}
+
+    \begin{Them}[定理8.23, p.189] \label{them8:23}
+        Banach空間$\spX$に対し，作用素$\kappa$を
+        \begin{align*}
+            \kappa: \spX \to \spX^{\ast \ast}     &;u \mapsto \phi_{u} \\
+            \phi_u: \mathscr{X^{\ast}} \to \C \hspace{3truemm}&;f \mapsto f(u)
+        \end{align*}
+        のように定める．
+        $\kappa$により$\spX$は$\spX^{\ast \ast}$の中への等長な線形作用素である．
+        したがって，$\spX$は$\spX^{\ast \ast}$の部分空間とみなせる．
+    \end{Them}
+
+%    \begin{Them}[定理8., p.] \label{them8:}
+%    \end{Them}
+
+\end{document}
