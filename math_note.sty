@@ -1,0 +1,59 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{ascmac}
+%\usepackage{breqn} %% cause error with xypic package
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{url}
+
+\theoremstyle{definition}
+\newtheorem{Them}{定理}[section]
+\newtheorem{Def}[Them]{定義}
+\newtheorem{Lemma}[Them]{補題}
+\newtheorem{Prop}[Them]{命題}
+\newtheorem{Cor}[Them]{系}
+\newtheorem{Remark}[Them]{注意}
+\newtheorem{Example}[Them]{例}
+
+\newcommand{\QED}{\begin{rightflush}\rule[-2pt]{5pt}{10pt}\end{rightflush}}
+\renewcommand{\proofname}{\textnormal{(証明)}}
+\renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}
+
+%% \footnote => 1), 2), 3), ...
+\renewcommand\thefootnote{\arabic{footnote})}
+
+%% kenten {{{
+\makeatletter
+\def\kenten#1{%
+   \ifvmode\leavevmode\else\hskip\kanjiskip\fi
+   \setbox1=\hbox to \z@{・\hss}% 「・」は全角の中黒
+   \ht1=.63zw
+   \@kenten#1\end}
+\def\@kenten#1{%
+   \ifx#1\end \let\next=\relax \else
+     \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
+     \let\next=\@kenten
+   \fi\next}
+
+\def\rensuji#1{\hskip\xkanjiskip
+  \hbox to 1zw{\yoko\hss#1\hss}\hskip\xkanjiskip\relax}
+
+\makeatother
+%% }}}
+
+%% symbols
+\mathchardef\mdash="2D %% dash in math-mode
+\newcommand {\cat}[1]       {\mathbf{#1}}
+\newcommand {\idarrow}[1]   {1_{#1}}
+\newcommand {\mKer}         {\operatorname{Ker}} %% m means math
+\newcommand {\mIm}          {\operatorname{Im}} %% m means math
+\newcommand {\C}            {\mathbb{C}}
+\newcommand {\R}            {\mathbb{R}}
+\newcommand {\Z}            {\mathbb{Z}}
+\newcommand {\N}            {\mathbb{N}}
+
+%% other utilities
+%\newcommand{\tatev}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
+%\newcommand{\Forall}[1]{{}^{\forall}\hiderel{#1}~}
+%\newcommand{\Exists}[1]{{}^{\exists}\hiderel{#1}~}

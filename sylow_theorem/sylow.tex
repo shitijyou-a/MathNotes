@@ -13,6 +13,9 @@
 
 \begin{document}
 \maketitle
+これはKeith Conrad氏のノート``THE SYLOW THEOREMS"
+\footnote{\url{http://www.math.uconn.edu/~kconrad/blurbs/grouptheory/sylowpf.pdf}}
+を元にした，Sylowの定理の証明とその応用についてのノートである．
 
 \begin{Them}[Sylow Theorems]
     任意の有限群$G$について、
@@ -29,13 +32,13 @@
     \end{enumerate}
 \end{Them}
 
-\section{Prepares for The Proof}
+\section{Prepares for The proof}
     \begin{Them}[Orbit-Stabilizer Theorem]
         群$G$は集合$X$に作用するものとする。以下が成り立つ。
         \[ \forall x \in  X,~ |G / \Stab_G(x)|=|G \ast x| \]
         \footnote{$\Stab_G(x):=\{g \in G : g \ast x=x \}$}
     \end{Them}
-    \begin{Proof}
+    \begin{proof}
         任意の$g, h \in G$を取る。
         \begin{eqnarray*}
             g \ast x=h \ast x
@@ -43,14 +46,13 @@
                 &\iff& g \ast \Stab_G(x)= h \ast \Stab_G(x) ~(=\Stab_G(x))
         \end{eqnarray*}
         よって$g \ast \Stab_G(x) \mapsto g \ast x$は全単射。
-        \QED
-    \end{Proof}
+    \end{proof}
 
     \begin{Them}[Lagrange's Theorem]
         任意の有限群$G$とその部分群$U$の位数について以下が成り立つ。
         \[ |G/U|=|G|/|U| \]
     \end{Them}
-    \begin{Proof}
+    \begin{proof}
         \textbf{この段落は『天書の証明』より引用する。}
         二項関係\[ a \sim b \iff ba^{-1} \in U \]を考える。
         群の公理から$\sim$が同値関係であることがわかる。
@@ -61,8 +63,8 @@
         あとは
         \[ |G|=\sum_{i=1}^{|G/U|}{|a_i U|}=\sum_{i=1}^{|G/U|}{|U|}=|G/U||U| \]より、
         最終的な等式が成り立つ。
-        \QED
-    \end{Proof}
+        
+    \end{proof}
 
     \begin{Lemma}[Fixed Points Congurance]
         群$G$は集合$X$に作用するものとする。
@@ -70,7 +72,7 @@
         \[ |X| \equiv |\Fix_G(X)| \mod p\]
         \footnote{$\Fix_G(X):=\{x \in X : \forall g \in G,~ g \ast x=x \}$}
     \end{Lemma}
-    \begin{Proof}
+    \begin{proof}
         $X$の$G$による軌道分解を考える。
         \[ X= \bigsqcup_{x \in X}{Gx} \]
         するとOrbit-Stabilizer TheoremとLagrange's Theoremより、
@@ -80,17 +82,17 @@
         したがって$|G|/|\Stab_G(x)|$は$p$の倍数か1である。
         しかも$|G|/|\Stab_G(x)|=1$すなわち$\Stab_G(x)=G$の時は$x \in \Fix_G(X)$となっている。
         よって、$|X|=|\Fix_G(X)|+(p\mbox{の倍数}) \equiv |\Fix_G(X)| \mod p$
-        \QED
-    \end{Proof}
+        
+    \end{proof}
 
     \begin{Them}[Cauchy's Group Theorem]
         群$G$の位数が$p$の倍数ならば、$G$は位数$p$の巡回群を含む。
     \end{Them}
-    \begin{Proof}
+    \begin{proof}
         位数$p$の元の存在を示す。この元は求める巡回群の生成元である。
-    \end{Proof}
+    \end{proof}
 
-\section{Proof of Sylow Theorem I.}
+\section{proof of Sylow Theorem I.}
     \ulpar{整理と方針}
     ステートメントは定義から次のように論理式で表される。
     \[ \forall i \in [0, n],~ \exists H : \mbox{a group} ~s.t.~ H \subset G ~\wedge~ |H|=p^i \]
@@ -134,9 +136,9 @@
     Cauchy's Group Theoremから、これは位数$p$の巡回群を持つ。
     それは群$H' \subset \Norm_G(H)$によって$H'/H$と表される。
     $|H'/H|=[H':H]=p$だから、帰納法が完成した。
-    \QED
+    
 
-    \section{Proof of Sylow Theorem II}
+    \section{proof of Sylow Theorem II}
     \ulpar{$\Fix_Q(G/P)$は空でない}
     群$G$の$p$-Sylow部分群$P$,$Q$をとり、これらが共役であることを示す。
     使うのはやはりFixed Points Conguranceだ。$Q$は$p$-部分群なので以下が成り立つ。
@@ -149,9 +151,9 @@
     定義から、全ての$Q$の元$q$に対して
     \[ qg \cdot P=gP \implies qg \cdot e \in gP \iff qg \in gP \iff Q \subset gPg^{-1} \]となる。
     $P,Q$はどちらも$p$-Sylow部分群で、位数は同じ。したがって$Q=gPg^{-1}$
-    \QED
+    
 
-    \section{Proof of Sylow Theorem III}
+    \section{proof of Sylow Theorem III}
     \ulpar{方針}
     $\Syl_p(G)$の元を一つとり$P$とする。そして集合$\Syl_p(G)$への$P$の共役作用を考える。
     $P$は$p$-部分群なので、ここでもFixed Points Conguranceを使える。
@@ -172,30 +174,30 @@
     Sylow Theorem IIから$P,Q$は$\Norm_G(Q)$の部分群として互いに共役。
     ところが正規部分群の定義より、$\Norm_G(Q)$の部分群で$Q$と共役なものは$Q$自身しか無い。
     よって$P=Q$となり、$\Fix_P(\Syl_p(G))=\{ P \}$が示された。
-    \QED
+    
 
-    \section{Proof of Sylow Theorem IV}
+    \section{proof of Sylow Theorem IV}
     Orbit-Stabilizer Theoremを集合$\Syl_p(G)$とこれに共役作用する群$G$に用いる。
     Sylow Theorem IIから$\Syl_p(G)$の元は互いに共役だから、
     $G$の共役作用による軌道は一つしか無い。
     \[ \forall P \in \Syl_p(G),~ |G/\Stab_G(P)|=|G \ast P|=|\Syl_p(G)|\]
     $\Stab_G(P)=\{ g \in G : g^{-1}Pg=P \}=\Norm_G(P)$なので、
     \[ \forall P \in \Syl_p(G),~ |\Syl_p(G)|=[G:\Norm_G(P)] \]
-    \QED
+    
 
-    \section{Proof of Sylow Theorem V}
+    \section{proof of Sylow Theorem V}
     Sylow Theorem Vから$|\Syl_p(G)|$は素数$p$と互いに素。
     また、Sylow Theorem IVとLagrange's Theoremから$|\Syl_p(G)|=[G:\Norm_G(P)]=|G|/|\Norm_G(P)|$なので
     $|\Syl_p(G)|$は$|G|=p^n m$の約数である。
     よって$|\Syl_p(G)|$は$m$の約数。
-    \QED
+    
 
     \section{Applications}
     \begin{Lemma}[Frattini's Argument]
         $H$を群$G$の正規部分群、$P$を$H$の$p$-Syllow部分群とすると、
         $G=\Norm_G(P)H$である。
     \end{Lemma}
-    \begin{Proof}
+    \begin{proof}
         $G$の任意の元$g$を取る。$H$は$G$の正規部分群だから、
         \[ g^{-1}Pg \subset g^{-1}Hg=H \]
         したがって$g^{-1}Pg$も$H$の$p$-Syllow部分群である。
@@ -203,15 +205,15 @@
         \[ hg^{-1} P gh^{-1} = (gh^{-1})^{-1} P gh^{-1} = P \]
         $\Norm_G(P)$の定義から、$gh^{-1} \in \Norm_G(P)$。
         よって$g \in \Norm_G(P)H$が成立。
-        \QED
-    \end{Proof}
+        
+    \end{proof}
 
     \begin{Prop}[Sylow's test]
         $n$を素数でない正の整数とし、$p$を$n$の素因数とする。
         もし$n$の約数の中で$p$を法として1と合同なものが$1$のみであれば、
         位数$n$の単純群は存在しない。
     \end{Prop}
-    \begin{Proof}
+    \begin{proof}
         位数$n$の任意の群を$G$とする。
         $n$が素数の冪数ならば$G$は非自明な中心を持つ。したがって単純群でない。
 
@@ -222,6 +224,6 @@
         よって$G$の$p$-Sylow部分群は唯１つであり、
         $\Syl_p(G) \not \ni G$とSylow Theorem IIから、これは$G$の正規部分群。
         よって$G$は単純群でない。
-    \end{Proof}
+    \end{proof}
 
 \end{document}

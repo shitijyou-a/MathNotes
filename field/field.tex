@@ -1,12 +1,16 @@
 \documentclass[a4j]{jarticle}
 
-\usepackage[all]{xy}
 \usepackage{../math_note}
+\usepackage[all]{xy}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Gal}{\operatorname{Gal}}
 \newcommand{\Irr}{\operatorname{Irr}}
 
+\title{森田『代数概論』の体論のためのノート}
+\author{七条彰紀}
+
 \begin{document}
+\maketitle
 \section{$\mKer(\bar{\phi})$は極大イデアル(p.182, l.5)}
     簡単のため、$I=\mKer(\phi)$とおく。
     定義から、$I$の元である多項式$f$に$\theta$を代入すれば0となる。
@@ -157,16 +161,16 @@
         \ar@{->}            "L3"+<0.8em,0em>;"L4"
         \ar@{->}            "L4"+<0.8em,0em>;"Li"
 
-        \ar@{->}@/_1mm/ "K1"+<0.0em,0.5em>;"L1"+<-0.0em,-0.5em>
-        \ar@{->}@/^3mm/ "K1"+<0.0em,0.5em>;"L2"+<-0.6em,-0.5em>
-        \ar@{->}@/^7mm/ "K1"+<0.0em,0.5em>;"L3"+<-0.6em,-0.5em>
-        \ar@{->}@/^7mm/ "K1"+<0.0em,0.5em>;"L4"+<-0.8em,-0.5em>
-        \ar@{->}@/^7mm/ "K1"+<0.0em,0.5em>;"Li"+<-0.8em,-0.5em>
-        \ar@{->}@/_1mm/ "L1"+<-0.0em,0.5em>;"cK1"
-        \ar@{->}@/^2mm/ "L2"+<-0.6em,0.5em>;"cK1"
-        \ar@{->}@/^5mm/ "L3"+<-0.6em,0.5em>;"cK1"
-        \ar@{->}@/^5mm/ "L4"+<-0.8em,0.5em>;"cK1"
-        \ar@{->}@/^5mm/ "Li"+<-0.8em,0.5em>;"cK1"
+        \ar@{->}@/_{1mm}/ "K1"+<0.0em,0.5em>;"L1"+<-0.0em,-0.5em>
+        \ar@{->}@/^{3mm}/ "K1"+<0.0em,0.5em>;"L2"+<-0.6em,-0.5em>
+        \ar@{->}@/^{7mm}/ "K1"+<0.0em,0.5em>;"L3"+<-0.6em,-0.5em>
+        \ar@{->}@/^{7mm}/ "K1"+<0.0em,0.5em>;"L4"+<-0.8em,-0.5em>
+        \ar@{->}@/^{7mm}/ "K1"+<0.0em,0.5em>;"Li"+<-0.8em,-0.5em>
+        \ar@{->}@/_{1mm}/ "L1"+<-0.0em,0.5em>;"cK1"
+        \ar@{->}@/^{2mm}/ "L2"+<-0.6em,0.5em>;"cK1"
+        \ar@{->}@/^{5mm}/ "L3"+<-0.6em,0.5em>;"cK1"
+        \ar@{->}@/^{5mm}/ "L4"+<-0.8em,0.5em>;"cK1"
+        \ar@{->}@/^{5mm}/ "Li"+<-0.8em,0.5em>;"cK1"
     \end{xy}
     \]
     中間体達の間ではこのような挿入射だけを考える。
@@ -336,7 +340,7 @@
 
     最後に、$\bar{K}_1$と$\bar{K}_2$が共に代数的閉包であることを用いる。
     まず、$\bar{\sigma}(\varinjlim L) \simeq \bar{K}_1$から$\bar{\sigma}(\varinjlim D)$は代数的閉包。
-    図式の射は全て準同型だから$\bar{\sigma}(\varinjlim L) \subset \bar{K}_2$となる。
+    図式の射は全て準同型だから$\bar{\sigma}(\varinjlim L) \subseteq \bar{K}_2$となる。
     この二つと$\bar{\sigma}(\varinjlim D)$,$\bar{K}_2$が特に代数閉体であることから、
     $\bar{\sigma}(\varinjlim L)=\bar{K}_2$が分かる
     \footnote{定理2.8の直前に有る「Kが代数閉体で$K \subset L$なら$\bar{K}_L=K$」という記述はこのことを言っている。
@@ -375,8 +379,8 @@
         \subsection{$M/K$が正規拡大$\iff \dots$}
         \begin{eqnarray*}
             &{}& M/K\mbox{が正規拡大} \\
-            &\iff& \forall \sigma \in Aut(\bar{K}/K), \sigma(M)=M \\
-            &\iff& \forall \sigma \in Aut(\bar{K}/K), \phi(\sigma(M))=\phi(M)
+            &\iff& \forall \sigma \in \Aut(\bar{K}/K), \sigma(M)=M \\
+            &\iff& \forall \sigma \in \Aut(\bar{K}/K), \phi(\sigma(M))=\phi(M)
         \end{eqnarray*}
         二行目はシュタイニッツの定理より。
         三行目は$\phi$の単射性より。
@@ -387,12 +391,12 @@
         $\bar{\sigma}:\bar{L}=\bar{K} \to \bar{K}$に拡張される。
         しかも命題3.1(2)より$\bar{\sigma}(L)=L$である。
         
-        \subsection{「$r: Aut(L/K) \to Gal(M/K)$は全射」}
+        \subsection{「$r: \Aut(L/K) \to Gal(M/K)$は全射」}
         $\sigma \in \Gal(M/K)$を任意にとる。
         $\sigma$$はM \to M$の$K$-同型だから、
         シュタイニッツの定理よりこれは$K$-同型$\bar{\sigma}: \bar{M} \to \bar{M}$に拡張される。
         これをLに制限すると、これがさらに$K$-同型$\bar{\sigma}|_{L}:L \to L$となる。
-        これが$K$-同型であることは、$K$-同型の定義$\bar{\sigma}|_{K}=id_K$と$K \subset L$より。
+        これが$K$-同型であることは、$K$-同型の定義$\bar{\sigma}|_{K}=id_K$と$K \subseteq L$より。
         以上より、$\Gal(M/K)$の各元に対して$\Aut(L/K)$の元$\bar{\sigma}|_{L}$が存在する。
         よって$r$は全射。
         

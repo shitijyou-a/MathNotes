@@ -3,7 +3,7 @@
 
 \begin{document}
 \begin{Them}[Eisenstein's criterion]
-\[ f(x)=\sum_{0 \leq k \leq n}{a_k x^k} \in \mathbf{Z}[x] \]
+\[ f(x)=\sum_{0 \leq k \leq n}{a_k x^k} \in \Z[x] \]
 について、ある素数$p$が存在して、整数$a_0, a_1, \dots, a_n$が
     \begin{enumerate}
     \item $i \neq n$の場合は$a_i$は$p$で割り切れる
@@ -12,7 +12,7 @@
     \end{enumerate}
 を満たすならば、$f(x)$は有理数体上既約である。
 \end{Them}
-\begin{Proof}
+\begin{proof}
 多項式$g,h$を$f(x)=g(x) h(x)$を満たすものとおき、
 多項式$f, g, h$の各係数を
 \[ g(x)=\sum_{0 \leq i \leq n}{g_i x^i}, h(x)=\sum_{0 \leq j \leq n}{h_j x^j} \]
@@ -21,7 +21,7 @@
 この時、単純な計算で
 \[ a_{k}=\sum_{i+j=k}{g_i h_j} \]
 が成り立つと分かる。
-記法を簡単にするため、$P=(p) \subset \mathbf{Z}$とおく。
+記法を簡単にするため、$P=(p) \subset \Z$とおく。
 これが素イデアルであることを何度も使う。
 
 $a_0$を考える。
@@ -52,15 +52,14 @@ $g_0, g_1, \dots, g_{N} \in P$が成り立つとする。
 
 $0 \in P$だから、このことから$g_n \neq 0$。
 よって$\deg g=n, \deg h=n-n=0$。これで$f$の既約性が示された。
-\QED
-\end{Proof}
+\end{proof}
 
 これと以下の命題を組み合わせると、多くの多項式の既約性が示せる。
 \begin{Prop}
-多項式$f(x) \in \mathbf{Z}[x]$について、
-「任意の定数$a \in \mathbf{Z}$について$f(x+a)$が既約」と「$f(x)$も既約」は同値。
+多項式$f(x) \in \Z[x]$について、
+「任意の定数$a \in \Z$について$f(x+a)$が既約」と「$f(x)$も既約」は同値。
 \end{Prop}
-\begin{Proof}
+\begin{proof}
 $f(x)$が既約だとする。
 定数$a$に対し、1次以上の多項式$g,h$（これは$a$によって変化する）が
 存在して$f(x+a)=g(x)h(x)$が成り立つ($f(x+a)$が既約でない)ならば、
@@ -71,7 +70,6 @@ $f(x)$が既約でないとする。
 すると1次以上の多項式$g,h$が存在して$f(x)=g(x)h(x)$が成り立つが、
 $f(x+a)=g(x+a) h(x+a)$となり、$g(x+a), h(x+a)$は一次以上の多項式。
 よって$f(x+a)$も既約でない。
-\QED
-\end{Proof}
+\end{proof}
 
 \end{document}
