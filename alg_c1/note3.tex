@@ -1,0 +1,513 @@
+\documentclass[a4]{article}
+\usepackage{../math_note}
+\usepackage{amsmath}
+\usepackage[all]{xypic}
+\newcommand{\affine}{\mathbb{A}}
+\newcommand{\proj}{\mathbb{P}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\begin{document}
+    \section{ベズーの定理}
+        \subsection{終結式}
+            \begin{Lemma}
+                UFD $R$上の多項式$f, g \in R[x] \setminus R$に対して、
+                以下は同値。
+                \begin{enumerate}
+                    \renewcommand{\labelenumi}{(\roman{enumi})}
+                    \item $\exists h \in R[x] \setminus R ~s.t.~ h|f ~\mbox{and}~ h|g$
+                    \item $\exists A,B \in R[x] ~s.t.~ \deg A<\deg g,~ \deg B<\deg f ~\mbox{and}~ Af+Bg=0$
+                \end{enumerate}
+            \end{Lemma}
+            \begin{proof}
+                \textbf{(i) $\implies$ (ii)}~~
+                    仮定より$f=hB, g=-hA$を満たす$A, B \in  R[x]$が存在する。
+                    すると明らかに$Af+Bg=0$となる。
+                    多項式の次数に関する部分も、
+                    $\deg h \neq 0$から$\deg A=\deg g - \deg h<\deg g$のようにして導かれる。
+
+                \textbf{(ii) $\implies$ (i)}~~
+                    仮定から、$Af=-Bg$となる$A, B \in R[x]$が存在する。
+                    $g$の全ての既約因子は$Af$を割り切る。
+                    このとき$\deg A < \deg g$から、
+                    $g$の1次以上の既約因子であって$f$を割り切るものが有る。
+                    それを$h$とすれば(i)の条件を満たす。
+                
+            \end{proof}
+
+            \begin{Def}
+                多項式$f, g \in k[t]$を
+                \[ f(t)=\sum_{0 \leq i \leq p}{a_{i}t^{i}}, g(t)=\sum_{0 \leq j \leq q}{b_{j}t^{j}} \]
+                とおく。これに対して以下のように$(p+q)$次正方行列\footnote{シルベスター行列と呼ばれる。}を定める。
+                \[
+                    M(f,g; t)=
+                    \begin{bmatrix}
+                        a_0&    a_1&    \cdots&     a_q \\
+                        {}&     a_0&    a_1&        \cdots&     a_q \\
+                        {}&     {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                        {}&     {}&     {}&         a_0&        a_1&    \cdots&    a_q \\
+                        b_0&    b_1&    \cdots&     b_p \\
+                        {}&     b_0&    b_1&        \cdots&     b_p \\
+                        {}&     {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                        {}&     {}&     {}&         b_0&        b_1&    \cdots&    b_p
+                    \end{bmatrix}
+                \]
+                この時、
+                \[ \Res(f,g; t)=\det M(f,g; t) \]
+                を$f,g$の$t$に関する終結式と呼ぶ。
+            \end{Def}
+
+        \begin{Them}
+            $f,g \in R[t] \setminus R$に対して、以下は同値。
+            \begin{enumerate}
+                \item $\exists h \in R[t]~s.t.~ h|f~\mbox{and}~h|g$
+                \item $\Res(f,g; t)=0$
+            \end{enumerate}
+        \end{Them}
+        \begin{proof}
+            補題より、以下のような$A,B$があって$Af+Bg=0$を満たす。
+            \[ A(t)=\sum_{0 \leq j \leq q-1}{A_{j}t^{j}},B(t)=\sum_{0 \leq i \leq p-1}{B_{i}t^{i}} \]
+            さて、$Af+Bg=0$を計算してみると、以下のようになる。
+            \[ \sum_{0 \leq d \leq p+q-1}{ \left\{ \sum_{i+j=d}{(a_i A_j + b_j B_i)} \right\}}=0 \]
+            各項の係数を見ると以下が分かる。
+            \begin{eqnarray*}
+            (1.) \iff
+            \exists [A_j]_{0 \leq j \leq q-1}, [B_i]_{0 \leq i \leq p-1} ~s.t.~ \\
+            a_0 A_0 + b_0 B_0 &=&0 \\
+            a_1 A_0 + b_1 B_0+a_0 A_1 + b_0 B_1&=&0 \\
+            \vdots \\
+            a_{p+q-1} A_0 + \cdots + b_0 B_{p+q-1}&=&0
+            \end{eqnarray*}
+            まとめて表せば次のようになる。
+            \begin{gather*}
+                (1.) \iff \\
+                \exists [A_0, \dots, A_{q-1}, B_0, \dots, B_{p-1}] \in R^{p+q} \setminus \{ \mathbf{0} \} ~s.t.~
+                [A_0, \dots, A_{q-1}, B_0, \dots, B_{p-1}] M(f,g;t)=\mathbf{0}
+            \end{gather*}
+            次元定理より$\Res(f,g;t)=0$と$\operatorname{ker}M(f,g;t) \neq \{ \mathbf{0} \}$は同値である
+            \footnote{次元定理より、$M(f,g;t)$が正則ならばkerの次元は0であるから、kerの元は自明な物に限る}。
+            したがって$(1.) \iff (2.)$が示された。
+            
+        \end{proof}
+
+        \begin{Prop}
+            \[
+                \forall f,g \in R[t] \setminus R,~\exists A, B \in R[t]~s.t.~
+                \deg A < \deg g, \deg B < \deg f ~\mbox{and}~ Af+Bg=\Res(f,g;t)
+            \]
+        \end{Prop}
+        \begin{proof}
+            各$i=2,3,\dots,p+q$に対して、$M(f,g;t)$の各$i$列目の$t^i$倍を1列目に加える。
+            すると次のようになる。
+            \[
+                M'=
+                \begin{bmatrix}
+                    f&          a_1&    \cdots&     a_q \\
+                    tf&         a_0&    a_1&        \cdots&     a_q \\
+                    {}&         {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                    t^{q-1}f&   {}&     {}&         a_0&        a_1&    \cdots&    a_q \\
+                    g&          b_1&    \cdots&     b_p \\
+                    tg&         b_0&    b_1&        \cdots&     b_p \\
+                    {}&         {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                    t^{p-1}g&   {}&     {}&         b_0&        b_1&    \cdots&    b_p
+                \end{bmatrix}
+            \]
+            この操作は基本操作であるから、行列式を変えない。$M'$を第1列で余因子展開する。
+            \begin{eqnarray*}
+                \Res(f,g;t) &=& \det M' \\
+                &=& (f A_0+tf A_1+\dots+t^{q-1}f A_{q-1})
+                + (g B_0+tg B_1+\dots+t^{p-1}g B_{p-1}) ~~ (A_i, B_j \in R)\\
+                &=& (A_0+t A_1+\dots+t^{q-1} A_{q-1})f+(B_0+t B_1+\dots+t^{p-1} B_{p-1})g \\
+                &=& Af+Bg
+            \end{eqnarray*}
+            
+        \end{proof}
+
+        \paragraph{注意}
+        $f,g \in k[x_1, \dots, x_n, t]$に対して、$\Res(f,g; t)$は$f,g$が成すイデアルに属す。
+
+        \subsubsection{例}
+        $F=X^3-YZ^2, G=X^2-YZ \in k[X, Y, Z]$を考える。
+        $C:=\mathcal{Z}_p(F), D:=\mathcal{Z}_p(G) \in \proj^2$とおき、
+        $C$と$D$の交点を求める。
+        \[
+            R(X,Z):=\Res(F,G; Y) \footnote{Yについての射影化と解釈できる？}=
+            \begin{bmatrix}
+                -Z^3& X^3 \\
+                -Z& Z^2
+            \end{bmatrix}
+            =X^2 Z (X-Z)
+        \]
+        したがって$C,D$の交点は$X=0, Z=0, X-Z=0$の上に有る。
+
+        例えば$\mathcal{Z}(X) \cap C \cap D$の属す交点を$P=(a:b:c)$とする。
+        $0=F(a,b,c)=-bc^2, 0=G(a,b,c)=-bc$なので$bc=0$となるが、$(a:b:c)\neq(0:0:0)$なので、
+        $P=(0:0:1)$または$P=(0:1:0)$となる。
+        同様に$Z=0, X-Z=0$についても計算して、$C \cap D=\{ (0:0:1),(0:1:0),(0:1:0) \}$となる。
+
+        \subsection{弱ベズーの定理}
+        \begin{Lemma}
+            kを無限体、斉次多項式$F,G \in k[X,Y,Z]$とし、
+            $m:=\deg F, n:=\deg G$と置く。
+            この時、$R(X,Y):=\Res(F,G; Z)$は$mn$次斉次多項式
+        \end{Lemma}
+        \begin{proof}
+            主張は$R(tX,tY)=t^{mn} \cdot R(X,Y)$と同値なので、これを考える。
+            計算のため、
+            \begin{eqnarray*}
+                F&=&\sum_{0 \leq i \leq m}{a_{i} Z^{m-i}} \\
+                G&=&\sum_{0 \leq j \leq n}{b_{j} Z^{n-j}}
+            \end{eqnarray*}
+            とおく。
+            この時、$a_{i}, b_{j}$はそれぞれ$k[X,Y]$に属す$i$次斉次多項式と$j$次斉次多項式である。
+            したがって、
+            \begin{eqnarray*}
+                a_{i}(tX,tY)&=&t^{i} \cdot a_{i}(X,Y) \\
+                b_{j}(tX,tY)&=&t^{j} \cdot b_{j}(X,Y)
+            \end{eqnarray*}
+            が成り立つ。
+
+            このことを使うと、$R(tX,tY)$は次のようになっている。
+            \[
+            R(tX,tY)=
+            \begin{vmatrix}
+                a_0&    ta_1&   \cdots&     t^m a_m \\
+                {}&     a_0&    t a_1&      \cdots&     t^m a_m \\
+                {}&     {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                {}&     {}&     {}&         a_0&        t a_1&  \cdots&    t^m a_m \\
+                b_0&    t b_1&  \cdots&     t^n b_n \\
+                {}&     b_0&    t b_1&      \cdots&     t^n b_n \\
+                {}&     {}&     \ddots&     \ddots&     {}&     \ddots& \\
+                {}&     {}&     {}&         b_0&        t b_1&  \cdots&    t^n b_n
+            \end{vmatrix}
+            \]
+            この右辺の各行にそれぞれ
+            $t^{0}=1, t^{1}=t, \dots, t^{n-1}, t^0, t^1, \dots, t^{m-1}$
+            を掛け、左辺にもこれらをまとめて掛ける。
+            \[
+            R(tX,tY)\cdot t^{0+1+\dots+(m-1)+0+1+\dots+(n-1)}=
+            \begin{vmatrix}
+                a_0&    t a_1&  \cdots&     t^m a_m \\
+                {}&     t a_0&  t^2 a_1&    \cdots&         t^{m+1} a_m \\
+                {}&     {}&     \ddots&     \ddots&         {}&             \ddots& \\
+                {}&     {}&     {}&         t^m a_0&        t^{m+1} a_1&    \cdots&    t^{m+n-1} a_m \\
+                b_0&    t b_1&  \cdots&     t^n b_n \\
+                {}&     t b_0&  t^2 b_1&    \cdots&         t^{n+1} b_n \\
+                {}&     {}&     \ddots&     \ddots&         {}&             \ddots& \\
+                {}&     {}&     {}&         t^{m-1} b_0&    t^m b_1&        \cdots&    t^{m+n-1} b_n
+            \end{vmatrix}
+            \]
+            右辺の各列はそれぞれ$t^{0}=1, t^{1}=t, \dots, t^{m+n-1}$
+            でくくり出し、$t^{\dots} \cdot R(X,Y)$の形にすることが出来る。
+            \[
+                R(tX,tY) \cdot t^{\frac{m(m-1)}{2}+\frac{n(n-1)}{2}}=R(X,Y) \cdot t^{\frac{(m+n)(m+n-1)}{2}}
+            \]
+            そして、
+            \[
+                \frac{(m+n)(m+n-1)}{2}-\left( \frac{m(m-1)}{2}+\frac{n(n-1)}{2} \right)=mn
+            \]
+            より、$R(tX,tY)=t^{mn} \cdot R(X,Y)$が成り立つ。
+
+            
+        \end{proof}
+
+        \begin{Lemma}
+            $k$が無限体であるとき、
+            斉次多項式$F \in k[X,Y,Z] \setminus \{0\}$に対して
+            $\proj^2_{k} \setminus \mathcal{Z}(F)$は空でない。
+        \end{Lemma}
+        \begin{proof}
+            対偶を示す。
+            \[ \forall P \in \proj^2,~ F(P)=0 \implies F=0 \]
+            $F \in (k[X,Y])[Z]$と見て、
+            \[ F=\sum_{i=0}^{d}{G_i Z^{d-i}} \]
+            と書く。
+            ただし$d:=\deg F$で、$G_i$は$k[X,Y]$に属す$i$次斉次多項式である。
+
+            任意の$P=(a:b:c) \in \proj^2_{k}$に対して、$F(a,b,c)=0$であるとする。
+            任意の$a,b \in k$に対し、
+            \[f(Z):=F(a,b,Z)=\sum_{i=0}^{d}{G_i(a,b) Z^{d-i}}\]
+            は$k[Z]$の関する多項式である。
+
+            任意の$c \in k \setminus \{0\}$に対して$f(c)=0$となるから、
+            \[ \#(\mathcal{Z}(f(Z)))=\#(k \setminus \{0\})=\infty \]
+            となる。
+            ここで$f(Z) \neq 0$と仮定すると、
+            \[ \#(\mathcal{Z}(f(Z))) \leq \deg f(Z) < \infty \]
+            となってしまうので$f(Z)=0$が分かる。
+            \[ \forall i,~ \forall a, b \in k,~ G_i(a,b)=0 \]
+
+            さて、$G_i(X,Y)$の$\proj^1_{k}$における零点集合$\mathcal{Z}(G_i)$を考える。
+            $G_i$は任意の$a,b \in k$に対して$G_i(a,b)=0$となるから、
+            \[ \#(\mathcal{Z}_p(G_i))=\# \proj^1=\infty \]
+            ここで$G_i \neq 0$と仮定すると、斉次因数定理より
+            \[ \#\mathcal{Z}_p(G_i) \leq \deg G_i=i< \infty \]
+            となってしまうので$G_i=0$
+
+            合わせて、$F=0$が示された。
+            
+        \end{proof}
+        なお、$k$が無限体でない時はこれは成り立たない。
+        例えば$k=\mathbb{F}_2$の時、
+        $F(X,Y,Z)=(X-Y)(Y-Z)(Z-X)$とおくと$F \neq 0$にも関わらず
+        $\mathcal{Z}(F)=\proj^2_{\mathbb{F}_2}$となる。
+
+        \begin{Prop}(弱ベズーの定理)
+            kを無限体、斉次多項式$F,G \in k[X,Y,Z]$により定まる曲線を
+            $C:=\mathcal{Z}(F), D:=\mathcal{Z}(G) \in \proj^2$とし、
+            $m:=\deg F, n:=\deg G$とする。
+            もし$F,G$に共通因子がないならば、
+            \[ |C \cap D| \leq mn \]
+            が成り立つ。
+        \end{Prop}
+        \begin{proof}
+            $|C \cap D|>mn$であると仮定し、矛盾を導く。
+            $C \cap D \supset \{ P_1, P_2, \dots, P_{mn+1} \}(i \neq j \implies P_i \neq P_j)$とおく。
+            さらに、$P_i$と$P_j$を通る直線を$L_{ij}$とする。
+
+            $k$は無限体であるから、点$O$として
+            \[ O \not \in C \cup D \cup \bigsqcup_{i \neq j}{L_ij} \]
+            となるものが取れる。
+            この点$O$が$(0:0:1)$になるように$\proj^2$全体を射影変換し、
+            各$P_i$も射影変換したものにラベルを貼り直しておく。
+
+            $F,G \in (k[X, Y])[Z]$とみて、
+            \[ F=\sum_{0 \leq i \leq m}{a_{i} Z^{m-i}}, G=\sum_{0 \leq j \leq n}{b_{j} Z^{n-j}} \]
+            とおく。ただし$a_i, b_j \in k[X, Y]$であって、$\deg a_i=i, \deg b_j=j$である。
+            すると、$C,D \not \ni 0$より$0 \neq F(O)=a_0, 0 \neq G(O)=b_0$が成り立つ。
+            したがって$R(X, Y):=\Res(F,G; Z)$とおくと、$R(X,Y) \neq 0$となる。
+
+            準備をする。$(a,b) \in k^2 \setminus \{ (0,0) \}$を取る。
+            この時、以下が成り立つ。
+            \begin{eqnarray*}
+                &{}& \exists c \in k,~ (a:b:c) \in C \cap D \\
+                &\iff& \exists c \in k,~ F(a,b,c)=G(a,b,c)=0 \\
+                &\implies& F(a,b,Z), G(a,b,Z)\mbox{は共通因子をもつ。} \\
+                &\iff& R(a,b)=\Res ( F(a,b,Z), G(a,b,Z); Z )=0 \\
+                &\iff& (aY-bX) | R(X,Y)
+            \end{eqnarray*}
+            ただし、3行目の$\implies$は$k$が代数的閉包の時には逆も成り立つ。
+            また、4行目は前の定理を、そして5行目は斉次因数定理を用いている。
+            
+            $P_i=(a_i:b_i:c_i)$とおくと、$P_i \in C \cap D$だから、すでに示したとおり、
+            \[ (a_i Y - b_i X) | R(X,Y) \]
+            ここで、$L_{ij}$の定義式は
+            \[
+                \begin{vmatrix}
+                    a_i& b_i& c_i \\
+                    a_j& b_j& c_j \\
+                    X  & Y  & Z
+                \end{vmatrix}
+                =0
+            \]
+            $O \not \in L_{ij}$なので、
+            \[
+                0 \neq
+                \begin{vmatrix}
+                    a_i& b_i& c_i \\
+                    a_j& b_j& c_j \\
+                    0  & 0  & 1
+                \end{vmatrix}
+                =
+                \begin{vmatrix}
+                    a_i& b_i \\
+                    a_j& b_j \\
+                \end{vmatrix}
+            \]
+            したがって$\{ (a_i Y - b_i X) \}$の各元は単数倍で一致しない。
+            つまり$\{ (a_i Y - b_i X) \}$のそれぞれが異なる$R(X,Y)$の1次因子である。
+            ゆえに
+            \[ \deg R(X,Y) \geq |\{ (a_i Y - b_i X) \}| = mn+1\]
+            となり、補題に反する。
+            
+        \end{proof}
+
+        \subsubsection{注意}
+            体の拡大を考える。
+            $\mathcal{Z}_{k}(F):={(a:b:c) \in k^3 : F(a,b,c)=0}$
+            とおくと、一般に斉次多項式$F \in k[X,Y,Z]$について
+            \[ K/k::\mbox{体の拡大} \implies \mathcal{Z}_K(F) \supset \mathcal{Z}_k(F) \]
+            例として$F=X^2+Y^2+Z^2$と$\bar{\mathbb{Q}}/\mathbb{Q}$を考えよ。
+
+        \subsection{ベズーの定理}
+        \begin{Them}(ベズーの定理)
+        $F,G,C,D,m,n$の定義は今までと同じようにする。
+        $C \cap D=\{P_{1},P_{2}, \dots, P_{r} \}$とする。
+        基礎体$k$が代数的閉包であるとき、
+        各$P_{i}$について交点数$I_{R}(C,D; P_i)$が定義され、
+        以下が成立する。
+        \[ \sum_{i=1}^{r}{I_{R}(C,D; P_i)}=mn \]
+        \end{Them}
+        \begin{proof}
+            まず、$P_{i}=(a_i:b_i:c_i) \in \proj_{k}^2$とおく。
+            基礎体$k$が代数的閉包であるから、
+            $R(X,Y)=\Res(F,G; Z)$は次のように一次式の積に分解される。
+            \begin{eqnarray*}
+                R(X,Y)&=&\lambda \prod_{i=1}^{r}(a_i Y - b_i X)^{m_i} \\
+                mn&=&\sum_{i=1}^{r}{m_i} \\
+            \end{eqnarray*}
+            ただし$\lambda \in k^{\times}, m_i \geq 1$としている。
+            点$P_i$における交点数は$I_{R}(C,D; P_i)=m_i$と定義される。
+            定理の成立は明らか。
+            
+        \end{proof}
+
+        \subsubsection{例}
+        $F=X^3-YZ^2,G=X^2-YZ$をとり、交点数を求めてみる。
+        $R(X,Y)=X^3 Y (Y-X)$となるので、計算すると
+        \[ L_{12}=\mathcal{Z}(X-Z), L_{23}=\mathcal{Z}(X-Y),L_{31}=\mathcal{Z}(X) \]
+        となる。
+        取りうる点$O \not \in C \cap D \cap \bigcup{L_{ij}}$として$O=(1:0:1)$がある。
+        これを$(0:0:1)$に写す射影変換は、例えば
+        \[
+            A=
+            \begin{bmatrix}
+                0& 0& 1 \\
+                0& 1& 0 \\
+                1& 0& 0
+            \end{bmatrix}
+        \]
+        で定まる$\phi_A$である。
+        この射影変換で各交点と曲線を変換する。
+        \begin{eqnarray*}
+            F'&=&F \circ A^{-1} =Z^3-YX^2 \\
+            G'&=&G \circ A^{-1} =Z^2-YX \\
+            C'&=&\mathcal{Z}(F') \\
+            D'&=&\mathcal{Z}(G') \\
+            P'_{1}&=&(0:1:0) \\
+            P'_{2}&=&(1:1:1) \\
+            P'_{3}&=&(1:0:0) \\
+        \end{eqnarray*}
+        改めて$R(X,Y)$を計算すると、
+        $R(X,Y)=\underbrace{X^3}_{P'_{1}} \underbrace{(X-Y)}_{P'_{2}} \underbrace{Y^2}_{P'_{3}}$となる。
+        よって、
+        \begin{eqnarray*}
+            I_R(C',D'; P'_{1})&=&3 \\
+            I_R(C',D'; P'_{2})&=&1 \\
+            I_R(C',D'; P'_{3})&=&2
+        \end{eqnarray*}
+        と計算できる。
+
+        別のやり方としては$\Res(F,G; X)$を計算しても良い。
+
+        $\Res(F,G; Z)$なら、$\Res(F,G; Z)=0$は$C \cap D$を$Z$軸上に射影した時の
+        $C \cap D$の各元が満たす方程式。これは終結式を計算する際に選ぶ変数の幾何学的意味。
+
+        \subsubsection{(弱)ベズーの定理の応用}
+        \begin{Prop}
+            $F,G \in k[X,Y,Z]$を斉次多項式とし、
+            $C:=\mathcal{Z}_p(F),D:=\mathcal{Z}_p(G),
+            m:=\deg F, n:=\deg G$とおく。
+            $G$が既約多項式とすると、
+            \[ \#(C \cap D) > mn \]
+            ならば$C \subset D$である。
+            さらに$m=n$ならば$C=D$で、
+            $m>n$ならば$C=C' \cup D$を満たす$(m-n)$次曲線$C'$が存在する。
+        \end{Prop}
+        \begin{proof}
+            弱ベズーの定理から、$F,G$は共通因子を持つ。
+            しかも$G$が既約なので、
+            ある$F' \in k[X,Y,Z]$が存在して$F=F'G$が成立する。
+            したがって$m \geq n$となる。
+            さらに詳しく、$m=n$ならば$F' \in k^{\times}$なので$C=D$が成り立つ。
+            $m>n$なら$C'=\mathcal{Z}(F')$とおけば$C=C' \cup D$となる。
+            
+        \end{proof}
+
+        \subsection{線形系}
+        自然数$d$に対して、
+        \[ \Lambda_d=\{ F \in k[X,Y,Z] : \mbox{$F$は斉次多項式であり$\deg F=d$} \} \cup \{ 0 \} \]
+        これは$k$上の線形空間となる。
+        この$\Lambda_d$（または、付随する射影空間$(\Lambda_d \setminus \{0\})/k^{\times}$）を
+        次数$d$の完備線形系と呼ぶ。
+        また、これの部分空間は、単に線形系と呼ぶ。
+        この時、$\dim \Lambda_d=\frac{1}{2}(d+1)(d+2)$である。
+
+        次数$d$の線形系$\Lambda(\subset \Lambda_d)$と
+        $S \subset \proj^2$に対して、
+        \[ \Lambda(S):=\{ F \in \Lambda : \forall P,~F(P)=0 \} \]
+        と定義する。
+
+        \begin{Lemma}
+            $\Lambda(S)$は線形空間で、
+            \[ \dim \Lambda(S) \geq \dim \Lambda - \#S \]
+            さらに``="の時、
+            \[ S' \subset S \implies \dim \Lambda(S) = \dim \Lambda - \#S \]
+        \end{Lemma}
+        \begin{proof}
+            もし$s:=\#S=\infty$なら$\Lambda(S)=\{0\}$となるので$\#S<\infty$とする。
+            この時、選択公理を仮定せずとも$S$の元を整列できるので、
+            $S=\{ P_1, \dots, P_s \}, P_i=(p_{i0}: p_{i1}: p_{i2})$とおく。
+            この設定の上で、次のように線形写像$\phi_S$を定義する。
+            \begin{eqnarray*}
+                \phi_S : \Lambda &\to& k^{\oplus s} \\
+                F &\mapsto& (F(p_{i0}, p_{i1}, p_{i2}))_{1 \leq i \leq s}
+            \end{eqnarray*}
+            すると、この時$\operatorname{ker}\phi_S=\Lambda(S)$である。
+            よって$\Lambda(S)$は$S$の部分空間で、しかも
+            \[ \dim \Lambda(S) \geq \dim \Lambda - s \]
+            が成り立つ。
+
+            さらに、$S' \subset S, s':=\#S'$とするとき、
+            以下の図式が可換となる。
+            \[
+                \begin{xy}
+                    (0,20) *{\Lambda}="la",
+                    (20,20) *{k^{\oplus s}}="ks",
+                    (20,0) *{k^{\oplus s'}}="ksd",
+                    \ar@{->}^{\phi_S} "la";"ks"
+                    \ar@{->}^{\pi} "ks";"ksd"
+                    \ar@{->}^{\phi_{S'}} "la";"ksd"
+                \end{xy}
+            \]
+            そして、以下の様になる。
+            \begin{eqnarray*}
+                &{}& \dim \Lambda(S) = \dim \Lambda - s \\
+                &\iff& \phi_S :: \mbox{全射} \\
+                &\implies& \phi_{S'} :: \mbox{全射} \\
+                &\iff& \dim \Lambda(S') = \dim \Lambda - s' \\
+            \end{eqnarray*}
+            
+        \end{proof}
+
+        \begin{Prop}
+            与えられた$\frac{1}{2}d(d+3)$個の点を通る$d$次の射影曲線が存在する。
+        \end{Prop}
+        \begin{proof}
+            与えられた点の集合を$S$とする。仮定より$\#S=\frac{1}{2}d(d+3)$である。
+            補題より
+            \[ \dim \Lambda_d(S) \geq \dim \Lambda_d - \#S=\frac{1}{2}(d+1)(d+2)-\frac{1}{2}d(d+3)=1 \]
+            よって$F \Lambda_d(S), F \neq 0$となるものが存在する
+            \footnote{$\dim \Lambda_d=0$ならば$\Lambda_d$が1点、すなわち0のみからなることを意味する。}。
+            
+        \end{proof}
+
+        \begin{Prop}
+            相異なる5点に対し、どの3点も一直線上に無いとする。
+            この時、この5点を通る既約2次曲線がただ一つ存在する。
+        \end{Prop}
+        \begin{proof}
+            すでに示した命題より、そのような二次曲線$C:=\mathcal{Z}(F)$が存在する。
+            この$F$が既約であることと、ただ一つであることを示す。
+
+            $F$が既約でないとすると、$F$は1次式の積に分解される。
+            すると$C$は2直線の和集合ということになる。
+            しかしこれは与えられた5点の内どの3点も一直線上に無いという仮定に反する。
+            よって$F$は既約。
+
+            与えられた5点を$S=\{P_1, \dots, P_5\}$とおく。
+            $\dim \Lambda_d (S) \geq 2$とすると、
+            $F$と一次独立な$F' \in \Lambda_d (S)$が取れる。
+            F,F'は既約で一次独立だから、共通因子を持たない。
+            したがって弱ベズーの定理が適用できて、
+            \[ \# (\mathcal{Z}(F) \cap \mathcal{Z}(F')) \leq 2 \cdot 2=4 \]
+            となる。
+            しかし$\mathcal{Z}(F) \cap \mathcal{Z}(F') \supset S$なので、矛盾する。
+            よってこのような$F'$は存在せず、$\dim \Lambda_d (S) =1$である。
+            
+        \end{proof}
+
+\end{document}
+
+%\subsection{平面射影幾何のいろいろな定理}
+%\subsection{特異点の個数}
+%\subsection{変曲点}

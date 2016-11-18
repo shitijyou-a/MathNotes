@@ -1,0 +1,20 @@
+\usepackage{ascmac}
+
+\topmargin = 0mm
+\oddsidemargin = 5mm
+\textwidth = 152mm
+\textheight = 240mm
+
+% サブセクションを 問1,問2 にする設定
+\renewcommand{\thesubsection}{問\arabic{subsection}}
+
+% サブサブセクションを (1),(2)にする設定
+\renewcommand{\thesubsubsection}{(\arabic{subsubsection})}
+% (i),(ii)なら \arabic を \roman に変える。    (a),(b)なら \alph
+
+% 大問2の3番目の計算式のラベルを (2.3) にする設定
+% 計算式の参照には \eqref{eq:hoge} を使う
+\makeatletter
+  \renewcommand{\theequation}{\arabic{subsection}.\arabic{equation}}
+  \@addtoreset{equation}{subsection}
+\makeatother

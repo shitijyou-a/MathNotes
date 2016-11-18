@@ -1,0 +1,55 @@
+\documentclass[a4j]{jarticle}
+\usepackage{../math_note}
+
+\title{可測集合が可測集合に写る事}
+
+\begin{document}
+\maketitle
+
+\begin{Them}
+    集合$X$上の全単射連続写像$T$と0でない定数$\tau$があって，
+    集合$X$上の外測度$\mu$に対して，
+    \[ \mu \circ T=\tau \cdot \mu \]
+    が成立するものとする．
+    このとき，$E$が$\mu$-可測集合ならば$T^{-1}(E)$も$\mu$-可測集合．
+    特に$T$が同相写像ならば$T(E)$も$\mu$-可測集合．
+\end{Them}
+\begin{proof}
+    $T,\tau$の関係と，$T$が全単射であることから
+    $\tau \cdot (\mu \circ T^{-1})=\mu \circ (T \circ T^{-1})=\mu$が成立する．
+
+    任意の$A \subset X$を取る．
+    \begin{align*}
+        \mu(A)
+        &=\mu(A \cap E)                              &&+&&   \mu(A \cap E^c) \\
+        &=\tau \cdot \mu(T^{-1}(A \cap E))           &&+&&   \tau \cdot \mu(T^{-1}(A \cap E^c)) \\
+        &=\tau \cdot \mu(T^{-1}(A) \cap T^{-1}(E))   &&+&&   \tau \cdot \mu(T^{-1}(A) \cap T^{-1}(E^c)) \\
+        &=\tau \cdot \mu(T^{-1}(A) \cap T^{-1}(E))   &&+&&   \tau \cdot \mu(T^{-1}(A) \cap T^{-1}(E)^c)
+    \end{align*}
+    $\mu(A)=\tau \cdot \mu \circ T^{-1}(A)$を用いて
+    \begin{align*}
+        \tau \cdot \mu \circ T^{-1}(A)&=\tau \cdot (\mu(T^{-1}(A) \cap T^{-1}(E))+\mu(T^{-1}(A) \cap T^{-1}(E)^c)) \\
+        \mu(T^{-1}(A))&=\mu(T^{-1}(A) \cap T^{-1}(E))+\mu(T^{-1}(A) \cap T^{-1}(E)^c)
+    \end{align*}
+    任意の集合$A$は$T(A')$と表現できる（$T$の全射性）から，
+    \[ \mu(A')=\mu(A' \cap T^{-1}(E))+\mu(A' \cap T^{-1}(E)^c) \]
+    よって$T^{-1}(E)$は$\mu$-可測．
+\end{proof}
+実際の所，定数$\tau$が存在するという条件は「加法準同型な全単射写像$U$があって$\mu \circ T=U \circ \mu$」
+と書けるのだが，このような$U$であって更に連続なものに限ると，$U(x)=\tau x$の形になるしか無い．
+
+\begin{Example}
+    $\mathbb{R}^n$上のルベーグ測度を考えることにする．
+    定数$c$に対して$T(E)=E-c, \tau=1$とすればこれは定理の仮定を満たす．
+    したがって平行移動に対して可測性は不変．
+
+    また，0でない定数$a$を取ると，$T(E)=aE$に対して$\tau=|a|^n$とすればこれも定理の仮定を満たすから，
+    定数倍に対しても可測性は不変．
+\end{Example}
+\end{document}
+
+%連続関数fはボレル可測関数であることの証明．
+%開集合Eについて，f^{-1}(E)は開集合．
+%したがってf^{-1}(E)はボレル可測集合．
+%よってfはボレル可測関数．
+

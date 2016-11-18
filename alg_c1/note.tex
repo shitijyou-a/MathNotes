@@ -1,0 +1,307 @@
+\documentclass[a4]{article}
+\usepackage{../math_note}
+\newcommand{\affine}[1]{\mathbb{#1}}
+
+\begin{document}
+    \section{アフィン曲線}
+        \subsection{アフィン空間}
+        \begin{Def}[アフィン空間(大雑把な定義)]
+            体kについて、
+            \[ \affine{A}^n=\affine{A}^n_{k}=k^n \]
+            をk上のn次元アフィン空間(Affine space)と呼ぶ。
+        \end{Def}
+
+        \subsection{アフィン曲線}
+        \begin{Def}
+            $f \in k[x, y]-{0}$に対して、その零点集合
+            \[ C=Z(f)=\{ p \in \affine{A}^2 | f(p)=0 \} \]
+            をアフィン曲線と呼ぶ。
+            この曲線$C$を他には
+            \[ C:f=0 ~\mbox{in}~ \affine{A}^2 \]
+            と書く。
+        \end{Def}
+
+        他に次の用語を導入する。
+        \begin{description}
+            \item[Cの定義多項式:] f
+            \item[Cの定義方程式:] f=0
+        \end{description}
+
+        $f$の$k[x,y]$に於ける既約分解を以下のようにする。
+        \begin{gather*}
+            f=cf_1^{e_1} \dotsm f_i^{e_i} \dotsm f_n^{e_n} \\
+            (c \in k,~ f_i : k[x, y]\mbox{の既約元},~ e_i \geq 1)
+        \end{gather*}
+
+        このとき、$C=\cup_{i=1}^{n}{Z(f_i)}$となる。
+
+        \begin{Proof}
+        \begin{eqnarray*}
+            &{}&    p \in C \\
+            &\iff&  f(p) =0 \\
+            &\iff&  c \prod{f_i(p)}=0
+        \end{eqnarray*}
+            $k$は整域なので、
+        \begin{eqnarray*}
+            &\iff& \exists i, f_i(p)=0 \\
+            &\iff& \exists i, p \in Z(f_i) \\
+            &\iff& p \in \cup_{i=1}^{n}{Z(f_i)}
+        \end{eqnarray*}
+
+        \QED
+        \end{Proof}
+
+        このようにして得られた$C_i=Z(f_i)$達を$C$の既約成分、
+        $C=\cup {C_i}$を$C$の既約分解と呼ぶ。
+        また、$f$が既約多項式の時は$C$を既約曲線と呼ぶ。
+        $\deg C=\deg f$とし、$d=\deg f$の時には$C$を$d$次曲線と呼ぶ。
+
+        \subsubsection{重複度}
+        以下、$C:f=0 ~\mbox{in}~ \affine{A}^2$とする。
+        今、
+        \[ f=\sum_{i,j}{a_{ij} x^i y^j} ~ (a_{ij} \in k)\]
+        とする。$p_0=(a,b) \in \affine{A}^2$について、
+        \[ x=(x-a)+a, y=(y-b)+b\]
+        を代入して$(x-a), (y-b)$についてまとめると、fは次のように変形できる。
+        \begin{eqnarray*}
+            f_k&=&\sum_{i+j=k}{c_{ij}(x-a)^i(y-b)^j} \\
+            f&=&\sum_{k}{f_k}
+        \end{eqnarray*}
+        この表示を$f$の$p_0$におけるテイラー展開と呼ぶ。
+
+            \subsubsection{偏微分}
+            一般の体$k$について偏微分を定義できる。ここでは$\affine{A}^n$を考える。
+            \begin{Def}[偏微分]
+            \[ f=\sum_{i_1, \dots, i_n} {a_{ i_1 \dots i_n } x^{i_1}_1 \dotsm x^{i_n}_n} \in k[x_1, \dots, x_n]\]
+            に対して、$f$の偏微分を、
+            \[ \frac{\partial f}{\partial x_{j}}=\sum{i_j \cdot a_{ i_1 \dots i_n } (x^{i_1}_1 \dotsm x^{i_j-1} \dotsm x^{i_n}_n) } \]
+            と定義する。
+            \end{Def}
+
+            標数0の体については、次が成り立つ。
+            \[
+                c_{i_1 \dots i_n}
+                =\frac{1}{i_1! \dots i_n!} f_{x_{i_1}^{i_1} \dots x_{i_n}^{i_n}}(p_0)
+                =\frac{1}{i_1! \dots i_n!} \frac{\partial^{i_1+\dots+i_n} f}{\partial x_{i_1}^{i_1} \dots \partial x_{i_n}^{i_n}}(p_0)
+            \]
+            ただし$c_{i_1 \dots i_n}$は$f$を$(x_1-p_0^{(1)}), (x_2-p_0^{(2)}), \dots$の多項式として表した時の係数であることに注意。
+            特に$n=2$の時は次のよう。
+            \[
+                c_{i_1 \dots i_n}
+                =\frac{1}{i! j!} f_{x^{i} y^j}(p_0)
+                =\frac{1}{i! j!} \frac{\partial^{i+j} f}{\partial x^i \partial y^j}(p_0)
+            \]
+
+        \subsection{接線と特異点}
+        点$p_0:=(a,b)$とおく。他の点は$p$で表す。
+        \begin{Def}[$C$の$p$に於ける重複度]
+            $m_p(C)=\min\{k : f_k(p) \neq 0\}$
+        \end{Def}
+        $m=m_p(C)$のとき、$p$を$C$の$m$重点と呼ぶ。
+
+        再び2次元アフィン空間を考える。
+        $f_0=c_{00}=f(p)$から、
+        \[ m_p(C)>0 \iff f(p)=0 \iff p \in C \]
+        が成り立つ。
+
+        $p=(x,y) \in C$とする。
+        \[f_1(p)=f_x(p_0)(x-a)+f_y(p_0)(y-b)=c_{01}(x-a)+c_{10}(y-b)\]
+        よって、
+        \[ m_p(C)=1 \iff f_1(p) \neq 0 \iff f_x(p) \neq 0~\mathrm{or}~f_y(p) \neq 0 \]。
+
+        \begin{Def}[単純点と特異点]
+            $m_p(C)=1$の時$p$を$C$の単純点、$m_p(C) > 1$の時$p$を$C$の特異点と呼ぶ。
+        \end{Def}
+        単純点$p$における$C$の接線は定義方程式$f_1=0$で定められる。これを
+        \[ T_p(C)=Z(f_1) \subset \affine{A}^2 \]
+        と書く。
+
+        $p$が特異点の時はどうだろうか。
+        以下では$m=m_p(C) \geq 2$とする。
+        このとき、
+        \[ f=\underbrace{f_0+\dots +f_{m-1}}_{=0}+f_m+f_{m+1}+\dots \]
+        となっている。
+        実は$k$が代数閉体ならば、$f_m$は次のように$x,y$の一次式の積に分解される（後に示す）。
+        つまり、
+        \begin{gather*}
+            f_m(x)=\prod^{e}_{i=1} (\alpha_{i}(x-a)+\beta_{i}(y-b))^{m_{i}} \\
+            \alpha_{i},\beta_{i} \in k,~ m_i \geq 1,~ \sum^e_{i=1}{m_i}=m
+        \end{gather*}
+        と表すことが出来る。
+        $\alpha_i, \beta_i$は単数倍で等しいものをまとめられるので、
+        \[
+             \left|
+            \begin{array}{cc}
+                \alpha_i & \beta_i \\
+                \alpha_j & \beta_j \\
+            \end{array}
+            \right|
+            \neq 0
+            ~(i \neq j)
+        \]
+        として良い（？）。
+
+        この時、$e$本の直線$\alpha_{i}(x-a)+\beta_{i}(y-b)=0$を$p$における$C$の接線とする。
+        また、$m_i$をその重複度と呼ぶ。
+
+        \begin{Def}
+            $m=e$ (i.e. $\forall i, m_i=1$)の時、
+            $p$を$C$の通常特異点(ordinary singular point)と呼ぶ。
+            通常2重点を結節点と呼ぶ。
+        \end{Def}
+
+        \subsection{斉次多項式}
+        $k$を体とする。
+        $f \in k[X_1, \dots, X_n]=k[\mathbb{X}]$は、
+        \[
+            f=\sum{c_{i_0 \dots i_n} X_0^{i_0} \dots X_n^{i_n}}
+            =\sum{c_{\mathbb{I}} \mathbb{X}^{\mathbb{I}}} ~(\mathbb{I}=(i_0, \dots, i_n))
+        \]
+        と表される。
+        $\mathbb{X}^{\mathbb{I}}$を単項式、
+        $|\mathbb{I}|=i_0+\dots+i_n$をその次数と呼ぶ。
+        $f(\neq 0)$のに現れる次数が全て等しい時、$f$を斉次多項式と呼ぶ。
+
+        \[
+            f=\sum_{d \geq 0}{ \left( \sum_{|\mathbb{I}|=d}{c_{\mathbb{I}} \mathbb{X}^{\mathbb{I}}} \right)}
+        \]
+        ()内を$f_d$と置けば$f=\sum_{d \geq 0}{f_d}$となる。
+        $f_d$はそれぞれ$d$次の斉次多項式。そこで、この表示を$f$の斉次分解と呼ぶ。
+
+        次の補題は2次斉次多項式と1変数多項式が同型であることを言っている。
+        \begin{Lemma}
+            $F(x, y) \in k[x,y]$を$d$次の斉次多項式とする。
+            $f(t)=F(1, t) \in k[t]$とおくと、以下が成り立つ。
+            \[ F(x, y)= x^d f(\frac{y}{x})\]
+        \end{Lemma}
+        \begin{Proof}
+            \begin{eqnarray*}
+                F(x, y) &=& \sum{a_{ij} x^{i} y^{j}} \\
+                f(t)    &=& \sum{a_{ij} t^{j}} \\
+                f\left( \frac{y}{x} \right)&=& \sum{a_{ij} x^{-j} y^{j}} \\
+            \end{eqnarray*}
+            $F(x, y)$は$d$次の斉次多項式だから$i+j=d$。よって、
+            \begin{eqnarray*}
+                x^d f\left( \frac{y}{x} \right)=\sum{a_{ij} x^{i} y^{j}}
+            \end{eqnarray*}
+            \QED
+        \end{Proof}
+
+        \begin{Prop}
+            $F(x, y) \in k[x,y]$を$d$次の斉次多項式とする。
+            $k$が代数的閉包の時、$F(x, y)$は次の形に分解される。
+            \begin{gather*}
+                F(x, y)=\prod^{e}_{i=1} (\alpha_{i}(x-a)+\beta_{i}(y-b))^{d_{i}} \\
+                ( \alpha_{i},\beta_{i} \in k,~ d_i \geq 1,~ \sum^e_{i=1}{d_i}=d )
+            \end{gather*}
+        \end{Prop}
+        \begin{Proof}
+            $f(t)=F(1, t)$とおく。$\bar{k}=k$だから、$f(t)$は一次式に分解される。
+            \begin{gather*}
+                f(t) = c \prod_{i=1}^{l}{(t-\gamma_{i})} \\
+                (\gamma_{i} \in k, c \in k^{\times})
+            \end{gather*}
+            ただし$l=\deg f$。先ほどの補題より、以下の様にして命題が成り立つ。
+            \begin{eqnarray*}
+                F(x, y) \\
+                &=& x^{d} f\left( \frac{y}{x} \right) \\
+                &=& c x^{d} \prod_{i=1}^{l}{ \left( \frac{y}{x} - \gamma_{i} \right)} \\
+                &=& c x^{d-l} \prod_{i=1}^{l}{ \left( y - \gamma_{i}x \right)} \\
+                &=& (1 \cdot x + 0 \cdot y)^{d-l} \prod_{i=1}^{l}{ \left( c^{\frac{1}{l}}y - c^{\frac{1}{l}}\gamma_{i}x \right)} \\
+            \end{eqnarray*}
+            \QED
+        \end{Proof}
+
+        \begin{Prop}
+            $F(x, y) \in k[x,y]$を$d$次の斉次多項式とする。
+            $(\lambda, \mu) \in k^2, (\lambda, \mu) \neq (0, 0)$に対して、
+            \[
+                F(\lambda, \mu)=0 \iff (\lambda y -\mu x) | F(x, y)
+            \]
+        \end{Prop}
+        \begin{Proof}
+            ($\impliedby$)は自明なので($\implies$)を示す。
+
+            $\lambda, \mu$の両方が同時に0になることは無いので、
+            $\lambda \neq 0$とする。
+            $\mu \neq 0$としても以降の文字をただ置き換えれば証明が出来る。
+
+            \begin{eqnarray*}
+                &{}& F\left(\lambda, \mu\right)=0 \\
+                &\iff& \lambda^{d} F\left(1, \frac{\mu}{\lambda}\right)=0 \\
+                &\iff& f\left(\frac{\mu}{\lambda}\right)=0 \\
+                &\iff& \exists g \in k[t] ~s.t.~
+                    f\left(\frac{\mu}{\lambda}\right) = \left(t-\frac{\mu}{\lambda}\right) g\left(\frac{\mu}{\lambda}\right) \\
+                &{}&\mbox{以下、行頭には$\exists g$があると思え。補題から次が成り立つ。} \\
+                &\iff& F(x, y)=x^d f(t)=x^d \left(\frac{y}{x}-\frac{\mu}{\lambda}\right) g\left(\frac{y}{x}\right) \\
+                &\iff& F(x, y)=\frac{1}{\lambda} (\lambda y - \mu x)\cdot x^{d-1}g\left(\frac{y}{x}\right) \\
+            \end{eqnarray*}
+            ここで、$\deg g = \deg f -1 \leq \deg F -1 =d-1$。
+            よって$x^{d-1}g\left(\frac{y}{x}\right) \in k[x, y]$（$x$の指数は全て0以上）。
+
+            \QED
+        \end{Proof}
+
+        \subsection{直線との交点数}
+        $C=Z(f), f \in k[x, y] \setminus \{0\}, p=(a, b) \in C$とする。
+        $p$を通る直線$L$に対して、$C$と$L$との$p$における交点数$i(C, L; p)$を以下のとおり定める。
+        
+        \begin{Def}
+            直線Lのパラメータ表示を以下のようにおく。
+            \begin{gather*}
+                L: (x, y)=(a+ \lambda t, b+ \mu t) \\
+                (\lambda, \mu \in k, (\lambda, \mu) \neq (0, 0))
+            \end{gather*}
+            このとき、交点数$i(C, L; p)$は、次のよう。
+            \[
+                i(C, L; p)
+                  :=\operatorname{ord}_{t} f(a+ \lambda t, b+ \mu t)
+                  :=\max \{d : t^d | f(a+ \lambda t, b+ \mu t) \}
+            \]
+        \end{Def}
+        
+        $p \in L$なので$i(C, L; p) \geq 1$。
+        さらに、この定義は$L$のパラメータ表示によらないことが示せる。
+        
+        \begin{Prop}
+              $C$を曲線、$L$を点$p \in C$を通る直線とする。
+            \[
+                i(C, L; p) \geq m_p(C)
+            \]
+            特に、次が成り立つ。
+            \[
+                i(C, L; p) > m_p(C) \iff \mbox{Lはpに於けるCの接線の一つ}
+            \]
+        \end{Prop}
+        
+        \begin{Proof}
+              座標全体を平行移動して$p=(0, 0)$とする。
+              このとき$L$のパラメータ表示は、
+              \begin{gather*}
+                  L: (x, y)=(\lambda t, \mu t) \\
+                  (\lambda, \mu \in k, (\lambda, \mu) \neq (0, 0))
+              \end{gather*}
+              となる。$m:=m_p(C)$とおくと、$p$における$f$のテイラー展開は以下の様。
+              \[
+                  f=\sum_{k \geq m}{ \left( \sum_{i+j=k}{c_{ij} x^{i} y^{j}} \right) }
+              \]
+              $L$上の点では、
+              \begin{eqnarray*}
+                  f
+                  &=&\sum_{k \geq m}{ x^k \left( \sum_{i+j=k}{c_{ij} \lambda^{i} \mu^{j}} \right) } \\
+                  &=&\sum_{k \geq m}{ x^k f_k(\lambda, \mu) }
+              \end{eqnarray*}
+              $k \geq m$から、$i(C, L; p) \geq m$。
+              さらに、$i(C, L; p) > m \iff f_m(\lambda, \mu)=0$だから、
+              斉次因数定理より次が成り立つ。
+              \begin{eqnarray*}
+                  &{}& f_m(\lambda, \mu)=0 \\ 
+                  &\iff& (\lambda y - \mu x) | f_m(\lambda, \mu) \\
+                  &\iff& Z(\lambda y - \mu x)\mbox{は$f$の接線の一つ（接線の定義を見よ）} \\
+                  &\iff& L\mbox{は$f$の接線の一つ}
+              \end{eqnarray*}
+              \QED
+        \end{Proof}
+        
+
+\end{document}

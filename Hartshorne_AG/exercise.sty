@@ -1,0 +1,16 @@
+\topmargin = 0mm
+\oddsidemargin = 5mm
+\textwidth = 152mm
+\textheight = 240mm
+
+% (1),(2)=\arabic, (i),(ii)=\roman, (a),(b)=\alph
+\renewcommand{\thesection}{問\arabic{section}}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesubsubsection}{}
+
+% 大問2の3番目の計算式のラベルを (2.3) にする設定
+% 計算式の参照には \eqref{eq:hoge} を使う
+\makeatletter
+  \renewcommand{\theequation}{\arabic{subsection}.\arabic{equation}}
+  \@addtoreset{equation}{subsection}
+\makeatother

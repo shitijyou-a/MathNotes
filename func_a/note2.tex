@@ -1,0 +1,97 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note}
+
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\begin{document}
+    \begin{Them}[p.44, 逆関数定理]
+        正則関数$f:\Omega \to \mathbb{C}$について、
+        $z_0 \in \Omega, f'(z_0) \neq 0$とする。
+        この時、ある$z_0$の開近傍$U$, $f(z_0)$の開近傍$V$が存在して、
+        $f$の逆関数$g$が存在する。
+        しかも、この$g$は正則である。
+    \end{Them}
+    \begin{Proof}
+        $z=x+iy, w=u+iv$とおき、$f(z)=F(x,y)=(u(x,y), v(x,y))$を考える。
+        $z_0=x_0+iy_0$におけるJacobianは、
+        Cauchy-Riemannの関係式$u_x=v_y, u_y=-v_x$より、以下のようになる。
+        \[
+            |J|=
+            \left|
+            \begin{array}{cc}
+                u_x(z_0) & u_y(z_0) \\
+                v_x(z_0) & v_y(z_0)
+            \end{array}
+            \right|
+            ={u_x(z_0)}^2+{v_x(z_0)}^2
+            =|f'(z_0)|^2
+            \neq 0
+        \]
+        $|J| \neq 0$だから、逆写像の定理より、$U, V$と$g$が存在する。
+
+        $z=g(w)$が正則となることを示す。
+        そのためにCauchy-Riemannの関係式が成立することを示す。
+        \[ g(w)=g(u+iv)=x(u, v)+iy(u, v) \]
+        とおく。
+        逆写像の微分公式より、
+        \[
+            \left(
+            \begin{array}{cc}
+                x_u & x_v \\
+                y_u & y_v
+            \end{array}
+            \right)
+            =
+            \left(
+            \begin{array}{cc}
+                u_x & u_y \\
+                v_x & v_y
+            \end{array}
+            \right)^{-1}
+            =
+            \frac{1}{|J|}
+            \left(
+            \begin{array}{cc}
+                v_y & -u_y \\
+                -v_x & u_x
+            \end{array}
+            \right)
+        \]
+        であるから、
+        最右辺での$u, v$のCauchy-Riemannの関係式から、
+        最左辺で$x,y$のCauchy-Riemannの関係式が導出される。
+        したがって$g$は微分可能。
+        さらに、$(f \circ g)(w)=w$の両辺を微分して、
+        $g'(w)=\frac{1}{f'(g(w))}$を得る。
+        よって$g$はCauchy-Riemannの関係式を満たし、連続であるから、正則関数。
+        \QED
+    \end{Proof}
+    
+    $f(z)=e^{z}$についての逆関数を考える。
+    $f'(z_0)=e^{z_0}$だから、任意の$z_0 \in mathbb{C}$で$f'(z_0) \neq 0$である。
+    よってある$U, V$が存在して$f$の逆関数$g$が存在する。
+    \[ w=f(z)=e^{x+iy}=e^x (\cos y+i\sin y)=u+iv \]
+    ここから$w^2+v^2=e^{2x}$かつ$y=\arg w$が分かる。
+    したがって$g(w)=\log |w| + i \arg w$である。
+    しかしこれは$\arg$が多価関数なので、「主値」を別に定義する。
+
+    \begin{Def}[対数関数]
+        $w \in \mathbb{C}$, $w \neq 0$に対して、
+        \begin{itemize}
+            \item $\log w=\log |w|+i \arg w$
+            \item $\Log w=\log |w|+i \Arg w$
+        \end{itemize}
+        とおく。
+        ただし$-\pi < \Arg w \leq \pi$である。
+        また、右辺の$\log$は実数関数である。
+    \end{Def}
+    $\Log$は$\log$の主値（あるいは主ブランチ）と呼ばれる。
+    $\log w=\Log w + 2 k \pi i (i \in \mathbb{Z})$となる。
+
+    $z \in \mathbb{C}$について、$z^{\frac{1}{2}}$を考える。
+    \[ z^{\frac{1}{2}}=e^{\frac{1}{2} \log z}=e^{\frac{1}{2} (\Log z+2k \pi i)} \]
+    $e^{\frac{1}{2} (2k \pi i)}=e^{k \pi i}$の値は$\pm 1$のみなので、
+    結局\[ z^{\frac{1}{2}}=\pm e^{\frac{1}{2} \Log z}\]となる。
+    同様に$i^{\frac{1}{2}}$や$i^i$を計算せよ。
+
+\end{document}

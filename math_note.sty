@@ -44,16 +44,56 @@
 
 %% symbols
 \mathchardef\mdash="2D %% dash in math-mode
-\newcommand {\cat}[1]       {\mathbf{#1}}
-\newcommand {\idarrow}[1]   {1_{#1}}
-\newcommand {\mKer}         {\operatorname{Ker}} %% m means math
-\newcommand {\mIm}          {\operatorname{Im}} %% m means math
+
+%% fundamental spaces
 \newcommand {\C}            {\mathbb{C}}
 \newcommand {\R}            {\mathbb{R}}
 \newcommand {\Z}            {\mathbb{Z}}
 \newcommand {\N}            {\mathbb{N}}
 
-%% other utilities
-%\newcommand{\tatev}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
-%\newcommand{\Forall}[1]{{}^{\forall}\hiderel{#1}~}
-%\newcommand{\Exists}[1]{{}^{\exists}\hiderel{#1}~}
+%% general category theory
+\newcommand {\cat}[1]   {\mathbf{#1}}
+\newcommand {\id}[1]    {id_{#1}}
+\newcommand {\Hom}      {\operatorname{Hom}}
+\newcommand {\eq}       {\operatorname{eq}}
+\newcommand {\coeq}     {\operatorname{coeq}}
+
+%% topology theory
+\newcommand{\open}[1]{\mathcal{O}_{#1}}
+\newcommand{\closed}[1]{\mathcal{A}_{#1}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\inte}{\operatorname{int}}
+\newcommand{\pr}{\operatorname{pr}}
+
+%% abelian category
+%\newcommand {\ker}      {\operatorname{ker}}
+\newcommand {\coker}    {\operatorname{coker}}
+\newcommand {\im}       {\operatorname{im}}
+\newcommand {\coim}     {\operatorname{coim}}
+
+%% commutative algebra
+\newcommand {\Spec} {\operatorname{Spec}}
+\newcommand {\Max}  {\operatorname{Max}}
+\newcommand {\Ann}  {\operatorname{Ann}}
+\newcommand {\Supp} {\operatorname{Supp}}
+\newcommand {\Jac}  {\operatorname{Jac}}
+\newcommand {\Nil}  {\operatorname{Nil}}
+\newcommand {\height}{\operatorname{height}}
+
+%% algebraic geometry
+\newcommand {\zeros}    {\mathcal{Z}} %% zero points in general space
+\newcommand {\defs}     {\mathcal{I}} %% define ideal in general space
+\newcommand {\zerosa}   {\zeros_a} %% zero points in affine space
+\newcommand {\zerosp}   {\zeros_p} %% zero points in affine space
+\newcommand {\defsa}    {\defs_a} %% define ideal in affine space
+\newcommand {\defsp}    {\defs_p} %% define ideal in projective space
+\newcommand {\proj}     {\mathbb{P}} %% projective space
+\newcommand {\affine}   {\mathbb{A}} %% affine space
+
+%% liner algebra
+\newcommand{\tatev}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
+\newcommand{\rank}{\operatorname{rank}}
+
+%% logic
+\newcommand{\Forall}[1]{ {}^{\forall} #1,~~ }
+\newcommand{\Exists}[1]{ {}^{\exists} #1,~~ }

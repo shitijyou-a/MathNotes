@@ -1,0 +1,379 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+\newcommand{\I}[1]{\mathfrak{#1}}
+\newcommand{\prodsp}{\affine^1 \times \affine^1}
+
+\begin{document}
+\section{}
+    \subsection{}
+    $Y=k[x,y]/(y-x^2)$を考える．
+    この環において$y=x^2$が成り立つ．
+    写像$\phi: Y \to k[t]$を以下のように定めれば，これは同型写像となる．
+    \[ \phi(x)=t,~ \phi(y)=t^2,~ \phi(c)=c ~(c \in k) \]
+    逆写像は$\phi^{-1}(t)=x,~ \phi^{-1}(c)=c ~(c \in k)$である．
+    また，
+    \[ (k[x,y]/(y-x^2))[z]=k[x,y,z]/(y-x^2) \cong k[x,z]=k[t][z] \]
+    が成り立つ．これは問題2で用いる．
+
+    \subsection{}
+    同型写像$\psi: k[x,y]/(xy-1) \to k[t]$が存在するとして矛盾を導く．
+    \[ 0=\psi(xy-1)=\psi(x)\psi(y)-1 \]
+    よって$1=\psi(x)\psi(y)$が成立する．
+    $\psi$の像は多項式であるから，両辺で($t$の)次数を考えると$\psi(x), \psi(y)$は定数．
+    すると全ての不定元が定数となり，$\im \psi=k$となるので，$\psi$が同型であることと矛盾．
+
+    \begin{Remark}
+    $d$次式が$d$次式に写らない例は(a)を見よ．$y \mapsto t^2$となっている．
+    また，$k[x,y]/(y-1)$は$k[t]$に同型であり，$y \mapsto 1$となっている．
+    \end{Remark}
+
+    \subsection{}
+    2次多項式$F=ax^2+bxy+cy^2+dx+ey+f \in k[x,y]$を考える．
+    $k[x,y]/(F)$が環として$k[t]$または$(k[t])_{t}$に同型であることを示したい．
+
+    \paragraph{標準形へ}
+    標数が正の体でも，その代数閉包は無限体である．
+
+\section{}
+    問題文から$Y:=\{ (t,t^2,t^3) : t \in k\}$．
+    まず，$I(Y)$の生成元を求める．
+    \[ (x,y,z) \in Y \iff \Exists{t \in k} x=t \land y=t^2 \land z=t^3 \iff x \in k \land y=x^2 \land z=x^3 \]
+    よって$Y=Z((y-x^2, z-x^3))$, $I(Y)=IZ((y-x^2, z-x^3))=\sqrt{(y-x^2, z-x^3)}$が得られる．
+
+    $g_1:=y-x^2, g_2:=z-x^3, \I{a}:=(g_1, g_2) \subset k[x,y,z]$として，以下のことを示していく．
+    問題1-1(a)と同様に$k[x,y,z]/\I{a} \cong k[t]$．
+    右辺は整域(特にPID)だから，$\I{a}$は素イデアル．
+    よって$\sqrt{\I{a}}=\I{a}$がわかる．つまり$I(Y)$の生成元は$g_1, g_2$．
+    また，$k[t]$のKrull次元は1であるから，$Y$は1次元．
+
+\section{}
+by the definition.
+    \begin{align*}
+        &{}     (a,b,c) \in \zerosa(\{x^2-yz, xz-x\}) \\
+        &\iff   a^2-bc=0 \land ac-a=0 \\
+        &\iff   a^2-bc=0 \land (a=0 \lor c-1=0) \\
+        &\iff   (a^2-bc=0 \land a=0) \lor (a^2-bc=0 \land c-1=0) \\
+        &\iff   ((b=0 \lor c=0) \land a=0) \lor (a^2-bc=0 \land c-1=0) \\
+        &\iff   (b=0 \land a=0) \lor (c=0 \land a=0) \lor (a^2-bc=0 \land c-1=0) \\
+        &\iff   (a,b,c) \in \zerosa(x,y) \cup \zerosa(x,z) \cup \zerosa(x^2-y, z-1)
+    \end{align*}
+    よって，$Z:=\zerosa(\{x^2-yz, xz-x\})$は少なくとも
+    $Z_1:=\zerosa(x,y), Z_2:=\zerosa(x,z), Z_3:=\zerosa(x^2-y, z-1)$に分解される．
+    この$Z_i~(i=1,2,3)$に対応するイデアルの内，
+    $(x,y), (x,z)$は素イデアルとなることが明らか．
+    問1-1(a)より$k[x,y,z]/(x^2-y, z-1) \cong k[t]\mbox{::domain}$なので，$(x^2-y,z-1)$も素イデアル．
+
+\section{}
+    $\Delta:=\zerosa(x-a)=\{(x,x) ~|~ x \in k\}$と置く．
+    これは$\affine^2$の閉集合である．
+    また，$\mathcal{B}_{\prodsp}=\{ U \times V ~|~ U, V \in \mathcal{O}_{\prodsp}\}$が
+    積位相空間$\prodsp$の開基であることを用いる．
+    これはもう少し具体的に
+    \[
+        \mathcal{B}_{\prodsp}
+        =\{ (\affine^1 \setminus F) \times (\affine^1 \setminus G) ~|~ F,G :: \affine^1 \mbox{の有限個の点の集合} \}
+    \]
+    と書ける．
+
+    \subsection{Proof 1}
+    $\mathcal{B}_{\prodsp}$が開基であることを用いる．
+    $\affine^2=\prodsp$であったと仮定すると，$\Delta^c$は$\prodsp$の開集合である．
+    したがって$\Delta^c=\bigcup {B_{\lambda}}$となる
+    $\{B_{\lambda}\}_{\lambda \in \Lambda} \subset \mathcal{B}_{\prodsp}$が存在する．
+    ただし$\Delta^c$は空でないので$B_{\lambda} \neq \emptyset$としておく．
+
+    集合が一致するので，差をみる．
+    \[
+        (\bigcup {B_{\lambda}}) \setminus \Delta^c
+        =(\bigcup {B_{\lambda}}) \cap (\Delta^c)^c
+        =\bigcup {(B_{\lambda} \cap \Delta)}
+        =\emptyset.
+    \]
+    したがって各$B_{\lambda} \cap \Delta$は空である．
+    一方，計算によって$B_{\lambda} \cap \Delta \neq \emptyset$が示せる．
+    \begin{align*}
+        {}& B_{\lambda} \cap \Delta \\
+        =&  ((\affine^1 \setminus F_{\lambda}) \times (\affine^1 \setminus G_{\lambda})) \cap \Delta \\
+        =&  \{ (u,v) ~|~ (u,v \in k) \land (u \not \in F_{\lambda}) \land (v \not \in G_{\lambda}) \land (u=v) \} \\
+        =&  \{ (u,u) ~|~ (u \in k) \land (u \not \in F_{\lambda}) \land (u \not \in G_{\lambda}) \} \\
+        =&  \{ (u,u) ~|~ (u \in k) \land (u \not \in F_{\lambda} \cup G_{\lambda}) \} \\
+        =&  \Delta \setminus \{ (u,u) ~|~ u \in F_{\lambda} \cup G_{\lambda} \} \\
+        =&  \mbox{(無限集合)} \setminus \mbox{(有限集合)}
+    \end{align*}
+    よって矛盾し，$\affine^2 \neq \prodsp$が示される．
+
+    \subsection{Proof 2}
+    先に一般の位相空間$X$とその積位相空間$X \times X$を考える．
+    $\Delta$が$X \times X$の位相で閉集合であるとしよう．
+    $\Delta^c$は開集合であるから開基$\mathcal{B}_{X \times X}$の元の和で表される．
+    さて，点$(x,y)$をとる．
+    $x \neq y$ならば，点$(x,y)$は$\Delta^c$に属す．
+    したがって$\mathcal{B}_{X \times X}$の元には$(x,y)$を含むものがあるので，それを$U \times V$としよう．
+    すると$U \cap V = \emptyset$である．
+    実際，$z \in U \cap V$がとれたとすると，$U \times V$の定義から$(z,z) \in U \times V$．
+    しかし$U \times V \subset \Delta^c$としていたのでこれは矛盾．
+    以上より$x \in U, y \in V, U \cap V = \emptyset$となる．
+    まとめると，$\Delta$が$X \times X$の位相で閉集合ならば$X$はHausdorff空間であることがわかった．
+
+    以上を用いて証明を行う．
+    まず，$\affine^1$はHausdorff空間でない\footnote{証明は容易．実際に開集合$U, V$を作ろうとしてみよ．}．
+    上で示したことの対偶から$\Delta$は$\prodsp$で閉集合でないことが分かる．
+    しかし$\Delta$は$\affine^2$で閉集合．
+    よって$\affine^2 \neq \prodsp$が示される．
+
+\section{}
+    \begin{screen}
+        $B$ ::k-algebraについて，次を示せ．ただし$A:=k[x_1, \dots, x_n]$とする．
+        \[ \Exists{I \subset A} B \cong A/I \iff B \mbox{::finitely generated k-algebra} \land \Nil(B)=0 \]
+    \end{screen}
+    \paragraph{($\implies$)}
+    $B$が有限生成$k$-代数となることは明らか($x_i+I$が生成する)．
+    $\Nil(B)=0$という性質を持つ環はreduced ringと呼ばれるが，
+    剰余環$A/I$がreduced ringであるための必要十分条件は$I$がradical idealとなることである．
+    つまり，$x^n \in I \iff x \in I$ということ．
+    $Y$::algebraic setについて$I=I(Y)$はradical idealだから，これは真．
+
+    \paragraph{($\impliedby$)}
+    $B$が有限生成$k$-代数であるとは，
+    非負整数$n$と全射準同型$\phi: k[x_1, \dots, x_n] \to B$が存在すること．
+    したがって$I=\ker \phi$とすればBは$A/I=k[x_1, \dots, x_n]/I$と同型である．
+    $\Nil(B)=0$ならば$I$はradical idealだからalgebric setを定義する．
+
+\section{}
+    位相空間$X$が既約だとする．定義を変形する．
+    \begin{align*}
+        {}&     \Forall{U, V \in \closed{X}} U,V \neq X \implies X \neq U \cup V \\
+        \iff&   \Forall{U,V \in \open{X}} U,V \neq X \implies X \neq (X \setminus U) \cup (X \setminus V) \\
+        \iff&   \Forall{U,V \in \open{X}} U,V \neq \emptyset \implies U \cap V \neq \emptyset
+    \end{align*}
+
+    $X$の部分集合$Y$が稠密だとする．定義を変形する．
+    \begin{align*}
+        {}&     \cl_{X}(Y)=X \\
+        \iff&   X \setminus \cl_{X}(Y)=\emptyset \\
+        \iff&   \inte_{X}(X \setminus Y)=\emptyset \\
+        \iff&   \Forall{O \in \open{X}} O \neq \emptyset \implies (O \not \subseteq (X \setminus Y)) \\
+        \iff&   \Forall{O \in \open{X}} O \neq \emptyset \implies (O \cap Y \neq \emptyset)
+    \end{align*}
+
+    主張の前半は，（Xでの）開部分集合をとるので自明．
+
+    後半を示す．これは$\cl(Y)$内の任意の開集合が$Y$と交わることから分かる．
+    実際，$Y \cap O=\emptyset$なる$O \subset \cl(Y)$が存在したとすると
+    \[ (Y \subsetneq Y \cap O) \land (Y \cap O \subset \cl(Y)) \implies \cl(Y) \subsetneq \cl(Y \cap O) \subseteq \cl(Y)\]
+    となり，矛盾．
+
+    さて，$\cl(Y)$の任意の（$\cl(Y)$への相対位相における）開集合$U, V$をとる．
+    $(Y \cap U),(Y \cap V) \neq \emptyset$であり，
+    $Y$は$Y$への相対位相で開集合であるから，このそれぞれは開集合．
+    誘導位相で$Y$がirreducibleであることから，
+    $(Y \cap U) \cap (Y \cap V)=Y \cap (U \cap V) \neq \emptyset$．
+    よって$U \cap V \neq \emptyset$．
+
+\section{}
+\subsection{}
+    \paragraph{(i) $\iff$ (ii) $\iff$ (iv)}
+    開(resp.閉)集合の族$S$に対応する閉(resp.開)集合の族$T:=\{ s^c | s \in S \}$を考える．
+    $T$に極小(resp.極大)元$m$があれば$m^c$は$S$の極大(resp.極小)元である．
+
+    \paragraph{(iii) $\implies$ (iv)}
+    昇鎖$(x_m)_{m \geq 0}$は極大元を持つ．
+
+    \paragraph{(iv) $\implies$ (iii)}
+    開集合の族$O$は極大元を持たないので，$I_0 \in O$は極大でない．
+    したがって$I_0 \subsetneq I_1$が取れる（選択公理を用いる）．
+    このようにして帰納的に真の無限昇鎖が作れてしまう．
+
+\subsection{}
+    $X$::Noetharian topology spaceをとる．
+    これがquasi-compactであることをしめす．
+    まず，$X$の任意の開被覆をとり，$\{O_{\lambda}\}_{\lambda \in \Lambda}$とする．
+    そして$\{O_{\lambda}\}_{\lambda \in \Lambda}$の内有限個の和をとり，それらの族を作る．
+    つまり，
+    \[ \Sigma_0:=\left\{ \bigcup_{\lambda \in \Lambda_{fin}}O_{\lambda} ~\middle|~ \Lambda_{fin} \mbox{::finitely subset of }\Lambda \right\} \]
+    とする．
+    $\Sigma_0$の各元は$X$よりも大きくない開集合である．
+    $X$がNoetherianなので$\Sigma_0$は極大元を持つ．それを$S_0$とする．
+
+    $S_0=X$を示す．$S_0 \subset X$はすでに述べた．
+    開集合$S_0^c$が空でないとすると，$S_0^c$は有限個の$O_{\lambda}$では覆われない．
+    そこで
+    \[
+        \Sigma_1:=
+    \left\{ \bigcup_{\lambda \in \Lambda_{fin}}O_{\lambda}
+            ~\middle|~
+            \Lambda_{fin} \mbox{::finitely subset of }\Lambda \land O_{\lambda} \cap S_0^c \neq \emptyset \right\} \]
+    と置く．
+    $\emptyset \neq S_0^c \subsetneq X=\bigcup_{\lambda \in \Lambda}O_{\lambda}$であるから，
+    これは少なくとも一つ空でない元を持つ．したがって空でない極大元が存在する．
+    $\Sigma_1$の極大元を$S_1$とすると，これは有限個の$O_{\lambda}$で表すことが出来て，
+    しかも$S_1 \subsetneq S_0^c$だから，$S_0 \subsetneq S_0 \cup S_1$となる．
+    しかしこの右辺は有限部分被覆で表される開部分集合で極大なもので，左辺も有限部分被覆で表される開部分集合．
+    これは矛盾．
+
+\subsection{}
+    Noetherian位相空間の任意の部分集合はその相対位相でNoetherian．
+    $X$::Noetharian topology spaceとその任意の部分集合$Y$をとる．
+    $Y$のinduced topologyにおける開集合の族$\Sigma$を任意にとる．
+    すると$\Sigma$の各元は$X$におけるある開集合と$Y$の積で表されるから，
+    $\Sigma$に対して$X$の開集合族$\bar{\Sigma}$が存在する．
+    $X$はNoetherianであるから$\bar{\Sigma}$には極大元$S$が存在する．
+    $\cap Y$をとる操作で極大元は極大元に写る．
+    実際，
+    \[ Z_0 \subseteq Z_1 \implies ``(x \in Z_0 \land x \in Y) \implies (x \in Z_1 \land x \in Y)" \iff (Z_0 \cap Y) \subseteq (Z_1 \cap Y) \]
+    よって$Y$もNoetherian．
+
+\subsection{}
+    $X$::Noetharian Hausdorff topology spaceをとる．
+    開集合の昇鎖を作る．
+
+    \paragraph{Start}
+    まず，$X$の任意の点$x$を選び，その開近傍$U_0$をとる．
+    $V_0:=X \setminus \cl(U_0)$とすると，これは$U_0$を含まない最大の開集合である．
+
+    \paragraph{Step1}
+    $U_0$が一点集合でなければ，$x$とは異なる点$y_1 \in U_0$が取れる．
+    すると$X$はHausdorffであるから，
+    $x, y_1$をそれぞれ含むdisjointな開部分集合$x \in \tilde{U}_1, y_1 \in \tilde{V}_1$が存在する．
+    $U_1:=\tilde{U}_1 \cap U_0, V_1:=\tilde{V}_1 \cup V_0$とすれば，
+    $x \in U_1 \subsetneq U_0$かつ$x \not \in V_0 \subsetneq V_1$となる．
+
+    \paragraph{Step2}
+    $U_1$が一点集合でなければ，$x$とは異なる点$y_2 \in U_1$が取れる．
+    すると$X$はHausdorffであるから，
+    $x, y_2$をそれぞれ含むdisjointな開部分集合$x \in \tilde{U}_2, y_2 \in \tilde{V}_2$が存在する．
+    $U_2:=\tilde{U}_2 \cap U_1, V_2:=\tilde{V}_2 \cup V_1$とすれば，
+    $x \in U_2 \subsetneq U_1 \subsetneq U_0$かつ$x \not \in V_0 \subsetneq V_1 \subsetneq V_2$となる．
+
+    \paragraph{Step N and conclusion}
+    以下，同様の操作を繰り返せば，$U_n=\{x\}$なるnが存在しない限りこの2つの開集合の鎖は無限に伸びる．
+    しかし$X$はNoetherianであるから昇鎖$V_{\ast}$は途中で止まり，
+    任意の$x \in X$について$\{x\}$は開集合．よって$X$は離散位相空間である．
+
+    \paragraph{$X$は有限集合}
+    また，離散位相空間では一点集合は開集合であるから，
+    \[ \{x_0\} \subsetneq \{x_0, x_1\} \subsetneq \cdots \]
+    の様に有限集合の昇鎖が作れる．
+    再び$X$がNoetherianであることからこれはいつか止まり，それ以上$X$から点が取れなくなる．
+    これは有限集合の昇鎖であったから，$X$は有限．
+
+\section{}
+    既約多項式$f \in k[x_1, \dots, x_n]$をとる．
+    $n>3$の時，$\zerosa(f)$::affine varietyはhypersurfaceと呼ばれる．
+    \begin{screen}
+        $Y$::affine varietyと，$H$::hypersurfaceをとる．
+        $Y \not \subseteq H$であるとき，
+        $Y \cap H$の任意のirreducible component $C$の次元は$\dim Y-1$であることを示せ．
+    \end{screen}
+    $C (\subset Y \cap H)$はirreducible, closed in $Y \cap H$であり，
+    この2条件を満たすものとしては極大である．
+    多項式$f \in A$を$\defsa(H)=(f)$を満たすものとしよう．
+    すると，
+    \[
+        \defsa(C) \supset \defsa(Y \cap H)=\defsa \zerosa (\I{a})=\sqrt{\I{a}}
+        ~~ (\I{a}:=\langle \defsa(Y) \cup (f)\rangle)
+    \]
+    となる．
+    $\defsa(C)$は，$C$の条件から，上の包含関係を満たすprime idealとして極小なものである．
+    $\sqrt{\I{a}}$は$\I{a}$を含む素イデアルの共通部分であるから，
+    この極小条件は「$\defsa(C)$は$\I{a}$を含む極小素イデアル」と言い換えられる．
+
+    さて，今，計算すると
+    \[ \defsa(C) \supset \I{a} \implies \defsa(C)/\defsa(Y) \supset (\bar{f}) \]
+    が得られる．ただし$\bar{f}=f+\defsa(Y)$である．
+    $Y \not \subseteq H$から$\bar{f} \neq 0$であり，
+    また$\bar{f}$が単元だと仮定すると，
+    $\defsa(C) \supset \I{a}$から$\defsa(C)=A$，$C=\emptyset$となる．
+    $C$はirreducibleだったからこれは起こりえず，$\bar{f}$は零因子でも単元でもないことが分かる．
+    したがってKrullの単項イデアル定理を用いることが出来て，
+    $\height \defsa(C)/\defsa(Y)=1$が得られる．
+
+    (1.8A)と(1.7)より，
+    \[ \dim \frac{A/\defsa(Y)}{\defsa(C)/\defsa(Y)}+\height \defsa(C)/\defsa(Y)=\dim A/\defsa(Y)=\dim Y \]
+    第三同型定理より$\frac{A/\defsa(Y)}{\defsa(C)/\defsa(Y)} \cong A/\defsa(C)$がわかるから，
+    \[ \dim A(C)+1=\dim Y \]
+    よって主張が示された．
+
+\section{}
+    $r$個の元で生成されるイデアル$\I{a}$を考える．
+    $\I{a}$に属する極小素イデアル$\I{p}_i$は，Atiyah-MacDonald Cor11.16より，
+    $\height \I{p}_i \leq r$である．
+    定理1.8(A)から，
+    \[ \dim A(Y)/\I{p}_i+\height \I{p}_i=\dim A(Y) \iff \dim A(Y)/\I{p}_i \geq n-r. \]
+
+\section{} %1-10
+    \subsection{If $Y \subseteq X, \dim Y \leq \dim X$}
+    $X$の閉部分集合の鎖$Z_0 \cap \dots \cap Z_k$から，
+    $Y$の閉部分集合の鎖$(Z_0 \cap Y) \cap \dots \cap (Z_k \cap Y)$が作られる．
+    逆に，定義から，$Y$の閉部分集合の鎖はこのようにして尽くされるものが全てである．
+    よって$\dim Y \leq \dim X$が成り立つ．
+
+    \subsection{If $X$ has an open covering $X=\bigcup U_i$, then $\dim X=\sup_{i} \dim U_i$}
+    $X$の既約閉部分集合の鎖であって最長のものを$Z_0 \subsetneq \dots \subsetneq Z_d$とする．
+    この時，次元の定義から$\dim X=d$である．
+    今，$Z_0 \neq \emptyset$から，ある$U \in \{U_i\}$について$Z_0 \cap U \neq \emptyset$が成り立つ．
+    この$U$と$Z_j$のcapを考えると，以下のようになる．
+    \[ (Z_0 \cap U) \subsetneq \dots \subsetneq (Z_d \cap U) \]
+    実際，$Z_j \cap U$は互いに異なる．
+    なぜなら，$Z_j$は$X$の既約閉部分集合であるから，$Z_j \cap U$は$Z_j$の相対位相で稠密となっている(Ex1-6)．
+    なので$Z_j \cap U=Z_k \cap U$$(j \neq k)$と仮定して両辺の$\cl_{X}$をとると
+    $Z_j=Z_k$となり
+    \footnote{$(W \subset Z \subset X) \land (Z\mbox{::closed in }X) \implies \cl_{X}(W)=\cl_{Z}(W)$が一般に成り立つ．}
+    ，$Z_j, Z_k$のとり方に反する．
+    よって$\dim X=\dim U$となる．
+    \footnote{\url{http://math.stackexchange.com/questions/140066/krull-dimension-of-a-scheme/140078}でのKeenan Kidwellの投稿を訳した．}
+
+    \subsection{An example of a topological space::$X$ and a dense open subset::$U$ with $\dim U <\dim X$.}
+
+    \subsection{$X$::irreducible finite-dimensional topological space, $(X \supseteq) Y$::closed, and if $\dim Y = \dim X$, then $Y = X$.}
+    $X$は有限次元であるから，既約閉部分集合の列であって極大な長さを持つもの
+    \[ X_0 \subsetneq \dots \subsetneq X_{d-1} \subsetneq X_d=X \]が存在する．
+    今，$Y$::closed in $X$かつ$\dim X=\dim Y$である．
+    したがって，$Y$における既約閉部分集合の列であって極大な長さを持つものは
+    \[ Z_0 \subsetneq \dots \subsetneq Z_{d-1} \subsetneq Z_d ~~ (Z_j \subseteq X_j \cap Y) \]
+    の様になっている．
+
+    さて，$X_j \cap Y=X_j$を示す．
+    今，以下のような包含関係があって，
+    $Z_j$::irreducible in $Y$，$X_j$::irreducible in $X$となっている．
+    \[ Z_{j-1} \subsetneq Z_j \subseteq X_j \cap Y \subseteq X_j \subsetneq X_{j+1} \]
+    $X_j \cap Y$が$X$において閉集合であることに注意すると，
+    $Z_j, X_j$::irreducible in $X$が分かる．
+    このことを元に，以下のように$Z_j=X_j$が示され，
+    よって$X \cap Y=X$すなわち$X_Y$が得られる．
+
+    帰納的に$Z_j=X_j$を示そう．
+    $X_j$は$X_{j-1}$よりも真に大きい閉集合であって，既約であり，かつそのようなもので極小なものである．
+    $j=0$において$Z_0 \subseteq X_0$を考えると，$X_0$は極小であるから$Z_0=X_0$．
+    $j=1$では，$Z_0=X_0 \subseteq Z_1 \subseteq X_1$であるから$Z_1=X_1$．
+    以下同様にして$X_j=Z_j$が示される．
+
+    \subsection{An example of a noetherian topological space of infinite dimension.}
+    Ati-Mac Chapter.11のExerciseにある．
+
+\section{} % 1-11
+    与えられた曲線は$Y:=\{(x,y,z) | \Exists{t \in k} x=t^3 \land y=t^4 \land z=t^5\}$である．
+    $t$を消して$Y=\zerosa((x^4-y^3, y^5-z^4, z^3-x^5))$である．この定義イデアルを$I$とおく．
+    $I$の高さが2で，さらに2元では生成できないことを示す．
+
+    まず，
+    
+\section{}
+    \[ f=((x-1)(x+1))^2+((y-1)(y+1))^2 \]
+    と置くと，これは明らかに既約．
+    しかし，$\zerosa(f)=\{ (1,1), (1,-1), (-1,1), (-1,-1) \}$なので，
+    \[ \zerosa(f)=\zerosa(x-1,y-1) \cup \zerosa(x-1,y+1) \cup \zerosa(x+1,y-1) \cup \zerosa(x+1,y+1)\]
+    と分解できる．
+
+    発想としては次のようである．
+    $I,J$::radical idealによって$\zerosa(f)=\zerosa(I) \cup \zerosa(J)$となる，
+    とすると，まず$f \in I \cap J$が必要である．
+    $f$は既約なので$I,J$が単項であることはない．
+    そこで$I=(s,t), J=(u,v)$とそれぞれ2つの元で生成されるとすれば
+    $su+tv \in I \cap J$となる．
+    そして$s,t$と$u,v$はそれぞれの組が1以外に公約元を持たないことが，$f$が既約になる為に必要．
+    一方，$\zerosa(I)$は2つの互いに独立な曲線の共通部分であるから，点である．
+    そこで$\zerosa(I)$を$(x-1)^2=(y-1)^2=0$なる点，すなわち$(1,1)$とした．
+
+\end{document}

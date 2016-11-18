@@ -1,0 +1,692 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+\usepackage{bussproofs}
+\newcommand{\I}[1]{\mathfrak{#1}}
+
+\begin{document}
+\section{} %% 2-1
+    $\I{a}$::homogenus idealをとる．
+    $\defsp \zerosp(\I{a}) \cap S^h \subseteq \sqrt{\I{a}}$を示す．
+    今，$\I{a} \subset S=k[x_0,\dots,x_n]$である．
+    したがって$\defsa \zerosa(\I{a})=\sqrt{\I{a}}$が成立している．
+    あとは$\defsa \zerosa(\I{a}) \supseteq \defsp \zerosp(\I{a}) \cap S^h$を示せばよい．
+    \begin{align*}
+        {}&     f \in \defsp \zerosp(\I{a}) \cap S^h \\
+        \iff&   (f \in S^h) \land (f \in \defsp \zerosp(\I{a})) \\
+        \iff&   (f \in S^h) \land ( \Forall{P \in \zerosp(\I{a})} f(P)=0 ) \\
+        \iff&   (f \in S^h) \land ( \Forall{P (\in \tilde{P} )\in \proj^{n}} \Forall{a \in \I{a}} (a(P) \implies f(P)=0) ) \\
+        \implies&
+                (f \in S^h) \land ( \Forall{P \in \affine^{n+1}} \Forall{a \in \I{a}} (a(P) \implies f(P)=0) ) \\
+        \iff&   (f \in S^h) \land ( \Forall{P \in \zerosa(\I{a})} f(P)=0 ) \\
+        \iff&   (f \in S^h) \land ( f \in \defsa \zerosa(\I{a}) ) \\
+        \implies&   f \in \defsa \zerosa(\I{a})
+    \end{align*}
+    2つめの$\iff$は下から上に戻るために$f \in S^h$が必要．
+    途中の$P \in \tilde{P} \in \proj^{n}$は$P$が有る同値類$\tilde{P}$に属すということ．
+    1つめの$\implies$は$(0,\dots,0)$が$\proj^n$に無いため．
+    2つめの$\implies$は$f \in S^h$を除いたため．
+    なので証明から，実は$\defsp \zerosp(\I{a}) \cap S^h \subseteq \sqrt{\I{a}} \cap S^h$が示せている．
+
+\section{} %% 2-2
+    $\I{a}$::homogenus idealをとる．
+    i) $\zerosp(\I{a})=\emptyset$
+    ii) $\sqrt{\I{a}}=S \lor \sqrt{\I{a}}=S_{+}$
+    iii) $\Exists{d>0} \I{a} \supseteq S_d$
+
+    \paragraph{i) $\implies$ ii)}
+    $\zerosa(\I{a})$には，$\I{a} \neq S$であれば，少なくとも1点が含まれる．
+    これは$\I{a}$を含む極大イデアルが存在し，それが1点に対応するから．
+    式で書くと$\I{a} \subseteq \I{m} \implies \zerosa(\I{a}) \supseteq \zerosa(\I{m})=\{ \ast \}$
+    さらに，そのような点$P$として原点と異なるものが有る，
+    すなわち$\zerosa(\I{a}) \neq \{(0,\dots,0)\}$ならば
+    同値類$\{ \lambda P ~|~ \lambda \in k^{\times} \}$は$\zerosp(\I{a})$に属す．
+    実際，任意の$f \in \I{a}$について$f(P)=0$であり，
+    しかも$\I{a}$はhomogenus idealであるからこれは成り立つ
+    （これはEx2-10を先取りした議論）．
+
+    まとめると$\zerosp(\I{a})=\emptyset$が成り立つための十分条件は
+    \[ \I{a}=S \lor \zerosa(\I{a})=\{(0,\dots,0)\} \]
+    前者は明らかに$\sqrt{\I{a}}=S$．
+    後者も$\defsa \zerosa(\I{a})=\sqrt{\I{a}}=\langle x_1,\dots,x_n \rangle=S_{+}$．
+
+    \paragraph{ii) $\implies$ iii)}
+    最大値は平均値以上であることに注意する
+    \footnote{$a,b,c$の内$a$が最大値であれば，$\frac{a+b+c}{3} \leq \frac{a+a+a}{3}=a$．一般の場合も同様．}．
+    条件を満たす$d$を構成する．
+    まず仮定$\sqrt{\I{a}} \supseteq S_{+}$から，
+    各不定元$x_i$に対して$x_i^{e_i} \in \I{a}$となるような$e_i$が存在する．
+    その最大値を$E=\max\{e_i\}$とすれば，$d:=(n+1)E$が求めるものである．
+    実際そうなることを示そう．
+    $d$次斉次単項式$c x_0^{e_0} \cdots x_n^{e_n}~(c \in k)$を適当にとり，
+    指数$e_i$の最大値が仮に$e_n$だとすると，これは平均値$E=d/(n+1)$以上．
+    したがってこの単項式は$x_n^{E}(\in \I{a})$を因子に持つので$\I{a}$の元．
+    $S_d$の元は$d$次斉次単項式の和で表されるから，結局$S_d$の元は全て$\I{a}$に属す．
+
+    \paragraph{iii) $\implies$ i)}
+    任意の点$(a_0: \dots: a_n) \in \proj^n$をとる．
+    すると，$f(a_0, \dots, a_n) \neq 0$であるような$f \in S_d$を実際に構成できる．
+
+    $(a_0: \dots: a_n) \neq (0:\dots:0)$から$a_k \neq 0$なる$k$の存在が言えるので，
+    そのような$k$を一つ取って固定し，添字多重集合$I$を$k \not \in I$かつ$|I|=d$であるように作る．
+    $n < d$の時には$I$が多重でなくてはならない．
+    すると，
+    \[ f=\prod_{i \in I}(a_k x_i- a_i x_k) +x_k^d\]
+    は$\prod$の部分が代入で0になり，$x_k^d \neq 0$から$f(a_0, \dots, a_n) \neq 0$．
+    しかもこれは$S_d$の元である．
+
+    \paragraph{Another Proof for iii) $\implies$ i)}
+    $S_d \subset \I{a}$より，$\{x_0^d, \dots, x_n^d \} \subset \I{a}$．
+    したがってEx2-3(a)の結果を用いると$\zerosp(\I{a}) \subset \emptyset$が得られる．
+    よって$\zerosp(\I{a})=\emptyset$
+
+    以上より主張が示された．
+
+\section{} %% 2-3
+    \subsection{$T_1 \subseteq T_2 \subseteq S^h \implies \zerosp(T_1) \supseteq \zerosp(T_2)$}
+    $T_1=T_2$の時に成立することは自明．
+    $f \in T_2 \setminus T_1$をとる．
+    \begin{align*}
+        {}&     P \in \zerosp(f) \cap \zerosp(T_1) \\
+        \iff&   (f(P)=0) \land (\Forall{g \in T_1} g(P)=0) \\
+        \iff&   \Forall{g \in T_1 \cup \{f\}} g(P)=0 \\
+        \iff&   P \in \zerosp(T_1 \cup \{f\})
+    \end{align*}
+    よって$\zerosp(f) \cap \zerosp(T_1)=\zerosp(T_1 \cup \{f\}) \subseteq \zerosp(T_1)$が成り立つ．
+    $T_2$の他の元も同様に$T_1$に加えていき，主張を得る．
+
+    \subsection{$Y_1 \subseteq Y_2 \subseteq \proj^n \implies \defsp(Y_1) \supseteq \defsp(Y_2)$}
+    この場合も$=$での成立は自明．
+    $P \in Y_2 \setminus Y_1$をとる．
+    すると，$\defsp(Y_1)$には$P$で0にならない多項式が属すから，
+    $\defsp(Y_1) \not \subseteq \defsp(P)$が成り立つ．
+    \begin{align*}
+        {}&     f \in \defsp(Y_1) \cap \defsp(P) \\
+        \iff&   (f(P)=0) \land (\Forall{Q \in Y_1} f(Q)=0) \\
+        \iff&   \Forall{Q \in Y_1 \cup \{P\}} f(Q)=0 \\
+        \iff&   f \in \defsp(Y_1 \cup \{P\})
+    \end{align*}
+    したがって$\defsp(Y_1) \cap \defsp(P) = \defsp(Y_1 \cup \{P\}) \subseteq \defsp(Y_1)$が成り立つ．
+    これを繰り返して，主張を得る．
+
+    \subsection{$\Forall{Y_1, Y_2 \subset \proj^n} \defsp(Y_1 \cup Y_2)=\defsp(Y_1) \cap \defsp(Y_2)$}
+    by the definition.
+    \begin{align*}
+        {}&     f \in \defsp(Y_1 \cup Y_2) \cap S^h \\
+        \iff&   (f \in S^h) \land (\Forall{P \in Y_1 \cup Y_2} f(P)=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} P \in Y_1 \cup Y_2 \implies f(P)=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} (P \in Y_1)  \lor (P \in Y_2) \implies f(P)=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} ((P \in Y_1) \implies (f(P)=0)) \land ((P \in Y_2) \implies (f(P)=0)))  \\
+        \iff&   (f \in S^h) \land ((\Forall{P \in \proj^n} (P \in Y_1) \implies (f(P)=0)) \land (\Forall{P \in \proj^n} (P \in Y_2) \implies (f(P)=0)))  \\
+        \iff&   f \in \defsp(Y_1) \cap \defsp(Y_2) \cap S^h
+    \end{align*}
+    よって$\defsp(Y_1 \cup Y_2)$の生成元は$\defsp(Y_1) \cap \defsp(Y_2)$の生成元．
+
+    4つめの$\iff$は次のように証明できる．
+    \begin{prooftree}
+        \AxiomC{$(P \lor Q) \to R$}
+        \UnaryInfC{$\lnot (P \lor Q) \lor R$}
+        \UnaryInfC{$\lnot ((P \lor Q) \land \lnot R)$}
+        \UnaryInfC{$\lnot ((P \land \lnot R) \lor (Q \land \lnot R))$}
+        \UnaryInfC{$\lnot (P \land \lnot R) \land \lnot(Q \land \lnot R)$}
+        \UnaryInfC{$(\lnot P \land R) \land (\lnot Q \land R)$}
+        \UnaryInfC{$(P \to R) \land (Q \to R)$}
+    \end{prooftree}
+
+    \subsection{$\defsp \zerosp(\I{a})=\sqrt{\I{a}}$}
+    すでに$\defsp \zerosp(\I{a}) \cap S^h \subseteq \sqrt{\I{a}}$はEx2-1で示した．
+    $\defsp \zerosp(\I{a}) \cap S^h$は$\defsp \zerosp(\I{a})$の生成元を全て含むから，
+    結局$\defsp \zerosp(\I{a}) \subseteq \sqrt{\I{a}}$が示せている．
+    逆の包含関係を示す．
+
+    $\sqrt{\I{a}}$の任意の元$f$をとる．
+    このとき，$f$に対してある$m \in \N$が存在して$f^m \in \I{a}$となっている．
+    $f$を斉次分解した時の最高次成分を$f_D~(D:=\deg f)$とおくと，
+    $f^m$の最高次成分は$f_D^m$であり，$\I{a}$はhomogenusなので$f_D^m \in \I{a}$
+    \footnote{homogenus idealの定義を斉次多項式で生成されるイデアルと考える場合には，
+    生成元$g$と任意の多項式の斉次分解$f_1+\dots+f_d$の積を考えることで，
+    homogenus idealの元の各斉次成分がhomogenus idealに属すことが分かる．}．
+    今，点$P \in \zerosp(\I{a})$を任意にとる．
+    すると$f_D^m \in \I{a}$より$f_D^m(P)=0$．
+    ところが$f_D(P) \in k$は零因子でないから$f_D(P)=0$．
+    結局$f_D \in \defsp \zerosp(\I{a})$が分かる．
+    $f-f_D \in \sqrt{\I{a}}$も同様に考えていけば，
+    結局$f$の全ての斉次成分が$\defsp \zerosp(\I{a})$に属すことが示される．
+    よって$f \in \defsp \zerosp(\I{a})$．
+
+
+    \subsection{ $\Forall{Y \subseteq \proj^n} \zerosp(\defsp(Y))=\cl_{\proj^n}(Y)$}
+    まず，$\zerosp(\defsp(Y))$は$Y$を含む\footnote{自明}$\proj^n$の閉集合\footnote{定義}であるから
+    $\cl_{\proj^n}(Y) \subseteq \zerosp(\defsp(Y))$．
+    $Y \subseteq \zerosp(\I{a})$である閉集合$W:=\zerosp(\I{a})$をとる．
+    \begin{align*}
+        {}&     Y \subseteq \zerosp(\I{a})=W \\
+        \iff&   \defsp(Y) \supseteq \defsp(\zerosp(\I{a})) \\
+        \iff&   \defsp(Y) \supseteq \defsp(\zerosp(\I{a}))=\sqrt{\I{a}} \supseteq \I{a} \\
+        \iff&   \zerosp(\defsp(Y)) \subseteq \zerosp(\I{a})=W
+    \end{align*}
+    以上より，$Y \subseteq \zerosp(\defsp(Y)) \subseteq W$が得られる．
+    最後に$W=\cl_{\proj^n}(Y)$として主張を得る．
+
+\section{} %% 2-4
+    \subsection{1-1 correspondance between algebraic set and homogenus radical ideal.}
+    すでに述べた．
+
+    \subsection{ $Y \subset \proj^n$::irreducible$\iff$$\defsp(Y)$::prime}
+    \paragraph{$\implies$}
+    $fg \in \defsp(Y)$であったとする．
+    すると
+    \[ Y \subseteq \zerosp(fg)=\zerosp(f) \cup \zerosp(g) \implies Y = (Y \cap \zerosp(f)) \cup (Y \cap \zerosp(g))\]
+    $Y$::irreducibleより，$Y = Y \cap \zerosp(f)$または$Y=Y \cap \zerosp(g)$が成り立つ．
+    よって$Y \subseteq \zerosp(f)$または$Y \subseteq \zerosp(g)$，
+    すなわち$f \in \defsp(Y)$または$g \in \defsp(Y)$が得られる．
+
+    \paragraph{$\impliedby$}
+    $Y$が2つの閉部分集合$Y_1, Y_2$に分解されたとする．3つ以上に分解された場合も同様である．
+    $\I{p}=\defsp(Y)$としよう．$\zerosp(\I{p})=Y_1 \cup Y_2$から
+    \[ \defsp\zerosp(\I{p})=\sqrt{\I{p}}=\I{p}=\defsp(Y_1) \cap \defsp(Y_2)=\defsp(Y_1 \cup Y_2) \]となる．
+    Ati-MacのProp1.11より，$\I{p}=\defsp(Y_1)$または$\I{p}=\defsp(Y_1)$．
+    よって$\zerosp(\I{p})=Y_1$または$\zerosp(\I{p})=Y_1$，
+    すなわち$\zerosp(\I{p})$::irreducible algebraic setが得られる．
+
+    \subsection{$\proj^n$::irreducible}
+    $\zerosp(\I{a})=\proj^n$となるイデアル$\I{a}$は$\Nil(k[x_0,\dots,x_n])=0$．
+    両辺の$\defsp$をとって$\defsp(\proj^n)=0=\defsp\zerosp(0)$．
+    0は$k[x_0,\dots,x_n]$で素イデアルなので，(b)より主張を得る．
+
+\section{} %% 2-5
+
+\section{} %% 2-6
+    $A:=k[x_1,\dots,x_n], S:=k[x_0,\dots,x_n]$とする．
+    $Y$::projective varietyについて$\dim S(Y)=\dim Y +1$を示そう．
+    $\phi_i:U_i \to \affine^n$::homeomorphismを用いて
+    $Y_i:=\phi_i(Y \cap U_i)$とし，$A(Y_i)$を考える．
+
+    %% \alpha \beta=id
+    \paragraph{Step I. $A(Y_i) \cong (S(Y)_{x_i})_0$.}
+    まず次を確認しておく．
+    \[
+        A(Y_i)=\{ f+\defsa(Y_i) ~|~ f \in A\};~~
+        (S(Y)_{x_i})_0=\{ (f+\defsp(Y))/(x_i^{\deg f}+\defsp(Y)) ~|~ f \in S\}
+    \]
+
+    \paragraph{Step II. $S(Y)_{x_i} \cong A(Y_i)[x_i, x_i^{-1}]$.} \mbox{} \\
+
+    \paragraph{Step III. Use (1.7), (1.8A) and (Ex1-10). Then look at trans.deg.}
+
+    \paragraph{Conclusion.}
+
+\section{} %% 2-7
+    \subsection{$\dim \proj^n=n$}
+    Ex2-6を用いると，$\dim \proj^n=\dim S(\proj^n)-1=\dim S/\defsp(\proj^n)-1$が得られる．
+    $\zerosp(0)=\proj^n$であるから，零点定理より$\defsp(\proj^n)=0$．
+    したがって$\dim \proj^n=\dim S-1=(n+1)-1=n$となる．
+
+    \subsection{$\proj^n \supseteq Y$::quasi-affine variety, $\dim Y=\dim \cl_{\proj^n}(Y)$}
+    $\dim Y=d$としよう．
+    するとirreducible, distinct, closed in $Y$であるような集合が成す次のような鎖が有る．
+    \[ Y_0 \subsetneq \dots \subsetneq Y_{d-1} \subsetneq Y_d=Y \]
+    この$Y_i$それぞれに$\cl_{\proj^n}$を作用させると，
+    irreducible, distinct, closed in $\proj^n$な鎖が出来る．
+    \[ \cl_{\proj^n}(Y_0) \subsetneq \dots \subsetneq \cl_{\proj^n}(Y_{d-1}) \subsetneq \cl_{\proj^n}(Y) \]
+    irreducibleはEx1-6から．closed in $\proj^n$は$\cl_{\proj^n}$の定義．
+    残るはdistinct（つまり各集合が一致しないこと）である．
+    
+    簡単のために添字を変えて，$\cl_{\proj^n}(Y_1)=\cl_{\proj^n}(Y_2)$と仮定する．
+    $Y_1=X_1 \cap Y, Y_2=X_2 \cap Y$となる$X_1, X_2$::closed in $\proj^n$ and irreducibleが存在する
+    \footnote{$X_1=Z_1 \sqcup Z_2$と分解されるなら$Y_1=X_1 \cap Y=(Z_1 \cap Y) \sqcup (Z_2 \cap Y)$．
+    $Y_1$::irreducibleより$Z_1 \cap Y=Y_1$ or $Z_2 \cap Y=Y_1$なので，そのようになるものを$X_1$にとる．}．
+    $Y_1=X_1 \cap Y( \subseteq X_1)$は$Y$が$\proj^n$の開集合なので，$X_1$で稠密．
+    したがって$\cl_{X_1}(Y_1)=X_1$となる．
+    さらに後で示すように，このとき$\cl_{X_1}(Y_1)=\cl_{\proj^n}(Y_1)=X_1$となる．
+    仮定$\cl_{\proj^n}(Y_1)=\cl_{\proj^n}(Y_2)$から$X_1=X_2$すなわち$Y_1=Y_2$が得られ，大前提に矛盾．
+
+    さて，$(W \subset Z \subset X) \land (Z\mbox{::closed in }X) \implies \cl_{X}(W)=\cl_{Z}(W)$を示す．
+    $\cl_{Z}(W)$の定義から，以下が成り立つ．
+    \[ \Forall{C\mbox{::closed in }X} W \subseteq (C \cap Z) \implies \cl_{Z}(W) \subseteq (C \cap Z) \]
+    $C \cap Z$は$Z$の任意の閉集合を表す．
+    ところが，$Z$::closed in $X$より$C \cap Z$::closed in $X$．
+    $W \not \subseteq (C \cap Z)( \subset C)$である$C$については無条件で論理式がtrueになるので，
+    結局次のように書き換えられる．
+    \[ \Forall{C\mbox{::closed in }X} W \subseteq C \implies \cl_{Z}(W) \subseteq C \]
+    これは$\cl_{X}(W)$の定義に等しい．これで主張が示された．
+
+\section{} %% 2-8
+$\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S} f \mbox{::irreducible}~~ Y=\zerosp(f)$を示す．
+    $\I{a}=\defsp{Y}$としよう．$Y$::affine varietyから，$\I{a}$は素イデアル．
+    \paragraph{$\implies$}
+    Ex2-6から$\dim Y=\dim S/\I{a}-1$である．
+    定理(1.8A)から，$\dim S/\I{a}+\height \I{a}=\dim S=n+1$が分かる．
+    したがって$\height \I{a}=1$のとき$\I{a}$が単項イデアルであることが示せればよい．
+
+    そこで$\I{a}$の生成元全体から2元$f,g$がとれたとする．
+    $\I{a}$は素イデアルだから，その生成元は全て既約である．
+    したがって$0 \subsetneq (f),(g) \subseteq \I{a}$なる素イデアルの列が構成できる．
+    もし$\I{a}$が単項イデアルでなければ$0 \subsetneq (f),(g) \subsetneq \I{a}$となり，
+    これは$\height \I{a}=1$に矛盾する．よって$\I{a}$は単項イデアル．
+
+    \paragraph{$\impliedby$}
+    単項素イデアル$(f)$の高さが1で有ることを言えば良い．
+    Krullの単項イデアル定理より，これは明らか．
+
+\section{} %% 2-9
+    $Y \subseteq \affine^n$::affine varietyをとり，
+    $\bar{Y}=\cl_{\proj^{n}}(\phi_0^{-1}(Y))$を考える．
+
+    \subsection{Show that $\defsp(\bar{Y})=\langle \beta(\defsa(Y)) \rangle$}
+    $\bar{Y}=\zerosp \defsp(\phi_0^{-1}(Y))$である．
+    両辺$\defsp$をとって$\defsp(\bar{Y})=\defsp(\phi_0^{-1}(Y))$となる．
+    これはhomogenus idealだから，
+    \[ \defsp(\phi_0^{-1}(Y)) \cap S^h \subset \langle \beta(\defsa(Y)) \rangle \]を示せば証明が終わる．
+    簡単のため，$\phi_0$を$\phi$と略す．$\beta, \alpha$も同様である．
+    \begin{align*}
+            &   f \in \defsp(\phi_0^{-1}(Y)) \cap S^h \\
+        \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} P \in \phi^{-1}(Y) \implies f(P)=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} \phi(P) \in Y \implies f(P)=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P' \in \affine^n} P' \in Y \implies f(\phi^{-1}(P'))=0) \\
+        \iff&   (f \in S^h) \land (\Forall{P' \in \affine^n} P' \in Y \implies (\beta \alpha f)(\phi^{-1}(P'))=0) \\
+        \iff&   (f' \in A) \land (\Forall{P' \in \affine^n} P' \in Y \implies (\beta f')(\phi^{-1}(P'))=0) \\
+    \end{align*}
+    (TODO)
+    3つめの$\iff$は$\phi$が全射であることから．また，$P'=\phi(P)$としている．
+    5つめの$\iff$は$\alpha$が全射であることから．また，$f'=\alpha(f)$としている．
+
+    \subsection{Consider twisted cubic curve in $\proj^3$}
+    $T$::twisted cubic curveとする．
+    $\defsa(T)=\langle y-x^2, z-x^3 \rangle$である．
+    一方，$\beta(y-x^2)=yw-x^2, \beta(z-x^3)=zw^2-x^3$で生成されるイデアルは$\defsp(\bar{T})$と一致しない．
+    実際，\[ xy-z \in \defsa(T) \implies xy-zw \in \defsp(\bar{T})\]
+    \footnote{$f \in \defsa(Y) \implies \beta f \in \beta \defsa(Y) \implies \beta f \in \defsp(\bar{Y})$}
+    がわかるが，$a(yw-x^2)+b(zw^2-x^3)=w(ya+bzw)-x^2(a+bx)$の$x$に関する次数を1以下にするには，
+    $a+bx=0$となるようにするより無いが，そうすると$w(ya+bzw)-x^2(a+bx)=-bw(xy-zw)$となり，
+    結局$xy-zw \not \in \langle yw-x^2, zw^2-x^3 \rangle$が示される．
+
+\section{} %% 2-10
+    \subsection{$C(Y)$ is algebraic set, and $\defsa(C(Y))=\defsp(Y)$}
+    $\defsp(Y)$が根基イデアルであるから，
+    $C(Y)=\zerosa \defsp(Y)$を以下で示し，
+    そのうえで$\defsa(C(Y))=\sqrt{\defsp(Y)}=\defsp(Y)$を得る．
+
+    \paragraph{$C(Y) \supseteq \zerosa \defsp(Y)$}
+    $P \in \zerosa \defsp(Y)$を取る．
+    $\defsp(Y)$は$Y$の点で0になる多項式であり，
+    $\zerosa \defsp(Y)$は$Y$の点で0になる多項式の零点である．
+    よって$\zerosa \defsp(Y) \subseteq Y \subseteq C(Y)$．
+
+    \paragraph{$C(Y) \subseteq \zerosa \defsp(Y)$}
+    $\defsp(Y)$はhomogenusであり，
+    したがって$P \in Y$を取れば$f(\lambda P)~~(\lambda \in k^{\times})$も0になる．
+    すなわち$\theta^{-1}(P) \subset \zerosa \defsp(Y)$．
+    また，$Y \neq \emptyset$とEx2-2，それと$\defsp(Y)$は単元$1$を含まないことから，
+    $\defsp(Y) \subset S_{+}$（定数項がない元）である．
+    よって$(0,\dots,0) \in \zerosa \defsp(Y)$が成り立つ．
+    以上より$C(Y) \subseteq \zerosa \defsp(Y)$が得られる．
+
+
+    \subsection{$C(Y)$ is irreducible if and only if $Y$ is}
+    (a)から，$\defsa(C(Y))=\defsp(Y)$が分かる．
+    $C(Y)$::irreducibleと$\defsa(C(Y))$::prime idealは同値．
+    $Y$と$\defsp(Y)$についても同様であるから，主張が得られる．
+
+    \subsection{$\dim C(Y) = \dim Y + 1$}
+    Ex2-6から，右辺は$\dim S(Y)$に一致する．
+    なので$\dim S/\defsp(Y)=\dim S(Y)=\dim C(Y)=\dim S/\defsa(C(Y))$を示せばよいが，
+    (a)からこれは明らか．
+
+\section{} %% 2-11
+    \subsection{For variety $Y \in \proj^n$}
+    以下の同値性を示す．
+    \begin{enumerate}[(i)]
+        \item $\Exists{p_i \in S_1} \defsp(Y)=\langle p_1, \dots, p_l \rangle$
+        \item $\Exists{q_i \in S_1} Y=\zerosp(q_1) \cap \dots \zerosp(q_m)$
+    \end{enumerate}
+    \paragraph{(i) $\implies$ (ii)}
+    \begin{align*}
+            &   \defsp(Y)=\langle p_1, \dots, p_l \rangle \\
+        \iff&   \zerosp \defsp(Y)=\cl_{\proj^n}(Y)=\zerosp(\{ p_1, \dots, p_l \}) \\
+        \iff&   \cl_{\proj^n}(Y)=\zerosp(p_1)\cap \dots \cap \zerosp(p_l) \\
+        \iff&   Y=\zerosp(p_1)\cap \dots \cap \zerosp(p_l)
+    \end{align*}
+    最後の$\iff$は$Y$::variety($\implies Y$::closed in $\proj^n$)から．
+
+    \paragraph{(ii) $\implies$ (i)}
+    \begin{align*}
+            &   Y=\zerosp(q_1) \cap \dots \zerosp(q_m) \\
+        \iff&   Y=\zerosp(\{q_1, \dots, q_m \}) \\
+        \iff&   Y=\zerosp(\langle q_1, \dots, q_m \rangle) \\
+        \iff&   \defsp(Y)=\defsp \zerosp(\langle q_1, \dots, q_m \rangle) \\
+        \iff&   \defsp(Y)=\sqrt{\langle q_1, \dots, q_m \rangle}
+    \end{align*}
+    最後に$\langle q_1, \dots, q_m \rangle$が素イデアルとなることを示す．
+    
+    生成元の集合を，個数が最小になるようにとる．すると
+    各$q_i~~(i=1,\dots,m)$について
+    \[ q_i \not \in \langle \{q_1, \dots, q_m\} \setminus \{q_i\} \rangle \]が成り立つ．
+    よって$q_1, \dots, q_m$は$k$上のベクトルとして一次独立である．
+    そこで
+    \[ q_1=0;~ q_2=0;~ \dots;~ q_m=0 \]
+    という連立多項式を考えると，
+    これは不定元の個数が連立されている式よりも少ないので，解を持つ．
+    なぜなら$q_1, \dots, q_m$は$k$上のベクトル空間$S_1$の元として一次独立であり，
+    一方で$S_1$のその基底の濃度は丁度不定元の個数に等しいから．
+    したがっていくつかの不定元が別の不定元の線形和として表すことが出来，
+    そのような不定元はEx1-1の様に消すことが出来る．
+    よって$S/\langle q_1, \dots, q_m \rangle \cong k[y_1,\dots,y_k]$なる$k \in \N$が存在し，
+    主張が示される．
+
+    \subsection{If $Y(\subset \proj^n)$::linear variety and $\dim Y=r$, then $\defsp(Y)$ can be generated by $n-r$ linear polynomials.}
+    Ex2-6より，$\dim Y+1=\dim S(Y)=\dim S/\defsp(Y)=r+1$が成立．
+    よって定理(1.8A)を用いて$\height \defsp(Y)=(n+1)-(r+1)=n-r$．
+    Kurllの高度定理から，$\defsp(Y)$の生成元は$n-r$個以上である．
+
+    今，$k$上線形独立な$l$個の$S_1$の元（ベクトル）で生成されるイデアル$\langle g_1, \dots, g_l \rangle$を考える．
+    するとこれは(a)で見たとおり素イデアル．
+    また，$\defsp(Y)$の生成元から１つを取り除いた$l-1$個の元$g_2, \dots, g_l$も線形独立であるから，
+    $\langle g_2, \dots, g_l \rangle$も素イデアル．
+    これを繰り返すことによって$\langle g_1, \dots, g_l \rangle$の高さは$l$以上あることが分かる．
+    この議論を高さ$n-r$のイデアル$\defsp(Y)$に用いれば，
+    これが$n-r$個以下の線形独立な元で生成されることが示される．
+
+    前半の議論と合わせて，$\defsp(Y)$は$n-r$個以下の線形独立な元で生成されることが示された．
+
+    \subsection{$Y, Z$::linar variety in $\proj^n$. Think about $\dim Y+\dim Z \geq n$ and $Y \cap Z \neq \emptyset$.}
+    本文通り$\dim Y=r, \dim Z=s$とおく．
+    (b)から，$\defsp(Y), \defsp(Z)$はそれぞれ$n-r$個，$n-s$個の元で生成される．
+    それぞれ生成元の集合であって最小なものを$G_Y, G_Z$としよう．
+    $\defsp(Y)=\langle G_Y \rangle, \defsp(Z)=\langle G_Z \rangle$が成り立つ．
+    $\defsp(Y \cap Z)$は$\defsp(Y) \cup \defsp(Z)$，
+    すなわち$G_Y \cup G_Z$で生成されるhomogenus idealである．
+    さらに$\defsp(Y \cap Z)$の生成元の集合であって最小なものを$G_{Y \cap Z}$としよう．
+    明らかに$|G_{Y \cap Z}| \leq |G_Y \cup G_Z|$である．
+
+    \paragraph{$\dim Y+\dim Z \geq n \implies Y \cap Z \neq \emptyset$}
+    仮定から$r+s \geq n$．
+    これの両辺に$n$を加えて整理すれば$(n-r)+(n-s)=|G_Y \cup G_Z| \leq n < n+1$．
+    よって$\langle G_{Y \cap Z} \rangle=\langle G_Y \cup G_Z \rangle=\defsp(Y \cap Z) \subsetneq S_1$となる．
+    Ex2-2から，$Y \cap Z \neq \emptyset$が成立する．
+
+    \paragraph{$Y \cap Z \neq \emptyset \implies \dim (Y \cap Z) \geq \dim Y+\dim Z-n$}
+    $\dim (Y \cap Z)=t$と置くと$|G_{Y \cap Z}|=n-t$．
+    また，$|G_{Y \cap Z}| \leq |G_Y \cup G_Z|$より$n-t \leq (n-r)+(n-s)$であるから，
+    変形して$t \geq (r+s)-n$すなわち$\dim (Y \cap Z) \geq \dim Y+\dim Z-n$を得る．
+    $Y \cap Z \neq \emptyset$は$Y \cap Z$がvarietyであることと，$\dim (Y \cap Z)$が意味を持つために必要．
+
+\section{} %% 2-12
+    以下のような元を並べて$M_0,\dots,M_N$とする．
+    ただし$\alpha$は要素数$n$の多重指数で，$N=\binom{n+d}{n}-1$．
+    \[ \prod_{|\alpha|=d}{x_0^{\alpha_1} \cdots x_n^{\alpha_n}} \]
+    写像$\theta$を以下で定める．
+    \[ \theta:k[y_0,\dots,y_N] \to k[x_0,\dots,x_n];~~ f(y_0,\dots,y_N) \mapsto f(M_0,\dots,M_N) \]
+    さらに写像$\rho_d$を以下で定める．
+    \[ \rho_d:\proj^n \to \proj^N;~~ P=(a_0:\dots:a_n) \mapsto (M_0(P):\dots:M_N(P)) \]
+
+    \subsection{$\ker \theta$::homogenus prime ideal}
+    まず$\im \theta$を考える．
+    これは$\theta$が準同型だから整域$k[x_0,\dots,x_n]$の部分環．
+    整域の部分環はまた整域だから$\im \theta$は整域．
+    \footnote{部分環の2元は整域の元と考えることも出来るから．}
+
+    $\ker \theta$が斉次イデアルであることを見よう．
+    $f \in \ker \theta$を1つとると$\theta(f)=0$．
+    $f$の斉次分解を$f=\sum_{d \geq 0}{f_i}$とする．
+    このとき
+    \[ 0=\theta(f)=\theta \left(\sum_{d \geq 0}{f_i} \right)=\sum_{d \geq 0}{\theta(f_i)}=0 \]
+    $\theta$は$i$次斉次式を$d \cdot i$次斉次式に写すから，
+    これは$\theta(f)=0$の斉次分解である．
+    0の斉次分解は$0=0+0+\dots$しかないので，$\theta(f_i)=0$．
+    よって$f$の各斉次成分$f_i$も$\ker \theta$に属す．
+
+    \subsection{$\rho_d(\proj^n)=\zerosp(\ker \theta)$}
+    証明に使うので，先に$\rho_d$が単射であることを示す．
+    $\rho_d(P)=\rho_d(Q)$なる2点$P,Q$をとる．すると以下が成立する．
+    \[ \Exists{\lambda \in k^{\times}} \Forall{i} M_i(P)=\lambda M_i(Q). \]
+    $N_{ij}=x_i^{d-1} x_j$とすると，これは$d$次式．
+    なので$N_{ij}$は$M_i$達の一部である．
+
+    $N_{ii}(P)=p_i^d \neq 0$なる$i$を選び固定する．
+    この時$M_i(Q)=q_i^d \neq 0$が得られる．
+    \begin{align*}
+        {}&     \Exists{\lambda \in k^{\times}} \Forall{j} N_{ij}(P)=\lambda N_{ij}(Q) \\
+    \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} p_i^{d-1}p_j=\lambda q_i^{d-1}q_j \\
+    \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} p_j=\lambda \left(\frac{q_i}{p_i} \right)^{d-1}q_j \\
+    \implies&   \Exists{\lambda' \in k^{\times}} \Forall{j} p_j=\lambda' q_j \\
+    \iff&       P=Q
+    \end{align*}
+    4行目の$\implies$は$\frac{q_i}{p_i} \neq 0$と，$\lambda \left(\frac{q_i}{p_i} \right)^{d-1}$は$j$に依らないことから．
+
+    \subsection{$\proj^n \cong \zerosp(\ker \theta)$ by $\rho_d$}
+    $\rho_d: \proj^n \to \zerosp(\ker \theta)$を考える．
+    全単射であることはすでに示した．
+
+    $\rho_d, \rho_d^{-1}$が共に閉写像であることを示そう．
+    \paragraph{$\rho_d^{-1}$::closed morphism}
+    $\I{J}$::homogenous radical idealをとる．
+    まず$\theta(\I{J})$はhomogenousである．
+    先にこれを示そう．
+    $\I{J}$の元$f$をとり，$f=f_0+\dots+f_D$と斉次分解すると，$f_i \in \I{J}$．
+    なので$\theta(f), \theta(f_i) \in \theta(\I{J})$．
+    $\theta(f)=\theta(f_0)+\dots+\theta(f_D)$は$\theta(f)$の斉次分解なので示せた．
+
+    $\rho_d^{-1}(\zerosp(\I{J}^h))=\zerosp(\theta(\I{J}^h))$．
+    \begin{align*}
+        {}&     P \in \rho_d^{-1}(\zerosp(\I{I}^h)) \\
+        \iff&   \rho_d(P) \in \zerosp(\I{I}^h) \\
+        \iff&   \Forall{f \in \I{I}^h} f(\rho_d(P))=0 \\
+        \iff&   \Forall{f \in \I{I}^h} f(M_0(P), \dots, M_N(P))=0 \\
+        \iff&   \Forall{f \in \I{I}^h} f(M_0, \dots, M_N)(P)=0 \\
+        \iff&   \Forall{f \in \I{I}^h} \theta(f)(P)=0 \\
+        \iff&   P \in \zerosp(\theta(\I{I}))
+    \end{align*}
+    よって主張が示された．
+
+    \paragraph{$\rho_d$::closed morphism}
+
+    \subsection{Twisted cubic curve is a 3-uple emdebeding.}
+    $n=1, d=3$の場合，$M_i$は例えば以下の様．
+    \[ M_0=u^3, M_1=u^2 v, M_2=u v^2, M_3=v^3 \]
+    そこで$\rho_3$の像を見る．
+    \[ \rho_3(\proj^1)=\{ (u^3: u^2v: u v^2: v^3) ~|~ u,v \in k \}=\{ (1,t, t^2, t^3) ~|~ t \in k \} \cup \{(0:0:0:1)\}\]
+    これは明らかに$\phi_0^{-1}(T)$，すなわちTwisted cubic curveである．
+    $(0:0:0:1)$は無限遠点であることに注意．
+
+\section{} %% 2-13
+    $\proj^2$の$\proj^5$への2-uple emdebedingを考える．
+    \[ M_0=x^2, M_1=y^2, M_2=z^2, M_3=xy, M_4=yz, M_5=zx \]
+    とすれば，このemdebeding(Veronese surface)は
+    \[ Y=\rho_d(\proj^2)=\{ (1: u^2: v^2: u: uv: v), (0:u^2:v^2:0:uv:0) ~|~ u,v \in k \} \} \]
+    となる．
+    $Y \cong \proj^2$から，$\dim  Y=2$が分かる．
+
+    $Z \subseteq Y, \dim Z=1$なるclosed varietyをとる．
+    この時，$V \subset \proj^5, \dim V=5-1=4$なるprojective varietyが存在して
+    $Y \cap V=Z$となることを示す．
+    それぞれの定義イデアルで考えると，
+    $\defsp(Y), \defsp(Z), \defsp(V)$はどちらも素イデアルで，
+    $Z \subseteq Y$より$\defsp(Y) \subseteq \defsp(Z)$．
+    高さは$\height \defsp(Y)=5-2=3, \height \defsp(Z)=5-1=4, \height \defsp(V)=5-4=1$である．
+    したがってcriticalな問題は$\defsp(Z)$から$\defsp(Y)$を「引く」ことで出来るイデアルが
+    高さ1の素イデアルになるかどうかかである．
+
+    $S$はNoether ringであるから$\defsp(Y), \defsp(Z)$は有限個の生成元を持つ．
+    $\defsp(Y) \subseteq \defsp(Z)$から，それら生成元は
+    \[ \defsp(Y)=\langle g_1,\dots,g_r \rangle, \defsp(Z)=\langle g_1,\dots,g_r, h_1,\dots,h_s \rangle \]
+    の様に選べる．
+    この時$V=\zerosp(\langle h_1,\dots,h_s \rangle)$とすれば，
+    あきらかに$\defsp(V) \cup \defsp(Y)$は$\defsp(Z)$を生成する．
+    すなわち$V \cap Y=Z$．
+    また，$\defsp(Y)$による剰余をとる写像は全射であるから，
+    $\defsp(Z)/\defsp(Y)=\defsp(V)$より，$\defsp(V)$は素イデアル．
+    さらにこの写像で$0=\defsp(Y)/\defsp(Y) \subseteq \defsp(Z)/\defsp(Y) \cong \defsp(V)$が得られ，
+    $\height \defsp(V)=1$も示される．
+
+\section{} %% 2-14
+    写像$\psi$を次で定める．
+    \begin{align*}
+        \psi: \proj^r \times \proj^s \to& \proj^N \\
+        (a_0: \dots: a_r) \times (b_0: \dots: b_s) \mapsto& (a_0 b_0: a_0 b_1: \dots: a_i b_j: \dots: a_r b_s)
+    \end{align*}
+    ただし$N:=rs+r+s$とした．このとき，$\im \psi$がvarietyであることを示す．
+    証明のため，以下のような写像$\phi$を考える．
+    \begin{align*}
+        \phi: k[z_{(0,0)}, \dots, z_{(i,j)}, \dots, z_{(r,s)}] \to& k[x_0, \dots, x_r, y_0, \dots, y_s] \\
+        z_{(i,j)} \mapsto& x_i y_j
+    \end{align*}
+    $\im \phi$は整域(cf.Ex2-12(a))だから，
+    \footnote{整域$R$に対して$R[x_1,\dots,x_n]$の部分環は整域．零因子の最高次係数が0になることを見よ．}
+    $\ker \phi$は素イデアル．
+    $\ker \phi$が斉次であることもわかるから，$\zerosp(\ker \phi)$はprojective variety
+    \footnote{例えば$z_{(1,1)}z_{(2,2)}-z_{(1,2)}z_{(2,1)}$は$x_1y_1x_2y_2-x_1y_2x_2y_1=0$となる．同様の元が$\ker \phi$を生成する．}．
+    そこで$\im \psi = \zerosp(\ker \phi)$を示す．
+    Ex2-3を用いれば，これは$\defsp(\im \psi) = \ker \phi$と同値である．
+
+    \paragraph{$\defsp(\im \psi) \subseteq \ker \phi$}
+    $f \in \defsp(\im \psi)$を取る．
+    これは$\im \psi$に属す任意の点$P=(a_0 b_0: a_0 b_1: \dots: a_i b_j: \dots: a_r b_s)$を0にする．
+    したがって，$a_i b_j$は$z_{(i,j)}$に代入されると考えれば，
+    \[
+        f(P)
+        =\left( \sum_{\alpha}{c_{\alpha} \prod_{(i,j) \in I}{z_{(i,j)}^{\alpha_{(i,j)}}}} \right)(P)
+        =\left( \sum_{\alpha}{c_{\alpha} \prod_{(i,j) \in I}{(a_i b_j)^{\alpha_{(i,j)}}}} \right)
+        =0
+    \]
+    ただし$c_{\alpha} \in k, I=\{(i,j) ~|~ 0 \leq i \leq r, 0 \leq j \leq s\}$とした．
+    これは直ちに$\phi$で写すことが出来て，
+    \[
+        \phi(f)(\psi^{-1}(P))
+        =\left( \sum_{\alpha}{c_{\alpha} \prod_{(i,j) \in I}{(x_i y_j)^{\alpha_{(i,j)}}}} \right)(\psi^{-1}(P))
+        =\left( \sum_{\alpha}{c_{\alpha} \prod_{(i,j) \in I}{(a_i b_j)^{\alpha_{(i,j)}}}} \right)
+        =0
+    \]
+    点$P$は$\im \psi$全体を動くから，$\phi(f)$は$\proj^r \times \proj^s$全体で0になる．
+    すなわち$\zerosp(\phi(f))=\proj^r \times \proj^s=\zerosp(0)$
+    Ex2-3(b)を$Y_1 \subseteq Y_2$かつ$Y_1 \supseteq Y_2$の場合に用いることで，
+    このような多項式は0しかないことが分かる．よって$\phi(f)=0$．
+
+    \paragraph{$\defsp(\im \psi) \supseteq \ker \phi$}
+    $f \in \ker \phi$をとる．このとき$\phi(f)=0$である．
+    すると\[ \Forall{P \in \im \psi} \phi(f)(\psi^{-1}(P))=0 \]が得られ，
+    前段同様に単項式を見ることで$f(P)=0$が得られる．
+
+\section{} %% 2-15
+    The Segre Embedding $\psi: \proj^1 \times \proj^1 \to \proj^3$を考える．
+
+    \subsection{The Quadric Surface in $\proj^3$ is the Segre embedding of $\proj^1 \times \proj^1$ in $\proj^3$.}
+    この時，Ex2-14で定めた$\phi$の核は，
+    \[ \ker \phi=\langle z_{(1,1)}z_{(2,2)}-z_{(1,2)}z_{(2,1)} \rangle=\langle xy-zw \rangle \]
+    Ex2-14より，
+    \[ \im \psi=\zerosp(\ker \phi)=\zerosp(xy-zw) \]
+    である．これはthe quadric surface $Q$の定義である．
+
+    \subsection{$Q$ contains two families of lines $\{L_t\}, \{M_t\}$.}
+    $t=(a:b) \in \proj^1$を任意にとる．
+    この時，次のように定めた$\{L_t\}, \{M_t\}$は本文中の条件を満たす．
+    \[ L_t=\zerosp(\{bx-az, by-aw\}), M_t=\zerosp(\{bx-ay, bz-aw\})  \]
+    それぞれ，$\psi((a:b) \times (u:t)), \psi((u:t) \times (a:b))$の結果をもとに作った．
+    これらが$Q$に含まれる直線であることは作り方から自明．
+    実際に$\{L_t\}, \{M_t\}$が条件を満たすことを示そう．
+
+    \paragraph{$t \neq u \implies L_t \cap L_u=\emptyset, M_t \cap M_u=\emptyset$}
+    $t=(a:b), u=(c:d)$とする．
+    このとき，$L_t \cap L_u=\zerosp(\{bx-az, by-aw, dx-cz, dy-cw\})$となる．
+    $bx-az=0 \land dx-cz=0$かつ$t \neq u$（すなわち$ad-bc \neq 0$）から$x=z=0$．
+    \footnote{行列で考えると良い．}
+    さらに$by-aw=0 \land dy-cw=0$も同様に考えて，$y=w=0$．
+    合わせて$L_t \cap L_u(=\{(0:0:0:0)\})=\emptyset$が示される．
+    $M_t$でも同様．
+
+    \paragraph{$\Forall{t,u \in \proj^1} L_t \cap M_u = \{\mbox{one point}\}$}
+    $t=(a:b), u=(c:d)$とする．
+    $L_t \cap M_u=\zerosp(\{bx-az, by-aw, dx-cy, dz-cw\})$である．
+    これの解としては$P=\psi((a:b) \times (c:d))=(ac:ad:bc:bd)$がある．
+    $t,u \neq (0:0)$だから$P \in \proj^3$．
+    $L_t \cap M_u = \{\mbox{one point}\}$は，以下の方程式の解空間が1次元であることと同値である．
+    \[
+        \begin{bmatrix}
+            b & 0 & -a & 0 \\
+            0 & b & 0 & -a \\
+            d & -c & 0 & 0 \\
+            0 & 0 & d & -c
+        \end{bmatrix}
+        \begin{bmatrix}
+            x \\ y \\ z \\ w
+        \end{bmatrix}
+        =0
+    \]
+    この係数行列を$A$とする．
+    $A$を基本変形すると，次のよう．
+    \[
+        \begin{bmatrix}
+            b & 0 & -a & 0 \\
+            0 & b & 0 & -a \\
+            0 & 0 & d & -c \\
+            0 & 0 & 0 & 0
+        \end{bmatrix}
+        ~~(\alpha:=ad-bc)
+    \]
+    よって$\rank A=3$．次元定理より，解空間の次元は$\dim \ker A=4-3=1$．
+
+    \subsection{$\psi$ is not a homeomorphism between $Q$ and $\proj^1 \times \proj^1$．}
+    $\proj^1$の開基$U,V$について，$U \times V$は$\proj^1 \times \proj^1$の開基である．
+    これはfactとして利用する．
+    すると$\proj^1$の開集合は$\proj^1$全体から有限個の点を除いたものだから，
+    それを$\psi$で写したものは$Q$全体から有限個の$\{L_t\}, \{M_t\}$を除いたもの，
+    あるいはそれらの和集合である，$Q$全体から有限個の点を除いたものとなる．
+
+    今，$\psi((u,v) \times (u,v))=(u^2:uv:uv:v^2)$を考えると，
+    これは曲線であり，$\zerosp(\{z^2-xw, y^2-xw\})$と一致する．
+    この曲線を$C$としよう．
+    $C \cap L_t, C \cap M_t$はそれぞれ，$t=(a:b)$とした時，
+    \[ C \cap L_t=\{(a^2:ab:ab:b^2)\}=C \cap M_t \]
+    となる．
+    すなわち$C \cap L_t, C \cap M_t$は1点であり，$C$は$L_t, M_t$と一致しない．
+    よって$\proj^1 \setminus C$は$Q$全体から有限個の$\{L_t\}, \{M_t\}$を除いたものではない曲線である．
+    なので$\proj^1 \setminus C$は開集合の$\psi$による像ではない．
+    $\psi$が開写像でないから，$\psi$はhomeomorpismではない．
+
+\section{} %% 2-16
+    \subsection{$\zerosp(x^2-yw) \cap \zerosp(xy-zw)$}
+    $(x^2-yw=0) \land (xy-zw=0)$を考えると，これは以下と同値．
+    \[ ((w \neq 0) \land (y-(\frac{x}{w})^2=0) \land (z-(\frac{x}{w})^3)=0) \lor ((w=0) \land (x=0)) \]
+    よって
+    \[
+        \zerosp(x^2-yw) \cap \zerosp(xy-zw)
+        =\{(t: t^2: t^3: 1) ~|~ t \in k\} \cup \{ (0:u:v:0) ~|~ u,v \in k\}
+    \]
+    これはtwisted cubic curveと直線の和である．
+
+    \subsection{$\zerosp(x^2-yz) \cap \zerosp(y)$}
+    $(x^2-yz=0) \land (y=0)$を解くと，$(x=0) \land (y=0)$．
+    $\proj^3$における交点を考えているので，結局
+    \[ \zerosp(x^2-yz) \cap \zerosp(y)=\{(0:0:1)\} \]となる．
+    これに対応するイデアルは$\I{m}=(x,y)$である．
+
+    一方，
+    \[ (x^2-yz)+(y)=(x^2, y) \neq \I{m} \]
+    となる．ただし，$\sqrt{(x^2, y)}=\I{m}$である．
+
+\section{} %% 2-17
+    次元$r$のvariety $Y (\subset \proj^n)$が(strict) complete intersectionであるとは，
+    $\defsp(I)$が丁度$n-r$個の元で生成されるということである．
+    同じく，$Y$がset-theoretic complete intersectionであるとは，
+    $Y$が丁度$n-r$個の
+    hypersurface\footnote{1つの既約多項式で定義されるvariety．Ex2-8．}
+    で表されるということである．
+
+    \subsection{If ideal $\I{a}$ can be generated by $q$ elements, $\dim \zerosp(\I{a}) \geq n-q$}
+    Ex2-6より，$\dim \zerosp(\I{a})=\dim S/\I{a}-1$．
+    定理(1.8A)から，証明は$\height \I{a} \leq q$に絞られるが，
+    これはKrullの高度定理
+    \footnote{If $R$ is a Noetherian ring and $I$ is a proper ideal generated by $n$ elements of $R$, then $\height I \leq n$.}
+    から明らか．
+    （生成元がhomogenusであることは定義？）
+
+    \subsection{strict complete intersection is a set-theoretic complete intersection.}
+    $Y$は空でなく，$\defsp(Y)$は素イデアルだから，既約多項式で生成される．
+    \footnote{定数でない多項式$f,g$をとると多項式$fg$（積）は既約でない．また，$\deg f, \deg g < \deg (fg)$．}
+    strict complete intersection $Y$の生成集合として最小のもの$G_Y$を取ると，
+    $G_Y$の各元は既約であり，かつ$|G_Y|=n-\dim Y$となる．
+    すると$f \in G_Y$にたいして$\zerosp(f)$はhypersurfaceである．
+    異なる$f,g \in G_Y$が定義する$\zerosp(f), \zerosp(g)$が一致することはないから，
+    こうして作られるhypersurfaceは丁度$|G_Y|$個．
+
+\end{document}

@@ -1,0 +1,399 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note, braket}
+\newcommand{\I}[1]{\mathfrak{#1}}
+\newcommand{\Quot}{\operatorname{Quot}}
+
+\begin{document}
+\section{Definition of regular function}
+    \begin{Def}[regular function on quasi-affine variety $Y$] \mbox{} \\
+        $f: Y \to k$がregular functiona at a point $P \in Y$とは，以下の論理式が成り立つ事．
+        \[ \Exists{U \in \mathcal{O}_Y} (P \in U) \land (\Exists{g,h \in A} (h|_U \neq 0) \land (f|_U=g/h) ) \]
+    \end{Def}
+
+    \begin{Def}[regular function on quasi-projective variety $Y$] \mbox{} \\
+        $f: Y \to k$がregular functiona at a point $P \in Y$とは，以下の論理式が成り立つ事．
+        \[ \Exists{U \in \mathcal{O}_Y} (P \in U) \land (\Exists{g,h \in S^h} (\deg g=\deg h) \land (h|_U \neq 0) \land (f|_U=g/h) ) \]
+    \end{Def}
+
+    多様体の間の写像としてregular mapが後に定義される．
+
+\section{About Remark 3.1.1}
+    \begin{Lemma}
+        $Y (\subset \proj^n)$ :: quasi-projective variety,
+        $f: Y \to \proj^1_k$ :: regular function on quasi-projective variety $Y$
+        $\implies$
+        $f$ :: continus
+    \end{Lemma}
+    \begin{proof}
+        そのためにLemma 3.1と同じ方針で証明をする．
+        閉集合が閉集合へ写ることを示す．
+        $\proj^1_k$の閉集合は有限集合だから，一点集合が閉集合に写ることだけ見れば良い．
+        ある開集合$U$で$f$が
+        \[ f|_U=g/h ~~ (g,h \in S^h, \deg g=\deg h, g|_U \neq 0) \]とあらわせたとしよう．
+        $a \in f(U) \subseteq \proj^1_k$を任意にとると，
+        \[ f^{-1}(a) \cap U=\set{ P \in U | g(P)/h(P)=a }=\zerosp(g-ah) \]
+        となる．
+        $g-ah$は$g,h$が斉次かつ$\deg g=\deg h$かつ$a$が定数だから斉次である．
+        \footnote{この一文だけがaffineの場合と異なる．他の部分はaffineと全く同じ．}
+        よって$f^{-1}(a) \cap U$はclosed set.
+    \end{proof}
+
+    \begin{Lemma}
+        $X$ :: variety, $U$:: open in $X$, $f, g: X \to k$ :: regular on $U$とする．
+        このとき$f=g$ on $U$ならば$f=g$ on $X$．
+    \end{Lemma}
+    \begin{proof}
+    今，$U$において$f,g$が$f=f_0/f_1, g=g_0/g_1$とあらわせたとしよう．
+    （$U$より大きい集合で$f=f_0/f_1$となっていれば単に制限する．）
+    すると$h=f-g=\frac{f_0 g_1-g_0 f_1}{f_1 g_1}$もまた$U$上のregular function．
+    したがって$h$は連続である．
+    $k=\affine^1_k$はT1空間だから$\{0\}$は閉集合で，$h$は連続．
+    よって$A:=h^{-1}(\{0\})=\{P \in X ~|~ f(P)=g(P)\}$は閉集合．
+    明らかに$U \subseteq A \subseteq X$となっている．
+    $U$は$X$ :: irreducible setの開部分集合なので，Exsercise 1.6より，$U$はdense．
+    したがって$\cl_{X}(U)=X$．$A$は閉集合であるから，$X \subseteq A \subseteq X$すなわち$A=X$が得られる．
+    \end{proof}
+
+
+\section{p.16 Definition}
+    \subsection{ring of regular functions on $Y$ : $\mathcal{O}(Y)$}
+    $\mathcal{O}(Y)$は$Y$全体でregularな関数全体である．
+    つまり，任意の点$P \in Y$について，ある$P$の開近傍$U$が存在し，
+    $f=g_U/h_U \mbox{ on }U, h_U \neq 0$であるような$g_U,h_U \in S$を見つけられるもの．
+    $g_U,h_U$は点$P$と開近傍$U$に依存することに注意．
+    $Y$全体で正則な有理関数を全て含むが，それよりも大きな集合になりうる．
+
+    $\mathcal{O}(Y)$がringであることをみる．
+    まず$0, 1$は明らかにこの集合に属す．
+    $f,g \in \mathcal{O}(Y)$をとると，
+    適当な点$P$とその開近傍$U$について$f=\frac{f_0}{f_1}, g=\frac{g_0}{g_1}$という表示がある．
+    以下の計算から，$fg, f+g$も$U$でregular．
+    \[ fg=\frac{f_0 g_0}{f_1 g_1}, f+g=\frac{f_0 g_1+g_0 f_1}{f_1 g_1} \mbox{ on } U \]
+    点$P \in Y$は任意に取ったので，$fg, f+g$は$Y$でregular.
+
+    \subsection{local ring of $P$ : $\mathcal{O}_P$}
+    \paragraph{Definition}
+    $\mathcal{O}_P$は$P$でregularな関数全体で作られるring．
+    中身は$P$の開近傍$U \subset Y$と，quasi-variety $U$の各点でregularな関数$f$の組で，
+    \[ \langle U,f \rangle \equiv \langle V,g \rangle \iff f=g \mbox{ on }U \cap V \iff (f-g)|_{U \cap V}=0 \]
+    という関係で割っている．
+    $f$から$U$が定まるのではなく，その逆である．
+    $Q \in U$に対する$f$の有理関数表示が変わるかも知れない．
+
+    \paragraph{check to be equivalence relation.}
+    $\equiv$が同値関係であることは次のように分かる．
+    まず反射律と対称律は明らか．
+    推移律はRemark 3.1.1の
+    \[ \langle U,f \rangle \equiv \langle V,g \rangle \implies f=g \mbox{ on } Y  \]
+    より直ちに分かる．$U \cap V \neq \emptyset$は$P \in U, V$より直ちに分かる．
+    この同値関係で割らなければ，$\langle U,f \rangle$と$\langle V,f \rangle$は異なるものになる．
+
+    \paragraph{check to be ring}
+    この集合がringであることを示す．
+    \[ a=\langle U,f \rangle, b=\langle V,g \rangle \]
+    とすると，$ab, a+b$の計算は次のようになる．
+    まず$Q \in U \cap V$を適当にとると，開近傍$(Q \in )W, (Q \in )Z$において
+    $f,g$はそれぞれ$f=f_0/f_1, g=g_0/g_1$と書ける．
+    $W,Z$はirreducible set $Y$の開部分集合だから$W \cap Z \neq \emptyset$．
+    \[ fg=\frac{f_0 g_0}{f_1 g_1}, f+g=\frac{f_0 g_1+g_0 f_1}{f_1 g_1} \mbox{ on } W \cap Z \]
+    点$Q \in U \cap V$毎に開近傍$W \cap Z$がとれ，そこで$fg, f+g$がregularなのでringになっている．
+    
+    \paragraph{check for well-definedness}
+    演算がwell-definedであることを示す．
+    二つの同値類$A, B$をとる．
+    それぞれの代表元を任意に2つずつとり，
+    \[ a=\langle U,f \rangle, a'=\langle U',f' \rangle \in A;~ b=\langle V,g \rangle, b'=\langle V',g' \rangle \in B\]
+    としよう．
+    例えば$ab, a'b'$を計算すると，
+    \[ ab=\langle U \cap V,fg \rangle, a'b'=\langle (U' \cap V'),f'g' \rangle \]
+    だが，$f=f' \mbox{ on } U \cap U'$, $g=g' \mbox{ on } '$より
+    $fg=f'g' \mbox{ on } U \cap U' \cap V \cap V=(U \cap V) \cap (U' \cap V')$．
+    よって$ab=a'b'$．
+    $a+b \equiv a'+b'$なども同様である．
+    
+    \paragraph{check to be a local ring}
+    $\mathcal{O}_P$は$\I{m}=\{ \langle U,f \rangle ~|~ f(P)=0 \}$を唯一の極大イデアルとする局所環．
+    実際，$\mathcal{O}_P$の非単元はすべて$\I{m}$に属す．これは$f(P) \neq 0$ならば適当な$P$の近傍の中で$1/f$が定義出来ること（対偶）から示される．．
+
+    \paragraph{check to be a integral domain}
+    また，$\mathcal{O}_P$は整域である．
+    実際，$fg=0$ on $U \cap V$であるような$\langle U,f \rangle, \langle V,g \rangle \in \mathcal{O}_P$をとる．
+    $P \in U, V$より$U \cap V \neq \emptyset$．
+    すると，$f=f_0 / f_1, g=g_0 / g_1$ on $U \cap V$となるような$f_0, f_1, g_0, g_1 \in S$が存在する．
+    $f_1, g_1$は$U \cap V$で0とならないから，結局$f_0 g_0$ on $U \cap V$となっている．
+    \[ \Forall{P \in U \cap V} (f_0 g_0)(P)=0 \in k  \iff \Forall{P \in U \cap V} f_0(P)=0 \lor g_0(P)=0\]
+    よって$f=0$ on $U \cap V$または$g=0$ on $U \cap V$が成立．Remark3.1.1より，これは，$f=0$ on $U$または$g=0$ on $V$，と書き換えられる．
+
+    \subsection{function field : $K(Y)$}
+    $K(Y)$は$Y$内のいずれかの点でregularな関数全体である．
+    中身は$\mathcal{O}_P$のものと同様である．
+    これは任意の$\langle U,f \rangle (f|_{U} \neq 0)$に対して逆元を持つ．すなわち体である．
+    実際，$U'=U \setminus (U \cap \zeros(f))$
+    \footnote{$f$が0にならない$U$の開部分集合である}
+    と置けば，（$f|_{U} \neq 0$より）これは空でないので，$\langle U',1/f\rangle$と逆元を作れる．
+
+    \subsection{$\mathcal{O}(Y) \subset \mathcal{O}_P \subset K(Y)$}
+    この包含関係は殆ど自明である．正確には，injection mapが作れることは自明である．
+    $\mathcal{O}(Y)$の元は$Y$全体でregularだから，$\mathcal{O}_P$に属す．
+    $\mathcal{O}_P$の元は$P \in Y$でregularだから，必ず$K(Y)$に属す．
+
+\section{Theorem 3.2}
+    \subsection{About $\alpha: A(Y) \to \mathcal{O}(Y)$}
+    多項式$f \in A$は$Y$全体で定義されるから，
+    これは$\langle Y, f|_{Y} \rangle \in \mathcal{O}(Y)$のように$\mathcal{O}(Y)$へ埋め込める．
+    $f \mapsto f|_{Y}$という写像によって0となるのは$\mathcal{I}(Y)$の元のみであるから，
+    $A \to \mathcal{O}(Y)$から$\alpha: A(Y) \to \mathcal{O}(Y)$が得られる．
+
+    \subsection{About proof of (b)}
+    点$P \in Y$に対応する$A(Y)$の極大イデアルは次のように作られる．
+    \[ P \mapsto \defs(P) \mapsto \defs(P)/\defs(Y) \]
+    さらに$\defs(P)/\defs(Y)$の元$\bar{f}=f+\defs(Y)$を
+    $\alpha$によって$Y$上のregular functionとみなすことで
+    この極大イデアルを$\I{m}_P:=\{f \in A(Y) | f(P)=0 \}$と書くことが出来る．
+
+    \subsection{About proof of (c)}
+    $S=A \setminus \I{m}_P$としよう．
+    すると$s \in S$について$\alpha(s)=\langle Y,s|_{Y} \rangle$は$\mathcal{O}_P$の単元である．
+    実際$s(P) \neq 0$だから，$s|_{U} \neq 0$であるような$P$の近傍$U$が存在して，
+    $\langle U,1/(s|_{Y}) \rangle \in \mathcal{O}_P$．
+    このことからAti-MacのProp3.1（商環の普遍性）が使える．
+    すなわち，$\beta: A(Y)_{\I{m}_P}=S^{-1}A(Y) \to \mathcal{O}_P$であって
+    $\alpha(f)=\beta(f/1)$となるものが存在する．
+    $f \mapsto f/1$と$\alpha$は単射だから$\beta$は単射．
+    さらにProp3.1の証明から$\beta(a/s)=\alpha(a)/\alpha(s)$．
+
+    この対応$\beta$が全射であることは$\mathcal{O}_P$の定義から直ちに分かる．
+    つまり，$\mathcal{O}_P$の元はこのようにして得られるものしか無い．
+    よって$A(Y)_{\I{m}_P} \cong \mathcal{O}_P$．
+
+    以上の段落から，
+    $\dim \mathcal{O}_P=\dim A(Y)_{\I{m}_P}=\height \I{m}_P$が得られる．
+    さらに$A(Y)$の元に点$P$を代入する準同型に準同型定理を用いれば，$A(Y)/\I{m}_P \cong k$が得られる．
+    (1.7)と(1.8A)より
+    \[ \dim A(Y)/\I{m}_P+\height \I{m}_P=\dim A(Y) \iff 0+\dim \mathcal{O}_P=\dim Y. \]
+
+    \subsection{About proof of (d)}
+    \paragraph{$\Quot(A(Y)) \cong \Quot(\mathcal{O}_P)$}
+    本文中のquotinet fieldは整域の全商環\footnote{すなわち整域$R$に対する$S=R \setminus (0)$による局所化}の事．
+    今，環$R$の全商環を$\Quot(R)$と書くことにしよう．
+    すると(c)の結果より，以下が得られる．
+    \[ \mathcal{O}_P \cong A(Y)_{\I{m}_P} \implies \Quot(\mathcal{O}_P) \cong \Quot(A(Y)_{\I{m}_P}) \cong \Quot(A(Y)) \]
+    $\Quot(A(Y)_{\I{m}_P}) \cong \Quot(A(Y))$は以下のように示される．まず，
+    \[ S_0=A(Y) \setminus \I{m}_P, S_1=A(Y) \setminus \{0+\defs(Y) \} \]
+    と置くと$\Quot(A(Y))=S_1^{-1}A(Y), \Quot(A(Y)_{\I{m}_P})=\tau(S_1^{-1})(S_0^{-1}A(Y))$である．
+    ただし$\tau$は$x \mapsto x/1$という単射写像である．
+    Ati-Mac Ch.3 Ex3より，これは$(S_1 S_0)^{-1}A(Y)$と同型．
+    \footnote
+    {
+        Ati-Mac Ch.3 Ex3の証明は，$(a/st) \mapsto ((a/s)/(t/1))$が同型でもあることを示せば良い．
+        $st$を$(s,t)$に因子分解するところに任意性があるので，どのように分解しても良いことまで示す必要が有る．
+    }
+    さらに
+    \[ S_1 S_0=\set{ xy | x,y \in A(Y) \land \lnot(x \in \I{m}_P \lor y \in (\bar{0})) } \]
+    であるので，$\I{m}_P, (\bar{0})$がイデアルであることから
+    \[ S_1 S_0=A(Y) \setminus (\I{m}_P \times (\bar{0}))=A(Y) \setminus (\bar{0})=S_1 \]
+    よって$\Quot(A(Y)_{\I{m}_P}) \cong S_1^{-1}A(Y)=\Quot(A(Y))$．
+
+    \paragraph{$\Quot(A(Y)) \cong K(Y)$}
+    $\langle U, f \rangle \in \Quot(\mathcal{O}_P) \cong \Quot(A(Y))$を任意にとる．
+    すると$\langle U, f \rangle$は$f|_U \neq 0$を満たすから，
+    $K(Y)$の元として逆元$\langle \tilde{U}, 1/f \rangle$を持つ．
+    したがって
+    \[ \langle U, f \rangle^{-1} \mapsto \langle \tilde{U}, 1/f \rangle \]
+    という対応が作れた．
+    逆写像も作れる．それは単純に以下のように定まる．
+    \[ (0 \neq )\langle \tilde{U}, 1/f \rangle \mapsto \langle \tilde{U}, f \rangle \]
+    $\tilde{U} \subset U$より$\langle U, f \rangle \equiv \langle \tilde{U}, f \rangle$なのでこれは全単射．
+    この写像が同型写像であることを見よう．つまり演算を保つことを見る．
+    \begin{align*}
+        \frac{\langle U,f \rangle}{\langle V,g \rangle} \frac{\langle U',f' \rangle}{\langle V',g' \rangle}
+        &\mapsto \quad
+        \langle U \cap \tilde{V},f/g \rangle \langle U' \cap \tilde{V'},f'/g' \rangle
+        &=
+        \langle U \cap U' \cap \tilde{V} \cap \tilde{V'},ff'/gg' \rangle
+        \\ \\
+        %%%%%
+        \frac{\langle U, f \rangle \langle U', f' \rangle}{\langle V, g \rangle \langle V', g' \rangle}
+        &= \qquad\qquad
+        \frac{\langle U \cap U', ff' \rangle}{\langle V \cap V', gg' \rangle}
+        &\mapsto
+        \langle U \cap U' \cap \widetilde{V \cap V'}, ff'/gg' \rangle
+    \end{align*}
+    あとは$\tilde{V} \cap \tilde{V'}=\widetilde{V \cap V'}$を見れば良い．
+    \begin{align*}
+        \tilde{V} \cap \tilde{V'}
+        &=\set{P \in V | g(P) \neq 0} \cap \set{P \in V' | g'(P) \neq 0} \\
+        &=\set{P \in V \cap V' | g(P) \neq 0 \land g'(P) \neq 0} \\
+        &=\set{P \in V \cap V' | \lnot(g(P)=0 \lor g'(P)=0)} \\
+        &=\set{P \in V \cap V' | g(P)g'(P) \neq 0} \\
+        &=\widetilde{V \cap V'}
+    \end{align*}
+    $+$についても同様である．
+    （有理関数の積と和では分子のみ異なるが，以上の議論では分子の零点は関係なかった．）
+
+    \subsection{About proof of (a)}
+    $\mathcal{O}_P$は点$P$で定義されるregular function全体だから，
+    $\mathcal{O}(Y) \subseteq \bigcap_{P \in Y} \mathcal{O}_P$は自明．
+    (b), (c)を用いると$\mathcal{O}_P \cong A(Y)_{\I{m}_P} = A(Y)_{\I{m}}$となる．
+    単射$\alpha: A(Y) \to \mathcal{O}(Y)$の存在から$A(Y) \subseteq \mathcal{O}(Y)$とみなせる．
+    よって
+    \[ A(Y) \subseteq \mathcal{O}(Y) \subseteq \bigcap_{\I{m} \in \Max(A(Y))} A(Y)_{\I{m}}. \]
+    この最左辺と最右辺が一致することを示そう．
+    すると直ちに3つが全て等しいことが分かる．
+
+    整域$B$について，その極大イデアルを2つとり，$\I{m}, \I{m}'$とする．
+    すると$B_{\I{m}} \cap B_{\I{m}'}$の元は，
+    分母が$\I{m}$にも$\I{m}'$にも属さない元であるような分数である．
+    よって$B_{\I{m}} \cap B_{\I{m}'}=B_{\I{m} \cup \I{m}'}$．
+    このように考えることで，以下が得られる．
+    \[ \bigcap_{\I{m} \in \Max(B)} B_{\I{m}} = B_{M} ~~ \left( M:=\bigcup_{\I{m} \in \Max(B)} \I{m} \right) \]
+    $B \setminus M$に非単元があればそれを含む極大イデアルが存在し，
+    したがってその非単元は$M$に属す．よって$B \setminus M$は単元のみの集合（単元群）である．
+    $B_M$の元は分母が単元であるような分数だから，$a/s \mapsto a \cdot s^{-1}$という対応で直ちに$B$と同型になる．
+    以上より$B \cong B_M$．
+
+\section{Proposition 3.3}
+    \begin{Prop}
+        $U_i = \proj^n \setminus \zerosp(x_i)$と置く．
+        この時(2.2)の写像$\phi_i: U_i \to \affine^n$はisomorphism of varietyとなっている．
+    \end{Prop}
+    \begin{proof}
+        isomorphism of varietyの定義からまず$\phi_i$が連続であることが必要だが，
+        すでに同相写像であることがわかっている．
+        あとはregular function $f/g$について$(f/g) \circ \phi_i$もregularであることを示せば良い．
+
+        regular functionの定義より，$f,g \in k[x_0, \dots, x_n]$は斉次である．
+        これらを(2.2)の$\alpha_i, \beta_i$で写し合うことで証明を行う．
+        $\alpha, \beta$の添字$i$は以降省略する．
+        \begin{align*}
+            {}& \left( \frac{f}{g} \circ \phi_i \right)(x_0, \dots, x_n) \\
+            =&  \frac{f}{g} \left( \frac{x_0}{x_i}, \dots, \frac{x_n}{x_i} \right) \\
+            =&  \frac{\alpha(f)}{\alpha(g)} (x_0, \dots, x_n)
+        \end{align*}
+        $\alpha(g)(P)=0$ならば$\beta \alpha(g)(P)=g(P)=0$が得られる．
+        よって$g(P) \neq 0 \implies \alpha(g)(P) \neq 0$なので，
+        $\frac{\alpha(f)}{\alpha(g)}$はregular．
+    \end{proof}
+
+\section{About $S_{(\I{p})}, S_{(f)}$}
+    $S_{(\I{p})}$がlocal ringで，その極大イデアルが
+    $\I{m}:=(\I{p} \cdot T^{-1}S) \cap S_{(\I{p})}$であることを見よう．
+    $S_{(\I{p})}$がringであることは明らか．
+    まず$\I{m}$がイデアルとなっていることだが，これは実際に計算して分子分母の次数を見れば良い．
+    あとは$S_{(\I{p})} \setminus \I{m}$が単元のみからなることを見れば良いが，
+    これは$E:=T^{-1}S \setminus \I{p} \cdot T^{-1}S$が単元のみからなることを元に直ちに分かる．
+    $E$の元は$f/g ~(g \not \in \I{p})$と表されるような$S_{\I{p}}$の単元全体であり，
+    $S_{(\I{p})} \setminus \I{m}$は$E$の内次数0のものである．
+    $S_{(f)}$がringであることも容易．
+
+\section{Theorem 3.4}
+    \subsection{About $\phi^{\ast}_i$}
+        多項式$f(y_1, \dots, y_n) \in A(Y)$を取る．
+        これを代入写像$\Phi$
+        \[ \Phi: y_1 \mapsto x_0/x_i, \dots, y_n \mapsto x_n/x_i \]($x_i/x_i$はommited)
+        で写して通分すると，$\bar{f}(x_0,\dots,x_n)/x_i^{\deg f}$という$S(Y)_{(x_i)}$の元が出来る．
+        例えば$i=1$とすると
+        \[ y_1^3+y_1 y_2+1 \mapsto \frac{x_0^3}{x_1^3}+\frac{x_0}{x_1}\frac{x_2}{x_1}+1=\frac{x_0^3+x_0^2 x_1+x_1^3}{x_1^3} \]
+        逆に任意に$S(Y)_{(x_i)}$の元を取るとそれは$F(x_0,\dots,x_n)/x_i^{\deg F}$という形をしているが，
+        \[ x_0 \mapsto y_1, \dots, x_i \mapsto 1, \dots, x_n \mapsto y_n \]
+        とすれば，この写像$\Phi$で$F$に写ってくるようなものが作れる．
+        よって$\Phi$は全射である．
+
+        構成した$\Phi$の逆写像を観察すると，
+        これは$Y$上で消える斉次多項式$F(x_0,\dots,x_n)$を$F(x_0,\dots,1,\dots,x_n)$に写す．
+        このようにして出来る多項式はまさしく$\defsa(Y_i)$の元である．
+        よって$\ker \Phi=\defsa(Y_i)$．正確には$\ker \Phi=\defsa(Y_i)/\defsa(Y)$である．
+        （$Y_i \subset Y$より$\defsa(Y_i) \supset \defsa(Y)$が成り立つことに注意．）
+        $(A/\defsa(Y))/(\defsa(Y_i)/\defsa(Y)) \cong A/\defsa(Y_i)$だから，
+        $\Phi: A(Y) \to S(Y)_{(x_i)}$から同型写像$\phi^{\ast}_i: A(Y_i) \to S(Y)_{(x_i)}$が作れた．
+
+    \subsection{About (b)}
+    affineの$\mathcal{O}_P$は$\mathcal{O}_P^a$と書くことにする．projectiveも同様．
+
+    \paragraph{$\mathcal{O}_P^p \cong A(Y_i)_{\I{m}'_P}$}
+    最初に$\mathcal{O}_P^p \cong A(Y_i)_{\I{m}'_P}$とある．
+    Theorem 3.2は$\mathcal{O}_P^a \cong A(Y)_{\I{m}_P}$しか言っていないので，
+    これを導く．
+    まず$\affine^n \cong \sqcup_i$を用いると，
+    
+    \paragraph{$\phi^{\ast}_i(\I{m}'_P)=\I{m}_P \cdot S(Y)_{(x_i)}$}
+    pass
+
+    \paragraph{$S(Y)_{(x_i)} \cong A(Y_i)_{\I{m}'_P}$}
+    pass
+
+    \subsection{About (c)}
+    \paragraph{$\Forall{i} K^p(Y)=K(Y_i)$}
+    pass
+
+    \paragraph{$K^p(Y) \cong S(Y)_{((0))}$}
+    pass
+
+    \subsection{About (a)}
+    \paragraph{$f \in A(Y_i), x_0^q f^q \in S(Y)$}
+    $f \in A(Y_i)$をとると，$A(Y_i) \cong S(Y)_{(x_i)}$より
+    $f$は$g_i/x_i^{N_i}~(g_i \in S(Y)_{N_i})$と書ける．
+    したがって各$i$について$g_i=f \cdot x_i^{N_i} \in S(Y)_{N_i}$．
+
+    今，$N \geq \sum{N_i}$とすると，
+    $N$次単項式$M=\prod_{i=1}^{n}{x_i^{e_i}}$について少なくともひとつの$e_i$は$N_i$より大きい．
+    なので$f \cdot M$は$f \cdot x_i^{N_i} (\in S(Y)_{N_i})$の倍数である．
+    $S(Y)_N$はこのような単項式で張られる$k$-vector spaceだから
+    $S(Y)_N \cdot f \subset S(Y)_N$が分かる．
+
+    \[ g_i^q=f^q \cdot x_i^{qN_i}=(f \cdot x_i^{N_i})(f^{q-1} \cdot x_i^{(q-1)N_i}) \in S(Y)_{N_i} \]
+    だから，$g_i^q \in S(Y)_{N_i}$．あとは$q=1$の時と同様にして$S(Y)_N \cdot f^q \subset S(Y)_N$．
+
+    \paragraph{``we can replace the $a_i$ by ..."}
+    式の左辺を観る．$a_j \in S(Y)$である．$a_j$を斉次分解してみる．
+    \[ f^m+a_1 f^{m-1}+\dots+a_m=f^m+(a^{(1)}_0+a^{(1)}_1+\dots) f^{m-1}+\dots+(a^{(m)}_0+a^{(m)}_1+\dots) \]
+    すると$f$は0次式だから，この多項式の0次斉次部分は以下のようになる．
+    \[ f^m+a^{(1)}_0 f^{m-1}+\dots+a^{(m)}_0 \]
+    これは斉次多項式だからprojective varietyの点を入れた時に値が0かどうかということは意味を持つ．
+
+\section{Proposition 3.5}
+    \paragraph{A morphism $\mathcal{O}(Y) \to \mathcal{O}(X)$ which induced by $\phi$ is a homomorphism of $k$-algebras.}
+    $\phi:X \to Y$から誘導される写像$\phi^{\ast}: \mathcal{O}(Y) \to \mathcal{O}(X)$は次のようなものである．
+    \[ \phi^{\ast}: (f:Y \to k) \mapsto (f \circ \phi: X \to k). \]
+    これは$(af+bg) \circ \phi=a(f \circ \phi)+b(g \circ \phi)$より，$k$-加群としての写像でもある．
+    よってこれは$k$-代数の写像．
+    また，$f \circ \phi \circ \phi^{-1}=f$より，以下が$\phi^{\ast -1}$．
+    \[ \phi^{\ast -1}: (g:X \to k) \mapsto (g \circ \phi^{-1}: Y \to k). \]
+
+    \paragraph{Naturallity of $\alpha$}
+    多分．単に「標準的な」という意味でnaturalと言っている．
+
+\section{Lemma 3.6}
+    $x_i \circ \psi$とあるが，これは$x_i$を$(x_0,\dots,x_n) \mapsto x_i$という関数だと考えれば
+    単に$\pr_i \circ \psi$のことである．
+    この解釈は$f(x_0,\dots,x_n) \circ \psi=f(x_0 \circ \psi,\dots,x_n \circ \psi)$を考えれば自然である．
+
+    \paragraph{If $x_i \circ \psi$ is regular, then for all $f \in k[x_0,\dots,x_n]$, $f \circ \psi$ is also regular on $X$.}
+    \[ f \circ \psi=f(x_0,\dots,x_n) \circ \phi=f(x_0 \circ \phi,\dots,x_n \circ \phi) \]
+    $\mathcal{O}(X)$は任意のvarietyについて環を成すから，
+    $\mathcal{O}(X)$の元の積と和で表示される$f(x_0 \circ \phi,\dots,x_n \circ \phi)$は$\mathcal{O}(X)$の元．
+    よって$f \circ \psi$は$X$でregular．
+    
+    \paragraph{$\psi$ is continuous.}
+    $Y$の閉集合$\zerosa(E)~~(E \subset k[x_0,\dots,x_n])$をとると，
+    \[ \psi^{-1}(\zerosa(E))=\{\psi^{-1}(P) \in X ~|~ \Forall{f \in E} P \in f^{-1}(0) \}=\bigcap_{f \in E} \psi^{-1} \circ f^{-1}(0) \]
+    任意の多項式$f$について$f \circ \psi:X \to k$がregular．
+    regularならcontinuousなので$(f \circ \psi)^{-1}=\psi^{-1} \circ f^{-1}$は閉集合を閉集合に写す．
+    よってこの最右辺は閉集合．
+
+\section{Corollary 3.8}
+    $k$上のaffine varietyとmorphism of varietiesが成す圏を$\mathbf{Aff}$と書くことにし，
+    $k$上の有限生成整域とその間の準同型写像が成す圏を$\mathbf{k-FinDom}$と書くことにしよう．
+    関手$A(-):\mathbf{Aff} \to \mathbf{k-FinDom}$は対象$X$を$A(X)$に写し，射$\phi$を$\alpha(\phi)$にうつす．
+    これが圏同値をつくることを示そう．
+
+    $A(-)$が圏同値をつくることと$A(-)$が忠実充満関手かつ本質的全射であることは同値である．
+    忠実充満関手であることはProp 3.5で示されている．
+    この系では一般のvarietyとしている$X$をaffineとしているので$\mathcal{O}(X) \cong A(X)$が使えることに注意せよ．
+
+    本質的全射であることは，Ex1.5から得られる．
+    Ex1.5ではべき零元を持たない$k$上の有限生成代数は必ず何らかの代数的集合のaffine coordinate ringと同型であることを示す．
+    しかしその証明から，任意の$k$上の有限生成整域$B$は素イデアル$\I{p}$を用いて$k[x_0,\dots,x_n]/\I{p}$と表せることがわかるから，
+    任意の$k$上の有限生成整域$B$はあるaffine variety$X$を用いて$A(X)$と表せる．
+
+\end{document}

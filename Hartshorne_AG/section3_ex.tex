@@ -1,0 +1,246 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+\usepackage{bussproofs}
+\newcommand{\I}[1]{\mathfrak{#1}}
+\newcommand{\mor}{\mbox{ or }}
+\newcommand{\mand}{\mbox{ and }}
+\newcommand{\regs}{\mathcal{O}}
+\newcommand{\reg}[2]{\langle #1,#2 \rangle}
+
+\begin{document}
+    $n$変数多項式環を$A^n=k[x_0, \dots, x_n]$とする．
+    また，$S^n=A^{n+1}$と置く．
+    一般の$n$変数についての場合は$A, S$とだけ書く．
+    isomorphic of varietyは$\equiv$で書き，homeomrophic of varietyは$\cong$で書く．
+
+\section{} %% 3-1
+    \subsection{Any conic in $\affine^2$ $\equiv$ $\affine^1 \mor \affine^1 \setminus \{0\}$.}
+    Ex1-1より，任意のconic curve $X \subset \affine^2$について，
+    $A^2/\defsa(Y) \cong A^1/(0) \mor A^1/(xy-1)$となっている．
+    したがって$\defsa(Y) \cong \zerosa(0)=\affine^1 \mor \zerosa(xy-1)$である．
+
+    写像$\sigma: \affine^1 \setminus \{0\} \to \zerosa(xy-1);~~ x \mapsto (x,1/x)$を考える．
+    これは明らかな逆写像$\sigma^{-1}: (x,y) \mapsto x$が存在するので全単射．
+    あとは$\sigma, \sigma^{-1}$がmorphismであることを見ればよいが，
+    これはLemma 3.6からすぐに分かる．
+    すなわち，
+    \[ \bar{x} \circ \sigma(x,y)=x, \bar{y} \circ \sigma=1/x;~ t \circ \sigma^{-1}(u,v)=u  \]
+    よってこれらはmorphism．
+
+    \subsection{Any proper open subset $X \subsetneq \affine^1$, $\affine^1 \not \equiv X$.}
+    任意の真の開部分集合$X$は空でない有限集合（=閉集合）$T$によって$X=\affine^1 \setminus F$と表せる．
+    これに対して，$\omega(x)=\prod_{t \in T}(x-t) \in k[x,y]$としよう．
+    すると多項式$f=1-y \cdot \omega(y)$で定義されるaffine varietyは$X$と同型である．
+    実際，次の写像がその同型写像である．
+    \[ \mu: X \to \zerosa(f);~ x \mapsto (x, 1/\omega(x)) \]
+    逆写像は$(x,y) \mapsto x$である．
+    これが同型写像であることはLemma 3.6から明らか．
+
+    さて，$k[x,y]/(f)$は$A(\affine^1)=k[t]$と同型でない．
+    なぜなら$k[x,y]/(f)$が$k[t]$が同型であることは$1/\omega(x)$が多項式として表せることを言っており，
+    それは有限値の有限和が無限に大きくなることを意味するからである．
+    よって$A(X) \cong k[x,y]/(f) \not \cong A(\affine^1)$すなわち$\affine^1 \not \equiv X$．
+
+    \subsection{Any conic in $\proj^2$ is isomorphic to $\proj^1$.}
+    $\proj^2$のconic curveは既約二次斉次式で定義される．
+    その斉次式を$f \in k[x,y,z]^h$とし，$X=\zerosp(f)$としよう．
+    これを2-uple emdebeddingの$\theta$で引き戻す．
+    \[ f=a_0 x^2+a_1 xy+a_2 y^2+a_3 yz+a_4 z^2 \mapsto \theta^{-1}(f)=a_0 w_0+a_1 w_1+a_2 w_2+a_3 w_3+a_4 w_4 \]
+    するとこれは$\proj^4$のhyperplaneを定義する．
+
+    \subsection{$\affine^2$ is not homeomorphic to $\proj^2$.}
+    Proposition 3.5より$\Hom(\proj^2, \affine^2) \simeq \Hom(\mathcal{O}(\affine^2), \mathcal{O}(\proj^2))$．
+    これらはTheorem3.2, 3.4より$\Hom(A(\affine^2), \mathcal{O}(\proj^2))=\Hom(k[x,y], k)$．
+    これには可逆元すなわち同型写像が属していないので，$\Hom(\proj^2, \affine^2)$にも同型写像はない．
+
+    \subsection{If an affine variety $X$ isomorphic to a projective variety, $X=\{one~point\}$.}
+    Theorem 3.2, 3.4より
+    \[ A/\defs(X)=A(X) \cong \regs(X) \cong k \]
+    最右辺は体なので$\defs(X)$は$A$の極大イデアル．
+    定義イデアルが極大イデアルとなるaffine varietyは1点集合なので，$X$は1点集合．
+
+\section{} %% 3-2
+    affine varietyを考える．
+    \subsection{$\phi: t \mapsto (t^2,t^3)$ is a bijective bicontinuous morphism on to $y^2=x^3$, but not an isomorphism.}
+    $\phi$ :: a bijective bicontinuous morphismを示そう．
+    全単射であることは逆写像が次のように構成できることから分かる．
+    \[ \phi^{-1}: (x,y) \mapsto y/x; \mand (0,0) \mapsto 0 \]
+    これは原点だけは$y/x$の様に計算できないので注意．
+    bicontinuousは有限集合（閉集合）を有限集合（閉集合）に写すことから明らか．
+
+    $\phi$ :: not an isomorphismを示そう．
+    Lemma 3.6を用いて$\phi^{-1}$がregularでないことを見れば十分．
+    \[ t \circ \phi^{-1}(x,y)=\mbox{if $x=0$ then $0$ otherwise $y/x$} \]
+    これは明らかに$(0,0)$で連続でない．よってこの点でregularでない．
+
+    \subsection{Let the characteristic of the base field $k$ be $p > 0$. $\phi: t \mapsto t^p$ is also.}
+    逆写像は$\phi^{-1}: s \mapsto s^{1/p}$である．
+    $\phi$ :: a bijective bicontinuous morphismであることは(a)と同様である．
+
+    $\phi$ :: not an isomorphismを示そう．
+    \[ t \circ \phi^{-1}(s)=s^{1/p} \]
+    これは多項式でも有理関数でも表示できない．
+    実際，$s^{1/p}=g(s)/h(s)$と置くと，$g^p(s)=s \cdot h^p(s)$．
+    次数を考えると$p \cdot \deg g(s)=p \cdot \deg h+1$となるが，
+    両辺の整数は互いに素なのでこれはありえない．
+
+\section{} %% 3-3
+    \subsection{$\phi: X \to Y$ induces a local ring homomorphism $\phi_P^{\ast}: \mathcal{O}_{\phi(P), Y} \to \mathcal{O}_{P, X}$, for all $P \in X$.}
+    誘導される写像は以下のようなものである．
+    \[ \phi_P^{\ast}: \reg{U}{f} \mapsto \langle \phi^{-1}(U),f \circ \phi \rangle \]
+    $\phi(P) \in U$より$P \in \phi^{-1}(U)$であることに注意．
+
+    $\phi_P^{\ast}$が準同型であることを示そう．
+    $\reg{U}{f}, \reg{V}{g} \in \mathcal{O}_{\phi(P), Y}$をとる．
+    \begin{align*}
+        {}& \phi_P^{\ast}(\reg{U}{f}+\reg{V}{g}) \\
+        &   =\reg{\phi^{-1}(U \cap V)}{(f+g) \circ \phi} \\
+        &   =\reg{\phi^{-1}(U \cap V)}{(f \circ \phi)+(g \circ \phi)} \\
+        &   =\reg{\phi^{-1}(U)}{f \circ \phi}+\reg{\phi^{-1}(V)}{g \circ \phi} \\
+        &   =\phi_P^{\ast}(\reg{U}{f})+\phi_P^{\ast}(\reg{V}{g})
+    \end{align*}
+    積については上の式変形を$+$から$\times$に変えるだけですむ．
+    また$\reg{Y}{0}, \reg{Y}{1}$は$\reg{X}{0}, \reg{X}{1}$に写される．
+    以上より$\phi_P^{\ast}$は準同型である．
+
+    さらに$\mathcal{O}_{\phi(P), Y}$の極大イデアルを$\I{m}$としよう．
+    これは$\I{m}=\{ \reg{U}{f} ~|~ \Exists{Q \in U} f(Q)=0 \}$と書ける．
+    \[ \phi_P^{\ast}(\I{m})=\{ \reg{\phi_P^{-1}(U)}{f \circ \phi_P} ~|~ \Exists{Q \in U} f(Q)=0 \} \]
+    さて，$\phi_P^{\ast}(\I{m})$の元$\reg{\phi_P^{-1}(U)}{f \circ \phi_P}$をとる．
+    $Q \in U$において$f(Q)=0$だから，$Q' \in \phi_P^{-1}(Q)$とすれば
+    $f \circ \phi_P(Q')=f(Q)=0$．
+    したがって
+    \[ \phi_P^{\ast}(\I{m}) \subseteq \{ \reg{\phi_P^{-1}(U)}{f \circ \phi_P} ~|~ \Exists{Q' \in \phi_P^{-1}(U)} f \circ \phi_P(Q')=0 \} \]
+    左辺は$\mathcal{O}_{P, X}$の極大イデアルの部分集合であるから，$\phi_P^{\ast}$はhomomorphism of local rings.
+
+    \subsection{$\phi$ is an isomorphism $\iff$ $\phi$ is a homeomorphism, and the induced map $\phi_P^{\ast}$ is an isomorphism, for all $P \in X$.}
+    \paragraph{($\implies$)}
+    仮定は$\phi, \phi^{-1}$がmorphism of varietiesであることと同値．
+    morphism of varietiesは連続写像だから，$\phi$::homeomorphismは良い．
+    また，$\phi, \phi^{-1}$がどちらもregular funcitonをregular functionにするから，
+    以下は(a)で定めた$\phi^{\ast}$の逆写像である．
+    \[ \phi_P^{\ast -1}: \reg{V}{g} \mapsto \reg{\phi(V)}{g \circ \phi^{-1}} \]
+
+    \paragraph{($\impliedby$)}
+    $\phi$::homeomorphismより$\phi, \phi^{-1}$は共にcontinuous.
+    $\phi_P^{\ast}, \phi_P^{\ast -1}$がともに準同型写像ならば，
+    $f$::regular on $U \subset X$について$f \circ \phi^{-1}$はregular on $\phi(U)$で，
+    $g$::regular on $V \subset Y$について$g \circ \phi$はregular on $\phi(V)$．
+    したがって$\phi, \phi^{-1}$は共にmorphism of varieties.
+
+    \subsection{$\phi(X)$ is dense in $Y$ $\implies$ $\phi_P^{\ast}$ is injective for all $P \in X$.}
+    $P \in X$を任意にとる．
+    $\mathcal{O}_{P, X}$の元を１つとり，$\reg{U}{f}$とする．
+    これに対して集合$E$を以下のように定める．
+    \[ E=\{\reg{V}{g} ~|~ \phi_P^{\ast}(\reg{V}{g})=\reg{U}{f} \} \subseteq \mathcal{O}_{\phi(P), Y} \]
+    これが1つの同値類に含まれることを示す．
+    これは$\phi_P^{\ast}(a)=\phi_P^{\ast}(b) \implies a=b$と同値である．
+
+    $\reg{V}{g}, \reg{V'}{g'} \in E$を任意にとる．
+    $\phi_P^{\ast}(\reg{V}{g})=\phi_P^{\ast}(\reg{V'}{g'})=\reg{U}{f}$より，
+    \[ g \circ \phi=g' \circ \phi \mbox{ on } \phi^{-1}(V \cap V' \cap \phi(X)) \]
+    $\phi(X)$::denseより$(V \cap V') \cap \phi(X)$は空でない．
+    \footnote{$\phi^{-1}(V) \cap \phi^{-1}(V')$は$\phi_P^{\ast}(\reg{V}{g})=\phi_P^{\ast}(\reg{V'}{g'})$と比較できているので空でない．}
+    したがって$(V \cap V') \cap \phi(X)$から点がとれて，以下のようになる．
+    \begin{align*}
+    {}&     \Forall{P \in \phi^{-1}(V \cap V' \cap \phi(X))} g \circ \phi(P)=g' \circ \phi(P) \\
+    \iff&   \Forall{Q \in V \cap V' \cap \phi(X)} g \circ \phi(\phi^{-1}(Q))=g' \circ \phi(\phi^{-1}(Q)) \\
+    \iff&   \Forall{Q \in V \cap V' \cap \phi(X)} g(Q)=g'(Q) \\
+    \iff&   g=g'\mbox{ on }V \cap V' \cap \phi(X) \\
+    \iff&   \reg{V}{g}=\reg{V'}{g'}
+    \end{align*}
+    よって$E$は1つの同値類に含まれる．
+
+\section{Show that the $d$-uple embedding of $\proj^n$ (Ex. 2-12) is an isomorphism onto its image.} %% 3-4
+    $\rho_d$がcontinuousであることはEx2.12で示した．
+    開集合$U \subset \proj^n$でのregular function$f$を考えよう．
+    $f \circ \rho_d: \rho_d^{-1}(U) \to k$がregularであることを示す．
+
+    まず$P \in \rho_d^{-1}(U)$をとる．
+    この時$\rho_d(P) \in U$なので，
+    これの開近傍$Z( \ni \rho_d(P))$と，
+    $f=g/h$ on $Z$かつ$h \neq 0$ on $Z$なる次数が等しい斉次多項式$g,h$が存在する．
+    したがって任意の点$Q \in \rho_d^{-1}(Z)$について，$\rho_d(Q) \in Z$だから
+    \[ f \circ \rho_d(Q)=\frac{g(\rho_d(Q))}{h(\rho_d(Q))}=\left( \frac{g \circ \rho_d}{h \circ \rho_d} \right)(Q) \]
+    $g \circ \rho_d=\theta(g), h \circ \rho_d=\theta(h)$より，これらは次数が等しい斉次多項式である(cf.Ex2.12)．
+    また，$\rho_d$は同相写像なので$\rho_d^{-1}(Z)$は$P$の開近傍．
+
+    以上より，任意の点$P \in \rho_d^{-1}(U)$に対して$P$の開近傍$\rho_d^{-1}(Z)$が存在し，
+    $f \circ \rho_d$は$\rho_d^{-1}(Z)$において，
+    多項式$g \circ \rho_d, h \circ \rho_d$によって$f \circ \rho_d=g \circ \rho_d/h \circ \rho_d$と表せる．
+    $h \circ \rho_d \neq 0$ on $\rho_d^{-1}(Z)$は$h \circ \rho_d(\rho_d^{-1}(z))=h(z)$から直ちに得られる．
+
+    さらに$\rho_d^{-1}$について証明が必要だが，
+    これは$\rho_d^{-1}$が同相写像であり，
+    $g \mapsto g \circ \rho_d^{-1}$も斉次多項式を斉次多項式に移す(cf.Ex2.12)から，
+    全く同様に証明できる．
+    実際，Ex2.12の証明で用いた$\phi_i$によって$g \circ (\rho_d^{-1}|_{V_i})=\phi_i(g)$であり，
+    これは$x_j \mapsto y_{s(i,j)}$という単射写像である．
+    $\rho_d$は全単射だから逆写像$\sigma_i:V_i \to \proj^n$を貼り合わせることが出来る．
+
+\section{$H \subseteq \proj^n$ is any hypersurface, show that $\proj^n \setminus H$ is affine.} %% 3-5
+    $H$がhypersurfaceならば，$H$は既約斉次多項式$f$によって定義される．
+    $d:=\deg f$とすると，$H$は$\rho_d(H)$と同相になっている(Ex3.4)．
+    $\rho_d(H) \subset \proj^N$はhyperplaneなので，
+    $\proj^n \setminus H=H^c$の代わりに$\proj^N \setminus \rho_d(H)=\rho_d(H)^c$を考えよう．
+    以下で示す通り$\rho_d(H)^c$はあるaffine varietyと同型なので$H^c$もあるaffine varietyと同型である．
+
+    $f=\sum_{0 \leq i \leq N}{c_i M_i}$としよう．$M_i$はEx2.12で定義されている．
+    そのうえで$g=\sum_{0 \leq i \leq N}{c_i y_i}$としよう．
+    まず$\rho_d(H)=\zerosp(g) \cap \im \rho_d$を示す．
+    \[ \rho_d^{-1}(\zerosp(g) \cap \im \rho_d)=\rho_d^{-1}(\zerosp(g)) \cap \proj^n=\zerosp(\theta(g))=\zerosp(f)=H \]
+
+%    以下の写像を考える．
+%    \[ \tilde{\varphi}: \rho_d(H)^c \to \affine^{N+1};~ P=(p_0:\dots:p_{N}) \mapsto \left( \frac{p_0}{g(P)}, \dots, \frac{p_N}{g(P)} \right) \]
+%    これは同値類の代表元のとり方に依らず，well-defined．
+%    $\im \tilde{\varphi}$を考えると，
+%    \[ \left( \frac{p_0}{g(P)}, \dots, \frac{p_N}{g(P)} \right)=(X_0,\dots,X_N) \implies \sum_{0 \leq i \leq N}{c_i X_i}=g(P)/g(P)=1 \]
+%    なので，$g'=\sum_{0 \leq i \leq N}{c_i X_i}-1$とすると$\im \tilde{\varphi}=\zerosa(g')$である．
+%    この多様体は$N$次元多様体だから，$\rho_d(H)^c$から$\affine^N$への写像が作れる．
+%    \begin{align*}
+%        \varphi: \rho_d(H)^c &\to \affine^{N} \\
+%        P=(p_0:\dots:p_N) &\mapsto \left( \frac{p_1}{g(P)}, \dots, \frac{p_N}{g(P)} \right)
+%    \end{align*}
+%    $\varphi$の逆写像は以下のように与えられる．
+%    \begin{align*}
+%        \varphi^{-1}: \affine^{N} &\to \rho_d(H)^c \\
+%        (q_1:\dots:q_N) &\mapsto \left( 1-\left( \sum_{1 \leq i \leq N}{c_i q_i} \right): q_1:\dots:q_N \right)
+%    \end{align*}
+%    あとは$\varphi, \varphi^{-1}$がmorphismであることを確かめればよい．
+%    $\varphi$がmorphismであることはLemma 3.6から，
+%    $\varphi^{-1}$がmorphismであることは写像が多項式で与えられることから分かる．
+
+\section{} %% 3-6
+
+\section{} %% 3-7
+
+\section{} %% 3-8
+
+\section{} %% 3-9
+
+\section{} %% 3-10
+
+\section{} %% 3-11
+
+\section{} %% 3-12
+
+\section{} %% 3-13
+
+\section{} %% 3-14
+
+\section{} %% 3-15
+
+\section{} %% 3-16
+
+\section{} %% 3-17
+
+\section{} %% 3-18
+
+\section{} %% 3-19
+
+\section{} %% 3-20
+
+\section{} %% 3-21
+
+\end{document}

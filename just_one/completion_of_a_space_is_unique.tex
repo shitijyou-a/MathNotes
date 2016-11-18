@@ -1,0 +1,61 @@
+\documentclass[a4jpaper]{jarticle}
+\usepackage[all]{xy}
+\usepackage{../math_note}
+\newcommand{\compA}{\bar{A}}
+
+\begin{document}
+
+\begin{Them}
+    $(A, d_A)$を距離空間、$(\compA, d_{\compA}), (X, d_X)$を完備距離空間とする。
+    さらに$i(A) \subset \compA$は稠密であるとする。
+    そして、距離空間と一様連続写像の成す圏において次の図式が成り立つとする。
+    \[
+    \begin{xy}
+        (0, 20) *{(X, d_X)}="X",
+        (0,0)   *{(\compA, d_{\compA})}="C",
+        (40, 0) *{(A, d_A)}="A",
+        \ar_{f} "A";"X"
+        \ar_{i} "A";"C"
+    \end{xy}
+    \]
+    このとき以下の図式を可換にする$\bar{f}$がただ一つ存在する。
+    \[
+    \begin{xy}
+        (0, 20) *{(X, d_X)}="X",
+        (0,0)   *{(\compA, d_{\compA})}="C",
+        (40, 0) *{(A, d_A)}="A",
+        \ar_{f} "A";"X"
+        \ar_{i} "A";"C"
+        {\ar@{.>}^{\bar{f}} "C";"X"}
+    \end{xy}
+    \]
+\end{Them}
+
+\begin{Proof}
+    $i$がmonicであること、及び$\bar{f}$が存在することから、
+    $\bar{f}$がただ一つ存在することが導かれる。
+
+    $i$がmonicであることを示す。
+    そのため、$p, q \in A$について$i(p)=i(q)$であるとする。
+    $i$は連続写像であるから、このとき$p=q$でなくてはならない。
+    したがって$i(p)=i(q) \implies p=q$。よって$i$は単射なのでmonic。
+
+    $\bar{f}$が存在することを示す。
+    $c \in C$をとる。$i(A)$は稠密だから、
+    点列$\{ a_n \}_{n=1}^{\infty} \subset A$で
+    $i(a_n)$が$c$へ収束するものをとれる。
+    収束点列はCauchy列だから、
+    \[
+        d_C(i(a_n), i(a_m))=d_A(a_n, a_m)=d_X(f(a_n), f(a_m))
+        \to 0 ~(n, m \to \infty)
+    \]
+    $(X, d_X)$も完備距離空間だから、
+    $\{ f(a_n) \}_{n=1}^{\infty} \subset X$はある点$x \in X$に収束する。
+    そこで$\bar{f}$を$C \ni c \mapsto x \in X$とする。
+    最後に、このようにして作った$\bar{f}$が一様連続写像であることを示す。
+
+
+    \QED
+\end{Proof}
+
+\end{document}
