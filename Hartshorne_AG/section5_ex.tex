@@ -1,0 +1,750 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+
+\newcommand{\mon}{\mbox{ on }}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\ord}{\operatorname{ord}}
+\renewcommand{\thesection}{Ex5.\arabic{section}}
+
+\begin{document}
+\section{Which equation defines which curve in Figure 4 ?} %% Ex5.1 
+    \subsection{$x^2=x^4+y^4$.} Tacnode.
+    \subsection{$xy=x^6+y^6$.} Node.
+    \subsection{$x^3=y^2+x^4+y^4$.} Cusp.
+    \subsection{$x^2 y+x y^2=x^4+y^4$.} Triple point.
+
+\section{Which equation defines which curve in Figure 5 ?} %% Ex5.2 
+    \subsection{$xy^2=z^2$.} Pinch point.
+    \subsection{$x^2+y^2=z^2$.} Conical double point.
+    \subsection{$xy+x^3+y^3=0$.} Double line.
+
+\section{Multiplicities.} %% Ex5.3
+    \subsection{$\mu_P(Y)=1$ $\iff$ $P$ is a nonsingular point of $Y$.}
+    $r=\mu_P(Y)$，$P=(0,0)$とおく．
+    まず，$P$が$Y$のnonsingular pointである事の必要十分条件は，
+    以下が成り立つことである．
+    \[
+        \rank
+        \begin{bmatrix}
+            \frac{\partial f}{\partial x}(P) & \frac{\partial f}{\partial y}(P)
+        \end{bmatrix}
+        =\dim \affine^2-r
+        =2-r.
+    \]
+    最左辺を見ると，これは$0 \mor 1$．
+    最右辺を見ると，$r=\mu_P(Y)>0$より$2-r=1$．
+    よって$r=1$が必要．
+
+    また，$r=1$の時，その最低次の成分は$f_1=ax+by$と書ける．
+    （ただし$(a,b) \in k^2 \setminus \{(0,0)\}$．）
+    そして最左辺は以下のように計算できる．
+    \[
+        \rank
+        \begin{bmatrix}
+            \frac{\partial f}{\partial x}(P) & \frac{\partial f}{\partial y}(P)
+        \end{bmatrix}
+        =
+        \rank
+        \begin{bmatrix}
+            (a+\text{($(x,y)$の元)})(0,0) & (b+\text{($(x,y)$の元)})(0,0)
+        \end{bmatrix}
+        =
+        \rank
+        \begin{bmatrix}
+            a & b
+        \end{bmatrix}.
+    \]
+    これは$a \mor b \neq 0$から1だと分かる．
+    よって主張が示された．
+
+    \subsection{Find the multiplicity of each of the singular points in (Ex. 5.1) above.}
+    いずれの曲線も原点が特異点であり，重複度は以下の様．
+    \begin{description}
+        \setlength{\leftskip}{1cm}
+        \item[(a) Tacnode] 2.
+        \item[(b) Node] 2.
+        \item[(c) Cusp] 2.
+        \item[(d) Triple point] 3.
+    \end{description}
+
+\section{Intersection Multiplicity.} %% Ex5.4 
+    $Y=\zerosa(f), Z=\zerosa(g) \subset \affine^2$とし，$P \in Y \cap Z$をとる．
+    $P$は平行移動によって$(0,0)$に出来る．
+    この時，$(Y \cdot Z)_P:=\length \mathcal{O}_{P, \affine^2}/(f,g)=\length (k[x,y])_{(x,y)}/(f,g)$と定義する．
+    ただし，環は$\mathcal{O}_{P, \affine^2}$加群とみなす．
+    また，$\proj^2$のcurveについては適切なopen affine subsetを取ることで
+    同様に$\mu_P(Y), (Y \cdot Z)_P$を定義する．
+
+    \subsection{$\mu_P(Y) \cdot \mu_P(Z) \leq (Y \cdot Z)_P < \infty$.}
+    $F:=(k[x,y])_{(x,y)}/(f,g)$とおく．
+
+    \paragraph{$(Y \cdot Z)_P < \infty$.}
+    主張は$F$が組成列を持つことと同値．
+    Ati-Mac Prop6.8とThem8.5より，
+    これは$F$がネーター環でありかつ$\dim F=0$であることと同値である．
+    $k[x,y]$がネーター的であることから$F$はネーター的なので，あとは$\dim F=0$を示せば良い．
+    これは以下のように幾何的に示される．
+    $F$の素イデアルは原点を含む$Y \cap Z$の部分多様体に対応する．
+    しかし$Y \cap Z$はEx2.8などから，各irreducible componentは点．
+    なので$F$の素イデアルは（冗長に言えば）原点を含む点に対応し，そのような点は原点しかない．
+    すなわち，$F$の素イデアルは極大イデアル$(x,y)$しか無い．
+    よって$\dim F=0$．
+
+    \paragraph{$\mu_P(Y) \cdot \mu_P(Z) \leq (Y \cdot Z)_P$.}
+    $(f,g)$を考えると，これの零点集合は有限集合だから，
+    準素イデアル分解をすれば有限個の極大イデアルのベキに分解される．
+    原点に対応する極大イデアルについて考えれば，特に$(f,g) \subseteq (x,y)^r$
+
+    \subsection{If $P \in Y$, then for almost all lines $L$ thurough $P$, $(L \cdot Y)_P=\mu_P(Y)$.}
+    平行移動により$P=(0,0)$とする．
+    今，$(u:v) \in \proj^2$をとると，$P$を通る全ての直線は$(x,y)=(u,v)t$の様にパラメータ表示できる．
+    逆に，$P$を通る直線はこの様に$\proj^2$の点と対応する．
+    ただし$t$は変数であり，$k$を渡る．
+    （多分$f_r(1,v) \cdot f_r(u,1)=0$でない点$(u:v)$では等式が成り立つ．）
+
+    \subsection{$Y$ :: curve of degree $d$ in $\proj^2$, $L$ :: line in $\proj^2$, then $(L \cdot Y):=\sum (L \cdot Y)_P=d$.}
+
+\section{Give a nonsingular curve of degree $d$ in $\proj^2$ over a field $k$ of characteristic $p$.} %% Ex5.5 
+    \paragraph{原点で非特異な曲線の例．}
+    $d$次斉次既約多項式$f \in k[x_0, x_1, x_2]_d$をとる．
+    この$f$が定義するcurveを$X$としよう．
+    点$P \in X$をとり，$P$がアフィン開被覆$U_i$に入っているとしよう．
+    さらに$X_i:=X \cap U_i$とする．
+    ひとまず，原点で非特異な曲線を考える．
+    $\mathcal{O}_{P,X}$は$\mathcal{O}_{P,X_i}$と同型なので，
+    $\mathcal{O}_{P,X_i}$がregular local ringであるような$f$を取れば良い．
+    さらに$X_i$はaffine varietyであるから，Ex5.3より，
+    $f$の非斉次化$\alpha_i(f)$のmultiplicityが1であることが
+    原点で非特異であるための必要十分条件．
+    そのような$f$としては次のようなものが取れる．
+    \[ f=x_0 x_1^{d-1}+x_1 x_2^{d-1}+x_2 x_0^{d-1}. \]
+
+    \paragraph{任意の点で非特異であることの必要十分条件．}
+    これが任意の点で非特異であることを見よう．
+    $f$は変数の交換について不変なので$\alpha_0(f)$のみ考えれば十分．
+    そのヤコビ行列を計算すると以下の様．
+    \[
+        J=
+        \begin{bmatrix}
+            (d-1) x_1^{d-2}+x_2^{d-1} \\
+            (d-1) x_1 x_2^{d-2}+1
+        \end{bmatrix}
+    \]
+    明らかに$\rank J=0 \mor 1$．
+    そしてnonsingularであることと$\rank J=1$は同値なので，
+    $\rank J \neq 0$を示せば良い．
+    そのためには，以下の連立方程式が解$(a,b)$を持つと仮定して矛盾が導かれれば良い．
+    \begin{align}
+        &a^{d-1}+ab^{d-1}+b = 0 \label{eq:5-1}\\
+        &(d-1)a^{d-2}+b^{d-1} = 0 \label{eq:5-2} \\
+        &(d-1)a b^{d-2}+1 = 0 \label{eq:5-3}
+    \end{align}
+    場合分けをする．
+
+    \paragraph{$d-1=0 \lor a=0 \lor b=0 \implies \rank J \neq 0$.}
+    (\ref{eq:5-3})が$1=0$となってしまうので矛盾．
+
+    \paragraph{$d-1 \neq 0 \land a \neq 0 \land b \neq 0 \implies \rank J \neq 0$.}
+    (\ref{eq:5-2})より，$a^{d-1}=-\frac{1}{d-1} ab^{d-1}$．
+    これと$b \neq 0$を(\ref{eq:5-1})に用いて$\frac{d-2}{d-1} ab^{d-2}+1=0$．
+    $d-2=0$とすると直ちに$1=0$と矛盾が出るので，$d-2 \neq 0$としよう．
+    すると(\ref{eq:5-3})と$ab^{d-2}=-\frac{d-1}{d-2}$を用いて，次が得られる．
+    \[ \frac{(d-1)^2}{d-2}=1. \]
+    $d \in \Z$がこの方程式を満たすことはなく，これで矛盾が生じた．
+
+    以上で主張が示された．
+
+\section{Blowing Up Curve Singularities.} %% Ex5.6 
+    点$O:=(0,0)$とする．
+    また，$V_0, V_1$を以下のように定義する．
+    \[ V_0:=\{(x,y) \times (1:v) ~|~ y=vx \},~ V_1:=\{(x,y) \times (u:1) ~|~ uy=x \} \subset \affine^2 \times \proj^1 \]
+    これらは$\affine^2$の$O$におけるblowing upを被覆する．
+
+    \subsection{Blowing up of the cusp or the node of Ex5.1 at $O$ is nonsingular.}
+    \paragraph{Blowing up of $Y=\zerosa(y^2+x^4+y^4-x^3)$ at $O$.}
+    $Y$の$V_0, V_1$におけるstrict transformはそれぞれ以下の様．
+    \begin{align*}
+        \tilde{Y} \cap V_0=& \zerosa(v^4 x^2+x^2+v^2-x, y-vx) \\
+        \tilde{Y} \cap V_1=& \zerosa(u^4 y^2-u^3y+y^2+1, uy-x)
+    \end{align*}
+    まず$\tilde{Y} \cap V_0$のヤコビ行列を計算する．
+    \[
+        J_0=
+        \begin{bmatrix}
+            -vx & y-v & y-x \\
+            0 & 2v^4x+2x-1 & 4v^3x^2+2v
+        \end{bmatrix}
+    \]
+    この行列を2つの行ベクトルに分解すると，それらは$\tilde{Y} \cap V_0$上の任意の点で線形独立．
+    \footnote{1列目を見ると，線形従属になるには$x=0 \mor v=0$が必要と分かる．
+    定義多項式から，$x=0 \implies y=v=0$と$v=0 \implies y=x(x-1)=0$であることに注意．}
+    よって$\rank J_0=\dim \im J_0=2$．
+    $\tilde{Y} \cap V_0$は3次元空間内の1次元多様体なのでnonsingular．
+    同様に$\tilde{Y} \cap V_1$のヤコビ行列を計算すると以下のようになり，
+    やはり$\tilde{Y} \cap V_1$がnonsingularであることが分かる．
+    \footnote{$\tilde{Y} \cap V_1$の定義多項式得られる$y \neq 0$と$u=0 \implies x=y^2-1=0$を用いる．}
+    \[
+        J_1=
+        \begin{bmatrix}
+            uy & u-x & y-x \\
+            0 & 2u^4 y-u^3+2y & 4u^3 y^2-3u^2y
+        \end{bmatrix}
+    \]
+
+    \paragraph{Blowing up of $Z=\zerosa(x^6+y^6-xy)$ at $O$.}
+    $Z$の$V_0, V_1$におけるstrict transformはそれぞれ以下の様．
+    \begin{align*}
+        \tilde{Z} \cap V_0=& \zerosa(-v^6 x^4+x^4+v, y-vx) \\
+        \tilde{Z} \cap V_1=& \zerosa(u^6 y^4+y^4-u, uy-x)
+    \end{align*}
+    それぞれヤコビ行列は次のよう．
+    \[
+        J_0=
+        \begin{bmatrix}
+            -vx & y-v & y-x \\
+            0 & -4v^6x^3+4x^3 & -6v^5x^4+1
+        \end{bmatrix},
+        J_1=
+        \begin{bmatrix}
+            uy & u-x & y-x \\
+            0 & 4u^6y^3+4y^3 & 6u^5 y^4-1
+        \end{bmatrix}
+    \]
+    $\tilde{Z} \cap V_0$の定義多項式より，$J_0$では$x=0 \mor v=0 \implies x=y=v=0$が成り立つ．
+    なので$\tilde{Z} \cap V_0$の任意の点で$\rank J_0=2$．
+    $J_1$でも同様のことが成り立つので，これらはnonsingularである．
+
+    \subsection{Blowing Up at a Node.}
+    既約多項式$f \in k[x,y]$で定義される$Y:=\zerosa(f)$について，
+    点$P \in Y$がnode (ordinary double point)であるとは，
+    $P$における$f$のテイラー展開の最低次斉次部分$f_r$について，
+    $r=2$であり，かつ$f_r$が互いに異なる一次多項式の積として書けることを言う．
+
+    $Y$について$O=(0,0)$がnodeであるとしよう．
+    すると2次斉次部分$f_2$は以下のように書ける．
+    \[
+        f_2=(ax-by)(cx-dy)
+        \mwhere
+        \begin{vmatrix}
+            a & b \\ c & d
+        \end{vmatrix}
+        =ad-bc
+        \neq 0
+    \]
+    whereの条件は二つの一次多項式が定義する直線が互いに異なることを意味する．
+    2次より高次な成分はまとめて$\sum_{i+j>2}{c_{ij} x^i y^j}$と書くことにする．
+    この$Y$を$O$でblowing upして得られるstrict transform $\tilde{Y}$が例外曲線に2点で交わることを示す．
+    blowing upの計算結果は以下の通り．
+    \begin{align*}
+        \tilde{Y} \cap V_0 =& \zerosa \left( (a-bv)(c-dv)+\sum_{i+j>2}{c_{ij} v^j x^{i+j-2}}, y-vx \right) \\
+        \tilde{Y} \cap V_1 =& \zerosa \left( (au-b)(cu-d)+\sum_{i+j>2}{c_{ij} u^i y^{i+j-2}}, uy-x \right)
+    \end{align*}
+    どちらも例外曲線$E:=\{(0,0) \times (u:v) \}$とは2点$P_1=(0,0) \times (b:a), P_2=(0,0) \times (d:c)$で交わる．
+    例外曲線上の点に於ける$\tilde{Y} \cap V_0$のヤコビ行列は以下の様．
+    \[
+        J_0((0,0) \times (u:v))=
+        \begin{bmatrix}
+            0 & -v & 0 \\
+            0 & \sum_{i+j=3}{(i+j-2) c_{ij} v^j} & 2bdv-(ad+bc)
+        \end{bmatrix}
+    \]
+    $2bdv-(ad+bc)$に$a-bv=0, c-dv=0$を用いると，どちらの場合も$ad-bc$となる．
+    これは$a,b,c,d$の取り方から非零なので，
+    ヤコビ行列のランクは2点$P_1, P_2$において2．
+    よって$\tilde{Y} \cap V_0$は$\phi^{-1}(O)=\{P_1,P_2\}$においてnonsingluarである．
+    $\tilde{Y} \cap V_1$についての計算は同様なので略す．
+
+    \subsection{Blowing up of tacnode of Ex5.1 at $O$ has a node.}
+    $Y=\zerosa(x^4+y^4-x^2)$とする．
+    この$Y$を$O$でblowing upして得られるstrict transformは以下の通り．
+    \begin{align*}
+        \tilde{Y} \cap V_0 =& \zerosa \bigg( (1+v^4) x^2-1, y-vx \bigg) \\
+        \tilde{Y} \cap V_1 =& \zerosa \bigg( \Big( (u^4+1) y-u \Big) \Big( (u^4+1) y+u \Big), uy-x \bigg)
+    \end{align*}
+    $\phi^{-1}(O)=\{(0,0) \times (0:1)\}$であり，
+    この点で$\tilde{Y} \cap V_1$は2つの接線を持つ．
+    よって$(0,0) \times (0:1)$は$\tilde{Y}$のnodeである．
+
+    \subsection{$O$ on $\zerosa(y^3-x^5)$ is a triple point, and blowing up $O$ gives rise to a double point.}
+    $f=y^3-x^5, Y=\zerosa(f)$とする．$O \in Y$は明らか．
+    $\mu_O(Y)=3$なのでEx5.3より$O$はsingular point，特にtriple pointである．
+    $Y$の$O$におけるstrict transformは以下の通り．
+    \begin{align*}
+        \tilde{Y} \cap V_0=& \zerosa(v^3-x^2, y-vx) \\
+        \tilde{Y} \cap V_1=& \zerosa(1-u^5 y^2, uy-x)
+    \end{align*}
+    $\tilde{Y} \cap E=\{ (0,0) \times (1:0) \}$であり，
+    $\tilde{Y} \cap V_0$の表式から，これは$O$にdouble point（詳しく言うとcusp）を持つ．
+    このcuspidal curve $v^3-x^2$がblowing upでnonsingularになることはEx4.10から明らか．
+
+\section{Cone of a nonsingular plane curve of degree $>$ 1.} %% Ex5.7 
+    $f=\sum_{l+m+n=d}{c_{lmn} x^l y^m z^n}$をnonsingularな既約$d$次斉次多項式とし，
+    さらに$d(=\deg f) >1$とする．
+    $Y=\zerosp(f), X=\zerosa(f)$とおき，$\tilde{X}$を$X$のstrict transformとしよう．
+    さらに$O=(0,0,0)$としておく．
+
+    \subsection{$X$ has just one singular point, namely $O$.}
+    Ex5.3と$\deg f>1$から$O$が$X$のsingular pointであることは明らか．
+
+    $O$以外の$X$の点$P$がnonsingularであることを示そう．
+    $P=(a,b,c)$かつ$c \neq 0$とする．
+    示すべきことは$P$におけるヤコビ行列のランクが0でない，
+    すなわち
+    \[ \frac{\partial f}{\partial x}(P)=\frac{\partial f}{\partial y}(P)=\frac{\partial f}{\partial z}(P)=0 \]
+    とはなりえないということである．
+
+    $(a:b:c)$が属すaffine open subset $Y \cap U_2$は$g=\alpha_2(f)$で定義される．
+    $Y$はnonsingularだから$Y \cap U_2$もnonsingularであり，
+    したがって$g$のヤコビ行列のランクは0でない．計算するとヤコビ行列は次のよう．
+    \[
+        \begin{bmatrix}
+            \frac{\partial g}{\partial x} & \frac{\partial g}{\partial y}
+        \end{bmatrix}
+        (a/c,b/c)
+%        =
+%        \begin{bmatrix}
+%            \sum_{l+m+n=d}{l c_{lmn} \left(\frac{a}{c}\right)^{l-1} \left(\frac{b}{c}\right)^{m}}
+%            &
+%            \sum_{l+m+n=d}{m c_{lmn} \left(\frac{a}{c}\right)^{l} \left(\frac{b}{c}\right)^{m-1}}
+%        \end{bmatrix}
+        =
+        c^{-(d-1)}
+        \begin{bmatrix}
+            \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+        \end{bmatrix}
+        (a,b,c)
+        \neq 
+        \begin{bmatrix}
+            0 & 0
+        \end{bmatrix}
+    \]
+    よって$\frac{\partial f}{\partial x}(P)=\frac{\partial f}{\partial y}(P)=0$となることはない．
+
+    \subsection{$\tilde{X}$ is nonsingular.}
+    $\affine^3$のblowing up $Bl_O(\affine^3)$のaffine coverは次のよう．
+    \begin{align*}
+        V_0=&\{ (x,y,z) \times (1:t:u) ~|~ xt=y, xu=z, yu=tz \} \\
+        V_1=&\{ (x,y,z) \times (s:1:u) ~|~ x=sy, xu=sz, yu=z \} \\
+        V_2=&\{ (x,y,z) \times (s:t:1) ~|~ xt=sy, x=sz, y=tz \}
+    \end{align*}
+    これを用いて$\tilde{X}$を計算する．
+    \begin{align*}
+        \tilde{X} \cap V_0=&\zerosa \left( \sum_{l+m+n=d}{c_{lmn} t^m u^n} \right) \cap V_0 = \zerosa(f(1,t,u)) \cap V_1 \\
+        \tilde{X} \cap V_1=&\zerosa \left( \sum_{l+m+n=d}{c_{lmn} s^l u^n} \right) \cap V_1 = \zerosa(f(s,1,u)) \cap V_1 \\
+        \tilde{X} \cap V_2=&\zerosa \left( \sum_{l+m+n=d}{c_{lmn} s^l t^m} \right) \cap V_2 = \zerosa(f(s,t,1)) \cap V_2
+    \end{align*}
+
+    $Y=\zerosp(f)$がnonsingularであることから
+    $Y \cap U_i=\zerosa(\alpha_i(f))$もnonsingular．
+    $\tilde{X}$がnonsingularであることは，その対称性から，
+    $\tilde{X} \cap V_i$のうち一つがnonsingularであることを見れば十分．
+    例えば$\tilde{X} \cap V_2$のヤコビ行列は以下の様になる．
+    \[
+    \begin{bmatrix}
+        0       & 0     & 0     & g_s   & g_t   \\
+        t-sy    & xt-s  & 0     & xt-y  & x-sy  \\
+        -sz     & 0     & x-s   & x-z   & 0     \\
+        0       & -tz   & y-t   & 0     & y-z   \\
+    \end{bmatrix}
+    \]
+    ただし$g=f(s,t,1)$である．
+    $5$次元空間内の2次元多様体を考えているので，この行列のランクが常に3であれば良い．
+    一番上の行は$\mathbf{0}$となることがないので，この条件は下3行がなす小行列のランクが常に2であることと同値．
+    さらにこれは$V_2$がnonsingularであることと同値である．
+    $V_2$は写像$(z,s,t) \mapsto (sz,tz,z) \times (s:t:1)$によって$\affine^3$と同型であるから$V_2$はnonsingular．
+    まとめて，$\tilde{X} \cap V_2$がnonsingularであることが導かれる．
+
+    \subsection{$\phi^{-1}(O) \iso Y$.}
+    $\phi^{-1}(O)$は$\tilde{X}$と例外曲線の交わりであるから，
+    p.28にある考察の(2)より，$\tilde{X}$と$O \times \proj^2$の共通部分である．
+    （$V_0, V_1, V_2$の表示を見てもこのことはわかる．）
+    したがって上の計算から次がわかる．
+    \[ \phi^{-1}(O)=\{ (0,0,0) \times (s:t:u) ~|~ f(s,t,u)=0 \} \iso \{(s:t:u) ~|~ f(s,t,u)=0 \}=\zerosp(f)=Y. \]
+
+\section{Condition for projective nonsingular variety expressed by Jacobian matrix.} %% Ex5.8 
+    $f_1,\dots,f_t \in k[x_0,\dots,x_n]$を斉次多項式とし，$Y=\zerosp(f_1,\dots,f_t)$とする．
+    $Y$のヤコビ行列を$J(P)=\left[ \frac{\partial f}{\partial x_i}(P) \right]$とおく．
+    さらに$J_i(P)=\left[ \frac{\partial \alpha_i(f)}{\partial x_i}(P) \right]$としておく．
+
+    \paragraph{$\rank J(P)$ is independent of the homogeneous coordinates chosen for $P$.}
+    多重指数$\gamma$を用いて$f=\sum_{|\gamma|=d}{c_{\gamma} x^{\gamma}}$とおく．
+    するとその偏微分は以下のようになる．
+    \[ \frac{\partial f}{\partial x_i}=\sum_{|\gamma|=d}{\gamma_i c_{\gamma} x^{(\gamma_0, \dots, \gamma_i-1, \dots, \gamma_n)}} \]
+    $|\gamma|=d$ならば常に$|(\gamma_0, \dots, \gamma_i-1, \dots, \gamma_n)|=d-1$であるから，
+    $\frac{\partial f}{\partial x_i}$は$d-1$次斉次多項式．
+    以下が成り立つ．
+    \[ \Forall{\lambda \in k^{\times}} J(\lambda P)=\lambda^{\sum_{j=1}^{t}(\deg f_j-1)} \cdot J(P). \]
+    したがって$\rank J(\lambda P)=\rank J(P)$．
+
+    \paragraph{Pass to affine $U_i$ containing $P$.}
+    $P$を固定し，$P$を含むアフィン開被覆$U_i$をひとつ選ぶ．
+    仮に$i=0$であったとしよう．$i \neq 0$であっても以下の議論は同様である．
+    $\mathcal{O}_{P,Y} \cong \mathcal{O}_{P,Y \cap U_0}$なので，
+    $P$で$Y$がnonsingularであることと$P$で$Y \cap U_0$がnonsingularであることは同値である．
+    $Y \cap U_0$は$\{\alpha_0(f_j)\}_{j=1}^t$で定義されるから，
+    $P$で$Y$がnonsingularであることと$\rank J_0(P)=n-\dim Y$は同値である．
+
+    \paragraph{$\rank J_i(P)=\rank J(P)$.}
+    さて，$J_0(P)$は次のような行列である．
+    \[
+        J_0(P)
+        =
+        \begin{bmatrix}
+            \partial_{x_0} \alpha_0(f_1) & \partial_{x_1} \alpha_0(f_1) & \dots  & \partial_{x_n} \alpha_0(f_1)  \\
+                            \vdots       &          \vdots              & \ddots &          \vdots               \\
+            \partial_{x_0} \alpha_0(f_t) & \partial_{x_1} \alpha_0(f_t) & \dots  & \partial_{x_n} \alpha_0(f_t)  \\
+        \end{bmatrix}
+        (P)
+        =
+        \begin{bmatrix}
+            0           & \partial_{x_1} \alpha_0(f_1) & \dots  & \partial_{x_n} \alpha_0(f_1)  \\
+            \vdots      &          \vdots              & \ddots &          \vdots               \\
+            0           & \partial_{x_1} \alpha_0(f_t) & \dots  & \partial_{x_n} \alpha_0(f_t)  \\
+        \end{bmatrix}
+        (P)
+    \]
+    また，$i \neq 0$の時，一般の$f=\sum_{|\gamma|=d}{c_{\gamma} x^{\gamma}}$について以下が成り立つ．
+    \[
+        \partial_{x_i} \alpha_0(f)(p_1,\dots,p_n)
+        =\sum_{|\gamma|=d} \gamma_i c_{\gamma} \cdot 1^{\gamma_0} \cdot p_1^{\gamma_1} \cdots p_i^{\gamma_i-1} \cdots p_n^{\gamma_n}
+        =\alpha_0(\partial_{x_i} f)(p_1,\dots,p_n)
+    \]
+    したがって$J_0(P)$は以下のようになる．ただしここでの$\phi_0$はProp2.2のものである．
+    \[
+        J_0(P)
+        =
+        \begin{bmatrix}
+            0           & \partial_{x_1} f_1 & \dots  & \partial_{x_n} f_1  \\
+            \vdots      &          \vdots              & \ddots &          \vdots               \\
+            0           & \partial_{x_1} f_t & \dots  & \partial_{x_n} f_t  \\
+        \end{bmatrix}
+        (\phi_0(P))
+    \]
+    そこで$J_0(P)$の$i$列目に$p_i$をかけて0列目へ足すと，
+    Euler's lemma : $\sum x_i \partial_{x_i} f=(\deg f) \cdot f$から次のようになる．
+    これは基本変形であるからランクは変わらない．
+    \[
+        \rank J_0(P)
+        =
+        \rank
+        \begin{bmatrix}
+            \deg f_1 \cdot f_1-\partial_{x_0} f_1    & \partial_{x_1} f_1 & \dots  & \partial_{x_n} f_1  \\
+            \vdots      &          \vdots              & \ddots &          \vdots               \\
+            \deg f_t \cdot f_t-\partial_{x_0} f_t    & \partial_{x_1} f_t & \dots  & \partial_{x_n} f_t  \\
+        \end{bmatrix}
+        (\phi_0(P))
+    \]
+    $P \in Y=\zerosp(f_1,\dots,f_t)$としていたから，$f_j(\phi_0(P))=0$．
+    さらに第一列を$-1$倍（基本変形）して，次を得る．
+    \[
+        \rank J_0(P)
+        =
+        \rank
+        \begin{bmatrix}
+            \partial_{x_0} f_1    & \partial_{x_1} f_1 & \dots  & \partial_{x_n} f_1  \\
+            \vdots      &          \vdots              & \ddots &          \vdots               \\
+            \partial_{x_0} f_t    & \partial_{x_1} f_t & \dots  & \partial_{x_n} f_t  \\
+        \end{bmatrix}
+        (\phi_0(P))
+        =\rank J(\phi_0(P))
+        =\rank J(P)
+    \]
+    最後の等号は$\rank J(\lambda P)=\rank J(P)$から来ている．
+
+\section{Irreducibitity and Jacobi Matrix.} %% Ex5.9 
+    $F \in k[x_0, x_1, x_2]^h$をとり，$X=\zerosp(F)$とする．
+    以下の条件が成立することと，$F$がirreducibleかつnonsingularであることは同値である．
+    \[ \Forall{P \in X} \Exists{i} \frac{\partial F}{\partial x_i}(P) \neq 0. \label{prop:1} \]
+
+    $F$がirreducibleかつnonsingularならば上の条件が成り立つことはEx5.8より明らか．
+    逆を背理法を用いて示そう．
+    これが以下の条件を満たすとしよう．
+    \[ \left[\Forall{P \in X} \Exists{i} \frac{\partial F}{\partial x_i}(P) \neq 0 \right] \land F\text{ :: not irreducible} \]
+    $F$ :: not irreducibleという条件から，
+    二つの斉次既約多項式$f,g$と斉次多項式$h$が存在して$F=fgh$と表せる．
+	\footnote
+	{
+		$f,g$をそれぞれ$f=f_s+\dots+f_S, g=g_t+\dots+g_T$と斉次分解すると，
+		$fg=f_s g_t+\dots+f_S g_T$となり，少なくとも$f_s g_t, f_S g_T$は残る．
+		なので$fg$が斉次多項式であることと$s=S, t=T$すなわち$f,g$がそれぞれ斉次多項式であることは同値．
+	}
+    Ex3.7より，二つのcurveの交わり$\zerosp(f) \cap \zerosp(g)$は空でないので，点$P$を取ることが出来る．
+    $F=fgh$の両辺の偏微分を計算する．
+    \[
+        \frac{\partial F}{\partial x_i}(P)
+        =
+        \frac{\partial f}{\partial x_i}(P) \cdot g(P) \cdot h(P)
+        +f(P) \cdot \frac{\partial g}{\partial x_i}(P) \cdot h(P)
+        +f(P) \cdot g(P) \cdot \frac{\partial h}{\partial x_i}(P)
+    \]
+    仮定より，ある$i$について左辺は0でない．
+    しかし，右辺は$f(P)=g(P)=0$より0．
+    よって矛盾が生じ，主張が示された．
+    nonsingularであることはやはりEx5.8より得られる．
+
+\section{Zariski Tangent Space} %% Ex5.10 
+    $X$ :: variety, $P \in X$, $\I{m}$ :: the maximal ideal of $\mathcal{O}_{P,X}$とする．
+    $k$-vector spaceとしての$\I{m}/\I{m}^2$の
+    双対空間$T_P(X)=\Hom_{\text{$k$-Vec}}(\I{m}/\I{m}^2, k)$
+    をZariski Tangent Spaceと呼ぶ．
+
+    \subsection{$\dim T_P(X) \geq \dim X$ with equality iff $P$ is nonsingular.}
+    Them5.1後半から$\dim \I{m}/\I{m}^2+\rank J=n$なので$\I{m}/\I{m}^2$は有限次元．
+    なのでその双対空間とは次元が等しい．
+    （大抵の線形代数の教科書に書かれている事実である．）
+    このこととThem5.1, Prop5.2Aから主張が得られる．
+
+    \subsection{morphism $\phi: X \to Y$ induces $k$-linear map $T_P(\phi): T_P(X) \to T_{\phi(P)}(Y)$.}
+    Ex3.3より，$\phi$から準同型$\phi^{\ast}: \mathcal{O}_{\phi(P),Y} \to \mathcal{O}_{P,X}$が得られる．
+    したがってそれぞれの極大イデアルを$\I{m}_Y, \I{m}_X$とすると，
+    以下の準同型が得られる．
+    \begin{defmap}
+        \psi_P:& \I{m}_Y/\I{m}_Y^2& \to& \I{m}_X/\I{m}_X^2 \\ 
+        {}& x+\I{m}_Y^2& \mapsto& \phi^{\ast}(x)+\I{m}_X^2
+    \end{defmap}
+    これがwell-definedであることは$\phi^{\ast}$がlocal ring homomorphism
+    \footnote{$\psi_P(\I{m}_Y) \subseteq \I{m}_X$を満たす局所環の準同型．}
+    であることから得られる．
+    この準同型$\psi_P$は$k$の元を$k+\I{m}_X^2$の元へ写す．
+    実際，$\phi^{\ast}$は$x \in k$を$(x \circ \phi)+\I{m}_X^2$へ写すが，
+    $x$は定数写像なので$x \circ \phi=x$．
+    なので$\psi_P$は$k$-vector space間の線形写像と見ることができる．
+    反変関手$\Hom_{\text{$k$-Vec}}(-, k)$で$\psi_P$を写せば求める線形写像が得られる．
+
+    \subsection{If $\phi: (t^2, t) \mapsto t^2$, then $T_{O}(\phi)=$zero map.}
+    （念の為．$O=(0,0)$である．）
+    $k[x,y]/(x-y^2) \cong k[t,t^2]$は明らか．
+    （bの解答で定義した）$\psi_O$は次のよう．
+    \begin{defmap}
+        \psi_O:& \frac{(x)}{(x^2)}& \to& \frac{(t,t^2)}{(t^2, t^3, t^4)} \\ 
+        {}& f(x)+(x^2)& \mapsto& [f(t^2)](t^2,t)+(t^2, t^3, t^4)
+    \end{defmap}
+    $\psi_O$は$(x)/(x^2)$の生成元$x+(x^2)$を$t^2+(t^2,t^3,t^4)=0+(t^2,t^3,t^4)$へ写すのでzero map．
+    $\Hom_{\text{$k$-Vec}}(-, k)$はzero mapをzero mapへ写すので，主張が示された．
+
+\section{The Elliptic Quartic Curve in $\proj^3$} %% Ex5.11 
+	$Y:=\zerosp(\{x^2-xz-yw, yz-xw-zw\}), Y'=\zerosp(y^2-x^3+xz^2)$とおく．
+	さらに点$P=(0:0:0:1)$から平面$w=0$へのprojectionを$\phi$とする．
+	$P'=(1:0:-1)$としておく．
+
+	\paragraph{$Y \setminus P \iso Y' \setminus P'$ by $\phi$}
+	$Q' \in \proj^3 \setminus P'$を取ると，
+	\[ \phi^{-1}(Q')=\{ (a:b:c:w) ~|~ w \in k \} \subset \proj^3. \]
+	そこで$\phi^{-1}(Q') \cap Y$を考える．
+	$\phi^{-1}(Q') \cap Y$は以下の連立方程式で定義される閉集合である．
+	\[ (a^2-ac)+(-b)w=0, (bc)+(-a-c)w=0. \]
+	行列で書き換えれば次のよう．
+	\[
+		\begin{bmatrix}
+			a^2-ac & -b \\
+			bc	   & -a-c
+		\end{bmatrix}
+		\tatev{1 \\ w}
+		=
+		\mathbf{0}
+	\]
+	この係数行列を$M(Q')$とする．
+
+	$\opnull M=1$の時かつその時のみ$\phi^{-1}(Q') \cap Y$は1点
+	（アフィン空間で考えれば1直線）となる．
+	これは$\phi$は単射になることを意味する．
+	$M$の第2列は$Q' \neq P'$なので$\mathbf{0}$でない．
+	したがって$\opnull M=1 \mor 2$であり，
+	$\opnull M=2 \iff \det M \neq 0$なので
+	$\det M(Q')=0$であれば良い．
+	\[ [Q'=(a:b:c) \in \proj^3 \setminus P'] \land [\det M(Q')=b^2-a^3+ac^2=0] \iff Q' \in Y' \setminus P'． \]
+    以上より$\phi$は$Y \setminus P$から$Y' \setminus P'$への単射．
+
+    $Q' \in Y' \setminus P'$ならば連立方程式は解$w=\frac{a^2-ac}{-b}=\frac{bc}{-a-c}$を持つから，
+    $\phi|_{Y \setminus P}$に対して逆写像が作れる．
+	すなわち，$\phi$は$(a:b:c) \in Y' \setminus P'$を以下のように写す同型写像である．
+	\[ (a:b:c) \in Y' \setminus P' \mapsto \left( a:b:c:\frac{a^2-ac}{-b} \right) \in Y \setminus P \mapsto (a:b:c) \in Y' \setminus P' \]
+
+	\subsection{$Y$ :: irreducible nonsingular curve.}
+	まずEx5.8より，$Y'$が特異点を持つのは以下が成立するとき．
+	\[ \Exists{(x:y:z) \in \proj^2} y^2-x^3+xz^2=-3x^2+z^2=2y=2xz=0. \]
+	しかし連立方程式を解くと$(x:y:z)=(0:0:0)$となり不合理なのでこれは成立しない．
+	よって$Y'$は特異点を持たない．
+	また，上の条件が成り立たないことからEx5.9が利用できて，
+	$Y'$はirreducibleであることが得られる．
+
+	$Y' \setminus P'$は$Y'$がirreducibleであることからdenseかつirreducibleな開集合である．
+	すでに見たように$Y \setminus P \iso Y' \setminus P'$なので，
+	$Y \setminus P$もdenseかつirreducibleな開集合．
+	したがってEx1.6より$\cl(Y \setminus P)=Y$はirreducibleな閉集合．
+
+	また，$Y'$がnonsingularであることと$Y \setminus P \iso Y' \setminus P'$から
+	$Y$の$P$以外の点がnonsingularであることもわかる．
+	$P$についてもEx5.8を利用してnonsingularであることが確かめられ，
+	まとめて$Y$がnonsingularであることが得られる．
+
+\section{Quadric Hypersurface} %% Ex5.12 
+	体$k$の標数は2でないとする．
+	また，2次斉次多項式$f \in k[x_0, \dots, x_n]_2$を取る．
+
+	\subsection{$f$ can be brought into the form $x_0^2+\dots+x_r^2$ by linear change of variables.}
+	体$k$の標数は2でないという仮定から，$f$を対称行列が定める二次形式と見ることができる．
+	あとは$\C$上の二次形式と全く同様の方法で$a_0 x_0^2+\dots+a_n x_n^2$の形にすることができる．
+	この内$a_i \neq 0$なる$i$が$r+1$個あるとすると，
+	変数を適当に交換して$a_0 x_0^2+\dots+a_r x_r^2$ ($0 \leq i \leq r$について$a_i \neq 0$)とできる．
+	最後に$k$は代数閉体なので$x_i \mapsto a_i^{-1/2} x_i$ ($0 \leq i \leq r$)と写すことができて，
+	これで$x_0^2+\dots+x_r^2$になった．
+
+	\subsection{$f$ :: irreducible $\iff$ $r \geq 2$.}
+	(a)の変数変換は線形なものだから既約性を変化させない．
+	よって$x_0^2+\dots+x_r^2$について既約性を考えれば良い．
+
+	まず，$r < 2$ならば$f$は$x_0^2$または$x_0^2+x_1^2$だから明らかに$f$ :: not irreducible．
+
+	逆に$f$ :: not irreducibleすると，
+	$\deg f=2$であるから，$f$は2つの1次斉次多項式に分解できることになる．
+	（斉次多項式に分解できることはEx5.9のfootnoteを見よ．）
+	したがって$f$に線形変数変換を行うことで$y_0 y_1$の形になり，
+	さらに$y=z_0+iz_1, y_1=z_0-iz_1$と変数変換することで$z_0^2+z_1^2$となる．
+	よって$r<2$．
+
+	\subsection{Assume $r \geq 2$, and let $Q=\zerosp(f)$. In this time $Z:=\Sing Q$ is linear variety of dimention $n-r-1$.}
+	$f=x_0^2+\dots+x_r^2$, $r \geq 2$なので$f$はirreducibleであり$\partial_{x_i}f=2x_i$．
+	また，$\dim Q=n-1$である．
+	Ex5.8より，$\Sing Q$は次で定義される．
+	\[ \Sing Q=\zerosp(\{\partial_{x_i}f+(f)\}_{0 \leq i \leq r})=\zerosp(\{x_i+(f)\}_{0 \leq i \leq r}). \]
+	$\deg f=2>1=\deg x_i$なので各$x_i+(f)$は0でない．
+	Ex2.11の証明から，$k$上線形独立な$r+1$個の元は$n-(r+1)$次元のlinear varietyを定義する．
+    よって$\dim \Sing Q=n-r-1$．
+    特に，$\Sing Q$は次のような集合である．
+    \[ \Sing Q=\{ (0:\dots:0:p_{r+1}:\dots:p_n) \} \cap Q \subset \proj^{n-r-1}. \]
+	
+    \subsection{$Q$ is a cone with axis $Z (=\Sing Q)$ over a nonsingular quadric hypersurface $Q'$.}
+    主張するところは，$Q$は$Z$の点と$Q'$の点を結ぶすべての直線の集合として表せるということである．
+
+    $Z \subset \proj^n, Q' \subset \proj^r$とする．
+    $A=(a_0:\dots:a_r:0:\dots:0) \in Q'$, $B=(0:\dots:0:b_{r+1}:\dots:b_n) \in Z$をとり，以下のように定める．
+    \[ P(\mu,\nu)=\mu A+\nu B=(\mu a_0:\dots:\mu a_r:\nu b_{r+1}:\dots:\nu b_{n}) \mwhere \mu, \nu \in k^{\times} \]
+    これは$A, B$を結ぶ直線のパラメータ表示である．
+    任意の$A,B$と任意の$\mu,\nu$について$P(\mu,\nu) \in Q$すなわち$f(P(\mu,\nu))=0$であるような$Q'$を見つけよう．
+    $f$には$\{x_i\}_{i=0}^{r}$しかないから，$f(P(\mu,\nu))=f(\mu A)$．
+    したがって$f(P(\mu,\nu))=0 \iff f(A)=0 \implies A \in Q$．
+    なので
+    \[ Q'=\{ (p_0:\dots:p_r:0:\dots:0) \} \cap Q \subset \proj^n \]
+    とすれば良い．
+    これは$f=x_0^2+\dots+x_r^2$で定まる$\proj^r$のnonsingular hypersurfaceを$\proj^n$に埋め込んだものである．
+
+    以上で$Q$はcone with axis $Z$ over $Q'$全体を含むことがわかった．
+    逆の包含関係を示そう．
+    $P=(p_0:\dots:p_r:p_{r+1}:\dots:p_n) \in Q$を任意にとる．
+    この時$A=(p_0:\dots:p_r:0:\dots:0), B=(0:\dots:0:p_{r+1}:\dots:p_n)$とすると，
+    明らかに$P=A+B$かつ$A \in Q', B \in Z$．
+    よって$Q$はcone with axis $Z$ over $Q'$に一致する．
+
+\section{ } %% Ex5.13 
+
+\section{Analytically Isomorphic Singularities.} %% Ex5.14 
+    \subsection{If $P \in Y, Q \in Z$ are analytically isomorphic plane curve singularities, then $\mu_P(Y)=\mu_Q(Z)$.}
+    multiplicity $\mu$は$\affine^2$内のcurveに対して定義されるので，$Y,Z \subset \affine^2$とする．
+    $Y,Z$を定義する既約多項式を$f,g$としておこう．
+    定義より$\mathcal{O}_{P,Y}, \mathcal{O}_{Q,Z}$はどちらもregular local ringでなく，
+    その完備化は互いに同型である．
+
+    $\I{m}'_P, \I{m}'_Q$をそれぞれ点$P,Q$に対応する$k[x,y]$の極大イデアルとする．
+    さらに$\I{m}_P, \I{m}_Q$をそれぞれ$\mathcal{O}_{P,Y}, \mathcal{O}_{Q,Z}$の極大イデアルとしよう．
+    $P$についてまず考える．
+    原点に対応する$k[x,y]$の極大イデアル$(x,y)$のべき乗$(x,y)^n=(x^n,x^{n-1}y,\dots,xy^{n-1},y^n)$などを考えれば，
+    $\mu_{P}(Y) \geq n \iff f \in (\I{m}_P)^n \iff (f) \subset (\I{m}_P)^n$がわかる．
+    なので次のような鎖が考えられる．
+    \[ 0 \subsetneq (f) \subsetneq (\I{m}'_P)^r \subsetneq \dots \subsetneq \I{m}'_P \subsetneq k[x,y]. \]
+    ただし$r=\mu_{P}(Y)$とした．
+    これを$\mathcal{O}_{P,Y}$に写すと次のようになる．
+    $(\I{m}'^n_P/(f))_{\I{m}_P}=\I{m}^n_P$に注意せよ．
+    \[ 0 \subsetneq (\I{m}_P)^r \subsetneq \dots \subsetneq \I{m}_P \subsetneq \mathcal{O}_{P,Y}. \]
+    これらを完備化すると次のよう．
+    \[ 0 \subsetneq (\hat{\I{m}}_P)^r \subsetneq \dots \subsetneq \hat{\I{m}}_P \subsetneq \hat{\mathcal{O}}_{P,Y}. \]
+    （Ati-Mac Prop 5.14\&5.15から．）
+    この鎖の長さ（$\subsetneq$の個数）は$r$であり，作り方から，$(\hat{\I{m}}_P)^n$を項とする鎖はこれ以上伸ばせない．
+    一方，$\hat{\mathcal{O}}_{P,Y}$についても同様の鎖が作れる．
+    その鎖の長さは$\mu_{Q}(Z)$であり，仮定$\mathcal{O}_{P,Y} \cong \mathcal{O}_{Q,Z}$から，$\mu_{Q}(Z)=r=\mu_{P}(Y)$．
+    （この証明は組成列云々は言っていない．Krullの交叉定理参照．）
+
+    \subsection{Generalizing the example in the text (5.6.3).}
+    $f=f_{r}+f_{r+1}+\dots, g=g_{s}+g_{s+1}+\dots, h=h_{t}+h_{t+1}+\dots \in k[[x,y]]$とする．
+    ただし$({-})_{i}$はそれぞれ$i$次斉次成分である．
+    $f_{r}=g_{s} h_{t}$かつ$g_{s}, h_{t}$が共通の一次因子を持たない時，$f=gh$とできることを示す．
+
+    帰納的に$g_{s+i}, h_{t+i}$を定める．
+    $i=0$の場合については与えられているので，$0 \leq i<d$については$g_{s+i}, h_{t+i}$が定まっているとしよう．
+    $gh$の$r+d$次斉次成分は次のよう．
+    \[ \sum_{i+j=r+d} g_{i} h_{j}=g_{s}h_{t+d}+g_{s+1}h_{t+d-1}+\dots+g_{s+d-1}h_{t+1}+g_{s+d}h_{t}. \]
+    これが$f_{r+d}$と等しくなるように$g_{s+d},h_{t+d}$を取る．
+    したがって以下の等式が成立すれば良い．
+    \[ g_{s}h_{t+d}+g_{s+d}h_{t}=f_{r+d}-(g_{s+1}h_{t+d-1}+\dots+g_{s+d-1}h_{t+1}). \]
+    両辺共に$r+d$次斉次式．
+    右辺が$(g_s, h_t)$の元であれば証明は完成するのでこのことを示そう．
+    $r+d>0$より，両辺共に非単元なので，そのためには$(g_s, h_t)$が極大イデアル$(x,y)$であれば十分である．
+
+    $g_s, h_t$を$k[x,y]$の元と見ると，
+    これらが生成するイデアル$(g_s,h_t) \subset k[x,y]$に対応する閉集合は$\zerosa(g_s) \cap \zerosa(h_t)=\{(0,0)\}$である．
+    なぜなら$\zerosa(g_s), \zerosa(h_t)$はどちらも原点を通る何本かの直線の和集合であり，
+    $g_{s}, h_{t}$が共通の一次因子を持たないことから，
+    $\zerosa(g_s), \zerosa(h_t)$が同じ直線を含まないからである．
+    零点定理から$\sqrt{(g_s,h_t)}=(x,y)$
+    なので$x^n=\alpha_x g_s+\beta_x h_t, y^m=\alpha_y g_s+\beta_y h_t$なる
+    $m,n \in \N, \alpha_{\ast}, \beta_{\ast} \in k[x,y]$が存在する．
+    舞台を$k[[x,y]]$に写すと，
+    $(x,y) \subset k[[x,y]]$の元はべき根が存在する
+    \footnote{$(1+x)^{\alpha} ~~(\alpha \in \Q)$はマクローリン展開が存在し，$(x,y)$の元は他の形式的べき級数と合成できる．}
+    ので，
+    $x,y \in (g_s,h_t) \subset k[[x,y]]$が言える．
+    よって$(g_s,h_t)=(x,y)$．
+
+    \subsection{Two ordinary double (resp. triple) points are analytically isomorphic, but two ordinary 4-fold points.}
+    $f \in k[x,y], Y=\zerosa(f) \subset \affine^2, P=(0,0), r=\mu_P(Y)$とする．
+    $f$の$r$次斉次部分$f_r$は常に1次式に分解されるが，
+    それが$r$個の互いに異なる一次式に分解されるとしよう．
+    この時$P$はordinary $r$-fold pointと呼ばれる．
+    
+    \paragraph{Case of $r=2$.}
+    (b)より，$f \in k[[x,y]]$は$g,h \in k[[x,y]]$を用いて$f=gh$と分解できる．
+    $r=1+1$より，$\ord g=\ord h=1$．
+    したがってExample 5.6.3と同様に同型写像が作れる．
+    （automorphismはどうやって作る？）
+    （多分$p(ug)=x, q(vh)=y$を満たす$p,q \in k[[x,y]], ~u,v \in k[[x,y]]^{\times}$を探す．）
+
+\section{The Homogeneous Polynomials In $k[x,y,z]_d$ And Points In $\proj^N$.} %% Ex5.15 
+    $d \in \N$に対し，$N=\binom{d+2}{2}-1$とする．
+    この時，斉次多項式$f \in k[x,y,z]_d$の係数はちょうど$N+1$個あるから，
+    $f$を$\proj^N$の点に対応させることができる．
+    $d$次単項式$x^l y^m z^n$に順に番号をつけ，$\{M_i\}_{i=0}^{N}$としておく．
+    また，$M_i=x^{l_i} y^{m_i} z^{n_i}$としておく．
+
+    \subsection{There is 1-1 correspondance between $P \in \proj^N$ and $\zerosp(f) \subset \proj^2$ if not $f$ have square.}
+    まず0でない多項式$f=\sum_{i=0}^{N}p_i M_i \in k[x,y,z]$で定まるalgebraic set $\zerosp(f)$をとる．
+    $\lambda \in k^{\times}$に対して$\zerosp(\lambda f)=\zerosp(f)$なので，
+    このalgebraic setは$P=(p_0:\dots:p_N)$に対応する．
+
+    一方，$P=(p_0:\dots:p_N) \in \proj^N$を取ると，
+    $f=\sum_{i=0}^{N}p_i M_i$が定義する閉集合が$P$に対応する．
+    しかしこれは一対一とは限らない．
+    もし$f$が定数でない多項式$g,h$を用いて$f=g^2 h$と表せたとすると，
+    $f=g^2 h$と$gh$は明らかに係数が異なる（次数も異なる）が，同じalgebraic setを定義する．
+    このことは零点定理から直ちに得られる．
+    なので$f$が多重因子を持たない時かつその時のみ$P$は$\zerosp(f)$と一対一対応する．
+
+    \subsection{The nonsingular irreducible curves of degree $d$ corresponds nonempty open set.}
+    $p_0,\dots,p_N$を不定元とし，$P=(p_0,\dots,p_N), f_P(x,y,z)=\sum_{i=0}^{N}p_i M_i$とする．
+    この時，$\partial_x f_P=\sum_{i=0}^{N} l_i p_i \cdot x^{-1} M_i$は$d-1$次斉次多項式であり，
+    $\partial_y f_P, \partial_z f_P$も同様に$d-1$次斉次多項式．
+    そこでThem5.7を4つの斉次多項式$f_P, \partial_x f_P, \partial_y f_P, \partial_z f_P$に対して用いる．
+    \footnote{Them5.7中の$a_{ij}$は$a_{0j}=p_j, a_{1j}=l_j p_j, a_{2j}=m_j p_j,a_{3j}=n_j p_j$となる．}
+    すると，$\{p_i\}_{i=0}^N$を変数に持つ斉次多項式$g_1,\dots,g_t$が存在し，次が成り立つ．
+    \[ \zerosp(\{f_P, \partial_x f_P, \partial_y f_P, \partial_z f_P\}) \neq \emptyset \iff P \in \zerosp(\{g_1,\dots,g_t\}). \]
+    $Z=\zerosp(\{g_1,\dots,g_t\})$とする．
+
+    $J_P(Q)$を点$Q$における$f_P$のヤコビ行列とすると，明らかに次が成り立つ．
+    \[ P \in Z \iff \Exists{Q \in \zerosp(f_P)} J_P(Q)=\mathbf{0}. \]
+    $J_P(Q)$は1x3行列（あるいは3x1行列）だから$\rank J_P(Q)=0 \mor 1$であり，
+    $J_P(Q)=\mathbf{0}$は$\rank J_P(Q)=0$と同値．
+    さらに$\dim f_P=2-1=1$だから，（Ex5.8と）Ex5.9より
+    $P \not \in Z$は$\zerosp(f_P)$がnonsingularかつirreducibleであることと同値．
+    よってthe nonsingular irreducible curves of degree $d$はopen set $Z^c$に対応する．
+    この$Z^c$はEx5.5で存在を示したnonsingular curveに対応する点を持つので空でない．
+
+\end{document}

@@ -6,17 +6,18 @@
 \usepackage{enumerate}
 \usepackage{mathrsfs}
 \usepackage{url}
+\usepackage{bussproofs}
 
 \theoremstyle{definition}
 \newtheorem{Them}{定理}[section]
 \newtheorem{Def}[Them]{定義}
 \newtheorem{Lemma}[Them]{補題}
 \newtheorem{Prop}[Them]{命題}
+\newtheorem{Claim}[Them]{主張}
 \newtheorem{Cor}[Them]{系}
 \newtheorem{Remark}[Them]{注意}
 \newtheorem{Example}[Them]{例}
 
-\newcommand{\QED}{\begin{rightflush}\rule[-2pt]{5pt}{10pt}\end{rightflush}}
 \renewcommand{\proofname}{\textnormal{(証明)}}
 \renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}
 
@@ -42,58 +43,104 @@
 \makeatother
 %% }}}
 
+%% \mapedfrom {{{
+\usepackage{graphicx}
+%\newcommand{\mapedfrom}{\makebox[1.5em][c]{\reflectbox{$\mapsto$}}}
+\newcommand{\mapedfrom}{\reflectbox{$\mapsto$}}
+%% }}}
+
+%% defmap environment
+\usepackage{array}   % for \newcolumntype macro
+\newcolumntype{L}{>{$\displaystyle}l<{$}} % math-mode version of "l" column type
+\newcolumntype{C}{>{$\displaystyle}c<{$}} % math-mode version of "l" column type
+\newenvironment{defmap}[0]
+{\begin{center}\begin{tabular}{LCLC}}
+{\end{tabular}\end{center}}
+
 %% symbols
 \mathchardef\mdash="2D %% dash in math-mode
+\newcommand{\mor}           {\text{ or }}
+\newcommand{\mand}          {\text{ and }}
+\newcommand{\mwhere}        {\text{ where }}
 
 %% fundamental spaces
 \newcommand {\C}            {\mathbb{C}}
 \newcommand {\R}            {\mathbb{R}}
+\newcommand {\Q}            {\mathbb{Q}}
 \newcommand {\Z}            {\mathbb{Z}}
 \newcommand {\N}            {\mathbb{N}}
 
 %% general category theory
-\newcommand {\cat}[1]   {\mathbf{#1}}
-\newcommand {\id}[1]    {id_{#1}}
-\newcommand {\Hom}      {\operatorname{Hom}}
-\newcommand {\eq}       {\operatorname{eq}}
-\newcommand {\coeq}     {\operatorname{coeq}}
+\newcommand {\cat}          [1]{\mathbf{#1}}
+\newcommand {\id}           [1]{id_{#1}}
+\newcommand {\Hom}          {\operatorname{Hom}}
+\newcommand {\eq}           {\operatorname{eq}}
+\newcommand {\coeq}         {\operatorname{coeq}}
 
 %% topology theory
-\newcommand{\open}[1]{\mathcal{O}_{#1}}
-\newcommand{\closed}[1]{\mathcal{A}_{#1}}
-\newcommand{\cl}{\operatorname{cl}}
-\newcommand{\inte}{\operatorname{int}}
-\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\open}          [1]{\mathcal{O}_{#1}}
+\newcommand{\closed}        [1]{\mathcal{A}_{#1}}
+\newcommand{\cl}            {\operatorname{cl}}
+\newcommand{\opint}         {\operatorname{int}}
+\newcommand{\pr}            {\operatorname{pr}}
 
 %% abelian category
-%\newcommand {\ker}      {\operatorname{ker}}
-\newcommand {\coker}    {\operatorname{coker}}
-\newcommand {\im}       {\operatorname{im}}
-\newcommand {\coim}     {\operatorname{coim}}
+%\newcommand {\ker}          {\operatorname{ker}}
+\newcommand{\coker}         {\operatorname{coker}}
+\newcommand{\im}            {\operatorname{im}}
+\newcommand{\coim}          {\operatorname{coim}}
 
 %% commutative algebra
-\newcommand {\Spec} {\operatorname{Spec}}
-\newcommand {\Max}  {\operatorname{Max}}
-\newcommand {\Ann}  {\operatorname{Ann}}
-\newcommand {\Supp} {\operatorname{Supp}}
-\newcommand {\Jac}  {\operatorname{Jac}}
-\newcommand {\Nil}  {\operatorname{Nil}}
-\newcommand {\height}{\operatorname{height}}
+\newcommand{\I}             [1]{\mathfrak{#1}} %% I(deal)
+\newcommand{\Spec}          {\operatorname{Spec}}
+\newcommand{\Max}           {\operatorname{Max}}
+\newcommand{\Ann}           {\operatorname{Ann}}
+\newcommand{\Supp}          {\operatorname{Supp}}
+\newcommand{\Jac}           {\operatorname{Jac}}
+\newcommand{\Nil}           {\operatorname{Nil}}
+\newcommand{\height}        {\operatorname{height}}
+\newcommand{\length}        {\operatorname{length}}
+\newcommand{\Quot}          {\operatorname{Quot}} %% quotient field
+
+%% field theory
+\newcommand{\fchar}         {\operatorname{char}}
+\newcommand{\irr}           {\operatorname{irr}}
+\newcommand{\Gal}           {\operatorname{Gal}}
 
 %% algebraic geometry
-\newcommand {\zeros}    {\mathcal{Z}} %% zero points in general space
-\newcommand {\defs}     {\mathcal{I}} %% define ideal in general space
-\newcommand {\zerosa}   {\zeros_a} %% zero points in affine space
-\newcommand {\zerosp}   {\zeros_p} %% zero points in affine space
-\newcommand {\defsa}    {\defs_a} %% define ideal in affine space
-\newcommand {\defsp}    {\defs_p} %% define ideal in projective space
-\newcommand {\proj}     {\mathbb{P}} %% projective space
-\newcommand {\affine}   {\mathbb{A}} %% affine space
+\newcommand{\zeros}         {\mathcal{Z}} %% zero points in general space
+\newcommand{\defs}          {\mathcal{I}} %% define ideal in general space
+\newcommand{\zerosa}        {\zeros_a} %% zero points in affine space
+\newcommand{\zerosp}        {\zeros_p} %% zero points in affine space
+\newcommand{\defsa}         {\defs_a} %% define ideal in affine space
+\newcommand{\defsp}         {\defs_p} %% define ideal in projective space
+\newcommand{\proj}          {\mathbb{P}} %% projective space
+\newcommand{\affine}        {\mathbb{A}} %% affine space
+\newcommand{\reg}           [2]{\langle #1,#2 \rangle} %% regular function f on U : <U,f>
+
+%% equivalence relation of varieties
+%% the more rigid, the less tilde and more bar.
+\newcommand{\iso}           {\equiv} %% isomorphic (3bar)
+\newcommand{\bi}            {\cong} %% birational (1tilde 2bar)
+\newcommand{\homeo}         {\approxeq} %% homeomorphic (2tilde 1bar)
+%% \Xi
+%% triple vertical bar
+%% \doteq
+%% \simeq
+%% \approx
+
+%% and maps
+\newcommand{\isomap}        {\xrightarrow{\iso}}
+\newcommand{\bimap}         {\xrightarrow{\bi}}
+\newcommand{\homeomap}      {\xrightarrow{\home}}
+%% TODO \eq{1}{2}とすると1tilde 2barの記号が出来るようにしたい
 
 %% liner algebra
-\newcommand{\tatev}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
-\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\rank}          {\operatorname{rank}}
+\newcommand{\opnull}        {\operatorname{null}} %% already degined
 
 %% logic
-\newcommand{\Forall}[1]{ {}^{\forall} #1,~~ }
-\newcommand{\Exists}[1]{ {}^{\exists} #1,~~ }
+\newcommand{\Forall}        [1]{ {}^{\forall} #1,~~ }
+\newcommand{\Exists}        [1]{ {}^{\exists} #1,~~ }
+

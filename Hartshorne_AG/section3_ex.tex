@@ -1,12 +1,8 @@
 \documentclass[a4paper]{jarticle}
 \usepackage{../math_note, exercise}
 \usepackage[all]{xy}
-\usepackage{bussproofs}
-\newcommand{\I}[1]{\mathfrak{#1}}
-\newcommand{\mor}{\mbox{ or }}
-\newcommand{\mand}{\mbox{ and }}
-\newcommand{\regs}{\mathcal{O}}
-\newcommand{\reg}[2]{\langle #1,#2 \rangle}
+
+\renewcommand{\thesection}{Ex3.\arabic{section}}
 
 \begin{document}
     $n$変数多項式環を$A^n=k[x_0, \dots, x_n]$とする．
@@ -14,7 +10,7 @@
     一般の$n$変数についての場合は$A, S$とだけ書く．
     isomorphic of varietyは$\equiv$で書き，homeomrophic of varietyは$\cong$で書く．
 
-\section{} %% 3-1
+\section{ } %% 3-1
     \subsection{Any conic in $\affine^2$ $\equiv$ $\affine^1 \mor \affine^1 \setminus \{0\}$.}
     Ex1-1より，任意のconic curve $X \subset \affine^2$について，
     $A^2/\defsa(Y) \cong A^1/(0) \mor A^1/(xy-1)$となっている．
@@ -45,22 +41,25 @@
     \subsection{Any conic in $\proj^2$ is isomorphic to $\proj^1$.}
     $\proj^2$のconic curveは既約二次斉次式で定義される．
     その斉次式を$f \in k[x,y,z]^h$とし，$X=\zerosp(f)$としよう．
-    これを2-uple emdebeddingの$\theta$で引き戻す．
-    \[ f=a_0 x^2+a_1 xy+a_2 y^2+a_3 yz+a_4 z^2 \mapsto \theta^{-1}(f)=a_0 w_0+a_1 w_1+a_2 w_2+a_3 w_3+a_4 w_4 \]
-    するとこれは$\proj^4$のhyperplaneを定義する．
+%    これを2-uple emdebeddingの$\theta$で引き戻す．
+%    \[ f=a_0 x^2+a_1 xy+a_2 y^2+a_3 yz+a_4 z^2 \mapsto \theta^{-1}(f)=a_0 w_0+a_1 w_1+a_2 w_2+a_3 w_3+a_4 w_4 \]
+%    するとこれは$\proj^4$のhyperplaneを定義する．
+
+    $(a:b:c) \in X^c$をとり，さらに$P=(0:s:t) \in \zerosp(x)$をとる．
+    すると以下の直線$L$は$Q,P$を通る．
+    \[ L: (x:y:z)=(a:b-s:c-t) \]
+    これと
 
     \subsection{$\affine^2$ is not homeomorphic to $\proj^2$.}
-    Proposition 3.5より$\Hom(\proj^2, \affine^2) \simeq \Hom(\mathcal{O}(\affine^2), \mathcal{O}(\proj^2))$．
-    これらはTheorem3.2, 3.4より$\Hom(A(\affine^2), \mathcal{O}(\proj^2))=\Hom(k[x,y], k)$．
-    これには可逆元すなわち同型写像が属していないので，$\Hom(\proj^2, \affine^2)$にも同型写像はない．
+    Ex3.7aから得られる．
 
-    \subsection{If an affine variety $X$ isomorphic to a projective variety, $X=\{one~point\}$.}
+    \subsection{If an affine variety $X$ isomorphic to a projective variety, $X=\{p.t.\}$.}
     Theorem 3.2, 3.4より
-    \[ A/\defs(X)=A(X) \cong \regs(X) \cong k \]
+    \[ A/\defs(X)=A(X) \cong \mathcal{O}(X) \cong k \]
     最右辺は体なので$\defs(X)$は$A$の極大イデアル．
     定義イデアルが極大イデアルとなるaffine varietyは1点集合なので，$X$は1点集合．
 
-\section{} %% 3-2
+\section{Bijective Bicontinuous Morphism But Not Isomorphism.} %% 3-2
     affine varietyを考える．
     \subsection{$\phi: t \mapsto (t^2,t^3)$ is a bijective bicontinuous morphism on to $y^2=x^3$, but not an isomorphism.}
     $\phi$ :: a bijective bicontinuous morphismを示そう．
@@ -85,7 +84,7 @@
     次数を考えると$p \cdot \deg g(s)=p \cdot \deg h+1$となるが，
     両辺の整数は互いに素なのでこれはありえない．
 
-\section{} %% 3-3
+\section{Induced homomorphisms between local rings.} %% 3-3
     \subsection{$\phi: X \to Y$ induces a local ring homomorphism $\phi_P^{\ast}: \mathcal{O}_{\phi(P), Y} \to \mathcal{O}_{P, X}$, for all $P \in X$.}
     誘導される写像は以下のようなものである．
     \[ \phi_P^{\ast}: \reg{U}{f} \mapsto \langle \phi^{-1}(U),f \circ \phi \rangle \]
@@ -133,7 +132,7 @@
     $P \in X$を任意にとる．
     $\mathcal{O}_{P, X}$の元を１つとり，$\reg{U}{f}$とする．
     これに対して集合$E$を以下のように定める．
-    \[ E=\{\reg{V}{g} ~|~ \phi_P^{\ast}(\reg{V}{g})=\reg{U}{f} \} \subseteq \mathcal{O}_{\phi(P), Y} \]
+    \[ E=\{\reg{V}{g} ~|~ \phi_P^{\ast}(\reg{V}{g})=\reg{U}{f} \}=\phi_P^{\ast -1}(\reg{U}{f}) \subseteq \mathcal{O}_{\phi(P), Y} \]
     これが1つの同値類に含まれることを示す．
     これは$\phi_P^{\ast}(a)=\phi_P^{\ast}(b) \implies a=b$と同値である．
 
@@ -145,7 +144,7 @@
     したがって$(V \cap V') \cap \phi(X)$から点がとれて，以下のようになる．
     \begin{align*}
     {}&     \Forall{P \in \phi^{-1}(V \cap V' \cap \phi(X))} g \circ \phi(P)=g' \circ \phi(P) \\
-    \iff&   \Forall{Q \in V \cap V' \cap \phi(X)} g \circ \phi(\phi^{-1}(Q))=g' \circ \phi(\phi^{-1}(Q)) \\
+    \iff&   \Forall{Q \in V \cap V' \cap \phi(X)} g(\phi \circ \phi^{-1}(Q))=g'(\phi \circ \phi^{-1}(Q)) \\
     \iff&   \Forall{Q \in V \cap V' \cap \phi(X)} g(Q)=g'(Q) \\
     \iff&   g=g'\mbox{ on }V \cap V' \cap \phi(X) \\
     \iff&   \reg{V}{g}=\reg{V'}{g'}
@@ -153,94 +152,506 @@
     よって$E$は1つの同値類に含まれる．
 
 \section{Show that the $d$-uple embedding of $\proj^n$ (Ex. 2-12) is an isomorphism onto its image.} %% 3-4
-    $\rho_d$がcontinuousであることはEx2.12で示した．
     開集合$U \subset \proj^n$でのregular function$f$を考えよう．
     $f \circ \rho_d: \rho_d^{-1}(U) \to k$がregularであることを示す．
 
-    まず$P \in \rho_d^{-1}(U)$をとる．
-    この時$\rho_d(P) \in U$なので，
-    これの開近傍$Z( \ni \rho_d(P))$と，
-    $f=g/h$ on $Z$かつ$h \neq 0$ on $Z$なる次数が等しい斉次多項式$g,h$が存在する．
-    したがって任意の点$Q \in \rho_d^{-1}(Z)$について，$\rho_d(Q) \in Z$だから
-    \[ f \circ \rho_d(Q)=\frac{g(\rho_d(Q))}{h(\rho_d(Q))}=\left( \frac{g \circ \rho_d}{h \circ \rho_d} \right)(Q) \]
-    $g \circ \rho_d=\theta(g), h \circ \rho_d=\theta(h)$より，これらは次数が等しい斉次多項式である(cf.Ex2.12)．
-    また，$\rho_d$は同相写像なので$\rho_d^{-1}(Z)$は$P$の開近傍．
+    \paragraph{$\rho_d$はmorphism}
+    $\rho_d$が連続であることはEx2.12cで示した．
+    regular function $f: (\im \rho_d \supset) U  \to k$を任意にとる．
+    $f \circ \rho_d: \rho_d^{-1}(U) \to k$がregularであることを示そう．
+    任意の点$P=\rho_d^{-1}(Q) \in \rho_d^{-1}(U)$に対して$P$の開近傍$\rho_d^{-1}(Z)$が存在する．
+    この$Z$は$\rho_d$が同相写像であることから$Q \in U$の開近傍である．
+    したがって同次な斉次多項式$g,h \in S$であって$f=g/h \mbox{ on } Z$なるものが存在する．
+    このことから直ちに以下が得られる．
+    \[ f \circ \rho_d=\frac{g \circ \rho_d}{h \circ \rho_d}=\frac{\theta(g)}{\theta(h)} \mbox{ on } \rho_d^{-1}(Z) \]
+    $\theta(g), \theta(h)$が同次な斉次多項式であることは$\theta$の定義から分かる．
+    $\theta(h) \neq 0$ on $\rho_d^{-1}(Z)$は$h \circ \rho_d(\rho_d^{-1}(z))=h(z)$から直ちに得られる．
 
-    以上より，任意の点$P \in \rho_d^{-1}(U)$に対して$P$の開近傍$\rho_d^{-1}(Z)$が存在し，
-    $f \circ \rho_d$は$\rho_d^{-1}(Z)$において，
-    多項式$g \circ \rho_d, h \circ \rho_d$によって$f \circ \rho_d=g \circ \rho_d/h \circ \rho_d$と表せる．
-    $h \circ \rho_d \neq 0$ on $\rho_d^{-1}(Z)$は$h \circ \rho_d(\rho_d^{-1}(z))=h(z)$から直ちに得られる．
+    \paragraph{$\rho_d^{-1}$はmorphism}
+    さらに$\rho_d^{-1}$について証明が必要だが，証明は殆ど同様である．
+    $\rho_d^{-1}$が連続であることはEx2.12cで示した．
+    実際，上の証明にある$\rho_d$を$\rho_d^{-1}$に，$\theta$を$\phi_i$に書き換えればほとんど良い．
+    ただし$i$と開近傍をとるときに注意が必要である．
+    最初に任意にregular functionをとり，$g: (\proj^n \supset) V \to k$としよう．
+    任意に点$Q=\rho_d(P) \in \rho_d(V)$をとり，これに対して$Q \in V_i$であるような$i$を選ぶ．
+    （$V_i$はEx2.12の解答で定義した．）
+    すると$Q$に対して開近傍$W( \subset \proj^n)$が存在し，
+    そこでは$g$が有理関数として表せる．
+    しかし以降は開近傍として$W$全体をとるのではなく，$W \cap \rho_d^{-1}(V_i)$をとる．
+    すると$\rho_d(W) \cap V_i$では$\rho_d^{-1}$が$\sigma_i$のように具体的にかけて，
+    $g \circ \rho_d^{-1}$が有理関数として表せることが分かる．
 
-    さらに$\rho_d^{-1}$について証明が必要だが，
-    これは$\rho_d^{-1}$が同相写像であり，
-    $g \mapsto g \circ \rho_d^{-1}$も斉次多項式を斉次多項式に移す(cf.Ex2.12)から，
-    全く同様に証明できる．
-    実際，Ex2.12の証明で用いた$\phi_i$によって$g \circ (\rho_d^{-1}|_{V_i})=\phi_i(g)$であり，
-    これは$x_j \mapsto y_{s(i,j)}$という単射写像である．
-    $\rho_d$は全単射だから逆写像$\sigma_i:V_i \to \proj^n$を貼り合わせることが出来る．
-
-\section{$H \subseteq \proj^n$ is any hypersurface, show that $\proj^n \setminus H$ is affine.} %% 3-5
+\section{$H \subseteq \proj^n$ is any hypersurface, show that $H^c$ is affine.} %% 3-5
     $H$がhypersurfaceならば，$H$は既約斉次多項式$f$によって定義される．
     $d:=\deg f$とすると，$H$は$\rho_d(H)$と同相になっている(Ex3.4)．
-    $\rho_d(H) \subset \proj^N$はhyperplaneなので，
-    $\proj^n \setminus H=H^c$の代わりに$\proj^N \setminus \rho_d(H)=\rho_d(H)^c$を考えよう．
-    以下で示す通り$\rho_d(H)^c$はあるaffine varietyと同型なので$H^c$もあるaffine varietyと同型である．
 
     $f=\sum_{0 \leq i \leq N}{c_i M_i}$としよう．$M_i$はEx2.12で定義されている．
     そのうえで$g=\sum_{0 \leq i \leq N}{c_i y_i}$としよう．
-    まず$\rho_d(H)=\zerosp(g) \cap \im \rho_d$を示す．
+    $\rho_d(H)=\zerosp(g) \cap \im \rho_d$を示す．
     \[ \rho_d^{-1}(\zerosp(g) \cap \im \rho_d)=\rho_d^{-1}(\zerosp(g)) \cap \proj^n=\zerosp(\theta(g))=\zerosp(f)=H \]
+    したがって特に$\rho_d(H^c)=\im \rho_d \cap \rho_d(H)^c \subset \zerosp(g)^c$．
 
-%    以下の写像を考える．
-%    \[ \tilde{\varphi}: \rho_d(H)^c \to \affine^{N+1};~ P=(p_0:\dots:p_{N}) \mapsto \left( \frac{p_0}{g(P)}, \dots, \frac{p_N}{g(P)} \right) \]
-%    これは同値類の代表元のとり方に依らず，well-defined．
-%    $\im \tilde{\varphi}$を考えると，
-%    \[ \left( \frac{p_0}{g(P)}, \dots, \frac{p_N}{g(P)} \right)=(X_0,\dots,X_N) \implies \sum_{0 \leq i \leq N}{c_i X_i}=g(P)/g(P)=1 \]
-%    なので，$g'=\sum_{0 \leq i \leq N}{c_i X_i}-1$とすると$\im \tilde{\varphi}=\zerosa(g')$である．
-%    この多様体は$N$次元多様体だから，$\rho_d(H)^c$から$\affine^N$への写像が作れる．
-%    \begin{align*}
-%        \varphi: \rho_d(H)^c &\to \affine^{N} \\
-%        P=(p_0:\dots:p_N) &\mapsto \left( \frac{p_1}{g(P)}, \dots, \frac{p_N}{g(P)} \right)
-%    \end{align*}
-%    $\varphi$の逆写像は以下のように与えられる．
-%    \begin{align*}
-%        \varphi^{-1}: \affine^{N} &\to \rho_d(H)^c \\
-%        (q_1:\dots:q_N) &\mapsto \left( 1-\left( \sum_{1 \leq i \leq N}{c_i q_i} \right): q_1:\dots:q_N \right)
-%    \end{align*}
-%    あとは$\varphi, \varphi^{-1}$がmorphismであることを確かめればよい．
-%    $\varphi$がmorphismであることはLemma 3.6から，
-%    $\varphi^{-1}$がmorphismであることは写像が多項式で与えられることから分かる．
+    以下で示す通り$\zerosp(g)^c$は$\affine^N$と同型．
+    $H^c$がirreducibleであることから$\rho_d(H^c)$はそのsubvariety(?)．
+    したがって$\rho_d(H^c)$はあるaffine varietyと同型(?)．
+    よって$H^c$もあるaffine varietyと同型である．
 
-\section{} %% 3-6
+    $c_0 \neq 0$だと仮定し，以下のように写像を定める．
+    $c_1 \neq 0$だと仮定した場合の写像は容易に類推できるであろう．
+    \[
+        \begin{array}{ccccccc}
+        \phi:
+            &\zerosp(g)^c
+            &\to &\affine^{N+1}
+            &\to &\affine^N \\
+        {}  &P=(p_0:\dots:p_N)
+            &\mapsto &\left( \frac{p_0}{g(P)}:\dots:\frac{p_N}{g(P)} \right)
+            &\mapsto &\left( \frac{p_1}{g(P)}:\dots:\frac{p_N}{g(P)} \right)
+    \end{array}
+    \]
+    中間をみると，$\sum_{i=1}^{N}{c_i \frac{p_i}{g(P)}}=g(P)/g(P)=1$．
+    なので逆写像を以下の様に作れる．
+    \[
+        \begin{array}{ccccccc}
+            \phi^{-1}:
+            &\affine^N
+            &\to &\zerosp(g)^c \\
+        {}  &(q_1:\dots:q_N)
+            &\mapsto &\left( \frac{1}{c_0} \left[1-\left( \sum_{i=1}^{N}{c_i q_i} \right) \right]: q_1:\dots:q_n \right)
+    \end{array}
+    \]
+    $\phi$がmorphismであることはLemma3.6から，
+    $\phi^{-1}$がmorphismであることはこれが多項式で与えられることから直ちに分かる．
 
-\section{} %% 3-7
+\section{$\affine^2 \setminus \{(0,0)\}$ is not affine.} %% 3-6
+    $O:=\{(0,0)\}$としよう．
+    $X:=\affine^2 \setminus O$としたとき，
+    $X$上で定義されるregular functionは$\affine^2$上で定義される．
+    したがって$X \neq \affine^2$かつ$\mathcal{O}(X)=\mathcal(O)(\affine^2)$であることがわかり，
+    prop3.5より，$X$はいかなるaffine varietyとも同型ではないことが示される．
 
-\section{} %% 3-8
+    実際，$ X$上で定義されるregular function $f:X \to k$を考えよう．
+    $P \in X$をとり，$f$が$P$の開近傍$U \setminus O (\subset X)$で$f=g/h$と表され，
+    しかも$h \neq 0 \mbox{ on } U \setminus O$を満たすとしよう．
+    $h \neq 0 \mbox{ on } U \setminus O \implies h \neq 0 \mbox{ on } U$を示す．
+    仮にこれが成り立たないとしよう．
+    すると$(0,0) \in U$かつ$h(0,0)=0$となっている．
+    $h$の既約因子$h'$であって$h'(0,0)=0$であるものが存在するのでそれを1つとろう．
+    この時$\zerosa(h') \cap U=O$．
+    \[ \zerosa(h') \cap (U \cup U^c)=O \cup (\zerosa(h') \cap U^c)=\zerosa(h') \]
+    これは$\zerosa(h')$が$(0,0)$の1点である，
+    あるいは$O$と$\zerosa(h') \cap U^c$というdisjointな二つの閉集合に分解できることを言っている．
+    前者の場合はありえない．
+    $\zerosa(h')$が1点であるためにはイデアル$(h')$が極大イデアルであることが必要十分だが，
+    $(h')$の高さは1であり，一方極大イデアルは高さ2である．
+    後者の場合もありえない．
+    $h'$は既約多項式としていたから，$\zerosa(h')$は既約である．
+    よって矛盾が生じたので以下が示された．
+    \[ h \neq 0 \mbox{ on } U \setminus O \implies h \neq 0 \mbox{ on } U \]
+    これで最初の主張が示された．
 
-\section{} %% 3-9
+\section{Intersection of two varieties in $\proj^n$} 
+    \subsection{Any two curves in $\proj^2$ have a nonempty intersection.}
+    $\proj^2$におけるhypersurfaceは次元1の多様体なので(b)から従う．
 
-\section{} %% 3-10
+    \subsection{If $Y \subset \proj^n$, $\dim Y \geq 1$, and $H$ is a hypersurface, then $Y \cap H \neq \emptyset$.}
+    背理法を用いるため，$Y \cap H=\emptyset$と仮定する．
+    すると以下が得られる．
+    \[ Y \cap (H \cup H^c)=(Y \cap H) \cup (Y \cap H^c)=Y \cap H^c=Y \]
+    すなわち$Y \subset H^c$．
+    Ex3.5で示したように，$H$ :: hypersurfaceについて$H^c$ :: affineなので$Y$ :: affine．
+    Ex3.1eよりこの時$Y$は1点であるから，$\dim Y \geq 1$と矛盾する．
+    よって$Y \cap H \neq \emptyset$．
 
-\section{} %% 3-11
+\section{Any regular function on $\proj^n - (H_i \cap H_j)$ is constant.} 
+    $i \neq j$かつ$H_i=(\zerosp(x_i))^c, H_j=(\zerosp(x_j))^c$と定義する．
 
-\section{} %% 3-12
+\section{Let $X:=\proj^1, Y:=\rho_2(\proj^1)$. Then $X \cong Y$ but $S(X) \not \cong S(Y)$. } 
+    計算すると
+    \[ Y=\{(s^2:t^2:st) ~|~ (s,t) \in k^2 \setminus \{(0,0)\} \}=\zerosp(xy-z^2) \subset \proj^2.\]
+    Ex2.12での議論から$S(Y)=k[x,y]/\ker \theta \cong \im \theta \subsetneq k[x,y]$．
+    これは明らかに$S(X)=k[x,y]$と同型でない．
 
-\section{} %% 3-13
+\section{Subvarieties} 
 
-\section{} %% 3-14
+\section{1-1 correspondence \\ $\Spec(\mathcal{O}_P) \leftrightarrow \{\text{the closed subvarieties of $X$ containing $P$}\}$.} 
+    $X$のsubvariety $Y$を任意にとる．    
+    $P \in Y \subset X$から$\defs(P) \supset \defs(Y) \supset \defs(X)$であり，
+    $X, Y$はirreducible closed setなので$\defs(Y)$は素イデアル．
 
-\section{} %% 3-15
+\section{If $P$ is a point in a variety $X$, $\dim \mathcal{O}_P=\dim X$.} 
 
-\section{} %% 3-16
+\section{$\mathcal{O}_{Y,X}$ is a local ring with residue field $K(Y)$ and dimention $=\dim X-\dim Y$.} 
+    
 
-\section{} %% 3-17
+\section{Projection from a Point.}
+    $\proj^n$を$\proj^{n+1}$のhyperplaneとみなし，
+    $P \in \proj^{n+1} \setminus \proj^n$を固定する．
+    また，点$Q \in \proj^{n+1} \setminus \{P\}$を取った時の
+    2点$P,Q$を結ぶ直線を$L(P,Q)$としよう．
+    写像$\phi: \proj^{n+1} \setminus \{P\} \to \proj^n$を，
+    $\phi(Q)=L(P,Q) \cap \proj^n$で定める．
 
-\section{} %% 3-18
+    \subsection{$\phi$ is a morphism.}
+    $L(P,Q)$は以下の集合である．
+    \[ L(P,Q)=\{ sP+tQ ~|~ s,t \in k \land (s,t) \neq (0,0) \} \]
+    ただし点の和は各成分ごとの和で定義される．
+    さて，$\proj^n$を1次斉次多項式$F=\sum_{0 \leq i \leq n+1}{a_i x_i}$で定義される$\zerosp(F)$とみなそう．
+    2変数関数$F(s P+t Q)$は$s,t$について一次式なので$F(s P+t Q)=0$の解は1つである．
+    具体的にこの解を求める．$P=(p_0:\dots:p_n), Q=(q_0:\dots:q_n)$としよう．
+    \[ 0=F(sP+tQ)=\sum_{0 \leq i \leq n+1}{a_i (sp_i+tq_i)}=s F(P)+t F(Q) \iff (s:t)=(F(Q):-F(P)) \]
+    したがって$\phi(Q)=F(Q) P-F(P) Q$．
+    $F$は一次式だから$\phi(Q)$も一次式で，しかも各成分は多項式で与えられる．
+    regular functionを有理関数表示した時の分子分母は多項式であり，
+    多項式に$\phi$を合成しても多項式なのでこれはmorphism．
 
-\section{} %% 3-19
+    \subsection{Projection of twisted cubic curve have a cusp.}
+    $P=(0:0:1:0), F(x,y,z,w)=z$とし，
+    点$Q$を$T=\{(ttt:ttu:tuu:uuu) | t,u \in k \land (t,u) \neq (0,0)\}$からとる．
+    \[ \phi(T)=\{ (t^3:t^2u:0:u^3) ~|~ t,u \in k \land (t,u) \neq (0,0) \}=\{ (a^3:a^2:0:1) ~|~ a \in k \} \cup \{(1:0:0:0)\} \]
+    最右辺の表示から，この曲線が$\zerosp(wx^2=y^3)$で与えられることが分かる．
+    これは原点にカスプを持つ．
 
-\section{} %% 3-20
+\section{Products of Affine Varieties.} 
+    $X \subset \affine^n, Y \subset \affine^m$をaffine varietyとする．
+    $X \times Y$を直積集合に$\affine^{n+m}$の相対位相を入れたものとする．
 
-\section{} %% 3-21
+    \begin{Example}
+    $X=\zerosa(xy-1), Y=\zerosa(z^2+w^2-1)$としよう．
+    すると$X \times Y=\{(x,y,z,w) ~|~ xy-1=0 \land z^2+w^2-1 \}$．
+    \end{Example}
+
+    \subsection{$X \times Y$ is closed.}
+    $\defsa(X) \subset k[x_{0},\dots,x_{n}], \defsa(Y) \subset k[y_{0},\dots,y_{n}]$とする．
+    この二つのイデアルを埋め込み写像によって$k[x_{0},\dots,x_{n},y_{0},\dots,y_{n}]$の部分集合とみなすと，
+    $\I{I}_{XY}=\langle \defsa(X) \cup \defsa(Y) \rangle$が$X \times Y$を定義する．
+    なぜなら
+    \[ X \times Y=\{ (x,y) ~|~ [\Forall{f \in \defs(X)} f(x)=0] \land [\Forall{g \in \defs(Y)} g(y)=0] \} \]
+    だからである．
+    このイデアル$\I{I}_{XY}$は以下の事実から素イデアルである．
+
+    \subsection{$X \times Y$ is irreducible.}
+    $X \times Y$は二つの閉集合$Z_1, Z_2$の和集合で表せるとしよう．
+    すなわち$X \times Y=Z_1 \cup Z_2$とする．
+    これに対して集合$X_1, X_2$を以下で定める．
+    \[ X_i=\{ x \in X ~|~ x \times Y \subset Z_i \} ~~(i=1,2) \]
+
+    必要な同相写像を準備する．
+    $x$を固定した時，以下の写像は同相写像である．
+    \[ r_x: Y \to x \times Y;~ y \mapsto (x,y) \]
+    実際，これは全単射であり，しかもLemma 3.6から同型射である．
+    同型射ならば同相写像なので良い．
+    同様に定義される$l_y:X \to X \times y$も同相写像である．
+
+    $X=X_1 \cup X_2$を示そう．
+    $r_x$が同相写像であることから$r_x(Y)=x \times Y$はirreducible．
+    $Z_1, Z_2$はclosedだから
+    \[ x \times Y=(x \times Y) \cap (Z_1 \cup Z_2)=((x \times Y) \cap Z_1) \cup ((x \times Y) \cap Z_2) \]
+    の最右辺も閉集合による分解であり，したがって
+    \[ x \times Y=(x \times Y) \cap Z_1 \mor (x \times Y) \cap Z_2  \]
+    すなわち$x \times Y \subset Z_1 \mor x \times Y \subset Z_2$．
+    よって$X_1 \cup X_2=X$．
+
+    さらに$l_y^{-1}(Z_i)=\{ x \in X ~|~ (x,y) \in Z_i\}$は
+    $l_y$が同相写像であることから閉集合である．
+    すでに示した$(x,y) \in Z_i \iff x \times Y \subset Z_i$から
+    任意の$y$について$l_y^{-1}(Z_i)=X_i$が得られる．
+    
+    以上より$X \times Y=Z_1 \cup Z_2$ならば，$X=X_1 \cup X_2$のように$X$が二つの閉集合の和で表されることがわかった．
+    $X$はirreducibeだから$X=X_1 \mor X_2$．
+    したがって$X \times Y=Z_1 \mor Z_2$．
+
+    \subsection{Show that $A(X \times Y) \cong A(X) \otimes_k A(Y)$}
+    $k[x_i] \otimes_k k[y_j] \cong k[x_i,y_j]$を示す．
+    $\psi: (f,g) \mapsto fg$とすると以下の図式が成り立つ．
+    \[
+        \xymatrix
+        {
+        k[x_i] \otimes_k k[y_j] \ar@{..>}[r]^{\exists ! \phi} & k[x_i,y_j]\\
+        k[x_i] \times k[y_j] \ar[u]^{\otimes_k} \ar[ur]^{\psi}
+        }
+    \]
+    $\phi^{-1}: x_i \mapsto (x_i) \otimes 1;~ y_j \mapsto 1 \otimes y_j$によって逆写像が出来るので，
+    求める同型が示せた．
+    このことから$A(X \times Y) \cong A(X) \otimes_k A(Y)/\phi^{-1}(\I{I}_{XY})$．
+    以下の補題から残りが示せる．
+    \begin{Lemma}
+        $A,B$ :: $k$-algebra, $\I{a} \subset A, \I{b} \subset B$ :: idealとする．
+        この時$(A/\I{a}) \otimes_k (B/\I{b}) \cong (A \otimes_k B)/\langle \I{a} \cup \I{b} \rangle$．
+    \end{Lemma}
+
+    \subsection{Shot that $X \times Y$ is a product in the category of varieties.}
+    $k$-代数の圏 $k$-\textbf{alg}におけるcoproductがテンソル積であることを示せば，
+    あとはCor3.7から得られる．
+
+    \subsection{Show that $\dim X \times Y=\dim X+\dim Y$}
+    $r:=\dim X, s:=\dim Y$としよう．
+    ネーターの正規化定理より，$A(X)$ (resp. $A(Y)$)が$k[\{t_i\}_{i=1}^{r}]$ (resp. $k[\{u_i\}_{i=1}^{s}]$)上整であるような
+    代数独立な元$\{t_i\}_{i=1}^{r} \subset A(X)$ (resp. $\{u_i\}_{i=1}^{s} \subset A(Y)$)が存在する．
+    Cor3.7から，$A(X) \otimes_k A(Y)$が$k[\{t_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^{s}]$上整であることを示せば十分である．
+    なぜなら，一般に環$B$上整な環$F$について$\dim F=\dim B$が成り立ち，
+    しかも$t_i, u_i$が代数独立な元であることから$\dim k[t_i,u_i]=r+s=\dim X+\dim Y$だからである．
+
+    Ati-Mac Ex5.3から，
+    $R (\subset S)$と$T$が$k$-代数で，かつ$S$が$R$上整ならば，$S \otimes_k T$は$R \otimes _k T$上整である．
+    したがって$k[\{t_i\}_{i=1}^{r}] \subset A(X)$と$k[\{u_i\}_{i=1}^{s}] \subset A(Y)$から
+    \[ k[\{t_i\}_{i=1}^{r}] \otimes_k k[\{u_i\}_{i=1}^{s}] \subset k[\{t_i\}_{i=1}^{r}] \otimes_k A(Y) \subset A(X) \otimes_k A(Y) \]
+    は整従属の包含関係である．
+    $k[t_i,u_i] \cong k[\{t_i\}_{i=1}^{r}] \otimes_k k[\{u_i\}_{i=1}^{s}]$と整従属の推移律から
+    主張が示された．
+
+\section{Products of Quasi-Projective Varieties} 
+
+\section{Normal Varieties}
+    あるvariety $Y$が点$P$でnormalとは，$\mathcal{O}_{P,Y}$が整閉整域であることである．
+    $Y$が任意の点でnormalであるとき，単に$Y$はnormalという．
+
+    \subsection{Any conic in $\proj^2$ is normal.}
+    Ex3.1cより，考えるべき多様体は$\proj^1 \subset \proj^2$と同型．
+    Them 3.4bの証明から，$P \in U_i$ならば$\mathcal{O}_{P,\proj^1}=A(U_i)_{\I{m}'_P}$．
+    なので$A(U_i)_{\I{m}'_P}$がintegrally closed domainであることを示せば良い．
+    これは$A(U_i)=A(\affine^1)=k[t]$であり，これはintegrally closed domainなので，
+    それを局所化した$A(U_i)_{\I{m}'_P}$もintegrally closed domain．
+
+%    Ati-Mac Ex5.7より，環と部分環$A \subset B$について，
+%    $B \setminus A$が積閉集合であれば$A$は$B$上integrally closedである．
+%    \footnote
+%    {
+%        結論を否定すると，
+%        $\sum_{i=0}^{n}{a_i x^{n-i}}=0$かつ$\{a_i\}_i \subset A$であるような$x \in B \setminus A$が存在する．
+%        このような$n$で最小のものをとろう．
+%        すると$x (\sum_{i=1}^{n-1}{a_i x^{n-i}})=-a_n \in A$．
+%        $B \setminus A$は積閉集合だから$a:=\sum_{i=1}^{n-1}{a_i x^{n-i}} \in A$．
+%        $a-a=\sum_{i=1}^{n-1}{a_i x^{n-i}}-a=0$が得られ，これは$n$の最小性に矛盾する．
+%    }
+
+    \subsection{$Q_1=\zerosp(xy-zw), Q_2=\zerosp(xy-z^2) \subset \proj^3$ are normal.}
+    $\{U_i\}_i$をアフィン開被覆だとする．
+    Them3.4bの証明の前半から，
+    $P \in Y$について，$P \in U_i$なる$i$を選ぶと，
+    $\mathcal{O}_{P,Y} \cong S(Y)_{(\I{m}_P)} \cong A(Y_i)_{\I{m}'_P}$が成立する．
+    （ただし$Y_i:=Y \cap U_i$で，$\I{m}'_P$は$A(Y_i)$で点$P$に対応する極大イデアル．）
+    したがって局所環を調べるには各アフィン開被覆との共通部分だけ見れば良い．
+
+    \paragraph{Case I: $Y=Q_1$．}
+    $Y_0=Q_1 \cap U_0$は$\zerosa(y-zw)$の様に表される．
+    $A(Y_0)$は$y \mapsto st, z \mapsto s, w \mapsto t$で写すことで$k[s,t]$と同型であるから，
+    これがintegrally closedであることは(a)と同様の議論で分かる．
+    $i=1,2,3$でも同様．
+
+    \paragraph{Case II: $Y=Q_2$．}
+    $Y_0=Q_2 \cap U_0$は$\zerosa(y-z^2)$の様に表される．
+    $A(Y_0)$は$y \mapsto s^2, z \mapsto t$で写すことで$k[s,t]$と同型であり，
+    以下同様．
+    $Y_1$も同様である．
+    $Y_2$は$\zerosa(xy-1)$であり，
+    $A(Y_2)=k[s,s^{-1},t]=k[s,t]_{s}$とAti-Mac Prop 5.12よりこれはintegrally closed．
+
+    \paragraph{Case II-3}
+    $Y_3=\zerosa(xy-z^2)$は$(x,y,z)=(s^2,t^2,st)$というパラメータ表示を持つので，$A(Y_3)=k[s^2,t^2,st]$．
+    証明は2つあり，最初のものは一般の代数閉体で成立し，後のものは体$k$の標数が2でないときに成立する．
+    後のものは不要ではあるが美しいので残しておこう．
+    必要な観察をここでしておこう．
+    $A=k[s,t], B=k[s^2,t^2,st]$とする．
+    $s^m t^n$が$B$の元であるためには，
+    $s^m t^n=(s^2)^i (t^2)^j (st)^k$となる非負整数$i,j,k$が存在することが必要十分である．
+    これは指数を見て連立方程式を解くと，$\frac{m+n}{2}$が非負整数であるとき，
+    すなわち$m+n \in 2\Z_{\geq 0}$であることと同値
+    \footnote{$m=2i+k, n=2j+k (i,j,k \in \Z_{\geq 0})$を解くと$j=i-m+\frac{m+n}{2}, k=m-2i (\frac{m-n}{2} \leq i \leq \frac{m}{2})$}．
+    また，これは体$k$の標数が2でない時には，
+    $A$の自己準同型写像$\sigma_0: s \mapsto -s, t \mapsto -t$についての不変元であることと同値である．
+
+    \begin{proof}
+        $f/g \in \Quot(B)$をとる．以下の式を満たす$\{c_i\}_i \subset B$が存在したとしよう．
+        \[ \left( \frac{f}{g} \right)^d+c_1 \left( \frac{f}{g} \right)^{d-1}+\dots+c_d=0 \]
+        $B$は$A$の部分環であるから，$f/g \in \Quot(A), \{c_i\}_i \subset A$とみなすことで$f/g \in A$が得られる．
+        したがって$h=f/g \in \Quot(B) \cap A$．
+        あとは$h \in B$が示せれば良い．（ここまでは後の証明と共通．）
+
+        $f, g \in B, h \in A$に注意する．$h \not \in B$と仮定して矛盾を導く．
+        $g$の項であって，total degreeが偶数であるものの中で最大で，かつ$s$の次数が最大であるものを$g_{ab} s^a t^b$とする．
+        $h$の項であって，total degreeが奇数であるものの中で最大で，かつ$s$の次数が最大であるものを$h_{cd} s^c t^d$とする．
+
+        この時，$s^{a+c} t^{b+d}$の係数は，
+        \[ \sum_{i,j \in \Z}{g_{a-i, b-j} h_{c+i,d+j}} \]
+        である．
+        $g_{a-i, b-j} h_{c+i,d+j} \neq 0$の必要条件を整理しよう．
+        \begin{center}
+        $\begin{array}{lll}
+            {}      &   g_{a-i, b-j} h_{c+i,d+j} \neq 0    & {} \\
+            \implies&   i+j \in 2\Z    & [\text{$a+b \in 2\Z$かつ$a+b-(i+j) \in 2\Z$から．}] \\
+            \implies&   i+j \geq 0     & [\text{$g_{ab}$はtotal degree $a+b-(i+j)$（偶数）が$g$で最大のもの．}] \\
+            \implies&   i+j \leq 0     & [\text{$h_{cd}$はtotal degree $c+d+(i+j)$（奇数）が$h$で最大のもの．}] \\
+        \end{array}$
+        \end{center}
+        ここまでで$i+j=0$が得られた．
+        なので$g_{a-i, b+i} h_{c+i,d-i} \neq 0$を考えると，
+        $g_{ab}, h_{ab}$はそのtotal degreeでsの次数が最大であるものとしていたから，
+        $a-i \leq a$かつ$c+i \leq c$．
+        すなわち$i=0$が得られる．
+        まとめて，$i=j=0$．
+        よって$f=gh$の$s^{a+c} t^{b+d}$の係数は$g_{ab} h_{cd} \neq 0$であり，したがって$gh=f \not \in B$となる．
+        しかし$f \in B$であったから矛盾．
+%        $g \in B$とすでに述べた考察から$g$はtotal degreeが偶数のものしか存在しない．
+%        したがってまず$a+b-(i+j) \in 2\Z$すなわち$i+j \in 2\Z$．
+%        $g_{ab}$のとり方から$a+b-(i+j)>a+b$の時，すなわち$i+j<0$のとき$g_{a-i, b-j}=0$．
+%        さらに$i+j \geq 0$であっても$a-i > a$，すなわち$i<0$のとき$g_{a-i, b-j}=0$．
+%        さらにさらに$i+j \not \in 2\Z$のとき$g_{a-i, b-j}=0$．
+%        $i+j \in 2\Z$を踏まえると$c+d+(i+j) \not \in 2 \Z$なので$i+j>0$のとき$h_{c+i,d+j}=0$．
+%        $g$と同様に考えて$i>0$でも$h_{c+i,d+j}=0$である．
+%        まとめると，$g_{a-i, b-j} h_{c+i,d+j} \neq 0$となるのは$i+j=0$かつ$i=0$の時，すなわち$i=j=0$の時のみ．
+    \end{proof}
+
+    \begin{proof}
+        最初の段落は前述の証明と同じである．
+        $A$の自己準同型写像$\sigma_1: s \mapsto -s, t \mapsto -t$は明らかに巡回群を生成するので，
+        それを$G=\langle \sigma_1 \rangle$とおく．
+        前述の考察から，体$k$の標数が2でない時には以下が成立する．
+        \[ B=A^G=\{x \in A ~|~ \Forall{\sigma \in G} \sigma(x)=x \} \]
+        さて，前述の証明と同じく$h=fg$を考えよう．
+        \[
+            \Forall{\sigma \in G} g \cdot h=f=g \cdot \sigma(h)
+            \iff \Forall{\sigma \in G} g \cdot (h-\sigma(h))=0
+            \iff \Forall{\sigma \in G} h=\sigma(h)
+        \]
+        （ただし，$g \neq 0$と$A^G \subset A$から$A^G$::domainを用いた．）
+        よって$h=f/g \in A^G$が得られた．
+    \end{proof}
+    後者は一般化が容易に出来る．
+    実際，1の原始$d$乗根を$\zeta_d$として$\sigma: x_i \mapsto \zeta_d x_i$が生成する巡回群$G$を考えると，
+    $(k[x_0,\dots,x_n])^G$がintegrally closedであることが示される．
+    これは$k$の標数が$d$の約数でないの時，$d$-uple embedding $\rho_d$の像がprojectively normalであることを意味する．
+    Hartshorne p.159に部分的に逆も成り立つことが書かれているらしい．正確には:
+    ``when $V$ is non-singular, it is projectively normal if and only if each such linear system is a complete linear system."
+    \footnote{Wikipedia, Homogeneous coordinate ring}
+    という内容が書かれているらしいが，はっきりと読み取れない．
+
+    さらに後者は$A$がintegrally closedであるとき$A^G$がintegrally closedであることの証明になっていて，
+    これはよく知られた結果らしい．
+    これよりわずかに強い命題が``Foundations of Grothendieck Duality for Diagrams of Schemes"のCor 32.7にある．
+
+    \subsection{$C=\zerosa(y^2-x^3) \subset \affine^2$ is not normal.}
+    Them3.2より$\mathcal{O}(C)_P \cong A(C)_{\I{m}_P}$である．
+    $P=(0,0)$とすると，$\I{m}_P=(x,y)$だから，$\mathcal{O}(C)_{(0,0)}=A(C)_{\langle x,y \rangle}$．
+    これには$y/x$が属さないが，$(y/x)^2=y^2/x^2=x^3/x^2=x$から$(y/x)^2-(x/1)=0$．
+    $x/1 \in A(C)_{\langle x,y \rangle}$なのでこれは$\mathcal{O}(C)_{(0,0)}$がintegrally closedでないことを示す．
+
+    \subsection{If $Y$ is affine, then $Y$ is normal $\iff$ $A(Y)$ is integrally closed.}
+    Them3.2より$\mathcal{O}_{P,Y} \cong A(Y)_{\I{m}_P}$であるが，
+    Ati-Mac Prop5.13よりintegrally closedは局所的な性質なので主張が成り立つ．
+
+    \subsection{Normalization of an affine variety.}
+    まずvarietyの間の射と局所環の間の射の関係を考えよう．
+    \[ \bar{Y} \xrightarrow{\pi} Y \xleftarrow{\phi} Z \]という射が存在する．
+    Ex3.3から，これは
+    \[ \mathcal{O}_{\bar{Y}} \xleftarrow{\pi^{\ast}} \mathcal{O}_{Y} \xrightarrow{\phi^{\ast}} \mathcal{O}_{X} \]
+    という射に対応する．
+    $\phi$はdominantだから，同じくEx3.3より$\phi^{\ast}$はinjectiveである．
+
+\section{Projectively Normal Varieties.} 
+    \subsection{If $Y$ is projectively normal, then $Y$ is normal.}
+    $S(Y)$がintegrally closedだとする．
+    これは$S(Y)$が$\Quot(S(Y))$上整閉であることと同値．
+    Ati-MacProp 5.12とAti-Mac Ex 5.3より，$S(Y)_\I{m_P}$は$\Quot(S(Y))_\I{m_P}=\Quot(S(Y))$上整閉．
+    
+    $f/g \in S(Y)_{((0))}$に対して，以下の式を満たす$\{a_i/s_i\} \subset S(Y)_{(\I{m_P})}$が存在したとしよう．
+    \[ \left( \frac{f}{g} \right)^{d}+\frac{a_1}{s_1} \left( \frac{f}{g} \right)^{d-1}+\dots+\frac{a_d}{s_d}=0 \]
+    この式を$f/g \in \Quot(S(Y))$が$S(Y)_\I{m_P}$上整であることを表す式と見て，
+    $f/g \in S(Y)_\I{m_P} \cap S(Y)_{(\I{m_P})}=S(Y)_{(\I{m_P})}$．
+
+   \subsection{$Y:=\{(t^4:t^3 u:tu^3:u^4)\}$ is normal but not projectivly normal.}
+    明らかに$Y$は$U_0, U_3$で被覆される．
+    $Y \cap U_0 \cong \{(s,s^3,s^4)\}, Y \cap U_3 \cong \{(s^4,s^3,s)\} \subset \affine^3$であり，
+    $A(Y \cap U_0)=A(Y \cap U_3)=k[s,s^3,s^4]=k[s]$なのでこれはnormal．
+
+    一方，$S(Y)$はintegrally closed domainでない．
+    実際，$S(Y) \cong k[t^4,t^3 u,tu^3,u^4]$であり，$t^4 u^4 \in S(Y), t^2 u^2 \not \in S(Y)$．
+    しかし$t^2 u^2=(t^3 u)^2/t^4 \in \Quot(S(Y))$なのでintegrally closedでない．
+
+   \subsection{Show $Y \equiv \proj^1$. }
+   $\proj^1 \to Y$の射が全単射であることが明らか．
+   逆写像は$\rho_d$と同様に与えられる．
+   （$Y$は$\rho_4(\proj^1)$から$t^2u^2$の部分を落としたものである．）
+
+\section{Automorphisms of $\affine^n$}
+    morphism $\phi:\affine^n \to \affine^n$を考える．
+    これが多項式$f_1, \dots, f_n$によって$f=(f_1, \dots, f_n)$と表されるとしよう．
+    この時ヤコビ行列$J_{\phi}$を$J_{\phi}=[\partial f_i/\partial x_j]$としよう．
+
+    \subsection{$\phi$ :: isomorphism $\implies$ $\det J_{\phi}=$(non-zero constant)}
+    多変数解析学の結果から，ヤコビ行列は導関数と対応する．
+    すなわち，点$P \in \affine^n$において，
+    \[ I=J_{\phi^{-1} \circ \phi}(P)=J_{\phi^{-1}}(\phi(P)) \cdot J_{\phi}(P) \]
+    したがって任意の点$P$で$J_{\phi}(P)$は正則である．
+    これは$\det J_{\phi}(P) \neq 0$すなわち$\zerosa(\det J_{\phi})$が必要十分条件であるが，
+    これは更に$\det J_{\phi}$が$k$の単元であることが必要十分である．
+
+\section{Exitension of Regular Function}
+    $Y$::variety, $P \in Y$::normal point, $f$::regular function on $Y \setminus P$とする．
+
+    \subsection{If $\dim Y \geq 2$, then $f$ extends to a regular function on $Y$.}
+    regular function $x=\langle Y \setminus P, f \rangle \in K(Y)$が$Y$へ拡張出来ないと仮定して矛盾を導く．
+    $U'=U \cup P$が開集合であるような開集合$U$で$f$が$f=g/h$と有理関数表示されたとしよう．
+    すると$f$は$U'$に拡張出来ないから，$g/h$も$U'$へ拡張できない．
+    このとき，有理関数表示は色々ありうるが，$P$がnormal pointであることと$f \not \in \mathcal{O}_{P,Y}$から，
+    どの有理関数表示をとっても問題ないことが分かる．
+    実際，$g/h=g'/h'$かつ$g/h \not \in \mathcal{O}_{P,Y}$ならば，
+    $g/h- g'/h'=0$を$g/h$の整従属を表す式と見ることで$g'/h' \not \in \mathcal{O}_{P,Y}$が得られる．
+    同様に$f^n=(g/h)^n \not \in \mathcal{O}_{P,Y}$も得られる．
+    $h$は$P$で0になるから，$h$に含まれるある既約多項式$\bar{h}$が$P$で0になる．
+
+    $P$で0になる既約多項式だから$(\bar{h})$は$\mathcal{O}_{P,Y}$の高さ1の素イデアルであり，
+    したがって$H=\zerosa(\bar{h}) \cap Y$は$Y$のsubvarietyである．
+    これはhypersurfaceだから$\dim H=\dim Y-1 \geq 1$である．
+
+    今，$f$は$U$で値を持つから，$\bar{h}$は$U$の点全てで0にならず，$H \cap U'=P$である．
+    \[ H=H \cap (U' \cup U'^c)=(H \cap U') \cup (H \cap U'^c)=P \cup (H \cap U'^c) \]
+    ただし$U'^c=Y \setminus U'$である．
+    $H$はirreducibleだから$P=\emptyset \mor H \cap U'^c=\emptyset$となる．
+    しかしどちらもありえず，ここに矛盾が有る．
+    実際，前者は明らかにありえないし，後者は$H=P$を意味するが，$\dim H \geq 1$だからありえない．
+
+    \subsection{Show this would be false for $\dim Y = 1$.}
+    $Y=\affine^1, P=0, f=1/x$を考えよう．
+    この時$A(Y)=k[x]$であり，明らかに$f$は$Y$へ拡張できない．
+    一方，$Y=\zerosa(y^2-x^3)$は1次元多様体だが，$P=(0,0), f=y^2/x^2$とすると$f=x$なのでこれは自然に$Y$へ拡張出来る．
+
+\section{Group Varieties.}
+    varietyとmorphismの圏$\mathbf{Var}$に於ける群対象をgroup varietyと呼ぶ．
+    群の圏を$\mathbf{Grp}$と書くことにする．
+    予め一点集合が$\mathbf{Var}$の終対象であることを指摘しておこう．
+
+    \subsection{$G_a$=[$\affine^1$ with $\mu:(a,b) \mapsto a+b$] is a group variety.}
+
+    \subsection{$G_m$=[$\affine^1 \setminus \{0\}$ with $\mu:(a,b) \mapsto ab$] is a group variety.}
+
+    \subsection{If $G$::group variety, show that $\Hom(-,G)$::functor from $\mathbf{Var}$ to $\mathbf{Grp}$.}
+    $X \in \mathbf{Var}$を任意に取って考える．自然に以下の写像が考えられる．
+    \[ \mu^{\ast}: \Hom(X,G) \times \Hom(X,G) \to \Hom(X,G);~ (f(x),g(x)) \mapsto \mu(f(x),g(x)) \]
+    以下の図式を考えることで，このような写像はこれに限ることが分かる．
+    \[
+    \xymatrix
+    {
+    X \ar[dr]_{f} \ar[drr]_{g} \ar@{..>}[rr]^{\exists! (f,g)}
+        & {}
+        & G \times G \ar[dl]^{\pr_1} \ar[d]^{\pr_2} \ar[r]^{\mu}& G \\
+    {} & G & G
+    }
+    \]
+    $G$の演算$\mu$に対する単位元を$u$，逆元を作る射を$i$とする．
+    この時，$\mu^{\ast}$に対する単位元$u^{\ast}$と逆元$i^{\ast}$は以下で与えられる．
+    \[u^{\ast}: X \ni x \mapsto u \in G;~~ i^{\ast}: \Hom(X,G) \ni f \mapsto i \circ f \in \Hom(X,G)\]
+    $i^{\ast}$は実際に計算すると$\mu^{\ast}(f, i^{\ast}(f))=\mu(f(x), i(f(x)))=u=u^{\ast}$となる．
+
+    \subsection{$\Hom(X,G_a) \cong \mathcal{O}(X)$, as groups under addition.}
+    $G_a$の台集合は$\affine^1$なので，$\Hom_{\mathbf{Var}}(X,G_a)$は集合として$\mathcal{O}(X)$に等しい．
+    $f,g \in \Hom_{\mathbf{Var}}(X,G_a)=\mathcal{O}(X)$に対して$\mu^{\ast}(f,g)=f+g$より同型であることも分かる．
+
+    \subsection{$\Hom(X,G_m) \cong \mbox{units of }\mathcal{O}(X)$, as groups under multiplication.}
+    こちらも集合として一致する．
+    実際，$G_m$の台集合は$\affine^1 \setminus \{0\}$なので
+    $\Hom(X,G_m)$の元は$X$上で0にならないregular functionであり，
+    そのようなregular funcitonは明らかに$\mathcal{O}(X)$の単元である．
+    演算も$\mu^{\ast}(f,g)=fg$だから合同．
 
 \end{document}

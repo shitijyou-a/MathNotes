@@ -9,6 +9,7 @@
         $Y$が閉であることを示せ。
     \end{Prop}
 
+    \begin{proof}
     対偶を示す。
     $Y$が閉でなければ、$x \not \in Y$かつ$x \in \cl_{X}(Y)$なる点$x$が存在する。
     すると$\{ U_{\lambda} \}_{\lambda \in \Lambda}$は$X$の被覆だから、
@@ -26,4 +27,16 @@
     したがって$x \not \in \cl_{U}(U \cap Y)$とすると$y \not \in Z$と$y \in Z$が同時に得られ、矛盾。
     よって$x \in \cl_{U}(U \cap Y)$かつ$x \not \in U \cap Y$が示され、
     $U \cap Y$が$U$における閉集合では無いことが示される。
+    \end{proof}
+    \begin{proof}
+        \begin{align*}
+            {}&         Y \cap U_{\lambda} \text{ :: closed in } U_{\lambda} \\
+            \iff&       Y^c \cap U_{\lambda} \text{ :: open in } U_{\lambda} \\ 
+            \iff&       Y^c \cap U_{\lambda} \text{ :: open in } X \\ 
+            \implies&   {\textstyle \bigcup_{\lambda}{(Y^c \cap U_{\lambda})}} \text{ :: open in } X \\ 
+            \iff&       Y^c \text{ :: open in } X \\ 
+            \iff&       Y \text{ :: closed in } X
+        \end{align*}
+        ただし2つめの$\iff$は$U_{\lambda}$::open in $X$から．
+    \end{proof}
 \end{document}

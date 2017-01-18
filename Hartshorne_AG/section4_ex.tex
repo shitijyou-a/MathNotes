@@ -1,0 +1,327 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+
+\newcommand{\mon}{\mbox{ on }}
+\renewcommand{\thesection}{Ex4.\arabic{section}}
+
+\begin{document}
+\section{Term ``is defined" for Regular Functions.} %% Ex4.1 
+    $X$::varietyと$\reg{U}{f}, \reg{V}{g} \in K(X)$について，
+    $f=g \mon U \cap V$とする．
+    このとき，$U$上で$f$，$V$上で$g$であるような写像$h$が
+    $U \cup V$上のregular functionであることを示そう．
+    つまり，regular functionの定義域を接続する．
+
+    $P \in U \cup V$をとる．
+    $P \in U \setminus V$ならば単に$P \in U$と考えて開近傍をとり，$h$は$P$でregularであることが分かる．
+    $P \in V \setminus U$でも同様に$h$は$P$でregularであることがわかる．
+    $P \in U \cap V$の時は$P$の適当な開近傍上で$f,g$がそれぞれ有理関数表示をとるが，
+    $f=g \mon U \cap V$により，その有理関数表示も等しい．
+    正確には，$P$の開近傍$Z$で$f=f_n/f_d, g=g_n/g_d$と同時にとれたとすると，
+    $f=g$より$f_n g_d-f_d g_n=0 \mon Z$．
+    左辺は多項式であり，$Z$は無限集合であるから，左辺は零多項式である．
+    なので$h$の$P$近傍での有理関数表示としては$f_n/f_d, g_n/g_d$のいずれをとっても同じである．
+    よって$h$は$U \cap V$でwell-defined．
+
+    以上のように$\reg{U}{f}$の定義域を拡大していくと，定義域（開集合）の集合が出来る．
+    ネーター空間上で議論しているので，これは極大元を持つ．
+    もしも二つ極大な定義域が存在すれば，どちらも$U$を含むので接続が出来る．
+    したがって定義域の拡張でできる極大な定義域はただ一つである．
+
+\section{Term ``is defined" Rational Maps.} %% Ex4.2 
+    $\phi:U \mand U' \to V$がrational mapであるとする．
+    このとき$\phi$は明らかに$U \cup U'$で連続．
+    また，regular funciton $f:Z \to k$を任意にとった時，
+    $f \circ \phi: \phi^{-1}(Z) \to k$がregularであることは
+    $f_1 \circ \phi: \phi^{-1}(Z) \cap U \to k, f_2 \circ \phi: \phi^{-1}(Z) \cap U' \to k$の
+    両方がregularであることから明らか．
+
+\section{Example of ``defined"} %% Ex4.3 
+    \subsection{Open subset where $f=x_1/x_0$ is defiend.}
+    \subsection{}
+\section{``Rational"} %% Ex4.4
+    $Y$ ::varietyがある$\proj^n$とbirationalであるとき，
+    $Y$はrationalであるという．
+    同値な条件として，$K(Y)/k$が純超越拡大であるとき$Y$はrationalである．
+
+    \subsection{Any conic in $\proj^2$ is a rational curve.}
+    $\proj^2$内の任意のconic curveは$\proj^1$に同型．
+    したがってconic curve全体から$\proj^1$全体へのmorphismが存在するのでrationalである．
+
+    \subsection{$C:y^2-x^3=0$ is a rational curve.}
+    まず，$C$がパラメータ表示$\gamma(t)=(t^2,t^3)$を持つことを言っておく．
+    $U=C \setminus \{(0,0)\}$という$C$の開部分集合をとると，
+    パラメータ表示から以下はbirationalである．
+    \begin{align*}
+        \phi: U &\bimap \proj^1 \\
+        (x,y) &\mapsto (x:y)=(1:t)
+    \end{align*}
+    明らかにこれは$U$とアフィン開被覆$U_0$の間のisomorphismであるから$C$はbirational．
+
+    \subsection{Projection of $Y:y^2 z - x^2 (x + z)=0$.}
+    $P=(0:0:1)$から$z=0$への射影を$\phi$とする．
+    このとき，$\phi(x:y:z)=(x:y)$．
+    ここから以下の写像が得られる．
+    \begin{align*}
+        \bar{\phi}:
+            Y \cap U_0 &\to \{(1:s) ~|~ s^2 \neq 1\} \subset \proj^1 \\
+            (1:s:t) &\mapsto (1:s) \\
+            \left( 1:s:\frac{1}{s^2-1} \right) &\mapedfrom (1:s)\\
+    \end{align*}
+    $\{(1:s) ~|~ s \neq 1\}=U_0 \cap (\zerosp(x^2-y^2))^c$は開集合である．
+    また，像，原像ともにaffineであるから，
+    Lemma 3.6によって$\bar{\phi}, \bar{\phi}^{-1}$の両方がmorphismであることが分かる．
+    よってこれはbirational map．
+
+\section{$Q:xy-zw=0$ is birational to $\proj^2$ but not isomorphic.} %% Ex4.5 
+    \paragraph{$Q$ is birational to $\proj^2$.}
+    $Q_3=Q \cap U_3$を考えると,
+    \[ \phi:(x:y:z:w) \mapsto \left( \frac{x}{w}:\frac{y}{w}:\frac{z}{w} \right) \]
+    という写像が得られる．
+    これは直ちに逆写像が得られるので，birational map $\phi: Q \cap U_3 \bimap \proj^2$が得られた．
+
+    \paragraph{$Q$ is not isomorphic to $\proj^2$.}
+    Ex3.7より，$\proj^2$の任意の曲線は交わる．
+    しかしEx2.15より二つの直線$L_t, L_u (t \neq u)$は交わらない．
+    よって$Q$と$\proj^2$は同相でなく，したがって同型でもない．
+
+\section{Plane Cremona Transformations.} %% Ex4.6 
+    $\proj^2$から自分自身へのbirational mapはplane Cremona transformationと呼ばれる.
+    Quadratic transformation.
+    \[ \phi: \proj^2 \to \proj^2;~~ (a_0:a_1:a_2) \mapsto (a_1 a_2:a_0 a_2:a_0 a_1) \]
+    ここで$a_0,a_1,a_2$のいずれか二つは0でない．
+
+    \subsection{$\phi$ itself is its inverse as a rational map.}
+    $\phi$を2回適用する．
+    \[ (a_0:a_1:a_2) \mapsto (a_1 a_2:a_0 a_2:a_0 a_1) \mapsto (a_0^2 a_1 a_2:a_0 a_1^2 a_2:a_0 a_1 a_2^2)=(a_0:a_1:a_2) \]
+    したがって$\phi$は$U=(\zerosp(x_0 x_1 x_2))^c$から$U$自身へのisomorphismである．
+    定義域がこれ以上拡大出来ないことは明らか．
+
+    \subsection{Find $U,V \in \proj^2 \mwhere U \overset{\phi}{\iso} V$}
+    すでに述べた．
+
+    \subsection{Find opensets where $\phi$ and $\phi^{-1}$ are defiend.}
+    すでに述べた．
+
+\section{$\mathcal{O}_{P,X} \iso \mathcal{O}_{Q,Y}$ $\implies$ $\Exists{\psi} \psi:X \bimap Y; P \mapsto Q$} %% Ex4.7 
+    \paragraph{We can assume $X,Y$::affine.}
+    Prop4.3より，$P \in Z \subset X$なる$Z$::affine open subsetが存在する．
+    このとき$\mathcal{O}_{P,X}$と$\mathcal{O}_{P,Z}$は
+    $\reg{U}{f} \mapsto \reg{U \cap Z}{f}; \reg{V}{g} \mapedfrom \reg{V}{g}$なる写像で同型である．
+    なので$X,Y$::affineと仮定して良い．
+
+    \paragraph{Make $\phi_{\ast}$ and $\psi$.}
+    今，仮定から$\phi: A(X)_{\I{m}_P} \isomap A(Y)_{\I{m}_Q}$なる同型写像が存在する．
+    同型の両辺で$\Quot$を取ることで$\phi_{\ast}:K(X) \isomap K(Y)$ ::isomorphismが得られる．
+    \footnote{$\phi_{\ast}(a/s)=\frac{\phi(a/1)}{\phi(s/1)}$とすれば良い．Them3.2の議論とAti-Mac Ex3.3を参照．}
+    $\phi_{\ast}(x_i+\defs(X)) \in \Quot(A(Y))=K(Y)$は有理関数であるから，
+    以下の写像が定義できる開集合$U \subset Y$が存在する．
+    \[ \psi: U \to X;~ S \mapsto (\phi_{\ast}(x_0+\defs(X))(S), \dots, \phi_{\ast}(x_n+\defs(X))(S)) \]
+    逆写像も同様に作れるため，これはbirational mapである．
+    $f \in A(X)_{\I{m}_P}$についてあきらかに$\phi_{\ast} \circ f=f \circ \psi$．
+    \footnote{実際は$(a/s)(P)=0 \iff a(P)=0$なので$f \in A(X)$についてのみこの等式を言えば良い．}
+
+    \paragraph{Paraphrasing of $\psi^{-1}: P \mapsto Q$.}
+    $\phi_{\ast}$によって極大イデアル$\bar{\I{m}}_P \subset A(X)_{\I{m}_P} \subset K(X)$は
+    極大イデアル$\bar{\I{m}}_Q \subset A(Y)_{\bar{\I{m}}_Q} \subset K(Y)$に写され，
+    $\zerosa(\bar{\I{m}}_Q)=\zerosa(\phi_{\ast}(\bar{\I{m}}_P))=\{Q\}$．
+    $\phi_{\ast} \circ f=f \circ \psi$から以下のように$\psi^{-1}: P \mapsto Q$が得られる．
+    \begin{align*}
+        {}&     Q \in \zerosa(\phi_{\ast}(\bar{\I{m}}_P))=\zerosa(\bar{\I{m}}_Q) \\
+        \iff&   \Forall{f \in \bar{\I{m}}_P} \phi_{\ast}(f)(Q)=0 \\
+        \iff&   \Forall{f \in \bar{\I{m}}_P} f(\psi(Q))=0 \\
+        \iff&   \psi(Q) \in \zerosa(\bar{\I{m}}_P)=\{P\} \\
+        \iff&   \psi^{-1}(P)=Q
+    \end{align*}
+    なお，証明には全て$\implies$で十分．
+
+\section{Cardinality and Homeomorphism of Curves} %% Ex4.8
+    \subsection*{Lemma}
+    念の為に以下を証明しておく．
+    \begin{Lemma}
+        体$k$の代数閉包を$\bar{k}$とする．
+        $k$が有限体ならば$|\bar{k}|=\aleph_0$であり，
+        $k$が無限体ならば$|\bar{k}|=|k|$である．
+    \end{Lemma}
+    \begin{proof}
+        $k$上の$n$次多項式は次のように$k^n$の元と一対一対応する．
+        \[ x^n+c_{n-1} x^{n-1}+\dots+c_0 \leftrightarrow (c_{n-1}, \dots, c_0) \]
+        $n$次多項式の根は高々$n$個だから，以下のように濃度が計算できる．
+        \[
+            |\bar{k}|
+            \leq \sum_{n \in \N}{n |k^n|}
+            =\sum_{n \in \N}{n |k|^n}
+            =|\{(i,j,x) ~|~ i \in \N, 1 \leq j \leq i, x \in k^i \}|
+        \]
+        以降は$|k|$が有限かどうかで計算が変わる．
+        \paragraph{Case: $|k| < \aleph_0$}
+            $|k|$が有限ならば$n |k|^n$も有限なので
+            \[ |\bar{k}| \leq |\{(i,j) ~|~ i \in \N, 0 \leq j \leq i |k|^i \}| \leq |\N \times \N|=\aleph_0. \]
+            任意の自然数$d \in \N$に対して$d$次既約多項式が存在することが知られているので$|\bar{k}| \geq \aleph_0$．
+            よって$|k|=\aleph_0$．
+
+        \paragraph{Case: $|k| \geq \aleph_0$}
+            $|k|$が無限ならば$n|k|^n=n|k|=|k|$なので
+            \footnote{無限濃度$\kappa$について$\kappa^2=\kappa$は選択公理と同値．}
+            \[ |\bar{k}| \leq |\N \times k| \leq |k^2|=|k|. \]
+            $k \subseteq \bar{k}$から$|k| \leq |\bar{k}|$なので証明が完成した．
+    \end{proof}
+    \subsection{For any variety $X$ whose dimention $\geq 1$, $|X|=|k|$．}
+    $k=\bar{k}$とする．
+
+    \paragraph{$|\affine^n|=|\proj^n|=|k|$}
+    $\affine^n=k^n$なので$|k|$が無限濃度であることと合わせて$|\affine^n|=|k|$．
+    また，$\proj^n=(\affine^{n+1} \setminus \{O\})/\sim$なので，$|\proj^n| \leq |\affine^{n+1} \setminus \{O\}|=|k|$．
+    $\affine^n \equiv U_0 \subset \proj^n$を考えて$|\proj^n| \geq |k|$．
+    まとめて$|\affine^n|=|\proj^n|=|k|$．
+
+    \paragraph{Start of step I: case of $\dim X=1$．}
+    $\dim X=1$の時，
+    $X$::variety, $\dim X=1$を考える．
+    Prop 4.9より，$X$からhypersurface $H (\subset \proj^{2})$へのbirational mapが存在する．
+    $H$の定義多項式を$h$としておこう．
+
+    \paragraph{$\phi$ is surjective.}
+    一次斉次多項式$F$を，
+    $H \cup \zerosp(F)=\zerosp(\langle h, F \rangle)$が$\proj^{2}$全体でないように取る．
+    すると$P \not \in H \cup \zerosp(F)$を適当に取ることができる．
+    この点$P$からの射影$\phi: \proj^2 \setminus P \to \zerosp(F)$を考えよう．
+    明らかに$\phi(H) \subseteq \zerosp(F)=\proj^1$かつ$|\zerosp(F)|=|\proj^1|=|k|$である．
+    これが全射であることを示せば$|H| \geq |k|$が分かる．
+    $R \in \zerosp(F)$を任意にとり，$P$と$R$を通る直線を$L(P,R)$としよう．
+    Ex3.7(a)より，$L(P,R) \cap H \neq \emptyset$（ここで$\dim H=1$を用いる）．
+    したがって$Q \in L(P,R) \cap H$を取ることができて，
+    構成法から\footnote{つまり$P,Q,R$が一直線上にあり，$Q \in H, R \in \zerosp(F)$だから．}$\phi(Q)=R$が成立する．
+    よって$\phi$は全射．
+    \footnote{$L(P,R) \cap H$が有限集合であることは，
+    $M(R;t)=P+tR$とすると$h(M(R;t))$が$t$の1変数多項式であり，
+    したがって根は高々$\deg h$個であることから得られる．}
+
+    \paragraph{Conclusion of step I}
+    以上で$|H| \geq |k|$が示された．
+    $H \subset \proj^2$より$|H| \leq |k|$なので$|H|=|k|$．
+    さて，$X$と$H$はbirationalなので，
+    2つのある開集合$U \subset X, V \subset H$の間に全単射が存在する．
+    $H$が1次元であることから$V$は$H$から有限個の点を除いたものであり，したがって$|V|=|H|=|k|$．
+    \footnote{$H$に含まれる既約閉集合は1点のみであり，$H$の任意の閉集合はProp1.5から有限個の点である．}
+    あわせて$|X| \geq |U|=|V|=|k|$．
+    $X \subset \proj^n$より$|X| \leq |k|$なので，Case Iの証明が終わった．
+
+    \paragraph{Next Step}
+    $\dim X \geq 2$ならば，次元の定義より，$X$は1次元の既約閉集合$C$を含む．
+    したがってCase Iより$|X| \geq |C|=|k|$．
+    $|X| \leq |\proj^n|=|k|$なので一般の次元でも証明が得られた．
+
+    \subsection{Any two curves over $k$ are homeomorphic.}
+    Ex3.1dから$\affine^2 \not \iso \proj^2$であることに注意．
+
+    二つの曲線$C,D$をとろう．
+    (a)の結果から$|C|=|k|=|D|$なので全単射$\phi:C \to D$が存在する．
+    $C,D$は1次元なので$C,D$上の閉集合は空集合，有限個の点，曲線全体しかない．
+    明らかに$\phi$は空集合，点，曲線全体をそれぞれ空集合，点，曲線全体に写すので，
+    同相写像である．
+
+    \subsection{Another proof for $|\text{any curve}| \geq |k|$}
+    任意の曲線$C$を取ると，これはhypersurface $H \subset \proj^2$とbirational．
+    $H$の定義多項式を$h \in k[x,y,z]$とする．
+    このとき，写像$\iota: k \to H$が構成できる．
+    これは単純に$f(1,a,z) \in k[z]$の零点$z=b$を一つ選び\footnote{選択公理を用いる．}
+    $\iota: a \mapsto (1:a:b)$とすれば良い．
+    代数閉体で考えているので零点は必ず有限個存在する．
+    これは明らかに単射だから$|C| \geq |k|$．
+
+\section{Stereographic projection can induce a birational morphism.} %% Ex4.9
+    $X$::projective variety in $\proj^n$，$n \geq \dim X+2=r+2$とする．
+    localな議論をするので，$Y=X \cap U_{x_0}$::affine open subsetとして
+    $K(Y)$($=K(X)$ by Cor4.5)を考察する．
+    明らかに$Y$はaffine varietyである．
+
+    $\bar{x}_i=x_i+\defsa(Y)$とするとThem3.2より$K(Y)=\Quot(A(Y))=k(\bar{x}_1,\dots,\bar{x}_n)$．
+    Them3.2とThem4.8より拡大$K(Y)/k$はfinitely and separably generated．
+    Them4.7より，$\{\bar{x}_i\}_{i=1}^n$はseparating transcendence baseを部分集合として含む．
+    そこで番号を付け替えて，
+    $\{\bar{x}_i\}_i$に含まれるseparating transcendence baseを$\{\bar{x}_i\}_{i=1}^{r}$としよう．
+    baseの濃度が$r(=\dim X)$であることはThem3.2による．
+    そして以下の拡大はfinite generated extensionである．
+    \[ k(\{\bar{x}_i\}_{i=1}^{n})/k(\{\bar{x}_i\}_{i=1}^{r}) \]
+    $J=k(\{\bar{x}_i\}_{i=1}^{r})$としておこう．
+    Them4.6から，この拡大は以下のようなただ一つの元$\alpha$で生成することが出来る．
+    \[ \alpha=\sum_{i=r+1}^{n}{c_i \bar{x}_i} \mwhere c_i(\bar{x}_1,\dots,\bar{x}_r) \in J \]
+    今述べたように，$K(Y)$は$k$に$r+1$個の元$\bar{x}_1, \dots, \bar{x}_r, \alpha$を添加したものである．
+    $n>r+1$なので少なくとも１つの$\bar{x}_i$は$\bar{x}_1, \dots, \bar{x}_r, \alpha$のいずれとも一致しない．
+    それを$\bar{x}_n$とする．（必要ならば変数を交換する．）
+
+    さて，ここで$\proj^{n-1}=\zerosp(x_n), P=(0:\dots:0:1)$という設定のstereographic projection $\psi$を考える．
+    $\bar{x}_n$が$\{\bar{x}_i\}_{0 \leq i \leq n-1}$の有理関数$\eta$として表すことが出来た時，
+    すなわち$\bar{x}_n=\eta \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$の時，
+    以下のようにbirational mapが構成できる．
+    \begin{defmap}
+        \psi:& X \supset V& \to& U \subset \proj^{n-1} \\ 
+        {}& (1:a_1:\dots:a_{n-1}:a_n)& \mapsto& (1:a_1:\dots:a_{n-1}:0) \\
+        {}& (1:a_1:\dots:a_{n-1}:\eta(a_0,\dots,a_{n-1}))& \mapedfrom& (1:a_1:\dots:a_{n-1}:0)
+    \end{defmap}
+    ただし$V,U$はそれぞれ開集合である．
+    逆に，この逆写像がbirationalとなるのはLemma 3.6より
+    $\bar{x}_n \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$の時．
+
+    任意のstereographic projectionは線形変換によって上の設定に読み替えることが出来る．
+    なので，適切な線形変換をとって$\bar{x}_n \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$とすれば良い．
+    ある$i$について$c_{i}=0$であれば変数交換で$c_{n}=0$とできるので，いずれの$c_{i}$も0でないとしよう．
+    $\alpha$の$\bar{x}_n$の係数$c_n \in J$を0にすることを考えるが，
+    $c_n$は必ずしも$k$の元ではない．
+    なので$k$上の線形変換では必ずしも0に出来ない．
+    そこで$J$上の線形変換を考え，以下のような$J$上の正則行列$M$をとる．
+    \[
+        M=
+        \begin{bmatrix}
+            1 &        &   &   &           \\
+              & \ddots &   &   &           \\
+              &        & 1 &   &           \\
+              &        &   & 1 & -c_{n}  \\
+              &        &   & 0 & c_{n-1}
+        \end{bmatrix}
+    \]
+    この行列で定まる線形変換$\kappa_M$は$\alpha$を次のように写す．
+    \[
+        c_{r+1} \bar{x}_{r+1}+\dots+c_{n-1} \bar{x}_{n-1}+c_{n} \bar{x}_{n}
+        \mapsto
+        c_{r+1} \bar{x}_{r+1}+\dots+c_{n-1} (\bar{x}_{n-1}-c_n\bar{x}_{n})+c_{n} (c_{n-1}\bar{x}_{n})
+        .
+    \]
+    こうして$\bar{x}_{n}$が消える．
+    実際はこのような正則行列であれば$M$は何でも良い．
+    このような$M$がとれることは$n>r+1$，すなわち$M$が$1 \times 1$行列でないことによる．
+    小行列に分割して計算することで直ちに$\det M=c_{n-1}$が分かる．
+    そこで開集合$V_{\#}=(\zerosa(c_{n-1}))^c$を取ろう．
+    今$c_{n-1} \neq 0$であり，しかも$c_{n-1}$は$A(Y)$の元であるから，
+    $V_{\#}$は$Y$上の空でない開集合であり，$M$は$V_{\#}$上で正則．
+    したがってLemma3.6より，$\kappa_M$は$V_{\#}$から$\zerosp(\bar{x}_n)$の部分集合$V$へのisomorphismである．
+    この$V$で$\psi$が働く．
+
+\section{Blowing up of $C:y^2-x^3=0$ at $O=(0,0)$．} %% Ex4.10
+    $V_0=\affine^2 \times U_0, V_1=\affine^2 \times U_1$とおく．
+    これらはそれぞれ$\affine^2 \times \affine^1$とみなすことが出来る．
+
+    \paragraph{Blowing up to $V_0$.}
+    $C$の$V_0$へのblow-upは，$y^2-x^3=0, y=xu$の連立方程式を解くことで得られる．
+    計算すると$x^2(u^2-x)=0$．
+    よって$E_0=(0,0) \times (1:u), \tilde{C}_0=\zerosa(u^2-x) \subset V_0$．
+    $E_0 \cap \tilde{C}_0=(0,0) \times (1:0)$が得られる．
+    また，$\tilde{C}_0$は$u \mapsto (u^2,u^3) \times (1:u)$により$\affine^1$と同型である．
+
+    \paragraph{Blowing up to $V_1$.}
+    同様に$y^2-x^3=0, x=ty$を解いて$y^2 (1-t^3 y)=0$．
+    よって$E_1=(0,0) \times (t:1), \tilde{C}_1=\zerosa(1-t^3 y) \subset V_1$となる．
+    $E_1 \cap \tilde{C}_1$は空である．
+    また，$\tilde{C}_1$は$t \mapsto (t^2,t^3) \times (1:t)$により$\affine^1$と同型である．
+
+    \paragraph{Summarize.}
+    \begin{align*}
+        E &= O \times \proj^1 \\
+        \tilde{C} &=\{ (t^2,t^3) \times (1:t) ~|~ t \in k \}
+    \end{align*}
+    $\tilde{C}$は直ちに$\affine^3$の曲線と見ることが出来る． \\
+    gnuplotでのコードは\texttt{set parametric; splot u**2, u**3, u}なので試すと良い．
+
+\end{document}

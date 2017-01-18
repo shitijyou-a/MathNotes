@@ -1,0 +1,37 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note, braket}
+
+\begin{document}
+\section{Lemma 4.1}
+    \subsection{``We may assume that $Y \subset \proj^n$ for some $n$"}
+    affine, quasi-affineは$(a_1,\dots,a_n) \mapsto (1,a_1,\dots,a_n)$
+    という写像で$\proj^n$へ埋め込める．
+    この写像が同相写像であることはProp 2.2で示されているので，
+    irreducibleは反映される．
+
+    \subsection{$\Delta=\zerosp(\{ x_i y_j=x_j y_i \})$}
+    $P, Q \in \proj^n$が$P=Q$を満たすとき，以下が成り立つ．
+    \[ \Exists{\lambda \in k^{\times}} \Forall{i} p_i=\lambda q_i \]
+    なので$\lambda=p_j/q_j$とすれば，分母を払って$p_i q_j=p_j q_i$が得られる．
+    最後の式は$q_j=0$でも成立する．
+
+    \subsection{$(\phi \times \psi)(X) \subseteq \Delta$}
+    $q=\phi \times \psi$とすると，これはmorphismなので連続．
+    $q(U) \subseteq \Delta$なので$U \subset q^{-1}(\Delta)$が成り立ち，
+    $\Delta$が閉なので$q^{-1}(\Delta)$も閉．
+    $U$は$X$でdenseなので
+    \[ X=\cl_X(U) \subseteq \cl_X(q^{-1}(\Delta))=q^{-1}(\Delta). \]
+    よって$q(X)=(\phi \times \psi)(X) \subseteq \Delta$．
+
+\section{$Y (\subseteq X)$ :: open affine subset, $K(X) \cong K(Y)$.}
+    以下の同型写像がある．
+    \begin{defmap}
+        \kappa:& K(X)& \to& K(Y) \\ 
+        {}& \reg{U}{f}& \mapsto& \reg{U \cap Y}{f} \\
+        {}& \reg{V}{g}& \mapedfrom& \reg{V}{g}
+    \end{defmap}
+    これが同型写像であることは，$X$がirreducibleであることから来ている．
+    $Y$が何らかのaffine varietyと同型であることから，
+    $K(Y)$はThem3.2に従う．
+
+\end{document}

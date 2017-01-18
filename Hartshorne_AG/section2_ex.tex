@@ -1,11 +1,14 @@
-\documentclass[a4paper]{jarticle}
+\documentclass[a4paper]{jsarticle}
 \usepackage{../math_note, exercise}
 \usepackage[all]{xy}
 \usepackage{bussproofs}
-\newcommand{\I}[1]{\mathfrak{#1}}
+\renewcommand{\thesection}{Ex2.\arabic{section}}
 
+\newcommand{\transdeg}{\text{trans.deg.}}
+\newcommand{\omittedB}[1]{\ooalign{\hfil $\displaystyle #1$ \hfil\crcr\raise-.15ex\hbox{\Big/}}}
+\newcommand{\omittedn}[1]{\ooalign{\hfil $\displaystyle #1$ \hfil\crcr\raise.167ex\hbox{\normalsize/}}}
 \begin{document}
-\section{} %% 2-1
+\section{ } %% 2-1
     $\I{a}$::homogenus idealをとる．
     $\defsp \zerosp(\I{a}) \cap S^h \subseteq \sqrt{\I{a}}$を示す．
     今，$\I{a} \subset S=k[x_0,\dots,x_n]$である．
@@ -28,7 +31,7 @@
     2つめの$\implies$は$f \in S^h$を除いたため．
     なので証明から，実は$\defsp \zerosp(\I{a}) \cap S^h \subseteq \sqrt{\I{a}} \cap S^h$が示せている．
 
-\section{} %% 2-2
+\section{ } %% 2-2
     $\I{a}$::homogenus idealをとる．
     i) $\zerosp(\I{a})=\emptyset$
     ii) $\sqrt{\I{a}}=S \lor \sqrt{\I{a}}=S_{+}$
@@ -82,7 +85,7 @@
 
     以上より主張が示された．
 
-\section{} %% 2-3
+\section{ } %% 2-3
     \subsection{$T_1 \subseteq T_2 \subseteq S^h \implies \zerosp(T_1) \supseteq \zerosp(T_2)$}
     $T_1=T_2$の時に成立することは自明．
     $f \in T_2 \setminus T_1$をとる．
@@ -168,7 +171,7 @@
     以上より，$Y \subseteq \zerosp(\defsp(Y)) \subseteq W$が得られる．
     最後に$W=\cl_{\proj^n}(Y)$として主張を得る．
 
-\section{} %% 2-4
+\section{ } %% 2-4
     \subsection{1-1 correspondance between algebraic set and homogenus radical ideal.}
     すでに述べた．
 
@@ -194,29 +197,68 @@
     両辺の$\defsp$をとって$\defsp(\proj^n)=0=\defsp\zerosp(0)$．
     0は$k[x_0,\dots,x_n]$で素イデアルなので，(b)より主張を得る．
 
-\section{} %% 2-5
+\section{ } %% 2-5
 
-\section{} %% 2-6
-    $A:=k[x_1,\dots,x_n], S:=k[x_0,\dots,x_n]$とする．
+\section{ } %% 2-6
+    $A:=k[y_1,\dots,y_n], S:=k[x_0,\dots,x_n]$とする．
     $Y$::projective varietyについて$\dim S(Y)=\dim Y +1$を示そう．
     $\phi_i:U_i \to \affine^n$::homeomorphismを用いて
     $Y_i:=\phi_i(Y \cap U_i)$とし，$A(Y_i)$を考える．
 
     %% \alpha \beta=id
-    \paragraph{Step I. $A(Y_i) \cong (S(Y)_{x_i})_0$.}
+    \paragraph{Step I. $A(Y_i) \cong S(Y)_{(x_i)}$.}
     まず次を確認しておく．
     \[
         A(Y_i)=\{ f+\defsa(Y_i) ~|~ f \in A\};~~
-        (S(Y)_{x_i})_0=\{ (f+\defsp(Y))/(x_i^{\deg f}+\defsp(Y)) ~|~ f \in S\}
+        S(Y)_{(x_i)}=\left\{ \frac{f+\defsp(Y)}{x_i^{\deg f}+\defsp(Y)} ~\middle|~ f \in S \right\}
     \]
+    以下，$i$は固定する．まず次の同型写像を定義する．
+    \begin{defmap}
+        \mu:& A& \to& S_{(x_i)} \\ 
+        {}& f(y_1,\dots,y_n)& \mapsto& f \left( \frac{x_0}{x_i},\dots,\frac{x_n}{x_i} \right) \\
+        {}& g(y_1,\dots,y_{i-1},1,y_{i},\dots,y_n)& \mapedfrom& g(x_0,\dots,x_{i-1},x_{i},x_{i+1},\dots,x_n)
+    \end{defmap}
+    $\I{b}:=\mu(\defsa(Y_i))=\langle \{f/x_i^{\deg f} ~|~ f \in \defsa(Y_i) \} \rangle$とおく．
+    すると$\mu$から同型写像$\mu^{\ast}: A(Y_i) \isomap S_{(x_i)}/\I{b}$が誘導される．
+    つづいて次の準同型を定める．
+    \begin{defmap}
+        \nu:& S_{(x_i)}/\I{b}& \to& S(Y)_{(x_i)} \\ 
+        {}& \frac{\bar{f}}{\bar{x}_i^{\deg f}}& \mapsto& \frac{\bar{f}}{\bar{x}_i^{\deg f}}
+    \end{defmap}
+    これが全射であることは明らか．$\ker \nu=0$も以下のように示される．
+    \begin{align*}
+        {}& \nu \left( \frac{\bar{f}}{\bar{x}_i^{\deg f}} \right)=0 \\
+        \implies& f \in \defsp(Y) \\
+        \iff& \mu^{-1}(f) \in \mu^{-1}(\defsa(Y))=\defsa(Y_i) \\
+        \iff& f \in \I{b} \\
+        \iff& \frac{\bar{f}}{\bar{x}_i^{\deg f}}=0
+    \end{align*}
+    以上で示された同型写像を$\xi(=\nu \circ \mu^{\ast})$としておく．
 
-    \paragraph{Step II. $S(Y)_{x_i} \cong A(Y_i)[x_i, x_i^{-1}]$.} \mbox{} \\
+    \paragraph{Step II. $S(Y)_{x_i} \cong A(Y_i)[x_i, x_i^{-1}]$.}
+    以下が同型写像である．
+    \begin{defmap}
+        \rho:& S(Y)_{x_i}& \to& A(Y_i)[x_i, x_i^{-1}] \\ 
+        {}& \sum_{j=-d}^{d}{a_j \bar{x}_i^j}& \mapsto& \sum_{j=-d}^{d}{\xi(a_j) \bar{x}_i^{j}} \\
+        {}& \sum_{j=-d}^{d}{\xi^{-1}(b_j) \bar{x}_i^j}& \mapedfrom& \sum_{j=-d}^{d}{b_j \bar{x}_i^j}
+    \end{defmap}
+    ただし$f_j$は$f$の$j$次斉次成分である．
 
-    \paragraph{Step III. Use (1.7), (1.8A) and (Ex1-10). Then look at trans.deg.}
+    \paragraph{Step III. Use (1.7), (1.8A). Then look at trans.deg.}
+    Ati-Mac Ex3.3とThem1.8Aaより以下が成り立つ，
+    \[ \dim A(Y_i)[x_i, x_i^{-1}]=\transdeg \Quot((A(Y_i)[x_i])_{x_i})=\transdeg \Quot(A(Y_i)[x_i])=\dim A(Y_i)+1. \]
+    また，以下も成り立つ．
+    \[ \dim S(Y)=\transdeg \Quot(S(Y))=\transdeg \Quot(S(Y)_{x_i})=\dim S(Y)_{x_i}. \]
 
     \paragraph{Conclusion.}
+    $i$をfixせず再びindexとする．
+    開被覆$\{Y \cap U_i\}_{i=0}^{n}$の中で包含関係について極大なものを$Y \cap U_j$とする．
+    するとEx1.10bより$\dim Y=\dim \sup_i (Y \cap U_i)=\dim (Y \cap U_j)$．
+    $U_i \homeo \affine^n$なので，$\dim Y=\dim \phi_j(Y \cap U_j)$が成り立つ．
+    $Y_j=\phi_j(Y \cap U_j)$とすると，Step IIとStep IIIの結果から以下のように結論が得られる．
+    \[ \dim Y=\dim Y_j=\dim A(Y_j)=\dim A(Y_j)[x_j, x_j^{-1}]-1=\dim S(Y)_{x_j}-1=\dim S(Y)-1. \]
 
-\section{} %% 2-7
+\section{ } %% 2-7
     \subsection{$\dim \proj^n=n$}
     Ex2-6を用いると，$\dim \proj^n=\dim S(\proj^n)-1=\dim S/\defsp(\proj^n)-1$が得られる．
     $\zerosp(0)=\proj^n$であるから，零点定理より$\defsp(\proj^n)=0$．
@@ -251,7 +293,7 @@
     \[ \Forall{C\mbox{::closed in }X} W \subseteq C \implies \cl_{Z}(W) \subseteq C \]
     これは$\cl_{X}(W)$の定義に等しい．これで主張が示された．
 
-\section{} %% 2-8
+\section{ } %% 2-8
 $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S} f \mbox{::irreducible}~~ Y=\zerosp(f)$を示す．
     $\I{a}=\defsp{Y}$としよう．$Y$::affine varietyから，$\I{a}$は素イデアル．
     \paragraph{$\implies$}
@@ -269,7 +311,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     単項素イデアル$(f)$の高さが1で有ることを言えば良い．
     Krullの単項イデアル定理より，これは明らか．
 
-\section{} %% 2-9
+\section{ } %% 2-9
     $Y \subseteq \affine^n$::affine varietyをとり，
     $\bar{Y}=\cl_{\proj^{n}}(\phi_0^{-1}(Y))$を考える．
 
@@ -285,9 +327,9 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
         \iff&   (f \in S^h) \land (\Forall{P \in \proj^n} \phi(P) \in Y \implies f(P)=0) \\
         \iff&   (f \in S^h) \land (\Forall{P' \in \affine^n} P' \in Y \implies f(\phi^{-1}(P'))=0) \\
         \iff&   (f \in S^h) \land (\Forall{P' \in \affine^n} P' \in Y \implies (\beta \alpha f)(\phi^{-1}(P'))=0) \\
-        \iff&   (f' \in A) \land (\Forall{P' \in \affine^n} P' \in Y \implies (\beta f')(\phi^{-1}(P'))=0) \\
+        \iff&   (f' \in A) \land (\Forall{P' \in \affine^n} P' \in Y \implies (\beta f')(\phi^{-1}(P'))=0)
     \end{align*}
-    (TODO)
+    $\phi$が全単射であること，$\beta \alpha=\id{S^h}$であることをもちいている．
     3つめの$\iff$は$\phi$が全射であることから．また，$P'=\phi(P)$としている．
     5つめの$\iff$は$\alpha$が全射であることから．また，$f'=\alpha(f)$としている．
 
@@ -301,7 +343,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     $a+bx=0$となるようにするより無いが，そうすると$w(ya+bzw)-x^2(a+bx)=-bw(xy-zw)$となり，
     結局$xy-zw \not \in \langle yw-x^2, zw^2-x^3 \rangle$が示される．
 
-\section{} %% 2-10
+\section{ } %% 2-10
     \subsection{$C(Y)$ is algebraic set, and $\defsa(C(Y))=\defsp(Y)$}
     $\defsp(Y)$が根基イデアルであるから，
     $C(Y)=\zerosa \defsp(Y)$を以下で示し，
@@ -333,7 +375,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     なので$\dim S/\defsp(Y)=\dim S(Y)=\dim C(Y)=\dim S/\defsa(C(Y))$を示せばよいが，
     (a)からこれは明らか．
 
-\section{} %% 2-11
+\section{ } %% 2-11
     \subsection{For variety $Y \in \proj^n$}
     以下の同値性を示す．
     \begin{enumerate}[(i)]
@@ -411,14 +453,22 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     変形して$t \geq (r+s)-n$すなわち$\dim (Y \cap Z) \geq \dim Y+\dim Z-n$を得る．
     $Y \cap Z \neq \emptyset$は$Y \cap Z$がvarietyであることと，$\dim (Y \cap Z)$が意味を持つために必要．
 
-\section{} %% 2-12
+\section{ } %% 2-12
     以下のような元を並べて$M_0,\dots,M_N$とする．
     ただし$\alpha$は要素数$n$の多重指数で，$N=\binom{n+d}{n}-1$．
     \[ \prod_{|\alpha|=d}{x_0^{\alpha_1} \cdots x_n^{\alpha_n}} \]
     写像$\theta$を以下で定める．
-    \[ \theta:k[y_0,\dots,y_N] \to k[x_0,\dots,x_n];~~ f(y_0,\dots,y_N) \mapsto f(M_0,\dots,M_N) \]
+    \begin{defmap}
+        \theta:& k[y_0,\dots,y_N]& \to& k[x_0,\dots,x_n] \\ 
+        {}& f(y_0,\dots,y_N)& \mapsto& f(M_0,\dots,M_N)
+    \end{defmap}
     さらに写像$\rho_d$を以下で定める．
-    \[ \rho_d:\proj^n \to \proj^N;~~ P=(a_0:\dots:a_n) \mapsto (M_0(P):\dots:M_N(P)) \]
+    \begin{defmap}
+        \rho_d:& \proj^n& \to& \proj^N \\ 
+        {}& P& \mapsto& (M_0(P):\dots:M_N(P)) 
+    \end{defmap}
+    これら二つの写像は$\theta \circ f=f \circ \rho_d$という形で結びつく．
+    $U_i=(\zerosp(x_i))^c \subset \proj^n$とする．
 
     \subsection{$\ker \theta$::homogenus prime ideal}
     まず$\im \theta$を考える．
@@ -437,16 +487,30 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     よって$f$の各斉次成分$f_i$も$\ker \theta$に属す．
 
     \subsection{$\rho_d(\proj^n)=\zerosp(\ker \theta)$}
-    証明に使うので，先に$\rho_d$が単射であることを示す．
-    $\rho_d(P)=\rho_d(Q)$なる2点$P,Q$をとる．すると以下が成立する．
-    \[ \Exists{\lambda \in k^{\times}} \Forall{i} M_i(P)=\lambda M_i(Q). \]
-    $N_{ij}=x_i^{d-1} x_j$とすると，これは$d$次式．
-    なので$N_{ij}$は$M_i$達の一部である．
-
-    $N_{ii}(P)=p_i^d \neq 0$なる$i$を選び固定する．
-    この時$M_i(Q)=q_i^d \neq 0$が得られる．
+    \paragraph{$\im \rho_d \subset \zerosp(\ker \theta)$}
+    一方の包含関係は直ちに示すことが出来る．
+    $P \in \proj^n$を任意に取り，固定する．
     \begin{align*}
-        {}&     \Exists{\lambda \in k^{\times}} \Forall{j} N_{ij}(P)=\lambda N_{ij}(Q) \\
+        {}&     \Forall{f \in \zerosp(\ker \theta)} \theta(f)=0 \\
+        \iff&   \Forall{f \in \zerosp(\ker \theta)} \theta(f)(P)=0 \\
+        \iff&   \Forall{f \in \zerosp(\ker \theta)} f(\rho_d(P))=0 \\
+        \iff&   \rho_d(P) \in \zerosp(\ker \theta).
+    \end{align*}
+    よって示された．
+
+    \paragraph{$\rho_d$は単射である．}
+    次に$\rho_d$の単射性を示す．
+    $N_{ij}=x_i^{d-1} x_j$とすると，これは$d$次式なので$N_{ij}$は$M_i$達の一部である．
+    便利のため，$s(i,j):\N^2 \to \N$を$M_{s(i,j)}=N_{ij}$なる写像として定義する．
+
+    $\rho_d(P)=\rho_d(Q)$なる2点$P,Q$をとる．
+    $M_{s(i,i)}(P)=N_{ii}(P)=p_i^d \neq 0$なる$i$が存在するので，それを１つ選び固定する．
+    この時$p_i \neq 0$．
+    また，$N_{ii}(Q)=q_i^d \neq 0$から$p_i \neq 0$が得られる．
+    \begin{align*}
+    {}&         \rho_d(P)=\rho_d(Q) \\
+    \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} M_j(P)=\lambda M_j(Q) \\
+    \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} M_{s(i,j)}(P)=\lambda M_{s(i,j)}(Q) \\
     \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} p_i^{d-1}p_j=\lambda q_i^{d-1}q_j \\
     \iff&       \Exists{\lambda \in k^{\times}} \Forall{j} p_j=\lambda \left(\frac{q_i}{p_i} \right)^{d-1}q_j \\
     \implies&   \Exists{\lambda' \in k^{\times}} \Forall{j} p_j=\lambda' q_j \\
@@ -454,32 +518,115 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     \end{align*}
     4行目の$\implies$は$\frac{q_i}{p_i} \neq 0$と，$\lambda \left(\frac{q_i}{p_i} \right)^{d-1}$は$j$に依らないことから．
 
-    \subsection{$\proj^n \cong \zerosp(\ker \theta)$ by $\rho_d$}
-    $\rho_d: \proj^n \to \zerosp(\ker \theta)$を考える．
-    全単射であることはすでに示した．
+    \paragraph{道具の準備．}
+    単射性の証明を参考に，以下のような写像を作る．
+    \begin{defmap}
+        \sigma_i:& V_i& \to& \proj^n \\
+        {}& (p_0:\dots:p_N)& \mapsto& (p_{s(i,0)}:p_{s(i,1)}:\dots:p_{s(i,n)})
+    \end{defmap}
+    ただし$V_i=(\zerosp(y_{s(i,i)}))^c$である．
+    これに対応して，多項式の写像も作る．
+    \begin{defmap}
+        \psi_i:& k[x_0,\dots,x_n]& \to& k[y_0,\dots,y_N] \\ 
+        {}& f(x_0,\dots,x_n)& \mapsto& f(y_{s(i,0)}, \dots, y_{s(i,n)}) \\ 
+    \end{defmap}
+    これら二つも$\psi \circ f=f \circ \sigma_i$の様に関係している．
+    実は$V_i$は$\zerosp(\ker \theta)$を被覆しており，
+    $\sigma_i$は各$V_i$で$\zerosp(\ker \theta)$上で$\rho_d$の逆写像となっている．
 
-    $\rho_d, \rho_d^{-1}$が共に閉写像であることを示そう．
-    \paragraph{$\rho_d^{-1}$::closed morphism}
-    $\I{J}$::homogenous radical idealをとる．
+    \paragraph{$\{V_i\}_{i=0}^{n}$は$\zerosp(\ker \theta)$を被覆する．}
+    まず$M_i$を考える．
+    $M_i=\prod_{j=0}^{n}x_j^{e_j}$とすると，
+    \[ (M_i)^d=\left( \prod_{j=0}^{n} x_j^{e_j} \right)^d=\prod_{j=0}^{n} (x_j^d)^{e_j}=\prod_{j=0}^{n} \left( M_{s(j,j)} \right)^{e_j} \]
+    したがって$(y_i)^d-\prod_{j=0}^{n} \left( y_{s(j,j)} \right)^{e_j} \in \ker \theta$．
+    以上の計算から主張が示せる．
+    $P=(p_0:\dots:p_N) \in \zerosp(\ker \theta)$を任意にとろう．
+    $p_i \neq 0$だとすると，$P \in \zerosp(\ker \theta)$から
+    \[ (p_i)^d=\prod_{j=0}^{n} \left( p_{s(j,j)} \right)^{e_j} \neq 0. \]
+    よってある$j$について$p_{s(j,j)} \neq 0$すなわち$P \in V_j$．
+
+    \paragraph{$\rho_d \circ (\sigma_i|_{\zerosp(\ker \theta) \cap V_i})=\id{\zerosp(\ker \theta) \cap V_i}$}
+    $M_0=\prod_{j=0}^{n}{x_i^{e_j}}, \sum{e_j}=d$とする．
+    すると以下の計算から$M_0(y_{s(i,0)},\dots,y_{s(i,n)})-(y_{s(i,i)})^{d-1} y_{s(i,0)} \in \ker \theta$が分かる．
+    \[
+        M_0(M_{s(i,0)},\dots,M_{s(i,n)})
+        =\prod_{j=0}^{n}{\left( M_{s(i,j)} \right)^{e_j}}
+        =\prod_{j=0}^{n}{\left( x_i^{d-1} x_j \right)^{e_j}}
+        =(x_i^{\sum{e_j}})^{d-1} \prod_{j=0}^{n}{x_j^{e_j}}
+        =M_{s(i,i)}^{d-1} M_{s(i,0)}
+    \]
+    同様に$M_j(y_{s(i,0)},\dots,y_{s(i,n)})-(y_{s(i,i)})^{d-1} y_{s(i,j)} \in \ker \theta$が成り立つ．
+    したがって，
+    \begin{align*}
+        {}&\rho_d \circ (\sigma_i|_{\zerosp(\ker \theta) \cap V_i})\left( y_{s(i,0)}:\dots:y_{s(i,n)} \right) \\
+        =& \left( M_0(M_{s(i,0)},\dots,M_{s(i,n)}):\dots:M_n(M_{s(i,0)},\dots,M_{s(i,n)}) \right) \\
+        =& \left( (y_{s(i,i)})^{d-1} y_{s(i,0)}:\dots:(y_{s(i,i)})^{d-1} y_{s(i,n)} \right) \\
+        =& \left( y_{s(i,0)}:\dots:y_{s(i,n)} \right).
+    \end{align*}
+    最後の変形は$V_i=\{(p_0:\dots:p_N) ~|~ p_{s(i,i)} \neq 0\}$から．
+
+    \paragraph{$\im \rho_d \supset \zerosp(\ker \theta)$}
+    $P=(p_0:\dots:p_N) \in \zerosp(\ker \theta)$を任意に取る．
+    前前段落でしめしたことから，ある$i$について$P \in V_i$となっている．
+    $Q=\sigma_i(P)$とすると，前段落で示したことから$\rho_d(Q)=\rho_d(\sigma(P))=P$．
+    よって$\im \rho_d \supset \zerosp(\ker \theta)$が示された．
+
+    \paragraph{結論．}
+    以上を合わせて$\rho_d$は$\proj^n$から$\zerosp(\ker \theta)$への全単射であること，
+    さらに$\im \rho_d=\zerosp(\ker \theta)$であることが示された．
+    また，単射性の証明を$\sigma_i$を用いて書き換えることで
+    $\sigma_i \circ (\rho_d|_{U_i})=\id{U_i}$がわかる．
+    なので$\rho_d, \sigma_i$は互いに$U_i \leftrightarrow V_i$の逆写像となっている．
+
+    \subsection{$\rho_d$::homeomorphism.}
+    $\rho_d, \rho_d^{-1}$の両方がclosed mapであることを示せば良い．
+
+    \paragraph{$\rho_d^{-1}$::closed map.}
+    $\I{J} (\subset k[y_0,\dots,y_N])$::homogenous radical idealをとる．
     まず$\theta(\I{J})$はhomogenousである．
     先にこれを示そう．
     $\I{J}$の元$f$をとり，$f=f_0+\dots+f_D$と斉次分解すると，$f_i \in \I{J}$．
     なので$\theta(f), \theta(f_i) \in \theta(\I{J})$．
     $\theta(f)=\theta(f_0)+\dots+\theta(f_D)$は$\theta(f)$の斉次分解なので示せた．
-
-    $\rho_d^{-1}(\zerosp(\I{J}^h))=\zerosp(\theta(\I{J}^h))$．
+    残りは機械的に示される．ただし$\I{J}^h$は$\I{J}$の斉次な元全体である．
     \begin{align*}
         {}&     P \in \rho_d^{-1}(\zerosp(\I{I}^h)) \\
         \iff&   \rho_d(P) \in \zerosp(\I{I}^h) \\
-        \iff&   \Forall{f \in \I{I}^h} f(\rho_d(P))=0 \\
-        \iff&   \Forall{f \in \I{I}^h} f(M_0(P), \dots, M_N(P))=0 \\
-        \iff&   \Forall{f \in \I{I}^h} f(M_0, \dots, M_N)(P)=0 \\
         \iff&   \Forall{f \in \I{I}^h} \theta(f)(P)=0 \\
+        \iff&   \Forall{f \in \I{I}^h} f(\rho_d(P))=0 \\
         \iff&   P \in \zerosp(\theta(\I{I}))
     \end{align*}
-    よって主張が示された．
+    $\rho_d^{-1}(\zerosp(\I{J}^h))=\zerosp(\theta(\I{J})^h)$であるから主張が示された．
 
-    \paragraph{$\rho_d$::closed morphism}
+    \paragraph{$\rho_d(\zerosp(\I{I})) \cap V_i$ ::closed in $V_i$.}
+    $\I{I} (\subset k[x_0,\dots,x_n])$::homogenous radical idealをとる．
+    $\rho_d(\zerosp(\I{I}))$の全体が閉集合であることを示すのではなく，
+    その$V_i$との共通部分が閉集合であることを示そう．
+    明らかに$\rho_d(U_i)=\im \rho_d \cap V_i$．
+    また，$\psi_i$は変数を変数に書き換えるだけなので斉次式を斉次式へ写す．
+    なので，以下が分かる．
+    \begin{align*}
+        {}&     Q \in \rho_d(\zerosp(\I{I})) \cap V_i \\
+        \iff&   [Q \in V_i] \land [\Forall{f \in \I{I}^h} f(\rho_d^{-1}(Q))] \\
+        \iff&   [Q \in V_i] \land [\Forall{f \in \I{I}^h} f(\sigma_i(Q))] \\
+        \iff&   [Q \in V_i] \land [\Forall{f \in \I{I}^h} \psi_i(f)(Q)] \\
+        \iff&   [Q \in V_i] \land [Q \in \zerosp(\psi_i(\I{I})^h)] \\
+        \iff&   Q \in \zerosp(\psi_i(\I{I})^h) \cap V_i .
+    \end{align*}
+    よって$\rho_d(\zerosp(\I{I})) \cap V_i$ ::closed in $V_i$．
+
+    \paragraph{$\rho_d$ :: closed map.}
+    Ch.I, \S 3のLemma 3.1にある次の主張を用いる．
+    すなわち，集合$X$の部分集合$Y$が閉集合であることの必要十分条件は，
+    $X$がある開集合族$\{C_i\}_i$で被覆され，かつ全ての$Y \cap C_i$が$C_i$で閉であることである．
+    そこで$\proj^N$の開被覆として$\{V_i\}_{i=0}^n \cup \{(\zerosp(\ker \theta))^c\}$をとる．
+    すでに$\{V_i\}_{i=0}^n$が$\zerosp(\ker \theta)$を被覆することは示したから，
+    これは確かに開被覆であることが分かる．
+    $\rho_d(\zerosp(\I{I})) \subset \im \rho_d=\zerosp(\ker \theta)$から
+    $\rho_d(\zerosp(\I{I})) \cap (\zerosp(\ker \theta))^c=\emptyset$であるが，
+    $\emptyset$は明らかに閉集合．
+    このことと上の段落で示したことを合わせると，
+    $\rho_d(\zerosp(\I{I}))$が閉集合であることが分かる．
 
     \subsection{Twisted cubic curve is a 3-uple emdebeding.}
     $n=1, d=3$の場合，$M_i$は例えば以下の様．
@@ -489,7 +636,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     これは明らかに$\phi_0^{-1}(T)$，すなわちTwisted cubic curveである．
     $(0:0:0:1)$は無限遠点であることに注意．
 
-\section{} %% 2-13
+\section{ } %% 2-13
     $\proj^2$の$\proj^5$への2-uple emdebedingを考える．
     \[ M_0=x^2, M_1=y^2, M_2=z^2, M_3=xy, M_4=yz, M_5=zx \]
     とすれば，このemdebeding(Veronese surface)は
@@ -519,7 +666,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     さらにこの写像で$0=\defsp(Y)/\defsp(Y) \subseteq \defsp(Z)/\defsp(Y) \cong \defsp(V)$が得られ，
     $\height \defsp(V)=1$も示される．
 
-\section{} %% 2-14
+\section{ } %% 2-14
     写像$\psi$を次で定める．
     \begin{align*}
         \psi: \proj^r \times \proj^s \to& \proj^N \\
@@ -567,7 +714,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     すると\[ \Forall{P \in \im \psi} \phi(f)(\psi^{-1}(P))=0 \]が得られ，
     前段同様に単項式を見ることで$f(P)=0$が得られる．
 
-\section{} %% 2-15
+\section{ } %% 2-15
     The Segre Embedding $\psi: \proj^1 \times \proj^1 \to \proj^3$を考える．
 
     \subsection{The Quadric Surface in $\proj^3$ is the Segre embedding of $\proj^1 \times \proj^1$ in $\proj^3$.}
@@ -643,7 +790,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     なので$\proj^1 \setminus C$は開集合の$\psi$による像ではない．
     $\psi$が開写像でないから，$\psi$はhomeomorpismではない．
 
-\section{} %% 2-16
+\section{ } %% 2-16
     \subsection{$\zerosp(x^2-yw) \cap \zerosp(xy-zw)$}
     $(x^2-yw=0) \land (xy-zw=0)$を考えると，これは以下と同値．
     \[ ((w \neq 0) \land (y-(\frac{x}{w})^2=0) \land (z-(\frac{x}{w})^3)=0) \lor ((w=0) \land (x=0)) \]
@@ -664,7 +811,7 @@ $\proj^n \supset Y$::affine varietyについて$\dim Y=n-1 \iff \Exists{f \in S}
     \[ (x^2-yz)+(y)=(x^2, y) \neq \I{m} \]
     となる．ただし，$\sqrt{(x^2, y)}=\I{m}$である．
 
-\section{} %% 2-17
+\section{ } %% 2-17
     次元$r$のvariety $Y (\subset \proj^n)$が(strict) complete intersectionであるとは，
     $\defsp(I)$が丁度$n-r$個の元で生成されるということである．
     同じく，$Y$がset-theoretic complete intersectionであるとは，

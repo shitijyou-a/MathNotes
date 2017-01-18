@@ -1,0 +1,25 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+
+\begin{document}
+\begin{Lemma}
+    環$A$をintegrally closed domainとし，
+    $G$をその自己準同型写像が成すある有限群とする．
+    この時，固定環$A^G (\subseteq A)$はintegrally closed domainである．
+\end{Lemma}
+\begin{proof}
+    $\Quot(A^G)$の元$f/g$を任意にとる．
+    以下の式を満たす$\{a_i\}_i \subset A^G$が存在したとしよう．
+    \[ \left( \frac{f}{g} \right)^n+ a_1 \left( \frac{f}{g} \right)^{n-1}+\dots+a_n=0  \]
+    $A^G \subseteq A, \Quot(A^G) \subseteq \Quot(A)$だから，
+    $f/g \in \Quot(A), \{a_i\}_i \subset A$とみなすことが出来る．
+    $A$がintegrally closed domainであることから$f/g \in A$．
+    まとめて$f/g \in \Quot(A^G) \cap A$が得られる．
+    
+    さて，$f/g=h$と置くと$h \in A$かつ$gh=f$．
+    $f/g \in \Quot(A^G)$だから$f, g$はどちらも$A^G$の元である．
+    なので，
+    \[ \Forall{\sigma \in G} g \cdot h=\sigma(f)=f=g \cdot \sigma(h) \iff \Forall{\sigma \in G} h=\sigma(h) \]
+    よって$h=f/g \in A^G$が得られた．
+\end{proof}
+\end{document}
