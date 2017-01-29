@@ -1,0 +1,28 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+
+\begin{document}
+    \begin{Def}
+        写像$F: M \to N$が滑らかな写像とは，
+        各点$x \in M$，
+        $x$の周りの座標近傍$(U, \phi)$，
+        $F(x)$の周りの座標近傍$(V, \psi)$について，
+        $\psi \circ F \circ \phi^{-1}: \phi(U) \to \psi(V)$
+        が$C^{\infty}$級であること．
+    \end{Def}
+    \begin{Def}
+        多様体$M$のアトラスを$\mathcal{A}$とする．
+        \begin{align*}
+            {}&C^{\infty}(M) \\
+            =&\{ f:M \to \R ~|~ f \text{ is smooth.}\} \\
+            =&\{ f:M \to \R ~|~ \Forall{x \in M} \Exists{(U, \phi) \in \mathcal{A}} [x \in U] \land [f \circ \phi^{-1} \text{ is smooth.}] \}.
+        \end{align*}
+        $a \in M$に対し，これの部分空間$Z_a(M)$を以下で定める．
+        \begin{align*}
+            {}&Z_a(M) \\
+            =&\{ f \in C^{\infty}(M) ~|~ f \text{の$a$での微分が0．} \} \\
+            =&\{ f \in C^{\infty}(M) ~|~ \Exists{(U, \phi) \in \mathcal{A}} [a \in U] \land [\left(D(f \circ \phi^{-1})\right)_{\phi(a)}=\mathbf{0}]. \}.
+        \end{align*}
+        そして$T_a^{\ast}(M)=C^{\infty}(M)/Z_a(M), T_a(M)=\Hom_{\R\text{-Vec}}(T_a^{\ast}(M), \R)$とおく．
+    \end{Def}
+\end{document}

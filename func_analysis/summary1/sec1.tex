@@ -63,7 +63,7 @@
             ノルム空間$(V, \| \cdot \|)$について，
             点列$\{ u_n \}_{n \in \N}$が以下の論理式を満たすとき，
             点列$\{ u_n \}$を\textbf{Cauchy列}と呼ぶ．
-            \[ \forall \varepsilon>0,~ \exists N \in \N (\forall m,n>N,~ \| u_m-u_n \|<\varepsilon) \]
+            \[ \Forall{\varepsilon>0} \Exists{N \in \N} [ \Forall{m,n>N} \| u_m-u_n \|<\varepsilon ]. \]
         \end{Def}
 
         \begin{Def}
@@ -91,7 +91,7 @@
 
         \begin{Def}
             Hilbert空間$\mathscr{H}$の空でない\kenten{閉部分集合}$\mathscr{M}$に対して，
-            \[ \mathscr{M}^{\perp}=\{ u \in \mathscr{H} : \forall v \in \mathscr{M},~ (u,v)=0\} \]
+            \[ \mathscr{M}^{\perp}=\{ u \in \mathscr{H} \mid \Forall{v \in \mathscr{M}} (u,v)=0\} \]
             を$\mathscr{M}$の\textbf{直交補空間}と呼ぶ．
         \end{Def}
 
@@ -162,7 +162,7 @@
     \end{Them}
     \begin{Them}[Schwarzの不等式, 定理1.21, p.13]
         内積空間$(V, (\cdot, \cdot))$に対して，
-        \[ \forall u, v \in V,~ |(u,v)| \leq \|u\|\|v\| \]
+        \[ \Forall{u, v \in V} |(u,v)| \leq \|u\|\|v\|. \]
         ただしここに有る$\| \cdot \|$は内積が定めるノルムである．
     \end{Them}
 

@@ -4,6 +4,7 @@
 \newcommand{\mon}{\mbox{ on }}
 \newcommand{\Sing}{\operatorname{Sing}}
 \newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Nor}{\operatorname{Nor}}
 \renewcommand{\thesection}{Ex5.\arabic{section}}
 
 \begin{document}
@@ -94,6 +95,7 @@
     $(f,g)$を考えると，これの零点集合は有限集合だから，
     準素イデアル分解をすれば有限個の極大イデアルのベキに分解される．
     原点に対応する極大イデアルについて考えれば，特に$(f,g) \subseteq (x,y)^r$
+    （TODO: $\left( \I{m}_P^i/(f) \right) \cap \left( \I{m}_P^j/(g) \right) \subset F$を示せればOK．）
 
     \subsection{If $P \in Y$, then for almost all lines $L$ thurough $P$, $(L \cdot Y)_P=\mu_P(Y)$.}
     平行移動により$P=(0,0)$とする．
@@ -636,7 +638,45 @@
     明らかに$P=A+B$かつ$A \in Q', B \in Z$．
     よって$Q$はcone with axis $Z$ over $Q'$に一致する．
 
-\section{ } %% Ex5.13 
+\section{The Set of Non-normal Points of a Variety is a Proper Closed Subset of That.} %% Ex5.13 
+    \paragraph{前提．}
+    $Y$ :: varietyとし，$\Nor(Y)$を$Y$のnormal point全体とする．
+    $Y$の各open affine subsetについてnormal point全体が空でない開集合をなすことが示せれば十分だから，
+    $Y$はaffineだと仮定する．
+    $A=A(Y), K=K(Y)$としておこう．
+
+    \paragraph{非空開集合$U$の定義．}
+    Them3.9より，$A$の$K$における整閉包$\bar{A}$は有限生成$A$加群で，かつ有限生成$k$代数である．
+    （$\Quot(\bar{A})=K$なので$\bar{A}$は整閉である．）
+    $A$加群としての$\bar{A}$の生成元を$\{g_i\}_{i=1}^n \subset K$としよう．
+    $Y$の部分集合$U$を以下のように定める．
+    \[
+        U
+        =\{ P \in Y ~|~ \{g_i\}_{i=1}^n \subset \mathcal{O}_{P,Y} \}
+        =\{ P \in Y ~|~ \bar{A} \subset \mathcal{O}_{P,Y} \}
+        =\bigcap_{i=1}^n \zerosa(s_i)^c.
+    \]
+    ３つの表示が同値であることは明らか．
+    ただし$s_i$は$g_i$を$K=\Quot(A)$の元としてみた時の分母である．
+    $Y$がirreducibleであることと最左辺の表示から$U$は非空開集合であることがわかる．
+    $\Nor(Y)=U$を示す．
+
+    \paragraph{$U \subseteq \Nor(Y)$.}
+    まず$P \in U$を考える．このとき$A \subset \bar{A} \subset \mathcal{O}_{P,Y} \subset K$．
+    点$P$に対応する$A$の極大イデアル$\I{m}_P$でこれらすべてを局所化すると，
+    次が得られる．
+    \[ \mathcal{O}_{P,Y}=A_{\I{m}_P} \subseteq \bar{A}_{\I{m}_P} \subseteq \mathcal{O}_{P,Y} \subset K. \]
+    よって$\mathcal{O}_{P,Y}=\bar{A}_{\I{m}_P}$．
+    $\bar{A}$は$A$の整閉包なのでAti-Mac Prop5.12から$\bar{A}_{\I{m}_P}$は$K$で整閉．
+    よって$\mathcal{O}_{P,Y}$は整閉．
+
+    \paragraph{$U^c \subseteq \Nor(Y)^c$.}
+    $P \not \in U$とすると，少なくともひとつの$g_i$は$\mathcal{O}_{P,Y}$に属さない．
+    そのような$i$を1つとってfixする．
+    $g_i \in \bar{A}$ということは$g_i$は$A$上整であることを意味する．
+    $A \subset \mathcal{O}_{P,Y}$なので$g_i$は$\mathcal{O}_{P,Y}$上整でもある．
+    しかし先に述べたように$g_i \not \in \mathcal{O}_{P,Y}$なので，
+    $\mathcal{O}_{P,Y}$は整閉でない．
 
 \section{Analytically Isomorphic Singularities.} %% Ex5.14 
     \subsection{If $P \in Y, Q \in Z$ are analytically isomorphic plane curve singularities, then $\mu_P(Y)=\mu_Q(Z)$.}
@@ -704,9 +744,30 @@
     \paragraph{Case of $r=2$.}
     (b)より，$f \in k[[x,y]]$は$g,h \in k[[x,y]]$を用いて$f=gh$と分解できる．
     $r=1+1$より，$\ord g=\ord h=1$．
-    したがってExample 5.6.3と同様に同型写像が作れる．
-    （automorphismはどうやって作る？）
-    （多分$p(ug)=x, q(vh)=y$を満たす$p,q \in k[[x,y]], ~u,v \in k[[x,y]]^{\times}$を探す．）
+    座標変換によって$g(0,x) \neq 0, h(y,0) \neq 0$とすれば \footnote{Perturbation.}，
+    Weierstrass preparation theoremより，
+    $g=u(x-a(y)), h=v(y-b(x))$なる$u,v \in k[[x,y]]^{\times}, a,b \in [[x,y]]$が存在する．
+    したがって$x \mapsto g, y \mapsto h$なる写像は$x \mapsto a, y \mapsto b$という逆写像を持つ．
+    どちらもmorphismだから，任意のordinary double pointにおける局所環は$k[[x,y]]/(xy)$と同型である．
+
+    \paragraph{Case of $r=3$.}
+    今$\ord f=3$だから，(b)より，$f \in k[[x,y]]$は$f_1, f_2, f_3 \in k[[x,y]]$を用いて$f=f_1 f_2 f_3$と分解できる．
+    前段落と同様に，適切な線形変換を行った後には
+    $f_1=u_1 (x-g_1(y)), f_2= u_2(y-g_2(x))$なる$u_1,u_2 \in k[[x,y]]^{\times}, g_1, g_2 \in [[x,y]]$が存在する．
+    さて，この時，以下のような写像を考えよう．
+    \[ x \mapsto v_1 f_1, y \mapsto v_2 f_2, x+y \mapsto f_3. \]
+    この写像が適切に定義出来るような単元$v_1, v_2 \in k[[x,y]]^{\times}$は存在する．
+    実際，写像が適切に定義されるには$v_1 f_1+v_2 f_2=f_3$が成立すれば十分．
+    $\ord f_i=1$と，$f_i$の最低次項達が互いに異なる（つまり線形独立な）一次式であることを利用すると，
+    最低次項から順に$v_1, v_2$を決定できる．
+    どちらもmorphismだから，任意のordinary double pointにおける局所環は$k[[x,y]]/(xy(x+y))$と同型である．
+
+    \paragraph{Case of $r=4$.}
+    $r=3$の場合の証明のうち，$v_1, v_2$の最低次（これは非零定数）を決定する部分を考える．
+    この部分は，線形独立な2つの1次多項式は，適切に線型結合すれば任意の一次多項式に出来る，ということを用いていた．
+    短く言えば，$k[x,y]_1$は$k$上の2次元ベクトル空間をなす，ということを用いていた．
+    $r=4$の場合は同様の証明を行おうとすると3つのベクトルの線型結合で別のベクトルを表すことになる．
+    （TODO）
 
 \section{The Homogeneous Polynomials In $k[x,y,z]_d$ And Points In $\proj^N$.} %% Ex5.15 
     $d \in \N$に対し，$N=\binom{d+2}{2}-1$とする．

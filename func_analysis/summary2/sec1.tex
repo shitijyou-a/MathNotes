@@ -1,0 +1,245 @@
+\section{第9章 / レゾルベント・スペクトル}
+    \subsection{レゾルベント・スペクトルを考える動機}
+        $\spX$をBanach空間，$I$を$\spX$上の恒等作用素，$T \in B(\spX)$とする．
+        次のような$u$についての方程式を考えよう．
+        \[ \zeta u-Tu=v ~~~(u,v \in \spX). \label{eq905}\]
+        これは形式的に$v=(\zeta I-T)^{-1} u$と解くことが出来る．
+        さらに形式的に，$(\zeta I-T)^{-1}$は$\sum_{k=0}^{\infty}T^k$と変形出来るだろう．
+        $T^k$は既知だから，この変形が正当化できさえすれれば
+        上のような形の方程式は解けたことになり，大変嬉しい．
+        そして実際に，$\|T\|<|\zeta|$ならば上の形式的解法が
+        正当化出来ることが定理\ref{them902}よりわかる．
+        また，$T$が有界でない場合でも$(\zeta I-T)^{-1}$が有界になる場合は多い．
+        なので有界作用素の理論を用いて非有界作用素$T$を調べられることが出来る．
+
+    \subsection{定義}
+    \begin{Prop}[p.210]
+        $T$はBanach空間$\spX$の線形作用素とする．
+        $(\zeta I-T)^{-1}$が$B(\spX)$ \footnote{$\spX$上の有界線形作用素．}の元になり，
+        しかも1対1になるような$\zeta \in \C$が存在するためには，
+        $T$が閉作用素であることが必要である．
+    \end{Prop}
+    \begin{proof}
+        教科書の定理7.16 i)より$(\zeta I-T)^{-1}$は閉で，
+        定理7.17より$\zeta I-T$も閉．
+        よって定理7.18より$T=(\zeta I)-(\zeta I-T)$は閉．
+    \end{proof}
+    なのでスペクトル理論の興味の対象は閉作用素に限る．
+    \begin{Def}
+        $T$はBanach空間$\spX$の\kenten{閉線形作用素}とする．
+        \begin{description}
+            \item[レゾルベント集合$\rho(T)$] \mbox{}\\
+                $\rho(T)=\{ \zeta \in \C ~|~ (\zeta I-T) \text{が1対1，かつ}(\zeta I-T)^{-1} \in B(\spX). \}$
+                \footnote{$\rho$はresolventのr.}
+
+            \item[レゾルベント$R(\zeta;T)$] \mbox{}\\
+                $\zeta \in \rho(T)$について$R(\zeta;T)=(\zeta I-T)^{-1}$．
+
+            \item[スペクトル $\sigma(T)$] \mbox{}\\
+                $\sigma(T)=\C \setminus \rho(T)$．
+                \footnote{$\sigma$はspectrumのs.}
+
+            \item[スペクトル半径$r(T)$] \mbox{}\\
+                $T \in B(\spX)$に対して，$r(T)=\sup_{\zeta \in \sigma(T)}|\zeta|$．
+                \footnote{定理\ref{them902}から$r(T) \leq \|T\|$が成り立つ．}
+
+            \item[固有値]\mbox{}\\
+                $(\zeta I-T)$が1対1でないような$\zeta \in \C$を$T$の固有値と呼ぶ．
+
+            \item[点スペクトル$\sigma_p(T)$]\mbox{}\\
+                $T$の固有値全体を$\sigma_p(T)$で表す．
+
+            \item[固有値$\zeta$に属する固有ベクトル・固有空間]\mbox{}\\
+                $B(\spX)$の閉部分空間$\{u \in \spX ~|~ Tu=\zeta u. \}$を固有値$\zeta$に属する固有空間と呼び，
+                その元を固有値$\zeta$に属する固有ベクトルと呼ぶ．
+
+            \item[固有値$\zeta$の多重度] \mbox{}\\
+                固有値$\zeta$に属する固有空間の次元を固有値$\zeta$の多重度と呼ぶ．
+        \end{description}
+    \end{Def}
+
+    $T \in B(\spX)$について，$r(T)=0$であるとき$T$を\textbf{準ベキ零作用素}と呼び，
+    ある$n \in \N$について$T^n=0$となるとき$T$を\textbf{ベキ零作用素}と呼ぶ．
+    後に証明することとして，以下の等式がある（\ref{them912}）．
+    \[ r(T)=\lim_{n \to \infty} \|T^n\|^{1/n}=\inf_{n \in \N} \|T^n\|^{1/n}. \]
+    この等式から2つの概念は一致するように思われる．
+    しかし$r(T)$は$\sup$を取るという極限操作によって定まっており，
+    実際には$\spX$が無限次元の時一致しない．
+    一方有限次元の時には一致することが確かめられる．
+
+
+    \subsection{定理・命題・補題・系}
+    \subsubsection{Neumann級数}
+    教科書の定理7.16 i) (p.165)より，$B(\spX)$の元は閉作用素であることに注意．
+
+    \begin{Them}[定理9.2, p.209] \label{them902}
+        $\spX$はBanach空間，$T \in B(\spX), \zeta \in \C$とする．
+        $|\zeta| > \|T\|$ならば$\zeta \in \rho(T)$であり，
+        以下が成り立つ．
+        \begin{align}
+            R(\zeta; T)=&\sum_{k=0}^{\infty} \zeta^{-(k+1)} T^k \label{eq906}\\
+            \|R(\zeta; T)\| \leq& |\zeta|^{-1} (1-|\zeta|^{-1} \|T\|)^{-1}
+        \end{align}
+        ここで式(\ref{eq906})の右辺は$B(\spX)$で絶対収束する．
+        特に方程式$\zeta u-Tu=v$は一意的に解$u=R(\zeta;T)v$を持つ．
+    \end{Them}
+    式(\ref{eq906})の右辺はNeumann級数と呼ばれる．
+    例で見るようにこの定理は$(\zeta I-T)^{-1}$がNeumann級数で表せることの十分条件を示しているに過ぎない．
+    証明も$\sum_{k=0}^{\infty} \zeta^{-(k+1)} T^k$が存在するならば両辺が一致する，
+    というものになっている．
+    また，この定理の前半（と$T$が有界作用素であること）から，
+    $\rho(T)$は$\{ \zeta ~|~ |\zeta| > \|T\| \}$を\kenten{含む}ことがわかる．
+
+    \subsubsection{レゾルベント方程式と正則性}
+    この節では$T$を$\spX$の\kenten{閉線形作用素}とする．
+    まず$\zeta \in \rho(T)$ならば
+    $\zeta I-T$は1対1なので$\dom(T)$を$\spX$全体に写す．
+    したがって$R(\zeta;T):\spX \to \dom(T)$である．
+
+    \begin{Them}
+        $\zeta_1, \zeta_2 \in \rho(T)$について，以下が成り立つ．
+        \begin{align*}
+            R(\zeta_2;T)-R(\zeta_1;T)
+            =&(\zeta_1-\zeta_2)R(\zeta_2;T)R(\zeta_1;T) \\
+            =&(\zeta_1-\zeta_2)R(\zeta_1;T)R(\zeta_2;T)
+        \end{align*}
+    \end{Them}
+    これを（第一）\textbf{レゾルベント方程式}と呼ぶ．
+    \footnote
+    {
+        第二レゾルベント方程式は$R(\zeta;S)-R(\zeta;T)=R(\zeta;S)(S-T)R(\zeta;T)$（演習問題6）．
+        証明は第一レゾルベント方程式を真似れば良い．
+    }
+    この等式から$R(\zeta_1;T), R(\zeta_2;T)$が可換であること，
+    及び$\zeta_1 \neq \zeta_2$ならば
+    \[ \frac{R(\zeta_2;T)-R(\zeta_1;T)}{\zeta_2-\zeta_1}=-R(\zeta_2;T)R(\zeta_1;T)=-R(\zeta_1;T)R(\zeta_2;T). \label{eq-ori901} \]
+    となることが得られる．
+    すぐさま$\zeta_1 \to \zeta_2$として「微分」したくなるが，
+    その極限が存在することは自明でなく，次の定理で述べられる．
+
+    \begin{Them}[定理9.5, p.211]
+        $\zeta_0 \in \rho(T)$をとり，$R(\zeta):=R(\zeta;T)$と略記する．
+        このとき以下が成り立つ．
+        \[
+            \mathrm{Disc} \left(\zeta_0, \|R(\zeta_0)\|^{-1} \right)
+            =\left\{ \zeta \in \C ~\middle|~ |\zeta-\zeta_0|<\|R(\zeta_0)\|^{-1} \right\}
+            \subset \rho(T).
+        \]
+        この円盤の中では$R(\zeta)$は次のようにべき級数展開される．
+        \[ R(\zeta)=\sum_{k=0}^{\infty} (-1)^kR(\zeta_0)^{k+1} \cdot (\zeta-\zeta_0)^k. \]
+        また，この等式で両辺のノルムを評価することで，以下が得られる．
+        \[
+            \|R(\zeta)\|
+            \leq \|R(\zeta_0)\| \sum_{k=0}^{\infty}\left( |\zeta-\zeta_0|\|R(\zeta_0)\| \right)^k
+            =\|R(\zeta_0)\| (1-|\zeta-\zeta_0|\|R(\zeta_0)\|)^{-1}.
+        \]
+    \end{Them}
+    定理の最初から一般の閉線形作用素$T$について$\rho(T)$が開集合であることがわかる．
+    そして最後の不等式から$R(\zeta;T)$の「微分」$\frac{d}{d \zeta}R(\zeta;T):=\lim_{h \to 0}\frac{1}{h} (R(\zeta+h;T)-R(\zeta;T))$
+    が存在することが示される．
+
+    \begin{Them}[定理9.6, p.212]
+        $R(\zeta;T)$は$\rho(T)$で正則，
+        すなわち$\frac{d}{d \zeta}R(\zeta;T)$が存在し，次の等式が成り立つ．
+        \[ \frac{d}{d \zeta}R(\zeta;T)=-R(\zeta;T)^2. \]
+    \end{Them}
+
+    \subsubsection{スペクトル半径}
+    この節では$T$を$\spX$上の\kenten{有界線形作用素}とする．
+    定理\ref{them902}によると，$\rho(T)$は空でない．
+    実は次も成り立つ．
+    \begin{Them}[定理9.8, p.213]
+        $T \in B(\spX)$ならばスペクトル$\sigma(T)$は空でない．
+    \end{Them}
+    したがってスペクトル半径$r(T)=\sup_{\zeta \in \sigma(T)}|\zeta|$は存在する．
+    スペクトル半径について，以下の等式が成り立つ．
+    \begin{Them}[定理9.12, p.215] \label{them912}
+        $\lim_{n \to \infty} \|T^n\|^{1/n}$が存在し，以下が成り立つ．
+        \[ r(T)=\lim_{n \to \infty} \|T^n\|^{1/n}=\inf_{n \in \N} \|T^n\|^{1/n}. \]
+    \end{Them}
+
+    \subsubsection{双対作用素のレゾルベント}
+    $T$が閉作用素ならば，教科書の定理8.42より共役作用素$T^*$も閉作用素．
+    なので$\rho(T^*)$が考えられる．
+    \begin{Them}[定理9.9, p.213] \label{them909}
+        $T$が$\spX$上の閉作用素で，$\dim(T)$が$\spX$で稠密であるとする．
+        この時，まず以下が成り立つ．
+        \[ \rho(T^*)=\rho(T), R(\zeta;T^*)=R(\zeta;T)^*. \]
+        さらに$\spX$がHilbert空間ならば通常Hilbert space adjoint（p.201参照）$T^{\star}$を
+        共役作用素として扱うが，これについては以下が成り立つ．
+        \[ \rho(T^{\star})=\{ \zeta ~|~ \bar{\zeta} \in \rho(T)\}, R(\zeta;T^{\star})=R(\bar{\zeta};T)^{\star}. \]
+    \end{Them}
+
+    \subsubsection{擬レゾルベント}
+
+    \subsection{例}
+        \subsubsection{（準）ベキ零作用素}
+        \begin{Example}[例9.14, p.216]
+            $l^p$の元$u=(u_1,u_2,\dots)$に対して
+            $Tu=(2^{-1}u_2, 3^{-1}u_3, \dots)$と定める．
+            直ちに以下が得られる．
+            \[ T^n u=\left( \frac{1}{(n+1)!} u_{n+1}, \frac{2!}{(n+2)!} u_{n+2}, \dots \right). \]
+            $l^p$のノルムは$\sup$ノルムなので$\|T^n\|=\frac{1}{(n+1)!}$．
+            定理\ref{them912}より$r(T)=0$．
+            しかし明らかに任意の$n$について$T^n \neq 0$なので，
+            $T$は準ベキ零作用素だがベキ零作用素でない．
+        \end{Example}
+
+        \begin{Example}[問題9.2, p.223]
+            $k(x,y)$を正方形$[a,b]^2 (-\infty<a<b<\infty)$上定義された連続関数とする．
+            そして作用素$T \in B(C[a,b])$を以下で定める．
+            \[ (Tu)(x):=\int_a^x k(x,y)u(y) dy \mwhere u \in C[a,b],~ x \in [a,b]. \]
+
+            \paragraph{(i)}
+            $M=\sup_{(x,y) \in [a,b]^2}|k(x,y)|$とすると，
+            \footnote{教科書では$M=\sup_{(x,y) \in [a,1]^2}|k(x,y)|$となっているが明らかに誤植である．}
+            $|(T u)(x)| \leq M \|u\| \int_a^x dy=M \|u\| (x-a)$．
+            帰納的に$|(T^n u)(x)| \leq \frac{M^n}{n!} (x-a)^n \|u\|$が示されるので，
+            $\|T\| \leq \frac{M^n}{n!} (b-a)^n \to 0 ~~(n \to \infty)$．
+            しかし明らかに$T^n \neq 0$なので，これも準ベキ零作用素だがベキ零作用素でない．
+            
+            \paragraph{(ii)}
+            $\sum_{k=0}^{\infty}T^k$は
+            $\leq \sum_{k=0}^{\infty} \|T^k\|=\exp(M(a-b))<\infty$より，絶対収束する．
+            なので$(I-T)^{-1}$は定理9.1 (p.209)の証明から$\sum_{k=0}^{\infty}T^k$で表せて，
+            方程式$(I-T)u=f$は任意の$f \in C[a,b]$について一意的な解$u=(I-T)^{-1}f$を持つ．
+        \end{Example}
+
+        \subsubsection{レゾルベント・スペクトル}
+        \begin{Example}[例9.15, p.217]
+            $\dim \spX=n < \infty,T \in B(\spX)$とする．
+            $\spX$の基底をひとつ取ると，$T$は$n \times n$行列$\tilde{T}$で表示できる．
+            この時$\zeta I-T$が1対1であることと$(\zeta I-T)^{-1} \in B(\spX)$は同値．
+            $\zeta I-T$が1対1でないことは
+            $\zeta I-\tilde{T}$が可逆でないことと同値であることがわかるので，
+            $\sigma(T)=\{\zeta ~|~ \det(\zeta I-\tilde{T})=0 \}=\text{行列$\tilde{T}$の固有値全体．}$
+        \end{Example}
+
+        \begin{Example}[例9.17, p.217]
+            $\spX=l^p, 1 \leq p \leq \infty$とする．
+            作用素$S(u_1,u_2,\dots)=(u_2,u_3,\dots)$を考えよう．
+            これは明らかに非可逆．
+            $\|S\|=1$なので，スペクトルは円盤$|\zeta| \leq 1$に含まれる．
+
+            まず固有値を調べよう．
+            $S u=\zeta u$の両辺で成分を見ると$u_{n+1}=\zeta u_{n}$なので$u_n=\zeta^{n-1} u_1$．
+            したがって$|\zeta|<1$の時$\zeta$は固有値で，付随する固有空間は$\{(t, \zeta t, \dots) ~|~ t \in \C \}$．
+            一方$|\zeta|=1$の時は$|u_n|=|u_1|$．
+            故に$p<\infty$の時は同じように固有ベクトルを作っても$l^p$の元にならず，$p=\infty$ならば$l^p$の元になる．
+            よって$\sigma_p(S)$は
+            $1 \leq p < \infty$ならば$\{ |\zeta| < 1 \}$，
+            $p=\infty$ならば$\{|\zeta| \leq 1\}$である．
+
+            さらに，以上から$\{|\zeta| \leq 1\}$とレゾルベント集合は交わらない．
+            よって$p$によらず$\sigma(S)=\{|\zeta| \leq 1\}$．
+            （あるいは，$\sigma(S)=(\rho(S))^c$は$\sigma_p(S)$を含む閉集合であることを用いてもわかる．）
+
+            $1 \leq p < \infty$の時は共役作用素も考えられる．
+            p.202より$S^* (u_1,u_2,\dots)=(0,u_1,u_2,\dots)$．
+            まず定理\ref{them909}より$\sigma(S^*)=\sigma(S)$．
+            固有値を$S$と同様にして考えると，
+            $u_{n-1}=\zeta u_n, 0=\zeta u_1$となるので，$\zeta=0$または$u_1=u_2=\dots=0$が必要になる．
+            しかも$\zeta=0$なら$\zeta I-T^*=T^*$で，これは明らかに1対1．
+            よって$\sigma_p(S)=\emptyset$．
+        \end{Example}
+
