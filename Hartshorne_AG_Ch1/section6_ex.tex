@@ -1,0 +1,200 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+
+\newcommand{\mon}{\mbox{ on }}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\regs}{\mathcal{O}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\renewcommand{\thesection}{Ex6.\arabic{section}}
+
+\begin{document}
+\section{Nonsingular Curve which Is Birational but Not Isomorphic to $\proj^1$.} %% Ex6.1 
+    $Y$を$\proj^1$と同型でないnonsingular rational curveとする．
+    rationalはEx4.4で定義されていて，$\proj^1$とbirationalであることを意味する．
+    したがってThem3.4とCor4.5より$K:=K(Y) \cong K(\proj^1)=k[u,v]_{((0))}$．
+    また，$Y$が$\proj^1$と同型でないことから$\regs(Y)=:R \not \iso k = \regs(\proj^1)$.
+    $K(Y) \cong K(\proj^1)$の同型写像を用いて$R \subset K(\proj^1)$と考える．
+
+    \subsection{$Y$ is isomorphic to an open subset of $\affine^1$.}
+    $R \neq k$より，$Y$全体で定義される定数でないregular function $\alpha \in R \setminus k$がとれる．
+    
+
+    \subsection{$Y$ is affine.}
+    (a)より$Y \iso \affine^1 \setminus \{P_1,\dots,P_s\}$となる$\{P_1,\dots,P_s\}$が存在する．
+    この時$f=(x-P_1)\cdots(x-P_s)$とすれば，$Y \iso \affine^1 \setminus \zerosa(f)$．
+    なのでLemma4.2より$Y$はaffine.
+
+    \subsection{$A(Y)$ is UFD.}
+    $\affine^2$のcoordinate variableを$x,y$とする．
+    Lemma4.2より，$A(Y)=k[x]_f$．
+    Ati-Mac Prop3.11より，局所化$k[x]_f$のイデアルはすべて拡大イデアルである．
+    すなわち，$k[x]_f$の任意のイデアル$\I{a}$に対して$k[x]_f$のイデアル$\I{a}'$が存在し，
+    $\I{a}$は$\I{a}'$の元を$x \mapsto x/1$で写したもので生成される．
+    $k[x]$はPIDだから，$k[x]_f$もPID．
+    PIDならばUFDであることは代数概論にもある．
+
+\section{An Elliptic Curve} %% Ex6.2 
+    $f=y^2-x^3+x$を考えよう．
+    $Y=\zerosa(f) \subset \affine^2$とし，
+    考える体$k$の標数は2でないとする．
+    また，$K=K(Y), A=A(Y), \bar{x}=x+(f), \bar{y}=y+(f)$とする．
+
+    \subsection{$Y$ :: nonsingular, and $A$ :: integrally closed domain.}
+    $Y$がnonsingular affine curveであることは次の連立方程式が解を持たないことと同値である．
+    \[ y^2-x^3+x=-3x^2+1=2y=0. \]
+    $\fchar k \neq 2$なので，これは以下と同値．
+    \[ x(x+1)(x-1)=-3x^2+1=0. \]
+    これは明らかに解を持たない．
+
+    さらにaffine curve $Y$については以下のような同値な命題の列があるので，
+    $A$がintegrally closed domainであることがわかる．
+    \begin{align*}
+        {}&     Y \text{ :: nonsingular affine curve} \\
+        \iff&   \Forall{P \in Y} \mathcal{O}_{P,Y} \text{ :: regular local ring} \\
+        \iff&   \Forall{P \in Y} \mathcal{O}_{P,Y} \text{ :: integrally closed domain} \\
+        \iff&   Y \text{ :: normal affine curve} \\
+        \iff&   A (=A(Y)) \text{ :: integrally closed domain}
+    \end{align*}
+    Them 5.1, Them6.2, Ex3.17dを用いた．
+    
+    \subsection{$k[\bar{x}]$ :: polynomial ring, and $A$ is the integral closure of $k[\bar{x}]$ in $K$.}
+    $\bar{x}$が$k$上超越的であることを示そう．
+    仮に超越的でない，すなわち代数的であるとすると，多項式$p(X) \in k[X]$が存在して$p(\bar{x})=0$となる．
+    これは$p(x) \in (f)$と同値．したがって$\zerosa(p) \subseteq \zerosa(f)=Y$と同値である．
+    仮に$p(x)$の$k$における解の1つを$\alpha$とすると，$p(x)$が$y$を含まないので，以下が成り立つことが必要．
+    \[ \zerosa(x-\alpha) \subseteq Y. \]
+    なので$y^2-\alpha^3+\alpha=0$が恒等式になる．しかしこれは不可能．
+    よって$\bar{x}$は$k$上超越的であり，したがって$k[\bar{x}]$はpolynomial ringである．
+
+    $k[\bar{x}]$はpolynomial ringだから，$k[\bar{x}]$は$Y$の任意の局所環に含まれる．
+    Ati-Mac Cor5.22より$k[\bar{x}]$のintegral closureは$k[\bar{x}]$を含むすべての付値環の共通集合．
+    $Y$はnonsingularであるからThem6.2より$Y$の任意の局所環は付置環である．
+    したがって以下が言える．
+    \[ \text{the integral closure of }k[\bar{x}] = \bigcap_{P \in Y} A_{\I{m}_P}=\bigcap_{\I{m} \in \Max(A)} A_{\I{m}}. \]
+    最右辺はThem3.2の証明で述べられているように$A$に等しいから，$k[\bar{x}]$のintegral closureは$A$．
+
+    \subsection{Properties of the Norm.}
+    $A$の自己準同型$\sigma$を$\bar{x} \mapsto \bar{x}; \bar{y} \mapsto -\bar{y}$で定義する．
+    $\sigma$は明らかに$\sigma^2=\id{}$で，巡回群をなす．
+    これを用いてnorm $N$を$a \in A \mapsto a \cdot \sigma(a)$と定義する．
+    これは体拡大$K/k(\bar{x})$のnorm（対論で用いられる）である．
+
+    $\sigma$でfixされる元がなす$A$の部分環を考える．
+    $\sigma(\bar{x}^m \bar{y}^n)=(-1)^n \bar{x}^m \bar{y}^n$と$-1 \neq 1$より，
+    $\bar{y}$の次数が偶数であるような単項式がfixされる．
+    よって，
+    \[ A^{\langle \sigma \rangle}=k[\bar{x}, \bar{y}^2]=k[\bar{x}, \bar{x}^3-\bar{x}]=k[\bar{x}]. \]
+
+    $\sigma(N(a))=\sigma(a) \cdot \sigma^2(a)=N(a)$より，$\im N \subset k[\bar{x}]$．
+    また$N(1)=1 \cdot \sigma(1)=1$，$N(ab)=ab \cdot \sigma(a) \sigma(b)=N(a)N(b)$が成り立つ．
+
+    \subsection{The units of $A$ $=k^{\times}$, and $\bar{x}, \bar{y}$ :: irreducible elements.}
+    単元$u \in A^{\times}$をとる．
+    (b)で示したことから，以下がわかる．
+    \[ 1=N(u u^{-1})=N(u) N(u^{-1}) \in k[\bar{x}]. \]
+    したがって$N(u)$は$k[\bar{x}]$の単元であるが，
+    すでに示したとおり$k[\bar{x}]$はpolynomial ringなので$N(u)=u \cdot \sigma(u) \in k^{\times}$．
+    $\zerosa(N(u))$を考えると，
+    \[ \zerosa(N(u))=\zerosa(u) \cup \zerosa(\sigma(u))=\emptyset. \]
+    なので$\zerosa(u)=\emptyset$であり，したがって$u \in k^{\times}$．
+
+    $\bar{x}$がirreducibleでないと仮定しよう．
+    すると$\bar{x}=u v$となる非単元$u,v \in A \setminus k^{\times}$がある．
+    \[ u=\alpha \bar{x}+\beta \bar{y} \mwhere \alpha,\beta \in A \]
+    とおこう．
+    すると$(\alpha v-1) \bar{x}+\beta v \bar{y}=0$が成り立つ．
+    $v \in A$は非単元だから$\alpha v \neq 1$．
+    よって$\bar{x}=\frac{\beta v}{1- \alpha v} \bar{y}$となる．
+    このことから$Y$は$y$軸全体を含むか，または$x$軸との交点は$(0,0)$のみとなるか，どちらかになる．
+    しかし実際はどちらでもなく，矛盾．
+    よって$\bar{x}$はirreducible．
+
+    $\bar{y}$がirreducibleでないと仮定すると，
+    同様にして以下にできる．
+    \[ \bar{y}=\omega \bar{x} \mwhere \omega \in k(\bar{x}, \bar{y}). \]
+    これを$f$に代入すると，$\bar{x}(\bar{x}^2+\omega^2 \bar{x}-1)=0$が得られる．
+    $Y$は$y$軸全体($=\zerosa(x)$)を含まないので
+    \[ \bar{x}^2+\omega^2 \bar{x}-1=0. \]
+    これは$Y$上の任意の点で成り立つ方程式であるから$Y$は$y$軸と交わらない．
+    しかし実際は交わるので矛盾．
+
+%    また$\beta=0$とすると$\frac{u}{\bar{x}} \in A, 1=\frac{u}{\bar{x}} v$となり，
+%    これも$v$が非単元であることに反するから$\beta \neq 0$．
+%    $\bar{x}=\frac{\beta v}{1- \alpha v} \bar{y}$かつ$\frac{\beta v}{1- \alpha v} \neq 0$となるので，
+%    $Y$と$x$軸，あるいは$y$軸の交点は$(0,0)$のみであるということになる．
+
+    \subsection{$Y$ :: not rational curve.}
+    $A$において，以下の等式が成り立つ．
+    \[ \bar{y}^2=\bar{y} \cdot \bar{y}=\bar{x} \cdot (\bar{x}-1) \cdot (\bar{x}-1). \]
+    $\bar{x}, \bar{y}$は既約元であるから，これは$\bar{y}^2$に2つの既約元分解を与えている．
+    よって$A=A(Y)$はUFDでなく，同時に$Y$は明らかに$\proj^1$と同型でない．
+    これらのことからEx6.1cより$Y$はrationalでない．
+
+\section{Give counterexample to Prop6.8.} %% Ex6.3 
+%Prop6.8
+%Let X be an abstract nonsingular curve, let P E X, let Y be
+%a projective variety, and let \phi:X - P \to Y be a morphism. Then there
+%exists a unique morphism \phi: X \to Y extending \phi.
+
+    \paragraph{If $\dim X \geq 2$．}
+
+    \paragraph{If $Y$ :: not projective variety．}
+
+\section{Make surjective morphism $\phi: Y \to \proj^1$ from nonconstant rational function.} %% Ex6.4 
+    $Y$ :: nonsingular projective curveとする．
+    $Y$上の任意の定数でないrational function $f=g/h$に対して以下のように写像を定める．
+    \begin{defmap}
+        \phi:& Y& \to& \proj^1 \\ 
+        {}& P& \mapsto& (1:f(P))=(h(P):g(P))
+    \end{defmap}
+
+    TODO: これがsurjective morphismであることを示す．
+
+\section{Subvariety of nonsingular projective curve is closed subset.} %% Ex6.5 
+
+\section{Automorphisms of $\proj^1$.} %% Ex6.6 
+    $\proj^1=\affine^1+\{\infty\}$を考える．
+    Fractional linear transformation of $\proj^1$を以下のような写像と定める．
+    \[ x \mapsto \frac{ax+b}{cx+d} \mwhere a,b,c,d \in k, ad-bc \neq 0. \]
+    Fractional linear transformation of $\proj^1$全体を$PGL(1)$と書く．
+
+    \subsection{$(ax+b)/(cx+d) \in PGL(1)$ induces an automorphism of $\proj^1$．}
+    $\frac{ax+b}{cx+d}$の逆写像は$\frac{-dx+b}{cx-a}$である．
+    これらは明らかに$\proj^1$の定数でないrational function．
+    （$\proj^1=\affine^1+\{\infty\}$と考えていることに注意．必要なら$x=u/v$と斉次化せよ．）
+    Ex6.4より，$\proj^1$のautomorphismが誘導される．
+
+    \subsection{$\Aut \proj^1 \cong \Aut k(x)$.}
+    $\phi \in \Aut \proj^1$を任意に取ると，
+    以下のように$k(x)$の自己同型写像が誘導される．
+    \begin{defmap}
+        \phi^*:& k(x)& \to& k(x) \\ 
+        {}& \frac{g}{h}(x)& \mapsto& \left( \frac{g}{h} \circ \phi \right)(x)
+    \end{defmap}
+    これが自己同型であることはmorphismの定義から明らか．
+
+    逆に$\psi \in \Aut k(x)$を任意に取ると，
+    以下のように$\proj^1$の自己同型写像が誘導される．
+    \begin{defmap}
+        \psi_*:& \proj^1& \to& \proj^1 \\ 
+        {}& a& \mapsto& (\psi(x))(a)
+    \end{defmap}
+    $\psi(x) \in k(x)$に注意．
+
+    \subsection{$\Aut k(x)=PGL(1)$, and then $\Aut \proj^1 \cong PGL(1)$．}
+    $k(x)$の自己準同型は$x$の像で決定されることは明らか．
+    そこで$\Aut k(x)$のある元$\psi$は$x$を$f/g \in k(x)$に写すとしよう．
+    この時，$f,g$は高々1次式でなくては$\psi$がinverse morphismを持たないことを示す．
+
+    $X=f/g$としよう．
+    \[ X=\frac{a_n x^n+\dots+a_0}{b_n x^n+\dots+b_0} \mwhere \{a_i\}, \{b_j\} \subset k, a_n \mor b_n \neq 0. \]
+    必ずしも分子分母の次数は$n$でないが$n$以下であることに注意せよ．
+    $X$の値が与えられた時，$\psi^{-1}(X)$は以下の方程式の解集合である．
+    \[ (a_n-X b_n)x^n+(a_{n-1}-X b_{n-1}) x^{n-1}+\dots+(a_0-X b_0)=0. \]
+    $\psi$が全単射ならば任意の$X$について$\psi^{-1}(X)$は一点集合である．
+    よって$n=1$，すなわち$\Aut k(x) \subseteq PGL(1)$．
+    逆の包含関係は明らかだから，主張が示せた．
+
+\section{If $\affine^1 - \{P_1,\dots,P_s\} \iso \affine^1 - \{Q_1,\dots,Q_t\}$ then $s=t$．Converse?} %% Ex6.7
+
+\end{document}

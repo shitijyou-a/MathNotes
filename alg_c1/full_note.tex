@@ -324,22 +324,22 @@
     
     各$i=0, 1, \dots, n$に対し、
     \[
-        \sqcup_i:=\{(a_0: a_1: \dots: a_n) | a_i \neq 0\} \subset \proj^n
+        \bigsqcup_i:=\{(a_0: a_1: \dots: a_n) | a_i \neq 0\} \subset \proj^n
     \]
-    このとき、$\proj^n = \bigcup_{i=0}^{n}{\sqcup_i}$となる。
-    この$\{\sqcup_i \}_{i=0}^{n}$をアフィン開被覆と呼ぶ。
+    このとき、$\proj^n = \bigcup_{i=0}^{n}{\bigsqcup_i}$となる。
+    この$\{\bigsqcup_i \}_{i=0}^{n}$をアフィン開被覆と呼ぶ。
     
     \begin{Lemma}
         各$i$に対し、$\phi_i$を
         \begin{eqnarray*}
             \phi_{i} :
-            \sqcup_i &\to& \affine^n \\
+            \bigsqcup_i &\to& \affine^n \\
             (a_0: \dots: a_i: \dots: a_n) &\mapsto& (a_0/a_i, \dots, a_n/a_i)
         \end{eqnarray*}
         とおく。これは全単射で、
         \begin{eqnarray*}
             \psi_{i} :
-            \affine^n &\to& \sqcup_i \\
+            \affine^n &\to& \bigsqcup_i \\
             (a_0, \dots, a_n) &\mapsto& (a_0: \dots: \underset{\text{$i$番目の要素}}{1}: \dots: a_n)
         \end{eqnarray*}
         がその逆写像である。
@@ -349,10 +349,10 @@
         全単射の定義にしたがって調べれば良い。 
     \end{proof}
     
-    零点集合$\zeros(X_i)=\{(a_0: a_1: \dots: a_n) | a_i=0\}$を$\sqcup_i$の
-    無限遠超平面と言う。これはそれぞれ$\sqcup_i$の補集合で、
-    $\affine^n \simeq \sqcup_i = \proj^n \setminus \zeros(X_i)$が成り立つ。
-    零点集合はぞれぞれ$\sqcup_i$と無限遠で交わる。
+    零点集合$\zeros(X_i)=\{(a_0: a_1: \dots: a_n) | a_i=0\}$を$\bigsqcup_i$の
+    無限遠超平面と言う。これはそれぞれ$\bigsqcup_i$の補集合で、
+    $\affine^n \simeq \bigsqcup_i = \proj^n \setminus \zeros(X_i)$が成り立つ。
+    零点集合はぞれぞれ$\bigsqcup_i$と無限遠で交わる。
 
     \subsection{射影曲線}
     \begin{Def}[射影曲線]
@@ -548,8 +548,8 @@
     \end{Def}
 
     \begin{Def}
-        斉次多項式$F \in k[X, Y, Z]$により定まる射影曲線$C:=zerosp(F)$に対し、
-        $zerosa(\alpha(F)) \subset \affine^2$をその$Z \neq 0$のアフィン部分と呼ぶ。
+        斉次多項式$F \in k[X, Y, Z]$により定まる射影曲線$C:=\zerosp(F)$に対し、
+        $\zerosa(\alpha(F)) \subset \affine^2$をその$Z \neq 0$のアフィン部分と呼ぶ。
         ただし$\alpha$は$Z$に関する非斉次化、
         すなわち$\alpha : F(X, Y, Z) \mapsto F(x, y, 1)$である。
     \end{Def}
@@ -557,48 +557,48 @@
 
     \begin{Prop}
         斉次多項式$F \in k[X, Y, Z]$に対して、
-        \[ zerosp(F) \cap \sqcup_c = \psi_c(zerosa(\alpha(F)))\]
-        ただし$\sqcup_c$と$\psi_c$は補題1で定義したものである。
+        \[ \zerosp(F) \cap \bigsqcup_c = \psi_c(\zerosa(\alpha(F)))\]
+        ただし$\bigsqcup_c$と$\psi_c$は補題1で定義したものである。
     \end{Prop}
     \begin{proof}
-        $\sqcup_c \ni p=(a : b : 1)$をとる。
+        $\bigsqcup_c \ni p=(a : b : 1)$をとる。
         \begin{eqnarray*}
-            &{}&    p \in zerosp(F) \\
+            &{}&    p \in \zerosp(F) \\
             &\iff&  F(a,b,1)=0 \\
             &\iff&  \alpha(F)(a,b)=0 \\
-            &\iff&  \phi_c(p) \in zerosa(\alpha(F)) \\
-            &\iff&  p \in \psi_c(zerosa(\alpha(F))) \\
+            &\iff&  \phi_c(p) \in \zerosa(\alpha(F)) \\
+            &\iff&  p \in \psi_c(\zerosa(\alpha(F))) \\
         \end{eqnarray*}
         
     \end{proof}
 
     \begin{Lemma}
         $f \in k[x, y]$に対して、
-        \[ \overline{\psi(zerosa(f))}=zerosp(\beta(f)) \]
+        \[ \overline{\psi(\zerosa(f))}=\zerosp(\beta(f)) \]
         ただし、左辺はZariski位相での閉包である。
     \end{Lemma}
     この補題は利用しないので証明もしない。
 
 \subsection{特異点}
     \begin{Def}[射影曲線の特異点]
-        斉次多項式$F$により定まる射影曲線$C:=zerosp(F)$において、
+        斉次多項式$F$により定まる射影曲線$C:=\zerosp(F)$において、
         $p \in C$が$C$の特異点であるとは、
         $p$を含むアフィン開被覆における$C$のアフィン部分が$p$に於いて特異点を持つこと
         と定める。
 
         したがって、$p \in C$が$C$の特異点であるとは、
-        $p \in \sqcup_i$のとき、
-        アフィン部分$zerosa(\alpha(F))$が$\phi_i(p)$に於いて特異点を持つことである。
+        $p \in \bigsqcup_i$のとき、
+        アフィン部分$\zerosa(\alpha(F))$が$\phi_i(p)$に於いて特異点を持つことである。
     \end{Def}
 
     \begin{Lemma}
-        $p$が$zerosp(F)$の特異点である。
+        $p$が$\zerosp(F)$の特異点である。
         $\iff$ $F_X(p)=F_Y(p)=F_Z(p)=0$
         \footnote{$F_X$は斉次多項式$F$を$X$について偏微分したものである。$F_Y$なども同様。}
     \end{Lemma}
     \begin{proof}
-        $\sqcup_c \ni p=(a:b:1)$をとり、$f:=\alpha(F)=F(x, y, 1)$とおく。
-        $C:=zerosa(f)$が特異点$p$を持つとは、$f$の斉次分解$\{ f_k \}$について
+        $\bigsqcup_c \ni p=(a:b:1)$をとり、$f:=\alpha(F)=F(x, y, 1)$とおく。
+        $C:=\zerosa(f)$が特異点$p$を持つとは、$f$の斉次分解$\{ f_k \}$について
         $m_p(C)=\min\{k : f_k(p)=0\}>1$ということ。
         したがって、
         \[ f_x(a,b)=f_y(a,b)=0 \]
@@ -620,13 +620,13 @@
     \end{Def}
 
     \begin{Lemma}
-        斉次多項式$F$について、$p \in C:=zerosp(F)$がCの非特異点（単純点）であるとき、
+        斉次多項式$F$について、$p \in C:=\zerosp(F)$がCの非特異点（単純点）であるとき、
         $p$における$C$の接線は次式で定まる。
         \[ F_X(p)X+F_Y(p)Y+F_Z(p)Z=0 \]
     \end{Lemma}
     \begin{proof}
-        $\sqcup_c \ni p=(a:b:1)$をとり、$f:=\alpha(F)$とする。
-        $C$の$\sqcup_c$におけるアフィン部分$zerosa(f)$への$\phi_c(p)$に於ける接線は
+        $\bigsqcup_c \ni p=(a:b:1)$をとり、$f:=\alpha(F)$とする。
+        $C$の$\bigsqcup_c$におけるアフィン部分$\zerosa(f)$への$\phi_c(p)$に於ける接線は
         次で定まる。
         \[ f_x(a,b)(x-a)+f_y(a,b)(y-b)=0 \]
         fの定義より、
@@ -674,10 +674,10 @@
     \end{Prop}
     \begin{proof}
         \textbf{定義の確認}~~
-        適当に座標変換して$L=zerosp(Y), P=(0:0:1)$とする。
+        適当に座標変換して$L=\zerosp(Y), P=(0:0:1)$とする。
         $f(x, y)=\alpha(F)=F(x, y, 1)$と置けば、
-        $C:=zerosp(F)$と$L$のアフィン部分は
-        \[ C_0:=zerosa(f), L_0:=zerosa(y) \]
+        $C:=\zerosp(F)$と$L$のアフィン部分は
+        \[ C_0:=\zerosa(f), L_0:=\zerosa(y) \]
         である。
         $L_0$のパラメータ表示は$(x, y)=(t, 0)$とすれば、
         $P=(0:0:1)$に対応する点は$t=0$で与えられる。
@@ -852,7 +852,7 @@
 \end{proof}
 
 \begin{Lemma}
-    斉次多項式$F \in k[X, Y, Z]$により定まる射影曲線$C:=zerosp(F)$を$\phi_A$で写した像は
+    斉次多項式$F \in k[X, Y, Z]$により定まる射影曲線$C:=\zerosp(F)$を$\phi_A$で写した像は
     \[\phi_A(C)=\zeros(F \circ A^{-1}) \]
     さらに$\deg(\phi_A(C))=\deg C$である。
 \end{Lemma}
@@ -1668,13 +1668,13 @@ Four Points Lemmaより、射影変換は4点の写った先が決まれば一�
             \[ E=\{ (P, Q, R) \in C^3 : \phi_1(P, Q, R)=\phi_2(P, Q, R) \} \]
             これはZariski位相で閉。示したいことは$E=C^3$と表現できる。
             一方、
-            \[ \sqcup=\{ (P, Q, R) \in C^3 : \#(\mathcal{J} \cup \{T\})=9 \} \]
+            \[ \bigsqcup=\{ (P, Q, R) \in C^3 : \#(\mathcal{J} \cup \{T\})=9 \} \]
             （ただし$\mathcal{J}$は上で定めたもの）とおくと、
-            $\sqcup$は$C^3$の空ではない開集合となる。
-            $C^3$(既約)の中で$\sqcup$が稠密であることは前半の証明から分かる。
-            \[ \sqcup \subset E \subset C^3 \]
-            なので、閉包$\bar{\sqcup}$が$\sqcup$を含む最小の閉集合であることより、
-            \[ C^3=\bar{\sqcup} \subset E \subset C^3 \]
+            $\bigsqcup$は$C^3$の空ではない開集合となる。
+            $C^3$(既約)の中で$\bigsqcup$が稠密であることは前半の証明から分かる。
+            \[ \bigsqcup \subset E \subset C^3 \]
+            なので、閉包$\bar{\bigsqcup}$が$\bigsqcup$を含む最小の閉集合であることより、
+            \[ C^3=\bar{\bigsqcup} \subset E \subset C^3 \]
             すなわち$C^3=E$。
         \end{proof}
 

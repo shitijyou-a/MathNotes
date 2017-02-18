@@ -157,14 +157,15 @@
         $\spX^{\ast}$を$\spX$の\textbf{双対空間}あるいは\textbf{共役空間}と呼ぶ．
         また，$\spX^{\ast}$の元は\textbf{汎関数}と呼ばれる．
     \end{Def}
-    \begin{Def}
+    \begin{Def}[定理8.20, p.187]
         ノルム空間$\spX, \spY$について
         $T \in \spB{X}{Y}$と以下のような関係を持つ$T^{\ast} \in \spB{X^{\ast}}{Y^{\ast}}$を
         $T$の\textbf{共役作用素}と呼ぶ．
-        \begin{align*}
-            \|T^{\ast}\|_{\spB{X^{\ast}}{Y^{\ast}}}=\|T\|_{\spB{X}{Y}} \\
-            \Forall{u \in \spX} \Forall{g \in \mathscr{Y^{\ast}}} (T^{\ast}g)(u)=g(Tu)
-        \end{align*}
+        \begin{enumerate}[i)]
+            \item $\|T^{\ast}\|_{\spB{X^{\ast}}{Y^{\ast}}}=\|T\|_{\spB{X}{Y}}$
+            \item $\Forall{u \in \spX} \Forall{g \in \mathscr{Y^{\ast}}} (T^{\ast}g)(u)=g(Tu)$
+        \end{enumerate}
+        ii)は$\langle u,f \rangle=f(u)$という記法を用いれば$\langle u,T^* g \rangle=\langle Tu,g \rangle$．
     \end{Def}
     \begin{Def}
         Banach空間$\spX$に対し，作用素$\kappa$を
@@ -205,6 +206,7 @@
     \begin{Them}[定理7.20 (i), p.166] \label{them7:20}
         $T$が前閉作用素であるための必要十分条件は，
         \[ \Forall{\{ u_n \}_{n \in \N} \subset \dom T} \bigg[\Big[\lim_{n \to \infty}u_n=0  \land \lim_{n \to \infty}Tu_n=v \Big] \implies v=0 \bigg]. \]
+        （意味：0へ収束する点列を写すと0へ収束する点列になる．）
     \end{Them}
 
     \begin{Them}[定理7.21, p.166, 一様有界性の原理] \label{them7:21}
