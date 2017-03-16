@@ -92,19 +92,41 @@
     よって$\dim F=0$．
 
     \paragraph{$\mu_P(Y) \cdot \mu_P(Z) \leq (Y \cdot Z)_P$.}
-    $(f,g)$を考えると，これの零点集合は有限集合だから，
-    準素イデアル分解をすれば有限個の極大イデアルのベキに分解される．
-    原点に対応する極大イデアルについて考えれば，特に$(f,g) \subseteq (x,y)^r$
-    （TODO: $\left( \I{m}_P^i/(f) \right) \cap \left( \I{m}_P^j/(g) \right) \subset F$を示せればOK．）
+    W.Fulton ``Algebraic Curve" \S 3.3に証明がある．
+    この教科書では$(Y \cdot Z)_P=\dim_k \mathcal{O}_{P, \affine^2}/(f,g)$と定義されているが，
+    curveの場合には二つの定義が一致することが証明できる．
+    \url{http://math.stackexchange.com/questions/961889}を参照．
 
     \subsection{If $P \in Y$, then for almost all lines $L$ thurough $P$, $(L \cdot Y)_P=\mu_P(Y)$.}
-    平行移動により$P=(0,0)$とする．
-    今，$(u:v) \in \proj^2$をとると，$P$を通る全ての直線は$(x,y)=(u,v)t$の様にパラメータ表示できる．
-    逆に，$P$を通る直線はこの様に$\proj^2$の点と対応する．
-    ただし$t$は変数であり，$k$を渡る．
-    （多分$f_r(1,v) \cdot f_r(u,1)=0$でない点$(u:v)$では等式が成り立つ．）
+    $P=(0,0)$を通る直線は$bx-ay=0$と書け，これは$x=at, y=bt$とパラメトライズ出来る．．
+    また，$(k[x,y])_{(x,y)}/(f,ax-by)$のイデアルは，
+    $(f,bx-ay)$を含み，$(x,y)$に含まれるものに限られる．
+    すなわち$(k[x,y])_{(x,y)}/(f,ax-by)$のイデアルは$(x,y)/(f,bx-ay)$の部分イデアルに対応する．
+    そこで$(f,bx-ay)/(bx-ay)=(f)/(bx-ay)$の時成立する以下の同型を用いる．
+    \[
+        \frac{(x,y)}{(f,bx-ay)}
+        \cong \frac{(x,y)/(bx-ay)}{(f,bx-ay)/(bx-ay)}
+        =\frac{(x,y)/(bx-ay)}{(f)/(bx-ay)}
+        \cong \frac{(t)}{(f(at,bt))}.
+    \]
+    最後の同型は$k[x,y]/(bx-ay) \to k[t]; x \mapsto at, b \mapsto bt$である．
+    $f$を斉次分解し，$f=f_r+\dots+f_d$とする．
+    すると$f(at,bt)$は丁度$t^r$で割り切れ，
+    商は点$t=0$（すなわち点$P=(0,0)$）で0にならない多項式となる．
+    $P$で0にならない多項式は局所化で単元となるから，結局以下のようになる．
+    \[ \frac{(x,y)}{(f,bx-ay)} \cong (t)/(t^r). \]
+    左辺の部分イデアルは明らかに
+    \[ 0=(t^r)/(t^r) \subsetneq \dots \subsetneq (t^2)/(t^r) \subsetneq (t^1)/(t^r). \]
+    に限られる．
+    以上から，$(f,bx-ay)/(bx-ay)=(f)/(bx-ay)$ならば$(L \cdot Y)_P=\mu_P(Y)$．
+
+    $f_r$は2変数斉次多項式だから一次式に分解でき，以下のように出来る．
+    \[ f_r=\prod_{i=1}^s (b_i x-a_i y). \]
+    $f_r$は，ある$i$について$(a:b)=(a_i:b_i)$であるとき$f_r \in (bx-ay)$．
+    なのでこの時に限り$(f,bx-ay)/(bx-ay)=(f-f_r)/(bx-ay) \neq (f)/(bx-ay)$となる．
 
     \subsection{$Y$ :: curve of degree $d$ in $\proj^2$, $L$ :: line in $\proj^2$, then $(L \cdot Y):=\sum (L \cdot Y)_P=d$.}
+    W.Fulton ``Algebraic Curve" \S 3.3参照．
 
 \section{Give a nonsingular curve of degree $d$ in $\proj^2$ over a field $k$ of characteristic $p$.} %% Ex5.5 
     \paragraph{原点で非特異な曲線の例．}

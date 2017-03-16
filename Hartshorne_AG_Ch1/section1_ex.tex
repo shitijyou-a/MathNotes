@@ -1,8 +1,8 @@
-\documentclass[a4paper]{jarticle}
+\documentclass[a4paper]{jsarticle}
 \usepackage{../math_note, exercise}
 \usepackage[all]{xy}
-\newcommand{\I}[1]{\mathfrak{#1}}
 \newcommand{\prodsp}{\affine^1 \times \affine^1}
+\renewcommand{\thesection}{Ex1.\arabic{section}}
 
 \begin{document}
 \section{}
@@ -29,11 +29,26 @@
     \end{Remark}
 
     \subsection{}
-    2次多項式$F=ax^2+bxy+cy^2+dx+ey+f \in k[x,y]$を考える．
-    $k[x,y]/(F)$が環として$k[t]$または$(k[t])_{t}$に同型であることを示したい．
+    2次多項式$f \in k[x,y]$を考える．
+    $k[x,y]/(f)$が環として$k[t]$または$(k[t])_{t}$に同型であることを示したい．
 
-    \paragraph{標準形へ}
-    標数が正の体でも，その代数閉包は無限体である．
+    （以下の証明はchapter 1全体を学び終わった者が書く．$\iso$は同型を表す．）
+    $f$を斉次化して$F \in k[x,y,z]_2$とする．
+    さらに$\zerosp(F)$から3点をとりそれぞれ$(1:0:0), (0:1:0), (0:0:1)$に射影変換する．
+    この3点を通るirreducibleな2次曲線は$axy+byz+czx=0 ~~(a,b,c \neq 0)$なるものしかない．
+    さらに$x,y,z$を適切に定数倍すれば$xy+yz+zx=0$に変換できる．
+    この曲線は以下の写像によって$\proj^1$とbirationalである．
+    \begin{defmap}
+        \alpha:& \zerosp(xy+yz+zx)& \to& \proj^1 \\ 
+        {}& (a:b:c)& \mapsto& (a:b) \\
+        {}& \left( a:b: -\frac{ab}{a+b} \right)& \mapedfrom& (a:b) \\
+    \end{defmap}
+    Cor6.12から，$\zerosp(F)$は$\proj^1$と同型．
+    （ここまでの一連の変換は$d$-uple embeddingを介しても得られる．）
+    もともとの$\zerosa(f)$は$\zerosp(F) - \zerosp(z)$と同型であった．
+    $\deg F=2$なので，これは$\zerosp(F)-\text{(1 or 2 points)}$．
+    結局$\zerosa(f) \iso \proj^1-\text{(1 or 2 points)} \iso \affine^1 \mor \affine^1-0$となる．
+    それぞれのaffine coordinate ringは，$\affine^1$は$k[t]$で，$\affine^1-0$は$k[t]_t$．
 
 \section{}
     問題文から$Y:=\{ (t,t^2,t^3) : t \in k\}$．
@@ -152,7 +167,7 @@ by the definition.
     \begin{align*}
         {}&     \cl_{X}(Y)=X \\
         \iff&   X \setminus \cl_{X}(Y)=\emptyset \\
-        \iff&   \inte_{X}(X \setminus Y)=\emptyset \\
+        \iff&   \opint_{X}(X \setminus Y)=\emptyset \\
         \iff&   \Forall{O \in \open{X}} O \neq \emptyset \implies (O \not \subseteq (X \setminus Y)) \\
         \iff&   \Forall{O \in \open{X}} O \neq \emptyset \implies (O \cap Y \neq \emptyset)
     \end{align*}
@@ -316,15 +331,18 @@ by the definition.
     この$U$と$Z_j$のcapを考えると，以下のようになる．
     \[ (Z_0 \cap U) \subsetneq \dots \subsetneq (Z_d \cap U) \]
     実際，$Z_j \cap U$は互いに異なる．
-    なぜなら，$Z_j$は$X$の既約閉部分集合であるから，$Z_j \cap U$は$Z_j$の相対位相で稠密となっている(Ex1-6)．
+    なぜなら，$Z_j$は$X$の既約閉部分集合であるから，$Z_j \cap U$は$Z_j$の相対位相で稠密となっている(Ex1.6)．
     なので$Z_j \cap U=Z_k \cap U$$(j \neq k)$と仮定して両辺の$\cl_{X}$をとると
     $Z_j=Z_k$となり
     \footnote{$(W \subset Z \subset X) \land (Z\mbox{::closed in }X) \implies \cl_{X}(W)=\cl_{Z}(W)$が一般に成り立つ．}
     ，$Z_j, Z_k$のとり方に反する．
     よって$\dim X=\dim U$となる．
-    \footnote{\url{http://math.stackexchange.com/questions/140066/krull-dimension-of-a-scheme/140078}でのKeenan Kidwellの投稿を訳した．}
+    \footnote{\url{http://math.stackexchange.com/questions/140066}でのKeenan Kidwellの投稿を訳した．}
 
-    \subsection{An example of a topological space::$X$ and a dense open subset::$U$ with $\dim U <\dim X$.}
+    \subsection{An example of a topological space $X$ and a dense open subset $U$ with $\dim U <\dim X$.}
+    $X=\{a,b,c\}, \mathcal{O}_X=\{ \emptyset, \{a\}, \{a,b\}, \{a,b,c\} \}, U=\{a,b\}$とおく．
+    すると$U$を含む閉集合は$X$しかないから$U$はdense．
+    そして$\{a\} \subsetneq \{a,b\} \subsetneq \{a,b,c\}$より$\dim U=1<2=\dim X$．
 
     \subsection{$X$::irreducible finite-dimensional topological space, $(X \supseteq) Y$::closed, and if $\dim Y = \dim X$, then $Y = X$.}
     $X$は有限次元であるから，既約閉部分集合の列であって極大な長さを持つもの

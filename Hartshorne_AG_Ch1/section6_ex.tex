@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage{../math_note, exercise}
+\usepackage[all]{xy}
 
 \newcommand{\mon}{\mbox{ on }}
 \newcommand{\Sing}{\operatorname{Sing}}
@@ -10,14 +11,27 @@
 \begin{document}
 \section{Nonsingular Curve which Is Birational but Not Isomorphic to $\proj^1$.} %% Ex6.1 
     $Y$を$\proj^1$と同型でないnonsingular rational curveとする．
-    rationalはEx4.4で定義されていて，$\proj^1$とbirationalであることを意味する．
-    したがってThem3.4とCor4.5より$K:=K(Y) \cong K(\proj^1)=k[u,v]_{((0))}$．
-    また，$Y$が$\proj^1$と同型でないことから$\regs(Y)=:R \not \iso k = \regs(\proj^1)$.
-    $K(Y) \cong K(\proj^1)$の同型写像を用いて$R \subset K(\proj^1)$と考える．
 
     \subsection{$Y$ is isomorphic to an open subset of $\affine^1$.}
-    $R \neq k$より，$Y$全体で定義される定数でないregular function $\alpha \in R \setminus k$がとれる．
-    
+    Cor6.12を用いる．
+    仮定より，$K(Y) \cong K(\proj^1)$．
+    $Y$があるnonsingular projective curveと同型ならそれは$\proj^1$と同型になってしまう
+    \footnote{Cor6.12の(iii)$\simeq$(i)．}
+    したがって$Y$はあるnonsingular projective curve $\bar{Y}$の真の開部分集合と同型である．
+    \footnote{Cor6.12の(iii)$\simeq$(ii)．}
+    再びCor6.12によって$\bar{Y} \iso \proj^1$なので\footnote{Cor6.12の(iii)$\simeq$(i)．}，
+    結局$Y$は$\proj^1$の真の開部分集合と同型である．
+
+    $\proj^1$の真の開部分集合$U$は$\affine^1$の開部分集合と同型であることを示す．
+    $(a:b) \in \proj^1 \setminus U$と，$(a:b)$と異なる点$(c:d)$を$ad-bc \neq 0$であるように取る．
+    \begin{defmap}
+        f:& U& \to& \proj^1-\{(1:0)\} \\ 
+        {}& (x:y)& \mapsto& (dx-cy:bx-ay)=(u:v)
+    \end{defmap}
+    $ad-bc \neq 0$なのでこれは同型写像である．
+    同型写像は同相写像であり，かつ
+    $\im f \subseteq (\zerosp(v))^c \iso \affine^1$なので，
+    $U$は$\affine^1$の開部分集合と同型である．
 
     \subsection{$Y$ is affine.}
     (a)より$Y \iso \affine^1 \setminus \{P_1,\dots,P_s\}$となる$\{P_1,\dots,P_s\}$が存在する．
@@ -31,7 +45,7 @@
     すなわち，$k[x]_f$の任意のイデアル$\I{a}$に対して$k[x]_f$のイデアル$\I{a}'$が存在し，
     $\I{a}$は$\I{a}'$の元を$x \mapsto x/1$で写したもので生成される．
     $k[x]$はPIDだから，$k[x]_f$もPID．
-    PIDならばUFDであることは代数概論にもある．
+    PIDならばUFDであることは森田『代数概論』にもある．
 
 \section{An Elliptic Curve} %% Ex6.2 
     $f=y^2-x^3+x$を考えよう．
@@ -115,8 +129,8 @@
     これを$f$に代入すると，$\bar{x}(\bar{x}^2+\omega^2 \bar{x}-1)=0$が得られる．
     $Y$は$y$軸全体($=\zerosa(x)$)を含まないので
     \[ \bar{x}^2+\omega^2 \bar{x}-1=0. \]
-    これは$Y$上の任意の点で成り立つ方程式であるから$Y$は$y$軸と交わらない．
-    しかし実際は交わるので矛盾．
+    これは$Y$上の任意の点で成り立つ方程式であるから$Y$は$x=0$となる点を持たない．
+    しかし実際は$(0,0) \in Y$なので矛盾．
 
 %    また$\beta=0$とすると$\frac{u}{\bar{x}} \in A, 1=\frac{u}{\bar{x}} v$となり，
 %    これも$v$が非単元であることに反するから$\beta \neq 0$．
@@ -132,13 +146,59 @@
 
 \section{Give counterexample to Prop6.8.} %% Ex6.3 
 %Prop6.8
-%Let X be an abstract nonsingular curve, let P E X, let Y be
+%Let X be an abstract nonsingular curve, let P \in X, let Y be
 %a projective variety, and let \phi:X - P \to Y be a morphism. Then there
 %exists a unique morphism \phi: X \to Y extending \phi.
+    \paragraph{The Extension of Birational map between Nonsingular Projective Curves is Isomorphism.}
+    この問題とEx6.7で用いるので明確に述べておく．
+    Cor6.12より，互いにbirationalなnonsingular projective curveは同型である．
+
+    これはProp6.8から直接示すこともできる．
+    $X,Y$ :: nonsingular projective curves, $\phi: X \bimap Y$ :: birational mapとする．
+    Cor4.5から$U$ :: open in $X$, $V$ :: open in $Y$が存在して
+    isomorphism $\phi|_U^V: U \isomap V$ができる．
+    Prop6.8から，$\phi$には拡張が一意に存在する．
+    これをvarietyとmorphismの圏における可換図式にすると以下のようになる．
+    \[
+    \xymatrix
+    {
+    {} & U \ar@{>->}[dl] \ar[dr]^-{\phi|_U} \ar@{<->}^-{\phi|_U^V}[rr] & {} & V \ar@{>->}[dl] \ar[dr]^-{(\phi^{-1})|_V} & {} \\
+    X \ar@{-->}_-{\overline{\phi}}[rr] & {} & Y \ar@{-->}_-{\overline{\phi^{-1}}}[rr]& {} & X
+    }
+    \]
+    すると$U$から右下の$X$へ向かう2つのパスが可換であることから，以下が成り立つ．
+    \[ (\overline{\phi^{-1}} \circ \overline{\phi})|_U=(\phi^{-1})|_V \circ \phi|_U^V=\id{U}. \]
+    Lemma4.1から$\overline{\phi^{-1}} \circ \overline{\phi}=\id{X}$となる．
+    $\overline{\phi} \circ \overline{\phi^{-1}}=\id{Y}$も同様に示すことができるので，
+    $\overline{\phi}$がisomorphismになることがわかった．
 
     \paragraph{If $\dim X \geq 2$．}
+    自然数$n \geq 3$を固定する．
+    $f=x_0^2-\left( \sum_{i=1}^n x_i^2 \right), X=\zerosp(f), P=(1:0:\dots:0:1)$とする．
+    この時，$\dim X=n-1 \geq 2, P \in X$である．
+    まず$X-P$から$H=\zerosp(x_n)$へのstereographic projectionを$\phi$とすると，これは全単射になる．
+    \begin{defmap}
+        \phi:& X-P& \to& H \\ 
+        {}& (a_0:\dots:a_n)& \mapsto& (a_0-a_n:a_1:\dots:a_{n-1}:0) \\
+        {}& \left( 2b_0b_0-\alpha: 2b_0b_1: \dots: 2b_0b_{n-1}: -\alpha\right)& \mapedfrom& (b_0:\dots:b_{n-1}:0)
+    \end{defmap}
+    ただし$\alpha=f(b_0,\dots,b_{n-1},0)$とした．
+    Prop6.8がこの場合にも成立したと仮定しよう．
+    すると拡張$\bar{\phi}:X \to H$は全単射である．
+    しかし$\phi$がすでに全単射なので，$P$の$\bar{\phi}$による像は別の点$P'$の像でもある．
+    すなわち$\bar{\phi}^{-1}(\bar{\phi}(P))$は二点集合$\{P,P'\}$となる．
+    これは$\bar{\phi}$が単射であることに反する．
 
     \paragraph{If $Y$ :: not projective variety．}
+    $X=\proj^1, P=(1:0), Y=\affine^1$としよう．
+    すると$X-P$と$Y$には$(a:b) \mapsto a/b \mapsto (a/b:1)$という標準的な全単射が存在する．
+    Prop6.8がこの場合にも成立したと仮定すると，前段落と同様に矛盾が生じる．
+
+%    これを拡張したものを$\bar{\phi}$とすると，Lemma 3.6より，これはひとつのregular functionで表せる．
+%    regular function$\bar{\phi}$は開集合$X-P$上ではもとの全単射と一致しているから，
+%    Remark3.1.1より，$\bar{\phi}$は$X$全体で$(a:b) \mapsto a/b$と一致する．
+%    しかし明らかにこれは$P$で定義できない．
+%    よって矛盾が生じ，拡張は存在しない．
 
 \section{Make surjective morphism $\phi: Y \to \proj^1$ from nonconstant rational function.} %% Ex6.4 
     $Y$ :: nonsingular projective curveとする．
@@ -148,9 +208,32 @@
         {}& P& \mapsto& (1:f(P))=(h(P):g(P))
     \end{defmap}
 
-    TODO: これがsurjective morphismであることを示す．
+    多項式に多項式を代入したものは多項式だから，これがmorphismであることは自明．
 
-\section{Subvariety of nonsingular projective curve is closed subset.} %% Ex6.5 
+    surjectiveであることを示そう．
+    $(a:b) \in \proj^1$を任意に取る．
+    $\phi(P)=(h(P):g(P))=(a:b)$とすると，
+    \[ (ag-bh)(P)=0. \]
+    となる．
+    これを満たす$P$全体が$\phi^{-1}(a:b)$であり，
+    $ag-bh$は多項式であることから$\phi^{-1}(a:b)$は高々有限集合である．
+    $\phi^{-1}(a:b)$が空でないことは次のようにわかる．
+    $\phi^{-1}(a:b)$が空であるとき$ag-bh$は0でない定数$c$である．
+    $(a:b) \in \proj^1$なので$a \neq 0$と仮定すると\[ g=(b/a)h+c. \]
+    $g$は斉次であるから$\deg (b/a)h=\deg c=0$．
+    しかしそうなると$\deg g=\deg h=0$となり，$f=g/h$は定数であることになる．
+    これは$f$のとり方に矛盾する．
+
+\section{Subvariety which is nonsingular projective curve is closed subset.} %% Ex6.5 
+    $X,Y$ :: (quasi-projective) variety, $X \subset Y \subset \proj^n$とする．
+    $X$ :: nonsingular projective curveであるときに$X$ :: closed in $Y$であることを示そう．
+    $\bar{X}=\cl_{Y}(X)$とすると，これはnonsingular projective curve．
+    したがって，$X$は$\bar{X}$の開集合である．
+    $\bar{X}=X$を示そう．
+
+    埋め込み$i: X \to \bar{X}$は$\bar{i}: \bar{X} \to \bar{X}$へ拡張できる．
+    しかし$X$は予めprojective curveなので$i$は最初からmorphismで，$i=\bar{i}$．
+    よって$X=\im i^{-1}=\im \bar{i}^{-1}=\bar{X}$．
 
 \section{Automorphisms of $\proj^1$.} %% Ex6.6 
     $\proj^1=\affine^1+\{\infty\}$を考える．
@@ -187,14 +270,30 @@
     この時，$f,g$は高々1次式でなくては$\psi$がinverse morphismを持たないことを示す．
 
     $X=f/g$としよう．
-    \[ X=\frac{a_n x^n+\dots+a_0}{b_n x^n+\dots+b_0} \mwhere \{a_i\}, \{b_j\} \subset k, a_n \mor b_n \neq 0. \]
-    必ずしも分子分母の次数は$n$でないが$n$以下であることに注意せよ．
+    \[ X=\frac{a_n x^n+\dots+a_0}{b_n x^n+\dots+b_0} \mwhere \{a_i\}, \{b_j\} \subset k. \]
+    分子分母の次数は高々$n$であることに注意せよ．
     $X$の値が与えられた時，$\psi^{-1}(X)$は以下の方程式の解集合である．
     \[ (a_n-X b_n)x^n+(a_{n-1}-X b_{n-1}) x^{n-1}+\dots+(a_0-X b_0)=0. \]
     $\psi$が全単射ならば任意の$X$について$\psi^{-1}(X)$は一点集合である．
     よって$n=1$，すなわち$\Aut k(x) \subseteq PGL(1)$．
     逆の包含関係は明らかだから，主張が示せた．
 
-\section{If $\affine^1 - \{P_1,\dots,P_s\} \iso \affine^1 - \{Q_1,\dots,Q_t\}$ then $s=t$．Converse?} %% Ex6.7
+    \section{If $\affine^1 - \{P_n\}_{n=1}^{s} \iso \affine^1 - \{Q_n\}_{n=1}^{t}$ then $s=t$．Converse?} %% Ex6.7
+    $\proj^1=\affine^1+\{\infty\}$と考えることで$\affine^1-\{P_i\} \iso \proj^1-\{P_i,\infty\}$が自然に得られる．
+    なので同型写像$\phi: \affine^1 - \{P_n\}_{n=1}^{s} \isomap \affine^1 - \{Q_n\}_{n=1}^{t}$から
+    birational map $\phi': \proj^1 \bimap \proj^1$が得られる．
+    このbirational mapを拡張すると，Ex6.3で述べたように，$\proj^1$の自己同型写像$\bar{\phi'}$が得られる．
+    このことから主張が示される．
+    \[ \bar{\phi'}(\{P_n\}_{n=1}^{s})=\proj^1 - \bar{\phi'}(\proj^1 - \{P_n\}_{n=1}^{s})=\proj^1 - (\proj^1 - \{Q_n\}_{n=1}^{t})=\{Q_n\}_{n=1}^{t}. \]
+    
+    逆を考える．
+    ここまでの議論では$\affine^1 - \{P_n\}_{n=1}^{s} \iso \affine^1 - \{Q_n\}_{n=1}^{t}$の同型から$\proj^1$の自己同型を作った．
+    しかも出来上がった自己同型は$\{P_n\}_{n=1}^{s}$を$\{Q_n\}_{n=1}^{t}$へ写すものであった．
+    一方，Ex6.6より$\Aut \proj^1 \cong PGL(1)$であり，
+    $PGL(1)$の元は3点をどの3点に移すかで決定される．
+    $\affine^1$は無限集合なので，$PGL(1)$の任意の元で互いに写せないような
+    $\{P_n\}_{n=1}^{s}, \{Q_n\}_{n=1}^{s}$を選べる．
+    \footnote{具体的には，$k$を$\C$に埋め込み，$\affine^3$を見る．$\{(P_m, Q_n, P_mQ_n)\}$のうちのどの4点も同一平面上に乗らなければ良い．}
+    このような点達について同様の議論をすると矛盾が生じる．
 
 \end{document}

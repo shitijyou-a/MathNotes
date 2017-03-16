@@ -1,0 +1,478 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+
+\newcommand{\Reg}{\operatorname{Reg}}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\ord}{\operatorname{ord}}
+\renewcommand{\thesection}{Ex7.\arabic{section}}
+
+\begin{document}
+\section{Find the Degree of the Two Embedding.} %% Ex7.1 
+    \subsection{Find the degree of the $d$-uple embedding of $\proj^n$ in $\proj^N$.}
+    記号$\theta, \rho_d, M_i, N=\binom{n+d}{n}-1$はEx2.12の物を使う．
+    計算するのは$\mathcal{M}=S/\ker \theta$のHilbert polynomialである．
+    $\mathcal{M} \cong k[\{M_i\}_{i=0}^{N}]$かつ$\deg M_i=d$がEx2.12でわかっている．
+    したがって，$\mathcal{M}_l$は$dl$次単項式全体を基底に持つ$k$-ベクトル空間．
+    \[ P_{\mathcal{M}}(t)=\binom{dt+n}{n}=\frac{1}{n!}(d^nt^n+\dots). \]
+    よって$\deg \im \rho_d=d^n$.
+
+    \subsection{Find the degree of the Segre embedding of $\proj^r \times \proj^s$ in $\proj^N$.}
+    記号$\psi, \phi$はEx2.14の解答で使った物を使う．
+    計算するのは$\mathcal{N}=S/\ker \phi$のHilbert polynomialである．
+    Segre embeddingは$x_i y_j$でparametrizeされるから，
+    $\mathcal{N}_{l}$は
+    \[ \left(\{x_i\}_{i=1}^r\text{の$l$次単項式}\right) \cdot \left(\{y_j\}_{j=1}^s\text{の$l$次単項式}\right) \]
+    と書ける元全体を基底に持つ．
+    よって，
+    \[ P_{\mathcal{N}}(t)=\binom{t+r}{r}\binom{t+s}{s}=\frac{1}{r!} \frac{1}{s!}t^{r+s}+\dots. \]
+    なので$\deg \mathcal{N}=\frac{1}{r!} \frac{1}{s!} \cdot (r+s)!=\binom{r+s}{r}$．
+
+\section{The Arithmetic Genus.} %% Ex7.2 
+    $Y$ :: variety in $\proj^n$, $\dim Y=r$のとき，
+    $p_a(Y)=(-1)^r (P_Y(0)-1)$をthe arithmetic genus of $Y$とよぶ．
+
+    \subsection{$p_a(\proj^n)=0$.}
+    すでに得られている通り，
+    \[ P_{\proj^n}(t)=\binom{t+n}{n}=\frac{1}{n!}(t+n)(t+n-1)\cdots(t+1)=\frac{1}{n!}((\cdots)t+n!). \]
+    なので$P_{\proj^n}(0)=1$．よって$p_a(\proj^n)=0$．
+    
+    \subsection{If $Y$ :: curve in $\proj^2$ and $\deg Y=d$, then $p_a(Y)=\binom{d-1}{2}$.}
+    次の問題の特殊な場合に過ぎないので省略．
+
+    \subsection{If $Y$ :: hypersurface in $\proj^n$ and $\deg Y=d$, then $p_a(Y)=\binom{d-1}{n}$.}
+    Prop7.6dより，$P_Y(t)=\binom{t+n}{n}-\binom{t-d+n}{n}$．
+    \begin{align*}
+        {}&P_Y(0) \\
+        = &\frac{1}{n!} \left[ n!-(-d+n)\cdots(-d+1) \right] \\
+        = &1+\frac{1}{n!}(-1)^{n+1}(d-n)\cdots(d-1) \\
+        = &1+\frac{1}{n!}(-1)^{n+1}(d-1)\cdots(d-n).
+    \end{align*}
+    よって$p_a(Y)=\frac{1}{n!}(-1)^{2n}(d-1)\cdots(d-n)=\binom{d-1}{n}$．
+
+    \subsection{Arithmetic Genus of Compelete Intersection.}
+    $Y \subset \proj^3$がcomplete intersection, すなわち2元$f,g \in S$で$Y=\zerosp(\{f,g\})$で表せるcurveとする．
+    この時，以下は完全列である
+    \footnote
+    {
+    ただし，$S/(fg) \to S/(f) \oplus S/(g)$は$x+(fg) \mapsto (x+(f), x+(g))$，
+    $S/(f) \oplus S/(g) \to S/(f,g)$は$(x+(f), y+(g)) \mapsto x-y+(f,g)$である．
+    $x-y+(f,g)=0 \iff x+(f,g)=y+(f,g)$かつ$(f),(g) \subset (f,g)$だからこれは確かに完全列．
+    }．
+    \[ 0 \to S/(fg) \to S/(f) \oplus S/(g) \to S/(f,g) \to 0. \]
+
+    Prop7.6dと全く同様に$S/(fg)$, $S/(f) \oplus S/(g)$のHilbert Polynomialが計算できる．
+    \[ P_{S/(f,g)}(t)=(P_{S/(f)}(t)+P_{S/(g)}(t))-P_{S/(fg)}(t). \]
+    よって$S/(f,g)$のArithmetic Genusは
+    $(-1)^1((-\frac{1}{2}ab(a+b-4))-1)=\frac{1}{2}ab(a+b-4)+1$．
+
+    \subsection{Arithmetic Genus of Product Variety.}
+    $Y \subseteq \proj^n, Z \subseteq \proj^m$かつ$\dim Y=r, \dim Z=s$とする．
+    $Y \times Z \subseteq \proj^n \times \proj^m$を$\proj^N$へSegre embeddingで埋め込む．
+    $\mathbf{y}=\{y_i\}_{0 \leq i \leq n}, \mathbf{z}=\{z_j\}_{0 \leq j \leq m}, 
+    \mathbf{x}=\{x_{(i,j)}\}_{0 \leq i \leq n, 0 \leq j \leq m}$とすると，
+    以下の$k$-代数としての同型が成り立つ．
+    \[
+        \frac{k[\mathbf{x}]}{\defsp(Y \times Z)}
+        =
+        \bigoplus_{d \in \Z} \left(\frac{k[\mathbf{x}]}{\defsp(Y \times Z)} \right)_d
+        \cong
+        \bigoplus_{d \in \Z} \left[ \left( \frac{k[\mathbf{y}]}{\defsp(Y)} \right)_d \otimes_k \left(\frac{k[\mathbf{z}]}{\defsp(Z)} \right)_d \right]
+    \]
+    これは次のように示せる．
+    まず，以下の準同型は全射
+    \footnote{任意の$\prod_{i=1}^d y_{a_i} \otimes \prod_{i=1}^d z_{b_i}$に対して$\prod_{i=1}^d x_{(a_i, b_i)}$を取ればよい．}．
+    \begin{defmap}
+        \gamma:& k[\mathbf{x}]& \to& 
+        \bigoplus_{d \in \Z} \left[ \left( \frac{k[\mathbf{y}]}{\defsp(Y)} \right)_d \otimes_k \left(\frac{k[\mathbf{z}]}{\defsp(Z)} \right)_d \right] \\ 
+        {}& x_{(i,j)}& \mapsto& (y_i+\defsp(Y)) \otimes_k (z_j+\defsp(Z)) \\
+    \end{defmap}
+    さらに$\pr_{\mathbf{y}}:x_{(i,j)} \mapsto y_i$とする．
+    $\pr_{\mathbf{y}}$に対応して，射影写像$(p_{(i,j)}) \mapsto (p_{(i,l)})$が定義できるのでこれも$\pr_{\mathbf{y}}$と書く．
+    （ただし$l$はある$i$について$p_{(i,l)} \neq 0$であるようなもの．）
+    すると$\pr_{\mathbf{y}}(\zerosp(\ker \gamma))=\zerosp(\pr_{\mathbf{y}}(\ker \gamma))=\zerosp(\defsp(Y))=Y$．
+    よって$\zerosp(\ker \gamma)$の$\mathbf{y}$方向への射影は$Y$である．
+    同様に$\mathbf{z}$方向への射影は$Z$だから，
+    $\ker \gamma=\defsp(Y \times Z)$．
+    これで同型が証明できた．
+
+    以上の同型から$P_{Y \times Z}=P_Y \cdot P_Z$．
+    両辺の次数を見ることで$\dim Y \times Z=r+s$もわかる．
+    なので，以下のように$Y \times Z$のArithmetic Genusが計算できる．
+    \begin{align*}
+        {}& p_a(Y \times Z) \\
+        =&  (-1)^{r+s} (P_{Y} \cdot P_{Z}-1) \\
+        =&  (-1)^{r+s} \left( ((-1)^r p_a(Y)+1) ((-1)^s p_a(Z)+1)-1 \right) \\
+        =&  (-1)^{r+s} \left( (-1)^{r+s}p_a(Y) p_a(Z)+(-1)^s p_a(Y)+(-1)^r p_a(Z) \right) \\
+        =&  p_a(Y) p_a(Z)+(-1)^r p_a(Y)+(-1)^s p_a(Z)
+    \end{align*}
+
+\section{The Dual Curve.} %% Ex7.3 
+    $(\proj^2)^*=\{ a_0 x_0+a_1 x_1+a_2 x_2=0 ~|~ (a_0:a_1:a_2) \in \proj^2 \}$とする．
+    $Y$ :: curve in $\proj^2$とする．
+    また，$Y$の定義多項式を$f$としておく．
+
+    \subsection{Uniquely Existence of Tangent Line.}
+    \paragraph{$\deg Y>1$が必要であること．}
+    任意のnonsingular point $P=(p_0:p_1:p_2) \in Y$に対して，
+    $i(Y, L; P)>1$となる直線$L$を$T_P(Y)$と書く．
+    これがただひとつ存在することを示す．
+    まず，Cor7.8(B\'ezout's Theorem)から，
+    \[ 1 \leq i(Y, T_P(Y); P) \leq (\deg Y) \cdot (\deg T_P(Y))=\deg Y. \]
+    したがって$i(Y, T_P(Y); P)>1$には$\deg Y>1$が必要である．
+
+    \paragraph{示すべき主張の言い換え．}
+    $Q (\neq P) \in \proj^2$を任意にとり，直線$L: (x_0:x_1:x_2)=uP+vQ ~~((u:v) \in \proj^1)$を考える．
+    $Q$を変えれば$P$を通る任意の直線がこれで書けることに注意せよ．
+    さらに$L$と別に直線$T: \sum_{i=0,1,2}(\partial_{x_i} f)(P) \cdot x_i=0$を定義する．
+    $P \in Y$はnonsingular pointだからEx5.8より，これは確かに直線を定義している．
+    さらにEx5.8のEuler's lemmaから
+    $\sum_{i=0,1,2}(\partial_{x_i} f)(P) \cdot p_i=(\deg f) \cdot f(P)=0$なので$P \in T$．
+    $i(Y,L; P)>1$であることと$Q \in T$すなわち$L=T$
+    \footnote
+    {
+        $P, Q \in T$であれば，$L$は$T$に含まれる独立なベクトルの線形和であることになり，
+        したがって$L=T$．
+    }
+    であることは同値である．
+    これを示そう．
+
+    \paragraph{$i(Y, L; P)$の解体．}
+    $i(Y, L; P)$を計算したい．
+    そのためにこの段落で$i(Y,L; P)$を計算しやすいものへ帰着させる．
+    $I=\defsp(Y)+\defsp(L), M=S/I$とし，$P$に対応する$S$の極大イデアルを$\I{m}$とする．
+    $\Ann(M)=I$であり，$\zerosp(I)=Y \cap L$は有限集合なので，$\I{m}$は$\Ann(M)$の極小イデアル．
+    まず，$S_{\I{m}}$-加群$M_{\I{m}}$の組成列を考える．
+    \[ 0=\I{a}_l \subsetneq \I{a}_{l-1} \subsetneq \dots \subsetneq \I{a}_0=M_{\I{m}}. \]
+    $M_{\I{m}}$は環なので各$\I{a}_i$はイデアルである．
+    Ati-Mac Prop3.11-i)より，これらはすべて拡大イデアルである．
+    したがって以下のように書き換えられる．
+    \[ 0=\I{b}_l^e \subsetneq \I{b}_{l-1}^e \subsetneq \dots \subsetneq \I{b}_0^e=M_{\I{m}}. \]
+    各$\I{b}_i$は環$M$のイデアルである．
+    さらにAti-Mac Prop3.11-ii)より，
+    $\I{b}^e \neq M_{\I{m}} \iff \I{b} \subseteq \I{m}/I \subsetneq M$．
+    また，$\I{c} \subseteq \I{b} \subseteq \I{m}/I$については，
+    Ati-Mac Cor3.4, Prop3.8により，
+    \[ \I{c}=\I{b} \iff \I{b}/\I{c}=0 \iff \left( \I{b}/\I{c} \right)^e=0 \iff \I{b}^e=\I{c}^e. \]
+    なので$S_{\I{m}}$-加群$M_{\I{m}}$の組成列から次のようにイデアル列が得られる．
+    \[ 0=\I{b}_l \subsetneq \I{b}_{l-1} \subsetneq \dots \subsetneq \I{b}_0=\I{m}/I. \]
+    このイデアル列からもとの組成列が得られることはAti-Mac Prop3.3から理解る．
+    だから，我々は$\I{m}/I$の部分イデアル列として極大な物を考えれば良い．
+
+    \paragraph{$\proj^2$から$L$へ，$L$から$\proj^1$へ．}
+    同型定理から$\I{m}/I \cong \frac{\I{m}/\defsp(L)}{I/\defsp(L)}$であり，
+    以下で見るように右辺のほうが扱いやすい．
+    計算すると$I/\defsp(L)=\defsp(Y)/\defsp(L) \subset S(L)$．
+    $L$は定義から$u,v$によるパラメトライズを持つから$S(L) \cong k[u,v]^h$．
+    $\I{m}/\defsp(L)$をこの同型写像で写すと，
+    \[ \I{m}/\defsp(L)=(\{p_i x_j-p_j x_i\}_{i,j=0,1,2})/\defsp(L) \to (\{(p_i q_j-p_j q_i)v\}_{i,j=0,1,2})=(v). \]
+    \footnote
+    {
+        $p_i q_j-p_j q_i \neq 0$は欄外で示す．
+        $P,Q$の代表元を適当にとって$\affine^3$のベクトルと見よう．
+        $p_i q_j-p_j q_i=\det \begin{bmatrix} p_i & q_i \\ p_j & q_j \end{bmatrix}$．
+        したがってこれがすべての$i,j$で0になるということは，
+        $P,Q$が$\affine^3$のベクトルとして平行であることと同値である．
+        今$\proj^2$の元として$P \neq Q$としていたから，$p_i q_j-p_j q_i \neq 0$．
+    }
+    ただし$P=(p_0:p_1:p_2), Q=(q_0:q_1:q_2)$としている．
+    幾何的に見れば，これは$\proj^2$上の点$P$を$L$上の点$P$とみなし，さらに$\proj^1$の点をみなしたことになる．
+    同様に$\defsp(Y)/\defsp(L)=(f)/\defsp(L)$を写すことで，$(f)$を$k[u,v]^h$の元とみなせる．
+    $\bar{f}=f(p_0 u+q_0v, p_1 u+q_1v, p_2 u+q_2v)$としておけば，
+    $\frac{\I{m}/\defsp(L)}{I/\defsp(L)} \cong (v)/(\bar{f})$になる．
+
+    \paragraph{再び$i(Y, L; P)$．}
+    $\I{m}/\defsp(L)=(v)$の部分加群列を考えよう．
+    まず，明らかに$(v) \subsetneq (v^2) \subsetneq \dots$という部分加群列がある．
+    $\proj^1$がnonsingular curveであることから$\dim _k \I{m}/\I{m}^2=\dim \proj^1=1$．
+    （ここだけがcurveに特有の議論である．）
+    なので$(v)/(v^2)$は単純加群であり，$(v)$と$(v^2)$の間に更なる部分加群は無い．
+    したがって$(v)/(\bar{f})$が長さ2以上の部分加群列を持つこと，
+    $(v^2)$が$(v)/(\bar{f})$の部分加群に写せることは同値である．
+    さらにそれは$(v^2) \supseteq (\bar{f})$と同値である．
+
+    \paragraph{計算と結論．}
+    以上で$i(Y,L; P)>1 \iff (v^2) \supseteq (\bar{f})$がわかった．
+    $\bar{f}$を計算してみると，dual numberでの自動微分
+    \footnote{$\varepsilon \neq 0, \varepsilon^2=0$とすると，$F \in k[x]$について$F(a+\varepsilon)=F(a)+F'(a) \varepsilon$．}
+    を考えることにより，以下のように書ける．
+    \begin{align*}
+        {}& \bar{f}(u,v) \\
+        =&  f(p_0 u+q_0v, p_1 u+q_1v, p_2 u+q_2v) \\
+        =&  f(P)u^d+\left( \sum_{i=0,1,2} \partial_{x_i}f(P) \cdot q_i \right)u^{d-1}v+\dots+f(Q)v^d \\
+        =&  \left( \sum_{i=0,1,2} \partial_{x_i}f(P) \cdot q_i \right)u^{d-1}v+\dots+f(Q)v^d
+    \end{align*}
+    ただし$d:=\deg f$．最後の等号は$P \in Y=\zerosp(f)$による．
+    $u^{d-1}v$の係数が0であることと$(v^2) \supseteq (\bar{f})$が同値であることが直ちに理解る．
+    よって$Q \in T$．
+    これで$i(Y,L; P)>1 \iff Q \in T \iff T=L$が示された．
+
+    \paragraph{$P \in Y$ :: singularである時．}
+    $P \in Y$ :: singularであるとき，$\partial_{x_i}f(P)$は$i=0,1,2$で0．
+    なので最後に現れる$\sum_{i=0,1,2} \partial_{x_i}f(P) \cdot q_i$は任意の$Q$について0となる．
+    したがって$P$を通る任意の直線$L$について$i(Y,L; P)>1$となってしまう．
+
+    \subsection{A Map $P \mapsto T_P(Y)$ Defines a Morphism $\Reg Y \to (\proj^2)^*$.}
+    写像$\alpha$を$(a_0:a_1:a_2) \mapsto a_0 x_0+a_1 x_1+a_2 x_2=0$としておく．
+    これによって$\proj^2$と$(\proj^2)^*$は同一視される．
+    （問題文では明示されていないが，おそらくこれは定義の一部である．）
+    示すべきことは以下の写像がmorphismであること．
+    \begin{defmap}
+        \phi:& \Reg Y& \to& (\proj^2)^* \\ 
+        {}& P& \mapsto& T_P(Y)=\alpha(\nabla f(P))
+    \end{defmap}
+    ただし$\Reg Y$は$Y$のnonsingularな点全体である．
+    $\alpha$は同型写像だから$\alpha^{-1} \circ \phi=\nabla f$がmorphismであることが示せれば良い．
+    適当に$\proj^2$のaffine open coveringをとってLemma3.6を適用すればこのことが得られる．
+
+    \subsection{The Dual Curve.}
+    （問題ではないが次の問題で使うので書いておく．）
+    上で定義した$\phi$の像のclosureを$Y$のdual curveと呼ぶ．
+    すなわち，$Y$のdual curveは以下のもの．
+    \[ \alpha \left( \cl_{\proj^2} \left(\{\nabla(f)(P) ~|~ P \in \Reg Y\}\right) \right). \]
+    $\partial_{x_i}f$は$d-1$次斉次式だから，$\{\}$内は次のイデアルの零点だと言える．
+    \[ I_{DC}=(\{\partial_{x_i} f \cdot x_j-\partial_{x_j} f \cdot x_i\}_{i,j=0,1,2}). \]
+    （このイデアルの生成元は$P \in \Sing Y$ですべて0になる．）
+    したがって$\{\}$は閉集合であり，$I_{DC}$が$Y$のdual curveの定義イデアル．
+
+\section{Lines which Meet $Y$ Extactly in $d$ Points.} %% Ex7.4 
+    $Y$ :: curve in $\proj^2$, $d:=\deg Y$とする．
+    さらに写像$\alpha$を$(a_0:a_1:a_2) \mapsto a_0 x_0+a_1 x_1+a_2 x_2=0$としておく．
+    $U \subset \proj^2$を$\alpha(U)$の元（直線）が$Y$と丁度$d$個の点で交わるようなものとしよう．
+    この時，$U$ :: nonempty open subsetを示す．
+    そのために$U^c$ :: proper closed subsetを示す．
+
+    直線$L \in (\proj^2)^*$を考える．
+    $Y \cap L=\{P_i\}_{i=1}^r$としよう．
+    Cor7.8と，直線のdegreeが1であることから，
+    \[ \sum_{i=1}^r i(Y, L; P_i)=d. \]
+    したがって交点が$d$個，すなわち$r=d$であることと，
+    すべての$i$について$i(Y,L; P)=1$であることが同値であることが理解る．
+    任意の$L$について$i(Y,L; P) \geq 1$だから，Ex7.3と合わせて以下が理解る．
+    \[ L \in \alpha(U^c) \iff \Exists{P \in Y \cap L} i(Y, L; P)>1 \iff [\Exists{P \in \Reg Y} L=T_P(Y)] \lor [\Exists{P \in \Sing Y} P \in L]. \]
+    
+    この2条件のうち，$\Exists{P \in \Reg Y} L=T_P(Y)$を満たす$L$全体は
+    \[ \alpha(\{ \nabla(f)(P) ~|~ P \in \Reg Y \}) \]と書ける．
+    これはEx7.3の結果の言い換えである．
+    Ex7.3の解答で示したとおり，これは$\zerosp(I_{DC})$と書ける閉集合．
+    さらに$\Exists{P \in \Sing Y} P \in L$を満たす$L$全体を考える．
+    各$P \in \Sing Y$に対して，$P$を通る直線全体は次の集合である．
+    \[ \left\{ \sum q_ix_i=0 ~\middle|~ \sum q_ip_i=0 \right\}=\alpha(\{ Q ~|~ (P,Q)=0 \})=\alpha(\zerosp(\alpha(P))). \]
+    以上より，
+    \[ U^c=\zerosp(I_{DC}) \cup \left( \bigcup_{P \in \Sing Y} \zerosp(\alpha(P)) \right). \]
+    $Y$が曲線であることと$\Sing Y$が$Y$のproper closed subsetであることから$\Sing Y$は有限集合．
+    だから$U^c$はclosed subset．
+    properであること，すなわち$U^c \neq \proj^2$であることは$\proj^2$の既約性による．
+
+\section{An Irreducible Curve of Degree $d > 1$.} %% Ex7.5 
+    \subsection{``cannot have a point of multiplicity $\geq d$~".}
+    $Y$ :: irreducible curve in $\proj^2$, $\deg Y=:d>1$とする．
+    このとき，$Y$は斉次既約多項式$F \in k[x,y]^h$で表すことができる．
+    そして$\deg Y=d=\deg F$が成り立つ（Porp7.6d）．
+
+    $U_z=(\zerosa(z))^c$とする．
+    点$(a:b:1) \in Y \cap U_z$でのmultiplicityを考えよう．
+    $F$を$z$について非斉次化したものを$f$とする．
+    明らかに$\deg f \leq d=\deg F$．
+    さらに$(x,y) \mapsto (x-a, y-b)$と平行移動したものを$f'$とする．
+    この変換は1次変換だから$\deg f'=\deg f$．
+    Ex5.3で定義されているmultiplicityは
+    （$\affine^2$の曲線にしか定義されていないが）$\mu_{(a:b:1)}(Y)=\ord f'$．
+    \[ d=\deg F \geq \deg f=\deg f' \geq \ord f'=\mu_{(0,0)}(\zerosa(f')). \]
+    よって$Y$の点$(a:b:1)$におけるmultiplicityは$d$以下．
+
+    さらに，等号が成り立つと仮定しよう．
+    すると$f'$は$k[x,y]^h$の斉次$d$次多項式となる．
+    この時$f'$は重複を含めて$d(>1)$個の斉次1次多項式の積に分解できるから，
+    $\zerosa(f')$はirreducibleになり得ない．
+    しかし$Y \cap U_z$から$\zerosa(f')$への変換はirreducibilityを損なわない．
+    \footnote{$Y \cap U_z \to \zerosa(f)$はProp2.2より同相写像で，$\zerosa(f) \to \zerosa(f')$は平行移動なので同相写像．}
+    なので等号は成り立たず，$\mu_{(a:b:1)}(Y)=\deg f'<d$．
+
+    \subsection{``is a rational curve".}
+    $Y$ :: irreducible curve, $\deg Y=:d>1$とする．
+    ある点$P \in Y$において$\mu_P(Y)=d-1$であるとき，$Y$ :: rational curveとなることを示す．
+
+    調べたいのは$K(Y) \cong K(\proj^1)$か否かということなので，
+    Prop4.9を用いて$Y$を$\proj^2$のhypersurfaceとみなす．
+    定義多項式を$F \in k[x,y,z]^h$としよう．
+    このときProp7.6dより$\deg F=\deg Y=d$．
+    また，適当な射影変換によって$P \in Y$は$(0:0:1)$へ写せる．
+    すると仮定されているのは，$f=F(x,y,1)$が以下のように斉次分解出来るということである．
+    \[ f=F(x,y,1)=f_d+f_{d-1}=\prod_{i=1}^d (a_i x-b_i y)+\prod_{j=1}^{d-1} (c_j x-d_j y). \]
+    ただし$a_i, b_i, c_i, d_i \in k$である．
+    また，$\zerosa(f)(\iso Y \cap U_z)$がirreducibleであることから，
+    任意の$i,j$について$(a_{i}, b_{i})$と$(c_{j}, d_{j})$は平行でない．
+    仮に平行であるものがあればそれに対応する一次因子をくくりだして因数分解できてしまうからである．
+
+    任意の点$(x,y) \in Y$において次が成り立つ．
+    \[ f(x,y)=\prod_{i=1}^d (a_i x-b_i y)+\prod_{j=1}^{d-1} (c_j x-d_j y)=0. \]
+    したがって次が得られる．
+    \[ a_d x-b_d y=-\frac{\prod_{j=1}^{d-1} (c_j x-d_j y)}{\prod_{i=1}^{d-1} (a_i x-b_i y)}=:G(x,y). \]
+    $(a_{i}, b_{i}) \not \parallel (c_{j}, d_{j})$であるから$G$の分子分母に共通因子はなく，
+    $G$の分子分母は共に斉次式．
+    なので$G(x,y)=G(x/y,1)$．
+    今，$a_d \neq 0$と仮定し，$t=x/y$とする．
+    （$a_d=0$の時は$t=y/x$とする．）
+    すると$y \cdot (a_d t-b_d)=G(t,1)$となるから，結局次のbirational mapが得られる．
+    \begin{defmap}
+        \phi:& Y & \bimap& \proj^1 \\ 
+        {}& (x,y)& \mapsto& (x/y:1) \\
+        {}& \frac{G(t,1)}{a_d t-b_d}(t,1) & \mapedfrom& (t:1) 
+    \end{defmap}
+    $\frac{G(t,1)}{a_d t-b_d}=-\frac{\prod_{j=1}^{d-1} (c_j t-d_j)}{\prod_{i=1}^{d} (a_i t-b_i)}$である．
+    スカラー倍を用いて書いているので注意せよ．
+
+\section{Linear Varieties.} %% Ex7.6 
+    $Y$ :: algebraic set in $\proj^n$の各irreducible componentの次元が$r$だとする．
+    $\deg Y=1 \iff Y$ :: linear variety，を示す．
+    $Y$のirreducible componentsを$\{C_i\}_{i=1}^s$とし，$\I{p}_i=\defsp(C_i)$ておく．
+
+    \subsection{Proof of $\deg Y=1 \implies Y$ :: linear variety}
+    $M=S/\defsp(Y)$に対してThem7.7の証明の後半と同じ議論をすると，
+    $M$のHilbert polynomialは以下のようになる．
+    \[ P_M(z)=\sum_{i=1}^{s} \mu_{\I{p}_i}(M) \cdot P_{S/\I{p}_i}(z). \]
+    すべての$i$に対して$\dim C_i=r$であるから，$\deg P_{S/\I{p}_i}(z)=r$．
+    したがってleading cofficientを足すことにより，以下が理解る．
+    \[ 1=\deg Y=\sum_{i=1}^s \mu_{\I{p}_i}(M) \cdot \deg C_i \geq s \geq 1. \]
+    よって$s=1$すなわち$Y$ :: varietyが得られる．
+
+    $\defsp(Y)$の生成元を$g_1,\dots,g_t,g$とする．
+    $\defsp(Y)$は素イデアルだから，これらはすべて既約である．
+    $d=\deg g$としておく．
+    さらに$Y^-=\zerosp(\{g_1,\dots,g_t\})$としよう．
+    $Y^-$がirreducibleとは限らないことに注意せよ．
+    するとThem7.7の証明の前半と同様の議論が使える．
+    以下は完全列である．
+    \[ 0 \to (S/\defsp(Y^-))(-d) \to S/\defsp(Y^-) \to M \to 0. \]
+    よって$P_{M}(t)=P_{S/\defsp(Y^-)}(t)-P_{S/\defsp(Y^-)}(t-d)$．
+    なのでThem7.7の証明の前半から$\deg Y=1=\deg Y^- \cdot d$.
+    このことから$d=1$が得られる．
+    $g$は$\defsp(Y)$の生成元のいずれでも良いから，$\defsp(Y)$は一次斉次多項式で生成される．
+    以上から$Y$ :: linear variety.
+
+%    これのirreducible componentsを$\{C^-_i\}_{i=1}^{s^-}$としよう．
+%    $\I{p}^-_i$も同様である．
+%    $N=S/\defsp(Y^-)$に対して再び同じ議論を行うことで，以下が得られる．
+%    \[ P_N(z)=\sum_{i=1}^{s^-} \mu_{\I{p}^-_i}(N) \cdot P_{S/\I{p}^-_i}(z). \]
+%    明らかに$Y=\zerosp(\defsp(Y^-)+(g))$であるから，以下も理解る．
+%    \[ P_M(z)=\mu_{\I{p}^-_i}(N) \cdot P_{S/\I{p}^-_i}(z). \]
+
+    \subsection{Proof of $\deg Y=1 \impliedby Y$ :: linear variety}
+    $Y$がhyperplaneであるときはProp7.6dより$\deg Y=1$は明らかである．
+    Ex2.11aより，$Y$ :: linear varietyであるとき$Y$はhyperplaneの交わりとして書ける．
+    さらにEx2.11bより，$\defsp(Y)$は$(t:=)n-r$個の（線形独立な）一次斉次多項式で生成される．
+    その多項式を$h_1,\dots,h_t$としよう．
+    $I_i=\langle h_1,\dots,h_i \rangle$としておく．
+    同時に$Y_i=\zerosp(I_i)$としておく．
+    $I_{i+1}=I_i+(h), Y_{i+1}=\cap \zerosp(h_{i+1})$に注意せよ．
+
+    $\deg Y_i=1$ならば$\deg Y_{i+1}=1$であることを示す．
+    intersection multiplicityとdegreeは1以上の値だから，
+    Them7.7より
+    $\deg Y_{i+1}=(\deg Y_i)(\deg \zerosp(h_{i+1}))$．
+    仮定より$\deg Y_i=1$で，Prop7.6dより$\deg \zerosp(h_{i+1})=\deg h_{i+1}=1$なので主張が示された．
+
+%    以下の完全列を考える．
+%    \[ 0 \to S/(I_i \cdot h_{i+1}) \to S/I \oplus S/(h) \to S/(I_{i+1}) \to 0. \]
+%    それぞれの写像はEx7.2dで示したものと同じである．
+%    このことから以下が理解る．
+%    \[ P_{S/(I_{i+1})}=P_{S/I_i}+P_{S/(h_{i+1})}-P_{S/(I \cdot h_{i+1})}. \]
+%    今，$\dim \zerosp(I_i)=n-i, \dim \zerosp(h_{i+1})=\dim \zerosp(I \cdot h_{i+1})=n-1$．
+
+%    今，$Y=\bigcup_{i=1}^s C_i$かつ$\dim C_i=r$．
+%    ここで任意の$i,j$について$\dim (C_i \cap C_j)<r$であると仮定しよう．
+%    するとProp7.6bから$1=\deg Y=\sum_{i=1}^s \deg C_i$となる．
+%    したがって仮定のもとでは$s=1$，すなわち$Y$ :: varietyが得られる．
+
+%    $i,j$と$C_i \cap C_j$のirreducible component $D$をそれぞれひとつ取って固定する．
+%    ただし$D$は$\dim D=\dim (C_i \cap C_j)$なるものとする．
+%    すると$D \subseteq C_i \cap C_j \subsetneq C_i, C_j$となる．
+%    Them1.8とEx2.6から，
+%    \[ \dim D-1=\dim S/\defsp(D)=\dim \frac{S/\defsp(C_i)}{\defsp(D)/\defsp(C_i)}=\dim S(C_i)-\height \defsp(D)/\defsp(C_i). \]
+%    さらに
+
+\section{The Closure of the Union of All Lines from Nonsingular Point.} %% Ex7.7 
+    $Y$ :: variety in $\proj^n$, $\dim Y=r, \deg Y=d>1$について考える．
+    $P \in Y$ :: nonsingular pointとして，$X$を以下のように定める．
+    \[ X=\cl_{\proj^n} \left( \bigcup_{Q \in Y-P} L_{PQ} \right). \]
+    ただし$L_{PQ}$は二点$P,Q$を通る直線で，$L_{PQ}=\{uP+vQ ~|~ (u:v) \in \proj^1\}$と書ける．
+    射影変換を用いて$P=(1:0:\dots:0)$とする．
+
+    \paragraph{$X$の別表現．}
+    $\tilde{X}=\bigcup_{Q \in Y-P} L_{PQ}$としよう．
+    $R \in \tilde{X}$を任意にとると，
+    $L_{PR}$は$P$と異なる$Y$上の点を通る．
+    逆に，$L_{PR}$が$P$と異なる$Y$上の点を通らなければ$R$は$\tilde{X}$の元でない．
+    $R \in \proj^n$に対し，$L_{PR} \cap Y$の元はEx7.3の議論と同様に以下の集合に一対一対応する．
+    \[ (\{P\} \subseteq )\zerosp(\{ f(uP+vR) ~|~ f \in \defsp(Y)\}) (\subseteq \proj^1). \]
+    $l_{PR}$を$f \mapsto f(uP+vR)$なる準同型とすれば，
+    \[ \tilde{X}^c=\left\{ R \in \proj^n \middle| \sqrt{l_{PR}(\defsp(Y))}=(v) \right\}. \]
+
+    \subsection{$X$ :: variety, $\dim X=r+1$.}
+    \paragraph{$X$ :: variety.}
+    $X$ :: irreducibleを示す．
+    $X=C \cup D$となる$C,D$ :: closed in $X$が存在したとしよう．
+    $C'=Y \cap C, D'=Y \cap D$とおくと$Y \subset X$なので$C', D'$ :: closed in $Y$．
+    そして$C' \cup D'=Y \cap (C \cup D)=Y \cap X=Y$となる．
+    したがって$Y$がirreducibleでないということになり，
+    これは仮定に矛盾する．
+    よって$X$ :: variety.
+
+    \paragraph{道具}
+    $Z \subset X$に対して$\hat{C}(Z)=\cl_{\proj^n} \left( \bigcup_{Q \in Z-P} L_{PQ} \right)$とおく．
+    （coneのつもりで$C$とした．）
+    $\hat{C}(Y)=X$で，また$Z$がirreducibleならば前段落と同様の議論により$C(Z)$もirreducibleである．
+    Ex2.10で定義されたconeを$C(Y)$で書く．
+
+    \paragraph{$\dim X=r+1$.}
+    $\hat{C}(Y) \bi C(Y)$を示そう．
+    この結果とEx2.10c, Ex3.12から
+    $\dim \mathcal{O}_{P,\hat{C}(Y)}=\dim \mathcal{O}_{P,C(Y)}=\dim C(Y)=r+1$のように主張が示せる．
+    以下がbirational mapになる．
+    \begin{defmap}
+        \xi:& \hat{C}(Y)& \to& C(Y) \\ 
+        {}& P+t (1:q_1:\dots:q_n)& \mapsto& t (1,q_1,\dots,q_n) \\
+        {}& P+(r_0:r_1:\dots:r_n)& \mapedfrom& (r_0,r_1,\dots,r_n) \\
+    \end{defmap}
+
+    \subsection{$\deg X<d$.}
+    この問題では$Y$をirreducibleと限らないalgebraic setとする．
+    $\dim Y$についての帰納法で示そう．
+    
+    \paragraph{Case $\dim Y=0$．}
+    $\dim Y=0$の時，$Y$は$d$個の点で，$X=\hat{C}(Y)$は$d-1$本の直線．
+    したがって$\deg \hat{C}(Y)=\deg Y-1<\deg Y$となる．
+
+    \paragraph{Induction Hypothesis.}
+    $r>0$について，$\dim Y=r-1$の時$\deg \hat{C}(Y)<\deg Y$であるとする．
+    以下，$\dim Y=r$の場合にもこれが成り立つことを示す．
+
+    \paragraph{Case $\dim Y=r+1$.}
+    $H$ :: hyperplane in $\proj^n$, $P \in H$とする．
+    $X \cap H$のirreducible componentを$\{Z_j\}_{j=1}^t$とすると，
+    うまく$H$をとることですべての$j$について$i(X,H; Z_j)=1$であるように出来る（？）．
+    （この条件はThem7.7より$t=\deg X$と同値である．）
+    そのとき，Them7.7, Prop7.6bより以下が成り立つ．
+    \[ \deg (X \cap H)=\sum_{j=1}^{t} \deg Z_j=\sum_{j=1}^{t} i(X, H; Z_j) \cdot \deg Z_j=\deg X \cdot \deg H=\deg X. \]
+    一方，$Y \cap H$のirreducible componentを$\{W_j\}_{j=1}^s$とすると，
+    Ex1.8（の類似）より$\dim W_j=r-1$．
+    そのdegreeは再びThem7.7, Prop7.6bより以下のようになる．
+    \[ \deg (Y \cap H)=\sum_{j=1}^{s} \deg W_j \leq \sum_{j=1}^{s} i(Y, H; W_j) \cdot \deg W_j=\deg Y \cdot \deg H=\deg Y=d. \]
+    $H$は$P$を含むhyperplaneだから$H=C(H)$．
+    したがって$X \cap H=\hat{C}(Y) \cap \hat{C}(H)=\hat{C}(Y \cap H)$．
+    しかも$\dim Y \cap H=r-1$だから，
+    induction hypothesisより$\deg (X \cap H)<\deg (Y \cap H)$．
+    以上より，以下の不等式が得られる．
+    \[ \deg X=\deg (X \cap H)<\deg (Y \cap H) \leq \deg Y. \]
+
+\section{A Variety of Degree 2 in $\proj^n$.} %% Ex7.8 
+    $Y$ :: variety in $\proj^n$, $\deg Y=2$とおく．
+    $Y$に対してEx7.7の方法で構成されるvarietyを$X$としよう．
+    するとEx7.7bより$1 \leq \deg X<\deg Y=2$なので$\deg X=1$．
+    Ex7.7aから$\dim X=\dim Y+1$．
+    Ex7.6より，$X$はlinear varietyである．
+    以上より，$Y$は$\dim X=\dim Y+1$のlinear varietyに含まれている．
+
+
+\end{document}
