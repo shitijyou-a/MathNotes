@@ -1,0 +1,75 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+
+\begin{document}
+
+\begin{Prop}
+    $A=k[x,y]$とする
+    互いに素な多項式$f,g \in A$に対し，
+    $\zerosa(\{f,g\})=\{P_1,\dots,P_N\}$とする．
+    更にイデアル$(f,g)$の最短準素イデアル分解$\bigcap_{i=1}^N \I{q}_i$を
+    一つ固定し，$\sqrt{\I{q}_i}=\I{m}_i$としておく．
+    同時に$\zerosa(\I{m}_i)=\{P_i\}$となるように番号をつけておく．
+    この時，以下が成り立つ．
+    \[ \frac{A}{(f,g)} \cong \bigoplus_{i=1}^N \left( \frac{A}{\I{q}_i} \right)_{\I{m}_i}. \]
+\end{Prop}
+\begin{proof}
+    以下，Prop*.*やCor*.*はAtiyah-Macdonald ``Introduction to Commutative Algebra"での命題番号である．
+    まず，$(f,g)=\bigcap_{i=1}^N \I{q}_i$が最短準素イデアル分解であることから
+    $i=j \iff \I{p}_i \subseteq \I{m}_j$となることに注意する．
+    以下のようにして$\I{q}_i+\I{q}_j=(1) ~~(i \neq j)$が示される．
+    \begin{align*}
+        {}&\sqrt{\I{q}_i+\I{q}_j} \\
+        =&\sqrt{\sqrt{\I{q}_i}+\sqrt{\I{q}_j}} \\
+        =&\sqrt{\I{m}_i+\I{m}_j} \\
+        =&\defsa( \zerosa(\I{m}_i) \cap \zerosa(\I{m}_j)) \\
+        =&\defsa(\{P_i\} \cap \{P_j\}) \\
+        =&\defsa(\emptyset) ~~ (\text{by } i \neq j)\\
+        =&(1)
+    \end{align*}
+    $\sqrt{\I{a}}=(1) \iff \I{a}=(1)$より結論が得られる．
+    使ったのはEx1.13である．
+
+    このことから，以下の直和分解が得られる．
+    \[ \frac{A}{(f,g)}=\frac{A}{\bigcap_{i=1}^N \I{q}_i}\cong \bigoplus_{i=1}^N \left( \frac{A}{\I{q}_i} \right) \]
+    これはProp1.10から直ちに理解る．
+    \footnote{元の命題は環$A/(f,g)$とそのイデアル$\I{a}_i=\I{q}_i/(f,g)$について書かれていることに注意．}
+    最後に，$\sqrt{\I{q}_i}=\I{m}_i, \dim A/\I{q}_i=\dim \zerosa(\I{q}_i)=0$より
+    $A/\I{q}_i$は$\I{m}_i$を唯一の素イデアルに持つ局所環である．
+    なので局所化しても変わらず，$A/\I{q}_i \cong \left( A/\I{q}_i \right)_{\I{m}_i}$．
+    これで最初の主張が示せた．
+\end{proof}
+
+証明は$(f,g)$に属す素イデアルが極大イデアルであることしか使っていないから，
+一般の$n$次元空間の2曲線についても同様の証明が出来る．
+また，この命題のうち，$\left( A/\I{q}_i \right)_{\I{m}_i}$は$\mathcal{O}_{P_i, \affine^2}/(f,g)$に等しい．
+curveの交わりを考える場合は$\length_{\mathcal{O}_{P_i, \affine^2}}=\dim_k$（左辺はベクトル空間の次元）
+だから，$\dim_k A/(f,g)=\sum_{i=1}^N i(C,D; P_i)$となる．
+ただし$C=\zerosa(f), D=\zerosa(g)$とした．
+
+以上のことはすべてAffine Spaceでの事なので，
+B\'ezout's Theoremとの関連を見出すことは無意味である．
+証明をProjective Spaceに拡張することもできない．
+実際，Projective Spaceでは$\sqrt{\I{m}_i+\I{m}_j}=S_+ (=\bigoplus_{d>0} S_d)$
+なので，最初の直和分解さえ得られない．
+
+%まず，以下の$k$-ベクトル空間としての同型を考える．
+%ただし$S=k[x,y,z]$，$F,G$はそれぞれ$f,g$の$z$における斉次化とする．
+%また，$d$は十分大きい正の整数である．
+%\[ S_d \cong \bigoplus_{l \leq d} A_l. \]
+%$x^m y^n z^{d-(m+n)} \leftrightarrow x^m y^n$と，
+%基底が一対一対応するため，これは同型．
+
+%以上の設定のもとで，以下の完全列を考えよう．
+%\[ 0 \to \frac{S_d}{(FG)} \to \frac{S_d}{(F)} \oplus \frac{S_d}{(G)} \to \frac{S_d}{(F,G)} \to 0. \]
+%写像は$x+(FG) \mapsto (x+(F), x+(G))$と$(x+(F), y+(G)) \mapsto x-y+(F,G)$で与えられる．
+%$F,G$は斉次多項式だから，この完全列の各項についてHilbert Polynomialが考えられる．
+%斉次多項式$H \in S_d$について$S_d/(H)$のHilbert Polynomialは$\binom{t+2}{2}-\binom{t-\deg H+2}{2}$．
+%これを用いて計算すると，$S_d/(F,G)$のHilbert Polynomialは定数$\deg f \cdot \deg g$となる．
+%最初の同型で戻せば，$\dim_k (\bigoplus_{l \leq d} A_l)/(f,g)=\deg f \cdot \deg g$．
+%最後に，$\dim \zerosa(f,g)=0$より，十分大きい$d$について$\I{m}_i^d \subseteq (f,g)$．
+%つまり$(f,g)$は次数が$d$以上の単項式をすべて含む．
+%なので$\bigoplus_{l>d} A_l \subset (f,g)$，したがって$\dim_k (\bigoplus_{l>d} A_l)/(f,g)=0$．
+%合わせて$\dim_k A/(f,g)=\deg f \cdot \deg g$．
+
+\end{document}
