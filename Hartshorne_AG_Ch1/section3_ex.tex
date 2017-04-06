@@ -361,7 +361,7 @@
     $X$はirreducibeだから$X=X_1 \mor X_2$．
     したがって$X \times Y=Z_1 \mor Z_2$．
 
-    \subsection{Show that $A(X \times Y) \cong A(X) \otimes_k A(Y)$}
+    \subsection{$A(X \times Y) \cong A(X) \otimes_k A(Y)$}
     $k[x_i] \otimes_k k[y_j] \cong k[x_i,y_j]$を示す．
     $\psi: (f,g) \mapsto fg$とすると以下の図式が成り立つ．
     \[
@@ -380,11 +380,29 @@
         この時$(A/\I{a}) \otimes_k (B/\I{b}) \cong (A \otimes_k B)/\langle \I{a} \cup \I{b} \rangle$．
     \end{Lemma}
 
-    \subsection{Shot that $X \times Y$ is a product in the category of varieties.}
+    \subsection{Another Proof of $A(X \times Y) \cong A(X) \otimes_k A(Y)$}
+    $k[x_i,y_j]/\defsa(X \times Y) \cong (k[x_i]/\defsa(X)) \otimes_k (k[y_j]/\defsa(Y))$を示す．
+    そのために$k$-代数の圏 $k$-\textbf{alg}がlocally smallな圏であることを用いよう．
+    このことから$k$-\textbf{alg}ではcoYoneda LemmaとcoYoneda Principle（以下の命題）が成立する．
+    \[ \Hom(C,-) \cong \Hom(D,-) \implies C \cong D. \]
+    $k$-\textbf{alg}におけるcoproductがテンソル積であることから，以下のように証明が出来る．
+    なお，$I_*=\defsa(*)$と略記した．
+    \begin{align*}
+        {}&     \Hom((k[x_i]/I_{X}) \otimes_k (k[y_j]/I_{Y}),-) \\
+        \cong&  \Hom(k[x_i]/I_{X},-) \times \Hom(k[y_j]/I_{Y},-) \\
+        \cong&  \{\phi: k[x_i] \to - ~|~ \phi(I_{X})=0. \} \times \{\psi: k[y_j] \to - ~|~ \psi(I_{Y})=0. \} \\
+        \cong&  \{\langle \phi,\psi \rangle: k[x_i] \otimes_k k[y_j] \to - ~|~ \langle \phi,\psi \rangle(I^e_{X})=\langle \phi,\psi \rangle(I^e_{Y})=0. \} \} \\
+        \cong&  \{\theta: k[x_i,y_j] \to - ~|~ \theta(I^e_{X})=\theta(I^e_{Y})=0. \} \\
+        \cong&  \Hom(k[x_i,y_j]/I_{X \times Y},-)
+    \end{align*}
+    下から2,3行目にある$I^e_*$は$I_*$の拡大イデアルである．
+    途中で前段落の$k[x_i] \otimes_k k[y_j] \cong k[x_i,y_j]$を用いた．
+
+    \subsection{$X \times Y$ is a product in the category of varieties.}
     $k$-代数の圏 $k$-\textbf{alg}におけるcoproductがテンソル積であることを示せば，
     あとはCor3.7から得られる．
 
-    \subsection{Show that $\dim X \times Y=\dim X+\dim Y$}
+    \subsection{$\dim X \times Y=\dim X+\dim Y$}
     $r:=\dim X, s:=\dim Y$としよう．
     ネーターの正規化定理より，$A(X)$ (resp. $A(Y)$)が$k[\{t_i\}_{i=1}^{r}]$ (resp. $k[\{u_i\}_{i=1}^{s}]$)上整であるような
     代数独立な元$\{t_i\}_{i=1}^{r} \subset A(X)$ (resp. $\{u_i\}_{i=1}^{s} \subset A(Y)$)が存在する．

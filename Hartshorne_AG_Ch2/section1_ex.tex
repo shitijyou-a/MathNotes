@@ -1,0 +1,1037 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+\usepackage{nicefrac}
+\renewcommand{\thesection}{Ex1.\arabic{section}}
+
+\newcommand{\shA}{\mathcal{A}}
+\newcommand{\shB}{\mathcal{B}}
+\newcommand{\shF}{\mathcal{F}}
+\newcommand{\shG}{\mathcal{G}}
+\newcommand{\shH}{\mathcal{H}}
+\newcommand{\shI}{\mathcal{I}}
+\newcommand{\shJ}{\mathcal{J}}
+\newcommand{\shL}{\mathcal{L}}
+
+\newcommand{\Sh}{\mathbf{Sh}}
+\newcommand{\PSh}{\mathbf{PSh}}
+
+\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
+\newcommand{\shHom}{\mathscr{H\!o\!m}}
+
+\newcommand{\ftorSh}{\mathit{Sh}}
+\newcommand{\ftorFgt}{\mathit{Fgt}}
+\newcommand{\ftorSec}{\mathit{Sec}}
+\newcommand{\ftorEt}{\text{\textit{\'Et}}}
+
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\Spe}{\text{Sp\'e}}
+
+\newcommand{\OpenIn}{\text{ :: open in }}
+
+\begin{document}
+    このnoteではHartshorne ``Algebraic Geometry'' p.61にある
+    sheaf property (3)をIdentity Axiomと呼び，
+    同じく(4)をGluability Axiomと呼ぶ．
+    これらの名称はVakil ``Foundations of Algebraic Geometry''にあるものである．
+
+\section{Constant Sheaf is Associated to Constant Presheaf.} %% Ex1.1 
+    $A$ :: abelian group, $X$ :: topological spaceとする．
+    任意の空でない開集合$U \subseteq X$について$\shF(U)=A$とし，
+    restriction map $\rho_{UV}: \shF(U) \to \shF(V)$は$\id{A}$とする．
+    この$\shF$をconstant presheafと呼ぶ．
+    $\shF$に対応するsheafを$\shF^+$としよう．
+    開集合$U \subseteq X$に対し，
+    $\shF^+(U)=\{ f:U \to A ~|~ f :: \text{continus}. \}$を示す．
+
+    まず，明らかに
+    \[ \shF_P=\{ \reg{U}{s} ~|~ U :: \text{open in }X, s \in A\}=\{ \reg{X}{s} ~|~ s \in A\} \cong A \]
+    なので$\bigcup_{P \in U} \shF_P \cong A$．
+    $\shF^+(U)$の元$s(=\germ{U}{s})$は，以下の条件を満たすものである．
+    \[ \Forall{P \in U} \Exists{P \in V \subseteq U} \Exists{t \in \shF(V)} \Forall{Q \in V}  t_P=s(Q). \]
+    これは$t$として$s$自身が取れるので常に成り立つ．
+    $A$に離散位相を入れているので，
+    \[ \{ f:U \to A ~|~ f :: \text{continus}. \}=\{ f:U \to A ~|~ 2^A \subseteq f(\mathcal{O}_U). \}=\Hom(U,A)=\shF^+(U). \]
+
+\section{The Image/Kernel in a Sheaf/Stalk.} %% Ex1.2 
+    \subsection{$(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$．}
+    $\phi: \shF \to \shG$と任意の点$P$について
+    $(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$を示す．
+
+    \paragraph{$\ker$}
+    単なる変形である．
+    \begin{align*}
+        {}& \ker \phi_P \\
+        =&  \{ s_P \in \shF_P ~|~ \phi_P(s_P)=0. \} \\
+        =&  \{ s \in \shF(V) ~|~ P \in \Exists{V \OpenIn X} \phi_{V}(s)=0. \} \\
+        =&  (\{ s \in \shF(V) ~|~ \Exists{V \OpenIn X} \phi_{V}(s)=0. \})_P \\
+        =&  (\ker \phi)_P
+    \end{align*}
+
+    \paragraph{$\im$}
+    途中までは$\ker$と同様である．
+    \begin{align*}
+        {}& \im \phi_P \\
+        =&  \{ t_P \in \shG_P ~|~ \Exists{s_P \in \shF_P} \phi_P(s_P)=t_P. \} \\
+        =&  \{ t \in \shG(V) ~|~ P \in \Exists{V \OpenIn X} \Exists{s \in \shF(V)} \phi_{V}(s)=t. \} \\
+        =&  (\{ t \in \shG(V) ~|~ \Exists{V \OpenIn X} \Exists{s \in \shF(V)} \phi_{V}(s)=t. \})_P
+    \end{align*}
+    最後の行の$(\dots)_P$内はpresheaf $\im^{pre} \phi$である．
+    sheafificationによってstalkは変わらないから，
+    $\im \phi_P=(\im^{pre} \phi)_P=(\im \phi)_P$．
+
+    \subsection{$\phi$ :: inj/surj $\iff$ $\Forall{P \in X} \phi_P$ :: inj/surj.}
+    まず，Prop1.1を$\phi=\id{\shF}=\id{\shG}$の場合について適用すれば
+    \[ \shA=\shB \iff \Forall{P \in X} \shA_P=\shB_P \]
+    が言えることに注意する．
+    これと(a)を合わせると主張が示せる．
+    まず$\phi: \shF \to \shG$ :: injについて．
+    \[ \ker \phi=0 \iff (\ker \phi)_P=0_P \iff \ker \phi_P=0. \]
+    $\phi: \shF \to \shG$ :: surjについても以下の通り．
+    \[ \im \phi=\shG \iff (\im \phi)_P= \shG_P \iff \im \phi_P=\shG_P. \]
+
+    \subsection{$\shF \xrightarrow{\phi} \shG \xrightarrow{\psi} \shH$ is exact $\iff$
+        $\shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$ is exact.}
+    示すべきは以下の命題である．
+    \[ \im \phi=\ker \psi \iff \im \phi_P=\ker \psi_P. \]
+    しかしこれもProp1.1と(a)より明らか．
+
+
+\section{Surjectivity of Morphism is Local Property.} %% Ex1.3 
+    \subsection{Paraphrase of Surjectivity.}
+    $\shF, \shG: X \to A$, $\phi: \shF \to \shG$について
+    $\phi$ :: surjが以下の命題と同値であることを示す．
+    \[
+        (*)~~~
+        \Forall{U \text{ :: open in } X}
+        \Forall{s \in \shG(U)}
+        \bigcup {}^\exists U_i=U,~~
+        \Exists{t_i \in \shF(U_i)}
+        \Forall{i} \phi(t_i)=s|_{U_i}.
+    \]
+    $\phi$ :: surjならばcovering $\{U_i\}$として$U$をとり，
+    $\phi(t)=s$となる$t$を$t_i$とすれば良い．
+
+    逆を示す．
+    Ex1.2bより，任意の$P \in U$について$\phi_P$ :: surjであることを示せば良い．
+    仮定より$P \in V \subseteq U$となる$V$（$(*)$中の$U_i$）が存在し，
+    $\phi_P(t_P)=s|_V=s_P$を満たす$t_P \in \shF(V) \subseteq \shF_P$が存在する．
+    よって$\phi_P$ :: surj．
+
+    \subsection{Give an Counterexample.}
+    以下のmorphismはsurjectiveだが
+    $\phi(U): \shF(U) \to \shG(U)$がsurjectiveでない．
+    sheaf $\shF:\C-0 \to \C$を，穴あき平面$\C-0$全体で正則な関数全体(Example1.0.2)とする．
+    $\shG: \C \to \C$は$\C$全体で正則な関数全体とする．
+    そして$\phi: \shF \to \shG$を$f \mapsto \frac{d}{dz}(1/f)$で定義する．
+    （TODO）
+
+\section{Induced Injective Sheaf Morphism.} %% Ex1.4 
+    \subsection{Injective Presheaf Morphism Induces Injective Sheaf Morphism.}
+    以下は可換図式である．
+    \[
+    \xymatrix
+    {
+        \shF^+ \ar@{-->}[r]^{\phi^+} & \shG^+ \\
+        \shF \ar[u] \ar[r]_-{\phi} \ar[ur]& \shG \ar[u]
+    }
+    \]
+    これをstalkをとる関手$\lim_{\to_{P \in U}}$で写すと，
+    Prop-Def1.2の直後に言及されている$\shF_P=\shF_P^+$から，以下が得られる．
+    \[
+    \xymatrix
+    {
+        \shF_P^+ \ar[r]^{\phi_P^+} & \shG_P^+ \\
+        \shF_P \ar@{=}[u] \ar[r]_-{\phi_P} \ar[ur]& \shG_P \ar@{=}[u]
+    }
+    \]
+    この可換図式から$\phi_P=\phi_P^+$．
+    よってEx1.2bから$\phi$ :: inj $\iff$ $\phi^+$ :: inj.
+
+    \subsection{Natural Induced Map $\im \phi \to \shG$ is Injective.}
+    埋め込み写像$\im^{pre} \phi \hookrightarrow \shG$はinjectiveなので，
+    ここから誘導される$\im \phi \to \shG$もinjective．
+
+\section{For Morphism of Shaves, iso=inj+surj.} %% Ex1.5 
+    $\phi: \shF \to \shG$を考える．
+    $\phi$がisoであることと，任意の点$P$で$\phi_P$がisoであることは同値．
+    また，$\phi$がinj+surjであることと，任意の点$P$で$\phi_P$がinj+surjであることは同値である．
+    これらはそれぞれProp1.1とEx1.2から理解る．
+    よって$\phi_P$についてiso=inj+surjを確かめれば必要十分．
+    
+    \paragraph{$\phi_P$ :: iso $\implies$ $\phi_P$ :: inj+surj.}
+    $\phi_P$ :: iso ならば，
+    \[
+        \Forall{x_1, x_2 \in \shF_P}
+        \phi_P(x_1)=\phi_P(x_2)
+        \implies
+        \phi_P^{-1} \circ \phi_P(x_1)=x_1=x_2=\phi_P^{-1} \circ \phi_P(x_2)
+        \label{prop:ex15-inj}
+    \]
+    すなわち$\phi_P$ :: inj．
+    同時に
+    \[ \Forall{y \in \shG_P} \phi_P \big( \phi_P^{-1}(y) \big)=y \]
+    すなわち$\phi_P$ :: surj．
+
+    \paragraph{$\phi_P$ :: iso $\impliedby$ $\phi_P$ :: inj+surj.}
+    まず$\phi_P$ :: surjから以下が成り立つ．
+    \[ \Forall{y \in \shG_P} \Exists{x \in \shF_P} \phi_P(x)=y. \]
+    この命題を満たす$x \in \shF_P$は$\phi_P$ :: injからただひとつである．
+    \[ \Forall{y \in \shG_P} {}^{\exists_1} x \in \shF_P,~~ \phi_P(x)=y. \]
+    なので$\phi_P^{-1}(y)=x$と定めればこれは写像になる．
+    なお，$\phi_P$でなく$\phi$で議論をすると，構成した$\phi$のnaturalityを示す必要がある．
+
+\section{Short Exact Sequence of Sheaves.} %% Ex1.6 
+    \subsection{Natural Map $q:\shF \to \shF/\shF'$ Has $\im q=\shF/\shF'$ and $\ker q=\shF'$.}
+    quotient sheafの定義(p.65)より，
+    任意の点$P$について$(\shF/\shF')_P=\shF_P/\shF'_P$
+    \footnote
+    {
+        これはsheafification functor $sh_X: \mathbf{PSh}(X, \mathfrak{C}) \to \mathbf{Sh}(X, \mathfrak{C})$が
+        forgetful functorのleft adjoint functorであること，
+        及びleft adjoint functorはcolimitを保つことからも得られる．
+    }．
+    よって$q$から誘導される$q_P$は$\shF_P \to \shF_P/\shF'_P$の自然な写像である．
+    $\im q_P=\shF_P/\shF'_P, \ker q_P=\shF'$となるから，Ex1.2aより主張が得られる．
+
+    \subsection{If $0 \to \shF' \xrightarrow{f} \shF \xrightarrow{g} \shF'' \to 0$ is Exact, ...}
+    仮定より，$0=\ker f, \im f=\ker g, \im g=\shF''$．
+    よって$f$はinjで，$f|^{\im f}: \shF' \to \im f$はsurj+inj．
+    なのでEx1.5よりこれはisoであり，$\shF'$は$\im f \subset \shF$と同型である．
+    続けて$g:\shF \to \shF''$から誘導される$g_P: \shF_P \to \shF''_P$を考える．
+    定義より$\shF_P, \shF''_P$はabelian group（abelian groupの圏でのcolimit）で，$g_P$はそのmorphism．
+    だからabelian groupの準同型定理からの帰結として$\shF_P/\ker g_P=(\shF/\ker g)_P \cong \shF''_P$が得られる．
+    Prop1.1より$\shF'' \cong \shF/\ker g=\shF/\im f \cong \shF/\shF'$．
+
+\section{$\im \phi \cong \shF/\ker \phi,$ and $\coker \phi \cong \shG/\im \phi$.} %% Ex1.7 
+    $\phi: \shF \to \shG$について考える．
+    $\im \phi \cong \shF/\ker \phi$は以下の完全列にEx1.6bを用いて得られる．
+    \[ 0 \to \ker \phi \xrightarrow{i} \shF \xrightarrow{\phi} \im \phi \to 0. \]
+    ただし$i$は埋め込み写像である．
+    $\coker \phi \cong \shG/\im \phi$は同様に以下の完全列から得られる．
+    \[ 0 \to \im \phi \xrightarrow{\phi} \shG \xrightarrow{q} \coker \phi \to 0. \]
+    ただし$q$は$q^{pre}: \shG \to \coker \phi=\shG/\im \phi$から誘導される写像．
+    これが完全列であることは次のように示される．
+    まずEx1.6aを用いてstalkの完全列を得る．
+    \[ 0 \to \im \phi_P \xrightarrow{\phi_P} \shG_P \xrightarrow{q_P} \coker \phi_P=\shG_P/\im \phi_P \to 0. \]
+    Ex1.2a,cを用いて元の列が完全であることが示される．
+
+\section{$\Forall{U \subset X} \Gamma(U,-)$ :: left exact functor} %% Ex1.8 
+    以下を$X \to A$のsheavesがなす完全列とする．
+    \[ 0 \to \shF' \xrightarrow{f} \shF \xrightarrow{g} \shF''. \]
+    完全列なので$0=\ker f, \im f=\ker g$．
+    $\shA \mapsto \shA(U)$で定義されるfunctor $\Gamma(U,-)$により，
+    この完全列は以下の列になる．
+    \[ 0 \to \shF'(U) \xrightarrow{f_U} \shF(U) \xrightarrow{g_U} \shF''(U). \]
+    これが完全列であることは$0=\ker f_U, \im f_U=\ker g_U$と同値．
+
+    まず$\ker f$を考えると，定義より$0=(\ker f)(U)=\ker f_U$．
+    よって$f_U$ :: inj．
+    また，$\Gamma(U,-)$はfunctorだから
+    \[ 0=\Gamma(U,g \circ f)=\Gamma(U,g) \circ \Gamma(U,f)=0. \]
+    すなわち$g_U \circ f_U=0$，$\im f_U \subseteq \ker g_U$．
+
+    残るは逆の包含関係である．
+    まず$s \in \ker g_U \subseteq \shF(U)$を取る．
+    Ex1.2aより，任意の$P \in U$について$\im f_P=\ker g_P$．
+    なので任意の点$P$について$s_P \in \im f_P=\ker g_P$であり，
+    $f_P(t_P)=s_P$となる$t_P \in \shF'_P$が存在する．
+    そこで$s_P,t_P$の代表元$\germ{V_P}{s|_{V_P}}, \germ{V_P}{t^P|_{V_P}}$をとると
+    $f_{V_P}(t^P|_{V_P})=s|_{V_P}$となる．
+    同様に別の点$Q \in U, t_Q=\germ{V_Q}{t^Q|_{V_Q}}$をとると，
+    $W_{PQ}:=V_P \cap V_Q$について
+    \[ f_{W_{PQ}}(t^P|_{W_{PQ}})=s|_{W_{PQ}}=f_{W_{PQ}}(t^Q|_{W_{PQ}}). \]
+    $0=(\ker f)(W_{PQ})=\ker f_{W_PQ}$より$f_{W_{PQ}}$はinj．
+    したがって$t^P|_{W_{PQ}}=t^Q|_{W_{PQ}}$が得られる．
+    $(P \in)~W_{PQ}$は$U$を被覆するから，Gluability Axiomより，
+    $t|_{W_{PQ}}=t^P|_{W_{PQ}}=t^Q|_{W_{PQ}}$なる$t \in \shF'(U)$が存在する．
+    morphismとrestrictionのnaturalityにより，
+    \[ f_{U}(t)|_{W_{PQ}}=f_{W_PQ}(t|_{W_{PQ}})=f_{W_{PQ}}(t^P|_{W_{PQ}})=s|_{W_{PQ}} \]となるから，
+    Identity Axiomより$f_{U}(t)=s$．
+    以上より$\im f_U \supseteq \ker g_U$．
+
+\section{Direct Sum.} %% Ex1.9 
+    sheaves $\shF,\shG: X \to \mathfrak{C}$について，$\shF \oplus \shG$を以下で定める．
+    \[ \shF \oplus \shG: U \mapsto \shF(U) \oplus \shG(U). \]
+    ただし$U$ :: open in $X$．
+    これがpresheafであることは自明なので，sheafであることを示す．
+    以下，$U$ :: open in $X$とその開被覆$\{U_i\}$を固定する．
+
+    \paragraph{$\shF \oplus \shG$ Satisfies Identity Axiom.}
+    $s \oplus t \in \shF(U) \oplus \shG(U)$が$(s \oplus t)|_{U_i}=0 \oplus 0=0$を満たすとする．
+    この仮定を論理式で書下すと，
+    \[ \Forall{P \in U_i} (s \oplus t)(P)=s(P) \oplus t(P)=0 \oplus 0. \]
+    abelian groupのcoproductはproductと同型だから，これは以下のように書き換えられる．
+    \[ \Forall{P \in U_i} s(P)=0 \land t(P)=0. \]
+    これは$s|_{U_i}=t|_{U_i}=0$と同値．
+    なので$\shF,\shG$はsheafであることから$s=t=0$．
+    すなわち$s \oplus t=0$．
+
+    \paragraph{$\shF \oplus \shG$ Satisfies Gluability Axiom.}
+    $s_i \oplus t_i \in \shF(U_i) \oplus \shG(U_i)$が存在し，以下を満たすとする．
+    \[ \Forall{i,j} (s_i \oplus t_i)|_{U_i \cap U_j}=(s_j \oplus t_j)|_{U_i \cap U_j}. \]
+    前段落と同様に書き換えて，以下が得られる．
+    \[ \Forall{i,j} s_i|_{U_i \cap U_j}=s_j|_{U_i \cap U_j} \land t_i|_{U_i \cap U_j}=t_j|_{U_i \cap U_j}. \]
+    $\shF,\shG$はsheafであることから，以下を満たす$s \in \shF(U_i),t \in \shG(U_i)$が存在する．
+    \[ \Forall{i} s|_{U_i}=s_i \land t|_{U_i}=t_i. \]
+    この$s,t$について$(s \oplus t)|_{U_i}=(s|_{U_i}) \oplus (t|_{U_i})=s_i \oplus t_i$．
+
+    \paragraph{$\shF \oplus \shG$ is Coproduct in $\Sh(X)$.}
+    以下の図式を考える．
+    \[
+    \xymatrix
+    {
+        {} & \shF \oplus \shG \ar@{-->}[dd]^-{{}^{\exists_1} [f,g]}& {} \\
+        \shF \ar[rd]_-{{}^\forall f} \ar[ru]^-{i}& {} & \shG \ar[ld]^-{{}^\forall g} \ar[lu]_-{j}\\
+        {} & {}^\forall \mathcal{Z} & {}
+    }
+    \]
+    ただし$Z,f,g$は任意で，$i, j$はそれぞれ$s \mapsto s \oplus 0, t \mapsto 0 \oplus t$とする．
+    すると$\shF, \shG$から$\mathcal{Z}$へ至る二つのパスをたどることで，
+    この図式を可換にする$[f,g]$は以下のものしか無い事が理解る．
+    \[ [f,g]: s \oplus t \mapsto f(s)+g(t). \]
+    $f,g$はmorphism of abelian groupで$f(s),g(t)$はelement of abelian group．
+    だから，例えば$\shF \to \mathcal{Z}$の二つのパスは次の計算の通り可換になる．
+    \[ [f,g] \circ i : s \mapsto s \oplus 0 \mapsto f(s)+g(0)=f(s) ~\mapedfrom~ s: f \]
+    よって$\shF \oplus \shG$はcoproduct．
+
+\section{Direct Limit.} %% Ex1.10 
+    Ex1.8のfunctor $\Gamma(-,-)$，sheafification functor $sh_X$と
+    abelian categoryのdirect limit $\lim_{\to i}$を用いて，
+    $\lim_{\to i}\shF_i$を以下で定める．
+    \[ \Gamma(-,\lim_{\to i}\shF_i)=sh_X \lim_{\to i} \Gamma(-,\shF_i). \]
+    ただし$\{\shF_i\}_{i \in I}$はdirect systemである．
+    これが$\Sh(X)$のdirect limitであることを示す．
+
+    まず，$\shL: U \mapsto \lim_{\to i} \shF_i(U)$とおく．
+    これは明らかに$\PSh(X)$におけるdirect limitで
+    \footnote{$\PSh(X)$がdirect limitを持つことはabelian category $\mathfrak{C}$がdirect limitを持つことによる．}，
+    $\shL^+=\lim_{\to i}\shF_i$を満たす．
+    よってsheafification functor $sh_X$がdirect limitを保つことを見れば良い．
+    次の可換図式は$\shL$のUMPを表す．
+    \[
+    \xymatrix
+    {
+        \shL \ar@{-->}[rrd]^-{\bar{f}_i}& {} & {} & {} \\
+        {} & \shF_i \ar[r]_-{f_i} \ar[lu] & \shG & {}
+    }
+    \]
+    ただし$\shG, f_i$は任意．
+    sheafificationのUMPを$\bar{f}_i: \shL \to \shG$に用いて，
+    次の可換図式が得られる．
+    \[
+    \xymatrix
+    {
+    \shL \ar@{-->}[rrd]^-{\bar{f}_i} \ar[rrr]^-{\theta}& {} & {} & \shL^+ \ar[lld] \ar@{-->}[ld]^-{\bar{\bar{f}}_i}\\
+        {} & \shF_i \ar[r]_-{f_i} \ar[lu] & \shG & {}
+    }
+    \]
+    よって$f_i:\shF_i \to \shG$に対して一意に$\bar{\bar{f}}_i: \shL^+ \to \shG$が存在する．
+    これで$\shL^+=\lim_{\to i}\shF_i$のUMPが示せた．
+    $\shF_i \to \shF_j$との可換性はmorphismを結合すれば容易に分かる．
+
+    \subsubsection{Another Proof.} \label{sssec:1-10-1}
+    sheafification functor $sh_X: \PSh(X) \to \Sh(X)$が
+    Forgetful Functor $F: \Sh(X) \to \PSh(X)$の
+    left adjoint functorであることを用いる．
+    これはR.Vakil ``Foundations of Algebraic Geometry" Part I, 2.4.Lなどにある事実である．
+    direct limitがcolimitであることと，
+    ``Left Adjoint Preserves Colimits"より，
+    \[ sh_X \lim_{\to i} \shF_i \cong \lim_{\to i} sh_X \shF_i \cong \lim_{\to i} \shF_i. \]
+
+\section{Pre-Direct Limit on Noetherian Top.Sp. is Already a Sheaf.} %% Ex1.11 
+sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: direct systemとし，
+    $\PSh(X)$におけるdirect limitを$\shL$で書く．
+    $X$ :: noetherian topological spaceであるとき，$\shL$が予めsheafであることを示す．
+    以下，$U$ :: open in $X$と開被覆$\{U_{\lambda}_{\lambda \in \Lambda}\}$を任意にとり，固定する．
+
+    $X$ :: noetherianより，$X$ :: quasi-compact．
+    なので集合$\{U_{\lambda}\}$から有限被覆$\{ U_j \}_{j \in J}$が出来る．
+%    そして$\shF^i(U_1) \oplus \dots \oplus \shF^i(U_n)$として，
+%    これがdirect limitのUMPを満たすことを見る．)
+%    \paragraph{Identity Axiom.}
+%    $s \in \shL(U)$が任意の$\lambda$について$s|_{U_{\lambda}}=0$を満たすとしよう．
+%    以下の可換図式を見よ．
+%    \[
+%    \xymatrix
+%    {
+%    \shL(U) \ar@{-->>}[r]^-{\res_{U}^{U_{\lambda}}} & \shL(U_{\lambda}) \\
+%    \shF^i(U) \ar[u] \ar@/_4mm/[ur] \ar[r]_-{f^{ij}_{U}}& \shF^j(U) \ar[u] \ar@/^4mm/[ul]
+%    }
+%    \]
+%    $\shF^*(U)$から$\shL(U_{\lambda}), \shL(U)$へのmorphismが存在することは
+%    $\shL$が$\PSh(X)$でのdirect limitであることから明らか．
+%    射$\res_{U}^{U_{\lambda}}$はepi(=surj)．
+%    したがって$s|_{U_{\lambda}}=0$より$s|_{U}=0$が得られる．
+
+%    \paragraph{Gulability Axiom.}
+%    $s_{\lambda} \in \shL(U_{\lambda})$であるsectionの集合$\{s_{\lambda}\}$をとる．
+%    これらが任意の$\lambda, \mu$について
+%    $s_{\lambda}|_{U_{\lambda} \cap U_{\mu}}=s_{\mu}|_{U_{\lambda} \cap U_{\mu}}$
+%    を満たすとしよう．
+
+\section{Inverse Limit.} %% Ex1.12 
+    sheaves $\{\shF^i\}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: inverse systemとし，
+    $\PSh(X)$におけるinverse limit $U \mapsto \lim_{i \leftarrow} \shF^i(U)$ を $\shL$ で書く．
+    このとき$\shL$は$\Sh(X)$においてもinverse limitであることを示す．
+    
+    sheafification functorを$\ftorSh: \PSh(X) \to \Sh(X)$, 
+    forgetful functorを$\ftorFgt: \Sh(X) \to \PSh(X)$で書く．
+    $\ftorFgt$は$\ftorSh$のright adjoint functor($\ftorSh \dashv \ftorFgt$.)なので，$\lim_{i \leftarrow}$と可換
+    \footnote{``Right Adjoints Preserves Limits."}．
+    inverse limitはlimitなので以下が得られる．
+    \[ \lim_{i \leftarrow} \ftorFgt \shF^i \cong \ftorFgt \lim_{i \leftarrow} \shF^i \cong \lim_{i \leftarrow} \shF^i. \]
+    最後の$\cong$は$F$がforgetful functor，すなわちobjectを変化させないことによる．
+    したがって$\PSh(X)$におけるinverse limitは$\Sh(X)$におけるinverse limitと一致する．
+    まったく同様の議論で$\PSh(X)$におけるlimitは$\Sh(X)$におけるlimitに一致する．
+
+    \subsubsection{Proof of $\ftorSh \dashv \ftorFgt$.}
+    adjointの定義にはいくつか同値なものがあるが，
+    ここではSteve Awodey ``Category Theory" p.214にあるCor9.5を用いる．
+
+    $F$はobjectを変えない埋め込み写像なので，
+    直ちに全単射$\tilde{\eta}_{(-)}: (-) \leftrightarrow F(-):\tilde{\epsilon}_{(-)}$がとれる．
+    これにsheafificationのUMPを用いると以下の可換図式が得られる．
+    \[
+    \xymatrix
+    {
+    \ftorSh \ar@{->}[r]^-{\tilde{\eta}_{}}& \ftorFgt \ftorSh\\
+    \id{\PSh(X)} \ar[ru]_-{\eta} \ar[u]^-{\theta}& {}
+    }
+    \hspace{15mm}
+    \xymatrix
+    {
+    \ftorSh \ftorFgt \ar@{-->}[r]^-{\epsilon_{}}& \id{\Sh(X)}\\
+    \ftorFgt \ar[ru]_-{\tilde{\epsilon}_{}} \ar[u]^-{\theta_{\ftorFgt}}& {}
+    }
+    \]
+    こうして
+    unit $\eta: \id{\PSh(X)} \to \ftorFgt \ftorSh$と
+    counit $\epsilon: \ftorSh \ftorFgt \to \id{\Sh(X)}$が得られる．
+    さらに，この二つの可換図式を組み合わせて，以下の可換図式が作れる．
+    \[
+    %% @C : 列間隔, @R : 行間隔
+    \xymatrix@C=5pt@R=35pt
+    {
+    \id{\PSh(X)} \ar[rr]^{\theta_{}} & {} & \ftorSh  \\
+    \ftorFgt \ar@{<->}[rr]^-{\tilde{\epsilon}_{}} \ar[rd]_-{\theta_{\ftorFgt}} & {} & \id{\Sh(X)} \\
+    {} & \ftorSh \ftorFgt \ar[ru]_-{\epsilon_{}} & {}
+    }
+    \]
+
+    さて，$\shF \in \PSh(X), \shG \in \Sh(X)$と$g: \ftorSh \shF \to \shG$を任意に取る．
+    この時の可換図式は以下の(1)である．
+    \[
+    (1)
+    \xymatrix@C=2pt@R=35pt
+    {
+    \shF \ar[rr]^{\theta_{\shF}} & {} & \ftorSh \shF \ar[d]^{g} \\
+    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
+    }
+    \hspace{20pt}
+    (2)
+    \xymatrix@C=2pt@R=35pt
+    {
+    \shF \ar[rr]^{\theta_{\shF}} \ar[d]^{\bar{g}} \ar@<-2mm>@/_12mm/@{~>}[rdd] & {} & \ftorSh \shF \ar[d]^{g} \\
+    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
+    }
+    \hspace{20pt}
+    (3)
+    \xymatrix@C=2pt@R=35pt
+    {
+    \shF \ar[rr]^{\theta_{\shF}} \ar[d]^{\bar{g}} & {} & \ftorSh \shF \ar[d]^{g} \ar@<2mm>@/^12mm/@{-->}[ldd]^{\ftorSh(\bar{g})} \\
+    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
+    }
+    \]
+    コの字型の部分をたどることで，(2)の$\bar{g}: \shF \to \ftorFgt \shG$が得られる．
+    Ex1.4における$\phi^+$の作り方をなぞると，
+    $\ftorSh(\bar{g})$は(2)の波矢印$\theta_{\ftorFgt \shG} \circ \bar{g}$から
+    sheafificationのUMPで得られるものである．
+    sheafificationをしたあとの可換図式が(3)である．
+    こうして$g=\epsilon_{\shG} \circ \ftorSh(\bar{g})$が得られる．
+
+\section{Espace \'Etal\'e of a Presheaf.} %% Ex1.13 
+    \subsubsection{Definition of Espace \'Etal\'e.}
+    $\shF \in \PSh(X)$に対し，espace \'etal\'e of $\shF$ $\Spe(\shF)$を以下のように定義する．
+    まず，集合として$\Spe(\shF)=\bigsqcup_{P \in X} \shF_P$とおく．
+    projection map $\pi$とその``section" $\bar{s}$を以下で定める．
+    まず，$\pi$は以下のもの．
+    \begin{defmap}
+        \pi:& \Spe(\shF)& \to& X \\ 
+        {}& s \in \shF_P& \mapsto& P.
+    \end{defmap}
+    任意の$U$ :: open in $X$と$s \in \shF(U)$に対して
+    $\bar{s}: U \to \Spe(\shF)$を以下で定める．
+    \begin{defmap}
+        \bar{s}:& U& \to& \Spe(\shF) \\ 
+        {}& P& \mapsto& s_P.
+    \end{defmap}
+    この時，$\pi \circ \bar{s}=\id{U}$．
+    すなわち，$\bar{s}$は$U$上で$\pi$の``section"である．
+    そして$\Spe(\shF)$に以下のような位相を入れる: 
+    任意の$U$と任意の$s$について$\bar{s}$が連続であるような最強の位相．
+    これはつまり$\{\bar{s}\}$についての終位相である．
+
+%    \subsubsection{Another Sheafification.}
+%    $\shF \in \PSh(X)$に対し，そのsheafification $\shF^+$は以下を満たすことを示す．
+%    \[ \Forall{U \subseteq X} \shF^+(U)=\text{continuous sections of $\Spe(\shF)$ over $U$}=:\shF^@(U). \]
+%    $\shF^@(U)$の元は$\shF(U)$の元から得られるものだけではないことに注意せよ．
+
+%    $U$ :: open in $X$をひとつ取って固定する．
+%    $s \in \shF^+(U), \sigma \in \shF^@(U)$による
+%    $P \in U$の像がどちらの場合も$\shF_P$に入ることは，定義から明らか．
+%    $\sigma$が満たすべき定義を書き下すと，以下のようになる．
+%    \[
+%        \left[ \pi \circ \sigma=\id{U} \right]
+%        \land
+%        \left[ \Forall{\tilde{V} \OpenIn \Spe(\shF)} \sigma^{-1}(\tilde{V}) \OpenIn U \right].
+%    \]
+%    $\pi \circ \sigma=\id{U}$は$\sigma(P) \in \shF_P$を意味する．
+%    後半の条件を書き換えていく．
+%    \begin{align*}
+%        {}&     \Forall{\tilde{V} \OpenIn \Spe(\shF)} \sigma^{-1}(\tilde{V}) \OpenIn U, \\
+%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)} \bar{t}^{-1}(\mathcal{O}_U)}
+%                \sigma^{-1}(\tilde{V}) \OpenIn U, \\
+%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)}\{ \{t_P ~|~ P \in V\} ~|~ V \OpenIn U. \} } \\
+%        {}&     \hspace{8em} \Exists{W \OpenIn U} W=\sigma^{-1}(\tilde{V}), \\
+%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)}\{ \{t_P ~|~ P \in V\} ~|~ V \OpenIn U. \} } \\
+%        {}&     \hspace{8em} \Exists{W \OpenIn U} \Forall{Q \in W} \Exists{\tilde{R} \in \tilde{V}} \sigma(Q)=\tilde{R}.
+%    \end{align*}
+%    ここで現れる$\tilde{V}$は$V$を指定すれば一意に定まる．
+%    (正確には$\Forall{\tilde{V}} \Exists{V} V=\tilde{V}$で，中身まで特定すると$\Forall{\tilde{V}} \Exists{V} \Exists{t} V=\{t_P ~|~ P \in V\}$．)
+%    $V$は任意の$U$の開集合だから，さらに次のように書くことが出来る．
+%    \begin{align*}
+%        {}&     \Forall{V \OpenIn U} 
+%                \Exists{W \OpenIn V} \Forall{Q \in W} \Exists{t \in \shF(W)} \Exists{\tilde{R} \in \{t_P ~|~ P \in V\}} \sigma(Q)=\tilde{R}, \\
+%        \iff&   \Forall{V \OpenIn U}
+%                \Exists{W \OpenIn V} \Forall{Q \in W} \Exists{t \in \shF(W)} \sigma(Q)=t_Q, \\
+%        \iff&   \Forall{V \OpenIn U} 
+%                \Exists{W \OpenIn V} \Exists{t \in \shF(W)} \Forall{Q \in W} \sigma(Q)=t_Q.
+%    \end{align*}
+%    $\Exists{t \in \shF(W)}$は$Q \in W$に依存していないので順番を入れ替えた．
+%    $V,W$を指定する部分は，要するに$U$のcoverの中に条件を満たす開集合$W$が存在する，ということ．
+%    だから最終的に次が得られる．
+%    \[ \Forall{P \in U} (P \in)~ \Exists{V \OpenIn U} \Exists{t \in \shF(V)} \Forall{Q \in V} \sigma(Q)=t_Q. \]
+%    これは$\shF^+$の元の定義である．
+
+    \subsubsection{More References for Espace \'Etal\'e.}
+    WikipediaのSheafのページ
+    \url{https://www.wikiwand.com/en/Sheaf_(mathematics)#/The_.C3.A9tal.C3.A9_space_of_a_sheaf}
+    （2017年3月30日参照）
+    に概略が書かれている．
+    詳細についての資料は以下の通り．
+    まず，一般のespace \'etal\'e(\'etal\'e space)のcategoricalな定義が
+    \url{https://ncatlab.org/nlab/show/etal\'e+space}にある．
+    \'Etal\'e spaceの圏とsheafの圏が圏同値であることの証明は
+    Saunders Mac Lane, Ieke Moerdijk ``Sheaves in Geometry and Logic''の\S5-6, pp.83-90にある．
+    （この命題はこの本のp.90 Cor3である．）
+    同様のことが
+    ``Etale cohomology course notes''
+    \url{http://math.colorado.edu/~jonathan.wise/teaching/math8174-spring-2014/notes.pdf}
+    の7 Etale spaces and sheaves (p.24)にあるが，
+    このnoteはミスが多いしわかりにくいのでおすすめしない．
+
+    \subsubsection{Proposition and Proof.}
+    $X$上の\'etal\'e spaceをとって，
+    その連続なsection全体をとる関手を$\ftorSec: \mathbf{Et}(X) \to \Sh(X)$とする．
+    逆にpresheafから\'etal\'e spaceを作る関手を$\ftorEt: \PSh(X) \to \mathbf{Et}(X)$とする．
+    sheafification functorが$\ftorSh=\ftorSec \ftorEt$で定義できることを示す．
+%    $U \OpenIn X$について，
+%    $\ftorSec$は$\Hom(U,\Spe(-))$から$\Hom(U,U)$への，次の二つの射のequalizerである．
+%    \[ (\pi \circ): f \mapsto \pi \circ f,~~ \overline{\id{U}}: * \mapsto \id{U}. \]
+%    後者はすなわち定値写像である．
+%    また，$\ftorEt$は次のdirect systemについてのdirect limitである．
+%    \[ \text{For } U,V \OpenIn X, s \in \shF(U) \text{ and } t \in \shF(V),~~[U \supseteq V] \land [s|_{V}=t] \iff U \times s \geq V \times t \]
+%    先に定めた$\Spe \shF$と$\ftorEt \shF$が一致することは，二つが同じUMPを持つことから分かる．
+%    この場合，前者は終位相のUMPを持ち，後者はdirect limitのUMPを持つ．
+
+    \paragraph{Plan of Proof.}
+    二つの写像を定める．
+    \begin{defmap}
+        \alpha:& \id{\Sh(X)}& \to& \ftorSec \ftorEt \\ 
+        \vspace{2ex}
+        {}& s \in \shF(U)& \mapsto& [\bar{s}: P \mapsto s_P] \\
+        \beta:& \ftorEt \ftorSec& \to& \id{\mathbf{Et}(X)} \\ 
+        {}& P \times [\sigma:U \to \id{\mathbf{Et}(X)}]& \mapsto& \sigma(P) \\
+    \end{defmap}
+    ただし$U$は任意の$X$の開集合で，$P$は$U$の任意の点である．
+    この$\alpha, \beta$がnatural mapかつisomorphismであることが証明できるので，
+    圏同値$\mathbf{Et}(X) \simeq \Sh(X)$が示せる．
+    しかし我々の目的はsheafificationのUMPであり，
+    これには$\alpha$についてさえ示せれば十分である．
+    この証明は Saunders Mac Lane, Ieke Moerdijk ``Sheaves in Geometry and Logic'' pp.85-86にある
+    \footnote
+    {
+        この本では$\alpha$は$\eta$と書かれている．
+        また，この本でいうcross-sectionは$\pi \circ \sigma=\id{U}$なるsectionのこと．
+        $\dot{s}$は$\bar{s}$のことである．
+        その他，germの記法などがだいぶ違うので注意．
+    }．
+
+    \paragraph{$\alpha$ :: natural.}
+    $\shF, \shG \in \PSh(X)$とする．
+    \[
+    \xymatrix
+    {
+        \shF \ar[d]^{\phi} \ar[r]^{\alpha_{\shF}}& \ftorSec \ftorEt \shF \ar[d]^{\ftorSec \ftorEt \phi}\\
+        \shG \ar[r]_{\alpha_{\shG}}& \ftorSec \ftorEt \shG
+    }
+    \]
+    $\ftorSec \ftorEt \phi$は次のような，sectionをsectionへ写す写像である．
+    \[ \ftorSec \ftorEt \phi: [P \mapsto *_P] \mapsto [P \mapsto *_P \mapsto \phi_P(*_P)]. \]
+    したがって$\shF \to \ftorSec \ftorEt \shG$のどちらのパスでも
+    $s \mapsto [P \mapsto \phi_P(s_P)=(\phi(s))_P]$とsectionをsectionへ写す写像になる．
+    ただし$P$は$X$の点である．
+    これで$\alpha$ :: naturalが示せた．
+
+    \paragraph{$\alpha$ :: iso.}
+    まず$\alpha$ :: inj はIndentity Axiomから容易に示されるので略す．
+    $\alpha$ :: surjの証明は長い．
+    まず$U \OpenIn X, s \in (\ftorSec \ftorEt \shF)(U)$を任意に取る．
+    すると$\ftorSec \ftorEt$の定義から，以下が成り立つ．
+    \[ \Forall{P \in U} (P \in)\Exists{V \OpenIn U} \Exists{\sigma \in \shF(V)} s(P)=\sigma_P. \]
+    $\ftorEt \shF$の位相は像位相であり，かつ$\bar{\sigma}$は明らかに単射．
+    なので$\alpha(\sigma)(V)=\bar{\sigma}(V)$はopenである
+    \footnote
+    {
+        $\bar{\sigma}$の像位相において，
+        開集合$V$の像が開集合であることは
+        $\bar{\sigma}^{-1} \circ \bar{\sigma}(V)$が開集合であることと同値だが，
+        単射性から，この集合は$V$に等しい．
+    }．
+    しかも$s$ :: continuousだから，
+    $s(S) \subseteq \alpha(\sigma)(V)$なる$(P \in)S(\subseteq V)$ :: openが存在する
+    \footnote
+    {
+        これは$\epsilon-\delta$論法に似ている．
+        $s^{-1}(V)$が開集合ならば，その任意の点が内点であるから，
+        開集合$S$が存在することは自明である．
+    }．
+    このとき$\sigma$のとり方から$s|_S=\alpha(\sigma)|_S$となる．
+    点$P$を様々に取ることで，$S$で$U$を被覆できることがわかる．
+    $\sigma \& S$と$\tau \& T$の二組について
+    \[ \alpha(\sigma)|_{S \cap T}=s|_{S \cap T}=\alpha(\tau)|_{S \cap T}. \]
+    したがって$\alpha$ :: injから$\sigma|_{S \cap T}=\tau|_{S \cap T}$．
+    こうしてGluability Axiomから，
+    $\alpha(\sigma)|_S=\alpha(\Sigma)|_S=s|_S$なる$\Sigma \in \shF(U)$の存在が示せる．
+    最後にIdentity Axiomを用いて$\alpha(\Sigma)=s$．
+    これで$\alpha$ :: isoが示せた．
+
+    \paragraph{UMP of Sheafification.}
+    $\ftorSh=\ftorSec \ftorEt$とすると，これがsheafification functorとなる．
+    そのUMPを見よう．
+    $\shF \in \PSh(X), \shG \in \Sh(X)$とする．
+    $\alpha: \id{\Sh(X)} \to \ftorSh$のnaturalityから，次の可換図式が得られる．
+    \[
+    \xymatrix
+    {
+    \shF \ar[r] \ar[d]& \ftorSh \shF \ar[d]\\
+    \shG \ar[r]^-{\sim}& \ftorSh \shG
+    }
+    \]
+    $\alpha_{\shG}: \shG \to \ftorSh \shG$ :: isoだから，
+    $\shF \to \shG$から$\ftorSh \shF \to \shG$が得られた．
+    次に，以下で示す可換図式(1)が与えられたとしよう．
+    全体を$\ftorSh$で写し，$\ftorSh|_{\Sh(X)} \cong \id{\Sh(X)}$を用いて可換図式(2)が得られる．
+    \[
+    (1)
+    \xymatrix
+    {
+        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
+        \shF \ar[u]^-{\alpha_{\shF}} \ar[ur]_-{\phi} & {}
+    }
+    \hspace{5em}
+    (2)
+    \xymatrix
+    {
+        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
+        \ftorSh \shF \ar@{=}[u] \ar[ur]_-{\ftorSh \phi} & {}
+    }
+    \]
+    したがって$f=g$．
+    以上でexistence \& uniquenessが示せた．
+
+\section{Support.} %% Ex1.14 
+    $\shF \in \Sh(X), U \OpenIn X, s \in \shF(U)$をとる．
+    $\Supp s=\{ P \in U ~|~ s_P \neq 0 \}$としたとき，
+    これがclosed in $U$であることを示そう．
+    そのために$T=(\Supp s)^c=\{ P \in U ~|~ s_P=0 \}$として，
+    これがopenであることを示す．
+
+    $P \in T$を任意に取る．
+    すると$s_P$の代表元として$\germ{V_P}{s}~~(P \in V_P \subset U)$が取れる．
+    今$s_P=0$なので，$s|_{V_P}=0$．
+    したがって$V_P \subset T$となる．
+    任意の$P \in T$についてこのように$V_P$が取れるので，
+    $T$はopen covering $\{V_P\}_{P \in T}$を持つ．
+    よって$T=\bigcup_{P \in T} V_P$ :: open in $U$．
+
+    $\Supp \shF$は$\{P \in X ~|~ \shF_P \neq 0 \}$と定義される．
+    これはclosedとは限らない．
+    実際，$\shF$の元を，なめらかな実関数に$\mathit{bump}(x)=[x>0]e^{-1/x}$
+    \footnote
+    {
+        $[True]=1, [False]=0$とした．Iversonの記法である．
+        $\mathit{bump}(x)$がなめらかであることは次のPDFを参照せよ: \url{https://andromeda.rutgers.edu/~loftin/difffal03/bump.pdf}.
+    }
+    をかけたものとすると，
+    $\Supp \mathit{bump}(x)=[0,\infty), \Supp \shF=(0,\infty)$となる．
+    後者は明らかに閉集合でない．
+
+\section{Sheaf $\shHom$.} %% Ex1.15 
+    $\shF, \shG \in \Sh(X), U \OpenIn X$とし，
+    $\shF$の$U$へのrestrction(p.65)を$\shF|_U$で書く．
+    $U \mapsto \Hom(\shF|_U, \shG|_U)$で定まる
+    presehaf $\shHom(\shF, \shG)$がsheafであることを示そう．
+    以下では$U$とその開被覆$\{U_{\lambda}\}_{\lambda \in \Lambda}$を任意にとって固定する．
+
+    \paragraph{$\shHom(\shF, \shG)(U)$ :: Abelian Group.}
+    $s,t \in \shHom(\shF, \shG)(U)$について，$s+t$を以下で定める．
+    \[ (s+t)(\sigma)=s(\sigma)+t(\sigma) \mwhere V \OpenIn U,~ \sigma \in (\shF|_U)(V). \]
+    単位元は$\im \shF|_U$の単位元を返す定値写像である．
+    単位元を以下では0と書く．
+
+    \paragraph{$\shHom(\shF, \shG)$ :: Presheaf.}
+    $U,V$ :: openかつ$V \subseteq U$とする．
+    $\overline{\res}_U^V: \shHom(\shF, \shG)(U) \to \shHom(\shF, \shG)(V)$を以下のように定める．
+    \[ \{ \shF|_U \ni \sigma|_U \mapsto \tau|_U \in \shG|_U \} \mapsto \{ \shF|_V \ni \sigma|_V \mapsto \tau|_V \in \shG|_V \} \]
+    これは$\res(\shF)_U^V: \shF(U) \to \shF(V)$と$\res(\shG)_U^V: \shG(U) \to \shG(V)$の自然性から誘導される．
+
+    \paragraph{Identity Axiom.}
+    $s \in \shHom(\shF, \shG)(U)=\Hom(\shF|_U, \shG|_U)$をとる．
+    この$s$が任意の$\lambda$について$s|_{U_{\lambda}}=0$を満たすとする．
+    さて，$V$ :: open in $U$と$\sigma \in \shF(V)$を任意に取る．
+    $\{V_{\lambda}\}$を$V_{\lambda}=V \cap U_{\lambda}$で定めると，
+    これは$V$の開被覆になる．
+    仮定より，$s|_{V_{\lambda}}(\sigma)=s(\sigma)|_{V_{\lambda}}=0$．
+    よって$s(\sigma) \in \shG(V)$にIndentity Axiomを用いることで$s(\sigma)|_V=0$が示される．
+    $V, \sigma$は任意なので，結局以下が得られた．
+    \[ \Forall{V \OpenIn U} \Forall{\sigma \in \shF(V)} s(\sigma)=0. \]
+    すなわち，$s$は定値写像$0$である．
+    以上でIndentity Axiomの成立が示された．
+
+    \paragraph{Gluability Axiom.}
+    sections $s_{\lambda} \in \shHom(\shF, \shG)(U_{\lambda})$をとる．
+    これが任意の$\lambda, \mu \in \Lambda$について
+    $s_{\lambda}|_{U_{\lambda} \cap U_{\mu}}=s_{\mu}|_{U_{\lambda} \cap U_{\mu}}$を満たすとしよう．
+    この仮定は以下のように書ける．
+    \[
+        \Forall{\lambda, \mu \in \Lambda} \Forall{\sigma \in \shF(U_{\lambda} \cap U_{\mu})}
+        s_{\lambda}(\sigma)=s_{\mu}(\sigma).
+    \]
+    そこで$\lambda$をひとつ取って固定し，$\sigma \in \shF(U_{\lambda})$とする．
+    さらに$\{ V_{\mu} \}_{\mu \in \Lambda}$を$V_{\mu}=U_{\lambda} \cap U_{\mu}$で定める．
+    この$\{ V_{\mu} \}$は$U_{\lambda}$の開被覆である．
+    すると最初の仮定と$V_{\mu} \cap V_{\nu}=U_{\lambda} \cap (U_{\mu} \cap U_{\nu}) \subseteq U_{\mu} \cap U_{\nu}$から以下が成り立つ．
+    \[
+        \Forall{\mu, \nu \in \Lambda}
+        s_{\mu}(\sigma)|_{V_{\mu} \cap V_{\nu}}=s_{\nu}(\sigma)|_{V_{\mu} \cap V_{\nu}}.
+    \]
+    sections $s_{\mu}(\sigma) \in \shG(U_{\lambda})$に対してGluability Axiomを用いて，
+    $s(\sigma)|_{V_{\mu}}=s_{\mu}(\sigma)|_{V_{\mu}}$なる$s(\sigma)$の存在が言える．
+    Indentity Axiomから$s(\sigma)|_{U_{\lambda}}=s_{\mu}(\sigma)|_{U_{\lambda}}$．
+    こうして，以下を満たす$s \in \shHom(\shF, \shG)(U)$の像が
+    各点$\sigma \in \shF(U_{\lambda})$ごとに定義できる．
+    \[
+        \Forall{\lambda \in \Lambda} \Forall{\sigma \in \shF(U_{\lambda})}
+        s(\sigma)|_{U_{\lambda}}=s_{\lambda}(\sigma)|_{U_{\lambda}}.
+    \]
+    簡潔にかけば，$s|_{U_{\lambda}}=s_{\lambda}|_{U_{\lambda}}$．
+    よってGluability Axiomの成立が示せた．
+
+\section{Flasque Sheaves.} %% Ex1.16 
+    $U,V$ :: open in $X$，$V \subseteq U$とする．
+    restriction map $\res_U^V$がsurjectiveであるような$\shF \in \Sh(X)$を
+    flasque\footnote{フランス語．フラスコのこと．軟弱という意味．発音は \url{https://ja.forvo.com/word/flasque/}．} sheafと呼ぶ．
+
+    \subsection{Constant Sheaf on Irreducible Top.Sp is Flasque.}
+    $X$ :: irreducible，$A$ :: abelian group, $U,V$ :: open in $X$，$V \subseteq U$とする．
+    $\shA$を$X$から$A$へのconstant sheafとすると，
+    定義より$\shA(V)=\{ s: V \to A ~|~ s \text{ :: continuous. }\}$．
+    そこで$s \in \shA(V)$を一つとって固定する．
+    $s$ :: continuousという条件は次と同値
+    \[ \Forall{a \subseteq A} s^{-1}(a) \OpenIn V. \]
+    $X$ :: irreducibleであるとき，$s \in \shF(V)$がどのようなものか考えよう．
+    
+    \paragraph{Case: $\#A=1$.}
+    まず$\#A=1$，すなわち$A$が自明なabelian group $\{e\}$であったとする．
+    この時，明らかに$\shF(V)$は定値写像$x \mapsto e$のみからなる．
+    $\shF(U)$も同じ定値写像からなるので，この時constant sheafはflasque．
+
+    \paragraph{Case $\#A>1$.}
+    $a \neq b$が成り立つような$a,b \in A$を任意に取る．
+    すると以下が成り立つ．
+    \[ s^{-1}(\{a\}) \cap s^{-1}(\{b\})=s^{-1}(\{a\} \cap \{b\})=s^{-1}(\emptyset)=\emptyset. \]
+    したがって$X$ :: irreducibleから$s^{-1}(\{a\}) \mor s^{-1}(\{b\})=\emptyset$．
+    仮に任意の$a \in A$について$s^{-1}(\{a\})=\emptyset$であったとすると$s$が写像にならない．
+    したがって$s^{-1}(\{a_s\}) \neq \emptyset$となる$a_s \in A$がただひとつ存在する．
+    $s$は写像なので$s^{-1}(A)=V$が成り立ち，
+    したがって$s$はこのような$a_s$への定値写像である事が分かる．
+    すると容易に$s$は$U$へ拡張できるので，この時もconstant sheafはflasque．
+
+    \subsection{If $0 \to \shF' \to \shF \to \shF'' \to 0$ is Exact and $\shF'$ is Flasque, then... }
+    $0 \to \shF' \to \shF \to \shF'' \to 0$がexactかつ$\shF'$がflasqueであったとする．
+    この時，任意のopen set $U$について$0 \to \shF'(U) \to \shF(U) \to \shF''(U) \to 0$はexactであることを示す．
+
+    写像に$0 \to \shF' \xrightarrow{f} \shF \xrightarrow{g} \shF'' \to 0$と名前をつけ，
+    $U$ :: open in $X$と$s'' \in \shF''(U)$をとる．
+    Ex1.8より，$0 \to \shF'(U) \xrightarrow{f_U} \shF(U) \xrightarrow{g_U} \shF''(U)$はexact．
+    なのであとは$g_U$がsurjectiveであることを示せば良い．
+    元のexact sequenceから$g$ :: surjが言える．
+    Ex1.3より，以下が成り立つ．
+    \[
+        (*)~~~
+        \bigcup {}^\exists U_i=U,~~
+        \Exists{t_i \in \shF(U_i)}
+        \Forall{i} g(t_i)=s''|_{U_i}.
+    \]
+    任意に$i,j$をとり，以下の可換図式でdiagram chaseをする．
+    ただし$U=U_i \cap U_j$とした．
+    % {{{ diagram
+    \[
+    \xymatrix@C=-5pt
+    {
+        {} & ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U)~ \ar@{->>}[rd] \ar@{->>}[ldd] \ar@{>->}[rrr]^-{f} & {} & {} & \shF(U) \ar[rd] \ar[ldd] \ar[rrr]^-{g} & {} & {} & \shF''(U) \ar[rd] \ar[ldd] & {} \\
+        {} & {} & ~~~0~~~ \ar[rrr]|(0.47)\hole & {} & {} & \shF'(U_j)~ \ar@{->>}[ldd]|(0.50)\hole \ar@{>->}[rrr]|(0.51)\hole^(0.3){f} & {} & {} & \shF(U_j) \ar[ldd]|(0.50)\hole \ar[rrr]|(0.48)\hole^(0.3){g} & {} & {} & \shF''(U_j) \ar[ldd]& {} \\
+        ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U_i)~ \ar@{->>}[rd]\ar@{>->}[rrr]^(0.3){f} & {} & {} & \shF(U_i) \ar[rd]\ar[rrr]^(0.3){g} & {} & {} & \shF''(U_i) \ar[rd]& {} \\
+        {} & ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U_{ij})~ \ar@{>->}[rrr]^-{f} & {} & {} & \shF(U_{ij}) \ar[rrr]^-{g} & {} & {} & \shF''(U_{ij})& {} \\
+    }
+    \]
+    % }}}
+    $s'' \in \shF''(U)$と，
+    $(*)$から存在が示される$t_i \in \shF(U_i), t_j \in \shF(U_j)$から
+    diagram chasingを始める．
+    \begin{enumerate}[(1)]
+    \setlength{\itemindent}{2em}
+        \item naturalityから$g (t_i|_{U_{ij}})=s''|_{U_{ij}}=g(t_j|_{U_{ij}})$．
+        \item よって列の完全性から$t_i-t_j \in \ker g|_{U_{ij}}=\im f|_{U_{ij}}$．
+        \item したがって$f(u'_{ij})=t_i-t_j$なる$u'_{ij} \in \shF'(U_{ij})$が存在する．
+        \item $\res_U^{U_{ij}}$ :: surjから$s'_{ij}|_{U_{ij}}=u'_{ij}$なる$s'_{ij} \in \shF'(U)$が存在する．
+        \item $s_{i}=f(s'_{ij})|_{U_i}+t_j \in \shF(U_i)$とおく．（足すのは$t_j$であることに注意．）
+        \item 構成より，$g(s_i)|_{U_{ij}}=g(t_i|_{U_{ij}})=s''|_{U_{ij}}$．
+        \item $i$を固定して$j$を動かすことで，Identity Axiomにより$g(s_i)=s''|_{U_i}$が得られる．
+        \item $g(s_i) \in \im g$にGluability Axiomを用いて，$g(s)|_{U_i}=g(s_i)=s''|_{U_i}$なる$s \in \shF(U)$がとれる(？)．
+        \item Identity Axiomから$g(s)=s''$．
+    \end{enumerate}
+
+    \subsubsection{Another Proof}
+    次のPDFのLemma2.12(p.10)がこの演習問題と同じ命題である: 
+    \url{http://www.math.mcgill.ca/goren/SeminarOnCohomology/Sheaf_Cohomology.pdf}．
+    次のPDFのLemma0.3(p.12)も同じ:
+    \url{http://www.uio.no/studier/emner/matnat/math/MAT4215/v15/notes1.pdf}．
+    どちらの証明でもZorn's Lemmaが用いられている．
+
+    \subsection{If $0 \to \shF' \to \shF \to \shF'' \to 0$ is Exact and $\shF', \shF$ is Flasque, then $\shF''$ also.}
+    $U,V$ :: open in $X$, $V \subseteq U$とする．
+    (b)より，以下の完全列が得られる．
+    \[
+    \xymatrix
+    {
+    0 \ar[r]& \shF'(U)~ \ar@{>->}[r]^-{f} \ar@{->>}[d]& \shF(U) \ar@{->>}[r]^-{g} \ar@{->>}[d]& \shF''(U) \ar[r] \ar[d]& 0 \\
+    0 \ar[r]& \shF'(V)~ \ar@{>->}[r]^-{f}& \shF(V) \ar@{->>}[r]^-{g}& \shF''(V) \ar[r]& 0
+    }
+    \]
+    証明はdiagram chasingによる．
+    \begin{enumerate}[(1)]
+    \setlength{\itemindent}{2em}
+        \item   $s'' \in \shF''(V)$を任意に取る．
+        \item   $\shF(U) \to \shF(V) \to \shF''(V)$ :: surjから，
+                $g(\tilde{s})|_V=s''$なる$\tilde{s} \in \shF(U)$が取れる．
+        \item   naturalityから$g(\tilde{s}|_V)=s''=g(\tilde{s})|_V$．
+    \end{enumerate}
+    $s:=g(\tilde{s}) \in \shF''(U)$とおけば$s|_V=s''$．
+
+    \subsection{If $f: X \to Y$ is Conti. and $\shF$ is Flasque, then $f_* \shF$ is Flasque.}
+    $U,V$ :: open in $Y$，$V \subseteq U$とする．
+    このとき$f^{-1}(V) \subseteq f^{-1}(U)$．
+    なので$\shF(U) \to \shF(V)$ :: surjより$\shF(f^{-1}(U)) \to \shF(f^{-1}(V))$ :: surj．
+    $f_* \shF(U)=\shF(f^{-1}(U))$だから，$f_* \shF$ :: flasque．
+
+    \subsection{Discontinuous Sections.}
+    $\shF \in \Sh(X)$とする．
+    これに対し，discontinuous sections of $\shF$と呼ばれるsheaf $\shG$が以下のように作れる．
+    $\pi$はEx1.13の$s_P \mapsto P$なる写像である．
+    \[ \shG: U \mapsto \left\{ s:U \to \bigsqcup_{P \in U} \shF_P ~\middle|~ \pi \circ s=\id{U} \right\} \]
+    $\shG$がflasque sheafであることと，$\shF \to \shG$の自然な単射が存在することを示す．
+    
+    \paragraph{$\shG$ :: sheaf.}
+    $\shG$ :: presheafは明らか．
+    sheafであることを示すため，
+    $U$ :: open in $X$とそのopen cover $\{U_i\}_{i \in I}$をとり，固定する．
+    任意の$i \in I$について$s|_{U_i}=0$であるような$s \in \shG(U)$が存在したとする．
+    $\bigcup U_i=U$より，任意の点$P \in U$に対して$s(P)=0$．
+    これはIdentity Axiomの成立を意味する．
+    同様に``$\Forall{i,j} \Forall{P \in U_i \cap U_j}$''を``$\Forall{P \in U}$''に書き換えるだけで，
+    Gluability Axiomの成立が証明できる．
+
+    \paragraph{$\shG$ :: flasque.}
+    $V \subset U$とする．
+    $s \in \shG(V)$をとる．これは例えば以下のように拡張できる．
+    \[
+        \bar{s}(P)=
+        \begin{cases}{}
+            s(P) & (P \in V) \\
+            0 & (P \in U \setminus V)
+        \end{cases}
+    \]
+
+    \paragraph{$\alpha$ in Ex1.13 is injective.}
+    Ex1.13の$\alpha: s \mapsto [P \mapsto s_P]$がinjectiveであることは以下のように示される．
+    ある$s,t \in \shF(U)$について$\alpha(s)=\alpha(t)$が成立するとしよう．
+    すると十分小さいopen set $(P \in) V_P (\subset U)$が存在して，
+    $s|_{V_P}=t|_{V_P}$となる．
+    明らかに$\{V_P\}_{P \in U}$は$U$のopen coverなので，
+    $s-t \in \shG$にIdentity Axiomを用いて$s=t$が得られる．
+
+\section{Skyscraper Sheaves.} %% Ex1.17 
+    $X$ :: topological space, $P \in X$, $A$ :: abelian groupとする．
+    sheaf $i_P(A)$を以下で定める．
+    \[
+        i_P(A)(U)=
+        \begin{cases}{}
+            A & (P \in U) \\
+            0 & (\text{otherwise})
+        \end{cases}
+    \]
+    点$P$を含む最小の閉集合を$\{P\}^-$と書く．
+
+    \subsection{$(i_P(A))_Q=A$ is $A$ if $Q \in \{P\}^-$, otherwise $0$ ．}
+    $U$を$Q$を含む極小の開集合とした時，
+    $(i_P(A))_Q$は集合として$\shF(U)$と一致する．
+    したがって以下が成立する．
+    \begin{align*}
+        {}& (i_P(A))_Q=A \\
+        \iff& \Forall{U \subset X} Q \in U \implies P \in U \\
+        \iff& \Forall{U \subset X} P \in U^c \implies Q \in U^c.
+    \end{align*}
+    最後の行は対偶として得られた．
+    一方，点$P$を含む最小の閉集合$\{P\}^-$は以下を満たす唯一の集合として特徴づけられる．
+    \[ \Forall{U \subset X} P \in U^c \implies \{P\}^- \subseteq U^c \]
+    よって$(i_P(A))_Q=A \iff Q \in \{P\}^-$．
+    他の場合は明らかに$(i_P(A))_Q=0$となる．
+    また，この特徴付けの対偶から$U \cap \{P\}^- \neq \emptyset$ならば$P \in U$．
+    $P \in U$ならば$P \in U \cap \{P\}^-$なので逆も成立する．
+
+    \subsection{$i_P(A)$ can be described as direct image.}
+    abelian group $A$に伴う$\{P\}^-$上のconstant sheafを$\shA$とする．
+    すると$i_P(\shA)$は埋め込み写像$i: \{P\}^- \hookrightarrow X$のdirect image $i_*(\shA)$に等しい．
+    実際，開集合$U$について$i_*(\shA)(U)=\shA(i^{-1}(U))=\shA(U \cap \{P\}^-)$であるから以下のようになる．
+    \[
+        i_*(\shA)(U) \cong
+        \begin{cases}{}
+            A & (U \cap \{P\}^- \neq \emptyset) \\
+            0 & (\text{otherwise})
+        \end{cases}.
+    \]
+    (a)で見たとおり$U \cap \{P\}^- \neq \emptyset$と$P \in U$は同値．
+    よって$i_*(\shA)=i_P(A)$．
+    特に，$\{P\}^-$はその最小性からirreducibleなので，
+    Ex1.16a,dと合わせれば$i_P(A)$はflasqueであることが分かる．
+
+\section{Adjoint Property of $f^{-1}$.} %% Ex1.18 
+    $f: X \to Y$ :: continuous mapについて，
+    $f^{-1}$が$f_*$のleft adjoint functorであることを示す．
+    left adjointの定義としては$\Hom$についての定義を用いる．
+
+    unit $\eta: \id{\Sh(Y)} \to f_* f^{-1}$と
+    counit $\eta: f^{-1} f_* \to \id{\Sh(X)}$を構成する．
+
+\section{Extending a Sheaf by Zero.} %% Ex1.19 
+    $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
+    さらに$i: Z \hookrightarrow X, j: U \hookrightarrow X$を埋め込み写像とする．
+
+    \subsection{$i_* \shF$ : Extending $\shF \in \Sh(Z)$ by Zero Outside $Z$.}
+    $\shF \in \Sh(Z)$とする．
+    以下を示す．
+    \[
+        (i_* \shF)_P=
+        \begin{cases}{}
+            \shF_P & (P \in Z) \\
+            0 & (P \not \in Z)
+        \end{cases}
+    \]
+
+    \subsection{$j_! \shF$ : Extending $\shF \in \Sh(U)$ by Zero Outside $U$}
+    $\shF \in \Sh(U)$とし，
+    $j_! \shF$を以下で定まるpresheafのsheafificationとする．
+    \[
+        (j_! \shF)^{pre}(V)=
+        \begin{cases}{}
+            \shF(V) & (V \subseteq U) \\
+            0 & (\text{otherwise})
+        \end{cases}
+    \]
+    この時，以下を示す．
+    \[
+        (j_! \shF)_P=
+        \begin{cases}{}
+            \shF_P & (P \in U) \\
+            0 & (P \not \in U)
+        \end{cases}
+    \]
+
+    \subsection{$0 \to j_!(\shF|_U) \to \shF \to i_*(\shF|_Z) \to 0$ is Exact.}
+
+\section{Subsheaf with Supports.} %% Ex1.20 
+    $Z$ :: closed in $X$, $\shF \in \Sh(X)$とする．
+    $\Gamma_Z(X, \shF)$を以下で定める．
+    \[ \Gamma_Z(X, \shF)=\{ s \in \Gamma(X, \shF)=\shF(Z) ~|~ \Supp s \subseteq Z. \}. \]
+
+    \subsection{Presheaf $V \mapsto \Gamma_{V \cap Z}(V, \shF|_V)$ is a Sheaf.}
+    Presheaf $\mathscr{H}_Z^0(\shF)$を
+    \[ \mathscr{H}_Z^0(\shF): V \mapsto \Gamma_{V \cap Z}(V, \shF|_V) \]
+    で定める．
+    これがsheafであることを示そう．
+
+    \subsection{For $U=X \setminus Z$，$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|U)$ is Exact.}
+    さらに，$\shF$ :: flasqueならば$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|U) \to 0$もexactであることを示す．
+
+\section{Some Examples of Sheaves on Varieties.} %% Ex1.21 
+    $k$ :: algebraically closed field, $X$ :: variety over $k$とする．
+    $\mathcal{O}_X$をthe sheaf of regular functons on $X$ (Example 1.0.1)とする．
+    \subsection{The Sheaf of Ideals $\shI_Y$．}
+    $Y$ :: closed in $X$とする．
+    任意の$U$ :: open in $X$について，$\shI_Y(U)$を以下で定める．
+    \[ \shI_Y: U \mapsto \{ f \in \mathcal{O}_X(U) ~|~ \Forall{P \in Y \cap U} f(P)=0. \}. \]
+    $\shI_Y(U)$は$\mathcal{O}_X(U)$のイデアルである．
+    この時，$\shI_Y (\subseteq \mathcal{O}_X)$がsheafであることを示す．
+
+    \subsection{If $Y$ :: subvariety, then $\mathcal{O}_X \cong i_*(\mathcal{O}_Y)$．}
+
+    \subsection{ }
+    \subsection{ }
+    \subsection{ }
+
+\section{Glueing Sheaves.} %% Ex1.22 
+    $X$ :: topological space, 
+    $\mathfrak{U}=\{U_i\}_{i \in I}$ :: open cover of $X$,
+    $\shF_i \in \Sh(U_i)$とする．
+    この$\{\shF_i\}_{i \in I}$に付随して，
+    同型写像$\phi_{ij}: \shF_i|_{U_i \cap U_j} \isomap \shF_j|_{U_i \cap U_j}$が存在し，
+    $\{\shF_i\}_{i \in I}$ with $\{\phi_{ij}\}_{i,j \in I}$が
+    inverse systemをなすとする．
+    この時，inverse limitの存在を示す．
+    この命題はsectionでなくsheafのGluablity Axiomと言える．
+
+%    abelian group $\shF(U)$を以下で定める．
+%    \[ \shF(U)=\left( {\bigsqcup_{i \in I} \{i\} \times \shF_i(U \cap U_i)}\right) \Big/ {\sim}. \]
+%    ただし$\sim$は以下で定まる同値関係である．
+%    \[ (i, s) \sim (j, t) \iff (\phi_{ij})_{U \cap U_i \cap U_j}(s)=t. \]
+%    $s \in \shF_i(U \cap U_i)$に注意せよ．
+%    これが同値関係であることは自明なので証明を略す．
+
+%    \subsubsection{$\shF(U)$ :: abelian group.}
+%    任意の2元$(i,s), (j,t) \in \shF(U)$に対し，
+%    $(j,t)$が属す同値類から$(i,t') \in \{i\} \times \shF_i(U \cap U_i)$が取れる．
+%    これは$\phi_{ij}: \shF_i|_{U_i \cap U_j} \isomap \shF_j|_{U_i \cap U_j}$が全単射（同型）だからである．
+%    この時，$(i,s)+(j,t)$は$(i, s+t')$で定義できる．
+%    可換性は$\shF_*(U \cap U_*)$の元が可換であることから得られる．
+%    単位元は$(i, 0)$である．
+
+%    \subsubsection{$\shF$ :: sheaf.}
+%    \subsubsection{$\shF|_{U_i} \iso \shF_i$.}
+
+\end{document}
