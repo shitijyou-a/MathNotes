@@ -25,6 +25,7 @@
 \newcommand{\ftorEt}{\text{\textit{\'Et}}}
 
 \newcommand{\res}{\operatorname{res}}
+\newcommand{\emb}{\operatorname{emb}}
 \newcommand{\Spe}{\text{Sp\'e}}
 
 \newcommand{\OpenIn}{\text{ :: open in }}
@@ -343,32 +344,10 @@
 sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: direct systemとし，
     $\PSh(X)$におけるdirect limitを$\shL$で書く．
     $X$ :: noetherian topological spaceであるとき，$\shL$が予めsheafであることを示す．
-    以下，$U$ :: open in $X$と開被覆$\{U_{\lambda}_{\lambda \in \Lambda}\}$を任意にとり，固定する．
+    以下，$U$ :: open in $X$と開被覆$\{U_{\lambda}\}_{\lambda \in \Lambda}$を任意にとり，固定する．
 
     $X$ :: noetherianより，$X$ :: quasi-compact．
     なので集合$\{U_{\lambda}\}$から有限被覆$\{ U_j \}_{j \in J}$が出来る．
-%    そして$\shF^i(U_1) \oplus \dots \oplus \shF^i(U_n)$として，
-%    これがdirect limitのUMPを満たすことを見る．)
-%    \paragraph{Identity Axiom.}
-%    $s \in \shL(U)$が任意の$\lambda$について$s|_{U_{\lambda}}=0$を満たすとしよう．
-%    以下の可換図式を見よ．
-%    \[
-%    \xymatrix
-%    {
-%    \shL(U) \ar@{-->>}[r]^-{\res_{U}^{U_{\lambda}}} & \shL(U_{\lambda}) \\
-%    \shF^i(U) \ar[u] \ar@/_4mm/[ur] \ar[r]_-{f^{ij}_{U}}& \shF^j(U) \ar[u] \ar@/^4mm/[ul]
-%    }
-%    \]
-%    $\shF^*(U)$から$\shL(U_{\lambda}), \shL(U)$へのmorphismが存在することは
-%    $\shL$が$\PSh(X)$でのdirect limitであることから明らか．
-%    射$\res_{U}^{U_{\lambda}}$はepi(=surj)．
-%    したがって$s|_{U_{\lambda}}=0$より$s|_{U}=0$が得られる．
-
-%    \paragraph{Gulability Axiom.}
-%    $s_{\lambda} \in \shL(U_{\lambda})$であるsectionの集合$\{s_{\lambda}\}$をとる．
-%    これらが任意の$\lambda, \mu$について
-%    $s_{\lambda}|_{U_{\lambda} \cap U_{\mu}}=s_{\mu}|_{U_{\lambda} \cap U_{\mu}}$
-%    を満たすとしよう．
 
 \section{Inverse Limit.} %% Ex1.12 
     sheaves $\{\shF^i\}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: inverse systemとし，
@@ -475,48 +454,6 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     任意の$U$と任意の$s$について$\bar{s}$が連続であるような最強の位相．
     これはつまり$\{\bar{s}\}$についての終位相である．
 
-%    \subsubsection{Another Sheafification.}
-%    $\shF \in \PSh(X)$に対し，そのsheafification $\shF^+$は以下を満たすことを示す．
-%    \[ \Forall{U \subseteq X} \shF^+(U)=\text{continuous sections of $\Spe(\shF)$ over $U$}=:\shF^@(U). \]
-%    $\shF^@(U)$の元は$\shF(U)$の元から得られるものだけではないことに注意せよ．
-
-%    $U$ :: open in $X$をひとつ取って固定する．
-%    $s \in \shF^+(U), \sigma \in \shF^@(U)$による
-%    $P \in U$の像がどちらの場合も$\shF_P$に入ることは，定義から明らか．
-%    $\sigma$が満たすべき定義を書き下すと，以下のようになる．
-%    \[
-%        \left[ \pi \circ \sigma=\id{U} \right]
-%        \land
-%        \left[ \Forall{\tilde{V} \OpenIn \Spe(\shF)} \sigma^{-1}(\tilde{V}) \OpenIn U \right].
-%    \]
-%    $\pi \circ \sigma=\id{U}$は$\sigma(P) \in \shF_P$を意味する．
-%    後半の条件を書き換えていく．
-%    \begin{align*}
-%        {}&     \Forall{\tilde{V} \OpenIn \Spe(\shF)} \sigma^{-1}(\tilde{V}) \OpenIn U, \\
-%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)} \bar{t}^{-1}(\mathcal{O}_U)}
-%                \sigma^{-1}(\tilde{V}) \OpenIn U, \\
-%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)}\{ \{t_P ~|~ P \in V\} ~|~ V \OpenIn U. \} } \\
-%        {}&     \hspace{8em} \Exists{W \OpenIn U} W=\sigma^{-1}(\tilde{V}), \\
-%        \iff&   \Forall{\tilde{V} \in \bigcap_{t \in \shF(U)}\{ \{t_P ~|~ P \in V\} ~|~ V \OpenIn U. \} } \\
-%        {}&     \hspace{8em} \Exists{W \OpenIn U} \Forall{Q \in W} \Exists{\tilde{R} \in \tilde{V}} \sigma(Q)=\tilde{R}.
-%    \end{align*}
-%    ここで現れる$\tilde{V}$は$V$を指定すれば一意に定まる．
-%    (正確には$\Forall{\tilde{V}} \Exists{V} V=\tilde{V}$で，中身まで特定すると$\Forall{\tilde{V}} \Exists{V} \Exists{t} V=\{t_P ~|~ P \in V\}$．)
-%    $V$は任意の$U$の開集合だから，さらに次のように書くことが出来る．
-%    \begin{align*}
-%        {}&     \Forall{V \OpenIn U} 
-%                \Exists{W \OpenIn V} \Forall{Q \in W} \Exists{t \in \shF(W)} \Exists{\tilde{R} \in \{t_P ~|~ P \in V\}} \sigma(Q)=\tilde{R}, \\
-%        \iff&   \Forall{V \OpenIn U}
-%                \Exists{W \OpenIn V} \Forall{Q \in W} \Exists{t \in \shF(W)} \sigma(Q)=t_Q, \\
-%        \iff&   \Forall{V \OpenIn U} 
-%                \Exists{W \OpenIn V} \Exists{t \in \shF(W)} \Forall{Q \in W} \sigma(Q)=t_Q.
-%    \end{align*}
-%    $\Exists{t \in \shF(W)}$は$Q \in W$に依存していないので順番を入れ替えた．
-%    $V,W$を指定する部分は，要するに$U$のcoverの中に条件を満たす開集合$W$が存在する，ということ．
-%    だから最終的に次が得られる．
-%    \[ \Forall{P \in U} (P \in)~ \Exists{V \OpenIn U} \Exists{t \in \shF(V)} \Forall{Q \in V} \sigma(Q)=t_Q. \]
-%    これは$\shF^+$の元の定義である．
-
     \subsubsection{More References for Espace \'Etal\'e.}
     WikipediaのSheafのページ
     \url{https://www.wikiwand.com/en/Sheaf_(mathematics)#/The_.C3.A9tal.C3.A9_space_of_a_sheaf}
@@ -524,7 +461,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     に概略が書かれている．
     詳細についての資料は以下の通り．
     まず，一般のespace \'etal\'e(\'etal\'e space)のcategoricalな定義が
-    \url{https://ncatlab.org/nlab/show/etal\'e+space}にある．
+    \url{https://ncatlab.org/nlab/show/etale+space}にある．
     \'Etal\'e spaceの圏とsheafの圏が圏同値であることの証明は
     Saunders Mac Lane, Ieke Moerdijk ``Sheaves in Geometry and Logic''の\S5-6, pp.83-90にある．
     （この命題はこの本のp.90 Cor3である．）
@@ -539,14 +476,6 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     その連続なsection全体をとる関手を$\ftorSec: \mathbf{Et}(X) \to \Sh(X)$とする．
     逆にpresheafから\'etal\'e spaceを作る関手を$\ftorEt: \PSh(X) \to \mathbf{Et}(X)$とする．
     sheafification functorが$\ftorSh=\ftorSec \ftorEt$で定義できることを示す．
-%    $U \OpenIn X$について，
-%    $\ftorSec$は$\Hom(U,\Spe(-))$から$\Hom(U,U)$への，次の二つの射のequalizerである．
-%    \[ (\pi \circ): f \mapsto \pi \circ f,~~ \overline{\id{U}}: * \mapsto \id{U}. \]
-%    後者はすなわち定値写像である．
-%    また，$\ftorEt$は次のdirect systemについてのdirect limitである．
-%    \[ \text{For } U,V \OpenIn X, s \in \shF(U) \text{ and } t \in \shF(V),~~[U \supseteq V] \land [s|_{V}=t] \iff U \times s \geq V \times t \]
-%    先に定めた$\Spe \shF$と$\ftorEt \shF$が一致することは，二つが同じUMPを持つことから分かる．
-%    この場合，前者は終位相のUMPを持ち，後者はdirect limitのUMPを持つ．
 
     \paragraph{Plan of Proof.}
     二つの写像を定める．
@@ -606,7 +535,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $s(S) \subseteq \alpha(\sigma)(V)$なる$(P \in)S(\subseteq V)$ :: openが存在する
     \footnote
     {
-        これは$\epsilon-\delta$論法に似ている．
+        これは$\epsilon$-$\delta$論法に似ている．
         $s^{-1}(V)$が開集合ならば，その任意の点が内点であるから，
         開集合$S$が存在することは自明である．
     }．
@@ -937,7 +866,32 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     left adjointの定義としては$\Hom$についての定義を用いる．
 
     unit $\eta: \id{\Sh(Y)} \to f_* f^{-1}$と
-    counit $\eta: f^{-1} f_* \to \id{\Sh(X)}$を構成する．
+    counit $\epsilon: f^{-1} f_* \to \id{\Sh(X)}$を構成する．
+
+    \paragraph{Construction of Unit $\eta$.}
+    $\shG \in \Sh(Y)$をとると，$U$ :: open in $Y$について次の等式が成り立つ．
+    \[ (f_* f^{-1} \shG)^{pre}(U)=(f^{-1} \shG)^{pre}(f^{-1}(U))=\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^{-1}(U)}} \shG(V). \]
+    $U \supseteq f \circ f^{-1}(U)$（全射と等号成立は同値）だから，
+    coconeの「底面の辺」と「母線」の結合として
+    \[ (\eta^{pre}_{\shG})_U: \shG(U) \to \shG(f \circ f^{-1}(U)) \to (f_* f^{-1} \shG)^{pre}(U) \]
+    が得られる．
+    これをsheafification functor $\ftorSh$で写して，
+    $\eta: \id{\Sh(Y)} \to f_* f^{-1}$が得られる．
+
+    \paragraph{Construction of Counit $\epsilon$.}
+    $\shF \in \Sh(X)$をとると，$U$ :: open in $X$について次の等式が成り立つ．
+    \[ (f^{-1} f_* \shF)^{pre}(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^{-1}(V)). \]
+    $V \supseteq f(U)$であるとき，$f^{-1}(V) \supseteq f^{-1} \circ f(U) \supseteq U$．
+    したがってcolimitのUMPにより$(\epsilon^{pre}_{\shF})_U$が得られる．
+    \[
+    \xymatrix
+    {
+    (f^{-1} f_* \shF)^{pre}(U) \ar@{-->}[r]^-{(\epsilon^{pre}_{\shF})_U}& \shF(U) \\
+    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^{-1} \circ f(U)) \ar[u]_-{\res} \ar@/^10pt/[ul]
+    }
+    \]
+    $\epsilon^{pre}$をsheafification functor $\ftorSh$で写して，
+    $\epsilon: f^{-1} f_* \to \id{\Sh(X)}$が得られる．
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
@@ -945,7 +899,34 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
 
     \subsection{$i_* \shF$ : Extending $\shF \in \Sh(Z)$ by Zero Outside $Z$.}
     $\shF \in \Sh(Z)$とする．
-    以下を示す．
+    $i$は埋め込み写像なので，開集合$U$について$(i_* \shF)(U)=\shF(U \cap Z)$．
+
+    点$P$の開近傍を考える．
+
+    \paragraph{Case: $P \in Z^c$．}
+    $Z^c$は開集合だから，$P \in Z^c$ならば，開近傍$V$が存在して$P \in V \subseteq Z^c$となる．
+    このとき，$\shF(Z \cap V)=\shF(\emptyset)=0$となる．
+    しかも$\shF(Z \cap V)=0$は十分小さいすべての$U$について成り立つ．
+    したがって$P$の任意の開近傍$V$について次の図式が可換．
+    \[
+    \xymatrix
+    {
+        {} & (i_* \shF)_P & {} \\
+        \shF(Z \cap V) \ar[rr]_-{i_* \res_{V}^{\emptyset}} \ar[ur]& {} & 0 \ar[ul]\\
+    }
+    \]
+    よって$\shF(Z \cap V) \to (i_* \shF)_P$はゼロ写像しかなく，
+    $(i_* \shF)_P$のUMPから$(i_* \shF)_P=0$．
+
+    \paragraph{Case: $P \in Z$．}
+    逆に$P \in Z$ならば，点$P$の$X$における開近傍$U$から作られる$Z \cap U$は，
+    常に空でない$P$の開近傍．
+    いつでも埋め込み射$\shF(V) \to \shF(Z \cap V)$が存在するので，
+    結局$\shF(V) ~~(P \in V)$なるabelian group全てから$(i_* \shF)_P$に射がのびている．
+    よって$(i_* \shF)_P=\shF_P$．
+
+    \paragraph{Conclusion.}
+    まとめると，以下が成り立つ．
     \[
         (i_* \shF)_P=
         \begin{cases}{}
@@ -964,7 +945,24 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
             0 & (\text{otherwise})
         \end{cases}
     \]
-    この時，以下を示す．
+    sheafificationでstalkは変わらないから，$(j_! \shF)_P=(j_! \shF)^{pre}_P$．
+
+    点$P$の開近傍を考えよう．
+
+    \paragraph{Case: $P \in U$.}
+    $U$ :: openなので，ある$V$ :: openが存在して$P \in V \subseteq U$となる．
+    このような$V$について$(j_! \shF)^{pre}(V)=\shF(V)$．
+    $U$より小さい任意の開近傍$V$については$(j_! \shF)^{pre}(V)=\shF(V)$となる上，
+    $U$より大きい任意の開近傍$V$から射$\res_V^{U \cap V}: \shF(V) \to \shF(U)$が生えている．
+    よって$(j_! \shF)^{pre}_P=\shF_P$．
+
+    \paragraph{Case: $P \in U^c$.}
+    このとき，どのように$P$の開近傍$V$をとっても，
+    $P \in V$かつ$P \not \in U$なので$V \not \subseteq U$．
+    したがって$(j_! \shF)^{pre}_P=0$となる．
+
+    \paragraph{Conclusion.}
+    まとめると，以下が成り立つ．
     \[
         (j_! \shF)_P=
         \begin{cases}{}
@@ -974,20 +972,56 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \]
 
     \subsection{$0 \to j_!(\shF|_U) \to \shF \to i_*(\shF|_Z) \to 0$ is Exact.}
+    Ex1.2cを応用する．
+    $P \in X$を任意の点とする．
+    $P \in U \text{ exor } Z$なので，それぞれの場合について考える．
+
+    \paragraph{Case: $P \in Z$.}
+    この時，$(j_!(\shF|_U))_P=\shF_P, (i_*(\shF|_Z))_P=0$となる．
+    よって$0 \to (j_!(\shF|_U))_P \to \shF_P \to (i_*(\shF|_Z))_P \to 0$は
+    $0 \to \shF_P \to \shF_P \to 0 \to 0$に等しく，これは完全列．
+
+    \paragraph{Case: $P \in U$.}
+    この時，$(j_!(\shF|_U))_P=0, (i_*(\shF|_Z))_P=\shF_P$となる．
+    よって$0 \to (j_!(\shF|_U))_P \to \shF_P \to (i_*(\shF|_Z))_P \to 0$は
+    $0 \to 0 \to \shF_P \to \shF_P \to 0$に等しく，これは完全列．
 
 \section{Subsheaf with Supports.} %% Ex1.20 
     $Z$ :: closed in $X$, $\shF \in \Sh(X)$とする．
     $\Gamma_Z(X, \shF)$を以下で定める．
-    \[ \Gamma_Z(X, \shF)=\{ s \in \Gamma(X, \shF)=\shF(Z) ~|~ \Supp s \subseteq Z. \}. \]
+    \[ \Gamma_Z(X, \shF)=\{ s \in \Gamma(X, \shF)=\shF(X) ~|~ \Supp s \subseteq Z. \}. \]
 
     \subsection{Presheaf $V \mapsto \Gamma_{V \cap Z}(V, \shF|_V)$ is a Sheaf.}
     Presheaf $\mathscr{H}_Z^0(\shF)$を
     \[ \mathscr{H}_Z^0(\shF): V \mapsto \Gamma_{V \cap Z}(V, \shF|_V) \]
     で定める．
     これがsheafであることを示そう．
+    開集合$V$とその開被覆$\{V_i\}_{i \in I}$を任意にとる．
 
-    \subsection{For $U=X \setminus Z$，$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|U)$ is Exact.}
-    さらに，$\shF$ :: flasqueならば$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|U) \to 0$もexactであることを示す．
+    \paragraph{Identity Axiom.}
+    $s \in \mathscr{H}_Z^0(\shF)(V)$をとる．
+    任意の$i \in I$について$s|_{V_i}=0$が成り立つとしよう．
+    この時，$\mathscr{H}_Z^0(\shF)$の定義から，$s \in \shF(V)$と$\Supp (s|_V) \subseteq V \cap Z$が成り立つ．
+    $\shF$のindentity axiomをもちいて，$s|_V=0$が得られる．
+%    なお，$\Supp (s|_{V_i})=\emptyset$から$\Supp (s|_V)=\emptyset$が得られる．
+
+    \paragraph{Gluability Axiom.}
+    $s_i \in \mathscr{H}_Z^0(\shF)(V_i)$をとる．
+    任意の$i,j \in I$について$s_i|_{V_i \cap V_j}=s_j|_{V_i \cap V_j}$が成り立つとしよう．
+    するとやはり$s_i \in \shF(V_i)$なので，$\shF$のgluability axiomから，
+    $s|_{V_i}=s_i$なる$s \in \shF(V)$が存在する．
+    あとは$s \in \mathscr{H}_Z^0(\shF)(V)$，すなわち$\Supp(s) \subseteq V \cap Z$を示せば良い．
+    これは
+    \[ \Supp(s_i)=\Supp(s|_{V_i})=\Supp(s) \cap V_i \subseteq V_i \cap Z\]
+    から$\Supp(s)=\bigcup (\Supp(s) \cap V_i) \subseteq \bigcup (V_i \cap Z)=V \cap Z$と計算できる．
+
+    \subsection{For $U=X \setminus Z$，$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U)$ is Exact.}
+    開集合$U=X \setminus Z$と$j: U \hookrightarrow X$について，
+    $0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U)$がexactであることを示す．
+    さらに，$\shF$ :: flasqueならば$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U) \to 0$もexactであることを示す．
+
+    Ex1.2cを応用するために，先に$\mathscr{H}_Z^0(\shF)$のstalkを考えよう．
+
 
 \section{Some Examples of Sheaves on Varieties.} %% Ex1.21 
     $k$ :: algebraically closed field, $X$ :: variety over $k$とする．
@@ -1013,25 +1047,30 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     同型写像$\phi_{ij}: \shF_i|_{U_i \cap U_j} \isomap \shF_j|_{U_i \cap U_j}$が存在し，
     $\{\shF_i\}_{i \in I}$ with $\{\phi_{ij}\}_{i,j \in I}$が
     inverse systemをなすとする．
-    この時，inverse limitの存在を示す．
+    この時，inverse limit $\shF$の存在を示す．
+    さらに，$\shF|_{U_i} \iso \shF_i$となることを示す．
     この命題はsectionでなくsheafのGluablity Axiomと言える．
+ 
+    Prop1.1を用いて仮定を書き換える．
+    $\{\shF_i\}_{i \in I}$について，以下の同型がある．
+    \[ \Forall{i,j \in I} \Forall{P \in U_i \cap U_j} (\shF_i)_P \cong (\shF_j)_P. \]
+    この時，sheaf $\shF$が存在して，
+    \[ \Forall{i \in I} \Forall{P \in U_i} \shF_P=(\shF|_{U_i})_P \cong (\shF_i)_P \]
+    となることを示す．
+    Ex1.19bの結果が結論によく似ているので，これを参考にする．
 
-%    abelian group $\shF(U)$を以下で定める．
-%    \[ \shF(U)=\left( {\bigsqcup_{i \in I} \{i\} \times \shF_i(U \cap U_i)}\right) \Big/ {\sim}. \]
-%    ただし$\sim$は以下で定まる同値関係である．
-%    \[ (i, s) \sim (j, t) \iff (\phi_{ij})_{U \cap U_i \cap U_j}(s)=t. \]
-%    $s \in \shF_i(U \cap U_i)$に注意せよ．
-%    これが同値関係であることは自明なので証明を略す．
-
-%    \subsubsection{$\shF(U)$ :: abelian group.}
-%    任意の2元$(i,s), (j,t) \in \shF(U)$に対し，
-%    $(j,t)$が属す同値類から$(i,t') \in \{i\} \times \shF_i(U \cap U_i)$が取れる．
-%    これは$\phi_{ij}: \shF_i|_{U_i \cap U_j} \isomap \shF_j|_{U_i \cap U_j}$が全単射（同型）だからである．
-%    この時，$(i,s)+(j,t)$は$(i, s+t')$で定義できる．
-%    可換性は$\shF_*(U \cap U_*)$の元が可換であることから得られる．
-%    単位元は$(i, 0)$である．
-
-%    \subsubsection{$\shF$ :: sheaf.}
-%    \subsubsection{$\shF|_{U_i} \iso \shF_i$.}
+    $\shF$を以下のpresheafのsheafificationと定義する．
+    \[
+        \shF^{pre}(V)=
+        \begin{cases}{}
+            \shF_i(V) & (\Exists{i \in I} V \subseteq U_i) \\
+            0 & (\text{otherwise})
+        \end{cases}
+    \]
+    もし$V \subseteq U_i$なる$i$が複数存在した時には，どれを選んでも構わない．
+    その時$V \subset U_i \cap U_j$なる$i,j \in I$が存在し，
+    $i,j$どちらを選んでも$\shF^{pre}(V)$が$\phi_{ij}$を介して同型になるからである．
+    そしてEx1.19bの証明から分かるように，$(\shF|_{U_i})_P=(\emb^{U_i}_! \shF_i)_P=(\shF_i)_P$．
+    ただし$\emb^{U_i}: U_i \hookrightarrow U$は埋め込み写像である．
 
 \end{document}
