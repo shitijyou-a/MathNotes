@@ -430,6 +430,9 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $\ftorSh(\bar{g})$は(2)の波矢印$\theta_{\ftorFgt \shG} \circ \bar{g}$から
     sheafificationのUMPで得られるものである．
     sheafificationをしたあとの可換図式が(3)である．
+    UMPから，$\theta_{\ftorFgt \shG}$および$\theta_{\ftorFgt \shG} \circ \bar{g}$と共に
+    可換な三角形をなす射は$\ftorSh(\bar{g})$に等しい．
+    よって$\ftorSh(\bar{g})=\theta_{\ftorFgt \shG} \circ \tilde{\epsilon}_{\shG}^{-1} \circ g$．
     こうして$g=\epsilon_{\shG} \circ \ftorSh(\bar{g})$が得られる．
 
 \section{Espace \'Etal\'e of a Presheaf.} %% Ex1.13 
@@ -532,14 +535,17 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         単射性から，この集合は$V$に等しい．
     }．
     しかも$s$ :: continuousだから，
-    $s(S) \subseteq \alpha(\sigma)(V)$なる$(P \in)S(\subseteq V)$ :: openが存在する
+    $s(S) \subseteq \alpha(\sigma)(V)$なる$(P \in)S$ :: openが存在する
     \footnote
     {
         これは$\epsilon$-$\delta$論法に似ている．
-        $s^{-1}(V)$が開集合ならば，その任意の点が内点であるから，
-        開集合$S$が存在することは自明である．
+        $s^{-1}(\alpha(\sigma)(V))$が開集合であるから，
+        任意の点，特に$P$はこの集合の内点である．
+        このことから開集合$S$が存在することは自明である．
     }．
-    このとき$\sigma$のとり方から$s|_S=\alpha(\sigma)|_S$となる．
+    直ちに以下が成り立つ．
+    \[ \Forall{Q \in S} \Exists{Q' \in V} \shF_Q \ni s(Q)=\sigma_{Q'}． \]
+    明らかに$Q=Q'$，すなわち$s|_S=\alpha(\sigma)|_S$が成り立つ．
     点$P$を様々に取ることで，$S$で$U$を被覆できることがわかる．
     $\sigma \& S$と$\tau \& T$の二組について
     \[ \alpha(\sigma)|_{S \cap T}=s|_{S \cap T}=\alpha(\tau)|_{S \cap T}. \]
@@ -872,26 +878,74 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $\shG \in \Sh(Y)$をとると，$U$ :: open in $Y$について次の等式が成り立つ．
     \[ (f_* f^{-1} \shG)^{pre}(U)=(f^{-1} \shG)^{pre}(f^{-1}(U))=\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^{-1}(U)}} \shG(V). \]
     $U \supseteq f \circ f^{-1}(U)$（全射と等号成立は同値）だから，
-    coconeの「底面の辺」と「母線」の結合として
-    \[ (\eta^{pre}_{\shG})_U: \shG(U) \to \shG(f \circ f^{-1}(U)) \to (f_* f^{-1} \shG)^{pre}(U) \]
+    coconeの「母線」として
+    \[ (\eta^{pre}_{\shG})_U: \shG(U) \to (f_* f^{-1} \shG)^{pre}(U) \]
     が得られる．
     これをsheafification functor $\ftorSh$で写して，
     $\eta: \id{\Sh(Y)} \to f_* f^{-1}$が得られる．
+    $\eta$の自然性は容易に示される．
 
     \paragraph{Construction of Counit $\epsilon$.}
     $\shF \in \Sh(X)$をとると，$U$ :: open in $X$について次の等式が成り立つ．
     \[ (f^{-1} f_* \shF)^{pre}(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^{-1}(V)). \]
-    $V \supseteq f(U)$であるとき，$f^{-1}(V) \supseteq f^{-1} \circ f(U) \supseteq U$．
+    $V \supseteq f(U)$であるとき，$f^{-1}(V) \supseteq f^{-1} \circ f(U) \supseteq U$（単射と等号成立は同値）．
     したがってcolimitのUMPにより$(\epsilon^{pre}_{\shF})_U$が得られる．
     \[
     \xymatrix
     {
     (f^{-1} f_* \shF)^{pre}(U) \ar@{-->}[r]^-{(\epsilon^{pre}_{\shF})_U}& \shF(U) \\
-    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^{-1} \circ f(U)) \ar[u]_-{\res} \ar@/^10pt/[ul]
+    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(V_{-}) \ar[u]_-{\res} \ar@/^10pt/[ul]
     }
     \]
+    ただし$V_{-}$は$V \supseteq f^{-1} \circ f(U)$なる開集合$V$の中で極小のものである．
     $\epsilon^{pre}$をsheafification functor $\ftorSh$で写して，
     $\epsilon: f^{-1} f_* \to \id{\Sh(X)}$が得られる．
+    $\epsilon$の自然性は$\res$の自然性から誘導される．
+
+    \paragraph{Preparation of Unit-Counit Equations.}
+    まず$f \circ f^{-1}(B) \subseteq B$に$B=f(A)$を代入すると$f \circ f^{-1} \circ f(A) \subseteq f(A)$．
+    続いて$f^{-1} \circ f(A) \supseteq A$の両辺を$f$で写すと$f \circ f^{-1} \circ f(A) \supseteq f(A)$．
+    二つを合わせて$f \circ f^{-1} \circ f=f$が得られる．
+    双対的に$f^{-1} \circ f \circ f^{-1}=f^{-1}$が得られる．
+
+    \paragraph{Unit-Counit Equations.}
+    以下の可換図式を見よ．
+    \[
+    \xymatrix
+    {
+    (f_* f^{-1} f_* \shF)^{pre}(U) \ar[r]^-{f_* (\epsilon^{pre})_{\shF}} & (f_* \shF)(U) & {} \\
+    \dots \ar[u] \ar[ur] \ar[r]
+    & \shF(f^{-1} \circ f \circ f^{-1}(U)) \ar[ul]^(0.7){(\eta^{pre})_{f_* \shF}} \ar@{=}[u] \ar@{=}[r]
+    & \shF(f^{-1}(U))
+    }
+    \]
+    よって$\id{f_*}=f_* \epsilon \circ \eta_{f_*}$が得られた．
+    次に$\shG \xrightarrow{\eta_{\shG}} f_* f^{-1} \shG$と$f_* f^{-1} \shG$の下にあるcoconeを
+    $f^{-1}$で写し，$\epsilon$を図式に追加することで，
+    以下の図式が得られる．
+    \[
+    \xymatrix@C=5em@R=3em
+    {
+    (f^{-1} f_* f^{-1} \shG)^{pre}(U) \ar@<2pt>[r]^-{(\epsilon^{pre})_{f^{-1}\shG}}
+    & (f^{-1} \shG)^{pre}(U) \ar@<2pt>[l]^-{f^{-1}(\eta^{pre})_{\shG}}
+    & {} \\
+    \dots \ar[u] \ar[ur] \ar[r]
+    & \dots \ar[ul] \ar[u] \ar@{..>}[r]
+    & \shG(f \circ f^{-1} \circ f(U))=\shG(f(U))
+    }
+    \]
+    $f^{-1} \shG$が持つ（colimitの）UMPから，
+    $\id{f^{-1}}=\epsilon_{f^{-1}\shG} \circ f^{-1}\eta_{\shG}$．
+
+    \paragraph{Hom-set Definition.}
+    以下のように写像を定義する．
+    \[
+        \phi(-)=f_*(-) \circ \eta_{\shG},~~
+        \psi(-)=\epsilon_{\shF} \circ f^{-1}(-).
+    \]
+    するとunit-counit equationsからこれらが互いに逆写像であることが分かる．
+    こうして所期の同型$\phi: \Hom(f^{-1}\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
+    自然性は$\eta, \epsilon$の自然性から誘導される．
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
@@ -989,7 +1043,9 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
 \section{Subsheaf with Supports.} %% Ex1.20 
     $Z$ :: closed in $X$, $\shF \in \Sh(X)$とする．
     $\Gamma_Z(X, \shF)$を以下で定める．
-    \[ \Gamma_Z(X, \shF)=\{ s \in \Gamma(X, \shF)=\shF(X) ~|~ \Supp s \subseteq Z. \}. \]
+    \[ \Gamma_Z(X, \shF)=\{ s \in \Gamma(X, \shF)=\shF(X) ~|~ \Supp(s) \subseteq Z. \}. \]
+    ``$\Supp(s) \subseteq Z$''は``$\Forall{P \in Z^c} s(P)=0$''と同値である．
+    また，特に$\Supp(0)=\emptyset$より，$0 \in \Gamma_Z(X, \shF)$．
 
     \subsection{Presheaf $V \mapsto \Gamma_{V \cap Z}(V, \shF|_V)$ is a Sheaf.}
     Presheaf $\mathscr{H}_Z^0(\shF)$を
@@ -1020,8 +1076,22 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U)$がexactであることを示す．
     さらに，$\shF$ :: flasqueならば$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U) \to 0$もexactであることを示す．
 
-    Ex1.2cを応用するために，先に$\mathscr{H}_Z^0(\shF)$のstalkを考えよう．
-
+    定義より，$\mathscr{H}_Z^0(\shF), j_*(\shF|_U)$は以下のような集合である．
+    \[
+        \mathscr{H}_Z^0(\shF)=\{ s \in \shF(V) ~|~ \Forall{Q \in U \cap V} s(Q)=0. \},~~
+        j_*(\shF|_U)=\shF(U \cap V).
+    \]
+    そこで写像$\zeta: \shF \to j_*(\shF|_U)$を以下で定義する．
+    \[ \zeta(s)(Q)=[Q \in U \cap V]s(Q) \mwhere V \OpenIn X, s \in \shF(V), Q \in V. \]
+    ただし$[Q \in U \cap V]$はIversonの記法である．
+    （ここは指示関数を用いて$\chi_{U \cap V}(Q)$と書いても良い．）
+    すると既に確認した$\mathscr{H}_Z^0(\shF)$の定義から，$\ker \zeta=\mathscr{H}_Z^0(\shF)$．
+    よって$0 \to \mathscr{H}_Z^0(\shF) \hookrightarrow \shF \xrightarrow{\zeta} j_*(\shF|_U)$はexact．
+    
+    さらに$\shF$ :: flasqueだと仮定する．
+    すると，$s \in \shF(U \cap V)$に対して$s'|_{U \cap V}=s$なる$s' \in \shF(V)$が存在する．
+    明らかに$\zeta(s')=s$となるから，この時$\zeta$は全射．
+    したがって$0 \to \mathscr{H}_Z^0(\shF) \to \shF \to j_*(\shF|_U) \to 0$もexactになる．
 
 \section{Some Examples of Sheaves on Varieties.} %% Ex1.21 
     $k$ :: algebraically closed field, $X$ :: variety over $k$とする．
