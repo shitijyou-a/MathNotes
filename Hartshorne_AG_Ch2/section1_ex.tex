@@ -59,37 +59,101 @@
     $\phi: \shF \to \shG$と任意の点$P$について
     $(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$を示す．
 
-    \paragraph{$\ker$}
-    単なる変形である．
+    \paragraph{ASSERTION.}
+    $(\ker \phi)_P$は$\shF_P$のsubgroupとみなす．
+    あるいは，$\ker \phi$を$\shF$のsubsheafとみなした上で，
+    以下の同型写像$\iota^P: (\ker \phi)_P \to \shF_P$によってsubgroupと同一視する．
     \begin{align*}
-        {}& \ker \phi_P \\
-        =&  \{ s_P \in \shF_P ~|~ \phi_P(s_P)=0. \} \\
-        =&  \{ s \in \shF(V) ~|~ P \in \Exists{V \OpenIn X} \phi_{V}(s)=0. \} \\
-        =&  (\{ s \in \shF(V) ~|~ \Exists{V \OpenIn X} \phi_{V}(s)=0. \})_P \\
-        =&  (\ker \phi)_P
+        \iota^P(s_P)
+        &=\{ \germ{V}{\sigma} ~|~ V \OpenIn X,
+                                  [\sigma \in \shF(V)] \land \left[ \Exists{\germ{U}{s} \in s_P} \germ{V}{\sigma} \sim_P \germ{U}{s} \right]. \} \\
+        (\iota^P)^{-1}(\sigma_P)&=\{ \germ{U}{s} ~|~ [s \in (\ker \phi)(U)] \land [\germ{U}{s} \in \sigma_P]. \}
     \end{align*}
+    $\sim_P$は「点$P$の開近傍において二つのsectionが一致する．」という同値関係である．
+    $(\im \phi)_P$も同様に$\shG_P$のsubgroupとみなす．
+    記号の乱用で，$\iota^P$で$(\im \phi)_P \to \shG_P$も表すことにする．
+
+    \paragraph{$\ker$}
+    \begin{align*}
+        {}&     s_P \in (\ker \phi)_P \subseteq (\iota^P)^{-1}(\shF_P) \\
+        \iff&   \Forall{\germ{U}{s} \in s_P} [P \in U] \land [s \in (\ker \phi)(U)] \\
+        \iff&   \Forall{\germ{U}{s} \in \iota^P(s_P) \in \shF_P} \Exists{V \OpenIn X} [P \in V \subseteq U] \land [s \in (\ker \phi)(V)] \\
+        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} [P \in U] \land [s \in (\ker \phi)(U)] \\
+        \iff&   \phi_P(\iota^P(s_P))=0 \\
+        \iff&   \iota^P(s_P) \in \ker \phi_P \subseteq \shF_P
+    \end{align*}
+    $\iota^P$を介さなければ，二つの集合は一致しない．
+    例を見よう．
+    $\shF, \shG$をどちらも実直線$\R$上の連続な関数がなす層（変数は$x$）とし，
+    $\phi(f)=f-x$とする．
+    この$\phi$でramp function $\mathit{ramp}(x)=[x \geq 0]x$を写したものは
+    $\phi(\mathit{ramp})(x)=[x<0](-x)$となる．
+    これは明らかに$x=1$の近傍$(0,2)$で0になるから，$\germ{(0,2)}{\mathit{ramp}} \in \ker \phi_P$．
+    また，近傍を$(-2,2)$としても，
+    $\germ{(0,2)}{\mathit{ramp}} \sim_P \germ{(-2,2)}{\mathit{ramp}} \in \ker \phi_P$．
+    しかし，$\mathit{ramp}|_{(-2,2)} \neq 0$だから
+    $\mathit{ramp} \not \in (\ker \phi)((-2,2))$となる．
+    なので$(\ker \phi)_P$に$\germ{(-2,2)}{\mathit{ramp}}$は入っていない．
 
     \paragraph{$\im$}
-    途中までは$\ker$と同様である．
+    殆ど$\ker$の場合と同じだが，$(\im \phi)^{pre}_P=(\im \phi)_P$を用いる．
     \begin{align*}
-        {}& \im \phi_P \\
-        =&  \{ t_P \in \shG_P ~|~ \Exists{s_P \in \shF_P} \phi_P(s_P)=t_P. \} \\
-        =&  \{ t \in \shG(V) ~|~ P \in \Exists{V \OpenIn X} \Exists{s \in \shF(V)} \phi_{V}(s)=t. \} \\
-        =&  (\{ t \in \shG(V) ~|~ \Exists{V \OpenIn X} \Exists{s \in \shF(V)} \phi_{V}(s)=t. \})_P
+        {}&     s_P \in (\im \phi)^{pre}_P=(\im \phi)_P \subseteq (\iota^P)^{-1}(\shG_P)\\
+        \iff&   \Forall{\germ{U}{s} \in s_P} [P \in U] \land [s \in (\im \phi)(U)] \\
+        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} [P \in U] \land [s \in (\im \phi)(U)] \\
+        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} \Exists{t \in \shF(U)} \phi_U(t)=s \\
+        \iff&   \Exists{t_P \in \shF_P} \phi_P(t_P)=\iota^P(s_P) \\
+        \iff&   \iota^P(s_P) \in \im \phi_P \subseteq \shG_P
     \end{align*}
-    最後の行の$(\dots)_P$内はpresheaf $\im^{pre} \phi$である．
-    sheafificationによってstalkは変わらないから，
-    $\im \phi_P=(\im^{pre} \phi)_P=(\im \phi)_P$．
 
     \subsection{$\phi$ :: inj/surj $\iff$ $\Forall{P \in X} \phi_P$ :: inj/surj.}
-    まず，Prop1.1を$\phi=\id{\shF}=\id{\shG}$の場合について適用すれば
-    \[ \shA=\shB \iff \Forall{P \in X} \shA_P=\shB_P \]
+    まず，
+    \[ \shA=\shB \implies \Forall{P \in X} \shA_P=\shB_P \]
     が言えることに注意する．
-    これと(a)を合わせると主張が示せる．
-    まず$\phi: \shF \to \shG$ :: injについて．
-    \[ \ker \phi=0 \iff (\ker \phi)_P=0_P \iff \ker \phi_P=0. \]
-    $\phi: \shF \to \shG$ :: surjについても以下の通り．
-    \[ \im \phi=\shG \iff (\im \phi)_P= \shG_P \iff \im \phi_P=\shG_P. \]
+    これは$\shA=\shB$の両辺をstalkをとるfunctorで写せば分かる．
+
+    \paragraph{Injectivity.}
+    まず$\phi$と$\phi_P$の単射性について．
+    (a)から以下が分かる．
+    \[ \ker \phi=0 \implies (\ker \phi)_P=0_P \iff \ker \phi_P=\{\bar{0}_P\}. \]
+    ここで$0_P$はzero sheafのstalkで，
+    $\{\bar{0}_P\} \subset \shF_P$は$\bar{0}_P$しかgermを持たない1点集合である．
+    $\bar{0}_P$は$\shF(U)$の元達を1点で同一視したもので，
+    多くの場合，element of stalk of zero sheafとは濃度が異なる．
+    (a)のASSERTIONで定義した$\iota^P$を用いれば，$\iota^P(0)=\bar{0}_P.$
+    残るは$\ker \phi=0 \impliedby (\ker \phi)_P=0_P$である．
+    $\ker \phi \supseteq 0$は自明なので，逆の包含関係を示そう．
+    $U$ :: open in $X$とし，$s \in (\ker \phi)(U)$を任意に取る．
+    任意の点$P \in U$について，$\ker \phi_P=0$より，
+    新しい開近傍$V_P ~~(P \in V_P \subseteq U)$が存在して$\phi_{V_P}(s|_{V_P})=0$となる．
+    restrictionと$\phi$のnaturalityから$\phi_U(s)|_{V_P}=0$．
+    そこで$P$を動かして$V_P$で$U$を被覆すると，
+    $\shG$のIdentity Axiomから$\phi_U(s)=0$．
+    任意の$U, s$について$\phi_U(s)=0$だから，$\ker \phi=0$．
+
+    \paragraph{Surjectivity.}
+    $\phi$と$\phi_P$の全射性についても，以下の通り．
+    \[ \im \phi=\shG \implies (\im \phi)_P=\shG_P \iff \im \phi_P=\shG_P. \]
+    この場合は$\im \phi$がproper subsheafではないので記号を変えたりする必要はない．
+    残る$\im \phi=\shG \impliedby \im \phi_P=\shG_P$を示す．
+    $\im \phi \subseteq \shG$は自明なので，逆の包含関係を示そう．
+    $U$ :: open in $X$, $t \in \shG(U)$を任意に取る．
+    すると$\im \phi_P=\shG_P$より，$\phi_P(s^P_P)=t_P$となる$s^P_P \in \shF_P$が存在する．
+    この時，任意の点$P$について開近傍$V_P ~~(P \in V_P \subseteq U)$が存在し，
+    $\phi_{V_P}(s^P|_{V_P})=t|_{V_P}$．
+    restrictionと$\phi$のnaturalityから$\phi_U(s^P)|_{V_P}=t|_{V_P}$．
+    状況をまとめよう．
+    $U$の開被覆$\{V_P\}_{P \in U}$が存在し，
+    さらに各$P$ごとに$\sigma^P|_{V_P}=t|_{V_P}$なる
+    $\sigma^P:=\phi_U(s^P) \in (\im \phi)(V_P)$が存在する．
+    二点$P,Q$を取れば，以下が成り立つ．
+    \[ \sigma^P|_{V_P \cap V_Q}=t|_{V_P \cap V_Q}=\sigma^P|_{V_P \cap V_Q}. \]
+    よって$\im \phi$のGluability Axiomから，
+    $\Sigma|_{V_P}=\sigma^P=\phi_U(s^P)|_{V_P}=t|_{V_P}$なる$\Sigma \in (\im \phi)(U)$が存在する．
+    最後にIdentity Axiomを用いて，$t=\Sigma$．
+    以上より，任意の$t \in \shG(U)$に対して$t \in (\im \phi)(U)$が示された．
+    （この議論は当然 presheaf $\im^{pre} \phi$では通用しない．
+    $\im$がpresheafのままでは，$\phi$と$\phi_P$の全射性について，このような同値関係は示せない．）
 
     \subsection{$\shF \xrightarrow{\phi} \shG \xrightarrow{\psi} \shH$ is exact $\iff$
         $\shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$ is exact.}
