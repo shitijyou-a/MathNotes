@@ -1,12 +1,10 @@
-\documentclass[a4paper]{jarticle}
+\documentclass[a4paper]{jsarticle}
 \usepackage{../math_note}
 
 \newcommand{\Stab}{\operatorname{Stab}}
 \newcommand{\Fix}{\operatorname{Fix}}
 \newcommand{\Norm}{\operatorname{N}}
 \newcommand{\Syl}{\operatorname{Syl}}
-
-\newcommand{\ulpar}[1]{\paragraph{\underline{#1}}}
 
 \title{Sylow Theorems}
 \author{七条 彰紀}
@@ -78,7 +76,7 @@
         するとOrbit-Stabilizer TheoremとLagrange's Theoremより、
         \[ |X| = \sum_{x \in X}{|G/ \Stab_G(x)|} = \sum_{x \in X}{|G|/|\Stab_G(x)|}\]
 
-        $\Stab_G(x)$は$G$の部分群だから、$|\Stab_G(x)|$も$p$の倍数。
+        $\Stab_G(x)$は$G$の部分群だから、$|\Stab_G(x)|$も$p$の倍数か1。
         したがって$|G|/|\Stab_G(x)|$は$p$の倍数か1である。
         しかも$|G|/|\Stab_G(x)|=1$すなわち$\Stab_G(x)=G$の時は$x \in \Fix_G(X)$となっている。
         よって、$|X|=|\Fix_G(X)|+(p\mbox{の倍数}) \equiv |\Fix_G(X)| \mod p$
@@ -93,7 +91,7 @@
     \end{proof}
 
 \section{Proof of Sylow Theorem I.}
-    \ulpar{整理と方針}
+    \paragraph{整理と方針}
     ステートメントは定義から次のように論理式で表される。
     \[ \forall i \in [0, n],~ \exists H : \mbox{a group} ~s.t.~ H \subset G ~\wedge~ |H|=p^i \]
     これを$i$に関する帰納法で証明しよう。
@@ -102,14 +100,14 @@
     $i=k<n$の時$|H|=p^k$となる部分群$H$が存在するならば、
     $H \subset H'$かつ$|H'|=p^{k+1}$、すなわち$[H':H]=p$となる部分群$H'$が存在することを示す。
 
-    \ulpar{$\Fix_{H}(G/H)$の定義}
+    \paragraph{$\Fix_{H}(G/H)$の定義}
     中心となるアイデアは、集合$G/H$の元で、$H$による左からの積作用によって不変なものを考える、ということである。
     このような元全体を$\Fix_{H}(G/H)$と置く。
     \[
         \Fix_{H}(G/H) := \{ gH \in G/H : \forall h \in H,~ hgH=gH \}
     \]
 
-    \ulpar{$\Fix_{H}(G/H)=\Norm_G(H)/H$}
+    \paragraph{$\Fix_{H}(G/H)=\Norm_G(H)/H$}
     この$\Fix_{H}(G/H)$を別の表現にしよう。
     \begin{eqnarray*}
         &{}&    gH \in G/H \\
@@ -124,14 +122,14 @@
     以上から、$\Fix_{H}(G/H)=\{ gH : g \in \Norm_G(H) \} = \Norm_G(H)/H$となる。
     $\Fix_{H}(G/H)$が群だから、$H$は$\Norm_G(H)$の正規部分群である。
 
-    \ulpar{$\Norm_G(H)/H$は$p$群}
+    \paragraph{$\Norm_G(H)/H$は$p$群}
     さて、補題から次が成り立つ。
     \[ |G/H| \equiv |\Fix_{H}(G/H)| \mod p \]
     $k<n$という条件とLagrange's Theoremから、
     $|G/H|=|G|/|H|=p^{n-k}m$は$p$の倍数。
     したがって$|\Fix_{H}(G/H)|=|\Norm_G(H)/H|$も$p$の倍数。
 
-    \ulpar{Cauchy's Group Theoremから$H'$が存在}
+    \paragraph{Cauchy's Group Theoremから$H'$が存在}
     $|\Norm_G(H)/H|$が$p$の倍数であるということは、
     Cauchy's Group Theoremから、これは位数$p$の巡回群を持つ。
     それは群$H' \subset \Norm_G(H)$によって$H'/H$と表される。
@@ -139,14 +137,14 @@
     
 
     \section{Proof of Sylow Theorem II}
-    \ulpar{$\Fix_Q(G/P)$は空でない}
+    \paragraph{$\Fix_Q(G/P)$は空でない}
     群$G$の$p$-Sylow部分群$P$,$Q$をとり、これらが共役であることを示す。
     使うのはやはりFixed Points Conguranceだ。$Q$は$p$-部分群なので以下が成り立つ。
     \[ |G/P|=[G:P] \equiv |\Fix_Q(G/P)| \mod p \]
     $|P|=p^n$から、$|G/P|=|G|/|P|=m$は$p$の倍数でない。
     したがって$\Fix_Q(G/P)=\{ gP \in G/P : \forall q \in Q,~ qgP=gP \}$は空集合でない。
 
-    \ulpar{$\Fix_Q(G/P)$の元の定義から結論へ}
+    \paragraph{$\Fix_Q(G/P)$の元の定義から結論へ}
     $\Fix_Q(G/P)$の元を一つ取って$gP$とおく。
     定義から、全ての$Q$の元$q$に対して
     \[ qg \cdot P=gP \implies qg \cdot e \in gP \iff qg \in gP \iff Q \subset gPg^{-1} \]となる。
@@ -154,23 +152,23 @@
     
 
     \section{Proof of Sylow Theorem III}
-    \ulpar{方針}
+    \paragraph{方針}
     $\Syl_p(G)$の元を一つとり$P$とする。そして集合$\Syl_p(G)$への$P$の共役作用を考える。
     $P$は$p$-部分群なので、ここでもFixed Points Conguranceを使える。
     \[ |\Syl_p(G)| \equiv |\Fix_P(\Syl_p(G))| \mod p\]
     以下で$|\Fix_P(\Syl_p(G))|=1$を示す。
 
-    \ulpar{不動点$Q$を取る}
+    \paragraph{不動点$Q$を取る}
     $\Fix_P(\Syl_p(G))$に$P$が属すことは$\forall p \in P,~ p^{-1}Pp=P$から自明なので、
     $\Fix_P(\Syl_p(G))$からもうひとつ元をとって$Q$とする。
 
-    \ulpar{$P, Q, \Norm_G(Q)$の関係}
+    \paragraph{$P, Q, \Norm_G(Q)$の関係}
     この時、$P,Q \subset \Norm_G(Q) \subset G$だから
     \footnote{念の為。$\Norm_G(Q):=\{ g \in G : g^{-1}Qg=Q \}$であり、$Q \in \Fix_P(\Syl_p(G))$から$\forall g \in P,~ g^{-1}Qg=Q$が成立する。}、
     位数を考えれば$P,Q \in \Syl_p(\Norm_G(Q))$も成り立つ。
     また、$Q$は$\Norm_G(Q)$の正規部分群（Sylow Theorem Iでも触れた）である。
 
-    \ulpar{$P=Q$を示す}
+    \paragraph{$P=Q$を示す}
     Sylow Theorem IIから$P,Q$は$\Norm_G(Q)$の部分群として互いに共役。
     ところが正規部分群の定義より、$\Norm_G(Q)$の部分群で$Q$と共役なものは$Q$自身しか無い。
     よって$P=Q$となり、$\Fix_P(\Syl_p(G))=\{ P \}$が示された。
