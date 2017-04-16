@@ -100,7 +100,7 @@
         \iff&   \phi_P(\iota(s_P))=0 \\
         \iff&   \iota(s_P) \in \ker \phi_P \subseteq \shF_P
     \end{align*}
-    $\iota^P$を介さなければ，二つの集合は一致しない．
+    $\iota$を介さなければ，二つの集合は一致しない．
     例を見よう．
     $\shF, \shG$をどちらも実直線$\R$上の連続な関数がなす層（変数は$x$）とし，
     $\phi(f)=f-x$とする．
@@ -623,37 +623,37 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \paragraph{$\alpha$ :: iso.}
     まず$\alpha$ :: inj はIndentity Axiomから容易に示されるので略す．
     $\alpha$ :: surjの証明は長い．
-    まず$U \OpenIn X, s \in (\ftorSec \ftorEt \shF)(U)$を任意に取る．
+    まず$U \OpenIn X, \sigma \in (\ftorSec \ftorEt \shF)(U)$を任意に取る．
     すると$\ftorSec \ftorEt$の定義から，以下が成り立つ．
-    \[ \Forall{P \in U} (P \in)\Exists{V \OpenIn U} \Exists{\sigma \in \shF(V)} s(P)=\sigma_P. \]
-    $\ftorEt \shF$の位相は像位相であり，かつ$\bar{\sigma}$は明らかに単射．
-    なので$\alpha(\sigma)(V)=\bar{\sigma}(V)$はopenである
+    \[ \Forall{P \in U} P \in {}^{\exists} V \subseteq U \text{ :: open},~~ \Exists{s \in \shF(V)} \sigma(P)=s_P. \]
+    $\ftorEt \shF$の位相は像位相であり，かつ$\alpha(s)=\bar{s}$は明らかに単射．
+    なので$\alpha(s)(V)=\bar{s}(V)$はopenである
     \footnote
     {
-        $\bar{\sigma}$の像位相において，
+        $\bar{s}$の像位相において，
         開集合$V$の像が開集合であることは
-        $\bar{\sigma}^{-1} \circ \bar{\sigma}(V)$が開集合であることと同値だが，
+        $\bar{s}^{-1} \circ \bar{s}(V)$が開集合であることと同値だが，
         単射性から，この集合は$V$に等しい．
     }．
-    しかも$s$ :: continuousだから，
-    $s(S) \subseteq \alpha(\sigma)(V)$なる$(P \in)S$ :: openが存在する
+    しかも$\sigma$ :: continuousだから，
+    $\sigma(S) \subseteq \alpha(\sigma)(V)$なる$P \in S \subseteq \sigma^{-1}(\alpha(\sigma)(V))$ :: openが存在する
     \footnote
     {
         これは$\epsilon$-$\delta$論法に似ている．
-        $s^{-1}(\alpha(\sigma)(V))$が開集合であるから，
+        $\sigma^{-1}(\alpha(\sigma)(V))$が開集合であるから，
         任意の点，特に$P$はこの集合の内点である．
         このことから開集合$S$が存在することは自明である．
     }．
     直ちに以下が成り立つ．
-    \[ \Forall{Q \in S} \Exists{Q' \in V} \shF_Q \ni s(Q)=\sigma_{Q'}． \]
-    明らかに$Q=Q'$，すなわち$s|_S=\alpha(\sigma)|_S$が成り立つ．
+    \[ \Forall{Q \in S} \Exists{Q' \in V} \shF_Q \ni \sigma(Q)=s_{Q'}． \]
+    明らかに$Q=Q'$，すなわち$\sigma|_S=\alpha(s)|_S$が成り立つ．
     点$P$を様々に取ることで，$S$で$U$を被覆できることがわかる．
-    $\sigma \& S$と$\tau \& T$の二組について
-    \[ \alpha(\sigma)|_{S \cap T}=s|_{S \cap T}=\alpha(\tau)|_{S \cap T}. \]
-    したがって$\alpha$ :: injから$\sigma|_{S \cap T}=\tau|_{S \cap T}$．
+    $s \& S$と$t \& T$の二組について
+    \[ \alpha(s)|_{S \cap T}=\sigma|_{S \cap T}=\alpha(t)|_{S \cap T}. \]
+    したがって$\alpha$ :: injから$s|_{S \cap T}=t|_{S \cap T}$．
     こうしてGluability Axiomから，
-    $\alpha(\sigma)|_S=\alpha(\Sigma)|_S=s|_S$なる$\Sigma \in \shF(U)$の存在が示せる．
-    最後にIdentity Axiomを用いて$\alpha(\Sigma)=s$．
+    $\alpha(s)|_S=\alpha(\int)|_S=\sigma|_S$なる$\int \in \shF(U)$の存在が示せる．
+    最後にIdentity Axiomを用いて$\alpha(\int)=s$．
     これで$\alpha$ :: isoが示せた．
 
     \paragraph{UMP of Sheafification.}
