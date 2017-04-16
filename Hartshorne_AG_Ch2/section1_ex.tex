@@ -60,27 +60,45 @@
     $(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$を示す．
 
     \paragraph{ASSERTION.}
-    $(\ker \phi)_P$は$\shF_P$のsubgroupとみなす．
-    あるいは，$\ker \phi$を$\shF$のsubsheafとみなした上で，
-    以下の同型写像$\iota^P: (\ker \phi)_P \to \shF_P$によってsubgroupと同一視する．
-    \begin{align*}
-        \iota^P(s_P)
-        &=\{ \germ{V}{\sigma} ~|~ V \OpenIn X,
-                                  [\sigma \in \shF(V)] \land \left[ \Exists{\germ{U}{s} \in s_P} \germ{V}{\sigma} \sim_P \germ{U}{s} \right]. \} \\
-        (\iota^P)^{-1}(\sigma_P)&=\{ \germ{U}{s} ~|~ [s \in (\ker \phi)(U)] \land [\germ{U}{s} \in \sigma_P]. \}
-    \end{align*}
+    $\shF'$を$\shF$のsubsheafだとする．
+    この時，以下の写像$\iota_{\shF'_P}^{\shF_P}: \shF'_P \to \shF_P$に依って
+    $\shF'_P$は$\shF_P$のsubgroupとみなせる．
+    なお，germは$\sim_P$についての同値類（点ではなく集合）とみなす．
     $\sim_P$は「点$P$の開近傍において二つのsectionが一致する．」という同値関係である．
-    $(\im \phi)_P$も同様に$\shG_P$のsubgroupとみなす．
-    記号の乱用で，$\iota^P$で$(\im \phi)_P \to \shG_P$も表すことにする．
+    \[
+    \iota_{\shF'_P}^{\shF_P}(s_P)=
+        \left\{ \germ{U}{\sigma} ~\middle|~ 
+            \begin{array}{@{}c@{}}
+                P \in U, \sigma \in \shF(U), \\ 
+                P \in {}^{\exists}{V} \subseteq U,~ \germ{V}{\sigma} \in s_P.
+            \end{array}
+        \right\}
+        \Big/ \sim_P
+    \]
+    $\germ{U}{\sigma}$は本文p.62の記号である．
+    以下，$\iota_{\shF'_P}^{\shF_P}$は適宜$\iota$と略す．
+    $s_P=t_P$であるとき$\iota(s_P)=\iota(t_P)$であることは
+    定義の``$\germ{V}{\sigma} \in s_P$''の部分から明らか．
+    この写像が単射であることは以下のように示される．
+    まず互いに異なる$s_P, t_P \in \shF'_P$をとる．
+    すると$\germ{U}{\sigma} \in s_P \setminus t_P$が取れる．
+    明らかに$\germ{U}{\sigma} \in \iota(s_P)$．
+    この$\germ{U}{\sigma}$について，開集合$U$をより小さい$U'$に取り替えても
+    $\germ{U}{\sigma} \in s_P \setminus t_P$となる．
+    これは$s_P, t_P$が$\sim_P$についての同値類だからである．
+    したがって$\germ{*}{\sigma}$は$\iota(t_P)$に属さない．
+    以上から$\iota(s_P) \neq \iota(t_P)$．
 
     \paragraph{$\ker$}
+    $\iota_{(\ker \phi)_P}^{\shF_P}$の像が$\ker \phi_P$であることを示す．
+    そのために$s_P \in (\ker \phi)_P$をとり，$\iota(s_P)$を考える．
     \begin{align*}
-        {}&     s_P \in (\ker \phi)_P \subseteq (\iota^P)^{-1}(\shF_P) \\
-        \iff&   \Forall{\germ{U}{s} \in s_P} [P \in U] \land [s \in (\ker \phi)(U)] \\
-        \iff&   \Forall{\germ{U}{s} \in \iota^P(s_P) \in \shF_P} \Exists{V \OpenIn X} [P \in V \subseteq U] \land [s \in (\ker \phi)(V)] \\
-        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} [P \in U] \land [s \in (\ker \phi)(U)] \\
-        \iff&   \phi_P(\iota^P(s_P))=0 \\
-        \iff&   \iota^P(s_P) \in \ker \phi_P \subseteq \shF_P
+        {}&     s_P \in (\ker \phi)_P \\
+        \iff&   \Forall{\germ{U}{\sigma} \in s_P} s \in (\ker \phi)(U) \\
+        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \sigma|_V \in (\ker \phi)(V) \\
+        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \phi_V(\sigma|_V)=0 \\
+        \iff&   \phi_P(\iota(s_P))=0 \\
+        \iff&   \iota(s_P) \in \ker \phi_P \subseteq \shF_P
     \end{align*}
     $\iota^P$を介さなければ，二つの集合は一致しない．
     例を見よう．
@@ -96,15 +114,21 @@
     なので$(\ker \phi)_P$に$\germ{(-2,2)}{\mathit{ramp}}$は入っていない．
 
     \paragraph{$\im$}
-    殆ど$\ker$の場合と同じだが，$(\im \phi)^{pre}_P=(\im \phi)_P$を用いる．
+    殆ど$\ker$の場合と同じだが，$(\im^{pre} \phi)_P=(\im \phi)_P$を用いる．
     \begin{align*}
-        {}&     s_P \in (\im \phi)^{pre}_P=(\im \phi)_P \subseteq (\iota^P)^{-1}(\shG_P)\\
-        \iff&   \Forall{\germ{U}{s} \in s_P} [P \in U] \land [s \in (\im \phi)(U)] \\
-        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} [P \in U] \land [s \in (\im \phi)(U)] \\
-        \iff&   \Exists{\germ{U}{s} \in \iota^P(s_P)} \Exists{t \in \shF(U)} \phi_U(t)=s \\
-        \iff&   \Exists{t_P \in \shF_P} \phi_P(t_P)=\iota^P(s_P) \\
-        \iff&   \iota^P(s_P) \in \im \phi_P \subseteq \shG_P
+        {}&     s_P \in (\im^{pre} \phi)_P=(\im \phi)_P \\
+        \iff&   \Forall{\germ{U}{\sigma} \in s_P} \sigma \in (\im^{pre} \phi)(U) \\
+        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \sigma|_V \in (\im^{pre} \phi)(V) \\
+        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \Exists{\tau \in \shG(V)} \phi_V(\tau)=\sigma|_V \\
+        \iff&   \Exists{\tau_P \in \shG_P} \phi_P(\tau_P)=\iota(s_P) \\
+        \iff&   \iota(s_P) \in \im \phi_P
     \end{align*}
+    $\tau$は$\germ{U}{\sigma}$ごとに選ばれるが，下から2つめの$\iff$で問題は生じない．
+    例えば$\germ{U}{\sigma}$に$\germ{V}{\tau}$が，$\germ{U'}{\sigma'}$に$\germ{V'}{\tau'}$が対応するなら，
+    $\germ{U}{\sigma}, \germ{U'}{\sigma'} \in \iota(s_P)$なので，
+    ある開集合$W \subseteq U \cap U'$について
+    $\phi_{U}(\tau)|_W=\sigma|_{W}=\sigma'|_{W}=\phi_{U'}(\tau')|_W$となる．
+    よって$\tau_P=\tau'_P$．
 
     \subsection{$\phi$ :: inj/surj $\iff$ $\Forall{P \in X} \phi_P$ :: inj/surj.}
     まず，
@@ -115,30 +139,30 @@
     \paragraph{Injectivity.}
     まず$\phi$と$\phi_P$の単射性について．
     (a)から以下が分かる．
-    \[ \ker \phi=0 \implies (\ker \phi)_P=0_P \iff \ker \phi_P=\{\bar{0}_P\}. \]
-    ここで$0_P$はzero sheafのstalkで，
-    $\{\bar{0}_P\} \subset \shF_P$は$\bar{0}_P$しかgermを持たない1点集合である．
-    $\bar{0}_P$は$\shF(U)$の元達を1点で同一視したもので，
-    多くの場合，element of stalk of zero sheafとは濃度が異なる．
-    (a)のASSERTIONで定義した$\iota^P$を用いれば，$\iota^P(0)=\bar{0}_P.$
-    残るは$\ker \phi=0 \impliedby (\ker \phi)_P=0_P$である．
+    \[ \ker \phi=0 \implies \Forall{P} (\ker \phi)_P=0_P=0 \iff \Forall{P} \ker \phi_P=\{\iota(0)\}. \]
+    ここで$0_P$はzero sheaf \footnote{自明なabelian group $\{0\}$のconstant sheaf}のstalk．
+%    $\{\bar{0}_P\} \subset \shF_P$は$\bar{0}_P$しかgermを持たない1点集合である．
+%    $\bar{0}_P$は$\shF(U)$の元達を1点で同一視したもので，
+%    多くの場合，element of stalk of zero sheafとは濃度が異なる．
+%    (a)のASSERTIONで定義した$\iota^P$を用いれば，$\iota^P(0)=\bar{0}_P.$
+    残るは$\ker \phi=0 \impliedby \Forall{P} \ker \phi_P=\{\iota(0)\}$である．
     $\ker \phi \supseteq 0$は自明なので，逆の包含関係を示そう．
     $U$ :: open in $X$とし，$s \in (\ker \phi)(U)$を任意に取る．
-    任意の点$P \in U$について，$\ker \phi_P=0$より，
-    新しい開近傍$V_P ~~(P \in V_P \subseteq U)$が存在して$\phi_{V_P}(s|_{V_P})=0$となる．
-    restrictionと$\phi$のnaturalityから$\phi_U(s)|_{V_P}=0$．
+    このとき$\phi_U(s)=0$．したがって任意の点$P \in U$について$\phi_P(s_P)=0$となる．
+    $\ker \phi_P=0$から$s_P=0$．
+    なので新しい開近傍$V_P ~~(P \in V_P \subseteq U)$が存在して$s|_{V_P}=0$となる．
     そこで$P$を動かして$V_P$で$U$を被覆すると，
-    $\shG$のIdentity Axiomから$\phi_U(s)=0$．
-    任意の$U, s$について$\phi_U(s)=0$だから，$\ker \phi=0$．
+    $\shG$のIdentity Axiomから$s=0$．
+    任意の$U, s \in (\ker \phi)(U)$について$s=0$だから，$\ker \phi=0$．
 
     \paragraph{Surjectivity.}
     $\phi$と$\phi_P$の全射性についても，以下の通り．
-    \[ \im \phi=\shG \implies (\im \phi)_P=\shG_P \iff \im \phi_P=\shG_P. \]
+    \[ \im \phi=\shG \implies \Forall{P} (\im \phi)_P=\shG_P \iff \Forall{P} \im \phi_P=\shG_P. \]
     この場合は$\im \phi$がproper subsheafではないので記号を変えたりする必要はない．
-    残る$\im \phi=\shG \impliedby \im \phi_P=\shG_P$を示す．
+    残る$\im \phi=\shG \impliedby \Forall{P} \im \phi_P=\shG_P$を示す．
     $\im \phi \subseteq \shG$は自明なので，逆の包含関係を示そう．
     $U$ :: open in $X$, $t \in \shG(U)$を任意に取る．
-    すると$\im \phi_P=\shG_P$より，$\phi_P(s^P_P)=t_P$となる$s^P_P \in \shF_P$が存在する．
+    すると$\im \phi_P=\shG_P$より，$\phi_P((s^P)_P)=t_P$となる$(s^P)_P \in \shF_P$が存在する．
     この時，任意の点$P$について開近傍$V_P ~~(P \in V_P \subseteq U)$が存在し，
     $\phi_{V_P}(s^P|_{V_P})=t|_{V_P}$．
     restrictionと$\phi$のnaturalityから$\phi_U(s^P)|_{V_P}=t|_{V_P}$．
@@ -147,7 +171,7 @@
     さらに各$P$ごとに$\sigma^P|_{V_P}=t|_{V_P}$なる
     $\sigma^P:=\phi_U(s^P) \in (\im \phi)(V_P)$が存在する．
     二点$P,Q$を取れば，以下が成り立つ．
-    \[ \sigma^P|_{V_P \cap V_Q}=t|_{V_P \cap V_Q}=\sigma^P|_{V_P \cap V_Q}. \]
+    \[ \sigma^P|_{V_P \cap V_Q}=t|_{V_P \cap V_Q}=\sigma^Q|_{V_P \cap V_Q}. \]
     よって$\im \phi$のGluability Axiomから，
     $\Sigma|_{V_P}=\sigma^P=\phi_U(s^P)|_{V_P}=t|_{V_P}$なる$\Sigma \in (\im \phi)(U)$が存在する．
     最後にIdentity Axiomを用いて，$t=\Sigma$．
@@ -156,13 +180,12 @@
     $\im$がpresheafのままでは，$\phi$と$\phi_P$の全射性について，このような同値関係は示せない．）
 
     \subsection{$\shF \xrightarrow{\phi} \shG \xrightarrow{\psi} \shH$ is exact $\iff$
-        $\shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$ is exact.}
+    $\Forall{P} \shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$ is exact.}
     示すべきは以下の命題である．
     \[ \im \phi=\ker \psi \iff \im \phi_P=\ker \psi_P. \]
-    しかしこれもProp1.1と(a)より明らか．
+    しかしこれは(a)より明らか．
 
-
-\section{Surjectivity of Morphism is Local Property.} %% Ex1.3 
+    \section{Surjectivity of Morphism is (Not) Local Property.} %% Ex1.3 
     \subsection{Paraphrase of Surjectivity.}
     $\shF, \shG: X \to A$, $\phi: \shF \to \shG$について
     $\phi$ :: surjが以下の命題と同値であることを示す．
@@ -184,12 +207,26 @@
     よって$\phi_P$ :: surj．
 
     \subsection{Give an Counterexample.}
-    以下のmorphismはsurjectiveだが
-    $\phi(U): \shF(U) \to \shG(U)$がsurjectiveでない．
-    sheaf $\shF:\C-0 \to \C$を，穴あき平面$\C-0$全体で正則な関数全体(Example1.0.2)とする．
-    $\shG: \C \to \C$は$\C$全体で正則な関数全体とする．
-    そして$\phi: \shF \to \shG$を$f \mapsto \frac{d}{dz}(1/f)$で定義する．
-    （TODO）
+%    $X=\R, Y=\R-\{0\}$とし，$d(x)=[x \neq 0]$とする．
+%    さらに$U \subseteq X$ :: openに対し$\phi_U(s)(x)=s(x) ~ (x \neq 0)$とおく．
+%    すると$\phi$は
+%    $X$上の実連続関数の層$\shF$から
+%    $Y$上の実連続関数の層$\shG$へのmorphismである．
+
+%    点$P \in X$について$\phi_P$が全射であることを見よう．
+%    $P \in U, s \in \shF(U)$とすると，$\phi_U(s)$は$U-\{0\}$で$s$と全く同じ値を取る．
+%    なので$\phi_U(s)$の$U - \{0\}$の各点における値から，
+%    $\phi_U(s)$を$Y=\R-\{0\}$全体に拡張することは容易．
+%    （開区間$U$の両端への$s$の片側極限をとる．）
+%    よって$\phi_P$は全射である．
+
+%    しかし，$U=(-1,0) \cup (0,1)$とすると，以下のような連続関数は$\phi_U$の値域に入らない．
+%    \[ s(x)=[-1 < x < 0](x-1)+[0 < x < 1](x+1) \]
+%    このことを確かめよう．
+%    $s(x)=\phi_U(t)(x)$なる関数$t$が存在したとすると，
+%    $t$は$s$の値を$x=0$において補完したものである．
+%    しかし$s(x)$のグラフを書けば明らかな通り，
+%    $t(0)$をどのような値にとっても$t$は連続にならない．
 
 \section{Induced Injective Sheaf Morphism.} %% Ex1.4 
     \subsection{Injective Presheaf Morphism Induces Injective Sheaf Morphism.}
