@@ -38,28 +38,31 @@
 
 \section{Constant Sheaf is Associated to Constant Presheaf.} %% Ex1.1 
     $A$ :: abelian group, $X$ :: topological spaceとする．
-    任意の空でない開集合$U \subseteq X$について$\shF(U)=A$とし，
+    任意の空でない開集合$U \subseteq X$について$\shA(U)=A$とし，
     restriction map $\rho_{UV}: \shF(U) \to \shF(V)$は$\id{A}$とする．
-    この$\shF$をconstant presheafと呼ぶ．
-    $\shF$に対応するsheafを$\shF^+$としよう．
-    開集合$U \subseteq X$に対し，
-    $\shF^+(U)=\{ f:U \to A ~|~ f :: \text{continus}. \}$を示す．
-
-    まず，明らかに
-    \[ \shF_P=\{ \reg{U}{s} ~|~ U :: \text{open in }X, s \in A\}=\{ \reg{X}{s} ~|~ s \in A\} \cong A \]
-    なので$\bigcup_{P \in U} \shF_P \cong A$．
-    $\shF^+(U)$の元$s(=\germ{U}{s})$は，以下の条件を満たすものである．
-    \[ \Forall{P \in U} \Exists{P \in V \subseteq U} \Exists{t \in \shF(V)} \Forall{Q \in V}  t_P=s(Q). \]
-    これは$t$として$s$自身が取れるので常に成り立つ．
-    $A$に離散位相を入れているので，
-    \[ \{ f:U \to A ~|~ f :: \text{continus}. \}=\{ f:U \to A ~|~ 2^A \subseteq f(\mathcal{O}_U). \}=\Hom(U,A)=\shF^+(U). \]
+    この$\shA$をconstant presheafと呼ぶ．
+    $\shA$に対応するsheafを$\shA^+$としよう．
+    また，開集合$U \subseteq X$に対し，
+    $\hat{\shA}=\{ f:U \to A ~|~ f :: \text{continus}. \}$とおく．
+    $\shA^+=\hat{\shA}$を示そう．
+    
+    $\shA$のgermを考える．
+    明らかに$\varinjlim_{P \in U} \shA(U)=\varinjlim_{P \in U} A \cong A$．
+    よって$\shA$のgermは$A$の元と同一視出来る．
+    すると，$\shA^+(U)$の元$s$は，以下の条件を満たすものである．
+    \[
+        \Forall{P \in U} P \in {}^{\exists}V \subseteq U,~~ \Exists{a \in \shF(V)}
+        \Forall{Q \in V} s(Q)=a_Q=a.
+    \]
+    これは$\shA^+(U)$の元$s$がlocally constantな写像であることを言っている．
+    locally constantであれば連続であることは自明
+    ($\shA^+(U) \supseteq \hat{\shA}(U)$)．
+    逆に連続なsectionは$s^{-1}(\{a\})$が開集合になるのでlocally constantとなる
+    ($\shA^+(U) \subseteq \hat{\shA}(U)$)．
+    よって$\shA^+=\hat{\shA}$．
 
 \section{The Image/Kernel in a Sheaf/Stalk.} %% Ex1.2 
-    \subsection{$(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$．}
-    $\phi: \shF \to \shG$と任意の点$P$について
-    $(\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$を示す．
-
-    \paragraph{ASSERTION.}
+    \subsection{ASSERTION.}
     $\shF'$を$\shF$のsubsheafだとする．
     この時，以下の写像$\iota_{\shF'_P}^{\shF_P}: \shF'_P \to \shF_P$に依って
     $\shF'_P$は$\shF_P$のsubgroupとみなせる．
@@ -89,20 +92,9 @@
     したがって$\germ{*}{\sigma}$は$\iota(t_P)$に属さない．
     以上から$\iota(s_P) \neq \iota(t_P)$．
 
-    \paragraph{$\ker$}
-    $\iota_{(\ker \phi)_P}^{\shF_P}$の像が$\ker \phi_P$であることを示す．
-    そのために$s_P \in (\ker \phi)_P$をとり，$\iota(s_P)$を考える．
-    \begin{align*}
-        {}&     s_P \in (\ker \phi)_P \\
-        \iff&   \Forall{\germ{U}{\sigma} \in s_P} s \in (\ker \phi)(U) \\
-        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \sigma|_V \in (\ker \phi)(V) \\
-        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \phi_V(\sigma|_V)=0 \\
-        \iff&   \phi_P(\iota(s_P))=0 \\
-        \iff&   \iota(s_P) \in \ker \phi_P \subseteq \shF_P
-    \end{align*}
-    $\iota$を介さなければ，二つの集合は一致しない．
-    例を見よう．
-    $\shF, \shG$をどちらも実直線$\R$上の連続な関数がなす層（変数は$x$）とし，
+    $\phi: \shF \to \shG$をmorphisms of sheavesとする．
+    以下の例ではsubsheafのstalk $(\ker \phi)_P$と$\ker \phi_P \subset \shF_P$が一致しない．
+    まず$\shF, \shG$をどちらも実直線$\R$上の連続な関数がなす層（変数は$x$）とし，
     $\phi(f)=f-x$とする．
     この$\phi$でramp function $\mathit{ramp}(x)=[x \geq 0]x$を写したものは
     $\phi(\mathit{ramp})(x)=[x<0](-x)$となる．
@@ -112,78 +104,100 @@
     しかし，$\mathit{ramp}|_{(-2,2)} \neq 0$だから
     $\mathit{ramp} \not \in (\ker \phi)((-2,2))$となる．
     なので$(\ker \phi)_P$に$\germ{(-2,2)}{\mathit{ramp}}$は入っていない．
+    よって$(\ker \phi)_P$と$\ker \phi_P$は上で定義した$\iota$を介さなければ一致しない．
+    しかし，この二つを$\shF_P$のsubgroupとみなせば，
+    一致していると言うことも出来る．
+    Hartshroneはこの意味で$(\ker \phi)_P=\ker \phi_P$と主張している．
 
-    \paragraph{$\im$}
-    殆ど$\ker$の場合と同じだが，$(\im^{pre} \phi)_P=(\im \phi)_P$を用いる．
+    \subsection{Preparing.}
+    Ati-Mac Ex2.19から，加群のdirect limitはexact functorである
+    これの証明は\url{https://math.stackexchange.com/questions/121122}などにある．
+%    以下の図式でdiagram chasingを行い，
+%    $\im (\psi \circ \phi)_P=0~(\implies \im \phi \subseteq \ker \psi)$と
+%    $\im \phi \supseteq \ker \psi$を示せばよい．
+%    ただし$U$は点$P$を含む十分小さな開集合である．
+    このことをsheafのexact sequenceに用いたいが，使えることは自明ではない．
+    実際，$\xymatrix{ \shF \ar[r]^-{\phi}& \shG \ar[r]^-{\psi}& \shH }$
+    がexactであっても，加群の列
+    $\xymatrix{ \shF(U) \ar[r]^-{\phi_U}& \shG(U) \ar[r]^-{\psi_U}& \shH(U) }$が
+    完全であるとは限らないからである．
+
+    点$P$を任意の点とし，
+    $\ker \psi_P \subseteq \im \phi_P$を示す．
+    まず，$\ker \psi_P$からgerm $s_P$をとる．
+    \[
+    \xymatrix@R=5pt
+    {
+    \shF_P \ar[r]^-{\phi_P}& \shG_P \ar[r]^-{\psi_P}& \shH_P \\
+    {} & s_P \ar@{|->}[r]_-{\psi_P} & 0_P
+    }
+    \]
+    すると点$P$の開近傍$U$と，section $\sigma \in \ker \psi_U=(\ker \psi)(U)$が取れて，$\sigma_P=s_P$となる．
+    \[
+    \xymatrix@R=5pt
+    {
+    \shF_P \ar[r]^-{\phi_P}& \shG_P \ar[r]^-{\psi_P}& \shH_P \\
+    {} & s_P \ar@{|->}[r] & 0_P \\
+    {} & {} & {} \\
+    {} & {} & {} \\
+    {} & \sigma \ar@{|->}[uuu] \ar@{|->}[r] & 0 \ar@{|->}[uuu]\\
+    \shF(U) \ar[r]_-{\phi_U}& \shG(U) \ar[r]_-{\psi_U}& \shH(U) \\
+    }
+    \]
+    仮定より，$\sigma \in (\ker \psi)(U)=(\im \psi)(U)$．
+    なので，
+    \[ (\im^{pre} \psi)_P=(\im \phi)_P \ni \sigma_P=s_P \in \ker \phi_P. \]
+    よって以下が得られる．
+    \[ P \in {}^{\exists}V \subseteq U,~~ \sigma|_V \in (\im^{pre} \psi)(V)=\im \psi_V. \]
+    以上より，$\sigma_P=s_P$かつ$\im \psi_V \ni \sigma|_V \in \ker \psi_V$．
+    あとは$\phi_V(\tau)=\sigma|_V$となる$\tau \in \shF(V)$をとり，
+    図式の可換性を用いれば良い．
+
+    \subsection{Prooves.}
+    \begin{enumerate}[(a)]
+        \item $\Forall{P \in X} (\ker \phi)_P=\ker \phi_P, (\im \phi)_P=\im \phi_P$．
+        \item $\phi$ :: inj/surj $\iff$ $\Forall{P \in X} \phi_P$ :: inj/surj.
+        \item $\shF \to \shG \to \shH$ :: exact $\iff$ $\Forall{P \in X} \shF_P \to \shG_P \to \shH_P$ :: exact
+    \end{enumerate}
+    \paragraph{Proof of Half of (c).}
+    以下が成り立つ．
+    \[
+        \shF \xrightarrow{\phi} \shG \xrightarrow{\psi} \shH \text{ :: exact}
+        \implies
+        \Forall{P \in X}
+        \shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P \text{ :: exact}.
+    \]
+    ただし$\shF,\shG,\shH$は位相空間$X$上のsheafである．
+    この命題は(c)の半分である．
+
+    \paragraph{Proof of (a).}
+    $\phi: \shF \to \shG$に対し，
+    $0 \to \ker \phi \xrightarrow{i} \shF \xrightarrow{\phi} \shG$はexact．
+    このことから
+    $0 \to (\ker \phi)_P \xrightarrow{i_P} \shF_P \xrightarrow{\phi_P} \shG_P$はexact．
+    よって$\im i_P=\ker \phi_P$が得られる．
+    明らかに$i_P$はinjectiveだから，$(\ker \phi)_P \cong \im i_P=\ker \phi_P$となる．
+    また，$\shF \xrightarrow{\phi} \shG \to \im \phi \to 0$がexactであることから
+    $(\im \phi)_P \cong \im \phi_P$も得られる．
+
+    \paragraph{Proof of Remained Part of (c).}
+    任意の点$P \in X$について，
+    $\shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$がexactであったとする．
+    そこで任意の開集合$U \subset X$と，任意のsection $s \in \shF(U)$を取る．
+    以下のように$\im \phi \subseteq \ker \phi$が示される．
     \begin{align*}
-        {}&     s_P \in (\im^{pre} \phi)_P=(\im \phi)_P \\
-        \iff&   \Forall{\germ{U}{\sigma} \in s_P} \sigma \in (\im^{pre} \phi)(U) \\
-        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \sigma|_V \in (\im^{pre} \phi)(V) \\
-        \iff&   \Forall{\germ{U}{\sigma} \in \iota(s_P)} P \in {}^{\exists}{V} \subseteq U,~ \Exists{\tau \in \shG(V)} \phi_V(\tau)=\sigma|_V \\
-        \iff&   \Exists{\tau_P \in \shG_P} \phi_P(\tau_P)=\iota(s_P) \\
-        \iff&   \iota(s_P) \in \im \phi_P
+        {}&         s \in (\im \phi)(U) \\
+        \implies&   \Forall{P \in U} s_P \in (\im \phi)_P=\im \phi_P \\
+        \iff&       \Forall{P \in U} s_P \in \ker \phi_P \\
+        \iff&       \Forall{P \in U} P \in {}^{\exists} V_P \subseteq U,~~ s|_{V_P} \in (\ker \phi)(V_P) \\
+        \implies&   s \in (\ker \phi)(U)
     \end{align*}
-    $\tau$は$\germ{U}{\sigma}$ごとに選ばれるが，下から2つめの$\iff$で問題は生じない．
-    例えば$\germ{U}{\sigma}$に$\germ{V}{\tau}$が，$\germ{U'}{\sigma'}$に$\germ{V'}{\tau'}$が対応するなら，
-    $\germ{U}{\sigma}, \germ{U'}{\sigma'} \in \iota(s_P)$なので，
-    ある開集合$W \subseteq U \cap U'$について
-    $\phi_{U}(\tau)|_W=\sigma|_{W}=\sigma'|_{W}=\phi_{U'}(\tau')|_W$となる．
-    よって$\tau_P=\tau'_P$．
+    最後の行でGluability Axiomを用いた．
+    この証明で$\ker$と$\im$を交換すれば$\im \phi \supseteq \ker \phi$も示され，
+    よって$\im \phi=\ker \psi$が得られる．
 
-    \subsection{$\phi$ :: inj/surj $\iff$ $\Forall{P \in X} \phi_P$ :: inj/surj.}
-    まず，
-    \[ \shA=\shB \implies \Forall{P \in X} \shA_P=\shB_P \]
-    が言えることに注意する．
-    これは$\shA=\shB$の両辺をstalkをとるfunctorで写せば分かる．
-
-    \paragraph{Injectivity.}
-    まず$\phi$と$\phi_P$の単射性について．
-    (a)から以下が分かる．
-    \[ \ker \phi=0 \implies \Forall{P} (\ker \phi)_P=0_P=0 \iff \Forall{P} \ker \phi_P=\{\iota(0)\}. \]
-    ここで$0_P$はzero sheaf \footnote{自明なabelian group $\{0\}$のconstant sheaf}のstalk．
-%    $\{\bar{0}_P\} \subset \shF_P$は$\bar{0}_P$しかgermを持たない1点集合である．
-%    $\bar{0}_P$は$\shF(U)$の元達を1点で同一視したもので，
-%    多くの場合，element of stalk of zero sheafとは濃度が異なる．
-%    (a)のASSERTIONで定義した$\iota^P$を用いれば，$\iota^P(0)=\bar{0}_P.$
-    残るは$\ker \phi=0 \impliedby \Forall{P} \ker \phi_P=\{\iota(0)\}$である．
-    $\ker \phi \supseteq 0$は自明なので，逆の包含関係を示そう．
-    $U$ :: open in $X$とし，$s \in (\ker \phi)(U)$を任意に取る．
-    このとき$\phi_U(s)=0$．したがって任意の点$P \in U$について$\phi_P(s_P)=0$となる．
-    $\ker \phi_P=0$から$s_P=0$．
-    なので新しい開近傍$V_P ~~(P \in V_P \subseteq U)$が存在して$s|_{V_P}=0$となる．
-    そこで$P$を動かして$V_P$で$U$を被覆すると，
-    $\shG$のIdentity Axiomから$s=0$．
-    任意の$U, s \in (\ker \phi)(U)$について$s=0$だから，$\ker \phi=0$．
-
-    \paragraph{Surjectivity.}
-    $\phi$と$\phi_P$の全射性についても，以下の通り．
-    \[ \im \phi=\shG \implies \Forall{P} (\im \phi)_P=\shG_P \iff \Forall{P} \im \phi_P=\shG_P. \]
-    この場合は$\im \phi$がproper subsheafではないので記号を変えたりする必要はない．
-    残る$\im \phi=\shG \impliedby \Forall{P} \im \phi_P=\shG_P$を示す．
-    $\im \phi \subseteq \shG$は自明なので，逆の包含関係を示そう．
-    $U$ :: open in $X$, $t \in \shG(U)$を任意に取る．
-    すると$\im \phi_P=\shG_P$より，$\phi_P((s^P)_P)=t_P$となる$(s^P)_P \in \shF_P$が存在する．
-    この時，任意の点$P$について開近傍$V_P ~~(P \in V_P \subseteq U)$が存在し，
-    $\phi_{V_P}(s^P|_{V_P})=t|_{V_P}$．
-    restrictionと$\phi$のnaturalityから$\phi_U(s^P)|_{V_P}=t|_{V_P}$．
-    状況をまとめよう．
-    $U$の開被覆$\{V_P\}_{P \in U}$が存在し，
-    さらに各$P$ごとに$\sigma^P|_{V_P}=t|_{V_P}$なる
-    $\sigma^P:=\phi_U(s^P) \in (\im \phi)(V_P)$が存在する．
-    二点$P,Q$を取れば，以下が成り立つ．
-    \[ \sigma^P|_{V_P \cap V_Q}=t|_{V_P \cap V_Q}=\sigma^Q|_{V_P \cap V_Q}. \]
-    よって$\im \phi$のGluability Axiomから，
-    $\Sigma|_{V_P}=\sigma^P=\phi_U(s^P)|_{V_P}=t|_{V_P}$なる$\Sigma \in (\im \phi)(U)$が存在する．
-    最後にIdentity Axiomを用いて，$t=\Sigma$．
-    以上より，任意の$t \in \shG(U)$に対して$t \in (\im \phi)(U)$が示された．
-    （この議論は当然 presheaf $\im^{pre} \phi$では通用しない．
-    $\im$がpresheafのままでは，$\phi$と$\phi_P$の全射性について，このような同値関係は示せない．）
-
-    \subsection{$\shF \xrightarrow{\phi} \shG \xrightarrow{\psi} \shH$ is exact $\iff$
-    $\Forall{P} \shF_P \xrightarrow{\phi_P} \shG_P \xrightarrow{\psi_P} \shH_P$ is exact.}
-    示すべきは以下の命題である．
-    \[ \im \phi=\ker \psi \iff \im \phi_P=\ker \psi_P. \]
-    しかしこれは(a)より明らか．
+    \paragraph{Proof of (b).}
+    $0 \to \shF \to \shG$と$\shF \to \shG \to 0$に(c)を用いれば良い．
 
     \section{Surjectivity of Morphism is (Not) Local Property.} %% Ex1.3 
     \subsection{Paraphrase of Surjectivity.}
@@ -842,16 +856,18 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     diagram chasingを始める．
     \begin{enumerate}[(1)]
     \setlength{\itemindent}{2em}
-        \item naturalityから$g (t_i|_{U_{ij}})=s''|_{U_{ij}}=g(t_j|_{U_{ij}})$．
-        \item よって列の完全性から$t_i-t_j \in \ker g|_{U_{ij}}=\im f|_{U_{ij}}$．
-        \item したがって$f(u'_{ij})=t_i-t_j$なる$u'_{ij} \in \shF'(U_{ij})$が存在する．
+        \item naturalityから$g_{U_{ij}}(t_i|_{U_{ij}})=s''|_{U_{ij}}=g(t_j|_{U_{ij}})$．
+        \item よって列の完全性から$t_i-t_j \in \ker g_{U_{ij}}=\im f_{U_{ij}}$．
+        \item したがって$f_{U_{ij}}(u'_{ij})=t_i-t_j$なる$u'_{ij} \in \shF'(U_{ij})$が存在する．
         \item $\res_U^{U_{ij}}$ :: surjから$s'_{ij}|_{U_{ij}}=u'_{ij}$なる$s'_{ij} \in \shF'(U)$が存在する．
-        \item $s_{i}=f(s'_{ij})|_{U_i}+t_j \in \shF(U_i)$とおく．（足すのは$t_j$であることに注意．）
-        \item 構成より，$g(s_i)|_{U_{ij}}=g(t_i|_{U_{ij}})=s''|_{U_{ij}}$．
-        \item $i$を固定して$j$を動かすことで，Identity Axiomにより$g(s_i)=s''|_{U_i}$が得られる．
-        \item $g(s_i) \in \im g$にGluability Axiomを用いて，$g(s)|_{U_i}=g(s_i)=s''|_{U_i}$なる$s \in \shF(U)$がとれる(？)．
-        \item Identity Axiomから$g(s)=s''$．
+        \item $s_{ij}=f_U(s'_{ij})|_{U_i}+t_j \in \shF(U_i)$とおく．（足すのは$t_j$であることに注意．）
+%        \item 構成より$s_{ij_1}|_{U_{ij_1} \cap U_{ij_2}}=s_{ij_2}|_{U_{ij_1} \cap U_{ij_2}}$(TODO: 示す．)．
+%        \item Gluability Axiomより，$s_i|_{U_{ij}}=s_{ij}$なる$s_i \in \shF(U_i)$の存在が分かる．
+%        \item $i$を動かして再びGluability Axiomを用いると，$s|_{U_i}=s_i$となる$s \in \shF(U)$が存在する．
+%        \item 構成より，$g_{U}(s)|_{U_{ij}}=g_{U_{ij}}(s_{ij})=g_{U_{ij}}(t_i|_{U_{ij}})=s''|_{U_{ij}}$．
+%        \item Identity Axiomから$g_U(s)=s''$．
     \end{enumerate}
+    以上から，$g_U(s)=s''$なる$s \in \shF(U)$の存在が示せた．
 
     \subsubsection{Another Proof}
     次のPDFのLemma2.12(p.10)がこの演習問題と同じ命題である: 
@@ -970,38 +986,61 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
 \section{Adjoint Property of $f^{-1}$.} %% Ex1.18 
     $f: X \to Y$ :: continuous mapについて，
     $f^{-1}$が$f_*$のleft adjoint functorであることを示す．
+    そのために，当分の間は$f^{-1}=\ftorSh \varinjlim_{V \supseteq f(-)} \ftorFgt$でなく，
+    $f^p\shF=\varinjlim_{V \supseteq f(-)} \shF(-)$がleft adjointであることを示す．
     left adjointの定義としては$\Hom$についての定義を用いる．
 
-    unit $\eta: \id{\Sh(Y)} \to f_* f^{-1}$と
-    counit $\epsilon: f^{-1} f_* \to \id{\Sh(X)}$を構成する．
+    最初にunit $\eta: \id{\Sh(Y)} \to f_* f^p$と
+    counit $\epsilon: f^p f_* \to \id{\Sh(X)}$を構成する．
 
     \paragraph{Construction of Unit $\eta$.}
     $\shG \in \Sh(Y)$をとると，$U$ :: open in $Y$について次の等式が成り立つ．
-    \[ (f_* f^{-1} \shG)^{pre}(U)=(f^{-1} \shG)^{pre}(f^{-1}(U))=\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^{-1}(U)}} \shG(V). \]
-    $U \supseteq f \circ f^{-1}(U)$（全射と等号成立は同値）だから，
+    \[
+        (f_* f^p \shG)^{pre}(U)
+        =(f^p \shG)^{pre}(f^p(U))
+        =\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^p(U)}} \shG(V).
+    \]
+    $U \supseteq f \circ f^p(U)$（全射と等号成立は同値）だから，
     coconeの「母線」として
-    \[ (\eta^{pre}_{\shG})_U: \shG(U) \to (f_* f^{-1} \shG)^{pre}(U) \]
+    \[ (\eta_{\shG})_U: \shG(U) \to (f_* f^p \shG)^{pre}(U) \]
     が得られる．
-    これをsheafification functor $\ftorSh$で写して，
-    $\eta: \id{\Sh(Y)} \to f_* f^{-1}$が得られる．
     $\eta$の自然性は容易に示される．
+    （$f_* f^p$は母線と可換になるように射を写す．）
 
     \paragraph{Construction of Counit $\epsilon$.}
     $\shF \in \Sh(X)$をとると，$U$ :: open in $X$について次の等式が成り立つ．
-    \[ (f^{-1} f_* \shF)^{pre}(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^{-1}(V)). \]
-    $V \supseteq f(U)$であるとき，$f^{-1}(V) \supseteq f^{-1} \circ f(U) \supseteq U$（単射と等号成立は同値）．
-    したがってcolimitのUMPにより$(\epsilon^{pre}_{\shF})_U$が得られる．
+    \[ (f^p f_* \shF)(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^p(V)). \]
+    $V \supseteq f(U)$であるとき，$f^p(V) \supseteq f^p \circ f(U) \supseteq U$（単射と等号成立は同値）．
+    したがってcolimitのUMPにより$(\epsilon_{\shF})_U$が得られる．
     \[
     \xymatrix
     {
-    (f^{-1} f_* \shF)^{pre}(U) \ar@{-->}[r]^-{(\epsilon^{pre}_{\shF})_U}& \shF(U) \\
-    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(V_{-}) \ar[u]_-{\res} \ar@/^10pt/[ul]
+    (f^p f_* \shF)(U) \ar@{-->}[r]^-{(\epsilon_{\shF})_U}& \shF(U) \\
+    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^p(V)) \ar[u]_-{\res} \ar@/^10pt/[ul]
     }
     \]
-    ただし$V_{-}$は$V \supseteq f^{-1} \circ f(U)$なる開集合$V$の中で極小のものである．
-    $\epsilon^{pre}$をsheafification functor $\ftorSh$で写して，
-    $\epsilon: f^{-1} f_* \to \id{\Sh(X)}$が得られる．
-    $\epsilon$の自然性は$\res$の自然性から誘導される．
+    $\epsilon$の自然性を示すことはあまり自明ではないのでここで示そう．
+    \[
+    \begin{xy}
+        (20,0) *{\shF(V)}="F1", (50,0)*{\shF'(V)}="F'1",
+        (20,20)*{\shF(U)}="F2", (50,20)*{\shF'(U)}="F'2",
+        (0,30)*{(f^p f_* \shF)(U)}="F3", (70,30)*{(f^p f_* \shF')(U)}="F'3"
+        \ar "F1";"F2" \ar "F1";"F'1" \ar "F'1";"F'2" \ar "F2";"F'2"
+        \ar "F1";"F3" \ar"F'1";"F'3"
+        \ar "F3";"F'3"
+        \ar@{-->}_-{\epsilon} "F3";"F2" \ar@{-->}^-{\epsilon} "F'3";"F'2"
+        \ar@{~>} "F3";"F'2" \ar "F1";"F'2"
+    \end{xy}
+    \]
+    最初，この図式を書いた時には，上面の台形が可換になっていることは非自明である．
+    direct limitのUMPから$\shF(V), (f^p f_* \shF)(U), \shF'(U)$の三角形が
+    可換になるような唯一の射$(f^p f_* \shF)(U) \to \shF'(U)$（波線のもの）が存在する．
+    しかし同じ三角形を可換にするような射として，
+    $\epsilon$を通る射$(f^p f_* \shF)(U) \to \shF(U) \to \shF'(U)$が既に存在する．
+    UMPから，この射は波線の射に等しい．
+    また，同様に$(f^p f_* \shF)(U) \to \shF(U) \to \shF'(U)$も波線の射と等しい．
+    まとめると，上面の台形が可換であることが判る．
+    これは$\epsilon$の自然性を意味する．
 
     \paragraph{Preparation of Unit-Counit Equations.}
     まず$f \circ f^{-1}(B) \subseteq B$に$B=f(A)$を代入すると$f \circ f^{-1} \circ f(A) \subseteq f(A)$．
@@ -1010,43 +1049,78 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     双対的に$f^{-1} \circ f \circ f^{-1}=f^{-1}$が得られる．
 
     \paragraph{Unit-Counit Equations.}
+    まず計算．
+    \begin{align*}
+        {}& (f_* f^p f_* \shF)^(U) \\
+        =&  (f_* f^p \shF)(f^{-1}(U)) \\
+        =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} (f_* \shF) (V) \\
+        =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} \shF (f^{-1}(V))
+    \end{align*}
+    $V \supseteq f \circ f^{-1}(U)$であるとき，既に見たように$f^{-1}(V) \supseteq f^{-1}(U)$．
     以下の可換図式を見よ．
     \[
     \xymatrix
     {
-    (f_* f^{-1} f_* \shF)^{pre}(U) \ar[r]^-{f_* (\epsilon^{pre})_{\shF}} & (f_* \shF)(U) & {} \\
+    (f_* f^p f_* \shF)(U) \ar[r]^-{f_* (\epsilon)_{\shF}} & (f_* \shF)(U) \\
     \dots \ar[u] \ar[ur] \ar[r]
-    & \shF(f^{-1} \circ f \circ f^{-1}(U)) \ar[ul]^(0.7){(\eta^{pre})_{f_* \shF}} \ar@{=}[u] \ar@{=}[r]
-    & \shF(f^{-1}(U))
+    & \shF(f^{-1}(U)) \ar[ul]^(0.7){(\eta)_{f_* \shF}} \ar@{=}[u]
     }
     \]
     よって$\id{f_*}=f_* \epsilon \circ \eta_{f_*}$が得られた．
-    次に$\shG \xrightarrow{\eta_{\shG}} f_* f^{-1} \shG$と$f_* f^{-1} \shG$の下にあるcoconeを
-    $f^{-1}$で写し，$\epsilon$を図式に追加することで，
-    以下の図式が得られる．
+    再び計算する．
+    \begin{align*}
+        {}& (f^p f_* f^p \shG)^{pre}(U) \\
+        =&  f^p f_* \varinjlim_{V \supseteq f(U)} \shG (V) \\
+        =&  f^p \varinjlim_{V \supseteq f(U)} \shG (f^{-1}(V)) \\
+        =&  \varinjlim_{W \supseteq f \circ f^{-1}(V)} ~ \varinjlim_{V \supseteq f(U)} \shG(W)
+    \end{align*}
+    $V \supseteq f(U)$であるとき$W \supseteq f \circ f^{-1}(V) \supseteq f(U)$．
+    $V \supseteq f(U)$を満たす$V$全体は，
+    明らかに$W \supseteq f \circ f^{-1}(V) \supseteq f(U)$を満たす$W$全体を包含する
+    \footnote
+    {
+        $W$の方がより厳しい条件を満たさなくてはならない．
+        $f \circ f^{-1}(V)$は開集合にならないかもしれないが，$W$は開集合である．
+    }
+    ．
+    したがって以下の図式が得られる．
+    （点線の射は存在するとは限らない．）
     \[
     \xymatrix@C=5em@R=3em
     {
-    (f^{-1} f_* f^{-1} \shG)^{pre}(U) \ar@<2pt>[r]^-{(\epsilon^{pre})_{f^{-1}\shG}}
-    & (f^{-1} \shG)^{pre}(U) \ar@<2pt>[l]^-{f^{-1}(\eta^{pre})_{\shG}}
-    & {} \\
-    \dots \ar[u] \ar[ur] \ar[r]
-    & \dots \ar[ul] \ar[u] \ar@{..>}[r]
-    & \shG(f \circ f^{-1} \circ f(U))=\shG(f(U))
+    (f^p \shG)(U) \ar[r]^-{(f^p\eta_{\shG})_U}
+    & (f^p f_* f^{-1} \shG)(U) \ar[r]^-{(\epsilon_{f^p\shG})_U}
+    & (f^p \shG)(U) \\
+    \dots \ar[u] \ar[ur] \ar[r] \ar[urr]
+    & \shG(W) \ar[ul] \ar[u] \ar[r] \ar[ur]
+    & \shG(V) \ar[ull] \ar[u] \ar@{..>}[ul]
     }
     \]
-    $f^{-1} \shG$が持つ（colimitの）UMPから，
-    $\id{f^{-1}}=\epsilon_{f^{-1}\shG} \circ f^{-1}\eta_{\shG}$．
+    $(f^p \eta_{\shG})_U$は$\shG(U) \xrightarrow{\eta} (f_* f^p \shG)(U)$を$f^p$で写せば直ちに得られ，
+    $(\epsilon)_{f^p\shG(U)}$は$(f^p f_* f^p \shG)(U)$のUMPから得られる．
+    最後に，$(f^p \shG)(U)$のUMPから，
+    $\id{f^p}=\epsilon_{f^p\shG} \circ f^p \eta_{\shG}$．
 
     \paragraph{Hom-set Definition.}
     以下のように写像を定義する．
     \[
         \phi(-)=f_*(-) \circ \eta_{\shG},~~
-        \psi(-)=\epsilon_{\shF} \circ f^{-1}(-).
+        \psi(-)=\epsilon_{\shF} \circ f^p(-).
     \]
     するとunit-counit equationsからこれらが互いに逆写像であることが分かる．
-    こうして所期の同型$\phi: \Hom(f^{-1}\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
+    こうして所期の同型$\phi: \Hom(f^p\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
     自然性は$\eta, \epsilon$の自然性から誘導される．
+
+    \paragraph{Adjointness of $f^{-1}$.}
+    $f^{-1}=\ftorSh f^p$と$\ftorSh \dashv \ftorFgt, f^p \dashv f_*$を用いる．
+    \begin{align*}
+        {}& \Hom_{\Sh}(f^{-1} \shF, \shG) \\
+        =&  \Hom_{\PSh}(f^p \ftorFgt \shF, \ftorFgt \shG) \\
+        =&  \Hom_{\PSh}(\ftorFgt \shF, f_* \ftorFgt \shG) \\
+        =&  \Hom_{\Sh}(\ftorSh \ftorFgt \shF, \ftorSh f_* \ftorFgt \shG) \\
+        =&  \Hom_{\Sh}(\shF, f_* \shG)
+    \end{align*}
+    最後に，$\shF, \shG$が予めsheafであること，及び$f_*$がsheafをsheafに写すことを用いた．
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
