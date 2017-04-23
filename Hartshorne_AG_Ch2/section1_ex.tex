@@ -987,44 +987,44 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $f: X \to Y$ :: continuous mapについて，
     $f^{-1}$が$f_*$のleft adjoint functorであることを示す．
     そのために，当分の間は$f^{-1}=\ftorSh \varinjlim_{V \supseteq f(-)} \ftorFgt$でなく，
-    $f^p\shF=\varinjlim_{V \supseteq f(-)} \shF(-)$がleft adjointであることを示す．
+    $f^{pre}\shF=\varinjlim_{V \supseteq f(-)} \shF(-)$がleft adjointであることを示す．
     left adjointの定義としては$\Hom$についての定義を用いる．
 
-    最初にunit $\eta: \id{\Sh(Y)} \to f_* f^p$と
-    counit $\epsilon: f^p f_* \to \id{\Sh(X)}$を構成する．
+    最初にunit $\eta: \id{\Sh(Y)} \to f_* f^{pre}$と
+    counit $\epsilon: f^{pre} f_* \to \id{\Sh(X)}$を構成する．
 
     \paragraph{Construction of Unit $\eta$.}
     $\shG \in \Sh(Y)$をとると，$U$ :: open in $Y$について次の等式が成り立つ．
     \[
-        (f_* f^p \shG)^{pre}(U)
-        =(f^p \shG)^{pre}(f^p(U))
-        =\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^p(U)}} \shG(V).
+        (f_* f^{pre} \shG)^{pre}(U)
+        =(f^{pre} \shG)^{pre}(f^{pre}(U))
+        =\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^{pre}(U)}} \shG(V).
     \]
-    $U \supseteq f \circ f^p(U)$（全射と等号成立は同値）だから，
+    $U \supseteq f \circ f^{pre}(U)$（全射と等号成立は同値）だから，
     coconeの「母線」として
-    \[ (\eta_{\shG})_U: \shG(U) \to (f_* f^p \shG)^{pre}(U) \]
+    \[ (\eta_{\shG})_U: \shG(U) \to (f_* f^{pre} \shG)^{pre}(U) \]
     が得られる．
     $\eta$の自然性は容易に示される．
-    （$f_* f^p$は母線と可換になるように射を写す．）
+    （$f_* f^{pre}$は母線と可換になるように射を写す．）
 
     \paragraph{Construction of Counit $\epsilon$.}
     $\shF \in \Sh(X)$をとると，$U$ :: open in $X$について次の等式が成り立つ．
-    \[ (f^p f_* \shF)(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^p(V)). \]
-    $V \supseteq f(U)$であるとき，$f^p(V) \supseteq f^p \circ f(U) \supseteq U$（単射と等号成立は同値）．
+    \[ (f^{pre} f_* \shF)(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^{pre}(V)). \]
+    $V \supseteq f(U)$であるとき，$f^{pre}(V) \supseteq f^{pre} \circ f(U) \supseteq U$（単射と等号成立は同値）．
     したがってcolimitのUMPにより$(\epsilon_{\shF})_U$が得られる．
     \[
     \xymatrix
     {
-    (f^p f_* \shF)(U) \ar@{-->}[r]^-{(\epsilon_{\shF})_U}& \shF(U) \\
-    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^p(V)) \ar[u]_-{\res} \ar@/^10pt/[ul]
+    (f^{pre} f_* \shF)(U) \ar@{-->}[r]^-{(\epsilon_{\shF})_U}& \shF(U) \\
+    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^{pre}(V)) \ar[u]_-{\res} \ar@/^10pt/[ul]
     }
     \]
-    $\epsilon$の自然性を示すことはあまり自明ではないのでここで示そう．
+    $\epsilon$の自然性はあまり自明ではないのでここで示そう．
     \[
     \begin{xy}
         (20,0) *{\shF(V)}="F1", (50,0)*{\shF'(V)}="F'1",
         (20,20)*{\shF(U)}="F2", (50,20)*{\shF'(U)}="F'2",
-        (0,30)*{(f^p f_* \shF)(U)}="F3", (70,30)*{(f^p f_* \shF')(U)}="F'3"
+        (0,30)*{(f^{pre} f_* \shF)(U)}="F3", (70,30)*{(f^{pre} f_* \shF')(U)}="F'3"
         \ar "F1";"F2" \ar "F1";"F'1" \ar "F'1";"F'2" \ar "F2";"F'2"
         \ar "F1";"F3" \ar"F'1";"F'3"
         \ar "F3";"F'3"
@@ -1033,12 +1033,12 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \end{xy}
     \]
     最初，この図式を書いた時には，上面の台形が可換になっていることは非自明である．
-    direct limitのUMPから$\shF(V), (f^p f_* \shF)(U), \shF'(U)$の三角形が
-    可換になるような唯一の射$(f^p f_* \shF)(U) \to \shF'(U)$（波線のもの）が存在する．
+    direct limitのUMPから$\shF(V), (f^{pre} f_* \shF)(U), \shF'(U)$の三角形が
+    可換になるような唯一の射$(f^{pre} f_* \shF)(U) \to \shF'(U)$（波線のもの）が存在する．
     しかし同じ三角形を可換にするような射として，
-    $\epsilon$を通る射$(f^p f_* \shF)(U) \to \shF(U) \to \shF'(U)$が既に存在する．
+    $\epsilon$を通る射$(f^{pre} f_* \shF)(U) \to \shF(U) \to \shF'(U)$が既に存在する．
     UMPから，この射は波線の射に等しい．
-    また，同様に$(f^p f_* \shF)(U) \to \shF(U) \to \shF'(U)$も波線の射と等しい．
+    また，同様に$(f^{pre} f_* \shF)(U) \to \shF(U) \to \shF'(U)$も波線の射と等しい．
     まとめると，上面の台形が可換であることが判る．
     これは$\epsilon$の自然性を意味する．
 
@@ -1051,8 +1051,8 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \paragraph{Unit-Counit Equations.}
     まず計算．
     \begin{align*}
-        {}& (f_* f^p f_* \shF)^(U) \\
-        =&  (f_* f^p \shF)(f^{-1}(U)) \\
+        {}& (f_* f^{pre} f_* \shF)(U) \\
+        =&  (f_* f^{pre} \shF)(f^{-1}(U)) \\
         =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} (f_* \shF) (V) \\
         =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} \shF (f^{-1}(V))
     \end{align*}
@@ -1061,7 +1061,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \[
     \xymatrix
     {
-    (f_* f^p f_* \shF)(U) \ar[r]^-{f_* (\epsilon)_{\shF}} & (f_* \shF)(U) \\
+    (f_* f^{pre} f_* \shF)(U) \ar[r]^-{f_* (\epsilon_{\shF})} & (f_* \shF)(U) \\
     \dots \ar[u] \ar[ur] \ar[r]
     & \shF(f^{-1}(U)) \ar[ul]^(0.7){(\eta)_{f_* \shF}} \ar@{=}[u]
     }
@@ -1069,9 +1069,9 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     よって$\id{f_*}=f_* \epsilon \circ \eta_{f_*}$が得られた．
     再び計算する．
     \begin{align*}
-        {}& (f^p f_* f^p \shG)^{pre}(U) \\
-        =&  f^p f_* \varinjlim_{V \supseteq f(U)} \shG (V) \\
-        =&  f^p \varinjlim_{V \supseteq f(U)} \shG (f^{-1}(V)) \\
+        {}& (f^{pre} f_* f^{pre} \shG)(U) \\
+        =&  f^{pre} f_* \varinjlim_{V \supseteq f(U)} \shG (V) \\
+        =&  f^{pre} \varinjlim_{V \supseteq f(U)} \shG (f^{-1}(V)) \\
         =&  \varinjlim_{W \supseteq f \circ f^{-1}(V)} ~ \varinjlim_{V \supseteq f(U)} \shG(W)
     \end{align*}
     $V \supseteq f(U)$であるとき$W \supseteq f \circ f^{-1}(V) \supseteq f(U)$．
@@ -1088,39 +1088,40 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \[
     \xymatrix@C=5em@R=3em
     {
-    (f^p \shG)(U) \ar[r]^-{(f^p\eta_{\shG})_U}
-    & (f^p f_* f^{-1} \shG)(U) \ar[r]^-{(\epsilon_{f^p\shG})_U}
-    & (f^p \shG)(U) \\
+    (f^{pre} \shG)(U) \ar[r]^-{(f^{pre}\eta_{\shG})_U}
+    & (f^{pre} f_* f^{-1} \shG)(U) \ar[r]^-{(\epsilon_{f^{pre}\shG})_U}
+    & (f^{pre} \shG)(U) \\
     \dots \ar[u] \ar[ur] \ar[r] \ar[urr]
     & \shG(W) \ar[ul] \ar[u] \ar[r] \ar[ur]
     & \shG(V) \ar[ull] \ar[u] \ar@{..>}[ul]
     }
     \]
-    $(f^p \eta_{\shG})_U$は$\shG(U) \xrightarrow{\eta} (f_* f^p \shG)(U)$を$f^p$で写せば直ちに得られ，
-    $(\epsilon)_{f^p\shG(U)}$は$(f^p f_* f^p \shG)(U)$のUMPから得られる．
-    最後に，$(f^p \shG)(U)$のUMPから，
-    $\id{f^p}=\epsilon_{f^p\shG} \circ f^p \eta_{\shG}$．
+    $(f^{pre} \eta_{\shG})_U$は$\shG(U) \xrightarrow{\eta} (f_* f^{pre} \shG)(U)$を$f^{pre}$で写せば直ちに得られ，
+    $(\epsilon)_{f^{pre}\shG(U)}$は$(f^{pre} f_* f^{pre} \shG)(U)$のUMPから得られる．
+    最後に，$(f^{pre} \shG)(U)$のUMPから，
+    $\id{f^{pre}}=\epsilon_{f^{pre}\shG} \circ f^{pre} \eta_{\shG}$．
 
     \paragraph{Hom-set Definition.}
     以下のように写像を定義する．
     \[
         \phi(-)=f_*(-) \circ \eta_{\shG},~~
-        \psi(-)=\epsilon_{\shF} \circ f^p(-).
+        \psi(-)=\epsilon_{\shF} \circ f^{pre}(-).
     \]
     するとunit-counit equationsからこれらが互いに逆写像であることが分かる．
-    こうして所期の同型$\phi: \Hom(f^p\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
+    こうして所期の同型$\phi: \Hom(f^{pre}\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
     自然性は$\eta, \epsilon$の自然性から誘導される．
 
     \paragraph{Adjointness of $f^{-1}$.}
-    $f^{-1}=\ftorSh f^p$と$\ftorSh \dashv \ftorFgt, f^p \dashv f_*$を用いる．
+    $f^{-1}=\ftorSh f^{pre}$と$\ftorSh \dashv \ftorFgt, f^{pre} \dashv f_*$を用いる．
     \begin{align*}
         {}& \Hom_{\Sh}(f^{-1} \shF, \shG) \\
-        =&  \Hom_{\PSh}(f^p \ftorFgt \shF, \ftorFgt \shG) \\
-        =&  \Hom_{\PSh}(\ftorFgt \shF, f_* \ftorFgt \shG) \\
-        =&  \Hom_{\Sh}(\ftorSh \ftorFgt \shF, \ftorSh f_* \ftorFgt \shG) \\
+        =&  \Hom_{\Sh}(\ftorSh f^{pre} \shF, \shG) \\
+        =&  \Hom_{\PSh}(f^{pre} \shF, \ftorFgt \shG) \\
+        =&  \Hom_{\PSh}(\shF, f_* \ftorFgt \shG) \\
         =&  \Hom_{\Sh}(\shF, f_* \shG)
     \end{align*}
-    最後に，$\shF, \shG$が予めsheafであること，及び$f_*$がsheafをsheafに写すことを用いた．
+    最後に，$\shF, \shG$が予めsheafであること，
+    及び$\ftorFgt$がobjectを変化させない埋め込み関手であることを用いた．
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
