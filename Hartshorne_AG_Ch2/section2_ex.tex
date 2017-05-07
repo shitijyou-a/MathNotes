@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[dvipdfmx]{graphicx}
+\usepackage[all]{xy}
 \usepackage{../math_note, exercise}
 \renewcommand{\thesection}{Ex2.\arabic{section}}
 
@@ -113,8 +114,13 @@
     \end{center}
     \end{figure}
 
-    $\Spec \Z$の開集合は，$\emptyset, \Spec \Z$,$\Spec \Z$から有限個の点を除いたもの．
-    (TODO)
+    任意の環$R$について，homomorphism $\phi: \Z \to R$を考える．
+    準同型だから$\phi(0)=o, \phi(1)=e, \phi(-1)=-e$（ただし$o, e$はそれぞれ$R$の加法/乗法単位元．）となる．
+    そして$\Z$は無限巡回群だから，$\phi(n-m)=\sum_{i=1}^n e+\sum_{i=1}^{m} (-e)$となり，
+    よって準同型$\Z \to R$はただひとつ．
+    つまり$|\Hom(\Z, R)|=1$．
+    $\Spec \Z$はaffine spaceだから，Ex2.4より，任意のscheme $X$について$|\Hom(X, \Spec \Z)|=1$．
+    すなわち，$\Spec \Z$は$\Sch$のfinal objectとなる．
 
 \section{$\Spec \{0\}$ is the Initial Object in $\Sch$.} %% Ex2.6 
     零環$\{0\}$はただひとつのイデアル（したがって素イデアル）$(0)$を持つから，$\Spec \{0\}$は1点集合．
@@ -123,11 +129,141 @@
     $\Spec \{0\}$から別のschemeへの射は$0 \mapsto 0$から得られるものしか無い．
     よって$\Spec \{0\}$はinitial object．
 
-\section{ } %% Ex2.7 
+\section{Residue Field.} %% Ex2.7 
+    Residue field of $x$ on $X$とは，剰余体$k(x):=\shO_{X,x}/\I{m}_{X,x}$のことである．
+
+    $K$ :: field, $O:=(0) \subset K$とする．
+    すると$\Spec K=\{O\}$であり，開集合は$\emptyset, \Spec K=\{O\}$の二つのみ．
+    したがって$\shO_{\Spec K, O}=\shO_{\Spec K}(\Spec K)=K$となる．
+    $\shO_{\Spec K, O}$は$\shO_{\Spec K}(\Spec K)$のみからなるdirect systemのdirect limitだから，
+    これらは厳密に等しい．
+    
+    \paragraph{$(f,f^{\#}) \to (x, \phi)$}
+    $(f, f^{\#}): (\Spec K, \shO_{\Spec K}) \to (X, \shO_X)$を考えよう．
+    $f: \Spec K \to X$は，$\Spec K$が1点空間であることから，$f(O)$の値のみで定まる．
+    この値を$x:=f(O)$としておこう．
+    $f_* \shO_{\Spec K}$は
+    \[
+        f_* \shO_{\Spec K}(U)=
+        \begin{cases}{}
+            K & (x \in U) \\
+            0 & (x \not \in U)
+        \end{cases}
+    \]
+    で定まる．
+    これは$K$のskyscraper sheaf (Ex.1.17)である．
+    すると，$f^{\#}: \shO_X \to f_* \shO_{\Spec K}$は
+    \[ (f^{\#})_{x}: \shO_{X,x} \to \shO_{\Spec K,f^{-1}(x)}=\shO_{\Spec K,O}=K \]
+    を誘導する\footnote{$(f_* \shO)_P=\shO_{f^{-1}(P)}$を使った．}．
+    これは以下の図式を可換にする射である．
+    \[
+    \xymatrix@C=5em
+    {
+    \shO_{X,x} \ar[r]^-{(f^{\#})_{x}} & \shO_{\Spec K,O} \\
+    \shO_X(U) \ar[r]^-{(f^{\#})_U} \ar[u]_-{\mu_U} & \shO_{\Spec K}(\{O\}) \ar@{=}[u]
+    }
+    \]
+    ただしこの図式では$x \in U \subseteq X$．
+    $\im (f^{\#})_{x} \subseteq K$は体だから，第一同型定理より，$\ker (f^{\#})_{x}$は極大イデアル．
+    よって$(f^{\#})_{x}$は
+    \[ \xymatrix{ \shO_{X,x} \ar@{->>}[r]& \shO_{X,x}/\I{m}_{X,x}=k(x)~ \ar@{>->}[r]^-{\phi} & K } \]
+    へと分解される．
+    こうして$(f,f^{\#})$から$x \in X$と$\phi_f: k(x) \to K$が得られた．
+
+    \paragraph{$(x, \phi) \to (f,f^{\#})$}
+    逆に$x \in X$と$\phi: k(x) \to K$から$(f,f^{\#})$を作る．
+    これには以上の手順を逆にたどればよい．
+    まず$f$は以下のものになる．
+    \begin{defmap}
+        f:& \Spec K& \to& X \\ 
+        {}& O& \mapsto& x
+    \end{defmap}
+    $\phi: k(x) \to K$から$f^{\#}$を復元するには，以下のようにする．
+    \begin{defmap}
+        f^{\#}_U:& \shO_X(U)& \to& (f_* \shO_{\Spec K})(U) \\ 
+        {}& s& \mapsto&
+        \begin{cases}{}
+            \Phi_U(s) & (x \in U) \\
+            0 & (x \not \in U)
+        \end{cases}
+    \end{defmap}
+    ここでの$\Phi_U ~(\text{with }x \in U)$は，以下のような写像の結合である．
+    \[
+        \xymatrix
+        {
+            \shO_X(U) \ar[r]
+            & \varinjlim_{x \in V} \shO_X(V)=\shO_{X,x} \ar@{->>}[r]
+            & \shO_{X,x}/\I{m}_{X,x}=k(x) \ar[r]^-{\phi}
+            & K=(f_* \shO_{\Spec K})(U)
+        }
+    \]
+    $f^{\#}$から$\phi$を作った時，$\phi$から再び$f^{\#}$に戻ることは，
+    前段落で見た二つの図式から分かる．
 
 \section{ } %% Ex2.8 
 
-\section{ } %% Ex2.9 
+\section{Uniquely-Existence of Generic Point.} %% Ex2.9 
+    $X$をschemeとし，$Z$をそのnonempty irreducible closed subsetとする．
+    この時，$Z$がただひとつのgeneric pointを持つことを示す．
+
+    \paragraph{Useful Fact (!).}
+    一般に，$D \subset X$が$X$のdense subsetならば，
+    $X \setminus D$は空集合の他に開集合を含まない．
+    これは直ちに理解できるが重要なので記しておく．
+
+    \paragraph{Affine Case.}
+
+    \paragraph{General Case.}
+    affine open subset $U \subseteq X$であって，
+    $U \cap Z \neq \emptyset$であるものをとる．
+    この時，$U \cap Z$ ( :: closed in $U$)はaffine schemeのclosed subsetだから，
+    前段落より，必ずgeneric point $\zeta$を持つ．
+    この$\zeta$は$Z$のgeneric pointでもある．
+    このことを示すために，$\{\zeta\}$が$Z$でdenseでないとしよう．
+    すると$Z \setminus \{\zeta\}$は$V (\neq \emptyset)$ :: open in $Z$を含む．
+    $Z$はirreducibleだから$V \cap U \neq \emptyset$．
+    今$\zeta$は$Z \cap U$のgeneric pointとしたから，
+    $(U \cap Z) \setminus \{\zeta\}=U \cap (Z \setminus \{\zeta\})$は
+    $U \cap Z$の開集合を含まない．
+    しかし今
+    \[
+        V \subseteq Z \setminus \{\zeta\}
+        \text{ であり， }
+        \emptyset \neq V \cap U \subseteq U \cap (Z \setminus \{\zeta\}).
+    \]
+    よって$\zeta \in U \cap Z$は$Z$のgeneric pointである．
+    また，$\zeta$の他にgeneric point $\zeta'$が存在したとしよう．
+    $\zeta' \not \in Z \cap U$であれば$Z \setminus \{\zeta'\}$は
+    空でない開集合$Z \cap U$を含むことになるので，$\zeta, \zeta' \in Z \cap U$．
+    前段落の結果より，$\zeta=\zeta'$が得られる．
+
+%    $Z$の稠密部分集合全体$\Delta=\{D \subseteq Z \mid \overline{D}=Z \}$を考える．
+%    $\Delta$は集合の包含関係についてpartially ordered setを成し，$Z \in \Delta$なので空ではない．
+%    この時，$\delta=\bigcap \Delta=\bigcap_{D \in \Delta} D$とおく．
+%    以下で$\delta$が稠密な1点集合であることを示す．
+%    このことから$Z$がただひとつのgeneric pointを持つことがしたがう．
+
+%    \paragraph{$\delta$ is Dense.}
+%    $\delta$が稠密でないと仮定し，$\delta^c$を考える．
+%    なので，仮定より，$\delta^c$は空でない開集合$U$を含む．
+%    すると$\delta^c=\bigcup_{D \in \Delta} D^c$だから，
+%    任意の$D \in \Delta$について$D^c \cap U$は$D^c$の開集合である．
+%    さらに，少なくともひとつの$D_0 \in \Delta$について$D_0^c$は$U$と空でない交わりを持つ．
+%    これは$D_0^c$が空でない開集合を含むということである．
+%    $D_0$は稠密だから，これは矛盾．
+%    (TODO: 示すべきは，$D_0^c$が空でない$Z$の開集合を含むということである．これでは$D_0^c$の相対位相での開集合の存在しか言えない．)
+
+%    \paragraph{$\delta$ is One-Point Set.}
+%    $\delta$が二点以上からなると仮定する．
+%    この時，$\delta=\delta_1 \cup \delta_2$と，二つの異なる空でない部分集合にわけられる．
+%    $\delta_1,\delta_2$は$\Delta$の極小元$\delta$よりも真に小さいから，以下が成り立つ．
+%    \[
+%        \bar{\delta_1}, \bar{\delta_2} \neq \emptyset, Z
+%        \mand 
+%        Z=\bar{\delta}=\overline{\delta_1 \cup \delta_2}=\bar{\delta_1} \cup \bar{\delta_2}=Z
+%    \]
+%    つまり，$Z$を二つの空でない真の閉集合の和として表せる．
+%    しかし$Z$はirreducibleなのでこれはありえない．
 
 \section{ } %% Ex2.10 
 

@@ -984,144 +984,191 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     Ex1.16a,dと合わせれば$i_P(A)$はflasqueであることが分かる．
 
 \section{Adjoint Property of $f^{-1}$.} %% Ex1.18 
-    $f: X \to Y$ :: continuous mapについて，
-    $f^{-1}$が$f_*$のleft adjoint functorであることを示す．
-    そのために，当分の間は$f^{-1}=\ftorSh \varinjlim_{V \supseteq f(-)} \ftorFgt$でなく，
-    $f^{pre}\shF=\varinjlim_{V \supseteq f(-)} \shF(-)$がleft adjointであることを示す．
-    left adjointの定義としては$\Hom$についての定義を用いる．
+    $X,Y$を位相空間とし，$\shF, \shG$をそれぞれ$X,Y$上のsheafとする．
+    $f: X \to Y$を連続写像に対し，
+    $f^p \shG$を$U \mapsto \varinjlim_{V \supseteq f(U)} \shG(V)$で定まるpresheaf，
+    $f^{-1} \shG$を$f^p \shG$のsheafification，
+    $(f_* \shF)(U')=\shF(f^{-1}(U'))$とおく．
+    つまり，
+    \[ f^p: \Sh(Y) \to \PSh(X), f^{-1}: \Sh(Y) \to \Sh(X), f_*: \PSh(X) \to \PSh(Y) \]
+    であり，$f_*$はsheafをsheafに写すfunctorである．
+    natural transformation 
+    \[ \eta: \id{\Sh(Y)} \to f_* f^{-1}, \epsilon: f^{-1}f_* \to \id{\Sh(X)} \]を定義し，
+    sheaf $\shF, \shG$について$\Hom(f^{-1}\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
 
-    最初にunit $\eta: \id{\Sh(Y)} \to f_* f^{pre}$と
-    counit $\epsilon: f^{pre} f_* \to \id{\Sh(X)}$を構成する．
-
-    \paragraph{Construction of Unit $\eta$.}
-    $\shG \in \Sh(Y)$をとると，$U$ :: open in $Y$について次の等式が成り立つ．
+    \paragraph{Construction of $\tilde{\eta}, \eta$.}
+    \paragraph{$\tilde{\eta}, \eta$ is Natural.}
+    \paragraph{Construction of $\tilde{\epsilon}, \epsilon$.}
+    \paragraph{$\tilde{\epsilon}, \epsilon$ is Natural.}
+    \paragraph{Construction of $\Phi_{\shF, \shG}, \Psi_{\shF, \shG}$.}
+    $\Phi_{\shF, \shG}: \Hom(\shG, f_* \shF) \leftrightarrow \Hom(f^{-1}\shG, \shF): \Psi_{\shF, \shG}$
+    を構築する．
+    $\alpha \in \Hom(\shG, f_* \shF)$から始める．
     \[
-        (f_* f^{pre} \shG)^{pre}(U)
-        =(f^{pre} \shG)^{pre}(f^{pre}(U))
-        =\lim_{\substack{\longrightarrow \\ V \supseteq f \circ f^{pre}(U)}} \shG(V).
+        (1)
+        \xymatrix
+        {
+        {} & {} & {} \\
+        {} & {} & {} \\
+        \shG \ar[rr]^-{\alpha} & {} & f_* \shF \\
+        }
+        \hspace{1em}
+        (2)
+        \xymatrix
+        {
+        {} & \shF  & {} \\
+        f^{-1} \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^{-1} \alpha} & {} & f^{-1} f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
+        \shG \ar[rr]^-{\alpha} & {} & f_* \shF \\
+        }
+        \hspace{1em}
+        (3)
+        \xymatrix@C=1.5em
+        {
+        {} & \shF  & {} \\
+        f^{-1} \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^{-1} \alpha} & {} & f^{-1} f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
+        \shG \ar[rr]^-{\alpha} \ar[d]_-{\eta_{\shG}}& {} & f_* \shF \ar[d]^-{\eta_{f_* \shF}} \\
+        f_* f^{-1} \shG \ar[rd]_-{f_* \bar{\alpha}} \ar[rr]^-{f_* f^{-1} \alpha} & {} & f_* f^{-1} f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
+        {} & f_* \shF  & {} \\
+        }
     \]
-    $U \supseteq f \circ f^{pre}(U)$（全射と等号成立は同値）だから，
-    coconeの「母線」として
-    \[ (\eta_{\shG})_U: \shG(U) \to (f_* f^{pre} \shG)^{pre}(U) \]
-    が得られる．
-    $\eta$の自然性は容易に示される．
-    （$f_* f^{pre}$は母線と可換になるように射を写す．）
+    図式(1)を$f^{-1}$で写したものに，$\shF$と$\epsilon_{\shF}$を追加すると，射の結合として$\bar{\alpha}$が得られる．
+    これが図式(2)であり，
+    \[ \Phi_{\shF, \shG}(\alpha)=\bar{\alpha}=\epsilon_{\shF} \circ f^{-1} \alpha \in \Hom(f^{-1}\shG, \shF) \]
+    と定義する．
+    さらに(2)の上の三角形を$f_*$で写したものが図式(3)の下の三角形である．
+    $\eta$の自然性から，$\eta$を追加した図式(3)も可換である．
+    すると$\bar{\alpha} \in \Hom(f^{-1}\shG, \shF)$から
+    \[ \Psi_{\shF, \shG}(\bar{\alpha})=f_* \bar{\alpha} \circ \eta_{\shG} \in \Hom(\shG, f_* \shF) \]が得られる．
 
-    \paragraph{Construction of Counit $\epsilon$.}
-    $\shF \in \Sh(X)$をとると，$U$ :: open in $X$について次の等式が成り立つ．
-    \[ (f^{pre} f_* \shF)(U)=\lim_{\substack{\longrightarrow \\ V \supseteq f(U)}} \shF(f^{pre}(V)). \]
-    $V \supseteq f(U)$であるとき，$f^{pre}(V) \supseteq f^{pre} \circ f(U) \supseteq U$（単射と等号成立は同値）．
-    したがってcolimitのUMPにより$(\epsilon_{\shF})_U$が得られる．
+    \paragraph{$\Psi_{\shF, \shG} \circ \Phi_{\shF, \shG}=\id{\Hom(\shG, f_*\shF)}$.}
+    今，$\alpha$から$\Psi_{\shF, \shG}(\bar{\alpha})=\Psi_{\shF, \shG}(\Phi_{\shF, \shG}(\alpha))$が得られた．
+    この二つが等しいことを示そう．
+    これは$\Phi_{\shF, \shG}$が単射であることを意味する．
+    そのためには，直前の図式(3)における
+    以下のpathが$\id{f_* \shF}$であることを示せば良い．
+    \[
+        \xymatrix
+        {
+        {} & {} & f_* \shF \ar[d]^-{\eta_{f_* \shF}} \\
+        {} & {} & f_* f^{-1} f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
+        {} & f_* \shF  & {} \\
+        }
+    \]
+    $f_* f^{-1} f_* \shF$は$f_* f^p f_* \shF$のsheafificationである．
+    任意の$U$ :: open in $X$について，
+    $(f^p f_* \shF)(U)$は
+    \[ \mathscr{D}_0=\{ \shF(V) \mid V \supseteq f(f^{-1}(U)) \} \]のdirect limitである．
+    写像についての基本的な事実から，$U \supseteq f(f^{-1}(U))$となる．
+    つまり$\shF(U) \in \mathscr{D}_0$．
+    図式$\eta_{\shF}: \mathscr{D}_0 \to (f^p f_* \shF)(U)$を$f_*$で写せば，
+    $(f_* f^p f_* \shF)(U)$が
+    \[ \mathscr{D}_1=\{\shF(f^{-1}(V)) \mid V \supseteq f(f^{-1}(U)) \} \]
+    のdirect limitであることがわかる．
+    さらに$V \supseteq f(f^{-1}(U))$であるとき
+    $f^{-1}(V) \supseteq f^{-1}(f(f^{-1}(U)))=f^{-1}(U)$だから，
+    $\mathscr{D}_1$の任意の元から$\shF(f^{-1}(U))=f_*\shF(U)$へrestriction mapが伸びる．
+    以上から，以下の図式が書ける．
     \[
     \xymatrix
     {
-    (f^{pre} f_* \shF)(U) \ar@{-->}[r]^-{(\epsilon_{\shF})_U}& \shF(U) \\
-    \dots \ar[r]_-{\res} \ar[u] \ar@/_10pt/[ur]& \shF(f^{pre}(V)) \ar[u]_-{\res} \ar@/^10pt/[ul]
+    (f_* f^p f_* \shF)(U) \ar[rr]^-{(\tilde{\epsilon}_{f_*\shF})_U}& {} & \shF(f^{-1}(U)) \\
+    \mathscr{D}_1 \ar[u] \ar[urr]^(.2){\res}
+    & \ni 
+    & f_*\shF(U) \ar@{=}[u]_-{\res_{f^{-1}(U)}^{f^{-1}(U)}=\id{}} \ar[ull]_(.2){(f_*\tilde{\eta}_{\shF})_U}
     }
     \]
-    $\epsilon$の自然性はあまり自明ではないのでここで示そう．
-    \[
-    \begin{xy}
-        (20,0) *{\shF(V)}="F1", (50,0)*{\shF'(V)}="F'1",
-        (20,20)*{\shF(U)}="F2", (50,20)*{\shF'(U)}="F'2",
-        (0,30)*{(f^{pre} f_* \shF)(U)}="F3", (70,30)*{(f^{pre} f_* \shF')(U)}="F'3"
-        \ar "F1";"F2" \ar "F1";"F'1" \ar "F'1";"F'2" \ar "F2";"F'2"
-        \ar "F1";"F3" \ar"F'1";"F'3"
-        \ar "F3";"F'3"
-        \ar@{-->}_-{\epsilon} "F3";"F2" \ar@{-->}^-{\epsilon} "F'3";"F'2"
-        \ar@{~>} "F3";"F'2" \ar "F1";"F'2"
-    \end{xy}
-    \]
-    最初，この図式を書いた時には，上面の台形が可換になっていることは非自明である．
-    direct limitのUMPから$\shF(V), (f^{pre} f_* \shF)(U), \shF'(U)$の三角形が
-    可換になるような唯一の射$(f^{pre} f_* \shF)(U) \to \shF'(U)$（波線のもの）が存在する．
-    しかし同じ三角形を可換にするような射として，
-    $\epsilon$を通る射$(f^{pre} f_* \shF)(U) \to \shF(U) \to \shF'(U)$が既に存在する．
-    UMPから，この射は波線の射に等しい．
-    また，同様に$(f^{pre} f_* \shF)(U) \to \shF(U) \to \shF'(U)$も波線の射と等しい．
-    まとめると，上面の台形が可換であることが判る．
-    これは$\epsilon$の自然性を意味する．
+    $\mathscr{D}_1$から伸びる２本の射と整合的に$(\epsilon_{f_*\shF})_U$が生えている．
+    これはつまり上の図式で$\mathscr{D}_1$を頂点に持つ三角形が可換である，ということである．
+    $f_*\shF(U) \in \mathscr{D}_1$に注目すれば，
+    これは直ちに$\tilde{\epsilon}_{f_*\shF} \circ f_*\tilde{\eta}_{\shF}=\id{}$を意味する．
+    ここまでは$f_* f^p f_*\shF$についての議論だったが，
+    これをsheafificationすれば最初の目的の等式が得られる．
 
-    \paragraph{Preparation of Unit-Counit Equations.}
-    まず$f \circ f^{-1}(B) \subseteq B$に$B=f(A)$を代入すると$f \circ f^{-1} \circ f(A) \subseteq f(A)$．
-    続いて$f^{-1} \circ f(A) \supseteq A$の両辺を$f$で写すと$f \circ f^{-1} \circ f(A) \supseteq f(A)$．
-    二つを合わせて$f \circ f^{-1} \circ f=f$が得られる．
-    双対的に$f^{-1} \circ f \circ f^{-1}=f^{-1}$が得られる．
-
-    \paragraph{Unit-Counit Equations.}
-    まず計算．
-    \begin{align*}
-        {}& (f_* f^{pre} f_* \shF)(U) \\
-        =&  (f_* f^{pre} \shF)(f^{-1}(U)) \\
-        =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} (f_* \shF) (V) \\
-        =&  \varinjlim_{V \supseteq f \circ f^{-1}(U)} \shF (f^{-1}(V))
-    \end{align*}
-    $V \supseteq f \circ f^{-1}(U)$であるとき，既に見たように$f^{-1}(V) \supseteq f^{-1}(U)$．
-    以下の可換図式を見よ．
+    \paragraph{$\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}=\id{\Hom(f^{-1}\shG, \shF)}$.}
+    今度は$\beta \in \Hom(f^{-1}\shG, \shF)$をとる．
+    $\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}(\beta)=\beta$を示そう．
+    前段落及び前前段落と同様に図式を書く．
     \[
-    \xymatrix
-    {
-    (f_* f^{pre} f_* \shF)(U) \ar[r]^-{f_* (\epsilon_{\shF})} & (f_* \shF)(U) \\
-    \dots \ar[u] \ar[ur] \ar[r]
-    & \shF(f^{-1}(U)) \ar[ul]^(0.7){(\eta)_{f_* \shF}} \ar@{=}[u]
-    }
+        \xymatrix
+        {
+        {} & \shG \ar[ld]_-{\eta_{\shG}} \ar[rd]^-{\bar{\beta}} & {} \\
+        f_* f^{-1}\shG \ar[rr]^-{f_* \beta} & {} & f_* \shF \\
+        f^{-1} \shG \ar[rr]^-{\beta} & {} & \shF \\
+        f^{-1} f_* f^{-1} \shG \ar[u]^-{\epsilon_{f^{-1} \shG}}  \ar[rr]^-{f^{-1} f_* \beta} & {} & f^{-1} f_* \shF \ar[u]_-{\epsilon_{\shF}} \\
+        {} & f^{-1} \shG \ar[ru]_-{f^{-1} \bar{\beta}} \ar[lu]^-{f^{-1} \eta_{\shG}} & {} \\
+        }
     \]
-    よって$\id{f_*}=f_* \epsilon \circ \eta_{f_*}$が得られた．
-    再び計算する．
-    \begin{align*}
-        {}& (f^{pre} f_* f^{pre} \shG)(U) \\
-        =&  f^{pre} f_* \varinjlim_{V \supseteq f(U)} \shG (V) \\
-        =&  f^{pre} \varinjlim_{V \supseteq f(U)} \shG (f^{-1}(V)) \\
-        =&  \varinjlim_{W \supseteq f \circ f^{-1}(V)} ~ \varinjlim_{V \supseteq f(U)} \shG(W)
-    \end{align*}
-    $V \supseteq f(U)$であるとき$W \supseteq f \circ f^{-1}(V) \supseteq f(U)$．
-    $V \supseteq f(U)$を満たす$V$全体は，
-    明らかに$W \supseteq f \circ f^{-1}(V) \supseteq f(U)$を満たす$W$全体を包含する
-    \footnote
-    {
-        $W$の方がより厳しい条件を満たさなくてはならない．
-        $f \circ f^{-1}(V)$は開集合にならないかもしれないが，$W$は開集合である．
-    }
-    ．
-    したがって以下の図式が得られる．
-    （点線の射は存在するとは限らない．）
+    よって以下が$\id{f^{-1}\shG}$であることを示せば良いと分かる．
     \[
-    \xymatrix@C=5em@R=3em
-    {
-    (f^{pre} \shG)(U) \ar[r]^-{(f^{pre}\eta_{\shG})_U}
-    & (f^{pre} f_* f^{-1} \shG)(U) \ar[r]^-{(\epsilon_{f^{pre}\shG})_U}
-    & (f^{pre} \shG)(U) \\
-    \dots \ar[u] \ar[ur] \ar[r] \ar[urr]
-    & \shG(W) \ar[ul] \ar[u] \ar[r] \ar[ur]
-    & \shG(V) \ar[ull] \ar[u] \ar@{..>}[ul]
-    }
+        \xymatrix
+        {
+        f^{-1} \shG & {} & {} \\
+        f^{-1} f_* f^{-1} \shG \ar[u]_-{\epsilon_{f^{-1} \shG}} & {} & {} \\
+        {} & f^{-1} \shG\ar[lu]^-{f^{-1} \eta_{\shG}} & {} \\
+        }
     \]
-    $(f^{pre} \eta_{\shG})_U$は$\shG(U) \xrightarrow{\eta} (f_* f^{pre} \shG)(U)$を$f^{pre}$で写せば直ちに得られ，
-    $(\epsilon)_{f^{pre}\shG(U)}$は$(f^{pre} f_* f^{pre} \shG)(U)$のUMPから得られる．
-    最後に，$(f^{pre} \shG)(U)$のUMPから，
-    $\id{f^{pre}}=\epsilon_{f^{pre}\shG} \circ f^{pre} \eta_{\shG}$．
-
-    \paragraph{Hom-set Definition.}
-    以下のように写像を定義する．
+    そこで最初に次の図式を考える．
     \[
-        \phi(-)=f_*(-) \circ \eta_{\shG},~~
-        \psi(-)=\epsilon_{\shF} \circ f^{pre}(-).
+        \xymatrix@C=5em
+        {
+        (f^p \shG)(U) \ar[r]^-{(f^p \tilde{\eta}_{\shG})_U}
+        & (f^p f_* f^p \shG)(U) \ar@{-->}[r]^-{(\tilde{\epsilon}_{f^p\shG})_U}
+        & (f^p \shG)(U) \\
+        \mathscr{D} \ar[u]& \mathscr{D}' \ar[u]& \mathscr{D} \ar[u]
+        }
     \]
-    するとunit-counit equationsからこれらが互いに逆写像であることが分かる．
-    こうして所期の同型$\phi: \Hom(f^{pre}\shF, \shG) \bimap \Hom(\shF, f_* \shG)$が得られる．
-    自然性は$\eta, \epsilon$の自然性から誘導される．
+    ただし$\mathscr{D}, \mathscr{D}'$は以下のdirect systemであり，
+    $U \subseteq X$及び$V,W \subseteq Y$はすべて開集合である．
+    \[ \mathscr{D}=\{\shG(V) \mid f(U) \subseteq V \}, \mathscr{D}'=\{ \shG(W) \mid f(U) \subseteq V, f(f^{-1}(V)) \subseteq W \}. \]
+    $V,W$はopen setである．
+    $\mathscr{D}, \mathscr{D}'$は，実は等しい．
+    なぜなら，初歩的な写像についての結果から，
+    \[ [f(U)=f(f^{-1}(f(U))) \subseteq f(f^{-1}(V)) \subseteq W] \land [f(f^{-1}(V)) \subseteq V] \]
+    が成り立つからである．
+    前半は$\mathscr{D} \supseteq \mathscr{D}'$を意味し，
+    後半は$\mathscr{D} \subseteq \mathscr{D}'$を意味する．
+    よって$(f^p \shG)(U)$が持つUMPから，左の$(f^p \shG)(U)$から右の$(f^p \shG)(U)$への射は$\id{}$である．
+    ここから当初の予定の等式を得るためには，前段落の場合と違って注意が必要である．
+    なぜなら，前段落では$f_*f^{-1}f_*\shF$は$f_*f^p f_*\shF$を一回sheafificationしたものだが，
+    $f^{-1} f_* f^{-1} \shG=\ftorSh f^p f_* \ftorSh f^p \shG$は
+    2回sheafificationを行っているからである．
+    だから，議論は次のように行う．
+    次の可換図式から始める．
+    \[
+        \xymatrix
+        {
+        \shG \ar[r]^-{\eta_{\shG}} \ar[rd]_-{\tilde{\eta}_{\shG}}
+        & f_* f^{-1} \shG
+        \\
+        {}
+        & f_* f^p \shG \ar[u]_-{\theta}
+        \\
+        }
+    \]
+    この可換図式を$f^p$で写し，
+    $\tilde{\epsilon}_{f^{-1}\shG}, \tilde{\epsilon}_{f^p\shG}$を
+    追加して，もう一度sheafificationすると，以下の可換図式が得られる．
+    \[
+        \xymatrix@C=5em
+        {
+        f^{-1}\shG \ar[r]^-{f^{-1}\eta_{\shG}}
+        & f^{-1} f_* f^{-1} \shG \ar[rd]^-{\epsilon_{f^{-1}\shG}}
+        {} \\
+        f^p \shG \ar[r]^-{f^p \eta_{\shG}} \ar[rd]_-{f^p \tilde{\eta}_{\shG}} \ar[u]^-{\theta}
+        & f^p f_* f^{-1} \shG \ar[r]_-{\tilde{\epsilon}_{f^{-1}\shG}} \ar[u]
+        & f^{-1} \shG \\
+        {} 
+        & f^p f_* f^p \shG \ar[r]_-{\tilde{\epsilon}_{f^p\shG}}  \ar[u]
+        & f^p \shG \ar[u]_-{\theta} \\
+        }
+    \]
+    この可換図式の上の辺は，
+    一番下の辺（今$\id{}$であることを示した）を元に，
+    $f^p \shG$のsheafificationのUMPを使って作り出したものに等しい．
+    $\id{}$から出来た射なので，一番上の辺は$\id{}$．
+    （$\ftorSh$と$f_*$が交換できることについては書いていない．）
 
-    \paragraph{Adjointness of $f^{-1}$.}
-    $f^{-1}=\ftorSh f^{pre}$と$\ftorSh \dashv \ftorFgt, f^{pre} \dashv f_*$を用いる．
-    \begin{align*}
-        {}& \Hom_{\Sh}(f^{-1} \shF, \shG) \\
-        =&  \Hom_{\Sh}(\ftorSh f^{pre} \shF, \shG) \\
-        =&  \Hom_{\PSh}(f^{pre} \shF, \ftorFgt \shG) \\
-        =&  \Hom_{\PSh}(\shF, f_* \ftorFgt \shG) \\
-        =&  \Hom_{\Sh}(\shF, f_* \shG)
-    \end{align*}
-    最後に，$\shF, \shG$が予めsheafであること，
-    及び$\ftorFgt$がobjectを変化させない埋め込み関手であることを用いた．
+    \paragraph{$\Phi_{\shF, \shG}, \Psi_{\shF, \shG}$ is Natural.}
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．
