@@ -520,7 +520,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \xymatrix@C=2pt@R=35pt
     {
     \shF \ar[rr]^{\theta_{\shF}} & {} & \ftorSh \shF \ar[d]^{g} \\
-    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    \ftorFgt \shG \ar@{->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
     {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
     }
     \hspace{20pt}
@@ -528,7 +528,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \xymatrix@C=2pt@R=35pt
     {
     \shF \ar[rr]^{\theta_{\shF}} \ar[d]^{\bar{g}} \ar@<-2mm>@/_12mm/@{~>}[rdd] & {} & \ftorSh \shF \ar[d]^{g} \\
-    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    \ftorFgt \shG \ar@{->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
     {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
     }
     \hspace{20pt}
@@ -536,11 +536,12 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \xymatrix@C=2pt@R=35pt
     {
     \shF \ar[rr]^{\theta_{\shF}} \ar[d]^{\bar{g}} & {} & \ftorSh \shF \ar[d]^{g} \ar@<2mm>@/^12mm/@{-->}[ldd]^{\ftorSh(\bar{g})} \\
-    \ftorFgt \shG \ar@{<->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
+    \ftorFgt \shG \ar@{->}[rr]^-{\tilde{\epsilon}_{\shG}} \ar[rd]_-{\theta_{\ftorFgt \shG}} & {} & \shG \\
     {} & \ftorSh \ftorFgt \shG \ar[ru]_-{\epsilon_{\shG}} & {}
     }
     \]
-    コの字型の部分をたどることで，(2)の$\bar{g}: \shF \to \ftorFgt \shG$が得られる．
+    コの字型の部分をたどることで，
+    (2)の$\bar{g}=\tilde{\epsilon}_{\shG}^{-1} \circ g \circ \theta_{\shF}$が得られる．
     Ex1.4における$\phi^+$の作り方をなぞると，
     $\ftorSh(\bar{g})$は(2)の波矢印$\theta_{\ftorFgt \shG} \circ \bar{g}$から
     sheafificationのUMPで得られるものである．
@@ -549,6 +550,12 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     可換な三角形をなす射は$\ftorSh(\bar{g})$に等しい．
     よって$\ftorSh(\bar{g})=\theta_{\ftorFgt \shG} \circ \tilde{\epsilon}_{\shG}^{-1} \circ g$．
     こうして$g=\epsilon_{\shG} \circ \ftorSh(\bar{g})$が得られる．
+
+    以上では，
+    $g \in \Hom(\ftorSh \shF, \shG)$から$\bar{g} \in \Hom(\shF, \ftorFgt \shG)$を作り，
+    $\bar{g}$から$g$を復元した．
+    $f \in \Hom(\shF, \ftorFgt \shG)$からはじめて議論を逆向きにたどれば，
+    $g$と$\bar{g}$（$f$と$\bar{f}$）が一対一に対応していることが分かる．
 
 \section{Espace \'Etal\'e of a Presheaf.} %% Ex1.13 
     \subsubsection{Definition of Espace \'Etal\'e.}
@@ -992,16 +999,16 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     つまり，
     \[ f^p: \Sh(Y) \to \PSh(X), f^{-1}: \Sh(Y) \to \Sh(X), f_*: \PSh(X) \to \PSh(Y) \]
     であり，$f_*$はsheafをsheafに写すfunctorである．
-    natural transformation 
-    \[ \eta: \id{\Sh(Y)} \to f_* f^{-1}, \epsilon: f^{-1}f_* \to \id{\Sh(X)} \]を定義し，
-    sheaf $\shF, \shG$について$\Hom(f^{-1}\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
 
-    \paragraph{Construction of $\tilde{\eta}, \eta$.}
-    \paragraph{$\tilde{\eta}, \eta$ is Natural.}
-    \paragraph{Construction of $\tilde{\epsilon}, \epsilon$.}
-    \paragraph{$\tilde{\epsilon}, \epsilon$ is Natural.}
+    $ \eta, \epsilon$を定義して，この準備の後，
+    sheaf $\shF, \shG$について$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
+    その後，$\ftorSh \dashv \ftorFgt$を用いて
+    $\Hom(f^{-1}\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
+
+    \paragraph{Construction of $\eta$.}
+    \paragraph{Construction of $\epsilon$.}
     \paragraph{Construction of $\Phi_{\shF, \shG}, \Psi_{\shF, \shG}$.}
-    $\Phi_{\shF, \shG}: \Hom(\shG, f_* \shF) \leftrightarrow \Hom(f^{-1}\shG, \shF): \Psi_{\shF, \shG}$
+    $\Phi_{\shF, \shG}: \Hom(\shG, f_* \shF) \leftrightarrow \Hom(f^p\shG, \shF): \Psi_{\shF, \shG}$
     を構築する．
     $\alpha \in \Hom(\shG, f_* \shF)$から始める．
     \[
@@ -1017,7 +1024,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         \xymatrix
         {
         {} & \shF  & {} \\
-        f^{-1} \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^{-1} \alpha} & {} & f^{-1} f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
+        f^p \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^p \alpha} & {} & f^p f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
         \shG \ar[rr]^-{\alpha} & {} & f_* \shF \\
         }
         \hspace{1em}
@@ -1025,19 +1032,19 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         \xymatrix@C=1.5em
         {
         {} & \shF  & {} \\
-        f^{-1} \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^{-1} \alpha} & {} & f^{-1} f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
+        f^p \shG \ar@{~>}[ru]^-{\bar{\alpha}} \ar[rr]^-{f^p \alpha} & {} & f^p f_* \shF \ar[lu]_-{\epsilon_{\shF}} \\
         \shG \ar[rr]^-{\alpha} \ar[d]_-{\eta_{\shG}}& {} & f_* \shF \ar[d]^-{\eta_{f_* \shF}} \\
-        f_* f^{-1} \shG \ar[rd]_-{f_* \bar{\alpha}} \ar[rr]^-{f_* f^{-1} \alpha} & {} & f_* f^{-1} f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
+        f_* f^p \shG \ar[rd]_-{f_* \bar{\alpha}} \ar[rr]^-{f_* f^p \alpha} & {} & f_* f^p f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
         {} & f_* \shF  & {} \\
         }
     \]
-    図式(1)を$f^{-1}$で写したものに，$\shF$と$\epsilon_{\shF}$を追加すると，射の結合として$\bar{\alpha}$が得られる．
+    図式(1)を$f^p$で写したものに，$\shF$と$\epsilon_{\shF}$を追加すると，射の結合として$\bar{\alpha}$が得られる．
     これが図式(2)であり，
-    \[ \Phi_{\shF, \shG}(\alpha)=\bar{\alpha}=\epsilon_{\shF} \circ f^{-1} \alpha \in \Hom(f^{-1}\shG, \shF) \]
+    \[ \Phi_{\shF, \shG}(\alpha)=\bar{\alpha}=\epsilon_{\shF} \circ f^p \alpha \in \Hom(f^p\shG, \shF) \]
     と定義する．
     さらに(2)の上の三角形を$f_*$で写したものが図式(3)の下の三角形である．
     $\eta$の自然性から，$\eta$を追加した図式(3)も可換である．
-    すると$\bar{\alpha} \in \Hom(f^{-1}\shG, \shF)$から
+    すると$\bar{\alpha} \in \Hom(f^p\shG, \shF)$から
     \[ \Psi_{\shF, \shG}(\bar{\alpha})=f_* \bar{\alpha} \circ \eta_{\shG} \in \Hom(\shG, f_* \shF) \]が得られる．
 
     \paragraph{$\Psi_{\shF, \shG} \circ \Phi_{\shF, \shG}=\id{\Hom(\shG, f_*\shF)}$.}
@@ -1050,11 +1057,11 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         \xymatrix
         {
         {} & {} & f_* \shF \ar[d]^-{\eta_{f_* \shF}} \\
-        {} & {} & f_* f^{-1} f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
+        {} & {} & f_* f^p f_* \shF \ar[ld]^-{f_* \epsilon_{\shF}} \\
         {} & f_* \shF  & {} \\
         }
     \]
-    $f_* f^{-1} f_* \shF$は$f_* f^p f_* \shF$のsheafificationである．
+    $f_* f^p f_* \shF$は$f_* f^p f_* \shF$のsheafificationである．
     任意の$U$ :: open in $X$について，
     $(f^p f_* \shF)(U)$は
     \[ \mathscr{D}_0=\{ \shF(V) \mid V \supseteq f(f^{-1}(U)) \} \]のdirect limitである．
@@ -1071,48 +1078,48 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \[
     \xymatrix
     {
-    (f_* f^p f_* \shF)(U) \ar[rr]^-{(\tilde{\epsilon}_{f_*\shF})_U}& {} & \shF(f^{-1}(U)) \\
+    (f_* f^p f_* \shF)(U) \ar[rr]^-{(\epsilon_{f_*\shF})_U}& {} & \shF(f^{-1}(U)) \\
     \mathscr{D}_1 \ar[u] \ar[urr]^(.2){\res}
     & \ni 
-    & f_*\shF(U) \ar@{=}[u]_-{\res_{f^{-1}(U)}^{f^{-1}(U)}=\id{}} \ar[ull]_(.2){(f_*\tilde{\eta}_{\shF})_U}
+    & f_*\shF(U) \ar@{=}[u]_-{\res_{f^{-1}(U)}^{f^{-1}(U)}=\id{}} \ar[ull]_(.2){(f_*\eta_{\shF})_U}
     }
     \]
     $\mathscr{D}_1$から伸びる２本の射と整合的に$(\epsilon_{f_*\shF})_U$が生えている．
     これはつまり上の図式で$\mathscr{D}_1$を頂点に持つ三角形が可換である，ということである．
     $f_*\shF(U) \in \mathscr{D}_1$に注目すれば，
-    これは直ちに$\tilde{\epsilon}_{f_*\shF} \circ f_*\tilde{\eta}_{\shF}=\id{}$を意味する．
+    これは直ちに$\epsilon_{f_*\shF} \circ f_*\eta_{\shF}=\id{}$を意味する．
     ここまでは$f_* f^p f_*\shF$についての議論だったが，
     これをsheafificationすれば最初の目的の等式が得られる．
 
-    \paragraph{$\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}=\id{\Hom(f^{-1}\shG, \shF)}$.}
-    今度は$\beta \in \Hom(f^{-1}\shG, \shF)$をとる．
+    \paragraph{$\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}=\id{\Hom(f^p\shG, \shF)}$.}
+    今度は$\beta \in \Hom(f^p\shG, \shF)$をとる．
     $\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}(\beta)=\beta$を示そう．
     前段落及び前前段落と同様に図式を書く．
     \[
         \xymatrix
         {
         {} & \shG \ar[ld]_-{\eta_{\shG}} \ar[rd]^-{\bar{\beta}} & {} \\
-        f_* f^{-1}\shG \ar[rr]^-{f_* \beta} & {} & f_* \shF \\
-        f^{-1} \shG \ar[rr]^-{\beta} & {} & \shF \\
-        f^{-1} f_* f^{-1} \shG \ar[u]^-{\epsilon_{f^{-1} \shG}}  \ar[rr]^-{f^{-1} f_* \beta} & {} & f^{-1} f_* \shF \ar[u]_-{\epsilon_{\shF}} \\
-        {} & f^{-1} \shG \ar[ru]_-{f^{-1} \bar{\beta}} \ar[lu]^-{f^{-1} \eta_{\shG}} & {} \\
+        f_* f^p\shG \ar[rr]^-{f_* \beta} & {} & f_* \shF \\
+        f^p \shG \ar[rr]^-{\beta} & {} & \shF \\
+        f^p f_* f^p \shG \ar[u]^-{\epsilon_{f^p \shG}}  \ar[rr]^-{f^p f_* \beta} & {} & f^p f_* \shF \ar[u]_-{\epsilon_{\shF}} \\
+        {} & f^p \shG \ar[ru]_-{f^p \bar{\beta}} \ar[lu]^-{f^p \eta_{\shG}} & {} \\
         }
     \]
-    よって以下が$\id{f^{-1}\shG}$であることを示せば良いと分かる．
+    よって以下が$\id{f^p\shG}$であることを示せば良いと分かる．
     \[
         \xymatrix
         {
-        f^{-1} \shG & {} & {} \\
-        f^{-1} f_* f^{-1} \shG \ar[u]_-{\epsilon_{f^{-1} \shG}} & {} & {} \\
-        {} & f^{-1} \shG\ar[lu]^-{f^{-1} \eta_{\shG}} & {} \\
+        f^p \shG & {} & {} \\
+        f^p f_* f^p \shG \ar[u]_-{\epsilon_{f^p \shG}} & {} & {} \\
+        {} & f^p \shG\ar[lu]^-{f^p \eta_{\shG}} & {} \\
         }
     \]
-    そこで最初に次の図式を考える．
+    そこで次の図式を考える．
     \[
         \xymatrix@C=5em
         {
-        (f^p \shG)(U) \ar[r]^-{(f^p \tilde{\eta}_{\shG})_U}
-        & (f^p f_* f^p \shG)(U) \ar@{-->}[r]^-{(\tilde{\epsilon}_{f^p\shG})_U}
+        (f^p \shG)(U) \ar[r]^-{(f^p \eta_{\shG})_U}
+        & (f^p f_* f^p \shG)(U) \ar@{->}[r]^-{(\epsilon_{f^p\shG})_U}
         & (f^p \shG)(U) \\
         \mathscr{D} \ar[u]& \mathscr{D}' \ar[u]& \mathscr{D} \ar[u]
         }
@@ -1128,47 +1135,23 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     前半は$\mathscr{D} \supseteq \mathscr{D}'$を意味し，
     後半は$\mathscr{D} \subseteq \mathscr{D}'$を意味する．
     よって$(f^p \shG)(U)$が持つUMPから，左の$(f^p \shG)(U)$から右の$(f^p \shG)(U)$への射は$\id{}$である．
-    ここから当初の予定の等式を得るためには，前段落の場合と違って注意が必要である．
-    なぜなら，前段落では$f_*f^{-1}f_*\shF$は$f_*f^p f_*\shF$を一回sheafificationしたものだが，
-    $f^{-1} f_* f^{-1} \shG=\ftorSh f^p f_* \ftorSh f^p \shG$は
-    2回sheafificationを行っているからである．
-    だから，議論は次のように行う．
-    次の可換図式から始める．
-    \[
-        \xymatrix
-        {
-        \shG \ar[r]^-{\eta_{\shG}} \ar[rd]_-{\tilde{\eta}_{\shG}}
-        & f_* f^{-1} \shG
-        \\
-        {}
-        & f_* f^p \shG \ar[u]_-{\theta}
-        \\
-        }
-    \]
-    この可換図式を$f^p$で写し，
-    $\tilde{\epsilon}_{f^{-1}\shG}, \tilde{\epsilon}_{f^p\shG}$を
-    追加して，もう一度sheafificationすると，以下の可換図式が得られる．
-    \[
-        \xymatrix@C=5em
-        {
-        f^{-1}\shG \ar[r]^-{f^{-1}\eta_{\shG}}
-        & f^{-1} f_* f^{-1} \shG \ar[rd]^-{\epsilon_{f^{-1}\shG}}
-        {} \\
-        f^p \shG \ar[r]^-{f^p \eta_{\shG}} \ar[rd]_-{f^p \tilde{\eta}_{\shG}} \ar[u]^-{\theta}
-        & f^p f_* f^{-1} \shG \ar[r]_-{\tilde{\epsilon}_{f^{-1}\shG}} \ar[u]
-        & f^{-1} \shG \\
-        {} 
-        & f^p f_* f^p \shG \ar[r]_-{\tilde{\epsilon}_{f^p\shG}}  \ar[u]
-        & f^p \shG \ar[u]_-{\theta} \\
-        }
-    \]
-    この可換図式の上の辺は，
-    一番下の辺（今$\id{}$であることを示した）を元に，
-    $f^p \shG$のsheafificationのUMPを使って作り出したものに等しい．
-    $\id{}$から出来た射なので，一番上の辺は$\id{}$．
-    （$\ftorSh$と$f_*$が交換できることについては書いていない．）
 
+    \paragraph{$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$.}
+    以上で$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$が示せた．
+    $\ftorSh \dashv \ftorFgt$を用いると以下が示される．
+    \begin{align*}
+        {}&     \Hom(f^p\shG, \shF) \\
+        =&      \Hom(\ftorSh f^p \shG, \shF) \\
+        \cong&  \Hom(f^p \shG, \ftorFgt \shF) \\
+        \cong&  \Hom(\shG, f_* \ftorFgt \shF) \\
+        =&      \Hom(\shG, f_* \shF)
+    \end{align*}
+    ここで，$\shF$がsheafであること，したがって$\shF = \ftorFgt \shF$であることを用いた．
+
+    \paragraph{$\eta$ is Natural.}
+    \paragraph{$\epsilon$ is Natural.}
     \paragraph{$\Phi_{\shF, \shG}, \Psi_{\shF, \shG}$ is Natural.}
+    \paragraph{Bijection $\Hom(f^{-1}\shG, \shF) \cong \Hom(\shF, f_*\shF)$ is Natural.}
 
 \section{Extending a Sheaf by Zero.} %% Ex1.19 
     $X$ :: topological space, $Z$ :: closed subset in $X$，$U=X \setminus Z$とする．

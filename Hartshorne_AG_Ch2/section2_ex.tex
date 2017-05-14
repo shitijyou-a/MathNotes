@@ -10,6 +10,9 @@
 \newcommand{\Rings}{\mathbf{Rings}}
 \newcommand{\red}[1]{#1_{\text{red}}}
 \newcommand{\basesp}{\operatorname{sp}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\Rat}{\operatorname{Rat}} %% rational points
+\newcommand{\Proj}{\operatorname{Proj}}
 \newcommand{\CoverU}{\mathfrak{U}}
 \newcommand{\OpenIn}{\text{ :: open in }}
 \newcommand{\ClosedIn}{\text{ :: open in }}
@@ -105,6 +108,33 @@
     \subsection{If $X$ :: reduced scheme, then $X \to Y$ is uniquely factored into $X \to \red{Y} \to Y$．}
 
 \section{Functor $\Gamma$ and Affine Schemes.} %% Ex2.4 
+    $A$ :: ring, $X$ :: schemeとする．
+    写像$\alpha$を以下で定める．
+    \begin{defmap}
+        \alpha:& \Hom_{\Sch}(X,Spec A)& \to& \Hom_{\Rings}(A, \Gamma(X,\shO_X)) \\ 
+        {}& (f,f^{\#})& \mapsto& f^{\#}_{\Spec A}.
+    \end{defmap}
+    これがbijectiveであることを示す．
+
+    \paragraph{Definition of $\beta: \Hom(A, \Gamma(X,\shO_X)) \to \Hom(X,Spec A)$.}
+    $X$のopen affine coverを$\{U_i\}_{i \in I}$とおく．
+    また，$B_i$ :: ringを
+    \[ (U_i, \shO_X|_{U_i}) \iso (\Spec B_i, \shO_{\Spec B_i}) \]
+    となるものとして定める．
+    この時，写像$\beta$を次のように定める．
+    $\phi \in \Hom(A, \Gamma(X,\shO_X))$とすると，
+    \[ \phi_i := \res_{X}^{U_i} \circ \phi: A \to \Gamma(U_i, \shO_X)=B_i \]
+    が得られる．
+    ここから誘導されるmorphism of schemes $(f_i, f_i^{\#}): U_i \to \Spec A$を用いて，
+    $(f, f^{\#}): (X, \shO_X) \to (\Spec A, \shO_{\Spec A})$を
+    \[ f(x)=\text{$x \in U_i$となる$i$について$f_i(x)$}; f^{\#}_U(s)=s \circ f \]
+    とおく．
+    ここまでの$\phi$から$(f, f^{\#})$を得る操作を，まとめて$\beta$とおく．
+
+    \paragraph{$\beta \circ \alpha=\id{}$.}
+    
+
+    \paragraph{$\alpha \circ \beta=\id{}$.}
 
 \section{$\Spec \Z$ is the Final Object in $\Sch$.} %% Ex2.5 
     $\Z$は次元1の環だから，$\Spec \Z$は以下の図のようになる．
@@ -200,18 +230,46 @@
     $f^{\#}$から$\phi$を作った時，$\phi$から再び$f^{\#}$に戻ることは，
     前段落で見た二つの図式から分かる．
 
-\section{ } %% Ex2.8 
+\section{$\Hom(\Spec k[\epsilon]/(\epsilon^2), X) \cong \Rat(X) \times T_x X$.} %% Ex2.8 
 
 \section{Uniquely-Existence of Generic Point.} %% Ex2.9 
     $X$をschemeとし，$Z$をそのnonempty irreducible closed subsetとする．
     この時，$Z$がただひとつのgeneric pointを持つことを示す．
 
+    \paragraph{Affine Case.}
+    affine scheme $\Spec A$のirreducible closed subset $C$を考えよう．
+    これは$\{ \I{p} \in \Spec A \mid \I{a} \subseteq \I{p} \}$のように表される
+    素イデアルの集合である．
+    Ati-Mac Exc1.8
+    \footnote
+    {
+        これは以下のように解く．
+        $C$の全順序部分集合$\Gamma$を考え，$\gamma=\bigcap \Gamma$とする．
+        $\gamma \in C$を示せば良い．非自明な部分は$\gamma \in \Spec A$のみ．
+        $x, y \in A$について$x, y \not \in \gamma$であったと仮定しよう．
+        すると$x \not \in \I{p}, y \not \in \I{q}$となる$\I{p}, \I{q} \in \Gamma$が存在する．
+        $\Gamma$は全順序なので，$\I{p} \subseteq \I{q}$と仮定できる．
+        すると$x,y \not \in \I{p}$．
+        $\I{p}$は素イデアルなので$xy \not \in \I{p}$が得られる．
+        よって$x, y \not \in \gamma$ならば$xy \not \in \gamma$．
+    }
+    から，$C$は包含関係に関しての極小元を持つ．
+    この極小元全体を$G$とおくと，これは1点からなる．
+    これを示すため，$G$が2点以上からなると仮定しよう．
+    すると$G$は空でない二つの真の部分集合の和$G=G_0 \cup G_1$として書くことが出来る．
+    すると$G, G_0, G_1$の定義から
+    \[ \cl_C(G_0), \cl_C(G_1) \subsetneq C \mand \cl_C(G)=C. \]
+    閉包に関するgeneral topologyの結果から
+    \[ C=\cl_C(G)=\cl_C(G_0 \cup G_1)=\cl_C(G_0) \cup \cl_C(G_1)=C. \]
+    こうして$C$は空でない真の閉部分集合の和で書けることがわかった．
+    これは$C$はirreducibleであることに反する．
+    よって背理法により$G$が1点集合であることがわかった．
+    これは$C$がただ1つのgeneric pointを持つことを意味する．
+
     \paragraph{Useful Fact (!).}
     一般に，$D \subset X$が$X$のdense subsetならば，
     $X \setminus D$は空集合の他に開集合を含まない．
     これは直ちに理解できるが重要なので記しておく．
-
-    \paragraph{Affine Case.}
 
     \paragraph{General Case.}
     affine open subset $U \subseteq X$であって，
@@ -229,61 +287,192 @@
     \[
         V \subseteq Z \setminus \{\zeta\}
         \text{ であり， }
-        \emptyset \neq V \cap U \subseteq U \cap (Z \setminus \{\zeta\}).
+        \emptyset \neq U \cap V \subseteq U \cap (Z \setminus \{\zeta\}).
     \]
+    これは$\zeta$が$U \cap Z$のgeneric pointで無いことを意味し，$\zeta$のとり方に反する．
     よって$\zeta \in U \cap Z$は$Z$のgeneric pointである．
     また，$\zeta$の他にgeneric point $\zeta'$が存在したとしよう．
     $\zeta' \not \in Z \cap U$であれば$Z \setminus \{\zeta'\}$は
     空でない開集合$Z \cap U$を含むことになるので，$\zeta, \zeta' \in Z \cap U$．
     前段落の結果より，$\zeta=\zeta'$が得られる．
 
-%    $Z$の稠密部分集合全体$\Delta=\{D \subseteq Z \mid \overline{D}=Z \}$を考える．
-%    $\Delta$は集合の包含関係についてpartially ordered setを成し，$Z \in \Delta$なので空ではない．
-%    この時，$\delta=\bigcap \Delta=\bigcap_{D \in \Delta} D$とおく．
-%    以下で$\delta$が稠密な1点集合であることを示す．
-%    このことから$Z$がただひとつのgeneric pointを持つことがしたがう．
+\section{$\Spec \R[x]$} %% Ex2.10 
+    $\Spec \R[x]$の元は，既約多項式または0が生成する単項イデアルである．
+    $\R[x]$の既約多項式は，一次式または二次式に限られる（代数学の基本定理の初期バージョン）．
+    したがって$\R[x]$の既約多項式は
+    \[ \C_{\Im \geq 0}=\{ x+iy \mid y \geq 0 \} \]
+    の元と一対一に対応する．
 
-%    \paragraph{$\delta$ is Dense.}
-%    $\delta$が稠密でないと仮定し，$\delta^c$を考える．
-%    なので，仮定より，$\delta^c$は空でない開集合$U$を含む．
-%    すると$\delta^c=\bigcup_{D \in \Delta} D^c$だから，
-%    任意の$D \in \Delta$について$D^c \cap U$は$D^c$の開集合である．
-%    さらに，少なくともひとつの$D_0 \in \Delta$について$D_0^c$は$U$と空でない交わりを持つ．
-%    これは$D_0^c$が空でない開集合を含むということである．
-%    $D_0$は稠密だから，これは矛盾．
-%    (TODO: 示すべきは，$D_0^c$が空でない$Z$の開集合を含むということである．これでは$D_0^c$の相対位相での開集合の存在しか言えない．)
+\section{$\Spec \mathbb{F}_p[x]$} %% Ex2.11 
+    図を書くと次のようになる．
+    \begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=5cm]{./images/SpecF_p[x].eps}
+    \end{center}
+    \end{figure}
+    この円錐は上へ限りなく続く．
 
-%    \paragraph{$\delta$ is One-Point Set.}
-%    $\delta$が二点以上からなると仮定する．
-%    この時，$\delta=\delta_1 \cup \delta_2$と，二つの異なる空でない部分集合にわけられる．
-%    $\delta_1,\delta_2$は$\Delta$の極小元$\delta$よりも真に小さいから，以下が成り立つ．
-%    \[
-%        \bar{\delta_1}, \bar{\delta_2} \neq \emptyset, Z
-%        \mand 
-%        Z=\bar{\delta}=\overline{\delta_1 \cup \delta_2}=\bar{\delta_1} \cup \bar{\delta_2}=Z
-%    \]
-%    つまり，$Z$を二つの空でない真の閉集合の和として表せる．
-%    しかし$Z$はirreducibleなのでこれはありえない．
+\section{Gluing Lemma.} %% Ex2.12 
 
-\section{ } %% Ex2.10 
+\section{Quasi-Compact/Noetherian Space.} %% Ex2.13 
+    \subsection{Noethrian $\iff$ Every Open Subset is Quasi-Compact.}
+    \paragraph{($\implies$).}
+    Ch.I, Ex1.7ですべて示した．
 
-\section{ } %% Ex2.11 
+    \paragraph{($\impliedby$).}
+    可算開集合族$\mathfrak{U}=\{U_i\}_{i \in \N}$が昇鎖$U_0 \subseteq U_1 \subseteq \dots$をなすとしよう．
+    $U=\bigcup_{i \in \N} U_i$とすると，$\mathfrak{U}$は$U$のopen coverである．
+    なので仮定よりfinite sub-cover $\mathfrak{U}_{fin}$が存在する．
+    $\mathfrak{U}$は昇鎖なので，$\mathfrak{U}_{fin}$も有限昇鎖をなす．
+    その有限昇鎖の中でもっとも大きい物をとれば，それは$U$と一致する．
+    これで主張が示せた．
 
-\section{ } %% Ex2.12 
+    \subsection{}
+    $X=\Spec A$とする．
+    以下を示す: $X$の開集合$U$がquasi-compact $\iff$ $U$は基本開集合$D(f)$の有限和で表せる．
 
-\section{ } %% Ex2.13 
+    \paragraph{($\implies$).}
 
-\section{ } %% Ex2.14 
+    \paragraph{($\impliedby$).}
 
-\section{ } %% Ex2.15 
+    \subsection{$A$ :: Noethrian $\implies$ $\Spec A$ :: Noethrian.}
 
-\section{ } %% Ex2.16 
+    \subsection{Give Example: $A$ :: Noetherian $\not \impliedby$ $\Spec A$ :: Noethrian.}
+    $k$を体，$x_1,x_2,\dots$を不定元とし，$A=k[x_1,x_2,\dots]/(x_1,x_2,\dots)^2$を考える．
+    $x_i$の$R$における像を$e_i$とすると，任意の$i,j$について$e_i e_j=0$．
+    イデアル$(e_1,e_2,\dots)$は有限生成でないから，この環はNoetherian ringでない．
+    $\Spec A$がNoetherianであることは，Ex2.3bと$\Nil(A)=(e_1,e_2,\dots)$から得られる．
+    $\Nil(A)$は$e_i \mapsto 1$という代入写像の核だから極大イデアル．
+    したがってEx2.3bより$\Spec A_{red} \homeo \Spec k$となり，
+    これは１点集合である．
+    よってNoetherian．
 
-\section{ } %% Ex2.17 
+\section{$\Proj S$} %% Ex2.14 
 
-\section{ } %% Ex2.18 
+\section{The Fuctor $t$.} %% Ex2.15 
 
-\section{ } %% Ex2.19 
+\section{$X_f$.} %% Ex2.16 
+    $X$ :: scheme, $f \in \Gamma(X, \shO_X)=:A$について，
+    $X_f$を次のように定める．
+    \[ x \in X_f \iff f_x \text{ :: unit in }\shO_{X,x}. \]
 
+    \subsection{For $X \supseteq U=\Spec B$, $X_f \cap U=D(\bar{f}).$}
+    $U \subseteq X$をopen affine subschemeとし，$U=\Spec B$とする．
+    さらに$\bar{f}$で$f|_{U} \in \Gamma(U,\shO_X|_U)=B$を表す．
+    この時，以下が成り立つ．
+    \begin{align*}
+        {}&     x \in X_f \cap U \\
+        \iff&   [ f_x \text{ :: unit in }\shO_{X,x}] \land [x \in U] \\
+        \iff&   \bar{f}_x=\frac{\bar{f}}{1} \text{ :: unit in }B_{\I{p}_x} \\
+        \iff&   \bar{f} \not\in \I{p}_x \\
+        \iff&   x \in D(\bar{f})
+    \end{align*}
+    ただし$\I{p}_x \subseteq B$は点$x$に対応する素イデアル．
+    よって$X_f \cap U=D(\bar{f})$．
+
+    $U$ :: open in $X$かつ$X_f \cap U=D(\bar{f})$ :: open in $U$なので，
+    $X_f \cap U$ :: in $X$．
+    $X$のopen affine coverを考えれば，$X_f$ :: open in $X$が分かる．
+
+    \subsection{For $a \in A$，If $X$ :: quasi-compact and $a|_{X_f}=0$ then $\Exists{n > 0} f^n a=0$.}
+    $\{U_i\}_{i \in I}$を$X$のopen affine coverとする．
+    $X$ :: quasi-compactという仮定から，$I$は有限であると仮定して構わない．
+    また，$U_i = \Spec B_i$とする．
+
+    $a \in A$をとり，$a|_{X_f}=0$であるとする．
+    すると任意の$i$について$a|_{U_i}=0(=0/1)$，$a|_{U_i} \in B_i$．
+    前sectionから$X_f \cap U=D(f|_{U_i})$なので，以下が成り立つ
+    \footnote{商環の等号の定義からは$n_i \geq 0$であるが，$n_i>0$としても問題ない．}．
+    \[ \Forall{i \in I} \Exists{n_i>0} (f|_{U_i})^{n_i}(a|_{U_i} \cdot 1-1 \cdot 0)=(f^{n_i}a)|_{U_i}=0. \]
+    $I$は有限だから，$n=\max_{i \in I} n_i$が存在する．
+    明らかに任意の$i$について$(f^{n}a)|_{U_i}=0$だから，
+    Identity Axiomにより$f^n a=0$ in $A$.
+
+    \subsection{Under Some Assumption, $\Forall{b \in \Gamma(X_f, \shO_{X_f})} \Exists{n>0} \Exists{a \in A} f^n b=a|_{X_f}$.}
+    $X$はfinite affine open cover $\{U_i\}_{i=1}^r$を持ち，
+    任意の$i,j$について$U_i \cap U_j$ :: quasi-compactであるとする．
+    $U_i=\Spec B_i$とする．
+    （次の問題(d)でも$X$にこの仮定を置く）
+
+    (a)より$U_i \cap X_f=D(f|_{U_i})$，かつProp2.2より$\shO_{U_i}(D(f|_{U_i}))=(B_i)_{f|_{U_i}}$．
+    なので$b|_{D(f|_{U_i})} \in (B_i)_{f|_{U_i}}$について以下が成り立つ．
+    ただし$f_i=f|_{U_i}$とした．
+    \[ \Exists{m_i>0} \Exists{b_i \in B_i} (f^{m_i}b)|_{D(f_i)}=b_i|_{D(f_i)}. \]
+    $m=\max_i m_i$とすれば以下のようにまとめられる．
+    \[ \Exists{a_i \in B_i} (f^{m}b)|_{D(f_i)}=a_i|_{D(f_i)}. \]
+
+    次に$a_i \in B_i=\Gamma(U_i, \shO_{U_i})$を貼りあわせる．
+    そのために(b)を，$X=U_i \cap U_i$として利用しよう．
+    $X_{ij}=U_i \cap U_j, f_{ij}=f|_{U_i \cap U_j} \in \Gamma(U_{ij},\shO_{U_{ij}})$とおく．
+    すると$(X_{ij})_{f_{ij}}=X_f \cap X_{ij}$となる．
+    $a_i-a_j \in \Gamma(U_{ij},\shO_{U_ij})$を$(X_{ij})_{f_{ij}} \subset D(f_{i})$に制限すると0になるから，
+    (b)より，以下が成り立つ．
+    \[ \Exists{n_{ij}>0} (f_{ij})^{n_{ij}}(a_i-a_j)=0. \]
+    これをすべての組$(i,j)$について考えれば，以下が得られる．
+    \[ \Exists{n>0} (f^n a_i)|_{U_{ij}}=(f^n a_j)|_{U_{ij}} \text{ in } \Gamma(U_{ij},\shO_{U_ij}).  \]
+    よってGluability Axiomにより，$(f^n a)|_{U_i}=f^n a_i$となる$a \in A$がある．
+
+    もとの$f^m b$へ戻ると，今以下が成り立つ．
+    \[ (f^{m+n} b)|_{D(f_i)}=(f^n a)|_{D(f_i)}. \]
+    Identity Axiomにより，$f^{m+n} b=(f^n a)|_{X_f}$．
+
+    \subsection{$\Gamma(X_f, \shO_{X_f})=A_{f}$.}
+    (c)から，以下が成り立つ．
+    \[ \Forall{b \in \Gamma(X_f, \shO_{X_f})} \Exists{a \in A} \Exists{n>0} b=\frac{a}{f^n}. \]
+    よって$\Gamma(X_f, \shO_{X_f}) \subseteq A_f$．
+    $\supseteq$は明らかなので，$\Gamma(X_f, \shO_{X_f}) \subseteq A_f$．
+
+\section{A Criterion for Affineness.} %% Ex2.17 
+    \subsection{$f|_{f^{-1}(U_i)}$ :: iso $\implies$ $f$ :: iso.}
+    $f: X \to Y$ :: morphism of schemesについて，
+    open cover $\{U_i\}$が存在し，
+    各$i$について$f_i:=f|_{f^{U_i}}: f^{-1}(U_i) \to U_i$がisoであったとする．
+    この時$f$ :: isoを示す．
+    $V_i=\{f^{-1}(U_i)\}$としておく．これは$X$を被覆する．
+
+    \[ f_i|_{V_i \cap V_j}=(f|_{V_i})|_{V_i \cap V_j}=(f|_{V_j})|_{V_i \cap V_j}=f_i|_{V_i \cap V_j} \]
+    なので，$f$は$f_i$達の張り合わせとして矛盾なく書くことが出来る．
+    つまり，「$f(x)=f_i(x)$（ここでの$i$は$x \in V_i$を満たすもの）」と書くことが出来る．
+    さらに$V,U$ :: open in $X, Y$について，以下が成り立つ．
+    \[ f(V)=f(\bigcup (V \cap V_i))=\bigcup f(V \cap V_i);~~ f^{-1}(U)=f^{-1}(\bigcup (U \cap U_i))=\bigcup f^{-1}(U \cap U_i). \]
+    $f_i$:: homeoからこの二つは開集合．
+    よって$f$ :: homeo.
+
+    $f^{\#}: \shO_{Y} \to f_* \shO_{X}$も次のように$f_i^{\#}$で書ける．
+    \[
+        \shO_{Y}(U) \to f_* \shO_{Y}(U):
+        \xymatrix{
+        s \ar@{|->}[r]
+        & \bigoplus (s|_{U \cap U_i}) \ar@{|->}[rr]^-{\bigoplus (f_i^{\#})_{U \cap U_i}}
+        & {}
+        & \bigoplus (f_i^{\#})_{U \cap U_i}(s|_{U \cap U_i})=\bigoplus t_i \ar@{|->}[r]
+        & t
+        }
+    \]
+    $(f_i^{\#})_{U \cap U_i}$がisoなのでこの写像はiso．
+
+    \subsection{For scheme $X$, $X$ :: affine $\iff$ ....}
+    $X$ :: schemeを考える．$A:=\Gamma(X, \shO_X)$とする．
+    以下を条件(*)と呼ぶ．
+    \[ \Exists{f_1, \dots, f_r \in A=\Gamma(X, \shO_X)} [\Forall{i=1,\dots,r} X_{f_i} \text{ :: affine}] \land [(f_1,\dots,f_r)=(1)=A.] \]
+    $X$ :: affine $\iff$ (*)，ということを示す．
+    Affine schemeはquasi-compactである(Ex2.13b)，ということを何度も使う．
+
+    \paragraph{$\implies$.}
+    この時$X=\Spec A$である．
+    主張の成立は自明．
+
+    \paragraph{$\impliedby$.}
+    核心となるのは，$\{X_{f_i}\}$がEx2.16cで$\{U_i\}$に課せられている条件を満たす，ということ．
+    $X=\bigcup X_{f_i}$は
+    \[ \left( \bigcup X_{f_i} \right)^c=\left( \bigcap \{x \mid (f_i)_x \in \I{m}_{X,x} \subset \shO_{X,x}\} \right)^c \]
+    と$(f_1,\dots,f_r)=(1)$から得られる．
+    $X_{f_i} \cap X_{f_j}$ ::quasi-compactは，$X_{f_i}=\Spec F_i$とすると，
+    \[ X_{f_i} \cap X_{f_j}=D(f_j|_{X_{f_i}})=\Spec (F_i)_{f_j} \]はaffine schemeだからquasi-compact．
+    以上からEx2.16d, Ex2.4, Ex2.17aが全部使えて，この順に使えば$X=\Spec A$が示せる．
+
+\section{Ring Homomorphism vs. the Induced Morphism of the Spectra.} %% Ex2.18 
+
+\section{$\Spec A$ :: disconnected $\iff$ ....} %% Ex2.19 
 
 \end{document}
