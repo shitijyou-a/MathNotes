@@ -18,7 +18,6 @@
 \newcommand{\ClosedIn}{\text{ :: open in }}
 
 \begin{document}
-
 \section{$(D(f), \shO_X|_{D(f)}) \homeo (\Spec A_f, \shO_{\Spec A_f})$} %% Ex2.1 
     $A$ :: ring, $X=\Spec A$, $f \in A$とし，$D(f)=(V((f)))^c$とする．
     $S=\{1,f,f^2,\dots\}$とし，以下のように写像を定める．
@@ -315,6 +314,47 @@
 \section{Gluing Lemma.} %% Ex2.12 
 
 \section{Quasi-Compact/Noetherian Space.} %% Ex2.13 
+    \begin{Lemma}[I]
+        $A$ :: ring, $f \in A$について$D(f)$ :: quasi-compact.
+    \end{Lemma}
+    \begin{proof}
+        $D(f)=\bigcup_{i \in I} U_i$とすると，
+        \[ \sqrt{(f)}=\sqrt{\sum_{i \in I} \I{a}_i} \]
+        というイデアル達$\{\I{a}_i\}_{i \in I}$が存在する．
+        両辺ともに特に$f$を含むから，ある自然数$n>0$が存在して
+        \[ f^n \in \sqrt{\sum_{i \in I} \I{a}_i} \]
+        となる．
+        イデアルの和の定義から，（必要なら適当に番号を付け替えることで）
+        \[ f^n=\sum_{i=1}^{r} a_i \text{ with } a_i \in \I{a}_i \]
+        と出来る．
+        よって
+        \[
+            \sqrt{(f)}
+            \subseteq \sqrt{\sum_{i=1}^{r} \I{a}_i}
+            \subseteq \sqrt{\sum_{i \in I} \I{a}_i}=\sqrt{(f)}
+        \]
+        となる．
+        これは$D(f)=\bigcup_{i=1}^r U_i$を意味する．
+    \end{proof}
+    \begin{Lemma}[II]
+        $V(\I{a})^c$ :: quasi-compact
+        $\iff$
+        $\sqrt{\I{a}_f}=\sqrt{\I{a}}$となる有限生成イデアル$\I{a}_f$が存在する．
+    \end{Lemma}
+    \begin{proof}
+        \paragraph{($\implies$).}
+        $\I{a}=\sum_{a \in A} (a)$だから
+        \[ V(\I{a})^c=V(\sum_{a \in A} (a))^c=\bigcup_{a \in A} V((a))^c \]となる．
+        仮定より
+        \[ V(\I{a})=V(\sum_{i=1}^2 (a_i))^c=V(\langle a_1,\dots,a_r\rangle) \]
+        となる$a_i \in \I{a}$が存在する．
+
+        \paragraph{($\impliedby$).}
+        $g_1,\dots,g_r$を$\I{a}_f$の生成元とすると
+        \[ V(\I{a})^c=V(\sum_{i=1}^r (g_i))^c=\bigcup_{i=1}^r D(g_i) \]となる．
+        これはLemma Iよりquasi-compactな開集合の有限和だから，quasi-compact.
+    \end{proof}
+
     \subsection{Noethrian $\iff$ Every Open Subset is Quasi-Compact.}
     \paragraph{($\implies$).}
     Ch.I, Ex1.7ですべて示した．
@@ -327,15 +367,37 @@
     その有限昇鎖の中でもっとも大きい物をとれば，それは$U$と一致する．
     これで主張が示せた．
 
-    \subsection{}
+    \subsection{$\Spec A$ :: Quasi-Compact, but NOT Noetherian In General.}
     $X=\Spec A$とする．
-    以下を示す: $X$の開集合$U$がquasi-compact $\iff$ $U$は基本開集合$D(f)$の有限和で表せる．
+    $D(1)=\Spec A$だから，Lemma Iより$\Spec A$ :: quasi-compact.
+    しかし一般にはNoetherianでない．
+    これを示すためには，(a)から，ある開集合がquasi-compactでない例を構成すれば良い．
+    そのために
+    \[ A=k[x_1,x_2,\dots] \supset \I{a}=(x_1,x_2,\dots) \]
+    を考える．ただし$k$ :: alg.closed.field.
+    Lemma IIより，
+    $\sqrt{\I{a}}=\sqrt{\I{a}_f}$となる有限生成イデアル$\I{a}_f$が
+    存在しないことを示せば良い．
 
-    \paragraph{($\implies$).}
+    背理法で証明する．
+    $\I{a}_f$が存在すると仮定し，$g_1,\dots,g_r$を$\I{a}_f$の生成元とする．
+    各$g_i$に入っている不定元は高々有限個だから，
+    まとめれば，$g_1,\dots,g_r$のいずれかに入っている不定元であって一番番号が大きいものが存在する．
+    それを$x_N$としよう．つまり$g_1,\dots,g_r \in A_N$．
+    $\I{a}_f^c=\I{a} \cap A_N$とおこう．
 
-    \paragraph{($\impliedby$).}
+    $1 \in \I{a}_f^c \implies 1 \in \I{a}_f$だから，
+    これの対偶によって$\zerosa(\I{a}_f^c) \neq \emptyset$（ここで$k$ :: alg.closedを使っている）．
+    \[ (\alpha_1,\dots,\alpha_N) \in \zerosa(\I{a}_f^c), P=(\alpha_1,\dots,\alpha_N,1,0,\dots) \]
+    とすると，$g_i(P)=0$．
+    一方，$x_{N+1} \in \sqrt{\I{a}}=\sqrt{\I{a}_f}$だから，
+    $x_{N+1}^d=c_1g_1+\dots+c_Ng_N$となる$d>0$が存在する．
+    両辺に$P$を代入すると，左辺は$1^d=1 \neq 0$．右辺は$c_1(P)*0+c_N(P)*0=0$．
+    矛盾が生じた．
+    よって$\sqrt{\I{a}}=\sqrt{\I{a}_f}$となる有限生成イデアル$\I{a}_f$は存在しない．
 
     \subsection{$A$ :: Noethrian $\implies$ $\Spec A$ :: Noethrian.}
+    Lemma IIと(a)により明らか．
 
     \subsection{Give Example: $A$ :: Noetherian $\not \impliedby$ $\Spec A$ :: Noethrian.}
     $k$を体，$x_1,x_2,\dots$を不定元とし，$A=k[x_1,x_2,\dots]/(x_1,x_2,\dots)^2$を考える．
@@ -472,7 +534,79 @@
     以上からEx2.16d, Ex2.4, Ex2.17aが全部使えて，この順に使えば$X=\Spec A$が示せる．
 
 \section{Ring Homomorphism vs. the Induced Morphism of the Spectra.} %% Ex2.18 
+    $A,B$ :: ring, $\phi: A \to B$ :: ring homoとする．
+    $(f,f^{\#}): Y=\Spec B \to \Spec A=X$と$\phi$の関係を考える．
+    以下では$f(y) \in X$における$f^{\#}$のstalkを$f^{\#}_{(y)}$と書く．
+
+    \[
+        \xymatrix
+        {
+        \shO_{X,f(y)} \ar[r]^{}f^{\#}_{(y)} & (f_* \shO_{Y})_{f(y)} \ar[r]^{\iota^y}& \shO_{Y,y} \\
+        A_{f(y)} \ar@{<->}[u] \ar[rr]^{\phi_{y}} & {} & B_y \ar@{<->}[u]
+        }
+    \]
+
 
 \section{$\Spec A$ :: disconnected $\iff$ ....} %% Ex2.19 
+    可換環$A$について以下が同値であることを示す．
+    \begin{enumerate}[(1)]
+    \item $\Spec A$ :: disconnected.
+    \item $\Exists{e_1, e_2 \in A \setminus \{0\}} e_1e_2=0, e_1^2=e_1, e_2^2=e_2, e_1+e_2=1$.
+    \item $\Exists{A_1, A_2 \neq 0} A \cong A_1 \times A_2$.
+    \end{enumerate}
+
+    \paragraph{(1)$\implies$(2) [Step 1]}
+    仮定より，$\Spec A$は二つ以上のconnected componentをもつ．
+    そこで一方のconnected componentを$C_1$とし，$C_2=\Spec A \setminus C_1$とする．
+    そして$\I{a}_1=\bigcap_{\I{p} \in C_1}$とし，$\I{a}_2$も同様に定義する．
+    定義の仕方から，$\I{a}_1 \subsetneq \I{a}_1'$であるとき
+    \[ C_1=V(\I{a}_1) \supsetneq V(\I{a}_1') \]
+    となることに注意せよ．
+
+    \paragraph{(1)$\implies$(2) [Step 2]}
+    \begin{align*}
+        {}& \Spec A=V(\I{a}_1) \sqcup V(\I{a}_2) \\
+        \iff& [\Spec A=V(\I{a}_1 \I{a}_2)] \land [\emptyset=V(\I{a}_1+\I{a}_2)] \\
+        \iff& [\I{a}_1 \I{a}_2 \subseteq \Nil(A)] \land [(1)=\I{a}_1+\I{a}_2] \label{ex219-1}
+    \end{align*}
+    最後の行，2つめの条件から，
+    $a_1+a_2=1$となる$a_1 \in \I{a}_1, a_2 \in \I{a}_2$が存在することが分かる．
+    1つめの条件からは，$a_1^n a_2^n=0$となる$n>0$が存在することが分かる．
+
+    \paragraph{(1)$\implies$(2) [Step 3]}
+    $(a_1+a_2)^n=1^n=1$の左辺を展開する．
+    \[ 1=a_1^n+a_2^n+a_1a_2 \left( \sum_{i=1}^{n-1} \binom{n}{i}a_1^{i-1}a_2^{n-i-1} \right)=1. \]
+    $a_1a_2(***)$の部分を移項すると，
+    \[ a_1^n+a_2^n=1-a_1a_2(***) \]
+    となる．
+    $a_1a_2(***) \in \Nil(A)$だから，Ati-Mac Ex1.1より右辺は単元．
+    これを$u$を置くと，
+    \[ u^{-1}a_1^n+u^{-1}a_2^n=1, (u^{-1}a_1^n)(u^{-1}a_2^n)=u^{-2}(a_1^na_2^n)=0 \]
+    となる．
+
+    \paragraph{(1)$\implies$(2) [Step 4]}
+    以上から，$e_1=u^{-1}a_1^n, e_2=u^{-1}a_2^n$とおくと
+    $e_1+e_2=1$と$e_1e_2=0$が成り立つことがわかった．
+    最後に，$e_1^2=e_1$を示す（$e_1^2=e_1$も同様）．
+    これは以下のように直ちに示せる．
+    \[ e_1 \cdot (e_1+e_2)=e_1 \cdot 1 \implies e_1^2+e_1e_2=e_1 \implies e_1^2=e_1. \]
+
+    \paragraph{(2)$\implies$(3)}
+    $A_1=e_1 A, A_2=e_2 A$とすれば良い．
+    同型は以下のように定義できる．
+    \begin{defmap}
+        \phi:& A_1 \times A_2& \to& A \\ 
+        {}& (x,y)& \mapsto& x+y \\
+        {}& (a e_1,a e_2)& \mapedfrom& a
+    \end{defmap}
+    $a_1 \in A_1, a_2 \in A_2$について$a_1 a_2=0$に注意すると，
+    準同型であることが確かめられる．
+    実際，
+    \[ \phi(x,y) \phi(z,w)=(x+y)(z+w)=xz+(yz+zw)+yw=xz+yw=\phi(xz,yw)=\phi((x,y)\cdot(z,w)). \]
+    同型であることは$e_1+e_2$にも注意すれば分かる．
+
+    \paragraph{(3)$\implies$(1)}
+    $e_1,e_2$があるとき，$(e_1), (e_2)$は明らかに(\label{ex219-1})を満たす．
+    なので$\Spec A=V((e_1)) \sqcup V((e_2))$となる．
 
 \end{document}

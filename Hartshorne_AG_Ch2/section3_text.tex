@@ -1,0 +1,113 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, braket}
+
+\begin{document}
+定義をまとめておく．
+断りがない限り$X,Y$はschemeであり，$A,B,A_i, B_i$はringである．
+
+\section{About Scheme Property.}
+\begin{Def}[Locally Noetherian Scheme]
+\begin{align*}
+    {}&     X\text{ :: locally noetherian } \\
+    \iff&
+            \Exists{\{A_i\}_{i \in I}}
+            \lbra{X=\bigcup_{i \in I} \Spec A_i} \land \lbra{A_i\text{ :: noetherian.}} \\
+    \iff&   \Forall{\Spec A \subseteq X} A\text{ :: noetherian.}
+\end{align*}
+\end{Def}
+
+\begin{Def}[Noetherian Scheme]
+\begin{align*}
+    {}&     X\text{ :: noetherian } \\
+    \iff&   \Exists{\{A_i\}_{i=1}^r}
+            \lbra{X=\bigcup_{i=1}^r \Spec A_i} \land \lbra{A_i\text{ :: noetherian.}}
+\end{align*}
+\end{Def}
+
+\begin{Def}[Quasi-Compact Scheme]
+\begin{align*}
+    {}&     X\text{ :: quasi-compact } \\
+    \iff&   \operatorname{sp}(X)\text{ :: quasi-compact }
+\end{align*}
+\end{Def}
+
+以下の3つは教科書にないが，便宜上導入する．
+\begin{Def}[Locally $B$-Fin.Gen Scheme]
+\begin{align*}
+    {}&     X\text{ :: Locally $B$-Fin.Gen. Scheme} \\
+    \iff&
+            \Exists{\{A_i\}_{i \in I}}
+            \lbra{X=\bigcup_{i \in I} \Spec A_i} \land \lbra{A_i\text{:: fin.gen. $B$-algebra.}}
+\end{align*}
+\end{Def}
+
+\begin{Def}[$B$-Fin.Gen. Scheme]
+\begin{align*}
+    {}&     X\text{ :: $B$-Fin.Gen. Scheme} \\
+    \iff&  
+            \Exists{\{A_i\}_{i=1}^r}
+            \lbra{X=\bigcup_{i=1}^r \Spec A_i} \land \lbra{A_i\text{:: fin.gen. $B$-algebra.}}
+\end{align*}
+\end{Def}
+
+\begin{Def}[$B$-Fin.Gen. Affine Scheme]
+\begin{align*}
+    {}&     X\text{ :: $B$-Fin.Gen. Scheme} \\
+    \iff&  
+            \Exists{A}
+            \lbra{X=\Spec A} \land \lbra{A\text{:: fin.gen. $B$-algebra.}}
+\end{align*}
+\end{Def}
+
+\section{About Scheme Morphism Property.}
+このsectionで$f: X \to Y$はscheme morphismである．
+
+\begin{Def}[Locally of Finite Type]
+\begin{align*}
+    {}&     f\text{ :: locally of finite type} \\
+    \iff&
+            \Exists{\{B_i\}_{i \in I}}
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: locally $B_i$-fin.gen. scheme}} \\
+    \overset{\text{ Ex3.1 }}{\iff}&
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: locally $A$-fin.gen. scheme}
+\end{align*}
+\end{Def}
+
+\begin{Def}[Finite Type]
+\begin{align*}
+    {}&     f\text{ :: finite type} \\
+    \iff&
+            \Exists{\{B_i\}_{i \in I}}
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: $B_i$-fin.gen. scheme}} \\
+    \overset{\text{ Ex3.3a }}{\iff}&
+            f\text{ :: locally finite type+quasi-compact.} \\
+    \overset{\text{ Ex3.3b }}{\iff}&
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: $A$-fin.gen. scheme}
+%    \overset{\text{ Ex3.3c }}{\implies}&
+%            \Forall{\Spec B \subseteq X} \Forall{\Spec A \subseteq \Spec B}f^{-1}(\Spec A)\text{ :: $B$-fin.gen. scheme} \\
+\end{align*}
+\end{Def}
+
+\begin{Def}[Finite]
+\begin{align*}
+    {}&     f\text{ :: finite} \\
+    \iff&
+            \Exists{\{B_i\}_{i \in I}}
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: $B_i$-fin.gen. affine scheme}} \\
+    \overset{\text{ Ex3.4 }}{\iff}&
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: $A$-fin.gen. affine scheme} \\
+\end{align*}
+\end{Def}
+
+\begin{Def}[Quasi-Compact]
+\begin{align*}
+    {}&     f\text{ :: quasi-compact} \\
+    \iff&
+            \Exists{\{B_i\}_{i \in I}}
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: quasi-compact.}} \\
+    \overset{\text{ Ex3.2 }}{\iff}&
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: quasi-compact.}
+\end{align*}
+\end{Def}
+
+\end{document}

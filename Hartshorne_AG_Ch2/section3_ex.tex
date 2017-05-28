@@ -1,0 +1,87 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[all]{xy}
+\usepackage{../math_note, braket}
+
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Var}{\mathbf{Var}}
+\newcommand{\Rings}{\mathbf{Rings}}
+\newcommand{\red}[1]{#1_{\text{red}}}
+\newcommand{\basesp}{\operatorname{sp}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\Rat}{\operatorname{Rat}} %% rational points
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\CoverU}{\mathfrak{U}}
+\newcommand{\OpenIn}{\text{ :: open in }}
+\newcommand{\ClosedIn}{\text{ :: open in }}
+
+\begin{document}
+    schemeやscheme morphismの性質の定義は
+    \url{section3_text.pdf}にまとめたので参照すること．
+    同じPDFで$B$-fin.gen. schemeなどの独自の用語を定義している．
+    \url{http://stacks.math.columbia.edu/tag/01T0}も参照すると良い．
+
+\section{Definition(s) of Locally of Finite Type Morphism.} %% Ex3.1 
+以下の命題を示す．
+\begin{align*}
+    {}&
+    \Exists{\{B_i\}_{i \in I}}
+    \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: locally $B_i$-fin.gen. scheme}} \\
+    \iff&
+    \Forall{\Spec A \subseteq X} f^{-1}(\Spec A)\text{ :: locally $A$-fin.gen. scheme}
+\end{align*}
+
+下から上は自明である．上から下を示そう．
+
+まず$U=\Spec A \subset X$をとり，$U_i=\Spec A \cap \Spec B_i$を考える．
+$U_i \subseteq \Spec A$なので開基$D(a_{ij}) ~~(a_{ij} \in A)$によって$U_i$を被覆できる．
+また$D(a_{ij})=D(b_{ij}) ~~(b_{ij} \in B_i)$とする．
+この時$f^{-1} U=\bigcup_{i,j} f^{-1}D(b_{ij})$
+
+最終的に$\Spec A \subseteq \Spec B$かつ$f^{-1}\Spec B\text{ :: locally $B$-fin.gen. scheme}$の場合に帰着させられると思う．
+
+\section{ } %% Ex3.2 
+
+\section{ } %% Ex3.3 
+
+\section{ } %% Ex3.4 
+
+\section{ } %% Ex3.5 
+
+\section{ } %% Ex3.6 
+
+\section{ } %% Ex3.7 
+
+\section{ } %% Ex3.8 
+
+\section{ } %% Ex3.9 
+
+\section{ } %% Ex3.10 
+
+\section{ } %% Ex3.11 
+
+\section{ } %% Ex3.12 
+
+\section{ } %% Ex3.13 
+
+\section{ } %% Ex3.14 
+
+\section{ } %% Ex3.15 
+
+\section{ } %% Ex3.16 
+
+\section{ } %% Ex3.17 
+
+\section{ } %% Ex3.18 
+
+\section{ } %% Ex3.19 
+
+\section{ } %% Ex3.20 
+
+\section{ } %% Ex3.21 
+
+\section{ } %% Ex3.22 
+
+\section{ } %% Ex3.23 
+
+\end{document}
