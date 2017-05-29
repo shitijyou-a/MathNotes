@@ -21,7 +21,82 @@
     同じPDFで$B$-fin.gen. schemeなどの独自の用語を定義している．
     \url{http://stacks.math.columbia.edu/tag/01T0}も参照すると良い．
 
+    記法について．$\Spec A_f=D_A(f)$と書く．
+
 \section{Definition(s) of Locally of Finite Type Morphism.} %% Ex3.1 
+
+\begin{Lemma}[Nike's Lemma]
+    $X$ :: scheme, $U,V \subseteq X, U=\Spec A, V=\Spec B$かつ
+    $U \cap V \neq \emptyset$とする．
+    この時，任意の点$P \in U \cap V$に対し，$a \in A, b \in B$であって
+    \[ P \in D_A(a)=D_B(b) \subset U \cap V \]となるものがある．
+    系としてProp2.2より$A_a \cong B_b$が得られる．
+\end{Lemma}
+\begin{proof}
+    適当に$a \in A, b \in B$をとり，
+     \[ P \in D_B(b) \subseteq D_A(a) \subseteq U \cap V \]
+    としよう．
+    $X=\Spec B, X_f=D_B(b), \bar{b}=b|_{D_A(a)} \in A_a$
+    としてEx2.16aを用いると，
+    \[ D_B(b)=D_A(a) \cap D_B(b)=\Spec (A_a)_{\bar{b}}. \]
+    なので，あとは$(A_a)_{\bar{b}}$を調べれば良い．
+
+    $(A_a)_{\bar{b}}$の元は以下のように書ける．
+    \[ \frac{u/a^m}{\bar{b}^n}=\frac{u}{a^m\bar{b}^n} ~~(m,n \in \N; u \in A). \]
+    $\bar{b} \in A_a$なので$a^N\bar{b}=a' \in A$となる$N \in \N$が存在する．
+    \[ \frac{u a^{nN}}{a^m a^{nN}\bar{b}^n}=\frac{u a^{nN}}{a^m a'^{n}}. \]
+    仮に$m \geq n$とすると
+    \[ \frac{u a^{nN}}{a^m a'^{n}}=\frac{ua^{m-n+nN}}{(aa')^m} \]
+    $m \leq n$でも同様に分子分母に$a'^{n-m}$をかければ，
+    $(A_a)_{\bar{b}}$の元は$A_{aa'}$の元として書ける．
+    逆に$A_{aa'}$の元を$(A_a)_{\bar{b}}$の元として書くことは直ちに出来る．
+    よって$(A_a)_{\bar{b}}=A_{aa'}$．
+
+    以上より，$\alpha=aa' \in A, b \in B$について$D_B(b)=D_A(\alpha)$．
+\end{proof}
+
+\begin{Lemma}[Preimage of POS\footnote{Principle Open Set} is POS.]
+    $f: X \to Y$ :: scheme morphism.
+    $\Spec B \subseteq Y, f^{-1}\Spec B=\bigcup_{i \in I} \Spec C_i$とする．
+    この時，以下が成立する．
+    \[
+        \Forall{b \in B} \Exists{\{c_i(\in C_i)\}}
+        f^{-1}D_B(b)=\bigcup_{i \in I}D_{C_i}(c_i).
+    \]
+\end{Lemma}
+\begin{proof}
+    $U=\Spec B, V_i=\Spec C_i$とする．
+    すると$f$の制限によりscheme morphism $f|_{V_i}: V_i \to U$が得られる．
+    これは$V_i \hookrightarrow X \xrightarrow{f} Y$という写像で，
+    したがって逆写像は$(f|_{V_i})(S)=f^{-1}(S) \cap V_i$であることに注意．
+    structure sheafの間の射を考えると，以下が得られる．
+    \[ \phi_i=\left((f|_{V_i})^{\#}\right)_{U}: B=\shO_U(U) \to (f|_{V_i})_* \shO_{V_i}(U)=C_i. \]
+    ここでProp2.2を用いた．
+    Prop2.3から，$\phi_i$は$f|_{V_i}: V_i \to U$に1-1対応し，
+    特にtopological spaceとして
+    \[ f|_{V_i}(\I{p})=\phi_i^{-1}(\I{p}) ~~(\I{p} \in \Spec C_i) \]
+    が成り立つ．このことから以下が得られる．
+    \[ f^{-1}(D_B(b)) \cap V_i=(f|_{V_i})^{-1}D_B(b)=D_{C_i}(\phi_i(b)). \]
+    最左辺と最右辺を$\bigcup_{i \in I}$すれば主張が示せる．
+\end{proof}
+
+\begin{Lemma}
+    $f \in A$とする．
+    有限生成$A_{f}$代数は有限生成$A$代数でもある．
+\end{Lemma}
+\begin{proof}
+    変数の数は問題にならないので1変数で証明する．
+    （つまり以下で$A_{f}[x]$を多変数にしても構わない．）
+    有限生成$A_{f}$代数$B$には$A_{f}[x]$からの全射が存在する．
+    $A_{f}[x]$には$A[x,y]$から次のような全射が存在する．
+    \[ y \mapsto 1/f \]
+    これが全射であることは，
+    \[ ay^nx^m \mapsto (a/f^n)x^m \in A_{f}[x] \]
+    のように分かる．
+    あとはこの写像が$A$準同型（代入写像）であることに注意すれば良い．
+    よって$A[x,y] \to A_{f}[x] \to B$という全射が存在する．
+\end{proof}
+
 以下の命題を示す．
 \begin{align*}
     {}&
@@ -33,14 +108,52 @@
 
 下から上は自明である．上から下を示そう．
 
-まず$U=\Spec A \subset X$をとり，$U_i=\Spec A \cap \Spec B_i$を考える．
-$U_i \subseteq \Spec A$なので開基$D(a_{ij}) ~~(a_{ij} \in A)$によって$U_i$を被覆できる．
-また$D(a_{ij})=D(b_{ij}) ~~(b_{ij} \in B_i)$とする．
-この時$f^{-1} U=\bigcup_{i,j} f^{-1}D(b_{ij})$
+$U=\Spec A \subset X, V_i=\Spec B_i$とする．
+$U \cap V_i$の各点$P$に対し，
+\[ P \in D_{B_i}(b_{ij})=D_A(a_{ij}) \subseteq U \cap V_i \]
+であるような$b_{ij} \in B_i, a_{ij} \in A$が取れる．
+$P$を動かせば，このようにして$U$が被覆できる．
+\[ U=\bigcup_{i,j} D_{B_i}(b_{ij})=\bigcup_{i,j} D_A(a_{ij}). \]
+仮定より，各$V_i$は$\{ \Spec C_{ik} \}_{i,k}$で被覆され，
+これらの$C_{ik}$は有限生成$B_i$代数
+\footnote{$\phi_{ik}=\left((f|_{\Spec C_{ik}})^{\#}\right)_{\Spec B_i}$で代数とみなす．}
+であるようにとれる．
 
-最終的に$\Spec A \subseteq \Spec B$かつ$f^{-1}\Spec B\text{ :: locally $B$-fin.gen. scheme}$の場合に帰着させられると思う．
+Lemma (Preimage of POS is POS)より，$c_{ijk} \in C_{ik}$が存在し，
+以下のようになる．
+\[ f^{-1}U=\bigcup_{i,j} f^{-1}D_{B_i}(b_{ij})=\bigcup_{i,j} \bigcup_{k} D_{C_{ik}}(c_{ijk}). \]
+$D_{C_{ik}}(c_{ijk})=\Spec (C_{ik})_{c_{ijk}}$であり，
+$(C_{ik})_{c_{ijk}}$は有限生成$(B_i)_{b_{ij}}$代数．
+これは有限生成代数の定義から存在する全射$B[x_1,\dots,x_n] \to C_{ik}$の両辺を局所化
+\footnote{$C_{ik}$が$\phi_{ik}$による$B_i$代数であることと$c_{ijk}=\phi_{ik}(b_{ij})$を用いて計算する．}
+すれば分かる．
+$(B_i)_{b_{ij}} \cong A_{a_{ij}}$（Nike's Lemmaの最後の文）と最後のLemmaより，
+$(C_{ik})_{c_{ijk}}$は有限生成$A$代数．
 
-\section{ } %% Ex3.2 
+以上より，$f^{-1}\Spec A$は$\Spec (C_{ik})_{c_{ijk}}$で被覆され，
+各$(C_{ik})_{c_{ijk}}$は有限生成$A$代数である．
+
+\section{Definition(s) of Quasi-Compact Morphism.} %% Ex3.2 
+以下を示す．
+\begin{align*}
+    {}&
+        \Exists{\{B_i\}_{i \in I}}
+        \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: quasi-compact.}} \\
+    \iff&
+        \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: quasi-compact.}
+\end{align*}
+
+まず$\Spec A=\bigcup_{i,j} D_{B_i}(b_{ij})$となるように$b_{ij}$をとる．
+Ex2.13bより$\Spec A$はquasi-compactだから$b_{ij}$は有限個でよい．
+$f^{-1}\Spec B_i$はopen subschemeだから，
+$f^{-1}\Spec B_i=\bigcup_{i,k} \Spec C_{ik}$なる$C_{ik}$がある．
+仮定より$f^{-1}\Spec B_i$はquasi-compactであるから$C_{ik}$は有限個．
+これにEx3.1の中で示したLemma (Preimage of POS is POS)を用いると以下のようになる．
+\[ f^{-1}\Spec A=\bigcup_{i,j} f^{-1}D_{B_i}(b_{ij})=\bigcup_{i,j} \bigcup_{k} D_{C_{ik}}(c_{ijk}). \]
+確認したとおり組$(i,j,k)$は高々有限の組み合わせしか無い．
+Ex2.13の証明にあるとおり，$D_{C_{ik}}(c_{ijk})$はquasi-compactだから，
+$f^{-1}\Spec A$はquasi-compactな開集合の有限和．
+よって$f^{-1}\Spec A$もquasi-compact．
 
 \section{ } %% Ex3.3 
 
