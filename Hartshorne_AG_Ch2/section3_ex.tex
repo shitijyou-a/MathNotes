@@ -1,6 +1,7 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[all]{xy}
-\usepackage{../math_note, braket}
+\usepackage{../math_note, exercise}
+\renewcommand{\thesection}{Ex3.\arabic{section}}
 
 \newcommand{\shO}{\mathcal{O}}
 \newcommand{\Sch}{\mathbf{Sch}}
@@ -155,46 +156,332 @@ Ex2.13の証明にあるとおり，$D_{C_{ik}}(c_{ijk})$はquasi-compactだか�
 $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
 よって$f^{-1}\Spec A$もquasi-compact．
 
-\section{ } %% Ex3.3 
+\section{Definition(s) of Finite Type Morphism.} %% Ex3.3 
+    \subsection{Finite Type = Locally Finite Type+Quasi-Compact.}
+    定義より明らか．
 
-\section{ } %% Ex3.4 
+    \subsection{Another Definition of Finite Type Morphism.}
+    Ex3.1の弱い形である．
 
-\section{ } %% Ex3.5 
+    \subsection{If $f$ :: Finite Type and Any $\Spec A \subseteq f^{-1}(\Spec B)$, $A$ :: Fin.Gen $B$-Alg.}
 
-\section{ } %% Ex3.6 
+\section{Definition(s) of Finite Morphism.} %% Ex3.4 
+    Ex3.1と同様に証明できる．
 
-\section{ } %% Ex3.7 
+\section{Finite/Quasi-Finite Morphism.} %% Ex3.5 
+    $f: X \to Y$がquasi-finite morphismであるとは，
+    任意の点$y \in Y$について$f^{-1}(y)$が有限集合であるという事である．
 
-\section{ } %% Ex3.8 
+    \subsection{Finite $\implies$ Quasi-Finite.}
+    \subsection{Finite $\implies$ Closed.}
+    \subsection{Give an Example of morphism that is Surjective, Finite-Type, Quasi-Finite BUT NOT Finite.}
 
-\section{ } %% Ex3.9 
+\section{Function Field.} %% Ex3.6 
+    $X$ :: integral schemeとし，
+    $\shO_{X, \zeta}$が体であることと，
+    任意のaffine open subset $\Spec A$について$\shO_{X, \zeta} \cong \Quot(A)$であることを示す．
 
-\section{ } %% Ex3.10 
+    $\zeta \in X$をgeneric pointとしよう．
+    $\{\zeta\}$は$X$でdenseな1点集合だから，任意の開集合に含まれる．
+    だから$\Spec A$ :: affine open subsetをどのように取ってもよい．
+    $\shO_{X,\zeta}=(\shO_X|_{\Spec A})_{\zeta}=A_{\zeta}$であり，
+    $A=\shO_X|_{\Spec A}(\Spec A)$がintegralであることから，
+    $\zeta=(0) \in \Spec A$．
+    以上から
+    \[ \shO_{X,\zeta}=(\shO_X|_{\Spec A})_{\zeta}=A_{\zeta}=A_{(0)}=\Quot(A) \]
+    が得られる．
 
-\section{ } %% Ex3.11 
+\section{Dominant, Generically Finite Morphism of Finite Type of Integral Schemes.} %% Ex3.7 
 
-\section{ } %% Ex3.12 
+\section{Normalization.} %% Ex3.8 
+    schemeがnormalであるとは，その任意の局所環がintegrally closed domainである，という意味である．
+    $X$ :: integral schemeとする．
+    $U=\Spec A \subseteq X$に対し，$\tilde{A}$を$A$のintegral closure, $\tilde{U}=\Spec \tilde{A}$とする．
 
-\section{ } %% Ex3.13 
+    \subsection{$\{ \tilde{U} \}$ can be glued.}
+    Ati-Mac Prop5.1をつかう．
 
-\section{ } %% Ex3.14 
+    \subsection{$\tilde{X}$ has a UMP.}
 
-\section{ } %% Ex3.15 
+    \subsection{$X$ :: finite type $\implies$ $\tilde{X} \to X$ :: finite.}
 
-\section{ } %% Ex3.16 
+\section{The Topological Space of a Product.} %% Ex3.9 
+    \subsection{$\affine^1_k \times_{\Spec k} \affine^1_k \cong \affine^2_k$ but $\affine^2_k \neq \affine^1_k \times \affine^1_k$ as sets.}
+    $\affine_k^1=\Spec k[x]$として$\affine^1_k \times_{\Spec k} \affine^1_k$を考える．
 
-\section{ } %% Ex3.17 
+    \paragraph{$\affine^1_k \times_{\Spec k} \affine^1_k \cong \affine^2_k$.}
+    $\affine^1_k \times_{\Spec k} \affine^1_k \cong \Spec k[x] \otimes_k k[y]$かつ，
+    $k[x] \otimes_k k[y] \cong k[x,y]$(Ch I, Ex3.18の解答を参照．)なので明らか．
 
-\section{ } %% Ex3.18 
+    \paragraph{$\affine^1_k \times_{\Spec k} \affine^1_k \neq \affine^2_k$ as sets.}
+    $\Spec k[x,y]$は$(y-x^2)$のような点(generic point of a variety)を含むが，
+    $\affine^1_k \times_{\Spec k} \affine^1_k$にこれに対応する点はない．
 
-\section{ } %% Ex3.19 
+    \subsection{Describe $\Spec k(s) \otimes_{\Spec k} \Spec k(t)$.}
+    $\Spec k(s) \otimes_{\Spec k} \Spec k(t) \cong \Spec k(s) \otimes_k k(t)$である．
+    $k(s) \otimes_k k(t)$の元は$0$でなければ単元である．
+    実際，$f,g,f',g' \neq 0$であるとき，
+    \[ \frac{f(s)}{g(s)} \otimes \frac{f'(t)}{g'(t)} \cdot \frac{g(s)}{f(s)} \otimes \frac{g'(t)}{f'(t)}=1 \otimes 1=1. \]
+    よって$k(s) \otimes_k k(t)$は体で，$\Spec k(s) \otimes_{\Spec k} \Spec k(t)$は1点scheme．
 
-\section{ } %% Ex3.20 
+\section{Fibres of a Morphism.} %% Ex3.10 
+\subsection{$\basesp(X_y) \homeo f^{-1}(y)$.}
+    $X,Y$ :: scheme, $f: X \to Y$, $y \in Y$とし，fiber $X_y$を考える．
+    $k(y)$ :: the residue field at $y$は体だから，$\Spec k(y)$は１点空間．
+    そこで定値写像$ct_y$を
+    \[ ct_y: \Spec k(y)=\{*\} \to Y;~~~ * \mapsto y \]とする．
+    $X_y:=X \times_Y \Spec k(y)$は以下の図式を伴う．
+    \[
+    \xymatrix
+    {
+    \ar[d] \ar[drr] X_y & {} &\ar@{-->}[ll]_{\exists!} \forall Z \ar[d]^-{\forall} \ar[dll]^(0.25){\forall}\\
+    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
+    }
+    \]
+    以下，schemeはそのbase spaceだけを考える．
+    （つまりtopology spaceの圏に落とし込んで考える．）
+    普遍性が保たれることは，scheme morphismが$(f,f^{\#})$と言う
+    topological spaceとstructure spaceの間の射の組であり，
+    $f \neq g$ならば$\shO_X \to f_*\shO_Y$と$\shO_X \to g_*\shO_Y$の写像が
+    一致し得ないことから分かる．
+    $f^{-1}(y)$が$X_y$の普遍性を満たせば，
+    直ちに\footnote{homeomorphismはtopology spaceの圏におけるisomorphismであることに注意．}
+    $\basesp(X_y) \homeo f^{-1}(y)$が得られる．
 
-\section{ } %% Ex3.21 
+    上の図式で$X_y$の部分に$f^{-1}(y)$を入れた時の図式は次のよう．
+    示すべきは$Z \to f^{-1}(y)$が一意に存在することである．
+    \[
+    \xymatrix
+    {
+    \ar@{^{(}->}[d]_-{i} \ar[drr]^(0.3){j} f^{-1}(y) & {} & \forall Z \ar[d]^-{\forall q} \ar[dll]_(0.3){\forall p}\\
+    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
+    }
+    \]
+    まず，$f^{-1}(y) \to Y$の射が可換であることを見る．
+    つまり
+    \[ \Forall{x \in f^{-1}(y)} f \circ i(x)=f(x)=y=ct_y \circ j(x) \]
+    が成立することを示す必要があるが，これは$f^{-1}(y)$の定義．
+    次に$Z \to Y$の射が可換であることから，以下が成り立つ．
+    \[ \Forall{z \in Z} f \circ p(z)=y=ct_y \circ q(z). \]
+    よって$Z \subseteq (f \circ p)(y)=p^{-1}(f^{-1}(y))$．
+    逆の包含関係は自明だから，$Z=p^{-1}(f^{-1}(y))$が得られる．
+    したがって$Z \to f^{-1}(y)$の射として$p$を取ることが出来る．
+    \[
+    \xymatrix
+    {
+    \ar@{^{(}->}[d]_-{i} \ar[drr]_(0.2){j} f^{-1}(y) & {} & \ar[ll]_-{p} \forall Z \ar[d]^-{\forall q} \ar[dll]^(0.2){\forall p}\\
+    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
+    }
+    \]
+    $i$が単射であることから，この図式を可換にする$Z \to f^{-1}(y)$の射は$p$に一致する．
+    よって$f^{-1}(y)$は$\basesp(X_y)$の普遍性を持つ．
 
-\section{ } %% Ex3.22 
+\subsection{Fibers of $f: X=\Spec k[s,t]/(s-t^2) \to \Spec k[s]=Y$.}
+    $k$ :: algebraically closed fieldとする．
+    $A=k[s,t]/(s-t^2)=k[\bar{t},\bar{s}], B=k[s]$とおき，
+    $X=\Spec A, Y=\Spec B$とする．
+    $\bar{s}=\bar{t}^2$に注意．
+    また，$f$を$\phi: B \to A; s \mapsto \bar{s}$から誘導されるmorphismだとする．
+    この設定のもとで各点におけるfiberを調べていく．
 
-\section{ } %% Ex3.23 
+    \paragraph{At $y=(s-a) \in Y ~~(a \neq 0)$.}
+    まず$k(y)$を調べる．
+    $k(y)=B_y/yB_y \cong (B/y)_{\bar{y}}$だが，$B/y \cong k$は体だから$k(y)=k$．
+    よって$X_y=\Spec (A \otimes_B k)$となる．
+    $\phi(y)=(\bar{t}^2-a)=(\bar{t}-\sqrt{a}) \cap (\bar{t}+\sqrt{a})$だから，
+    (a)から以下が成り立つ．
+    \[
+        \basesp(X_y) \homeo
+        f^{-1}(y)=f^{-1}V(y)=V(\phi(\I{a}))=\{ (\bar{t}-\sqrt{a}), (\bar{t}+\sqrt{a}) \}.
+    \]
+    各点でのresidue fieldを見ていく．
+    $X_y$は$\Spec A \otimes_B k$である．
+    ここでの$T_y=A \otimes_B k$は，
+    $A,k(\cong (B/y)_{\bar{y}})$をそれぞれ$\phi, s \mapsto a$
+    \footnote{$s \mapsto a$は$s \mapsto s \bmod (s-a)$という写像を書き換えたものである．}
+    で$B$代数とみなしている．
+    この時，$T_y$は
+    \[ \I{m}_{\pm}=\langle (\bar{t}-\pm \sqrt{a})\otimes_B 1 \rangle \]を極大イデアルにもち，
+    それぞれでの剰余体は$k$である．
+    これは$F=\sum_{i=0}^d c_i(\bar{t}^i \otimes 1) \in A$について$F \otimes 1$を変形してみると分かる．
+    \begin{align*}
+        {}& F \otimes 1 \\
+        =& \sum_{i=0}^d c_i(\bar{t}^i \otimes 1) \\
+        =&  \sum_{0 \leq i \leq d, i \in 2\Z} c_i(\bar{t}^i \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
+        =&  \sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_i(\bar{t}^{2i} \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
+        =&  \sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_i(a^i \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
+        =&  \left(\sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_ia^i \otimes 1\right)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1).
+    \end{align*}
+    途中で
+    \[ s(1 \otimes 1)=\bar{s} \otimes 1=\bar{t}^2 \otimes 1=a \otimes 1=1 \otimes a=(1 \otimes 1)s \]
+    を使った．
+    したがって$(F \otimes 1)(\pm \sqrt{a})=F(\pm \sqrt{a}) \otimes 1$となる．
+    よって$\bar{t} \otimes 1 \mapsto \pm \sqrt{a}$の$\ker$は$\I{m}_{\pm}$．
+    また，上の計算からこの代入写像は$k$への全射であることが分かる．
+    つまり$T_y/\I{m}_{\pm} \cong k$なので，$k(\I{m}_{\pm})=k$．
+    $\Spec T_y$が2点のみを持つことから，これ以外に素イデアルはない
+    \footnote
+    {
+        $\alpha^2 \neq a$であるとき
+        \[
+            (\bar{t}^2-\alpha^2) \otimes 1
+            =\bar{t}^2 \otimes 1-\alpha^2 \otimes 1
+            =s(1 \otimes 1)-s(1 \otimes \alpha^2/a)
+            =(\bar{t}^2 \otimes 1)((1-\alpha^2/a) \otimes 1)
+        \]
+        だから$\langle (\bar{t}-\alpha)\otimes_B 1 \rangle$は素イデアルでない．
+    }
+    ．
+
+    \paragraph{At $y=(s) \in Y$.}
+    $k(y)$はやはり$B/y \cong k$より$k(y)=k$．
+    $\phi(y)=(\bar{t}^2)=(\bar{t})^2$となるから
+    \[ \basesp(X_y) \homeo f^{-1}(y)=\{ (\bar{t}) \}. \]
+    $X_y=\Spec (A \otimes_B k)$のsheafを考えよう．
+    ここでの$T_y=A \otimes_B k$は，$A,k$をそれぞれ$\phi, s \mapsto 0$
+    \footnote{$s \mapsto 0$は$s \mapsto s \bmod (s-0)$という写像を書き換えたものである．}
+    で$B$代数とみなしている．
+    この時$A \otimes_B k$はnon-reducedである．
+    \begin{align*}
+        {}  & (\bar{t} \otimes 1)^2 \in T_y \\
+        =   & \bar{t}^2 \otimes 1 \\
+        =   & \bar{s} \otimes 1 \\
+        =   & s(1 \otimes 1) \\
+        =   & 1 \otimes s(0) \\
+        =   & 1 \otimes 0 \\
+        =   & 0
+    \end{align*}
+
+    \paragraph{At $y=(0)=\eta \in Y$.}
+    $(B/\eta)_{\eta}=B_{(0)}=k(s)$なので$k(\eta)=k(s)$．
+    $\phi(\eta)=(0)=\zeta$ :: generic point of $A$で，
+    $\phi^{-1}(\I{a})=\eta=(0)$となる$\I{a}$は他にないから
+    $\basesp(X_{\eta}) \homeo \{\zeta\}$となる．
+    （$\{\eta\} \neq V(\eta)$に注意．）
+    $T_{\eta}=A \otimes_B k(s)$を考える．
+    ここでは$A,k$をそれぞれ$\phi, s \mapsto s/1$で$B$代数とみなしている．
+
+    \subsection{Another Solution of (b).}
+    Ch.I Ex3.18(Product of Affine Varieties)で使った補題を少し変形した
+    \[ \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J} \cong \frac{k[s][t,u]}{I^e+J^e} \]
+    と，中国剰余定理を用いる．
+
+    \begin{Lemma}
+        $I,J$をそれぞれ$k[s][t](=k[s,t]), k[s][u](=k[s,u])$のイデアルとする．
+        この時，以下が成り立つ．
+        \[ \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J} \cong \frac{k[s][t,u]}{I^e+J^e} \]
+        ただし，$\frac{k[s][t]}{I}, \frac{k[s][u]}{J}$はそれぞれ
+        $f \mapsto f \bmod I, f \mapsto f \bmod J$で$k[s]$代数とみなす．
+    \end{Lemma}
+    \begin{proof}
+        以下の写像を考える．
+        \begin{defmap}
+            {}& \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J}& \to& \frac{k[s][t,u]}{I^e+J^e} \\ 
+            {}& (f(s)t^m \bmod I) \otimes (g(s)u^n \bmod J)& \mapsto& f(s)g(s)t^mu^n \bmod I^e+J^e \\
+            {}& h(s) \cdot (t^m \bmod I) \otimes (u^n \bmod J)& \mapedfrom& h(s) t^mu^n \bmod I^e+J^e
+        \end{defmap}
+        （任意の元については加法準同型として拡張する．）
+        $\rightarrow$を$\phi$, $\leftarrow$を$\psi$と名付ける．
+        $(f(s)t^m \bmod I) \otimes (g(s)u^n \bmod J)=f(s)g(s) \cdot (t^m \bmod I) \otimes (u^n \bmod J)$だから，
+        二つがwell-definedならばこれらが互いに逆を与えることをは明らか．
+
+        $\phi, \psi$のwell-defiendnessを占めす．
+        $I,J \subset I^e+J^e$だから，$\phi$がwell-definedであることは明らか．
+        問題は$\psi$のwell-defiendnessである．
+        $I^e+J^e$の元は，
+        \[
+            \sum_{\text{finite}}(\text{element of }k[s][t,u])\cdot(\text{element of }I)
+            +\sum_{\text{finite}}(\text{element of }k[s][t,u])\cdot(\text{element of }J)
+        \]
+        のように書ける．
+        したがって，$w=c(s)t^{c_0}u^{c_1} \cdot i(s)t^{i_0}+d(s)t^{d_0}u^{d_1}\cdot j(s)u^{j_0}$の形の元の和である．
+        $\psi$は加法準同型であるように定義されているから，
+        $\psi(w \bmod I^e+J^e)=0$さえ示せば十分．
+        $\psi(w \bmod I^e+J^e)$を計算する．
+        \begin{align*}
+            {}& c(s)i(s) \cdot (t^{c_0}t^{i_0} \bmod I) \otimes (u^{c_1} \bmod J)
+                +d(s) j(s) \cdot (t^{d_0} \bmod I) \otimes (u^{j_0}u^{d_1} \bmod J) \\
+            =&  c(s) \cdot (t^{c_0} \cdot i(s)t^{i_0} \bmod I) \otimes (u^{c_1} \bmod J)
+                +d(s)  \cdot (t^{d_0} \bmod I) \otimes (u^{j_0} \cdot j(s)u^{d_1} \bmod J) \\
+            =&  c(s) \cdot (0 \otimes (u^{c_1} \bmod J))
+                +d(s)  \cdot ((t^{d_0} \bmod I) \otimes 0) \\
+            =&  0
+        \end{align*}
+        よって$\psi$はwell-defined．
+    \end{proof}
+
+    これをつかって(b)を計算していく．
+    \paragraph{At $y=(s-a) \in Y ~~(a \neq 0)$.}
+    $\phi(y)=(\bar{t}^2-a)=(\bar{t}-\sqrt{a}) \cap (\bar{t}+\sqrt{a})$だから，
+    (a)から以下が成り立つ．
+    \[
+        \basesp(X_y) \homeo
+        f^{-1}(y)=f^{-1}V(y)=V(\phi(\I{a}))=\{ (\bar{t}-\sqrt{a}), (\bar{t}+\sqrt{a}) \}.
+    \]
+    $k(y)=B_y/yB_y \cong (B/y)_{\bar{y}}$だが，$B/y \cong k$は体だから$k(y)=k$．
+    $X_y=\Spec A \otimes_B B/y$なので補題が使える．
+    \begin{align*}
+        \frac{k[s,t]}{(s-t^2)} \otimes_{k[s]} \frac{k[s,u]}{(s-a,u)}
+        \cong& \frac{k[s,t,u]}{(s-t^2, s-a, u)} \\
+        \cong& \frac{k[t]}{(t^2-a)} \\
+        =& \frac{k[t]}{(t-\sqrt{a}) \cap (t+\sqrt{a})} \\
+        \cong& \frac{k[t]}{(t-\sqrt{a})} \oplus \frac{k[t]}{(t+\sqrt{a})} \\
+        \cong& k \times k
+    \end{align*}
+    途中で中国剰余定理を使った．
+    このことから$X_y=\Spec (k \times k)$で，各点での剰余体は$k$．
+
+    \paragraph{At $y=(s) \in Y$.}
+    \begin{align*}
+        \frac{k[s,t]}{(s-t^2)} \otimes_{k[s]} \frac{k[s,u]}{(s,u)}
+        \cong& \frac{k[s,t,u]}{(s-t^2, s, u)} \\
+        \cong& \frac{k[t]}{(t^2)} \\
+    \end{align*}
+    $\frac{k[t]}{(t^2)}$は$(t) \bmod (t^2)$を唯一の極大イデアルとする局所環なので，
+    Ex2.3bより$\Spec \frac{k[t]}{(t^2)}$は1点空間．
+    また，non-reduced schemeである．
+
+    \paragraph{At $y=(0)=\eta \in Y$.}
+    $(B/\eta)_{\eta}=B_{(0)}=k(s)$なので$k(\eta)=k(s)$．
+    $k(s)=\frac{k[s,u]}{(su-1)}$より，以下のように計算できる．
+    \begin{align*}
+        \frac{k[s,t]}{(s-t^2)} \otimes_{k[s]} \frac{k[s,u]}{(su-1)}
+        \cong& \frac{k[s,t,u]}{(s-t^2, su-1)} \\
+        \cong& \frac{k[s,t,1/s]}{(t^2-s)} \\
+        \cong& \frac{k(s)[t]}{(t^2-s)}
+    \end{align*}
+    $t^2-s$は$k(s)$係数既約多項式だから，この環は体．
+    なので$X_y=\Spec \frac{k(s)[t]}{(t^2-s)}$は１点空間である．
+    しかも剰余体は$k(s)=k(y)$の2次拡大体．
+
+\section{Closed Subschemes.} %% Ex3.11 
+\subsection{Closed Immersions are Stable under Base Extension.}
+\subsection{* Affine Closed Subscheme of Affine Scheme is Determined by a Suitable Ideal.}
+\subsection{The Smallest Subscheme Structure on a Closed Subset.}
+\subsection{The Scheme-Theoretic Image of $f$.}
+
+\section{Closed Subschemes of $\Proj S$.} %% Ex3.12 
+
+\section{Properties of Morphisms of Finite Type.} %% Ex3.13 
+
+\section{The Closed Points of Scheme of Finite Type over a Field.} %% Ex3.14 
+
+\section{Geometrically Irreducible/Reduced/Integral Schemes.} %% Ex3.15 
+
+\section{Noetherian Induction.} %% Ex3.16 
+
+\section{Zariski Spaces.} %% Ex3.17 
+
+\section{Constructible Sets.} %% Ex3.18 
+
+\section{Chevalley's Theorem on Constructible Set.} %% Ex3.19 
+
+\section{Dimension.} %% Ex3.20 
+
+\section{$\Spec$ of D.V. Ring Gives Counterexample for Ex3.20a,d,e.} %% Ex3.21 
+
+\section{Dimension of the Fibres of a Morphism.} %% Ex3.22 
+
+\section{$t(V \times W)=t(V) \times_{\Spec k} t(W)$.} %% Ex3.23 
 
 \end{document}

@@ -32,16 +32,16 @@
 \end{Def}
 
 以下の3つは教科書にないが，便宜上導入する．
-\begin{Def}[Locally $B$-Fin.Gen Scheme]
+\begin{Def}[Locally Finite Type Scheme over $B$]
 \begin{align*}
-    {}&     X\text{ :: Locally $B$-Fin.Gen. Scheme} \\
+    {}&     X\text{ :: locally finite type scheme over $B$} \\
     \iff&
             \Exists{\{A_i\}_{i \in I}}
             \lbra{X=\bigcup_{i \in I} \Spec A_i} \land \lbra{A_i\text{:: fin.gen. $B$-algebra.}}
 \end{align*}
 \end{Def}
 
-\begin{Def}[$B$-Fin.Gen. Scheme]
+\begin{Def}[Finite Type Scheme over $B$]
 \begin{align*}
     {}&     X\text{ :: $B$-Fin.Gen. Scheme} \\
     \iff&  
@@ -50,7 +50,7 @@
 \end{align*}
 \end{Def}
 
-\begin{Def}[$B$-Fin.Gen. Affine Scheme]
+\begin{Def}[Finite Scheme over $B$]
 \begin{align*}
     {}&     X\text{ :: $B$-Fin.Gen. Scheme} \\
     \iff&  
@@ -67,9 +67,9 @@
     {}&     f\text{ :: locally of finite type} \\
     \iff&
             \Exists{\{B_i\}_{i \in I}}
-            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: locally $B_i$-fin.gen. scheme}} \\
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: locally finite type scheme over $B_i$.}} \\
     \overset{\text{ Ex3.1 }}{\iff}&
-            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: locally $A$-fin.gen. scheme}
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: locally finite type scheme over $A$.}
 \end{align*}
 \end{Def}
 
@@ -78,11 +78,11 @@
     {}&     f\text{ :: finite type} \\
     \iff&
             \Exists{\{B_i\}_{i \in I}}
-            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: $B_i$-fin.gen. scheme}} \\
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: finite type scheme over $B_i$.}} \\
     \overset{\text{ Ex3.3a }}{\iff}&
             f\text{ :: locally finite type+quasi-compact.} \\
     \overset{\text{ Ex3.3b }}{\iff}&
-            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: $A$-fin.gen. scheme}
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: finite type scheme over $A$.}
 %    \overset{\text{ Ex3.3c }}{\implies}&
 %            \Forall{\Spec B \subseteq X} \Forall{\Spec A \subseteq \Spec B}f^{-1}(\Spec A)\text{ :: $B$-fin.gen. scheme} \\
 \end{align*}
@@ -93,9 +93,9 @@
     {}&     f\text{ :: finite} \\
     \iff&
             \Exists{\{B_i\}_{i \in I}}
-            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: $B_i$-fin.gen. affine scheme}} \\
+            \lbra{Y=\bigcup_{i \in I} \Spec B_i} \land \lbra{\Forall{i \in I} f^{-1}(\Spec B_i)\text{ :: finite scheme over $B_i$.}} \\
     \overset{\text{ Ex3.4 }}{\iff}&
-            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: $A$-fin.gen. affine scheme} \\
+            \Forall{\Spec A \subseteq Y} f^{-1}(\Spec A)\text{ :: finite scheme over $A$.} \\
 \end{align*}
 \end{Def}
 

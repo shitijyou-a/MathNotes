@@ -47,7 +47,7 @@
     \[ f: \I{p} \mapsto \phi^{-1}(\I{p}),~~ f^{\#}: \shO_{\Spec A_f}(-) \mapsto \shO_X|_{D(f)}(\phi(-)) \]
     で定義される．
 
-\section{IF $X$ :: scheme, and $U \OpenIn X$, then $(U,\shO_X|_U)$ :: scheme.} %% Ex2.2 
+\section{If $X$ :: scheme, and $U \OpenIn X$, then $(U,\shO_X|_U)$ :: scheme.} %% Ex2.2 
     $X$はschemeだから，開被覆$\{U_{\lambda}\}_{\lambda \in \Lambda}$が存在し，
     $(U_{\lambda}, \shO_X|_{U_{\lambda}})$はaffine schemeとなる．
     すなわち，
@@ -137,7 +137,7 @@
 
 \section{$\Spec \Z$ is the Final Object in $\Sch$.} %% Ex2.5 
     $\Z$は次元1の環だから，$\Spec \Z$は以下の図のようになる．
-    \begin{figure}[h]
+    \begin{figure}[ht]
     \begin{center}
         \includegraphics[width=5cm]{./images/SpecZ.eps}
     \end{center}
@@ -181,20 +181,26 @@
     \]
     で定まる．
     これは$K$のskyscraper sheaf (Ex.1.17)である．
-    すると，$f^{\#}: \shO_X \to f_* \shO_{\Spec K}$は
-    \[ (f^{\#})_{x}: \shO_{X,x} \to \shO_{\Spec K,f^{-1}(x)}=\shO_{\Spec K,O}=K \]
-    を誘導する\footnote{$(f_* \shO)_P=\shO_{f^{-1}(P)}$を使った．}．
+    すると，$f^{\#}: \shO_X \to f_* \shO_{\Spec K}$は$x$におけるstalkの間の射
+    \[ f^{\#}_{x}: \shO_{X,x} \to (f_* \shO_{\Spec K})_x=\shO_{\Spec K,O}=K \]
+    を誘導する
+    \footnote
+        {
+            この写像は$\varinjlim_{x \in U}f^{\#}$ではない．
+            また，$(f_* \shO_{\Spec K})_x=\varinjlim_{x \in V \subseteq X} \shO_{\Spec K}(f^{-1}(V))=K.$
+        }．
     これは以下の図式を可換にする射である．
     \[
     \xymatrix@C=5em
     {
-    \shO_{X,x} \ar[r]^-{(f^{\#})_{x}} & \shO_{\Spec K,O} \\
-    \shO_X(U) \ar[r]^-{(f^{\#})_U} \ar[u]_-{\mu_U} & \shO_{\Spec K}(\{O\}) \ar@{=}[u]
+    \shO_{X,x} \ar[r]^-{f^{\#}_{x}} & \shO_{\Spec K,O} \\
+    \shO_X(U) \ar[r]^-{f^{\#}_U} \ar[u]_-{\mu_U} & \shO_{\Spec K}(\{O\}) \ar@{=}[u]
     }
     \]
     ただしこの図式では$x \in U \subseteq X$．
-    $\im (f^{\#})_{x} \subseteq K$は体だから，第一同型定理より，$\ker (f^{\#})_{x}$は極大イデアル．
-    よって$(f^{\#})_{x}$は
+    今扱っているのはlocally ringed spaceのmorphismだから，
+    \[ (f^{\#}_{x})^{-1}(\I{m}_{\Spec K,O})=(f^{\#}_{x})^{-1}(0)=\I{m}_{X,x}. \]
+    よって$\ker f^{\#}_{x}=\I{m}_{X,x}$で，$(f^{\#})_{x}$は
     \[ \xymatrix{ \shO_{X,x} \ar@{->>}[r]& \shO_{X,x}/\I{m}_{X,x}=k(x)~ \ar@{>->}[r]^-{\phi} & K } \]
     へと分解される．
     こうして$(f,f^{\#})$から$x \in X$と$\phi_f: k(x) \to K$が得られた．
@@ -229,7 +235,118 @@
     $f^{\#}$から$\phi$を作った時，$\phi$から再び$f^{\#}$に戻ることは，
     前段落で見た二つの図式から分かる．
 
-\section{$\Hom(\Spec k[\epsilon]/(\epsilon^2), X) \cong \Rat(X) \times T_x X$.} %% Ex2.8 
+\section{$\Hom_{/\Spec k}(\Spec k[x]/(x^2), X) \cong \Rat(X) \times T_x X$.} %% Ex2.8 
+    $\epsilon=x+(x^2), D=k[x]/(x^2)=k[\epsilon]$とおく．
+    $\epsilon^2=0$をよく使う．
+    $(f, f^{\#}) \in \Hom_{/\Spec k}(\Spec D, X)$をとる．
+    これは$\Spec k$上のmorphismである（教科書p.78参照）．
+    したがって
+    \[ (p,p^{\#}): \Spec D \to \Spec k, (q,q^{\#}): X \to \Spec k \]
+    が存在し$(p,p^{\#})=(q,q^{\#}) \circ (f, f^{\#})$が成立する．
+
+    $O:=(0) \subset k, \I{m}:=\Nil(A)=(\epsilon)$とすると，
+    Ex2.3bより$\Spec D \homeo \Spec D_{red}=\Spec k$．
+    そこで$x=f(\I{m})$としておく．
+
+    多項式環$k[x]$を$k$代数とみなすときは，
+    自然な埋め込み射で$k$代数とみなす．
+    \textbf{他の場合を考えることはない．}
+
+    \paragraph{stalk間の写像.}
+    特にstructure sheafの間に次の可換図式がある．
+    \[
+    \xymatrix@C=1em
+    {
+    p_* \shO_{\Spec D} & {} & \ar[ll]_-{q_*f^{\#}} q_* \shO_X \\
+    {} & \ar[ul]^-{p^{\#}} \shO_{\Spec k} \ar[ur]_-{q^{\#}}& {}
+    }
+    \]
+    この図式の射達から誘導される射達を書くと以下のようになる．
+    （TODO: これは可換？）
+    \[
+    \xymatrix@C=1em
+    {
+    D=\shO_{\Spec D,\I{m}} & {} & \ar[ll]_-{f^{\#}_{\I{m}}} \shO_{X,x} \\
+    {} & \ar[ul]^-{p^{\#}_{\I{m}}} k \ar[ur]_-{q^{\#}_x}& {}
+    }
+    \eqno(dg2.18)
+    \]
+    この図式を図式$(dg2.18)$と呼ぶことにする．
+    ここで
+    \[ \shO_{\Spec k,p(\I{m})}=\shO_{\Spec k,qf(\I{m})}=\shO_{\Spec k,O}=k,~~ \shO_{\Spec D,\I{m}}=D_{\I{m}}=D \]
+    を用いた
+    \footnote
+        {
+            $\frac{a+b\epsilon}{c+d\epsilon} \in D_{\I{m}}$は(分母) $ \not \in (\epsilon)$なので$c \neq 0$．
+            分子分母に$c-d\epsilon$をかけると$\frac{ac+(bc-ad)\epsilon}{c^2}$となり，$D_{\I{m}}=D$が示される．
+        }
+    ．
+
+    \paragraph{$k \cong k(x)$.}
+    図式$(dg2.18)$の射はいずれもlocal homomorphismだから，以下が成り立つ．
+    \[ (p^{\#}_{\I{m}})^{-1}(\I{m})=(0),~~(q^{\#}_x)^{-1}(\I{m}_{X,x})=(0),~~(f^{\#}_{\I{m}})^{-1}(\I{m})=\I{m}_{X,x}  \]
+    $ev_0$を$\epsilon \mapsto 0$という代入写像だとすると，これは全射．
+    $ev_0^{-1}(0)=\I{m}, (f^{\#}_{\I{m}})^{-1}(\I{m})=\I{m}_{X,x}$より
+    $\ker (ev_0 \circ f^{\#}_{\I{m}})=\I{m}_{X,x}$．
+    なので準同型定理が使える．
+    $\ker (ev_0 \circ p^{\#}_{\I{m}})^{-1}=(0)$も同様にして得られる．
+    標準的全射$\shO_{X,x} \to k(x)$を用いれば$q^{\#}_x$についても同様である．
+    \[
+    \xymatrix@R=3em
+    {
+    k & {} & \ar@{>->}[ll] ~k(x) \\
+    D \ar@{->>}[u]_-{ev_0} & {} & \ar[ll]_-{f^{\#}_{\I{m}}} \shO_{X,x} \ar@{->>}[u] \\
+    {} & \ar[ul]^-{p^{\#}_{\I{m}}} k \ar[ur]_-{q^{\#}_x}& {}
+    }
+    \]
+    $p^{\#}$は標準的入射であり，したがって$p^{\#}_{\I{m}}|_{k}=\id{k}$となっている．
+    なので図式にある$k \to k$の射は全単射であり，
+    このことと図式の可換性から$k \cong k(x)$が分かる
+    ($g \circ f$が全射ならば$g$も全射であることを使う)．
+
+    \paragraph{$(f,f^{\#})$から$v_f \in T_x X$を構成する.}
+    $\I{m} \subseteq f^{\#}_{\I{m}}(\I{m}_{X,x})$であるから，以下が成り立つ．
+    \[
+        \Forall{a \in \I{m}_{X,x} \subset \shO_{X,x}} \Exists{\beta \in k}
+        f_{\I{m}}^{\#}(a)=\beta \epsilon \in \I{m}=(\epsilon).
+    \]
+    $aa' \in \I{m}_{X,x}^2$については$\epsilon^2=0$より$f_{\I{m}}^{\#}(aa')=0$となる．
+    よって$\I{m}_{X,x}^2 \subseteq \ker f_{\I{m}}^{\#}$が得られる．
+    なので
+    \[ T_x X \ni v_f=\frac{1}{\epsilon}f_{\I{m}}^{\#}: \I{m}_{X,x}/\I{m}_{X,x}^2 \to k \]
+    が得られる．
+
+    \paragraph{$x \in \Rat(X), v \in T_x X$から$(f_v,f_v^{\#})$を構成する．}
+    $\Spec D=\{\I{m}\}$なので$f_v: \I{m} \mapsto x$とする．
+    $k(x)=k$だから，$a \mapsto a(x)$なる代入写像
+    (これは$a \mapsto a \bmod \I{m}_{X,x}$と見ても同じ)は$k$に値を取る．
+    また，$a-a(x)$は同じ代入写像で0になるから$\I{m}_{X,x}$に属す．
+    そこで$a \in \shO_{X,x}$に対し，以下のように定める．
+    \[ (f_v^{\#})_x(a)=a(x)+v([a-a(x)] \bmod \I{m}_{X,x}^2)\epsilon. \]
+    さらに$U \subset X$について
+    \[
+        ((f_v)_* \shO_{\Spec D})(U)
+        =\shO_{\Spec D}(f_v^{-1}(\{x\} \cap U))
+        =
+        \begin{cases}{}
+            D_{\I{m}}=D & (x \in U) \\
+            0   & (x \not \in U)
+        \end{cases}
+    \]
+    だから，$x \in V \subseteq X$について以下の可換図式が得られる．
+    \[
+    \xymatrix
+    {
+    \shO_{X,x} \ar[r]^-{(f_v^{\#})_x} & D \\
+    \shO_{X}(V) \ar[r]_-{(f_v^{\#})_V} \ar[u]& D \ar@{=}[u]
+    }
+    \]
+    $x \not \in V$については，
+    $((f_v)_* \shO_{\Spec D})(V)=0$なので$(f_v^{\#})_V$が自動的に零写像になる．
+    こうして$f_v^{\#}$が構成できた．
+
+    \paragraph{1対1対応であること．}
+    容易に確かめられるので省略．
 
 \section{Uniquely-Existence of Generic Point.} %% Ex2.9 
     $X$をschemeとし，$Z$をそのnonempty irreducible closed subsetとする．
@@ -304,7 +421,7 @@
 
 \section{$\Spec \mathbb{F}_p[x]$} %% Ex2.11 
     図を書くと次のようになる．
-    \begin{figure}[h]
+    \begin{figure}[ht]
     \begin{center}
         \includegraphics[width=5cm]{./images/SpecF_p[x].eps}
     \end{center}
@@ -312,6 +429,8 @@
     この円錐は上へ限りなく続く．
 
 \section{Gluing Lemma.} %% Ex2.12 
+    topological spaceもsheafもinjective limitとしてglueingが得られる．
+    特にtopologyはfinal topologyである．
 
 \section{Quasi-Compact/Noetherian Space.} %% Ex2.13 
     \begin{Lemma}[I]
