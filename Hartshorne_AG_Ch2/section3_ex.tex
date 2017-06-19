@@ -1,6 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[all]{xy}
-\usepackage{../math_note, exercise}
+\usepackage{../math_note, exercise, enumitem}
 \renewcommand{\thesection}{Ex3.\arabic{section}}
 
 \newcommand{\shO}{\mathcal{O}}
@@ -15,6 +15,7 @@
 \newcommand{\CoverU}{\mathfrak{U}}
 \newcommand{\OpenIn}{\text{ :: open in }}
 \newcommand{\ClosedIn}{\text{ :: open in }}
+\newcommand{\mnot}{/\hspace{-1.2ex}}
 
 \begin{document}
     schemeやscheme morphismの性質の定義は
@@ -226,188 +227,145 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
 
 \section{Fibres of a Morphism.} %% Ex3.10 
 \subsection{$\basesp(X_y) \homeo f^{-1}(y)$.}
-    $X,Y$ :: scheme, $f: X \to Y$, $y \in Y$とし，fiber $X_y$を考える．
-    $k(y)$ :: the residue field at $y$は体だから，$\Spec k(y)$は１点空間．
-    そこで定値写像$ct_y$を
-    \[ ct_y: \Spec k(y)=\{*\} \to Y;~~~ * \mapsto y \]とする．
-    $X_y:=X \times_Y \Spec k(y)$は以下の図式を伴う．
-    \[
-    \xymatrix
-    {
-    \ar[d] \ar[drr] X_y & {} &\ar@{-->}[ll]_{\exists!} \forall Z \ar[d]^-{\forall} \ar[dll]^(0.25){\forall}\\
-    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
-    }
-    \]
-    以下，schemeはそのbase spaceだけを考える．
-    （つまりtopology spaceの圏に落とし込んで考える．）
-    普遍性が保たれることは，scheme morphismが$(f,f^{\#})$と言う
-    topological spaceとstructure spaceの間の射の組であり，
-    $f \neq g$ならば$\shO_X \to f_*\shO_Y$と$\shO_X \to g_*\shO_Y$の写像が
-    一致し得ないことから分かる．
-    $f^{-1}(y)$が$X_y$の普遍性を満たせば，
-    直ちに\footnote{homeomorphismはtopology spaceの圏におけるisomorphismであることに注意．}
-    $\basesp(X_y) \homeo f^{-1}(y)$が得られる．
-
-    上の図式で$X_y$の部分に$f^{-1}(y)$を入れた時の図式は次のよう．
-    示すべきは$Z \to f^{-1}(y)$が一意に存在することである．
-    \[
-    \xymatrix
-    {
-    \ar@{^{(}->}[d]_-{i} \ar[drr]^(0.3){j} f^{-1}(y) & {} & \forall Z \ar[d]^-{\forall q} \ar[dll]_(0.3){\forall p}\\
-    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
-    }
-    \]
-    まず，$f^{-1}(y) \to Y$の射が可換であることを見る．
-    つまり
-    \[ \Forall{x \in f^{-1}(y)} f \circ i(x)=f(x)=y=ct_y \circ j(x) \]
-    が成立することを示す必要があるが，これは$f^{-1}(y)$の定義．
-    次に$Z \to Y$の射が可換であることから，以下が成り立つ．
-    \[ \Forall{z \in Z} f \circ p(z)=y=ct_y \circ q(z). \]
-    よって$Z \subseteq (f \circ p)(y)=p^{-1}(f^{-1}(y))$．
-    逆の包含関係は自明だから，$Z=p^{-1}(f^{-1}(y))$が得られる．
-    したがって$Z \to f^{-1}(y)$の射として$p$を取ることが出来る．
-    \[
-    \xymatrix
-    {
-    \ar@{^{(}->}[d]_-{i} \ar[drr]_(0.2){j} f^{-1}(y) & {} & \ar[ll]_-{p} \forall Z \ar[d]^-{\forall q} \ar[dll]^(0.2){\forall p}\\
-    X \ar[r]_-{f} & Y & \ar[l]^-{ct_y} \Spec k(y)
-    }
-    \]
-    $i$が単射であることから，この図式を可換にする$Z \to f^{-1}(y)$の射は$p$に一致する．
-    よって$f^{-1}(y)$は$\basesp(X_y)$の普遍性を持つ．
-
-\subsection{Fibers of $f: X=\Spec k[s,t]/(s-t^2) \to \Spec k[s]=Y$.}
-    $k$ :: algebraically closed fieldとする．
-    $A=k[s,t]/(s-t^2)=k[\bar{t},\bar{s}], B=k[s]$とおき，
-    $X=\Spec A, Y=\Spec B$とする．
-    $\bar{s}=\bar{t}^2$に注意．
-    また，$f$を$\phi: B \to A; s \mapsto \bar{s}$から誘導されるmorphismだとする．
-    この設定のもとで各点におけるfiberを調べていく．
-
-    \paragraph{At $y=(s-a) \in Y ~~(a \neq 0)$.}
-    まず$k(y)$を調べる．
-    $k(y)=B_y/yB_y \cong (B/y)_{\bar{y}}$だが，$B/y \cong k$は体だから$k(y)=k$．
-    よって$X_y=\Spec (A \otimes_B k)$となる．
-    $\phi(y)=(\bar{t}^2-a)=(\bar{t}-\sqrt{a}) \cap (\bar{t}+\sqrt{a})$だから，
-    (a)から以下が成り立つ．
-    \[
-        \basesp(X_y) \homeo
-        f^{-1}(y)=f^{-1}V(y)=V(\phi(\I{a}))=\{ (\bar{t}-\sqrt{a}), (\bar{t}+\sqrt{a}) \}.
-    \]
-    各点でのresidue fieldを見ていく．
-    $X_y$は$\Spec A \otimes_B k$である．
-    ここでの$T_y=A \otimes_B k$は，
-    $A,k(\cong (B/y)_{\bar{y}})$をそれぞれ$\phi, s \mapsto a$
-    \footnote{$s \mapsto a$は$s \mapsto s \bmod (s-a)$という写像を書き換えたものである．}
-    で$B$代数とみなしている．
-    この時，$T_y$は
-    \[ \I{m}_{\pm}=\langle (\bar{t}-\pm \sqrt{a})\otimes_B 1 \rangle \]を極大イデアルにもち，
-    それぞれでの剰余体は$k$である．
-    これは$F=\sum_{i=0}^d c_i(\bar{t}^i \otimes 1) \in A$について$F \otimes 1$を変形してみると分かる．
+    \subsubsection{Affine Case}
+    $\phi: B \to A, f: X=\Spec A \to \Spec B=Y$とし，
+    $A$を$\phi$で$B$代数とみなす．
+    $\I{p} \in \Spec B, S=B-\I{p}$とすると，
+    $A \otimes_B k(\I{p})$は以下のようになる．
+    なお，以下で$\phi(\I{p})$から生成されるイデアルを
+    $I_{\I{p}}=\phi(\I{p})A=\langle \phi(\I{p}) \rangle, T=\overline{\phi(S)}$と置く．
     \begin{align*}
-        {}& F \otimes 1 \\
-        =& \sum_{i=0}^d c_i(\bar{t}^i \otimes 1) \\
-        =&  \sum_{0 \leq i \leq d, i \in 2\Z} c_i(\bar{t}^i \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
-        =&  \sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_i(\bar{t}^{2i} \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
-        =&  \sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_i(a^i \otimes 1)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1) \\
-        =&  \left(\sum_{0 \leq i \leq \lfloor d/2 \rfloor} c_ia^i \otimes 1\right)+\sum_{0 \leq i \leq d, i \not \in 2\Z} c_i(\bar{t}^i \otimes 1).
+        {}& A \otimes_B \frac{S^{-1}B}{S^{-1}\I{p}} \\
+        =& A \otimes \bar{S}^{-1}\left( \frac{B}{\I{p}} \right) \\
+        \cong& A \otimes \frac{B}{\I{p}} \otimes S^{-1}B \\
+        \cong& \frac{A}{\phi(\I{p})A} \otimes S^{-1}B \\
+        \cong& T^{-1}\left( \frac{A}{I_{\I{p}}} \right)
     \end{align*}
-    途中で
-    \[ s(1 \otimes 1)=\bar{s} \otimes 1=\bar{t}^2 \otimes 1=a \otimes 1=1 \otimes a=(1 \otimes 1)s \]
-    を使った．
-    したがって$(F \otimes 1)(\pm \sqrt{a})=F(\pm \sqrt{a}) \otimes 1$となる．
-    よって$\bar{t} \otimes 1 \mapsto \pm \sqrt{a}$の$\ker$は$\I{m}_{\pm}$．
-    また，上の計算からこの代入写像は$k$への全射であることが分かる．
-    つまり$T_y/\I{m}_{\pm} \cong k$なので，$k(\I{m}_{\pm})=k$．
-    $\Spec T_y$が2点のみを持つことから，これ以外に素イデアルはない
+    途中でAti-Mac Cor3.4, Prop3.5, Ex2.2を使った．
+
+    Ati-Mac Prop1.1, 3.11より，$T^{-1}\left( \frac{A}{I_{\I{p}}} \right)$の素イデアルは，
+    $A$の素イデアルであって，$I_{\I{p}}$を含み，
+    $T$と共通部分を持たないものに対応する．
+    \[
+        \Spec T^{-1}\left( \frac{A}{I_{\I{p}}} \right)
+        \homeo
+        \{\I{q} \in \Spec A \mid I_{\I{p}} \subseteq \I{q} \land \phi(S) \cap \I{q}=\emptyset. \}
+    \]
+    同相であることは以下のように一般論から分かる．
+    まず，任意のイデアル$\I{a} \subseteq A$について
+    $\Spec \frac{A}{\I{a}}$は$\Spec A$の閉集合$V(\I{a})$と同相である
+    \footnote{$V(\I{a}) \cap V(I) \leftrightarrow V \left( \frac{\I{a}+I}{\I{a}} \right)$なので同相．}．
+    また任意の積閉集合$S \subseteq A$について$\Spec S^{-1}A$は$\Spec A$の部分集合と同相
+    \footnote{みなす時の対応は$\I{p}S^{-1}A \leftrightarrow P \cap A$である．}．
+    よって$\Spec T^{-1}\left( \frac{A}{I_{\I{p}}} \right)$は
+    $V(I_{\I{p}})$の部分集合と同相である．
+
+    一方，$f^{-1}(\I{p})=\{ \I{q} \in \Spec A \mid \phi^{-1}(\I{q})=\I{p} \}$．
+    なので$\I{q} \in \Spec A$についての命題
+    \[
+        I_{\I{p}} \subseteq \I{q} \land T \cap \bar{\I{q}}=\emptyset
+        \iff
+        f(\I{q})=\phi^{-1}(\I{q})=\I{p}
+        ~~~(*)
+    \]
+    が示されれば証明が完了する．
+    ただし$\bar{\I{q}}=\frac{\I{q}}{I_{\I{p}}}$．
+
+    まず$\I{p} \not \supseteq \ker \phi$だとしよう．
+    すると$S \cap \ker \phi \neq \emptyset$なので，$\phi(S) \ni 0$．
+    任意の$\I{q}$について$\I{q} \ni 0$なので，
+    \[ T \cap \bar{\I{q}} \supseteq \overline{\phi(S) \cap \I{q}} \supseteq \overline{\{0\}}. \]
+    よって$(*)$の左辺は常に偽．
+    同じ条件の下で(*)の右辺が偽になることは明らかなので，
+    $\I{p} \not \supseteq \ker \phi \implies (*)$が言えた．
+
+    続いて$\I{p} \supseteq \ker \phi$だとしよう．
+    この時$I_{\I{p}}=\phi(\I{p})$となる
     \footnote
     {
-        $\alpha^2 \neq a$であるとき
-        \[
-            (\bar{t}^2-\alpha^2) \otimes 1
-            =\bar{t}^2 \otimes 1-\alpha^2 \otimes 1
-            =s(1 \otimes 1)-s(1 \otimes \alpha^2/a)
-            =(\bar{t}^2 \otimes 1)((1-\alpha^2/a) \otimes 1)
-        \]
-        だから$\langle (\bar{t}-\alpha)\otimes_B 1 \rangle$は素イデアルでない．
+    $\phi: B \to A$について$\ker \phi \subseteq \I{b} \subseteq B$としよう．
+    $B/\ker \phi \cong \im \phi$の同型射は$b \bmod \ker \phi \mapsto \phi(b)$なので，
+    これに$\I{b}$を入れれば$\I{b}/\ker \cong \phi(\I{b})$となる．
+    $\ker \phi \subseteq \I{b}$より左辺はイデアルだから右辺もイデアル．
+    }．
+    $\phi(S)=\phi(B-\I{p})$だから，
+    \begin{align*}
+        {}&         \phi(\I{p}) \subseteq \I{q} \land T \cap \bar{\I{q}}=\emptyset \\
+        \implies&   \phi(\I{p}) \cap \I{q}=\phi(\I{p}) \land \overline{\phi(B-\I{p}) \cap \I{q}}=\emptyset \\
+        \implies&   \phi(\I{p}) \cap \I{q}=\phi(\I{p}) \land \phi(B-\I{p}) \cap \I{q})=\emptyset \\
+        \implies&   \phi(B) \cap \I{q}
+                    =\left( \phi(\I{p}) \cup \phi(B-\I{p}) \right) \cap \I{q}
+                    =(\phi(\I{p}) \cap \I{q}) \cup (\phi(B-\I{p}) \cap \I{q})
+                    =\phi(\I{p}) \\
+        \iff&   \phi^{-1}(\I{q})=\I{p}.
+    \end{align*}
+    最後の行で準同型定理を用いた．
+    逆に$\I{p}=\phi^{-1}(\I{q})$ならば$\phi(\I{p}) \subseteq \I{q}$は明らか．
+    同様に$\phi^{-1}(A-\I{q})=B-\phi^{-1}(\I{q})=B-\I{p}$より
+    $\phi(B-\I{p}) \subseteq A-\I{q}$も得られる．
+    最後に$T \cap \bar{\I{q}}=\emptyset$を示す．
+    これは以下と同値である．
+    \[ {}^{\not \exists} x \in \I{q}, y \in \phi(B-\I{p}),~~ x-y \in \I{p}. \]
+    このような$x,y$が存在すると仮定する．
+    $x-y \in \I{p}=\I{q} \cap \phi(B)$なので$x-(x-y)=y \in \I{q}$．
+    仮定と合わせて$y \in \I{q} \cap \phi(B-\I{p})$を得るが，
+    $\I{q} \cap \phi(B-\I{p}) \subseteq \I{q} \cap (A-\I{q})=\emptyset$なので，
+    矛盾が生じた．
+    以上より$\I{p} \supseteq \ker \phi \implies (*)$が言えた．
+
+    \subsubsection{General Case.}
+    $Y$の$y$を含むaffine open subset $\tilde{Y}$をとる．
+    すると$f^{-1}\tilde{Y}$もopen afine coveringをもつので，
+    それを$f^{-1}\tilde{Y}=\bigcup X_{i}$とする．
+    $f: X \to Y$を制限して
+    $f|_{X_{i}}: X_{i} \to Y_i$とする．
+    するとThem3.3の証明のStep6,7より，$X_y$は
+    \[ (X_y)_{i}:=X_{i} \times_{\tilde{Y}} \Spec (\shO_{\tilde{Y},y}/\I{m}_{\tilde{Y},y}) \]
+    の貼り合わせ
+    \footnote
+    {
+    ここで，$y \not \in Y_i$である場合は
+    $\Spec (\shO_{Y_i,y}/\I{m}_{Y_i,y}) \to Y_i$が無い．
+    これで大丈夫なのか気になる．
+    $\shO_{Y_i,y}=\varinjlim_{y \in V \subseteq Y_i} \shO_Y(V)$
+    は$y \not \in Y_i$の時$\{0\}$のdirect limitなので$0$（零環）となる．
+    したがって
+    $\Spec (\shO_{Y_i,y}/\I{m}_{Y_i,y}) \to Y_i$は零写像から誘導される物になり，
+    $(X_y)_{ij}=X_{ij} \times_{Y_i} \emptyset=0$となる．
+    以上から，$y \in Y_i$かどうか気にせず上のように述べて問題ない．
     }
     ．
-
-    \paragraph{At $y=(s) \in Y$.}
-    $k(y)$はやはり$B/y \cong k$より$k(y)=k$．
-    $\phi(y)=(\bar{t}^2)=(\bar{t})^2$となるから
-    \[ \basesp(X_y) \homeo f^{-1}(y)=\{ (\bar{t}) \}. \]
-    $X_y=\Spec (A \otimes_B k)$のsheafを考えよう．
-    ここでの$T_y=A \otimes_B k$は，$A,k$をそれぞれ$\phi, s \mapsto 0$
-    \footnote{$s \mapsto 0$は$s \mapsto s \bmod (s-0)$という写像を書き換えたものである．}
-    で$B$代数とみなしている．
-    この時$A \otimes_B k$はnon-reducedである．
-    \begin{align*}
-        {}  & (\bar{t} \otimes 1)^2 \in T_y \\
-        =   & \bar{t}^2 \otimes 1 \\
-        =   & \bar{s} \otimes 1 \\
-        =   & s(1 \otimes 1) \\
-        =   & 1 \otimes s(0) \\
-        =   & 1 \otimes 0 \\
-        =   & 0
-    \end{align*}
-
-    \paragraph{At $y=(0)=\eta \in Y$.}
-    $(B/\eta)_{\eta}=B_{(0)}=k(s)$なので$k(\eta)=k(s)$．
-    $\phi(\eta)=(0)=\zeta$ :: generic point of $A$で，
-    $\phi^{-1}(\I{a})=\eta=(0)$となる$\I{a}$は他にないから
-    $\basesp(X_{\eta}) \homeo \{\zeta\}$となる．
-    （$\{\eta\} \neq V(\eta)$に注意．）
-    $T_{\eta}=A \otimes_B k(s)$を考える．
-    ここでは$A,k$をそれぞれ$\phi, s \mapsto s/1$で$B$代数とみなしている．
+    $\basesp X_y$は$\basesp (X_y)_{i}$の張り合わせで，
+    Affine Caseでの議論により
+    $\basesp (X_y)_{i} \homeo (f|_{X_{i}})^{-1}(y)=f^{-1}(y) \cap X_{i}$．
+    よって$\basesp X_y=\bigcup_{i} (f^{-1}(y) \cap X_{i})=f^{-1}(y)$．
+    位相空間としては
+    $(f|_{X_{ij}})^{-1}(y) \homeomap \basesp (X_y)_{ij} \to \basesp X_y$を使って貼り合わせる．
 
     \subsection{Another Solution of (b).}
-    Ch.I Ex3.18(Product of Affine Varieties)で使った補題を少し変形した
-    \[ \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J} \cong \frac{k[s][t,u]}{I^e+J^e} \]
-    と，中国剰余定理を用いる．
+    Ch.I Ex3.18(Product of Affine Varieties)で使った補題を少し変形したものと，
+    中国剰余定理を用いる．
 
     \begin{Lemma}
-        $I,J$をそれぞれ$k[s][t](=k[s,t]), k[s][u](=k[s,u])$のイデアルとする．
+        $I,J$をそれぞれ$k[s][t](=k[s,t]), k[s]$のイデアルとする．
         この時，以下が成り立つ．
-        \[ \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J} \cong \frac{k[s][t,u]}{I^e+J^e} \]
-        ただし，$\frac{k[s][t]}{I}, \frac{k[s][u]}{J}$はそれぞれ
+        \[ \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s]}{J} \cong \frac{k[s][t]}{I+J^e} \]
+        ただし，$\frac{k[s][t]}{I}, \frac{k[s]}{J}$はそれぞれ
         $f \mapsto f \bmod I, f \mapsto f \bmod J$で$k[s]$代数とみなす．
     \end{Lemma}
     \begin{proof}
-        以下の写像を考える．
-        \begin{defmap}
-            {}& \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s][u]}{J}& \to& \frac{k[s][t,u]}{I^e+J^e} \\ 
-            {}& (f(s)t^m \bmod I) \otimes (g(s)u^n \bmod J)& \mapsto& f(s)g(s)t^mu^n \bmod I^e+J^e \\
-            {}& h(s) \cdot (t^m \bmod I) \otimes (u^n \bmod J)& \mapedfrom& h(s) t^mu^n \bmod I^e+J^e
-        \end{defmap}
-        （任意の元については加法準同型として拡張する．）
-        $\rightarrow$を$\phi$, $\leftarrow$を$\psi$と名付ける．
-        $(f(s)t^m \bmod I) \otimes (g(s)u^n \bmod J)=f(s)g(s) \cdot (t^m \bmod I) \otimes (u^n \bmod J)$だから，
-        二つがwell-definedならばこれらが互いに逆を与えることをは明らか．
-
-        $\phi, \psi$のwell-defiendnessを占めす．
-        $I,J \subset I^e+J^e$だから，$\phi$がwell-definedであることは明らか．
-        問題は$\psi$のwell-defiendnessである．
-        $I^e+J^e$の元は，
+        $\pi_1: k[s][t] \to \frac{k[s][t]}{I}, \pi_2: k[s] \to \frac{k[s]}{I}$を標準的全射とする．
+        すると$\pi_1 \otimes_{k[s]} \pi_2$
+        も全射である．
+        $\kappa: k[s][t] \to k[s][t] \otimes_{k[s]} k[s]$を標準的同型だとすると，
+        以下は全射である．
         \[
-            \sum_{\text{finite}}(\text{element of }k[s][t,u])\cdot(\text{element of }I)
-            +\sum_{\text{finite}}(\text{element of }k[s][t,u])\cdot(\text{element of }J)
+            \kappa \circ \pi_1 \otimes_{k[s]} \pi_2:
+                k[s][t] \to k[s][t] \otimes_{k[s]} k[s]
+                \to k[s][t] \otimes k[s]
+                \to \frac{k[s][t]}{I} \otimes_{k[s]} \frac{k[s]}{J}
         \]
-        のように書ける．
-        したがって，$w=c(s)t^{c_0}u^{c_1} \cdot i(s)t^{i_0}+d(s)t^{d_0}u^{d_1}\cdot j(s)u^{j_0}$の形の元の和である．
-        $\psi$は加法準同型であるように定義されているから，
-        $\psi(w \bmod I^e+J^e)=0$さえ示せば十分．
-        $\psi(w \bmod I^e+J^e)$を計算する．
-        \begin{align*}
-            {}& c(s)i(s) \cdot (t^{c_0}t^{i_0} \bmod I) \otimes (u^{c_1} \bmod J)
-                +d(s) j(s) \cdot (t^{d_0} \bmod I) \otimes (u^{j_0}u^{d_1} \bmod J) \\
-            =&  c(s) \cdot (t^{c_0} \cdot i(s)t^{i_0} \bmod I) \otimes (u^{c_1} \bmod J)
-                +d(s)  \cdot (t^{d_0} \bmod I) \otimes (u^{j_0} \cdot j(s)u^{d_1} \bmod J) \\
-            =&  c(s) \cdot (0 \otimes (u^{c_1} \bmod J))
-                +d(s)  \cdot ((t^{d_0} \bmod I) \otimes 0) \\
-            =&  0
-        \end{align*}
-        よって$\psi$はwell-defined．
+        これの$\ker$を計算すると$I+J^e$となり，準同型定理により主張が得られる．
     \end{proof}
 
     これをつかって(b)を計算していく．
@@ -443,21 +401,27 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
 
     \paragraph{At $y=(0)=\eta \in Y$.}
     $(B/\eta)_{\eta}=B_{(0)}=k(s)$なので$k(\eta)=k(s)$．
-    $k(s)=\frac{k[s,u]}{(su-1)}$より，以下のように計算できる．
+    $S=k[s]-\{0\}$とすると以下のように計算できる．
     \begin{align*}
-        \frac{k[s,t]}{(s-t^2)} \otimes_{k[s]} \frac{k[s,u]}{(su-1)}
-        \cong& \frac{k[s,t,u]}{(s-t^2, su-1)} \\
-        \cong& \frac{k[s,t,1/s]}{(t^2-s)} \\
+        \frac{k[s,t]}{(s-t^2)} \otimes_{k[s]} S^{-1}k[s]
+        \cong& \bar{S}^{-1} \frac{k[s,t]}{(s-t^2)} \\
+        \cong& \frac{S^{-1}k[s,t]}{S^{-1} (s-t^2)} \\
         \cong& \frac{k(s)[t]}{(t^2-s)}
     \end{align*}
     $t^2-s$は$k(s)$係数既約多項式だから，この環は体．
-    なので$X_y=\Spec \frac{k(s)[t]}{(t^2-s)}$は１点空間である．
+    なので$X_y=\Spec \frac{k(s)[t]}{(t^2-s)}$は1点空間である．
     しかも剰余体は$k(s)=k(y)$の2次拡大体．
 
 \section{Closed Subschemes.} %% Ex3.11 
 \subsection{Closed Immersions are Stable under Base Extension.}
-\subsection{* Affine Closed Subscheme of Affine Scheme is Determined by a Suitable Ideal.}
+
+\subsection{* Closed Subscheme of Affine Scheme is Determined by a Suitable Ideal.}
+$X=\Spec A$とそのclosed subscheme $Y$を考える．
+$Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
+
+
 \subsection{The Smallest Subscheme Structure on a Closed Subset.}
+
 \subsection{The Scheme-Theoretic Image of $f$.}
 
 \section{Closed Subschemes of $\Proj S$.} %% Ex3.12 
@@ -467,12 +431,366 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
 \section{The Closed Points of Scheme of Finite Type over a Field.} %% Ex3.14 
 
 \section{Geometrically Irreducible/Reduced/Integral Schemes.} %% Ex3.15 
+    $k$ :: field, $X$ :: scheme of finite type over $k$.
+    この時$X$は$\Spec \frac{k[x_1,\dots,x_n]}{I}$という形のopen affine subschemeで被覆できる．
+    以下ではこの被覆のうちの一つのopen affine subschemeを取って考察をする．
+    $R=\frac{k[x_1,\dots,x_n]}{I}$としておく．
+    また，$X \times_{\Spec k} \Spec \bar{k}$を$X \times_k \bar{k}$と略す．
+
+    \subsection{Geometrically Irreducible.}
+    以下の条件の同値性を示す．
+    \begin{enumerate}[label=(\roman*)]
+        \item $X \times_k \bar{k}$ is irreducible.
+        \item $X \times_k k_s$ is.
+        \item $X \times_k K$ is, for every extension field $K$ of $k$.
+    \end{enumerate}
+    ただし$k_s$は$k$の分離閉包で，$\bar{k}$の部分体である．
+    これらのいずれか（したがって全部）が
+    成り立つ$X$はgeometrically irreducibleである，という.
+
+    (iii)$\implies$(i),(ii)は明らか．
+    また，一般の位相空間$T$について以下が成り立つ．
+    （TODO:check）
+    \[
+        T\text{ :: irreducible}
+        \iff
+        \Exists{\{U_i\}\text{ :: open cover of }T}
+        \Forall{i,j} U_i \cap U_j \neq \emptyset \land U_i\text{ :: irreducible.}
+    \]
+    よって，(i)$\implies$(ii)$\implies$(iii)をaffine caseで確かめれば十分である．
+    Ati-Mac Ex1.19より，これは更に，次の3つの条件が同値であることだと言い換えられる．
+    \begin{enumerate}[label=(\roman*)]
+        \item $\Nil(R \otimes_k \bar{k})$ is a prime ideal.
+        \item $\Nil(R \otimes_k k_s)$ is.
+        \item $\Nil(R \otimes_k K)$ is, for every extension field $K$ of $k$.
+    \end{enumerate}
+
+    \subsection{Geometrically Reduced.}
+    以下の条件の同値性を示す．
+    \begin{enumerate}[label=(\roman*)]
+        \item $X \times_k \bar{k}$ is reduced.
+        \item $X \times_k k_p$ is.
+        \item $X \times_k K$ is, for every extension field $K$ of $k$.
+    \end{enumerate}
+    ただし$k_p$は$k$の完全閉包で，$\bar{k}$の部分体である．
+    これらのいずれか（したがって全部）が
+    成り立つ$X$はgeometrically reducedである，という．
+
+    (iii)$\implies$(i),(ii)は明らか．
+    また，Ex2.3aより，reducedという性質はlocalな性質であるから，
+    一般のscheme $S$について以下が成り立つ．
+    \[
+        S\text{ :: reduced}
+        \iff
+        \Exists{\{U_i\}\text{ :: open cover of }S}
+        \Forall{i} \shO_S(U_i)\text{ :: reduced.}
+    \]
+    よって，(i)$\implies$(iii)をaffine caseで確かめれば十分である．
+    これはaffine caseでは更に言い換えられる．
+    \begin{enumerate}[label=(\roman*)]
+        \item $\Nil(R \otimes_k \bar{k})=0$
+        \item $\Nil(R \otimes_k k_s)=0$.
+        \item $\Nil(R \otimes_k K)=0$, for every extension field $K$ of $k$.
+    \end{enumerate}
+
+    \subsection{Geometrically Integral.}
+    $X \times_k \bar{k}$がintegralであるとき
+    $X$はgeometrically integralであるという．
+    \textbf{integral} schemeだがgeometrically irreducibleでない，
+    またはgeometrically reducedでない例を作る．
 
 \section{Noetherian Induction.} %% Ex3.16 
 
 \section{Zariski Spaces.} %% Ex3.17 
+    $X$ :: topological spaceについて，
+    $X$がnoetherianかつ$X$の任意のirreducible closed subsetがただひとつのgeneric pointを持つとき，
+    $X$はZariski spaceであるという．
+
+    \subsection{$X$ :: Noetherian Scheme $\implies$ $\basesp(X)$ :: Zariski Space.}
+    Ex2.9より明らか．
+
+    \subsection{Minimal Nonempty Closed Subset of a Zariski Space $=$ One Point Set.}
+    $X$ :: Zariski Space,$M$ :: minimal nonempty closed subset of $X$とする．
+    この時，$M$ :: irreducibleである．
+    実際，$M=Z_0 \cup Z_1$と空でない閉集合の和へ分解できるならば
+    $Z_0,Z_1 \subsetneq M$となり，minimalityに反するからである．
+    また，Ch I, Ex1.7より$M$はNoetherian．
+    なので$g \in M$ :: generic pointが存在する．
+    $M-\{g\}$が空でないと仮定し，$\mnot g \in M-\{g\}$をとる．
+    $\cl_X(\{\mnot g\}) \subseteq M$であるが，
+    $M$は極小な閉集合だから$\cl_X(\{\mnot g\})=M$．
+    これは$M$のgeneric pointとして$g, \mnot g$の二つが取れることを意味し，
+    generic pointの唯一性に矛盾する．
+
+    \subsection{Zariski Space is a $\mathrm{T_0}$-Space.}
+    互いに異なる2点$x,y \in X$をとる．
+    これらのうち一方を含み，もう一方を含まない閉集合が存在することを示す．
+    まず，一般の空間における閉包作用素の性質より，以下が成り立つ．
+    \[ \cl_X(\{x,y\})=\cl_X(\{x\}) \cup \cl_X(\{y\}). \]
+    左から順に$C_{xy}, C_x, C_y$とする．
+
+    \paragraph{$C_{xy}$ :: not irreducible.}
+    $\{x\} \subseteq C_y$ならば$C_x \subseteq \cl_X(C_y)=C_y$となる．
+    よって$C_{xy}=C_y$が導かれる．
+    しかし$C_y$ :: irreducible
+    \footnote
+    {
+        $\cl_X(\{x\})$が$x$を含む最小の閉集合であることから，
+        $\cl_X(\{x\})$は$x$を含む真の部分閉集合を持たない．
+        よって$\cl_X(\{x\})=Z_0 \cup Z_1$ならば，
+        $Z_0, Z_1$のどちらか一方は真の部分閉集合になり得ない．
+    }
+    だから，これは矛盾．
+    したがって$x \not \in C_y$．
+    逆に$y \not \in C_x$も得られる．
+
+    \paragraph{$C_{xy}$ :: irreducible.}
+    $C_x,C_y$は空でない閉集合だから，
+    $C_{xy}$がirreducibleであったとすると，
+    $C_x, C_y$のいずれかは$C_{xy}$と一致している．
+    なので$x,y$のどちらか一方は$C_{xy}$のgeneric pointである．
+    $x$がそのgeneric pointだと仮定しよう．
+    $\{x\} \subseteq C_y$であれば$C_{xy}=\cl_X(C_y)=C_y$となるから，
+    $\{x\} \subseteq C_y$から$y$が$C_{xy}$のgeneric pointであることが導かれる．
+    これはgeneric pointの唯一性に反するから，
+    $x \not \in C_y$．
+
+    \subsection{The Generic Point of Irreducible Zariski Space is in Any Open Subset of That.}
+    $X$ :: irreducible Zariski space, $g$ :: generic point of $X$とおく．
+    $g$を含まない空でない開集合$U$が存在したと仮定する．
+    すると$g \in U^c$であり，$U^c$は真の閉部分集合である．
+    これは$\cl_X(\{g\}) \subseteq \cl_X(U^c) \subsetneq X$を意味するので，矛盾．
+
+    \subsection{Specialization.}
+    $X$ :: Zariski spaceとし，$X$の点に以下のように順序を入れたものを$\Sigma$とする．
+    \[ x_1 \geq x_0 \iff x_1 \rightsquigarrow x_0 \iff \cl_X(\{x_1\}) \ni x_0. \]
+    これは半順序集合をなす(CHECK)．
+    $x_1 \rightsquigarrow x_0$であるとき$x_0$は$x_1$のspecializationという．
+    逆に$x_1$は$x_0$のgenerizationだという．
+
+    \subsubsection{The Minimal/Maximal Elements of $\Sigma$.}
+    $\Sigma$の極小元$x$は以下を満たす点である．
+    \[ {}^{\not \exists} y \in \Sigma,~~ x \neq y \land \cl_X(\{x\}) \ni y. \]
+    つまり$x$は$\{x\}$が閉集合であるような点である．
+    よって$x$はclosed point.
+
+    次に$x$を$\Sigma$の極大元だとする．
+    これは以下を満たす．
+    \[ {}^{\not \exists} y \in \Sigma,~~ x \neq y \land \cl_X(\{y\}) \ni x. \]
+    $x$を含むirreducible componentのgeneric pointを$g$とする．
+    $y \neq g$であるとき$\cl_X(\{y\}) \ni g$はgeneric pointの唯一性に反するから，
+    $g$は$\Sigma$の極大元である．
+    逆に，任意の元$x \neq g$に対し，$\cl_X(\{g\}) \ni x$が成立する．
+    結局，$x$がそのgeneric point（すなわち$x=g$）であるときかつその時に限り，
+    $x$は$\Sigma$の極大元となる．
+
+    \subsubsection{Closed/Open Subset is Stable under Specialization/Generization.}
+    $S \subseteq X$に対し，
+    \[
+        S_S=\{ y \in X \mid \Exists{x \in S} x \rightsquigarrow y. \},~~~
+        S_G=\{ x \in X \mid \Exists{y \in S} x \rightsquigarrow y. \}
+    \]
+    とおく．
+    $x \rightsquigarrow x$なので$S \subseteq S_S, S_G$となる．
+    
+    \paragraph{$S$ :: closed $\implies$ $S_S=S$.}
+    $S \supseteq S_S$を示せば良い．
+    これは以下と同値．
+    \[
+        \Forall{x \in S} \Forall{y \in X} 
+        \cl_X(\{x\}) \ni y \implies y \in S
+    \]
+    これは以下から示せる．
+    \[ \{x\} \subseteq S \implies \cl_X(\{x\}) \subseteq \cl_X(S)=S \]
+
+    \paragraph{$S$ :: open $\implies$ $S_G=S$.}
+    $S \supseteq S_G$を示せば良い．
+    これは以下と同値．
+    \[
+        \Forall{y \in S} \Forall{x \in X} 
+        \cl_X(\{x\}) \ni y \implies x \in S
+    \]
+    これの対偶は以下のようになる．
+    \[
+        \Forall{y \in S} \Forall{x \in X} 
+        x \in S^c \implies y \not \in \cl_X(\{x\}) \subseteq \cl_X(S^c)=S^c
+    \]
+    これは明らかに成立する($y \in S$に注意)．
+
+    \subsection{$X$ :: Noetherian Topological Space $\implies$ $t(X)$ :: Zariski Space.}
+    $t(X)$は$X$のirreducible closed subsetsであり，
+    $t(X)$の閉集合は$X$の閉集合$Y$を用いて$t(Y)$と表せる集合である．
+
+    \paragraph{$X$ :: Noetherian $\implies$ Irreducible Subset in $t(X)$ has Unique Generic Point.}
+    $Y \subseteq X$がclosedだとし，
+    さらに$t(Y) \subseteq t(X)$がirreducible closed subsetだとする．
+    $t(Y)$の点は$X$のirreducible closed subsetだから，
+    $X$ :: Noetherianより，$t(Y)$は極小元$G \subseteq Y$をもつ．
+    $G \in t(Z)$すなわち$G \in t(Y \cap Z)$ならば$Y \cap Z=Y$すなわち$Y \subseteq Z$，
+    ということを示せば，$G$ :: generic pointが得られる．
+
+    \paragraph{$X$ :: Noetherian $\implies$ $t(X)$ :: Noetherian.}
+    以下を使う．
+    \[ \Forall{Y,Z \ClosedIn X} Y \subsetneq Z \iff t(Y) \subsetneq t(Z). \]
+    これは次のように示される．
+    まず$(\implies)$は，$z \in Z-Y$とすると，$\cl_X(z) \in t(Z)-t(Y)$となることから得られる．
+    $\cl_X(z) \in t(Y)$ならば$z \in \cl_X(z) \subseteq Y$だが，
+    $z \not \in Y$なのでこれはありえない．
+    また$(\impliedby)$は，$t(Z)-t(Y)$の極小元を考えれば得られる．
+    その極小元を$M$とし，$m \in M$とすると$\cl_X(m) \subseteq M$．
+    $M$の極小性から等号が成り立つ．
+    もし$m \in Y$ならば$\cl_X(m) \subseteq Y$かつ$\cl_X(m) \not \in t(Y)$となり，
+    これはありえない．
+    今示したことから，以下の同値が得られ，$t(X)$ :: Noetherianが示せる．
+    \[ X_0 \supsetneq X_1 \supsetneq \dots \iff t(X_0) \supsetneq t(X_1) \supsetneq \dots \]
+    ただし$X_0,X_1,\dots$は$X$の閉集合である．
 
 \section{Constructible Sets.} %% Ex3.18 
+    $X$ :: Zariski topological spaceの部分集合族$\mathfrak{F}_X$を，以下のように定める．
+    \begin{enumerate}[label=(\arabic*),leftmargin=5\parindent]
+        \item 任意の開集合は$\mathfrak{F}_X$に属す．
+        \item $\mathfrak{F}_X$の有限個の元の共通部分は$\mathfrak{F}_X$に属す．
+        \item $\mathfrak{F}_X$の元の補集合は$\mathfrak{F}_X$に属す．
+        \item 以上の操作を繰り返して得られる集合のみが$\mathfrak{F}_X$の元である．
+    \end{enumerate}
+    $\mathfrak{F}_X$の元を$X$のconstructible subsetと呼ぶ．
+    ひとつのZariski spaceしか扱わない時は$\mathfrak{F}_X$を$\mathfrak{F}$と略す．
+    \subsection{$\mathfrak{F}$=$\{$ Finite Disjoint Union of Locally Closed Subsets.$\}=:\mathfrak{L}$}
+
+    \begin{Lemma}
+        $Z \subseteq X$ :: finite union of locally closed
+        then
+        $Z$ :: finite \textbf{disjoint} union of locally closed.
+    \end{Lemma}
+    \begin{proof}
+        $Z=\bigcup_{i=1}^r C_i \cap O_i$がdisjoint unionであるためには，
+        $\bigcup_{i=1} C_i$がlocally closed subsetのdisjoint unionで書ければ十分であることに注意する
+        \footnote
+        {
+        $[D_j \cap (V_j \cap W_j)] \cap [D_k \cap (V_k \cap W_k)]=([D_j \cap V_j] \cap [D_k \cap V_k]) \cap (W_j \cap W_k)=\emptyset$
+        }
+        ．
+        実際，$\bigcup_{i=1} C_i=\bigcup_{j=1}^s D_j \cap V_j$となったとする．
+        \[ W_j=\bigcup_{i;~ C_i \cap D_j \cap V_j=D_j \cap V_j} O_i \]
+        とおくと，
+        $C_i \cap D_j \cap V_j=D_j \cap V_j \mor \emptyset$（以下の構成から分かる）から
+        $\bigcup_i C_i \cap D_j \cap V_j \cap O_i=D_j \cap V_j \cap W_j$．
+        これより以下が得られる．
+        \begin{align*}
+            Z 
+            =&  \bigcup_{i=1}^r \left(\bigsqcup_{j=1}^s D_j \cap V_j \cap C_i \right) \cap O_i \\
+            =&  \bigcup_{i=1}^r \bigcup_{j=1}^s D_j \cap V_j \cap C_i \cap O_i \\
+            =&  \bigcup_{j=1}^s \bigcup_{i=1}^r D_j \cap V_j \cap C_i \cap O_i \\
+            =&  \bigsqcup_{j=1}^s D_j \cap (V_j \cap W_j).
+        \end{align*}
+
+        $\bigcup_{i=1} C_i$をlocally closed subsetのdisjoint unionで書く．
+        $n=1,\dots,r$に対し，
+        \[ \Sigma_n=\{ (i_1,\dots,i_n) \mid i_1<\dots<i_n \land i_1,\dots i_n \in \{1,\dots,r\} \} \]
+        とおく．これは要素数$\binom{r}{n-r}$の有限集合である．
+        さらに$\sigma=(i_1,\dots,i_n) \in \Sigma_n$に対して
+        $C_{\sigma}=C_{i_1} \cap C_{i_n}$とする．
+        以下は明らかにlocally closed．
+        \[ K_{\sigma}=C_{\sigma} \cap \left( \bigcup_{m=n+1}^r ~\bigcup_{\tau \in \Sigma_m} C_{\tau} \right)^c \]
+        これらはdisjointである．
+        実際に$\sigma \in \Sigma_{n}, \sigma' \in \Sigma_{n'}$を考えてみる．
+        $n < n'$ならば明らかにdisjoint．
+        $n=n'$のとき，例えば$\sigma=(i_1,\dots,i_n),\sigma'=(i_1',\dots,i_n), i_1'<i_1$に対して
+        $\sigma \cap \sigma'=(i_1',i_1,\dots,i_n)$とすると，
+        $C_{\sigma} \cap C_{\sigma'}=C_{\sigma \cap \sigma'}$となる．
+        $\sigma \cap \sigma' \in \Sigma_{n+1}$なのでやはりdisjoint．
+    \end{proof}
+
+    $\mathfrak{L}$の元は，以下のように書ける．
+    \[
+        \bigsqcup_{i=1}^r (C_i \cap O_i)
+        \mwhere
+        \{C_i\}_{i=1}^r, \{O_i\}_{i=0}^r\text{ :: closed,open subsets of }X.
+    \]
+    $\mathfrak{F} \supseteq \mathfrak{L}$は
+    \[
+        \bigsqcup_{i=1}^r C_i \cap O_i
+        =\left(\bigcap_{i=1}^r (C_i^c)^c \cap O_i\right)^c
+    \]
+    から明らか．
+
+    $\mathfrak{F} \subseteq \mathfrak{L}$を示すために，
+    induction by construct of constructible subsetを行う．
+    開集合全体を$\mathfrak{F}_0$とし，
+    これらの元に(2),(3)の操作を$n (\geq 0)$回繰り返して得られる集合族を$\mathfrak{F}_{n}$とする．
+    任意の$n$について$\mathfrak{F}_{n} \subseteq \mathfrak{L}$であることを示す．
+    (1) $\mathfrak{F}_0$の元，すなわち開集合は明らかに$\mathfrak{L}$に属す．
+    以下，$\mathfrak{F}_{n} \subseteq \mathfrak{L}$と仮定して，
+    数学的帰納法により$\mathfrak{F}_{n+1} \subseteq \mathfrak{L}$を示す．
+    (2) $\mathfrak{F}_{n}$の2個の元は$\mathfrak{L}$に属す．
+    それらの共通部分は$\mathfrak{F}_{n+1}$に属すが，これは以下のように書ける．
+    \[
+        \left( \bigsqcup_{i=1}^r (C_i \cap O_i) \right) \cap \left( \bigsqcup_{j=1}^s (D_i \cap P_i) \right)
+        =
+        \bigsqcup_{\substack{1 \leq i \leq r \\ 1 \leq j \leq s}}
+            (C_i \cap D_j) \cap (O_i \cap P_j).
+    \]
+    よって$\mathfrak{F}_{n}$の有限個の元の共通部分は$\mathfrak{L}$に属す．
+    (3) $\mathfrak{F}_{n}$の元は$\mathfrak{L}$に属す．
+    その補集合は
+    \[
+        \bigcap_{i=1}^r (C_i^c \cup O_i^c)
+        =
+        \bigcup_{1 \leq i,j \leq r} (C_i^c \cap O_j^c)
+    \]
+    これはlocally closed subsetのunionだから，Lemmaより，$\mathfrak{L}$に属す．
+    以上より，任意の$n$について$\mathfrak{F}_{n} \subseteq \mathfrak{L}$である．
+    まとめて，$\mathfrak{F} = \bigcup_{n=0}^{\infty} \mathfrak{F}_{n} \subseteq \mathfrak{L}$
+
+    \subsection{Dense Constructible Subset In Irreducible Zariski Space.}
+    constructible subsetがdenseなのはそれがgeneric point $\zeta$を含むときに限る．
+    これを示そう．
+    (a)からconstructible subset $Z$は以下のように書ける．
+    \[
+        Z=\bigsqcup_{i=1}^r (C_i \cap O_i)
+        \mwhere
+        \{C_i\}_{i=1}^r, \{O_i\}_{i=0}^r\text{ :: closed,open subsets of }X.
+    \]
+    Ex3.17dより，各$O_i$は$\zeta$を含む．
+    なのですべての$C_i$が$\zeta$を含まない時に限り$Z$は$\zeta$を含まない．
+    この時，$\zeta \not \in \bigcup_{i=1}^r C_i$なので
+    $\bigcup_{i=1}^r C_i$は真の閉部分集合である．
+    $C_i \cap O_i \subseteq C_i$より
+    \[ \cl_X(Z) \subseteq \bigcup_{i=1}^r C_i \subsetneq X \]
+    よって$\zeta \not \in Z$ならば$Z$はdenseでない．
+
+    また，constructible subset $Z$がdenseならば，
+    ある$i$について$\zeta \in C_i \cap O_i$となる．
+    しかも$\zeta \in C_i$より$C_i=X$．
+    よって$C_i \cap O_i=O_i \subseteq Z$となり，
+    $Z$は$X$の開集合を含む．
+
+    \subsection{$S \subseteq X$ :: Closed $\iff$ $S$ :: Constructible And Stable Under Specialization.}
+    $(\implies)$はconstructible subsetの定義とEx3.17eから得られる．
+    $(\impliedby)$を示す．
+
+    $Z=\bigsqcup_{i \in I_0} C_i \cap O_i$をとり，
+    $\bigcup_{i \in I_0} C_i$を($X$の)irreducible componentsに分解して
+    $\bigcup_{i \in I_0} C_i=\bigcup_{(i,j) \in I_1} K_{ij}$とする
+    （$X$ :: noetherianとCh.I Prop1.5を用いた）．
+    更に，$K_{ij} \cap O_i \neq \emptyset$となる$(i,j) \in I_1$を選び出して$I_2$とする．
+    この時$Z=\bigcup_{(i,j) \in I_2} K_{ij} \cap O_i$となる．
+    さて，$K_{ij}$はirreducibleなので
+    $K_{ij} \cap O_i$は$K_{ij}$のgeneric point $\zeta_{ij}$を含む．
+    $Z$がstable under specializationならば以下が成り立つ．
+    \[
+        \bigcup_{(i,j) \in I_2} K_{ij}
+        =\bigcup_{(i,j) \in I_2} \cl_X(\{\zeta_{ij}\})
+        \subseteq Z
+        \subseteq \bigcup_{(i,j) \in I_2} K_{ij}
+    \]
+    よって$Z=\bigcup_{(i,j) \in I_2} K_{ij}$となり，これは閉集合．
+
+    \subsection{If $f: X \to Y$ :: Continuous Map then $f^{-1}(\mathfrak{F}_Y)=\mathfrak{F}_X$.}
+    すべて基本的な位相空間の結果である．
+    (1) $U$ :: open in $Y$について$f^{-1}(U)$ :: open in $X$．
+    (2) $Z,W \in \mathfrak{F}_Y$について$f^{-1}(Z \cap W)=f^{-1}(Z) \cap f^{-1}(W)$.
+    (3) $Z \in \mathfrak{F}_Y$について$f^{-1}(Z^c)=(f^{-1}(Z))^c$．
 
 \section{Chevalley's Theorem on Constructible Set.} %% Ex3.19 
 
