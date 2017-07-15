@@ -1,5 +1,6 @@
 \documentclass[a4j, 10pt]{jarticle}
 \usepackage{../math_note}
+\newcommand{\powerset}{\mathcal{P}}
 
 \title{Cantor-Schr\"{o}der-Bernsteinの定理}
 \author{七条 彰紀}
@@ -7,22 +8,21 @@
 \begin{document}
     \maketitle
     
-    以下で述べる証明は，\cite{thebook}にある証明を再構成したものである．
-    元の証明では写像$F$が現れる理由が明記されていないため，
-    その部分を補った．
+    以下で述べる証明は，\cite{thebook}にある証明を徹底的に詳述したものである．
+    教育的な証明とも言えるだろう．
     この証明の歴史については\cite{cbt}のPart IVが参考になる．
     特に，ここでの証明はChapter 35(pp.343-353)にある
     Tarski’s Fixed-Point Theoremを応用したものに近いと思われる．
 
     \section{定理}
     \begin{Them}[表現1]
-        集合A, Bについてそれぞれの濃度を$|A|, |B|$のように表す．
-        $|A| \leq |B|$かつ$|A| \geq |B|$ならば$|A|=|B|$である．
+        集合M, Nについてそれぞれの濃度を$|M|, |N|$のように表す．
+        $|M| \leq |N|$かつ$|M| \geq |N|$ならば$|M|=|N|$である．
     \end{Them}
 
     \begin{Them}[表現2]
-        A, Bを集合とし，単射$f:A \to B$と単射$g: B \to A$があったとする．
-        この時全単射$h:A \to B$が存在する．
+        M, Nを集合とし，単射$f:M \to N$と単射$g: N \to M$があったとする．
+        この時全単射$h:M \to N$が存在する．
     \end{Them}
 
     表現1はこの定理を証明するモチベーションの出処がよく分かる．
@@ -32,10 +32,20 @@
     この定理が述べているのは全単射$h$の存在であるから，証明の方針は二つ有る．
     一つは別の存在定理の帰結として$h$の存在を示す方針，
     もう一つは全単射$h$を実際に構成する方針である．
-    このレポートでは後者の方針を取る．
-    前者の方針での証明は知らない．可能かどうかもわからない．
+    このレポートでの証明は前者と後者の両方\footnote{なので証明の方針は三つある．}を使う．
+    すなわち，ある集合の存在を示し，それを用いて写像$h$を構成する．
 
-    \subsection{全単射hの構成方法}
+    \subsection{準備．}
+    単射$f: M \to N$と任意の部分集合$S,T \subseteq M$について以下が成り立つ．
+    \[
+        f^{-1}(f(S))=S,~~~
+        f(M \setminus S)=N \setminus f(S),~~~
+        f(S) \cap f(T)=f(S \cap T).
+    \]
+    これらの命題は集合と写像について書いた本なら
+    どれにでも書かれているようなものである．
+
+    \subsection{全単射$h$の構成方法}
     $f, g^{-1}; M \to N$とする．
     $M$から$N$への全単射$h$を作る方法として，
     $M$の各元が$M$の部分集合$S$に属すか属さないかによって
@@ -51,7 +61,6 @@
     \begin{enumerate}[(a)]
     \setlength{\itemindent}{3em}
         \item $f(S) \cup g^{-1}(M \setminus S)=N$.
-        \item $f(S) \cap g^{-1}(M \setminus S)=\emptyset$.
         \item $M \setminus S \subseteq g(N)$.
     \end{enumerate}
 
@@ -59,60 +68,71 @@
     一方$g^{-1}$は$M$全体で定義されるとは限らないが，像は$N$全体である．
     この二つを組み合わせることで全単射が作れそうだ，というのがこの構成の着想である．
     しかし$f, g^{-1}$が互いをうまく補い合えるかどうかは自明でない．
-    (b)が必要な理由は今の段階ではわかりにくいが，
-    後に必要なので，集合$S$の性質としてここにまとめて書いておく．
-
-    \subsection{部分集合$S$に課された条件の整理．}
-    実は上で$S$に要求した3つの条件のうち，(b), (c)は残る(a)から導かれる．
-
-    \paragraph{(a) $\implies$ (b).}
-    まず，(a) $\implies$ (b)が成り立つ．
-    そのことを示すため，(a)式の両辺を$g$で写す．
-    \[ g \circ f(S) \cup (M \setminus S)=g(N). \]
-    この時，$g \circ f$が単射であることから，$g \circ f(S) \subseteq S$が成り立つ．
-    したがって$g \circ f(S) \cap (M \setminus S)=\emptyset$．
-    再び両辺を$g^{-1}$で写して，$f(S) \cap g^{-1}(M \setminus S)=\emptyset$が得られる．
-
-    \paragraph{(a) $\implies$ (c)}
-    上で見た式$g \circ f(S) \cup (M \setminus S)=g(N)$より明らかである．
 
     \subsection{写像$F$}
-    再び(a) $f(S) \sqcup g^{-1}(M \setminus S)=N$に注目する．
+    写像$F$を以下のように定義する．
+    \begin{defmap}
+        F:& \powerset(M)& \to& \powerset(N) \\ 
+        {}& S & \mapsto& M \setminus g(N \setminus f(S))
+    \end{defmap}
+    そして$F(S_0)=S_0$となる集合$S_0$，すなわち$F$の不動点が存在すると仮定する．
+    この時，以下のようにして(a),(b)が成立することが分かる．
+    \begin{align*}
+        {}                      S_0=&M \setminus g(N \setminus f(S_0)) \\
+        \iff\hspace{5.7em}      M \setminus S_0=&g(N \setminus f(S_0)) \subseteq g(N) \tag{b} \\
+        \implies\hspace{3.5em}  g^{-1}(M \setminus S_0)=&N \setminus f(S_0) \\
+        \implies                f(S_0) \cup g^{-1}(M \setminus S_0)=&N \tag{a}
+    \end{align*}
+    したがって，我々は$F$の不動点$S_0$を構成すれば良い．
+
+    \subsection{写像$F$はどうやって着想されるのか}
+    (a) $f(S) \cup g^{-1}(M \setminus S)=N$に注目する．
     この式は$g^{-1}$を用いているが，これを取り除く方針で式変形をする．
-    \begin{eqnarray*}
-        f(S) \sqcup g^{-1}(M \setminus S)&=&N \\
-        g^{-1}(M \setminus S)&=&N \setminus f(S) \\
-        M \setminus S&=&g(N \setminus f(S)) \\
-        S&=&M \setminus g(N \setminus f(S))
-    \end{eqnarray*}
-    一行目から二行目への変形で
-    (b) $f(S) \cap g^{-1}(M \setminus S)=\emptyset$を用いた．
-    そこで，写像$F$を次のように定義する．
-    \begin{eqnarray*}
-        F : \mathcal{P}(M) &\to& \mathcal{P}(N) \\
-            S &\mapsto& M \setminus g(N \setminus f(S))
-    \end{eqnarray*}
-    すると，部分集合$S$が満たすべき3つの条件は，
-    $F(S)=S$すなわち「$S$の写像$F$の不動点である」ということと同値になる．
+    これは丁度直前のsubsectionにおける変形を逆転させたものである．
+    \begin{align*}
+        f(S_0) \cup g^{-1}(M \setminus S_0)=&N \\
+        g^{-1}(M \setminus S_0)=&N \setminus f(S_0) \\
+        M \setminus S_0=&g(N \setminus f(S_0)) \\
+        S_0=&M \setminus g(N \setminus f(S_0))
+    \end{align*}
+    実際に上から下が示されるためには
+    $f(S) \cap g^{-1}(M \setminus S)=\emptyset$（$1$行目$\implies$$2$行目）と
+    $g(g^{-1}(M \setminus S_0))=M \setminus S_0$（$2$行目$\implies$$3$行目）が必要である．
+    さらに，(a)から(b) $M \setminus S \subseteq g(N)$を示すことも出来ない．
+
+    しかし，最終的に現れる$S_0=M \setminus g(N \setminus f(S_0))$を
+    「$S_0$は不動点」と解釈することで，
+    直前のsubsectionのような結果が得られる．
+    示したい命題(a)からはじめて荒っぽい式変形を行い着想を得る，
+    という，数学者の仕事が見える証明である．
 
     \subsection{$F$の不動点}
     以上の議論から，我々は写像$F$の不動点さえ求めれば全単射$h$が構成できることがわかった．
-    また，$F$が写像であることから，
-    \[ \Forall{I \subseteq J \subseteq M} F(I) \subseteq F(J) \]
-    が成り立つ．
+    また，$F$について次が成り立つ．
+    \[ \Forall{I,J \subseteq M} I \subseteq J \implies F(I) \subseteq F(J) \]
+    これは次のように示せば良い．
+    \begin{align*}
+        {}&         I \subseteq J \\
+        \implies&   f(I) \subseteq f(J) \\
+        \iff&       N \setminus f(I) \supseteq N \setminus f(J) \\
+        \implies&   g(N \setminus f(I)) \supseteq g(N \setminus f(J)) \\
+        \iff&       M \setminus g(N \setminus f(I)) \subseteq M \setminus g(N \setminus f(J)) \\
+        \iff&       F(I) \subseteq F(J)
+    \end{align*}
     このことを用いて2つの証明を述べる．
 
     \subsection{$F$の不動点が存在することの証明(非構成的)}
+    Tarski’s Fixed-Point Theoremを用いる．
 
     \subsection{$F$の不動点が存在することの証明(構成的)}
     明らかに$M \supseteq F(M)$なので，両辺を繰り返し$F$で写せば
     \[ M \supseteq F(M) \supseteq F^2(M) \supseteq \cdots. \]
     が得られる．
     さて，以下の集合が$F$の不動点である．
-    \[ S=\bigcap_{i \geq 0}{F^{i}(M)}=M \cap F(M) \cap F(F(M)) \cap \cdots. \]
+    \[ S_0=\bigcap_{i \geq 0}{F^{i}(M)}=M \cap F(M) \cap F(F(M)) \cap \cdots. \]
     これが不動点であることは以下のように示される．
     \begin{align*}
-    F(S)
+    F(S_0)
     =&F \left(\bigcap_{i \geq 0}{F^{i}(M)} \right) \\
     =&M \setminus g \left(N \setminus f \left(\bigcap_{i \geq 0}{F^{i}(M)} \right) \right) \\
     =&M \setminus g \left(N \setminus \bigcap_{i \geq 0}{f(F^{i}(M))} \right)\\
@@ -123,7 +143,7 @@
     =& \bigcap_{i \geq 1}{F^{i}(M)} \\
     =& M \cap \bigcap_{i \geq 1}{F^{i}(M)} \\
     =& \bigcap_{i \geq 0}{F^{i}(M)} \\
-    =& S
+    =& S_0
     \end{align*}
     $M \supseteq F(M) \supseteq \cdots$の他に，$f$が単射であることを用いた．
 

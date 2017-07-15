@@ -4,8 +4,14 @@ MathNotes
 
 内容
 ------
-代数中心です．
-解析が苦手なので自分向けの解説を書いたりもします．
+フォルダ名とその内容の対応は以下の通り．
+
+* Hartshorne_AG_Ch1 -- Hartshorne "Algebraic Geometry" Chapter Iに関連するノート群．演習問題への解答が主．
+* Hartshorne_AG_Ch2 -- 同じくChapter IIに関連するノート群．
+* SylowTheorem -- Sylowの定理のできるだけself-containedな証明と応用．
+* BernsteinTheorem -- Cantor-Schroder-Bernsteinの定理の極めて詳細な証明．
+* func_analysis -- 関数解析の定義・定理をまとめたチートシート．
+* just_one -- そういえば証明したことがないな，とか，知っていると便利な定理とか．
 
 コンパイル
 ------------

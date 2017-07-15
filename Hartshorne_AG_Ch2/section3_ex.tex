@@ -174,7 +174,43 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
     任意の点$y \in Y$について$f^{-1}(y)$が有限集合であるという事である．
 
     \subsection{Finite $\implies$ Quasi-Finite.}
+    Artin ringをつかう．
+    Ati-Mac Prop8.3, Exc.8.3を参照せよ．
+    
+    $f: X \to Y$をfinite morphismだとする．
+    この時，任意の点$y \in Y$に対し，
+    \[ y \in \Spec B \subseteq Y, f^{-1}\Spec B=\Spec A \]
+    となる環$A,B$が存在する．
+    $f$を$\Spec A$に制限すれば$X=\Spec A, Y=\Spec B$と仮定できる．
+    また$f$からinduceされるring homomorphismを$\phi: B \to A$とする．
+    
+    Ex3.10aより，$f^{-1}(y) \homeo \basesp X_y=\basesp \Spec A \otimes_B k(y)$．
+    Ati-Mac Ex8.4より，この最右辺は有限空間である．
+    よって$f$ :: quasi-finite．
+
     \subsection{Finite $\implies$ Closed.}
+    $Z$ :: closed in $X$をとり，$f(Z)$ :: closed in $Y$を示す．
+    Ch I, Lemma 3.1の直後にあるとおり，
+    以下の条件が満たされた時，$f(Z)$ :: closed in $Y$となる．
+    \[ \Exists{\{U_i\}_{i \in I}} \Forall{i \in I} f(Z) \cap U_i\text{ :: closed in }U_i. \]
+    そこで$\Spec B \subseteq Y, f^{-1}\Spec B=\Spec A$を任意にとって
+    $f(Z \cap \Spec A)$ :: closed in $\Spec B$を示す．
+
+    $Z \cap \Spec A$ :: closed in $\Spec A$なので$Z \cap \Spec A=V(\I{a})$とする．
+    $f_|=f|_{\Spec A}$から誘導されるring homomorphismを$\phi: B \to A$とすると，
+    \[ \cl_{\Spec B}f_|(V(\I{a}))=V(\phi^{-1}\I{a}) \]だから
+    \footnote{Ati-Mac Ex1.21 iii)．}，
+    $f_|(V(\I{a})) \supseteq V(\phi^{-1}\I{a})$を示そう．
+    
+    $\I{p} \in V(\phi^{-1}\I{a})$を任意にとる．
+    $\ker \phi \subseteq \phi^{-1}\I{a} \subseteq \I{p}$だから，
+    $\I{a} \subseteq \phi(\I{p})$かつ（準同型定理より）$\phi(\I{p})$は素イデアル．
+    今，$\phi(B) \subseteq A$で$A$ :: finitely generated $\phi(B)$-algebraだから，
+    Ati-Mac Them5.10から次が成り立つ．
+    \[ \Exists{\I{q} \in \Spec A} \I{q} \cap \phi(B)=\phi(\I{p}). \]
+    $\ker \phi \subseteq \I{p}$と準同型定理から，$f(\I{q})=\phi^{-1}(\I{q})=\I{p}$．
+    よって$\I{p} \in fV(\I{a})$が得られた．
+
     \subsection{Give an Example of morphism that is Surjective, Finite-Type, Quasi-Finite BUT NOT Finite.}
 
 \section{Function Field.} %% Ex3.6 
@@ -340,7 +376,7 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
     $\basesp (X_y)_{i} \homeo (f|_{X_{i}})^{-1}(y)=f^{-1}(y) \cap X_{i}$．
     よって$\basesp X_y=\bigcup_{i} (f^{-1}(y) \cap X_{i})=f^{-1}(y)$．
     位相空間としては
-    $(f|_{X_{ij}})^{-1}(y) \homeomap \basesp (X_y)_{ij} \to \basesp X_y$を使って貼り合わせる．
+    $(f|_{X_{i}})^{-1}(y) \homeomap \basesp (X_y)_{i} \to \basesp X_y$を使って貼り合わせる．
 
     \subsection{Another Solution of (b).}
     Ch.I Ex3.18(Product of Affine Varieties)で使った補題を少し変形したものと，
@@ -414,11 +450,35 @@ $f^{-1}\Spec A$はquasi-compactな開集合の有限和．
 
 \section{Closed Subschemes.} %% Ex3.11 
 \subsection{Closed Immersions are Stable under Base Extension.}
+    （affine caseで証明する際に，surj $\iff$ epicを使って証明する．）
 
 \subsection{* Closed Subscheme of Affine Scheme is Determined by a Suitable Ideal.}
-$X=\Spec A$とそのclosed subscheme $Y$を考える．
-$Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
+    $X=\Spec A$とそのclosed subscheme $Y$を考える．
+    $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
 
+    $\{f_i\}_{i \in I_1} \subseteq A$を適切に取ると
+    $Y \subseteq \bigcup_{i \in I_1} D(f_i)$とできる．
+    ただし$D(f_i) \cap Y \neq \emptyset$とする．
+    また$Y^c$ :: open subscheme of $X$かつ$X$ :: affine schemeなので，
+    同様に$Y^c$の開被覆$Y^c=\bigcup_{i \in I_2} D(f_i)$を取ることができる．
+    まとめると$X$の開被覆が取れる．
+    \[ X=\bigcup_{i \in I_1 \cup I_2} D(f_i). \]
+    Ex2.10より$X$ :: quasi-compactだから，
+    ここからfinite open subcover$X=\bigcup_{j \in J} D(f_j)$がとれる．
+    このとき
+    \[
+        Y \subsetneq X=
+        \left[\bigcup_{i \in J \cap I_1} D(f_i)\right]
+        \cup
+        \underbrace{\left[\bigcup_{i \in J \cap I_2} D(f_i)\right]}_{\subseteq Y^c}
+    \]
+    だから$J \cap I_1, J \cap I_2 \neq \emptyset$となる．
+    新しく$I=J \cap I_1$とおけば
+    $Y$のfinite open cover $Y \subseteq \bigcup_{i \in I} D(f_i)$と
+    $X$のfinite open cover $X=\bigcup_{j \in J} D(f_j)$が得られたことになる．
+
+    さて，$B=\shO_X|_Y(Y)$とおくと
+    （ここで$A$の元を$B$へ写す手段がないことに気がついた．）
 
 \subsection{The Smallest Subscheme Structure on a Closed Subset.}
 
@@ -429,6 +489,57 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
 \section{Properties of Morphisms of Finite Type.} %% Ex3.13 
 
 \section{The Closed Points of Scheme of Finite Type over a Field.} %% Ex3.14 
+    \subsection{(First Part).}
+    $k$ :: field,
+    $X$ :: finite type over $k$，$X_0$=closed points of $X$とする．
+    $X_0$が$X$内でdense であることを示す．
+    ここでfinite type over $k$とは，$X \to \Spec k$がfinite typeであること．
+    すなわち，finitely generated $k$-algebraであるような
+    環によるaffine open coveringを$X$が持つということ．
+
+    \subsubsection{Affine Case.}
+    $X=\Spec A$，$A$ :: finitely generated $k$-algebra
+    と仮定して$\cl_X(X_0)=X$を示す．
+    このとき$X_0=\Max A$であり，
+    $\cl_X(X_0)=X$は$X_0^c$が空でない$X$の開集合を含まないことと同値である．
+    finitely generated $k$-algebraはJacobson ringである，
+    というfact \footnote{Eisenbud, Them4.19}を使ってこれを証明する．
+    \begin{Claim}
+        $\I{a}$ :: ideal of $A$とする．
+        $V^c(\I{a}) \subseteq X_0^c \implies V^c(\I{a})=\emptyset$．
+    \end{Claim}
+    \begin{proof}
+    \begin{align*}
+        {}&     V^c(\I{a}) \subseteq X_0^c \\
+        \iff&   V(\I{a}) \supseteq X_0=\Max A \\
+        \iff&   \Forall{\I{m} \in \Max A} \I{a} \subseteq \I{m} \\
+        \iff&   \I{a} \subseteq \Jac(A)=\Nil(A) ~~~(\text{by the fact}) \\
+        \iff&   V(\I{a})=X \\
+        \iff&   V^c(\I{a})=\emptyset.
+    \end{align*}
+    \end{proof}
+
+    \subsubsection{General Case.}
+    \begin{Claim}
+        $U$ :: open in $X$とする．
+        $U \subseteq X_0^c \implies U=\emptyset$．
+    \end{Claim}
+    \begin{proof}
+        背理法で示す．
+        $U \neq \emptyset$ならば$U \cap \Spec A \neq \emptyset$となる
+        $\Spec A \subseteq X$がある．仮定より，
+        \[ \emptyset \neq U \cap \Spec A \subseteq X_0^c \cap \Spec A=(\Max A)^c. \]
+        これはAffine Caseの結果に反する．
+        よって$U=\emptyset$．
+    \end{proof}
+
+    \subsection{(Second Part).}
+    $X$ :: finite type over $k$と限らなければ，反例が存在する．
+    実際，$A$を局所環$k[x,y]_{(x,y)}$だとすると，
+    $\Max A=\{(x,y)_{(x,y)}\}$であり，
+    これは閉点のみの1点集合だから閉集合．
+    つまり$\cl_{\Spec A}(\Max A)=\Max A \subsetneq \Spec A$となり，
+    これ$\Max A$はdenseでない．
 
 \section{Geometrically Irreducible/Reduced/Integral Schemes.} %% Ex3.15 
     $k$ :: field, $X$ :: scheme of finite type over $k$.
@@ -621,42 +732,60 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
     $t(X)$は$X$のirreducible closed subsetsであり，
     $t(X)$の閉集合は$X$の閉集合$Y$を用いて$t(Y)$と表せる集合である．
 
+    \begin{Claim}
+        $Y,Z$ :: closed in $X$について以下が成り立つ．
+        \[ Y \subsetneq Z \iff t(Y) \subsetneq t(Z). \]
+    \end{Claim}
+    \begin{proof}
+        包含関係は明らかなので$\neq$の部分を示す．
+
+        まず$(\implies)$は，$z \in Z-Y$とすると，$\cl_X(z) \in t(Z)-t(Y)$となることから得られる．
+        $\cl_X(z) \in t(Y)$ならば$z \in \cl_X(z) \subseteq Y$だが，
+        $z \not \in Y$なのでこれはありえない．
+        また$(\impliedby)$は，$A \in t(Z)-t(Y)$が存在することから得られる．
+        $A$はirreducibleかつ$A \subseteq Z$かつ$A \not \subseteq Y$となるから，
+        $A-Y \neq \emptyset$．
+        これは$Z-Y$が空でないことを意味する．
+    \end{proof}
+
+    \paragraph{$X$ :: Noetherian $\implies$ $t(X)$ :: Noetherian.}
+    claimから，以下の同値が得られ，$t(X)$ :: Noetherianが示せる．
+    \[ X_0 \supsetneq X_1 \supsetneq \dots \iff t(X_0) \supsetneq t(X_1) \supsetneq \dots \]
+    ただし$X_0,X_1,\dots$は$X$の閉集合である．
+
     \paragraph{$X$ :: Noetherian $\implies$ Irreducible Subset in $t(X)$ has Unique Generic Point.}
     $Y \subseteq X$がclosedだとし，
     さらに$t(Y) \subseteq t(X)$がirreducible closed subsetだとする．
-    $t(Y)$の点は$X$のirreducible closed subsetだから，
-    $X$ :: Noetherianより，$t(Y)$は極小元$G \subseteq Y$をもつ．
-    $G \in t(Z)$すなわち$G \in t(Y \cap Z)$ならば$Y \cap Z=Y$すなわち$Y \subseteq Z$，
-    ということを示せば，$G$ :: generic pointが得られる．
-
-    \paragraph{$X$ :: Noetherian $\implies$ $t(X)$ :: Noetherian.}
-    以下を使う．
-    \[ \Forall{Y,Z \ClosedIn X} Y \subsetneq Z \iff t(Y) \subsetneq t(Z). \]
-    これは次のように示される．
-    まず$(\implies)$は，$z \in Z-Y$とすると，$\cl_X(z) \in t(Z)-t(Y)$となることから得られる．
-    $\cl_X(z) \in t(Y)$ならば$z \in \cl_X(z) \subseteq Y$だが，
-    $z \not \in Y$なのでこれはありえない．
-    また$(\impliedby)$は，$t(Z)-t(Y)$の極小元を考えれば得られる．
-    その極小元を$M$とし，$m \in M$とすると$\cl_X(m) \subseteq M$．
-    $M$の極小性から等号が成り立つ．
-    もし$m \in Y$ならば$\cl_X(m) \subseteq Y$かつ$\cl_X(m) \not \in t(Y)$となり，
-    これはありえない．
-    今示したことから，以下の同値が得られ，$t(X)$ :: Noetherianが示せる．
-    \[ X_0 \supsetneq X_1 \supsetneq \dots \iff t(X_0) \supsetneq t(X_1) \supsetneq \dots \]
-    ただし$X_0,X_1,\dots$は$X$の閉集合である．
+    このとき，$Y$ :: irreducibleが示せる．
+    実際，$Y=C \cup D$かつ$\emptyset \subsetneq C,D \subsetneq Y$となる
+    $C,D$ :: closedが存在すれば，claimより
+    $t(Y)=t(C) \cup t(D)$かつ$\emptyset \subsetneq t(C),t(D) \subsetneq t(Y)$となり，
+    これは$t(Y)$ :: irreducibleに反する．
+    したがって$Y \in t(Y)$であり，これは$t(Y)$の最大元となる．
+    ここでgeneric pointの定義を書き下す．
+    \begin{Def}
+        $\zeta \in t(Y)$が$t(Y)$のgeneric pointであるとは，
+        任意の閉集合$t(Z) \subseteq t(X)$について，以下が成り立つこと．
+        \[ \zeta \in t(Z) \iff (Y \in )t(Y) \subseteq t(Z). \]
+    \end{Def}
+    明らかに$\zeta=Y$のとき「任意の閉集合$t(Z) \subseteq t(X)$について，……」が成り立つ．
+    よって定義の最後の論理式は
+    \[ \zeta \in t(Z) \iff Y \in t(Z) \]
+    と書き換えられる．
+    $\zeta \subsetneq Y$のとき$Z=\zeta$がこの右辺を成立させない．
+    よって$\zeta=Y$のみが$t(Y)$のgeneric pointである．
 
 \section{Constructible Sets.} %% Ex3.18 
     $X$ :: Zariski topological spaceの部分集合族$\mathfrak{F}_X$を，以下のように定める．
     \begin{enumerate}[label=(\arabic*),leftmargin=5\parindent]
         \item 任意の開集合は$\mathfrak{F}_X$に属す．
-        \item $\mathfrak{F}_X$の有限個の元の共通部分は$\mathfrak{F}_X$に属す．
-        \item $\mathfrak{F}_X$の元の補集合は$\mathfrak{F}_X$に属す．
-        \item 以上の操作を繰り返して得られる集合のみが$\mathfrak{F}_X$の元である．
+        \item $A,B \in \mathfrak{F}_X$ならば$A \cap B, A^c \in \mathfrak{F}_X$．
+        \item 以上を有限回使って得られる部分集合のみが$\mathfrak{F}_X$の元．
     \end{enumerate}
     $\mathfrak{F}_X$の元を$X$のconstructible subsetと呼ぶ．
     ひとつのZariski spaceしか扱わない時は$\mathfrak{F}_X$を$\mathfrak{F}$と略す．
-    \subsection{$\mathfrak{F}$=$\{$ Finite Disjoint Union of Locally Closed Subsets.$\}=:\mathfrak{L}$}
 
+    \subsection{$\mathfrak{F}$=$\{$ Finite Disjoint Union of Locally Closed Subsets.$\}$}
     \begin{Lemma}
         $Z \subseteq X$ :: finite union of locally closed
         then
@@ -667,7 +796,8 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
         $\bigcup_{i=1} C_i$がlocally closed subsetのdisjoint unionで書ければ十分であることに注意する
         \footnote
         {
-        $[D_j \cap (V_j \cap W_j)] \cap [D_k \cap (V_k \cap W_k)]=([D_j \cap V_j] \cap [D_k \cap V_k]) \cap (W_j \cap W_k)=\emptyset$
+        $[D_j \cap (V_j \cap W_j)] \cap [D_k \cap (V_k \cap W_k)]
+            =([D_j \cap V_j] \cap [D_k \cap V_k]) \cap (W_j \cap W_k)=\emptyset$
         }
         ．
         実際，$\bigcup_{i=1} C_i=\bigcup_{j=1}^s D_j \cap V_j$となったとする．
@@ -700,6 +830,7 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
         $C_{\sigma} \cap C_{\sigma'}=C_{\sigma \cap \sigma'}$となる．
         $\sigma \cap \sigma' \in \Sigma_{n+1}$なのでやはりdisjoint．
     \end{proof}
+    この補題は\url{kanii.sambou.blog41.emark.com/blog-entry-92.html}に別証明がある．
 
     $\mathfrak{L}$の元は，以下のように書ける．
     \[
@@ -708,20 +839,22 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
         \{C_i\}_{i=1}^r, \{O_i\}_{i=0}^r\text{ :: closed,open subsets of }X.
     \]
     $\mathfrak{F} \supseteq \mathfrak{L}$は
+    any closed subset $\in \mathfrak{F}$と
     \[
         \bigsqcup_{i=1}^r C_i \cap O_i
-        =\left(\bigcap_{i=1}^r (C_i^c)^c \cap O_i\right)^c
+        =\left(\bigcap_{i=1}^r C_i^c \cap O_i^c \right)^c
     \]
     から明らか．
 
     $\mathfrak{F} \subseteq \mathfrak{L}$を示すために，
     induction by construct of constructible subsetを行う．
-    開集合全体を$\mathfrak{F}_0$とし，
-    これらの元に(2),(3)の操作を$n (\geq 0)$回繰り返して得られる集合族を$\mathfrak{F}_{n}$とする．
+    開集合全体を$\mathfrak{F}_0$とし，$n=0,1,\dots$について
+    \[ \mathfrak{F}_{n+1}=\mathfrak{F}_{n} \cup \{A \cap B, A^c \mid A,B \in \mathfrak{F}_{n}. \} \]
+    とおく．
     任意の$n$について$\mathfrak{F}_{n} \subseteq \mathfrak{L}$であることを示す．
     (1) $\mathfrak{F}_0$の元，すなわち開集合は明らかに$\mathfrak{L}$に属す．
     以下，$\mathfrak{F}_{n} \subseteq \mathfrak{L}$と仮定して，
-    数学的帰納法により$\mathfrak{F}_{n+1} \subseteq \mathfrak{L}$を示す．
+    $\mathfrak{F}_{n+1} \subseteq \mathfrak{L}$を示す．
     (2) $\mathfrak{F}_{n}$の2個の元は$\mathfrak{L}$に属す．
     それらの共通部分は$\mathfrak{F}_{n+1}$に属すが，これは以下のように書ける．
     \[
@@ -736,7 +869,7 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
     \[
         \bigcap_{i=1}^r (C_i^c \cup O_i^c)
         =
-        \bigcup_{1 \leq i,j \leq r} (C_i^c \cap O_j^c)
+        \bigcup_{(\pm_1,\dots,\pm_r) \in \{C,D\}^r} (\pm_1^c \cap \dots \cap \pm_r^c)
     \]
     これはlocally closed subsetのunionだから，Lemmaより，$\mathfrak{L}$に属す．
     以上より，任意の$n$について$\mathfrak{F}_{n} \subseteq \mathfrak{L}$である．
@@ -793,8 +926,289 @@ $Y=X$ならば主張は自明なので$Y \subsetneq X$とする．
     (3) $Z \in \mathfrak{F}_Y$について$f^{-1}(Z^c)=(f^{-1}(Z))^c$．
 
 \section{Chevalley's Theorem on Constructible Set.} %% Ex3.19 
+    $X,Y$ :: Noetherian scheme，$f: X \to Y$ :: finite type morphismとする．
+    この時，$U$ :: constructible subset in $X$について
+    $f(U)$ :: constructible subset in $X$となること(Chevalley's Theorem)を示す．
+
+    \subsection{Case Reduction.}
+    $X, Y, f$が次を満たす場合を考える．
+    \begin{enumerate}[label=(\arabic*),leftmargin=5\parindent]
+        \item $X,Y$ :: affine scheme.
+        \item $X,Y$ :: integral Noetherian scheme.
+        \item $f(X)$ :: dense in $Y$ ($\iff$ $f$ :: dominant).
+    \end{enumerate}
+    この時に$f(X)$ :: constructible in $Y$ならば
+    一般の設定でのChevalley's Theoremが成り立つことを示す．
+
+    \paragraph{方針: 有限細分．}
+    $U=\bigsqcup{i=1}^r C_i \cap O_i$ :: constructible subset in $X$を考えよう．
+    明らかに各$f(C_i \cap O_i)$がconstructible subset in $Y$ならば
+    $f(U)=\bigcup_{(i,j) \in I} f(C_i \cap O_i)$もconstructibleである．
+    この$U$を十分に細分すれば，各$C_i \cap O_i$は，
+    上の(1)から(3)で$X=C_i \cap O_i, f=f|_{C_i \cap O_i}$かつ$Y$ :: affine
+    と置き換えたものを満たすように出来る（これを以下で示す）．
+    なので，$f(X)=f(C_i \cap O_i)$ :: constructible in $Y$から
+    一般の設定でのChevalley's Theoremが成り立つ．
+
+    \paragraph{(i) $X,Y$ :: noetherian scheme, $f$ :: finite type.}
+    これが最初の仮定．
+
+    \paragraph{(ii) $X,Y$ :: affine noetherian scheme, $f$ :: finite type.}
+    $Y$ :: Noetherianから$Y$ :: quasi-compact．
+    なので$f(C \cap O) \subseteq \bigcup_{j=1}^s Y_j$とaffine finite open coverがとれる．
+    これと$f$ :: finite type morphismから，
+    $f^{-1}(Y_j)$についても$f^{-1}(Y_j)=\bigcup_{k=1}^t X_{jk}$と
+    affine finite open coverがとれる．
+    この時$C \cap O \cap X_{jk} \subset X_{jk}$はEx3.11bよりaffineであり，
+    $f(C \cap O \cap X_{jk})$も$Y_j$ :: affineの部分集合である．
+    よって，$X'=C \cap O \cap X_{jk}, Y'=Y_j, f'=f|_{C \cap O \cap X_{jk}}$とすれば
+    $X',Y'$ :: affine noetherian schemeとできる．
+
+    \paragraph{(iii) $X,Y$ :: integral affine affine noetherian scheme, $f$ :: finite type.}
+    $\cl_{Y'}f(X')$をirreducible componentに分解し$\bigcup_{i=1}^l K_i$とする．
+    さらに$f^{-1}(K_i)$は閉集合だから，
+    これも有限個のirreducible componentに分解し$\bigcup_{j=1}^m K_{ij}$とする．
+    この時$f|_{K_{ij}}: K_{ij} \to K_i$で，$K_{ij}, K_i$ともにirreducibleである．
+    したがって$X'$はirreducibleだと仮定できる．
+    今，$X', Y'$はaffine, Noetherian, irreducibleである．
+    irreducibleなので，reduced schemeにすればProp2.1よりintegralになる．
+    Noetherianはtopologicalな性質だからEx2.3bよりreduced schemeにしてもこれは保たれる．
+    $X''=X'_{red}, Y''=Y'_{red}$としよう．
+
+    \paragraph{(iii) $f(X)$ :: dense.}
+    $f'': X'' \to Y''$を考える．
+    これに対応するring homomorphismを$\phi: B'' \to A''$とすると，
+    準同型定理から，$\phi$は$\phi': B''/\ker \phi \to A$と一対一に対応する．
+    この時$f((0))=\phi^{'-1}((0))=(0)$だから，
+    （記号が良くない．）
+
+    \subsection{$f(X)$ Contains A Nonempty Open Subset Of $Y$.}
+    Ati-Mac Prop5.23において$b=1$とすると
+
+    \subsection{Complete The Proof}
+
+    \subsection{Give Some Examples Of Morphisms...}
 
 \section{Dimension.} %% Ex3.20 
+    $X$ :: integral scheme of finite type over a field $k$とする．
+    $X$ :: irreducible and reducedに注意．
+    $\zeta$を$X$のgeneric pointとする．
+    また，環の族$\{A_i\}_{i=1}^n$を，
+    $X=\bigcup_{i=1}^n \Spec A_i$かつ
+    $A_i$ :: integral \& finitely generated $k$-algebra
+    なるものとする．
+    このような$\{A_i\}_{i=1}^n$は$X$についての仮定から存在が保証される．
+
+    \begin{Claim}
+        $\dim R=\dim \Spec R$.
+    \end{Claim}
+    \begin{proof}
+        $\Spec R$のirreducible closed subsetは$R$の素イデアルに1:1対応する．
+        また，$\I{p}_0, \I{p}_1 \subseteq R$ :: 素イデアルについて，
+        以下が成り立つ．
+        \[
+            \I{p}_0 \subseteq \I{p}_1
+            \implies V(\I{p}_0) \supseteq V(\I{p}_1)
+            \implies \sqrt{\I{p}_0}=\I{p}_0 \subseteq \I{p}_1=\sqrt{\I{p}_1}.
+        \]
+        よってCh I, Prop1.7と同様に$\dim R=\dim \Spec R$が言える．
+    \end{proof}
+
+    \subsection{$\Forall{P \in X\text{ :: closed point}} \dim X=\dim \shO_{X,P}$.}
+    $P \in \Spec A_i$となる$A_i$を選んで$A:=A_i$とおく．
+    (b)にあるclaimから$\dim X=\dim A$．
+    そして$P$ :: closed pointは$A$の極大イデアル$\I{m}_P$に対応する．
+    Ch I, Them1.8bと$A/\I{m}_P$ :: fieldより，
+    \[ \dim X=\dim A=\height \I{m}_P=\dim \shO_{X,P}. \]
+
+    \subsection{$\dim X=\transdeg K(X)/k$.}
+    Ch I, Ex1.10bより，
+    ある$i$について$\dim X=\dim \Spec A_i$となる．
+    $A:=A_i$としておこう．
+    この$\Spec A$について，Ex3.6から$K(X) \cong \Quot A$．
+    そしてCh I, Them1.8aと$\Spec A=\dim A$から以下が得られる．
+    \[ \dim X=\dim \Spec A=\dim A=\transdeg K(X)/k. \]
+
+    \begin{Lemma}
+    \[ \Forall{i} \Forall{f \in A_i} \dim X=\dim (A_i)_f=\dim \Spec (A_i)_f \] 
+    \end{Lemma}
+    \begin{proof}
+        $A_i$がintegralかつfinitely generated $k$-algebra
+        ならば$(A_i)_f$もそうである，ということを用いる．
+        Ex3.6から任意の$i$について$K(X)=\Quot (A_i)_f=\Quot A_i$．
+        したがって(b)とCh I, Them1.8aより
+        \[ \dim X=\transdeg K(X)=\transdeg \Quot (A_i)_f=\dim (A_i)_f \]
+        となる．
+    \end{proof}
+
+    \subsection{If $Y$ :: closed in $X$, $\codim(Y,X)=\inf\{\dim \shO_{P,X} \mid P \in Y\}$.}
+    $Y$ :: irreducible closed subsetと仮定し，
+    $\Spec A_i \cap Y \neq \emptyset$となる$i$を選んで$A:=A_i$とする．
+    Lemmaから$\dim X=\dim A=\dim \Spec A$なので，
+    $\Spec A$内のirreducible closed subsetsだけ考えれば十分である．
+    $\Spec A$を$X$，$Y \cap \Spec A$を$Y$と書く．
+
+    $Y$ :: irreducible closed subsetなので
+    $Y=V(\I{p}_Y) \subseteq \Spec A$となる素イデアル$\I{p}_Y \subset A$が存在する．
+    \[ \codim(Y,X)=\dim \shO_{X, \I{p}_Y,}=\inf_{P \in Y} \dim \shO_{Y,P} \]を示そう．
+    $A$の極大な素イデアル列を考える．
+    irreducible closed subsetとprime idealでは包含関係が反転することに注意．
+    \[ (0) \subsetneq \dots \subsetneq \I{p}_Y (\subsetneq A). \]
+    これの長さが$\codim(Y,X)$である．
+    すべて$A_{\I{p}_Y}$に写すと，長さが同じ真の上昇素イデアル列が得られる．
+    \[ (0)_{\I{p}_Y} \subsetneq \dots \subsetneq (\I{p}_Y)_{\I{p}_Y} \left(\subsetneq A_{\I{p}_Y} \right). \]
+    明らかにこの列の長さは$\dim \shO_{\I{p}_Y, X}$．
+
+    $Z$ :: irreducible closed subsetのgeneric pointを$\zeta_Z$と書くことにする．
+    以上から次の等式がわかった．
+    \[ \dim Z=\dim \shO_{X,\zeta_Z}. \]
+    $Z$と$\zeta_Z$は一対一に対応しているから一般の場合での等式が得られる．
+    \[
+        \codim(Y,X)
+        =\inf \{ \dim Z \mid Z \subseteq Y \}
+        =\inf \{ \dim \shO_{X,\zeta_Z} \mid Z \subseteq Y \}.
+    \]
+
+    \subsection{If $Y$ :: closed in $X$, $\dim Y+\codim(Y,X)=\dim X$.}
+    (c)と同様に，$X$をaffine open subschemeと考えてよい．
+
+    $A$の素イデアルを$Y$からとり$\I{p}$とする．
+    Ch I, Them1.8bより以下が得られる．
+    \[ \dim \frac{A}{\I{p}}+\height \I{p}=\dim A. \]
+    ここから，$\height \I{p}$が極小ならば$\dim \frac{A}{\I{p}}$が極大になることは明らか．
+    そのような$\I{p}$が定める閉集合$C=V(\I{p})$が
+    \[ \dim Y=\dim C\left(=\dim \frac{A}{\I{p}}\right), \codim (Y,X)=\codim(C,X)(=\height \I{p}) \]
+    となるirreducible closed subsetである．
+    ここから$\dim Y+\codim(Y,X)=\dim X$は明らか．
+
+    \subsection{If $U$ :: nonempty open subset of $X$, then $\dim U = \dim X$.}
+    $i, f \in A_i$を適当に取れば$\Spec (A_i)_f \subseteq U$とできる．
+    したがってLemma Iより，
+
+    \subsection{If $k'/k$ :: field extension, then every irreducible component of $X':=X \times_k k'$ has dim$=\dim X$.}
+    $X'$は一般にはirreducibleであることを指摘しておく．
+    例えば以下の計算が出来る．
+    \[
+        \C \otimes_{\R} \C
+        =\C \otimes_{\R} \left(\frac{\R[x]}{(x^2+1)}\right)
+        =\frac{\C \otimes \R[x]}{(x^2+1)}
+        =\frac{\C[x]}{(x+i) \cap (x-i)}
+        =\C \times \C.
+    \]
+    この事実は「$\C/\R$は2次Galois拡大である」と表現できる．
+    すなわち，「$\C$は分解$\R$代数である」ということ．
+
+    $Z$ :: irreducible component in $X'$を任意に取る．
+    $A'_i=A_i \otimes_k k'$とおく．
+    $Z=\bigcup_{i=1}^r Z \cap \Spec A'_i$なので，
+    ch I, Ex1.10bより，ある$i$について$\dim Z=\dim Z \cap \Spec A'_i$となる．
+    この$i$だけを考えることにし，以下では添字の$i$を省略する．
+
+    $k'/k$の超越基底を$T$とし，$k_T=k(T)$とする．
+    （claim 1,2の証明で$T$の元を使う．）
+    この時$k \subseteq k_T \subseteq k'$はそれぞれ純超越拡大，代数的拡大．
+    さらに$A_T, A'$を以下で定める．
+    \[ A \otimes_k k(=A) \subseteq A \otimes_k k_T(=:A_T) \subseteq A \otimes_k k'(=:A') \]
+
+    $Z \cap \Spec A'(\neq \emptyset)$は
+    $\Spec A'$の極大なirreducible closed subset
+    \footnote
+    {
+        $Z \cap \Spec A'$は$Z$のgeneric pointを含むから，
+        $Z \cap \Spec A' \subsetneq W \cap \Spec A'$ならば
+        $\cl_X$を取ることで$Z \subsetneq W$となる．
+        irreduciblityは$\cl_X$をとっても保たれるから，
+        $W \cap \Spec A'$ :: irreducible component in $\Spec A'$は$Z$の極大性に反する．
+    }
+    だから，
+    $A'$の極小な素イデアル$\I{p}$を用いて
+    \[ \Spec A'/\I{p} \homeo Z \cap \Spec A' \]と出来る．
+    以上に加え，以下で示すclaim 1,2をまとめれば，主張が得られる．
+    \[ \dim Z=\dim A'/\I{p}=\dim A_T=\dim A=\dim X. \]
+
+    \begin{Claim}[1]
+        $\dim A'/\I{p}=\dim A_T$.
+    \end{Claim}
+    \begin{proof}
+        \paragraph{(i) $A_T \subseteq A'$ :: flat extension.}
+        \begin{align*}
+            {}&         k'\text{ :: free $k_T$-mod.} \\
+            \implies&   k'\text{ :: flat $k_T$-mod.} \\
+            \implies&   (A \otimes_k k_T) \otimes_{k_T} k'\text{ :: flat $A \otimes_k k_T$-mod \footnote{Ati-Mac Ex2.20}.} \\
+            \implies&   A \otimes_k k'\text{ :: flat $A \otimes_k k_T$-mod \footnote{Ati-Mac Ex2.15}.}
+        \end{align*}
+
+        \paragraph{(ii) $A_T$ :: integral finitely generated $k_T$-algebra.}
+        finitely generated $k_T$-algebraであることは直ちに分かる．
+        $A \otimes_k k_T$の元は
+        $\sum a_i \otimes \frac{f_i}{g_i} (a_i \in A, f_i, g_i \in k[T])$
+        という形の有限和なので，
+        分母$g_i$を払えば$A \otimes_k k[T]$がintegralであることへ持ち込める．
+        これは$A[X]$がintegralであることの証明をそのままなぞれば良い．
+
+        \paragraph{Summarize.}
+        $A_T \subseteq A'$がflat(i) integral\footnote{Ati-Mac Ex5.3} ring extensionであることから
+        going up/down thmが成り立つ\footnote{Matsumura Thm9.5}ので
+        次元に加えて各素イデアルのheight, depthまで一致
+        \footnote{次元はgoing up (Matsumura Ex9.2), heightはgoing down (Matsumura Ex9.8, 9.9), depthはAti-Mac Prop5.6}．
+        Ch I,Thm1.8bが$A_T$に対して成り立つ(ii)ので$A'$に対しても成り立つ．
+        したがって特に以下が成り立つ．
+        ただし$\I{p}$は$A'$の極小素イデアルで，$\I{q}=A_T \cap \I{p}$．
+        \[
+        \xymatrix@R=5pt@C=5pt
+        {
+            \dim A_T \ar@{=}[r]& \height \I{q}& \!\!+\!\! & \dim \frac{A_T}{\I{q}} \\
+            \dim A' \ar@{=}[u]& \height \I{p}\ar@{=}[u]& {} &\dim \frac{A'}{\I{p}}\ar@{=}[u] \\
+            {} & 0 \ar@{=}[u]& {} &{}
+        }
+        \]
+        すなわち$\dim A_T=\dim \frac{A'}{\I{p}}$．
+
+%        (2)
+%        $\I{p}$ :: minimal prime idealから，$\I{p}$の元は零因子(Ati-Mac Ex3.9)．
+%        なので$x \in \I{q}$に対して$y \in A \otimes_k k'$が存在し$xy=0$となる．
+%        これは$A \otimes_k k'$ :: torsion-free $A \otimes_k k_T$-modである(3)ことから
+%        $x(\in A \otimes_k k_T)$ :: 零因子を意味する．
+%        $A \otimes_k k_T$はintegralなので$x=0$．
+
+%        $\I{p} \subset A \otimes k'$  :: minimal prime idealについて，
+%        $\dim A \otimes k'=\dim A \otimes k'/\I{p}$であることを示す．
+
+%        $A \otimes_k k_T \subseteq A \otimes_k k'$はintegral ring extension(Ati-Mac Ex5.3)．
+%        $\I{q}=\I{p} \cap A \otimes_k k_T$ :: prime idealとすると，
+%        Ati-Mac Prop5.6より，$A \otimes_k k_T/\I{q} \subseteq A \otimes k'/\I{p}$はintegral ring extensionである．
+%        また，$A \otimes_k k_T$はintegral finitely generated $k_T$-algebraである(1)．$\I{q}=(0)$（2），
+%        すなわち$\height \I{q}=0$であるから，ch I, Thm1.8bより次が得られる．
+%        \[ \dim A \otimes_k k'/\I{p}=\dim A \otimes_k k_T/\I{q}=\dim A \otimes_k k_T=\dim A \otimes_k k'. \]
+    \end{proof}
+    \begin{Remark}
+        Matsumuraの用語では，以上は$A'$がEquidimensional ringであることを示したことになる．
+        （Eisenbudではさらに任意の極大イデアルでの局所化が次元を変えないことも要求する．）
+        Eisenbud, Cor18.10から，$A'$がCohen-Macaulay ringであることを示しても以上の命題が得られる．
+        これはちょっと難しい．次の文献が良い資料になる．
+        S. Bouchiba, S. Kabbaj(2002) "Tensor Products of Cohen-Macaulay Rings."
+        \url{https://arxiv.org/abs/math/0606692}
+    \end{Remark}
+
+    \begin{Claim}[2]
+        $\dim A_T=\dim A$.
+    \end{Claim}
+    \begin{proof}
+    $S$の存在はNoether Normalization Theoremから,
+    $k[S] \subseteq A$がintegral ring extensionであるような
+    $k$上代数的独立な元の集合$S(\subset A)$が存在する．
+    Ati-Mac Ex5.3より，以下はintegral ring extension．
+    \[ k[S] \otimes k(T) \subseteq A \otimes k(T) (=A_T \subseteq A \otimes k'=A'). \]
+    よって$\dim k[S] \otimes k(T)=\dim A_T(=\dim A')$．
+
+    $Q:=\Quot(k[S] \otimes k(T))$の超越基底は，書いてみれば
+    \[ \{s \otimes 1, 1 \otimes t \mid s \in S, t \in T\} \]のようなもので，
+    濃度は$\#S+\#T$．
+    この内$k(T)(\cong k \otimes k(T))$上代数的独立な元は$\#S$個（有限個）．
+    すなわち$\transdeg Q/k(T)=\#S$．
+    Ch I, Th1.8aより，
+    \[ \dim A=\#S=\transdeg Q/k(T)=\dim k[S] \otimes k(T)=\dim A_T. \]
+    \end{proof}
 
 \section{$\Spec$ of D.V. Ring Gives Counterexample for Ex3.20a,d,e.} %% Ex3.21 
 

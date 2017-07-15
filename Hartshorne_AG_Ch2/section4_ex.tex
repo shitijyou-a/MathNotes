@@ -1,0 +1,156 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[all]{xy}
+\usepackage{../math_note, exercise, enumitem}
+\renewcommand{\thesection}{Ex3.\arabic{section}}
+
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Var}{\mathbf{Var}}
+\newcommand{\Rings}{\mathbf{Rings}}
+\newcommand{\red}[1]{#1_{\text{red}}}
+\newcommand{\basesp}{\operatorname{sp}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\Rat}{\operatorname{Rat}} %% rational points
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\CoverU}{\mathfrak{U}}
+\newcommand{\OpenIn}{\text{ :: open in }}
+\newcommand{\ClosedIn}{\text{ :: open in }}
+\newcommand{\mnot}{/\hspace{-1.2ex}}
+
+\begin{document}
+\section{Finite Morphism is Proper.} %% Ex4.1 
+    $f: X \to Y$をfiniteだとする．
+    Cor4.8fとEx3.4より，$X,Y$がaffine schemeである場合について調べれば十分である．
+
+    $X=\Spec A, Y=\Spec B$とすると，$A$ :: finitely generated $B$-module．
+    なので特に$X$ :: Noetherian scheme．
+    任意の$R$ :: valuation ringをとり，$K=\Quot R$とする．
+    今，以下の可換図式が成り立っているとする．
+    \[
+    \xymatrix
+    {
+        \Spec K \ar[d] \ar[r]& \Spec A \ar[d]^-{f} \\
+        \Spec R \ar[r] & \Spec B
+    }
+    \]
+    これに対応して，以下の環の可換図式が成り立つ．
+    Prop2.3より，二つの可換図式は一対一に対応している．
+    \[
+    \xymatrix
+    {
+        K  & A \ar[l]^-{u} \\
+        R  \ar@{^{(}->}[u]& B \ar[u]_-{\phi} \ar[l]_-{v}
+    }
+    \]
+    $A$ :: integral / $B$から$v(B) \subseteq u(A)$ :: integral ring extensionが得られる
+    \footnote
+    {
+        $a \in A$をとると，$a^n+\phi(b_{n-1})a^{n-1}+\dots+\phi(b_0)=0$となる$n>0$と$b_i \in B$が存在する．
+        両辺を$u$で写すと，$u \circ \phi=v$より$u(a)^n+v(b_{n-1})u(a)^{n-1}+\dots+v(b_0)=0$．
+    }．
+    $v(B) \subseteq R$と合わせて，$u(A)(\subseteq K)$ :: initegral / $R$．
+    $R$が付値環であることから，$R$は$K$上整閉．
+    よって$u(A) \subseteq R$．このことから$u: A \to R$の存在が得られる．
+    さらに，$R \to K$が単射であることからこのような射はただひとつ．
+    図式の一対一対応から，$\Spec R \to \Spec A$の射がただひとつ存在することがわかった．
+
+\section{ } %% Ex4.2 
+    $U$ :: dense in $X$とし，以下の可換図式で$f,g$ :: $S$-morphismは$f|_U=g|_U$を満たすとする．
+    \[
+    \xymatrix
+    {
+        U \ar@{^{(}->}[d]& {} & {} \\
+        X \ar[r]^-{h} \ar[d]_-{f}\ar[rrd]_(0.15){g}& \ar[ld] Y \times_S Y \ar[rd] &\ar@{=}[lld]\ar@{=}[d] \ar[l]_-{\Delta} Y \\
+        Y \ar[r]& S & \ar[l]Y
+    }
+    \]
+    $U \to X \to Y=Y \to Y \times_S Y$とたどると，$\Delta(f(U))=h(U)$が得られる．
+    $f(U) \subseteq Y$から$h(U) \subseteq \Delta(Y)$．
+    さらに次の計算から$h(X) \subseteq \Delta(Y)$が得られる．
+    \[ h(X)=h(\cl_X(U)) \subseteq \cl_Y(h(U)) \subseteq \cl_Y(\Delta(Y))=\Delta(Y). \]
+    最後の等号で$Y$ :: separated / $S$を用いた．
+    可換図式にある$Y \times_S Y \to Y$の射を$\pr_1, \pr_2$とする．
+    $h(X) \subseteq \Delta(Y)$から以下が得られる．
+    \[
+        \Forall{x \in X} \Exists{y \in Y}
+        f(x)=\pr_1 \circ h(x)=\pr_1 \circ \Delta(y)=y=\pr_2 \circ \Delta(y)=\pr_2 \circ h(x)=g(x).
+    \]
+    よってtopological spaceの射として$f=g$．
+
+    さらにschemeの射として$f=g$であることを示す．
+    \begin{Claim}
+        $V$ :: open in $Y$を任意に取る．
+        $\bar{V}=f^{-1}V \cap U=g^{-1}V \cap U(\neq \emptyset)$とする．
+        任意の$s \in \shO_Y(V)$に対し$s|_{\bar{V}}=0$ならば$s=0$．
+    \end{Claim}
+    $f|_U=g|_U$から$(f^{\#}(s)-g^{\#}(s))|_{\bar{V}}=0$が直ちに得られる．
+    なので，この主張が示されれば$f^{\#}(s)-g^{\#}(s)=0$すなわち$f^{\#}=g^{\#}$が得られる．
+    \begin{proof}
+        $V$ :: affineの場合に調べれば十分なので$V=\Spec A$とする．
+        $\I{p} \in \bar{V}$を任意に取ると，$s|_{\bar{V}}=0$より$s_{\I{p}}=0$．
+        これは$s=0$ in $A_{\I{p}}$を意味する．
+        したがって次が成り立つ．
+        \[ \Exists{t \not \in \I{p}} st=0 \in \I{p}. \]
+        よって$s \in \I{p}$，$\I{p} \in V(s)$となる．
+        $\I{p} \in \bar{V}$は任意にとっていたので$\bar{V} \subseteq V(s)$．
+        $\bar{V}$は$V=\Spec A$でdenseだから，両辺の閉包をとって$V=V(s)$．
+        すなわち$s=0$．
+    \end{proof}
+
+\section{$X$ :: Separated over an Affine Scheme $S$.} %% Ex4.3 
+    $S$ :: affine scheme, $X$ :: separated scheme /$S$,
+    $U, V$ :: affine open subscheme of $X$とする．
+    以下がfiber productであれば，主張が示せる．
+    \[
+    \xymatrix
+    {
+        U \cap V \ar[d]\ar[r]& X \ar[d]^-{\Delta} \\
+    U \times_S V \ar[r]& X \times_S X
+    }
+    \]
+    実際，$\Delta$ :: closed immersionとEx3.11aより
+    $U \cap V \to U \times_S V$はclosed immersion．
+    $U \times_S V$ :: affineとEx3.11bより$U \cap V$ :: affine．
+
+\section{"The Image of a Proper Scheme is Proper."} %% Ex4.4 
+
+\section{ } %% Ex4.5 
+
+\section{$f$ :: proper morphism of affine varieties/$k$. Then $f$ :: finite.} %% Ex4.6 
+    $f: X \to Y$を考える．
+    $X,Y$ :: affine variety / $k$より，
+    $X,Y$は$A, B$ :: affine domain / $k$を用いて$X=\Spec A, Y=\Spec B$と書ける．
+    $f$から誘導される環準同型を$\phi: B \to A$とする．
+    $A, B$ :: affine domain / $k$から特に$X, Y$はNoetherianである．
+    また，$f$ :: finite typeより$A$ :: finitely generated $B$-algebra．
+    よって，$f$ :: finiteであるためには$\phi$ :: integral
+    すなわち$A$ :: integral / $\phi(B)$を示せば十分である．
+
+    $K=\Quot(\phi(B))$とし，
+    $R$を$\phi(B) \subseteq R \subset K$であるような任意のvaluation ringとする．
+    Thm4.7から以下の可換図式が得られる．
+    \[
+    \xymatrix
+    {
+        K  & A \ar@{_{(}->}[l] \ar[ld]\\
+        R  \ar@{^{(}->}[u]& B \ar[u]_-{\phi} \ar[l]
+    }
+    \]
+    $A \to R \to K=A \to K$かつ右辺が埋め込みであることから$A \to R$は埋め込みである．
+    すなわち$(\phi(B) \subseteq )A \subseteq R$．
+    $R$のとり方とThm4.11より，$A \subseteq \overline{\phi(B)}$．
+    よって$A$ :: integral / $\phi(B)$．
+
+\section{Schemes Over $\R$} %% Ex4.7 
+
+\section{Let $\wp$ :: Property of Morphisms of Schemes} %% Ex4.8 
+
+\section{Composition of Projective Morphisms is Projective} %% Ex4.9 
+
+\section{Chow's Lemma.} %% Ex4.10 
+
+\section{ } %% Ex4.11 
+
+\section{Examples of Valuation Rings.} %% Ex4.12 
+
+\end{document}
