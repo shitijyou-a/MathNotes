@@ -1,0 +1,164 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+
+\title{冪級数の収束判定法}
+\author{七条 彰紀}
+
+\begin{document}
+    \maketitle
+
+    $B(r;z_0)=\{ z \in \C : |z-z_0|<r \} \subset \C$とする．
+    これは$z_0$を中心とする半径$r$の$\C$における円盤である．
+    冪級数についていくつかの収束判定法を紹介する．
+
+    \section{Weierstrass M-test}
+    収束判定法では次の事実が基本である．
+    \begin{Them}
+        関数列$\{f_n: A \to \C\}_{n=0}^{\infty}$の級数$\sum_{n=0}^{\infty} f_n(x)$を考える．
+        ある実数列$\{M_n\}_{n=0}^{\infty} \subset \R$について
+        \[ \Forall{n=1,2,\dots} \sup_{x \in A} |f_n| \leq M_n \]
+        が成り立ち，かつ$\sum_{n=0}^{\infty} M_n$が収束するとき，
+        関数項級数$\sum_{n=0}^{\infty} f_n(x)$も収束する．
+    \end{Them}
+    この定理を満たす関数項級数$\sum_{n=0}^{\infty} f_n(x)$は，
+    特に正規収束すると言う．
+
+    \section{Abel theorem}
+        \begin{Them}[Abel theorem]
+            $\{a_n\}_{n=0}^{\infty} \subset \C$とする．
+            \[
+                z_0 \in \C,~ \sum_{n=0}^{\infty}{a_n z^n_0} < \infty
+                \implies
+                \Forall{z \in B(|z_0|; 0)} \sum_{n=0}^{\infty}{a_n z^n} < \infty
+            \]
+            特に，この時$\sum_{n=0}^{\infty}{a_n z^n}$は正規収束する．
+        \end{Them}
+        \begin{proof}
+            命題$\sum_{n=0}^{\infty}{a_n z^n_0} < \infty \implies \lim_{n \to \infty}{a_n z^n_0}=0$と，
+            $|\frac{z}{z_0}|<1$を用いて，Weierstrass M-testへ帰着する．
+        \end{proof}
+
+    \section{Cauchy-Hadamard theorem}
+        \begin{Them}[Cauchy-Hadamard theorem]
+        一複素変数$z$に関する，以下のような冪級数を考える．
+        \[ f(z) = \sum_{n = 0}^{\infty} c_{n} (z-a)^{n}. \]
+        ここで $a, c_n \in \C$ とする．このとき，$f$の収束半径は以下のように与えられる．
+
+        \[
+            \frac{1}{R}=\limsup_{n \to \infty} \big( | c_{n} |^\frac{1}{n} \big)
+            :=\lim_{n\to\infty}\sup\{| c_{n} |^\frac{1}{n} : k\geq n\}.\]
+        \end{Them}
+
+        \begin{proof}
+            $\limsup_{n \to \infty} \big( | c_{n} |^\frac{1}{n} \big)=0$
+            のとき冪級数の収束半径が$\infty$であることだけ示す．
+
+            仮定より，任意の正数$\epsilon$に対し，
+            十分大きい$n$について$0 \leq | c_{n} |^\frac{1}{n} < \epsilon$が成立する．
+            そこで任意の$z \in \C$をとり，$\epsilon=\frac{1}{2|z|}$とする．
+            すると，
+            \[
+                0 \leq | c_{n} |^\frac{1}{n} < \epsilon
+                \implies
+                0 \leq | c_{n} |^\frac{1}{n}|z| < 1/2
+                \implies
+                0 \leq | c_{n} ||z|^{n} < (1/2)^n
+            \]
+            よってWeierstrass M-testにより，任意の$z \in \C$について冪級数は収束する．
+        \end{proof}
+
+    \section{Ratio test}
+        \begin{Them}[Ratio test]
+        べき級数$\sum_{n=0}^\infty{a_n}z^n$について，
+        任意の$n$について$a_n \neq 0$，かつ
+        \[
+            \rho = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|
+        \]
+        が存在するならば，$R=\frac{1}{\rho}$がべき級数の収束半径に等しい．
+        \end{Them}
+
+        \begin{proof}
+            今，考えている冪級数を二つに分けて，
+            \[
+                \sum_{n=0}^\infty{a_n z^n}=\sum_{n=0}^{N-1}{a_n z^n}+\sum_{n=N}^{\infty}{a_n z^n}
+            \]
+            としてみると，前半は有限級数であるから有限値に収束する．
+            なので後半の収束だけを考える．
+            $z=0$での収束は自明なので，以下では$z \neq 0$とする
+
+            $0 \leq \rho < \infty$とする．極限の定義から，以下が成立．
+            \[
+                \Forall{\epsilon>0} \Exists{N \in \N} \Forall{n \in N}
+                n>N \implies 0 \leq \left| \frac{a_{n+1}}{a_n} \right| < \rho + \epsilon
+            \]
+            ここで，任意の$n \in \mathbb{N}$について，
+            \[
+                |a_n|
+                = \overbrace
+                {
+                    \left|\frac{a_{n}}{a_{n-1}}\right| \left|\frac{a_{n-1}}{a_{n-2}}\right| \cdots \left|\frac{a_{N}}{a_{N-1}}\right|
+                }^{ (n-N+1)個 } |a_{N-1}|
+            \]
+            となる，したがって次のように命題がつながる．
+            \begin{eqnarray*}
+                \Forall{\epsilon>0} \Exists{N \in \N} \\
+                \Forall{n \in \N} n>N &\implies& 0 \leq \left| \frac{a_{n+1}}{a_{n}} \right| < \rho + \epsilon \\
+                \iff \Forall{n \in \N} n>N &\implies&
+                    0 \leq
+                        \left| \frac{a_{n+1}}{a_{n}} \right|,
+                        \left| \frac{a_{n}}{a_{n-1}} \right|,
+                        \dots,
+                        \left| \frac{a_{N}}{a_{N-1}} \right|
+                    < \rho + \epsilon \\
+                &\implies&  0 \leq |a_n|< (\rho+\epsilon)^{n-N+1}|a_N| \\
+                &\iff&      0 \leq |a_n||z^n|< (\rho+\epsilon)^{n-N+1}|a_N| |z^n| \\
+                &\iff&      0 \leq |a_n||z^n|< \frac{|z|^n}{\frac{1}{(\rho+\epsilon)^{n-N+1}}}|a_N| \\
+                &\iff&      0 \leq |a_n||z^n|< \left( \frac{|z|}{\frac{1}{\rho+\epsilon}} \right)^{n} (\rho+\epsilon)^{-N+1} |a_N| \\
+            \end{eqnarray*}
+
+            $0 < \rho<\infty$の場合を考える．
+            まず，$|z|<1/\rho$となる任意の各$z$に対して適切に$\epsilon$をとれば
+            \footnote{ $|z| \neq 0$ならば$0< \epsilon < \frac{1}{|z|} - \rho$の範囲にある$\epsilon$を，
+            例えば$\frac{1}{2} \left(\frac{1}{|z|} - \rho \right)$をとる． }，
+            $\left( \frac{|z|}{\frac{1}{\rho+\epsilon}} \right)<1$となる．
+            したがって，
+            \begin{equation*}
+                \sum_{n=N}^{\infty}{ \left( \frac{|z|}{\frac{1}{\rho+\epsilon}} \right)^{n} (\rho+\epsilon)^{-N+1} |a_N|} \\
+                =(\rho+\epsilon)^{-N+1} |a_N| \sum_{n=N}^{\infty}{ \left( \frac{|z|}{\frac{1}{\rho+\epsilon}} \right)^{n}}
+            \end{equation*}
+            となる．$N$は各$\epsilon$に対して定まる有限値だから，これは収束する．
+            Weierstrass M-testにより，冪級数の収束半径は$1/\rho$．
+
+            $\rho=0$の場合を考える．
+            このときは0でない任意の$z$について，同様に
+            $ 0< \epsilon < \frac{1}{|z|}$の範囲の$\epsilon$をとれば
+            $\left( \frac{|z|}{\frac{1}{\epsilon}} \right)<1$とすることができて，
+            Weierstrass M-testにより収束半径は$\infty$となる．
+
+            最後に，$\rho=\infty$の場合．
+            ここまでほとんどこのケースの考察はしていないことに注意しておく．
+            しかし同様の議論をすると$\lim_{n \to \infty}{|a_n|}=\infty$がわかる．
+            したがって命題$\sum_{n=0}^{\infty}{a_n z^n} < \infty \implies \lim_{n \to \infty}{a_n z^n}=0 \implies \lim_{n \to \infty}{|a_n z^n|}=0$
+            の対偶より，冪級数は発散する．
+        \end{proof}
+
+        これは$\sin z=z-\frac{z^3}{3!}+\frac{z^5}{5!}+\cdots$のように，
+        十分先の項でも係数が0になることがあるとそのままでは使えない．
+        しかし$\sin z$や$\cos z$には以下のように変形するとこの方法が使える．
+        \begin{eqnarray*}
+            \sin z \\
+            &=& 1 \cdot \sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}z^{2n+1}} \\
+            &=& (z \cdot 1/z) \cdot \sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}z^{2n+1}} \\
+            &=& z \cdot \left(1/z \cdot \sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}z^{2n+1}} \right) \\
+            &=& z \cdot \sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}z^{2n}} \\
+%            &=& w^{\frac{1}{2}} \sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}w^n} ~~ (w := z^2)\\
+        \end{eqnarray*}
+        そこで，$S(z)=\sum_{n=0}^{\infty}{\frac{(-1)^{n}}{(2n+1)!}z^n}$の収束半径を考える．
+        以下の計算から，これの収束半径は$\infty$と分かる．
+        \[
+            \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|
+            = \lim_{n \to \infty} \frac{1}{2n(2n+1)}=0
+        \]
+        したがって$\sin z=zS(z^2)$の収束半径は$(\infty)^{1/2}=\infty$であることが示される．
+
+\end{document}

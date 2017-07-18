@@ -3,31 +3,31 @@
 
 \begin{document}
     \begin{Prop}
-        位相空間$X$とその部分集合$Y$を考える。
-        ある$X$の被覆$\{ U_{\lambda} \}_{\lambda \in \Lambda}$であって、
-        任意の$\lambda$で$Y \cap U_{\lambda}$が$U_{\lambda}$において閉であるようなものが有るとき、
-        $Y$が閉であることを示せ。
+        位相空間$X$とその部分集合$Y$を考える．
+        ある$X$の被覆$\{ U_{\lambda} \}_{\lambda \in \Lambda}$であって，
+        任意の$\lambda$で$Y \cap U_{\lambda}$が$U_{\lambda}$において閉であるようなものが有るとき，
+        $Y$が閉であることを示せ．
     \end{Prop}
     一言で言えば，この命題は「閉集合である，ということは局所的な性質である」ということである．
 
     \begin{proof}
-    対偶を示す。
-    $Y$が閉でなければ、$x \not \in Y$かつ$x \in \cl_{X}(Y)$なる点$x$が存在する。
-    すると$\{ U_{\lambda} \}_{\lambda \in \Lambda}$は$X$の被覆だから、
-    この中に$x$の開近傍が少なくともひとつ存在する。それを$U$としよう。
-    $U \cap Y$が$U$において閉集合でないことを示す。
-    $x \not \in Y$から、$x \not \in U \cap Y$が得られる。
-    あとは$x \in \cl_{U}(U \cap Y)$が得られれば証明は終わる。
+    対偶を示す．
+    $Y$が閉でなければ，$x \not \in Y$かつ$x \in \cl_{X}(Y)$なる点$x$が存在する．
+    すると$\{ U_{\lambda} \}_{\lambda \in \Lambda}$は$X$の被覆だから，
+    この中に$x$の開近傍が少なくともひとつ存在する．それを$U$としよう．
+    $U \cap Y$が$U$において閉集合でないことを示す．
+    $x \not \in Y$から，$x \not \in U \cap Y$が得られる．
+    あとは$x \in \cl_{U}(U \cap Y)$が得られれば証明は終わる．
 
-    まず、$X$での閉集合$Z$を用いて$\cl_{U}(U \cap Y)=U \cap Z$と書く。
-    $x \not \in \cl_{U}(U \cap Y)=U \cap Z$と仮定すると、$x \in U$なので$x \not \in Z$が得られる。
-    すると$U \cap (X \setminus Z)$は$x$の開近傍となる。
-    $x \not \in Y$かつ$x \in \cl_{X}(Y)$から$x$は$Y$の集積点だから$U \cap (X \setminus Z)$は($x$と異なる)$Y$の点$y$も含む。
-    $y \in Y$かつ$y \in U \cap (X \setminus Z)$なので$y \in U \cap Y$かつ$y \not \in Z$。
-    しかし$y \in U \cap Y \subseteq U \cap Z$なので$y \in U \cap Z$。
-    したがって$x \not \in \cl_{U}(U \cap Y)$とすると$y \not \in Z$と$y \in Z$が同時に得られ、矛盾。
-    よって$x \in \cl_{U}(U \cap Y)$かつ$x \not \in U \cap Y$が示され、
-    $U \cap Y$が$U$における閉集合では無いことが示される。
+    まず，$X$での閉集合$Z$を用いて$\cl_{U}(U \cap Y)=U \cap Z$と書く．
+    $x \not \in \cl_{U}(U \cap Y)=U \cap Z$と仮定すると，$x \in U$なので$x \not \in Z$が得られる．
+    すると$U \cap (X \setminus Z)$は$x$の開近傍となる．
+    $x \not \in Y$かつ$x \in \cl_{X}(Y)$から$x$は$Y$の集積点だから$U \cap (X \setminus Z)$は($x$と異なる)$Y$の点$y$も含む．
+    $y \in Y$かつ$y \in U \cap (X \setminus Z)$なので$y \in U \cap Y$かつ$y \not \in Z$．
+    しかし$y \in U \cap Y \subseteq U \cap Z$なので$y \in U \cap Z$．
+    したがって$x \not \in \cl_{U}(U \cap Y)$とすると$y \not \in Z$と$y \in Z$が同時に得られ，矛盾．
+    よって$x \in \cl_{U}(U \cap Y)$かつ$x \not \in U \cap Y$が示され，
+    $U \cap Y$が$U$における閉集合では無いことが示される．
     \end{proof}
     \begin{proof}
         \begin{align*}

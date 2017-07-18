@@ -1,8 +1,6 @@
-/HilbeltsNullstellensatz/references/
-/Atiyah-MacDonald/note/
 /PDF/
-/pics/
 /**/ref/
+/junks/
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -184,3 +182,4 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 /PDF
+/junks/field/field.pdf

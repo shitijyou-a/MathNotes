@@ -10,8 +10,8 @@ MathNotes
 * Hartshorne_AG_Ch2 -- 同じくChapter IIに関連するノート群．
 * SylowTheorem -- Sylowの定理のできるだけself-containedな証明と応用．
 * BernsteinTheorem -- Cantor-Schroder-Bernsteinの定理の極めて詳細な証明．
-* func_analysis -- 関数解析の定義・定理をまとめたチートシート．
-* just_one -- そういえば証明したことがないな，とか，知っていると便利な定理とか．
+* FunctionalAnalysis -- 関数解析の定義・定理をまとめたチートシート．
+* JustOne -- そういえば証明したことがないな，とか，知っていると便利な定理とか．
 
 コンパイル
 ------------
