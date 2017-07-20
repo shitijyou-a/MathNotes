@@ -1,0 +1,89 @@
+
+\begin{Lemma}[Zariski's Lemma]
+体$k$上の有限生成代数$K$が体ならば，$K$は$k$の有限次代数拡大体である．
+\end{Lemma}
+
+\paragraph{Noether normalization theoremを使うもの．}
+\begin{proof}
+    Noether normalization theoremにより，
+    有限生成代数$K$が$R:=k[y_1, \dots, y_m]$の整拡大となり，
+    しかも$k$上代数独立であるような元$y_1, \dots, y_m$が存在する．
+    
+    $m>0$とする．
+    $y_1 \in K$ (::field)なので$y_1^{-1} \in K$．
+    したがって$y_1^{-1}$は$R$上整であるから，
+    以下が成立するような$f \in R$と非負整数$n$が存在する．
+    \[ (y_1^{-1})^n+f(y_1, \dots, y_m) (y_1^{-1})^{n-1}=0 \]
+    この両辺に$y_1^{n}$を掛けると，
+    \[ 1+f(y_1, \dots, y_m) y_1=0 \]
+    となり，これは$y_1, \dots, y_m$が$k$上代数独立
+    \footnote{$f(y_1, \dots, y_m)=0$となる0でない多項式$f \in k[x_1, \dots, x_m]$が存在しない} 
+    であることに矛盾する．
+    よって$m=0$．
+
+    以上より，$K$は$k$の整拡大，すなわち代数拡大となる．
+    再び$K$が$k$上有限生成代数な体であることから，$K$は$k$の有限次代数拡大体．
+\end{proof}
+%「$m>0$とする．...よって$m=0$．」の部分は，
+%「$m>0$とする．
+%$R:=k[y_1, \dots, y_m]$のKrull次元は$m$以上．
+%だからその整拡大$K$のKrull次元も$m$以上．
+%しかし体$K$のKrull次元は0なので矛盾．」
+%に置き換えることも出来る．
+%ただしこの書き方ではGoing-Up Theoremを用いることになる．
+%「$R$のKrull次元は$m$以上．」は，
+%\[ 0 \subset (y_1) \subset \cdots \subset (y_1, \dots, y_m) \]
+%という$R$のイデアル列を作り，これらの一つ一つが素イデアルであることを示せば良い．
+
+\paragraph{整従属性を使うもの．}
+(\cite{atimac}, Ex5.18と\cite{oneline}を参照)
+\begin{proof}
+    $k$代数としての$K$の生成元を$x_1,\dots,x_n$とする．
+    $n=1$ならば定理の成立は自明なので$n>1$としよう．
+    示したいことは$x_1,\dots,x_n$のすべてが$k$上代数的であること．
+    なので帰納的に考えて，
+    $x_2,\dots,x_n$が$k(x_1)$上代数的ならば$x_1,\dots,x_n$が$k$上代数的であることを示せば良い
+    \footnote
+    {
+        言い換えれば
+        $K=k(x_1,\dots,x_{n-2})(x_{n-1})[x_n] 
+        \implies \dots \implies K=k(x_1)[x_2,\dots,x_n] \implies K=k[x_1][x_2\dots,x_n]$
+    }．
+    そこで，$x_1$が$k$上代数的でなく，同時に
+    $x_2,\dots,x_n$が$k(x_1)$上代数的であると仮定し，背理法を用いる．
+    この時，$K=k(x_1)[x_2,\dots,x_n]$となる．
+
+    $x_2,\dots,x_n$が$k[x_1]_f(=k[x_1][1/f])$上代数的であるような$f \in k[x_1]$が存在する．
+    実際，$x_2$が$k(x_1)$上代数的であることから，
+    次の式を満たす$f_{i},g_{i} \in k[x_1]$が存在する．
+    \[
+        x_2^{d}+\left( \frac{g_{d-1}}{f_{d-1}} \right) x_2^{d-1}+\dots+\left(\frac{g_{0}}{f_{0}}\right)=0
+        \mwhere d>0, f_{i},g_{i} \in k[x_1], g_{i} \neq 0.
+    \]
+    $\tilde{f}_2:=\prod_{i=0}^{d-1} f_{i}$とおく．
+    $\frac{g_{d-1}}{f_{d-1}}$から$\frac{g_{0}}{f_{0}}$までを通分すると，
+    $x_2$は$k[x_1][1/\tilde{f}_2]$上整であることが分かる．
+    $x_3,\dots,x_n$も同様にして，結局$x_2,\dots,x_n$が
+    $k[x_1]\left[1/\tilde{f}_2,\dots,1/\tilde{f}_n\right]$
+    上代数的になるような$\tilde{f}_2,\dots,\tilde{f}_n \in k[x_1]$が存在することが分かる．
+    さらに$f=\prod_{i=2}^n \tilde{f}_i$とおくと，$x_2,\dots,x_n$は
+    $k[x_1]\left[1/f\right]=k[x_1]_f$
+    上代数的であると言える．
+
+    以上から，$K=k(x_1)[x_2,\dots,x_n]$は$k[x_1]_f$上整である．
+    この整従属関係と$K$が体であることから$k[x_1]_f$も体(\cite{atimac}, Prop5.7)．
+    $k[x_1] \subseteq k[x_1]_f \subseteq k(x)$かつ$k(x_1)$が$k[x_1]$を含む最小の体（商体）であることから
+    $k(x_1)=k[x_1]_f$．
+    しかし実際は$k[x_1]_f \neq k(x_1)$となる
+    \footnote
+    {
+    実際，仮定から$x_1$は$k$上超越的だから，
+    $f$は$k[x_1]$の有限個の既約多項式の積に分解され，$k[x_1]$は無数の既約多項式を持つ．
+    なので$f$と互いに素な既約多項式$g \in k[x_1]$が存在する．
+    $1/g=h/f^n$となる$n>0, h \in k[x_1]$が存在すれば，$gh=f^n=f \cdot f^{n-1} \in (g)$．
+    $g$は素元だから$f \in (g)$となり，$f,g$が互いに素であることに反する．
+    よって$1/g \not \in k[x_1]_f$．
+    }．
+    よって矛盾が生じた．
+\end{proof}
+

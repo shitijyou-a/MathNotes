@@ -1,0 +1,140 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+\usepackage[all]{xy}
+
+\newcommand{\kx}{k[\mathbf{x}]}
+
+\title{Hilbert's Nullstellensatz}
+\author{七条彰紀}
+
+\begin{document}
+    この記事では文字$\mathbf{x}$を一貫して不定元を表すために使う．
+    $\mathbf{x}=(x_1, \dots, x_d)$とする．
+
+%   TODO: どうせなら使用したNoether normalization theoremと\cite{atimac}, 
+%   Prop5.7の証明も書いてself-containedにしたい．
+%   重要定理だけあって，証明の方針はかなり多い．
+%   Jacobson ringであることを用いる証明，
+%   幾何的なNoether normalization theoremを用いる証明，
+%   Rabinowitsch's Trickを用いる証明，
+%   Artin-Tate Lemmaを用いる証明(\cite{atimac}, Prop7.9)，
+%   valuation ringを用いる証明(\cite{atimac}, Cor5.24)，
+%   Chevalley's theoremを用いる証明，
+%   Taoによる終結式を用いる証明，
+%   モデル理論的な証明．
+
+\section{The Statement}
+    \begin{Them}[Hilbert's Nullstellensatz (weak form)]
+        $k$を代数閉体とする．この時，以下で定まる対応$\mu$は全単射である．
+        \begin{defmap}
+            \mu:& k^d& \to& \Max(\kx) \\ 
+            {}& (a_1, \dots, a_d)& \mapsto& (x_1-a_1, \dots, x_d-a_d)
+        \end{defmap}
+    \end{Them}
+
+    \begin{Them}[Hilbert's Nullstellensatz (strong form)]
+        $k$を代数閉体とする．任意のイデアル$\I{a} \subsetneq \kx$に対して
+        \[ \defs \zeros(\I{a})=\sqrt{\I{a}} \]が成立する．
+    \end{Them}
+
+    \subsection{Another Forms of The Two Statements}
+    以上の二つの定理が「弱形」「強形」と並べられる理由は今ひとつ理解りにくい．
+    Terence Taoは自身のブログ``What's New"にHilbert's Nullstellensatzを扱った記事を掲載している\cite{tao}．
+    それによると，以上の二つのステートメントはそれぞれ次のように言い換えられる．
+
+    \begin{Them}[Hilbert's Nullstellensatz (weak form) by Terence Tao]
+        $k$を代数閉体とし，多項式$P_1, \dots, P_m \in \kx$をとる．
+        この時，以下のちょうど一方が成立する．
+        \begin{enumerate}[1.]
+            \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
+            \item$P_1 Q_1 + \ldots + P_m Q_m=1$を満たす多項式$Q_1,\ldots,Q_m \in k[x]$が存在する．
+        \end{enumerate}
+    \end{Them}
+
+    \begin{Them}[Hilbert's Nullstellensatz (strong form) by Terence Tao]
+        $k$を代数閉体とし，多項式$P_1, \dots, P_m, R\in \kx$をとる．
+        この時，以下のちょうど一方が成立する．
+        \begin{enumerate}[1.]
+            \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0, R(\mathbf{x}) \neq 0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
+            \item$P_1 Q_1 + \ldots + P_m Q_m=R^r$を満たす多項式$Q_1,\ldots,Q_m \in \kx$と非負整数$r$が存在する．
+        \end{enumerate}
+    \end{Them}
+    このようにweak formはstrong formで$R=1$とした場合であることは明白である．
+    したがってstrong form $\implies$ weak formが分かる．
+
+\section{Prepare for The Proofs}
+    \input{zariski_lemma}
+    \input{noether_normalization_thm}
+
+\section{Proof of The Weak Form}
+    \subsection{From Zariski Lemma.}
+    \paragraph{$(x_1-a_1, \dots, x_d-a_d) \in \Max(\kx)$.}
+    各$x_i$を$x_i \mapsto a_i$と写す写像を考える．
+    明らかにこれは全射で，$\ker = (x_1-a_1, \dots, x_d-a_d)$．
+    準同型定理から$\kx/(x_1-a_1, \dots, x_d-a_d) \cong k$が得られる．
+    剰余環が体になったので，$(x_1-a_1, \dots, x_d-a_d)$は$\Max(\kx)$の元．
+
+    \paragraph{$\mu$ :: injective.}
+    自明である．
+
+    \paragraph{$\mu$ :: surjective.}
+    $\I{m} \in \Max(\kx)$を任意に取る．
+    この時$L=\kx/\I{m}$は体．
+    しかも$\tilde{a}_i=x_i+\I{m}$とおけば$L=k[\{\tilde{a}_i\}_{i=1}^d]$と書けるから，$L$は有限生成$k$-代数．
+    Zariski's Lemmaより，$L/k$は有限代数拡大である．
+    $k$は代数的閉体であったから，$L \cong k$となり，よって各$\tilde{a}_i$は$k$の元$a_i$に対応する．
+    こうして点$\mathbf{a}=(a_1,\dots,a_d)$が得られた．
+    再び$x_i \mapsto a_i$という写像(像は$k[\{a_i\}_{i=1}^d]=k$)に準同型定理を用いれば，
+    \[ \kx/\mu(\mathbf{a}) \cong k[\{a_i\}_{i=1}^d] \cong k[\{\tilde{a}_i\}_{i=1}^d]=\kx/\I{m} \]
+    という同型が構成できる．
+    したがって$\I{m}=\mu(\mathbf{a})$．
+
+\section{Proof of The Strong Form}
+    \subsection{From Zariski Lemma.}
+    $\sqrt{\I{a}} \subseteq \defs \zeros (\I{a})$は明らか．
+    逆に$f \not \in \sqrt{\I{a}}$として$f \not \in \defs \zeros (\I{a})$を示す．
+
+    \paragraph{素イデアル$\I{p}$の存在．}
+    $\sqrt{\I{a}}$は$\I{a}$を含む素イデアル全体の共通部分であるから，
+    この時$\I{a} \subseteq \I{p}, f \not \in \I{p}$なる素イデアル$\I{p}$が存在する．
+
+    \paragraph{体$L$の構成．}
+    $\bar{f}=f+\I{p} (\neq 0)$とし，$C=(\kx/\I{p})_f=(\kx/\I{p})[1/\bar{f}]$とする．
+    さらに$\I{m}$を$C$の極大イデアルとおく．
+    すると体$L=C/\I{m}=(\kx/\I{p})_f/\I{m}$は
+    $\tilde{a}_i=\frac{x_i+\I{p}}{1}+\I{m}$で生成される有限生成$k$-代数．
+
+    \paragraph{$\mathbf{a} \in \zeros(\I{a})$かつ$f(\mathbf{a}) \neq 0$なる点$\mathbf{a}$を得る．}
+    Zariski's Lemmaより，$L/k$は有限代数拡大である．
+    $k$は代数的閉体であったから，$L \cong k$となり，
+    よって各$\tilde{a}_i$は$k$の元$a_i$に対応する．
+    こうして点$\mathbf{a}=(a_1,\dots,a_d)$が得られた．
+    ここで以下の準同型を考える．
+    \[
+        \phi: \kx \to \kx/\I{p} \to (\kx/\I{p})_f=C \to C/\I{m} \cong k;
+    ~~ x_i \mapsto x_i+\I{p} \mapsto \frac{x_i+\I{p}}{1} \mapsto \frac{x_i+\I{p}}{1}+\I{m}=\tilde{a}_i \mapsto a_i.
+    \]
+    これは代入写像．
+    繋いでいる写像はすべて準同型なので，
+    $g \in \I{p}$は$C$の零元$\frac{0+\I{p}}{1}$へ写り，最終的に零元$0$へ写る．
+    同様に，$f$は$C$の単元$\frac{f+\I{p}}{1}$へ写り，最終的に単元へ写る．
+    つまり$g \in \I{p}$について$\phi(g)=g(\mathbf{a})=0$で，$\phi(f)=f(\mathbf{a})$は単元．
+    よって$\mathbf{a} \in \zeros(\I{p}) \subset \zeros(\I{a})$かつ$f(\mathbf{a}) \neq 0$．
+
+\begin{thebibliography}{9}
+    \bibitem{atimac}
+        M.F.Atiyah, I.G.MacDonald
+        ''Introduction to Commutative Algebra"
+
+    \bibitem{tao}
+        Terence Tao (2007/11/27)
+        ''Hilbert’s nullstellensatz"
+        \url{https://terrytao.wordpress.com/2007/11/26/hilberts-nullstellensatz/}
+
+    \bibitem{oneline}
+        Alborz Azarang
+        ''A one-line undergraduate proof of Zariski's lemma and Hilbert's nullstellensatz"
+        \url{http://arxiv.org/abs/1506.08376}
+\end{thebibliography}
+
+\end{document}
