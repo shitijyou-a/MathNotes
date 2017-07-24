@@ -117,9 +117,9 @@
 \section{Center of Valuation Ring of $K/k$．} %% Ex4.5 
     $X$ :: integral scheme of finite type over a field $k$,
     $K$ :: function field of $K$とする．
-    定義から，$X=\bigcup_{i=1}^r \Spec A_i$となる
-    $\{A_i\}_{i=1}^r$ :: integral finitely generated $k$-algebrasが存在する．
-    $U_i=\Spec A_i$としておく．
+    特に，$f: X \to \Spec k$がfinite typeであるとしておく．
+    また，$X$はfinitely generated $k$-algebraの
+    $\Spec$で被覆されるからNoetherianである．
 
     $K/k$のvaluation ring $R$が$x \in X$をcenterに持つとは，
     $R$が$\shO_{X,x}$をdominateするということである．
@@ -136,23 +136,40 @@
         \Spec R \ar[r] & \Spec k
     }
     \]
-    $f$は与えられたもの，
-    $\Spec K \to X$は$\Spec K$（$1$点空間）を
-    $X$の$1$点$x$へ写す埋め込み写像(Ex2.7,Lemma4.4)，
-    $\Spec K \to \Spec R$も埋め込み写像である
-    \footnote
-        {
-            「埋め込み写像である」は，
-            それぞれ包含関係$k(x) \subseteq K, R \subseteq K$から誘導されている，
-            という意味で書いた．
-        }．
-    $X$ :: noetherian schemeだから，
+    まず，$f$は与えられたものである．
+    $\Spec K \to \Spec R$は包含写像$R \subseteq K$（特に単射）
+    から得られるから，
+    \[ \Spec K \ni (0) \mapsto (0) \in R. \]
+    $\Spec R \to \Spec k$も同様．
+    $\Spec K \to X$は$(0) \in \Spec K$を
+    $X$のgeneric point $\zeta$に写すものとする．
+    実際にこのような射が存在することはLemma4.4による．
+
+    $X$ :: Noetherian schemeだから，
     この時，図式を可換にする$\Spec R \to X$の射$i$が高々一つある(Thm4.3)．
-    加えて，$i$と同じ条件を満たす射と$R$のcenterは一対一に対応する(Lemma4.4)．
-    すなわち，$R$のcenterは高々一つ．
+    \[
+        \xymatrix@R=5pt
+        {
+            \Spec K \ar[r]& \Spec R \ar[r]^-{i}& X \\
+            (0) \ar@{|->}[r]& (0) \ar@{|->}[r]& \zeta \\
+            (0) \ar@{=}[u] \ar@{|->}[rr]& & \zeta \ar@{=}[u]
+        }
+    \]
+    可換性から，$i$は$(0) \subseteq R$を$\zeta$へ写す．
+    Lemma4.4より，
+    $R$のもうひとつの点（極大イデアル）$x$について，
+    $R$は$\cl_X(\{\zeta\})=X$上の点$i(x)$における
+    local ring $\shO_{X,i(x)}$をdominateする．
+    再びLemma4.4から，
+    逆に$R$が$\shO_{X,x'}$をdominateするならば，
+    $x$を$x'$に写すことで$i$が得られる．
+    よって$R$のcenterと$i$は一対一に対応し，
+    たかだか一つしか無い．
 
     \subsection{If $X$ :: proper/$k$ then any valuation of $K/k$ has just one center.}
-    この場合，Thm4.7より，$i$は丁度一つある．ほかは(a)と全く同じ．
+    この場合，$f$ :: finite typeかつ$X$ :: Noetherianなので，Thm4.7が成立する．
+    そしてThm4.7から$i$は丁度一つある．
+    ほかは(a)と全く同じ．
 
     \subsection{The Converses of (a) and (b).}
     Ex2.7とLemma4.4を使うのだとは思う．
