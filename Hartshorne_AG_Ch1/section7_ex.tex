@@ -329,7 +329,7 @@
     $Y$のirreducible componentsを$\{C_i\}_{i=1}^s$とし，$\I{p}_i=\defsp(C_i)$ておく．
 
     \subsection{Proof of $\deg Y=1 \implies Y$ :: linear variety}
-    $M=S/\defsp(Y)$に対してThem7.7の証明の後半と同じ議論をすると，
+    $M=S/\defsp(Y)$に対してThm7.7の証明の後半と同じ議論をすると，
     $M$のHilbert polynomialは以下のようになる．
     \[ P_M(z)=\sum_{i=1}^{s} \mu_{\I{p}_i}(M) \cdot P_{S/\I{p}_i}(z). \]
     すべての$i$に対して$\dim C_i=r$であるから，$\deg P_{S/\I{p}_i}(z)=r$．
@@ -342,11 +342,11 @@
     $d=\deg g$としておく．
     さらに$Y^-=\zerosp(\{g_1,\dots,g_t\})$としよう．
     $Y^-$がirreducibleとは限らないことに注意せよ．
-    するとThem7.7の証明の前半と同様の議論が使える．
+    するとThm7.7の証明の前半と同様の議論が使える．
     以下は完全列である．
     \[ 0 \to (S/\defsp(Y^-))(-d) \to S/\defsp(Y^-) \to M \to 0. \]
     よって$P_{M}(t)=P_{S/\defsp(Y^-)}(t)-P_{S/\defsp(Y^-)}(t-d)$．
-    なのでThem7.7の証明の前半から$\deg Y=1=\deg Y^- \cdot d$.
+    なのでThm7.7の証明の前半から$\deg Y=1=\deg Y^- \cdot d$.
     このことから$d=1$が得られる．
     $g$は$\defsp(Y)$の生成元のいずれでも良いから，$\defsp(Y)$は一次斉次多項式で生成される．
     以上から$Y$ :: linear variety.
@@ -369,7 +369,7 @@
 
     $\deg Y_i=1$ならば$\deg Y_{i+1}=1$であることを示す．
     intersection multiplicityとdegreeは1以上の値だから，
-    Them7.7より
+    Thm7.7より
     $\deg Y_{i+1}=(\deg Y_i)(\deg \zerosp(h_{i+1}))$．
     仮定より$\deg Y_i=1$で，Prop7.6dより$\deg \zerosp(h_{i+1})=\deg h_{i+1}=1$なので主張が示された．
 
@@ -388,7 +388,7 @@
 %    $i,j$と$C_i \cap C_j$のirreducible component $D$をそれぞれひとつ取って固定する．
 %    ただし$D$は$\dim D=\dim (C_i \cap C_j)$なるものとする．
 %    すると$D \subseteq C_i \cap C_j \subsetneq C_i, C_j$となる．
-%    Them1.8とEx2.6から，
+%    Thm1.8とEx2.6から，
 %    \[ \dim D-1=\dim S/\defsp(D)=\dim \frac{S/\defsp(C_i)}{\defsp(D)/\defsp(C_i)}=\dim S(C_i)-\height \defsp(D)/\defsp(C_i). \]
 %    さらに
 
@@ -452,12 +452,12 @@
     $H$ :: hyperplane in $\proj^n$, $P \in H$とする．
     $X \cap H$のirreducible componentを$\{Z_j\}_{j=1}^t$とすると，
     うまく$H$をとることですべての$j$について$i(X,H; Z_j)=1$であるように出来る（？）．
-    （この条件はThem7.7より$t=\deg X$と同値である．）
-    そのとき，Them7.7, Prop7.6bより以下が成り立つ．
+    （この条件はThm7.7より$t=\deg X$と同値である．）
+    そのとき，Thm7.7, Prop7.6bより以下が成り立つ．
     \[ \deg (X \cap H)=\sum_{j=1}^{t} \deg Z_j=\sum_{j=1}^{t} i(X, H; Z_j) \cdot \deg Z_j=\deg X \cdot \deg H=\deg X. \]
     一方，$Y \cap H$のirreducible componentを$\{W_j\}_{j=1}^s$とすると，
     Ex1.8（の類似）より$\dim W_j=r-1$．
-    そのdegreeは再びThem7.7, Prop7.6bより以下のようになる．
+    そのdegreeは再びThm7.7, Prop7.6bより以下のようになる．
     \[ \deg (Y \cap H)=\sum_{j=1}^{s} \deg W_j \leq \sum_{j=1}^{s} i(Y, H; W_j) \cdot \deg W_j=\deg Y \cdot \deg H=\deg Y=d. \]
     $H$は$P$を含むhyperplaneだから$H=C(H)$．
     したがって$X \cap H=\hat{C}(Y) \cap \hat{C}(H)=\hat{C}(Y \cap H)$．

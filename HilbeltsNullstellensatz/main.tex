@@ -24,41 +24,41 @@
 %   モデル理論的な証明．
 
 \section{The Statement}
-    \begin{Them}[Hilbert's Nullstellensatz (weak form)]
+    \begin{Thm}[Hilbert's Nullstellensatz (weak form)]
         $k$を代数閉体とする．この時，以下で定まる対応$\mu$は全単射である．
         \begin{defmap}
             \mu:& k^d& \to& \Max(\kx) \\ 
             {}& (a_1, \dots, a_d)& \mapsto& (x_1-a_1, \dots, x_d-a_d)
         \end{defmap}
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[Hilbert's Nullstellensatz (strong form)]
+    \begin{Thm}[Hilbert's Nullstellensatz (strong form)]
         $k$を代数閉体とする．任意のイデアル$\I{a} \subsetneq \kx$に対して
         \[ \defs \zeros(\I{a})=\sqrt{\I{a}} \]が成立する．
-    \end{Them}
+    \end{Thm}
 
     \subsection{Another Forms of The Two Statements}
     以上の二つの定理が「弱形」「強形」と並べられる理由は今ひとつ理解りにくい．
     Terence Taoは自身のブログ``What's New"にHilbert's Nullstellensatzを扱った記事を掲載している\cite{tao}．
     それによると，以上の二つのステートメントはそれぞれ次のように言い換えられる．
 
-    \begin{Them}[Hilbert's Nullstellensatz (weak form) by Terence Tao]
+    \begin{Thm}[Hilbert's Nullstellensatz (weak form) by Terence Tao]
         $k$を代数閉体とし，多項式$P_1, \dots, P_m \in \kx$をとる．
         この時，以下のちょうど一方が成立する．
         \begin{enumerate}[1.]
             \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
             \item$P_1 Q_1 + \ldots + P_m Q_m=1$を満たす多項式$Q_1,\ldots,Q_m \in k[x]$が存在する．
         \end{enumerate}
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[Hilbert's Nullstellensatz (strong form) by Terence Tao]
+    \begin{Thm}[Hilbert's Nullstellensatz (strong form) by Terence Tao]
         $k$を代数閉体とし，多項式$P_1, \dots, P_m, R\in \kx$をとる．
         この時，以下のちょうど一方が成立する．
         \begin{enumerate}[1.]
             \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0, R(\mathbf{x}) \neq 0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
             \item$P_1 Q_1 + \ldots + P_m Q_m=R^r$を満たす多項式$Q_1,\ldots,Q_m \in \kx$と非負整数$r$が存在する．
         \end{enumerate}
-    \end{Them}
+    \end{Thm}
     このようにweak formはstrong formで$R=1$とした場合であることは明白である．
     したがってstrong form $\implies$ weak formが分かる．
 

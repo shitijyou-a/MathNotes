@@ -171,25 +171,25 @@
 
     \subsection{定理・命題・補題・系}
     \subsubsection{ノルム・内積の基本的性質}
-    \begin{Them}
+    \begin{Thm}
         ノルム空間$(V, \| \cdot \|)$について，ノルム$\|u\|: V \to \C$は連続関数である．
-    \end{Them}
-    \begin{Them}[定理1.24, p.14]
+    \end{Thm}
+    \begin{Thm}[定理1.24, p.14]
         内積空間$(V, (\cdot, \cdot))$について，
         内積$(u, v): V \times V \to \C$は$u,v$両方について連続関数である．
-    \end{Them}
-    \begin{Them}[Schwarzの不等式, 定理1.21, p.13]
+    \end{Thm}
+    \begin{Thm}[Schwarzの不等式, 定理1.21, p.13]
         内積空間$(V, (\cdot, \cdot))$に対して，
         \[ \Forall{u, v \in V} |(u,v)| \leq \|u\|\|v\|. \]
         ただしここに有る$\| \cdot \|$は内積が定めるノルムである．
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{閉部分空間}
-    \begin{Them}[定理1.28, p17] \label{them1:28}
+    \begin{Thm}[定理1.28, p17] \label{them1:28}
         Banach空間$\spX$の部分空間$\mathscr{M}$を考える．
         $\mathscr{M}$のノルムを$\spX$のノルムを$\mathscr{M}$に制限したものとした時に
         $\mathscr{M}$もBanach空間になるための必要十分条件は，$\mathscr{M}$が$\spX$の閉部分空間であること．
-    \end{Them}
+    \end{Thm}
     \begin{Cor}[系1.29, p.18] \label{cor1:29}
         Hilbert空間$\spX$の部分空間$\mathscr{M}$を考える．
         $\mathscr{M}$の内積を$\spX$の内積を$\mathscr{M}$に制限したものとした時に
@@ -197,23 +197,23 @@
     \end{Cor}
 
     \subsubsection{有限次元ノルム空間}
-    \begin{Them}[補題1.38, p.22] \label{them1:38}
+    \begin{Thm}[補題1.38, p.22] \label{them1:38}
         ノルム空間$X$の元$u$を適当な$X$の基底$\{ \phi_1, \dots, \phi_n \}$を用いて
         $u=\alpha_1 \phi_1+\dots+\alpha_n \phi_n (\alpha_k \in \C)$と表したとする．
         $||| u |||:=\sup_{k=1,\dots,n}{|\alpha_k|}$とおくと，これはノルムであり，
         しかも任意の有限次元ノルム空間に備えられた任意のノルムと$||| \cdot |||$は同値である．
-    \end{Them}
+    \end{Thm}
     このノルム$||| \cdot |||$について任意の有限次元ノルム空間が完備であることを示すことが出来る．
-    \begin{Them}[定理1.37, p.22] \label{them1:37}
+    \begin{Thm}[定理1.37, p.22] \label{them1:37}
         有限次元ノルム空間は完備である．
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{局所コンパクト性}
-    \begin{Them}
+    \begin{Thm}
         ノルム空間$\spX$の
         単位球$\mathcal{S}=\{u \in \spX : \|u\|=1\}$がコンパクト集合ならば，
         $\spX$は有限次元である．
-    \end{Them}
+    \end{Thm}
 
     \section{第1,7,8章/作用素}
     \subsection{定義}
@@ -401,58 +401,58 @@
     % Fourier変換
 
     \subsection{定理・命題・補題・系}
-    \begin{Them}[定理7.1, p.148] \label{them7:1}
+    \begin{Thm}[定理7.1, p.148] \label{them7:1}
         線形作用素$T$が連続ならば$T$は有界である．
         \footnote{線形作用素$T$は0で連続ならば定義域全体で連続．
         実際，任意の点$a$について，0へ収束する列$\{u_n\}$を元に$a$へ収束する列を$\{a+u_n\}$の様に作れる．
         $T$が0で連続であれば，$T$の線形性と三角不等式から$\|T(a+u_n)\| \leq \|Ta\|+\|Tu_n\| \to \|Ta\|~(n \to \infty)$．
         よって$T$は任意の$a$で連続．}
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[定理7.6, p.150] \label{them7:6}
+    \begin{Thm}[定理7.6, p.150] \label{them7:6}
         $\spY$がBanach空間であるとき，$\spB{X}{Y}$はBanach空間になる．
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[定理7.8, p.153] \label{them7:8}
+    \begin{Thm}[定理7.8, p.153] \label{them7:8}
         $T_n, T \in \spB{X}{Y}$について$\{T_n\}$が一様収束することは次の命題と同値である．
         \[ \Forall{\varepsilon>0} \Exists{N \in \N} \Forall{u \in \mathrm{UnitBall}} n>N \implies \| T_n u-T u \| \leq \varepsilon. \]
         ただし$\mathrm{UnitBall}$は$\spX$の閉単位球$\{u \in \spX ~|~ \|u\| \leq 1\}$である．
         すなわち，$\{T_n\}$は$\spX$の閉単位球上で一様収束する．
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[定理7.20 (i), p.166] \label{them7:20}
+    \begin{Thm}[定理7.20 (i), p.166] \label{them7:20}
         $T$が前閉作用素であるための必要十分条件は，
         \[ \Forall{\{ u_n \}_{n \in \N} \subset \dom T} \bigg[\Big[\lim_{n \to \infty}u_n=0  \land \lim_{n \to \infty}Tu_n=v \Big] \implies v=0 \bigg]. \]
         （意味：0へ収束する点列を写すと0へ収束する点列になる．）
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[定理7.21, p.166, 一様有界性の原理] \label{them7:21}
+    \begin{Thm}[定理7.21, p.166, 一様有界性の原理] \label{them7:21}
         $\spX$を\kenten{Banach空間}，$\spY$を\kenten{ノルム空間}であるとし，
         $\{ T_{\lambda} \}_{\lambda \in \Lambda} \subseteq \spB{X}{Y}$を作用素の族とする．
         この時，$\spX$の各点$u$で$\{ T_{\lambda}u \}_{\lambda \in \Lambda} \subset \spY$が
         有界ならば，$\{ T_{\lambda} \}_{\lambda \in \Lambda}$は一様に有界である．
-    \end{Them}
+    \end{Thm}
     これはthree basic principlesの第1のもの．
 
-    \begin{Them}[定理7.23, p.167, Baireのカテゴリー定理] \label{them7:23}
+    \begin{Thm}[定理7.23, p.167, Baireのカテゴリー定理] \label{them7:23}
         $\spX$を\kenten{完備な距離空間}であるとする．
         高々加算個の$\spX$の閉集合$\spX_n ~(n=1,2,\dots)$が
         $\spX$を覆う（$\spX=\bigcup_{n=1}^{\infty}{\spX_n}$）ならば，
         少なくとも1つの$\spX_n$は$\spX$の開球を含む．
-    \end{Them}
+    \end{Thm}
     これを元に次が示される．
 
-    \begin{Them}[定理7.30, p.170, 開写像原理] \label{them7:30}
+    \begin{Thm}[定理7.30, p.170, 開写像原理] \label{them7:30}
         $\spX, \spY$をBanach空間とし，$T \in \spB{X}{Y}$とする．
         もし$\ran T=\spY$ならば，$T$は開写像である．
-    \end{Them}
+    \end{Thm}
     これはthree basic principlesの第2のもの．
 
-    \begin{Them}[定理7.33, p.172, 閉グラフ定理] \label{them7:33}
+    \begin{Thm}[定理7.33, p.172, 閉グラフ定理] \label{them7:33}
         $\spX, \spY$はBanach空間，
         $T$は$\spX$から$\spY$への閉作用素とする．
         この時，$\dom T=\spX$ならば$T \in \spB{X}{Y}$．
-    \end{Them}
+    \end{Thm}
 
     \begin{Cor}[系7.34, p.172] \label{cor7:34}
         $\spX, \spY$はBanach空間，
@@ -460,10 +460,10 @@
         $T$が1対1かつ$\ran T=\spY$ならば$T^{-1} \in \spB{X}{Y}$
     \end{Cor}
 
-%    \begin{Them}[定理7., p.] \label{them7:}
-%    \end{Them}
+%    \begin{Thm}[定理7., p.] \label{them7:}
+%    \end{Thm}
 
-    \begin{Them}[定理8.3, p.176] \label{them8:3}
+    \begin{Thm}[定理8.3, p.176] \label{them8:3}
         $\spX$をノルム空間，$f \in \spX^{\ast}$とするとき，次のことが成り立つ．
         \begin{enumerate}[i)]
             \setlength{\leftskip}{5truemm}
@@ -473,12 +473,12 @@
                   と一意に表される．ここで$\alpha$は$\alpha = f(u)/f(u_0)$で与えられる．
               \item $\spX$が\kenten{Hilbert空間}で$f \neq 0$ならば，$(\ker f)^{\perp}$は1次元である．
         \end{enumerate}
-    \end{Them}
-    \begin{Them}[定理8.5, p.177, Rieszの表現定理] \label{them8:5}
+    \end{Thm}
+    \begin{Thm}[定理8.5, p.177, Rieszの表現定理] \label{them8:5}
         $\mathscr{H}$をHilbert空間とすると，任意の$f \in \mathscr{H}^{\ast}$は
         有る$v \in \mathscr{H}$によって$f_v(\cdot)=(\cdot,v)$と表される．
         $v$は$f$によって一意に定まる．
-    \end{Them}
+    \end{Thm}
     このことからHilbert空間が反射的である（$\mathscr{H} \simeq \mathscr{H}^{\ast\ast}$）ことが示される．
 
     Rieszの表現定理は$\mathscr{H}^{\ast}$が十分広いことも言っている．
@@ -487,7 +487,7 @@
     \footnote{p.181参照．適当に$u_0 \in \spX, c \in \C$をとり，$f(\alpha u_0)=c \alpha$とする．}．
     しかし$\spX^{\ast}$が十分広い空間であることはまったく自明でない．
     これは以下の定理によって示される．
-    \begin{Them}[定理8.11, p.182, Hahn-Banachの拡張定理] \label{them8:11}
+    \begin{Thm}[定理8.11, p.182, Hahn-Banachの拡張定理] \label{them8:11}
         $\spX$を\kenten{実線形空間}とする．
         $p:\spX \to \R$は（線形とは限らない）汎関数とし，以下を満たすとする．
         \begin{enumerate}[i)]
@@ -500,11 +500,11 @@
         \[ \Forall{u \in \mathscr{M}} (f(u) \leq p(u)) \]
         を満たすものとする．
         その時$f$はこの不等式と線形性を保ったまま，$\spX$全体に拡張される．
-    \end{Them}
+    \end{Thm}
     これはthree basic principlesの第3のもの．
     複素線形空間でも同様の定理が成立する．
 
-    \begin{Them}[定理8.13, p.184] \label{them8:13}
+    \begin{Thm}[定理8.13, p.184] \label{them8:13}
         $\spX$を\kenten{複素線形空間}とする．
         $p:\spX \to \R$は（線形とは限らない）汎関数とし，以下を満たすとする．
         \begin{enumerate}[i)]
@@ -518,9 +518,9 @@
         \[ \Forall{u \in \mathscr{M}} (0 \leq |f(u)| \leq p(u)) \]
         を満たすものとする．
         その時$f$はこの不等式と線形性を保ったまま，$\spX$全体に拡張される．
-    \end{Them}
+    \end{Thm}
 
-    \begin{Them}[定理8.23, p.189] \label{them8:23}
+    \begin{Thm}[定理8.23, p.189] \label{them8:23}
         Banach空間$\spX$に対し，作用素$\kappa$を
         \begin{align*}
             \kappa: \spX \to \spX^{\ast \ast}     &;u \mapsto \phi_{u} \\
@@ -529,7 +529,7 @@
         のように定める．
         $\kappa$により$\spX$は$\spX^{\ast \ast}$の中への等長な線形作用素である．
         したがって，$\spX$は$\spX^{\ast \ast}$の部分空間とみなせる．
-    \end{Them}
+    \end{Thm}
 
     \section{収束に関して}
     Banach空間とその上の作用素が成す空間の点列には，

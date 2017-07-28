@@ -186,46 +186,49 @@
     Thm4.11より$K$における整閉包$\overline{k[a^{-1}]}$である．
     下で示すように，これは$a$を含まない．
     したがって$a^{-1} \in R, a \not \in R$であるようなvaluation ring $R$が存在する．
-    $a^{-1}$は$R$の単元でないから$a^{-1} \in \I{m}_R$．
-    一方，$a \in \Gamma(X, \shO_X) \subseteq K$から，
+    $a \in \Gamma(X, \shO_X) \subseteq K$だと仮定すると，
     任意の$x \in X$について$a \in \shO_{X,x}$．
-    よって$(a \in )\shO_{X,x} \subseteq R$ならば
-    $a \cdot a^{-1}=1 \in \I{m}_R$となり，不合理．
+    よって$\shO_{X,x} \subseteq R$ならば$a,a^{-1} \in R$となり，
+    これは今示したことに反する．
     したがって$R$はいかなる点もcenterに持たない．
     これは(b)に反する．
 
     \begin{Claim}
-     \[ a \not \in \overline{k[a^{-1}]}. \] 
+        \[ a \in \overline{k[a^{-1}]} \implies a,a^{-1} \in \bar{k}. \] 
     \end{Claim}
     \begin{proof}
-        $a \in K$が$k[a^{-1}]$上整ならば，
-        以下のような零でない多項式$f$が存在する．
-        \[ f \in k[a^{-1}][X] ~,~ \deg f=d>0 ~,~ f(a)=a^d+c_{d-1}a^{d-1}+\dots+c_0=0. \]
-        最後の等式の両辺に$a^{-d} \in k[a^{-1}]$をかける．
-        \[ a^{-d}f(a)=1+c_{d-1}a^{-1}+\dots+c_0a^{-d}=0. \]
-        $c_i \in k[a^{-1}]$だから，
-        この等式は
-        $f'(a^{-1})=0$を満たす零でない多項式$f' \in k[X]$が存在すること，
-        すなわち$a^{-1}$が$k$上代数的であることを意味する
-        （等式において，$a^{-1}$についての最高次係数は$k$の元であることに注意）．
-        しかし$a \not \in k=\bar{k}$だからこれはありえない．
+        $a \in K-\{0\}$が$k[a^{-1}]$上整ならば，
+        以下のような零でない多項式$f \in k[X, X^{-1}]$が存在する．
+        \[
+            f(X)=X^d+c_{d-1}(X^{-1})X^{d-1}+\dots+c_0(X^{-1}) \neq 0 ,~~
+            f(a)=0.
+        \]
+        $f$に$X^{-d} \in k[X,X^{-1}]$をかける．
+        \[
+            X^{-d}f(X)=1+c_{d-1}(X^{-1})X^{-1}+\dots+c_0(X^{-1})(X^{-1})^d \neq 0,~~
+            (X^{-d}f)(a)=a^{-d}f(a)=0.
+        \]
+        したがって，$f'(a^{-1})=0$を満たす
+        零でない多項式$f'=X^{d}f(X^{-1}) \in k[X]$が存在する．
+        すなわち$a^{-1}$は$k$上代数的である．
+        よって$a^{-1} \in \bar{k}$．
+        $a \neq 0$だから$a,a^{-1} \in \bar{k}$．
+        これは矛盾．
     \end{proof}
 
-%    \begin{Claim}
-%        $k$は$K$上整閉．
-%    \end{Claim}
-%    \begin{proof}
-%        $A_i$から一つ適当に選び，$A$とする．
-%        $A$ :: integral finitely generated $k$-algebraより，
-%        $A=\frac{k[x_1,\dots,x_n]}{\I{p}}$となる$n>0$と素イデアル$\I{p}$が存在する．
-%        Ex3.6より，$K=\Quot(A)$だから，$K$の元は$f,g \in A$を用いて$f/g$と書ける．
-%        $f/g$が$k$上整だとしよう．
-%        するとmonicな多項式$E(X) \in k[X]$が存在し，$E(f/g)=0$となる．
-%        分母を払ったり$A=\frac{k[x_1,\dots,x_n]}{\I{p}}$を使ったりすると，
-%        結局$E(f/g)=0$は$x_1,\dots,x_n$がある$k$係数多項式の根であることと同値になる．
-%        $k$ :: algebraically closedなので，この$k$係数多項式は根をもつ．
-%        その値を$f/g$に代入すれば$f/g \in k$が得られる．
-%    \end{proof}
+    \subsection*{Another Proof of (d).}
+    $G:=\Gamma(X,\shO_X)$が$k$の代数的拡大体であることを示す．
+    $a \in \Gamma(X,\shO_X)=G$を任意に取る．
+    すると任意の点$x$について$a \in \shO_{X,x}$．
+    また，$K/k$の任意のvaluation ring $R$はEx4.5bより少なくとも$1$点$x$について
+    $a \in \shO_{X,x} \subseteq R$となる．
+
+    $a \in G-\{0\}$をとる．
+    すると$k[a^{-1}] \subseteq K$．
+    今見たように$K/k$の任意のvaluation ringは$a$を含むから，
+    $a \in \overline{k[a^{-1}]}$．
+    主張から$a, a^{-1} \in \bar{k}$が得られる．
+    よって$G \subseteq \bar{k}$．
 
 \section{$f$ :: proper morphism of affine varieties/$k$. Then $f$ :: finite.} %% Ex4.6 
     $f: X \to Y$を考える．
@@ -298,5 +301,27 @@
     $\shO_{C,x} \subseteq R \neq K$から，$x$ :: closed point．
     さらにclaim 2から，$R$は少なくとも一つのDVRをdominateすると言える．
     valuation ringの極大性から$\shO_{C,x}=R$ :: DVR．
+
+    \subsection*{Another Proof of (a).}
+    $R$を$K/k$のvaluation ringとする．
+    $R$の任意の元が$k$上代数的ならば$R$は（$k$の代数的拡大）体となるから，
+    $R$は$k$上超越的な元$t$を持つ．
+
+    $A:=k[t]$はintegral domainで，なおかつ$\Quot(A) \subseteq K$．
+    なので$A$の$K$での整閉包$A'$をとると，
+    ch I, Thm3.9より，$A'$はfinitely generated $k$-algebra．
+    $A \subseteq A'$がintegral ring extensionで$\dim A=1$だから$\dim A'=1$．
+    したがって$A'$はDedekind domainである．
+
+    今，$A' \subseteq R$となっている．
+    これはintegral ring extension（示す必要がある）．
+    $R$の極大イデアル$\I{m}_R$のcontruction $\I{m}_{A'}=\I{m}_R \cap A'$をとると，
+    Ati-Mac Cor5.8より，$\I{m}_{A'}$は$A'$の極大イデアル．
+    したがって$A'$を$\I{m}_{A'}$で局所化すると，
+    ch I, \S 6のDedekind domainの定義(p.40)の下にある注意から，DVRが得られる．
+    しかも$A'_{\I{m}_{A'}} \subseteq R$かつ$\I{m}_{A'}=\I{m}_R \cap A'$から，
+    $R$は$A'_{\I{m}_{A'}}$をdominantする．
+    valuation ringはdominatingに関しての極大元だから，
+    $R=A'_{\I{m}_{A'}}$ :: DVR．
 
 \end{document}

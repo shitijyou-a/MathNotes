@@ -9,22 +9,22 @@
 \usepackage{bussproofs}
 
 \theoremstyle{definition}
-\newtheorem{Them}{定理}[section]
-\newtheorem{Def}[Them]{定義}
-\newtheorem{Lemma}[Them]{補題}
-\newtheorem{Prop}[Them]{命題}
-\newtheorem{Claim}[Them]{主張}
-\newtheorem{Cor}[Them]{系}
-\newtheorem{Remark}[Them]{注意}
-\newtheorem{Example}[Them]{例}
+\newtheorem{Thm}{定理}[section]
+\newtheorem{Def}[Thm]{定義}
+\newtheorem{Lemma}[Thm]{補題}
+\newtheorem{Prop}[Thm]{命題}
+\newtheorem{Claim}[Thm]{主張}
+\newtheorem{Cor}[Thm]{系}
+\newtheorem{Remark}[Thm]{注意}
+\newtheorem{Example}[Thm]{例}
 
 \renewcommand{\proofname}{\textnormal{(証明)}}
 \renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}
 
-%% \footnote => 1), 2), 3), ...
+%% \footnote => †1, †2, †3, ...
 \renewcommand\thefootnote{\dag\arabic{footnote}}
 
-%% kenten {{{
+%% \kenten {{{
 \makeatletter
 \def\kenten#1{%
    \ifvmode\leavevmode\else\hskip\kanjiskip\fi
@@ -49,13 +49,20 @@
 \newcommand{\mapedfrom}{\reflectbox{$\mapsto$}}
 %% }}}
 
-%% defmap environment
+%% defmap environment {{{
 \usepackage{array}   % for \newcolumntype macro
 \newcolumntype{L}{>{$\displaystyle}l<{$}} % math-mode version of "l" column type
-\newcolumntype{C}{>{$\displaystyle}c<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$\displaystyle}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$\displaystyle}c<{$}} % math-mode version of "c" column type
 \newenvironment{defmap}[0]
 {\begin{center}\begin{tabular}{LCLC}}
 {\end{tabular}\end{center}}
+%% usage:
+%    \begin{defmap}
+%        f:& X& \to& Y \\ 
+%        {}& x& \mapsto& x+1
+%    \end{defmap}
+%% }}}
 
 %% symbols
 \mathchardef\mdash="2D %% dash in math-mode
@@ -80,11 +87,11 @@
 \newcommand {\coeq}         {\operatorname{coeq}}
 
 %% topology theory
-\newcommand{\open}          [1]{\mathcal{O}_{#1}}
-\newcommand{\closed}        [1]{\mathcal{A}_{#1}}
-\newcommand{\cl}            {\operatorname{cl}}
-\newcommand{\opint}         {\operatorname{int}}
-\newcommand{\pr}            {\operatorname{pr}}
+\newcommand{\open}          [1]{\mathcal{O}_{#1}} %% open sets
+\newcommand{\closed}        [1]{\mathcal{A}_{#1}} %% closed sets
+\newcommand{\cl}            {\operatorname{cl}} %% closure
+\newcommand{\opint}         {\operatorname{int}} %% !!CAUTION!! THIS IS NOT \int ! \int is already defined.
+\newcommand{\pr}            {\operatorname{pr}} %% projection map(from a product space)
 \newcommand{\codim}         {\operatorname{codim}}
 
 %% abelian category
@@ -106,9 +113,9 @@
 \newcommand{\Quot}          {\operatorname{Quot}} %% quotient field
 
 %% field theory
-\newcommand{\fchar}         {\operatorname{char}}
+\newcommand{\fchar}         {\operatorname{char}} %% characteristic of a field
 \newcommand{\transdeg}      {\mathrm{tr.deg.\,}}
-\newcommand{\irr}           {\operatorname{irr}}
+\newcommand{\irr}           {\operatorname{irr}} %% irreducible(minimal) polynomial
 \newcommand{\Gal}           {\operatorname{Gal}}
 
 %% algebraic geometry
@@ -138,7 +145,6 @@
 \newcommand{\isomap}        {\xrightarrow{\iso}}
 \newcommand{\bimap}         {\xrightarrow{\bi}}
 \newcommand{\homeomap}      {\xrightarrow{\homeo}}
-%% TODO \eq{1}{2}とすると1tilde 2barの記号が出来るようにしたい
 
 %% liner algebra
 \newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}

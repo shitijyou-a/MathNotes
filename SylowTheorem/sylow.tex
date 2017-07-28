@@ -15,7 +15,7 @@
 \footnote{\url{http://www.math.uconn.edu/~kconrad/blurbs/grouptheory/sylowpf.pdf}}
 を元にした，Sylowの定理の証明とその応用についてのノートである．
 
-\begin{Them}[Sylow Theorems]
+\begin{Thm}[Sylow Theorems]
     任意の有限群$G$について，
     その位数が素数$p$，$p$に互いに素な正数$m$，そして非負整数$n$によって
     $|G|=p^{n}m$と表されるとする．
@@ -28,14 +28,14 @@
         \item 任意の$p$-Sylow部分群$P$について$|\Syl_p(G)| = [G:\Norm_G(P)]$
         \item $|\Syl_p(G)|$は$m$の約数である．
     \end{enumerate}
-\end{Them}
+\end{Thm}
 
 \section{Prepares for The proof}
-    \begin{Them}[Orbit-Stabilizer Theorem]
+    \begin{Thm}[Orbit-Stabilizer Theorem]
         群$G$は集合$X$に作用するものとする．以下が成り立つ．
         \[ \Forall{x \in  X} |G / \Stab_G(x)|=|G \ast x| \]
         \footnote{$\Stab_G(x):=\{g \in G : g \ast x=x \}$}
-    \end{Them}
+    \end{Thm}
     \begin{proof}
         任意の$g, h \in G$を取る．
         \begin{eqnarray*}
@@ -46,10 +46,10 @@
         よって$g \ast \Stab_G(x) \mapsto g \ast x$は全単射．
     \end{proof}
 
-    \begin{Them}[Lagrange's Theorem]
+    \begin{Thm}[Lagrange's Theorem]
         任意の有限群$G$とその部分群$U$の位数について以下が成り立つ．
         \[ |G/U|=|G|/|U| \]
-    \end{Them}
+    \end{Thm}
     \begin{proof}
         \textbf{この段落は『天書の証明』より引用する．}
         二項関係\[ a \sim b \iff ba^{-1} \in U \]を考える．
@@ -83,9 +83,9 @@
         
     \end{proof}
 
-    \begin{Them}[Cauchy's Group Theorem]
+    \begin{Thm}[Cauchy's Group Theorem]
         群$G$の位数が$p$の倍数ならば，$G$は位数$p$の巡回群を含む．
-    \end{Them}
+    \end{Thm}
     \begin{proof}
         位数$p$の元の存在を示す．この元は求める巡回群の生成元である．
     \end{proof}

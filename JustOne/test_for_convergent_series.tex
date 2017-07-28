@@ -13,18 +13,18 @@
 
     \section{Weierstrass M-test}
     収束判定法では次の事実が基本である．
-    \begin{Them}
+    \begin{Thm}
         関数列$\{f_n: A \to \C\}_{n=0}^{\infty}$の級数$\sum_{n=0}^{\infty} f_n(x)$を考える．
         ある実数列$\{M_n\}_{n=0}^{\infty} \subset \R$について
         \[ \Forall{n=1,2,\dots} \sup_{x \in A} |f_n| \leq M_n \]
         が成り立ち，かつ$\sum_{n=0}^{\infty} M_n$が収束するとき，
         関数項級数$\sum_{n=0}^{\infty} f_n(x)$も収束する．
-    \end{Them}
+    \end{Thm}
     この定理を満たす関数項級数$\sum_{n=0}^{\infty} f_n(x)$は，
     特に正規収束すると言う．
 
     \section{Abel theorem}
-        \begin{Them}[Abel theorem]
+        \begin{Thm}[Abel theorem]
             $\{a_n\}_{n=0}^{\infty} \subset \C$とする．
             \[
                 z_0 \in \C,~ \sum_{n=0}^{\infty}{a_n z^n_0} < \infty
@@ -32,14 +32,14 @@
                 \Forall{z \in B(|z_0|; 0)} \sum_{n=0}^{\infty}{a_n z^n} < \infty
             \]
             特に，この時$\sum_{n=0}^{\infty}{a_n z^n}$は正規収束する．
-        \end{Them}
+        \end{Thm}
         \begin{proof}
             命題$\sum_{n=0}^{\infty}{a_n z^n_0} < \infty \implies \lim_{n \to \infty}{a_n z^n_0}=0$と，
             $|\frac{z}{z_0}|<1$を用いて，Weierstrass M-testへ帰着する．
         \end{proof}
 
     \section{Cauchy-Hadamard theorem}
-        \begin{Them}[Cauchy-Hadamard theorem]
+        \begin{Thm}[Cauchy-Hadamard theorem]
         一複素変数$z$に関する，以下のような冪級数を考える．
         \[ f(z) = \sum_{n = 0}^{\infty} c_{n} (z-a)^{n}. \]
         ここで $a, c_n \in \C$ とする．このとき，$f$の収束半径は以下のように与えられる．
@@ -47,7 +47,7 @@
         \[
             \frac{1}{R}=\limsup_{n \to \infty} \big( | c_{n} |^\frac{1}{n} \big)
             :=\lim_{n\to\infty}\sup\{| c_{n} |^\frac{1}{n} : k\geq n\}.\]
-        \end{Them}
+        \end{Thm}
 
         \begin{proof}
             $\limsup_{n \to \infty} \big( | c_{n} |^\frac{1}{n} \big)=0$
@@ -68,14 +68,14 @@
         \end{proof}
 
     \section{Ratio test}
-        \begin{Them}[Ratio test]
+        \begin{Thm}[Ratio test]
         べき級数$\sum_{n=0}^\infty{a_n}z^n$について，
         任意の$n$について$a_n \neq 0$，かつ
         \[
             \rho = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|
         \]
         が存在するならば，$R=\frac{1}{\rho}$がべき級数の収束半径に等しい．
-        \end{Them}
+        \end{Thm}
 
         \begin{proof}
             今，考えている冪級数を二つに分けて，

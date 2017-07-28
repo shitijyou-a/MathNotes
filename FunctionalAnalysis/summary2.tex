@@ -92,7 +92,7 @@
     \subsubsection{Neumann級数}
     教科書の定理7.16 i) (p.165)より，$B(\spX)$の元は閉作用素であることに注意．
 
-    \begin{Them}[定理9.2, p.209] \label{them902}
+    \begin{Thm}[定理9.2, p.209] \label{them902}
         $\spX$はBanach空間，$T \in B(\spX), \zeta \in \C$とする．
         $|\zeta| > \|T\|$ならば$\zeta \in \rho(T)$であり，
         以下が成り立つ．
@@ -102,7 +102,7 @@
         \end{align}
         ここで式(\ref{eq906})の右辺は$B(\spX)$で絶対収束する．
         特に方程式$\zeta u-Tu=v$は一意的に解$u=R(\zeta;T)v$を持つ．
-    \end{Them}
+    \end{Thm}
     式(\ref{eq906})の右辺はNeumann級数と呼ばれる．
     例で見るようにこの定理は$(\zeta I-T)^{-1}$がNeumann級数で表せることの十分条件を示しているに過ぎない．
     証明も$\sum_{k=0}^{\infty} \zeta^{-(k+1)} T^k$が存在するならば両辺が一致する，
@@ -116,14 +116,14 @@
     $\zeta I-T$は1対1なので$\dom(T)$を$\spX$全体に写す．
     したがって$R(\zeta;T):\spX \to \dom(T)$である．
 
-    \begin{Them}
+    \begin{Thm}
         $\zeta_1, \zeta_2 \in \rho(T)$について，以下が成り立つ．
         \begin{align*}
             R(\zeta_2;T)-R(\zeta_1;T)
             =&(\zeta_1-\zeta_2)R(\zeta_2;T)R(\zeta_1;T) \\
             =&(\zeta_1-\zeta_2)R(\zeta_1;T)R(\zeta_2;T)
         \end{align*}
-    \end{Them}
+    \end{Thm}
     これを（第一）\textbf{レゾルベント方程式}と呼ぶ．
     \footnote
     {
@@ -137,7 +137,7 @@
     すぐさま$\zeta_1 \to \zeta_2$として「微分」したくなるが，
     その極限が存在することは自明でなく，次の定理で述べられる．
 
-    \begin{Them}[定理9.5, p.211]
+    \begin{Thm}[定理9.5, p.211]
         $\zeta_0 \in \rho(T)$をとり，$R(\zeta):=R(\zeta;T)$と略記する．
         このとき以下が成り立つ．
         \[
@@ -153,42 +153,42 @@
             \leq \|R(\zeta_0)\| \sum_{k=0}^{\infty}\left( |\zeta-\zeta_0|\|R(\zeta_0)\| \right)^k
             =\|R(\zeta_0)\| (1-|\zeta-\zeta_0|\|R(\zeta_0)\|)^{-1}.
         \]
-    \end{Them}
+    \end{Thm}
     定理の最初から一般の閉線形作用素$T$について$\rho(T)$が開集合であることがわかる．
     そして最後の不等式から$R(\zeta;T)$の「微分」$\frac{d}{d \zeta}R(\zeta;T):=\lim_{h \to 0}\frac{1}{h} (R(\zeta+h;T)-R(\zeta;T))$
     が存在することが示される．
 
-    \begin{Them}[定理9.6, p.212]
+    \begin{Thm}[定理9.6, p.212]
         $R(\zeta;T)$は$\rho(T)$で正則，
         すなわち$\frac{d}{d \zeta}R(\zeta;T)$が存在し，次の等式が成り立つ．
         \[ \frac{d}{d \zeta}R(\zeta;T)=-R(\zeta;T)^2. \]
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{スペクトル半径}
     この節では$T$を$\spX$上の\kenten{有界線形作用素}とする．
     定理\ref{them902}によると，$\rho(T)$は空でない．
     実は次も成り立つ．
-    \begin{Them}[定理9.8, p.213]
+    \begin{Thm}[定理9.8, p.213]
         $T \in B(\spX)$ならばスペクトル$\sigma(T)$は空でない．
-    \end{Them}
+    \end{Thm}
     したがってスペクトル半径$r(T)=\sup_{\zeta \in \sigma(T)}|\zeta|$は存在する．
     スペクトル半径について，以下の等式が成り立つ．
-    \begin{Them}[定理9.12, p.215] \label{them912}
+    \begin{Thm}[定理9.12, p.215] \label{them912}
         $\lim_{n \to \infty} \|T^n\|^{1/n}$が存在し，以下が成り立つ．
         \[ r(T)=\lim_{n \to \infty} \|T^n\|^{1/n}=\inf_{n \in \N} \|T^n\|^{1/n}. \]
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{双対作用素のレゾルベント}
     $T$が閉作用素ならば，教科書の定理8.42より共役作用素$T^*$も閉作用素．
     なので$\rho(T^*)$が考えられる．
-    \begin{Them}[定理9.9, p.213] \label{them909}
+    \begin{Thm}[定理9.9, p.213] \label{them909}
         $T$が$\spX$上の閉作用素で，$\dim(T)$が$\spX$で稠密であるとする．
         この時，まず以下が成り立つ．
         \[ \rho(T^*)=\rho(T), R(\zeta;T^*)=R(\zeta;T)^*. \]
         さらに$\spX$がHilbert空間ならば通常Hilbert space adjoint（p.201参照）$T^{\star}$を
         共役作用素として扱うが，これについては以下が成り立つ．
         \[ \rho(T^{\star})=\{ \zeta ~|~ \bar{\zeta} \in \rho(T)\}, R(\zeta;T^{\star})=R(\bar{\zeta};T)^{\star}. \]
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{擬レゾルベント}
 
@@ -371,23 +371,23 @@
     \subsection{定理・命題・補題・系}
     \subsubsection{直和分解と補空間}
     この節では$\spX$をBanach空間，$\spM,\spN$をその\kenten{閉部分空間}とする．
-    \begin{Them}[定理11.2, p.252] \label{them1102}
+    \begin{Thm}[定理11.2, p.252] \label{them1102}
         $\spM$が補空間を持つならば，
         それらはBanach空間としての同型を除いて一意．
-    \end{Them}
-    \begin{Them}[定理11.3, p.253] \label{them1103}
+    \end{Thm}
+    \begin{Thm}[定理11.3, p.253] \label{them1103}
         $\spM$は有限次元ならば補空間を持つ．
-    \end{Them}
-    \begin{Them}[定理11.4, p.253] \label{them1104}
+    \end{Thm}
+    \begin{Thm}[定理11.4, p.253] \label{them1104}
         $\spM^{\perp}$が有限次元であることと，$\spM$は有限次元な補空間$\spN$を持つことは同値．
         しかもその時$\dim \spM^{\perp}=\dim \spN$．
-    \end{Them}
-    \begin{Them}[定理11.7, p.255] \label{them1107}
+    \end{Thm}
+    \begin{Thm}[定理11.7, p.255] \label{them1107}
         $\spM,\spN$が閉部分空間であり，$\spN$は有限次元であるとする．
         この時，$\spM \cap \spN=\{0\}$ならば
         \footnote{つまり$\spM \oplus \spN$が存在すれば．}
         $\spM \oplus \spN$も閉部分空間である．
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{コンパクト作用素}
     この節では$\spX, \spY$をBanach空間とする．
@@ -395,23 +395,23 @@
         任意の$K \in B(\spX,\spY)$は$\ran K$または$\spY$が有限次元ならばコンパクトである．
         一方，$\spX$が無限次元ならば恒等作用素$I$はコンパクトでない．
     \end{Prop}
-    \begin{Them}[定理11.12, p.257] \label{them1112}
+    \begin{Thm}[定理11.12, p.257] \label{them1112}
         $B_0(\spX,\spY)$は$B(\spX,\spY)$の閉部分空間である．
-    \end{Them}
-    \begin{Them}[定理11.13, p.258] \label{them1113}
+    \end{Thm}
+    \begin{Thm}[定理11.13, p.258] \label{them1113}
         $S \in B(\spX, \spY), T \in B(\spY,\spZ)$とする．
         $S,T$のどちらか一方でもコンパクトであれば$ST$もコンパクトである．
-    \end{Them}
-    \begin{Them}[Schauderの定理, 定理11.15, p.258] \label{them1115}
+    \end{Thm}
+    \begin{Thm}[Schauderの定理, 定理11.15, p.258] \label{them1115}
         $K \in B(\spX,\spY)$について，以下が成り立つ．
         \[ K \in B_0(\spX,\spY) \iff K^* \in B_0(\spX^*,\spY^*). \]
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{コンパクト作用素のスペクトル理論}
 %    $T \in F(\spX), \zeta \neq 0$について
 %    $\zeta I-T \in F(\spX), \ind \zeta I-T=0$が成り立つことに注意しておく．
 %    これらは教科書のp.268で述べられている．
-    \begin{Them}[定理11.29, p.269] \label{them1129}
+    \begin{Thm}[定理11.29, p.269] \label{them1129}
         $K \in B_0(\spX)$のスペクトル$\sigma(K)$について以下が成り立つ．
         \begin{enumerate}[i)]
             \item $\sigma(K)=\sigma_p(K) \mor \sigma_p(K) \cup \{0\}$．\footnote{$0 \in \sigma_p(K)$はあり得る．}
@@ -422,14 +422,14 @@
             \item 各$\zeta_k$は$K^*$の固有値でもある．
             \item 各$\zeta_k$の$K$の固有値としての多重度は$K^*$の固有値としての多重度に等しい．
         \end{enumerate}
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{Fredholm作用素}
-    \begin{Them}[定理11.20, p.262] \label{them1120}
+    \begin{Thm}[定理11.20, p.262] \label{them1120}
         $\spX$をBanach空間とし，$K \in B_0(\spX), T=I-K$とする．
         この時$T$はFredholm作用素である．
-    \end{Them}
-    \begin{Them}[定理11.24, p.264] \label{them1124}
+    \end{Thm}
+    \begin{Thm}[定理11.24, p.264] \label{them1124}
         $T \in B(\spX,\spY)$がFredholm作用素であるための必要十分条件は，
         以下が成り立つこと．
         \begin{align*}
@@ -438,7 +438,7 @@
             &\Big[\Exists{A_2 \in B(\spY,\spX), K_2 \in B_0(\spY)} T A_2+K_2=I \Big]
             .
         \end{align*}
-    \end{Them}
+    \end{Thm}
     この定理は大雑把に言えば「Fredholm作用素とはコンパクト作用素の違いを無視すれば可逆なもの」ということを言っている．
 %    実際，Masamichi Takesaki ``Theory of OPerator Algebra I''の
 %    p.55で述べられているFredholm作用素の定義は次のようになっている．
@@ -447,10 +447,10 @@
 %    $\spX$のFredholm作用素とは，$\pi(K)$が可逆であるような$K \in B(\spX)$．
 %    」
 
-    \begin{Them}[定理11.25, p.265] \label{them1125}
+    \begin{Thm}[定理11.25, p.265] \label{them1125}
         $S \in F(\spX, \spY), T \in F(\spY,\spZ)$とする．
         この時$ST \in F(\spX,\spZ)$であり，指数について$\ind ST=\ind S+\ind T$となる．
-    \end{Them}
+    \end{Thm}
 
     \subsubsection{自己共役なコンパクト作用素}
 

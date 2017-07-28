@@ -7,7 +7,7 @@
 \begin{document}
 \maketitle
 
-\begin{Them}[Eisenstein's criterion]
+\begin{Thm}[Eisenstein's criterion]
     \[ f(x)=\sum_{0 \leq k \leq n}{f_k x^k} \in \Z[x] \]
     について，ある素数$p$が存在して，
     整数$f_0, f_1, \dots, f_n$が以下を満たすならば，
@@ -17,7 +17,7 @@
         \item $f_n$は$p$で割り切れない．
         \item $f_0$は$p^2$で割り切れない．
     \end{enumerate}
-\end{Them}
+\end{Thm}
 \begin{proof}
     多項式$g,h$を$f(x)=g(x) h(x)$を満たすものとおき，
     多項式$f, g, h$の各係数を
@@ -81,7 +81,7 @@
 \end{proof}
 
 次は有限体への還元を用いた判定法である．
-\begin{Them}[Reduction Criterion in S.Lang ``Algebra'']
+\begin{Thm}[Reduction Criterion in S.Lang ``Algebra'']
     $A,B$を整域とし，$\phi: A \to B$を準同型とする．
     さらに$B$の商体を$L$としておく．
     $f \in A[x]$について以下が成り立つとき，
@@ -93,7 +93,7 @@
         \item $\deg \phi(f)=\deg f$．
         \item $\phi(f)$は$L[x]$の既約多項式．
     \end{enumerate}
-\end{Them}
+\end{Thm}
 \begin{proof}
     $f=gh ~~(g,h \in A[x])$と分解できたとすると，
     $\phi(f)=\phi(g) \phi(h)$となる．
@@ -120,11 +120,11 @@
 \end{Example}
 
 次もまた別の判定法である．
-\begin{Them}[Cohn's Criterion]
+\begin{Thm}[Cohn's Criterion]
     $b \in \Z_{\geq 2}$と$p(x)=a_{k}x^{k}+a_((k-1))x^((k-1))+\cdots +a_{1}x+a_{0}$は
     $0 \leq a_{i}\leq b-1$を満たすとする．
     $p(b)$が素数ならば，$p(x)$は$\Z[x]$の既約元である．
-\end{Them}
+\end{Thm}
 証明は難しい．
 詳細は\url{https://www.wikiwand.com/en/Cohn's_irreducibility_criterion} を参照のこと．
 
