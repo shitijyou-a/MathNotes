@@ -17,62 +17,64 @@
     この両辺に$y_1^{n}$を掛けると，
     \[ 1+f(y_1, \dots, y_m) y_1=0 \]
     となり，これは$y_1, \dots, y_m$が$k$上代数独立
-    \footnote{$f(y_1, \dots, y_m)=0$となる0でない多項式$f \in k[x_1, \dots, x_m]$が存在しない} 
+    \footnote
+    {
+        「$y_1, \dots, y_m$が$k$上代数独立」の定義:
+        $f(y_1, \dots, y_m)=0$となる0でない多項式$f \in k[x_1, \dots, x_m]$が存在しない．
+    } 
     であることに矛盾する．
     よって$m=0$．
 
     以上より，$K$は$k$の整拡大，すなわち代数拡大となる．
     再び$K$が$k$上有限生成代数な体であることから，$K$は$k$の有限次代数拡大体．
 \end{proof}
-%「$m>0$とする．...よって$m=0$．」の部分は，
-%「$m>0$とする．
-%$R:=k[y_1, \dots, y_m]$のKrull次元は$m$以上．
-%だからその整拡大$K$のKrull次元も$m$以上．
-%しかし体$K$のKrull次元は0なので矛盾．」
-%に置き換えることも出来る．
-%ただしこの書き方ではGoing-Up Theoremを用いることになる．
-%「$R$のKrull次元は$m$以上．」は，
-%\[ 0 \subset (y_1) \subset \cdots \subset (y_1, \dots, y_m) \]
-%という$R$のイデアル列を作り，これらの一つ一つが素イデアルであることを示せば良い．
 
 \paragraph{整従属性を使うもの．}
 (\cite{atimac}, Ex5.18と\cite{oneline}を参照)
 \begin{proof}
     $k$代数としての$K$の生成元を$x_1,\dots,x_n$とする．
+    すなわち，
+    \[ K=k[x_1,\dots,x_n]. \]
     $n=1$ならば定理の成立は自明なので$n>1$としよう．
     示したいことは$x_1,\dots,x_n$のすべてが$k$上代数的であること．
     なので帰納的に考えて，
-    $x_2,\dots,x_n$が$k(x_1)$上代数的ならば$x_1,\dots,x_n$が$k$上代数的であることを示せば良い
+    $x_2,\dots,x_n$が$k(x_1)$
+    \footnote{$k(x_1)$は$k$と$x_1$を含む明らかな体．}
+    上代数的ならば
+    $x_1,\dots,x_n$が$k$上代数的であることを示せば良い
     \footnote
     {
         言い換えれば
         $K=k(x_1,\dots,x_{n-2})(x_{n-1})[x_n] 
-        \implies \dots \implies K=k(x_1)[x_2,\dots,x_n] \implies K=k[x_1][x_2\dots,x_n]$
+        \implies
+        K=k(x_1,\dots,x_{n-3})(x_{n-2})[x_{n-1},x_n]
+        \implies
+        \dots
+        \implies K=k(x_1)[x_2,\dots,x_n]$.
     }．
-    そこで，$x_1$が$k$上代数的でなく，同時に
+    そこで，$x_1$が$k$上代数的でなく同時に
     $x_2,\dots,x_n$が$k(x_1)$上代数的であると仮定し，背理法を用いる．
-    この時，$K=k(x_1)[x_2,\dots,x_n]$となる．
 
     $x_2,\dots,x_n$が$k[x_1]_f(=k[x_1][1/f])$上代数的であるような$f \in k[x_1]$が存在する．
-    実際，$x_2$が$k(x_1)$上代数的であることから，
-    次の式を満たす$f_{i},g_{i} \in k[x_1]$が存在する．
+    実際，$x_i$が$k(x_1)$上代数的であることから，
+    次の式を満たす$f_{j}^{(i)},g_{j}^{(i)} \in k[x_1]$が存在する．
     \[
-        x_2^{d}+\left( \frac{g_{d-1}}{f_{d-1}} \right) x_2^{d-1}+\dots+\left(\frac{g_{0}}{f_{0}}\right)=0
-        \mwhere d>0, f_{i},g_{i} \in k[x_1], g_{i} \neq 0.
+        x_i^{d_i}+\left( \frac{g_{d_i-1}^{(i)}}{f_{d_i-1}^{(i)}} \right) x_2^{d_i-1}+\dots+\left(\frac{g_{0}^{(i)}}{f_{0}^{(i)}}\right)=0
+        \mwhere d_i>0, f_{j}^{(i)},g_{j}^{(i)} \in k[x_1], g_{j}^{i} \neq 0.
     \]
-    $\tilde{f}_2:=\prod_{i=0}^{d-1} f_{i}$とおく．
-    $\frac{g_{d-1}}{f_{d-1}}$から$\frac{g_{0}}{f_{0}}$までを通分すると，
-    $x_2$は$k[x_1][1/\tilde{f}_2]$上整であることが分かる．
-    $x_3,\dots,x_n$も同様にして，結局$x_2,\dots,x_n$が
-    $k[x_1]\left[1/\tilde{f}_2,\dots,1/\tilde{f}_n\right]$
-    上代数的になるような$\tilde{f}_2,\dots,\tilde{f}_n \in k[x_1]$が存在することが分かる．
-    さらに$f=\prod_{i=2}^n \tilde{f}_i$とおくと，$x_2,\dots,x_n$は
-    $k[x_1]\left[1/f\right]=k[x_1]_f$
+    $\frac{g_{d_i-1}^{(i)}}{f_{d_i-1}^{(i)}}$から
+    $\frac{g_{0}^{(i)}}{f_{0}^{(i)}}$までを通分すると，
+    各$x_i$は$k[x_1]\left[1/\prod_{j=0}^{d_i}f_{j}^{(i)}\right]$上整であることが分かる．
+    したがって
+    \[ f=\prod_{i=2}^n\prod_{j} f_{j}^{(i)} \in k[x_1] \]とおくと，
+    $x_2,\dots,x_n$は$k[x_1]\left[1/f\right]=k[x_1]_f$
     上代数的であると言える．
 
-    以上から，$K=k(x_1)[x_2,\dots,x_n]$は$k[x_1]_f$上整である．
+    $K=k[x_1][x_2,\dots,x_n]$であり，
+    $x_2,\dots,x_n$は$k[x_1]_f$上整だから，$K$は$k[x_1]_f$上整．
     この整従属関係と$K$が体であることから$k[x_1]_f$も体(\cite{atimac}, Prop5.7)．
-    $k[x_1] \subseteq k[x_1]_f \subseteq k(x)$かつ$k(x_1)$が$k[x_1]$を含む最小の体（商体）であることから
+    $k[x_1] \subseteq k[x_1]_f \subseteq k(x_1)$かつ
+    $k(x_1)$が$k[x_1]$を含む最小の体（商体）であることから
     $k(x_1)=k[x_1]_f$．
     しかし実際は$k[x_1]_f \neq k(x_1)$となる
     \footnote
