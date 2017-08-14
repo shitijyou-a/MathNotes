@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage{../math_note}
+\usepackage{enumitem}
 
 \newcommand{\Stab}{\operatorname{Stab}}
 \newcommand{\Fix}{\operatorname{Fix}}
@@ -15,60 +16,87 @@
 \footnote{\url{http://www.math.uconn.edu/~kconrad/blurbs/grouptheory/sylowpf.pdf}}
 を元にした，Sylowの定理の証明とその応用についてのノートである．
 
-\begin{Thm}[Sylow Theorems]
+\begin{Thm*}[Sylow Theorems]
     任意の有限群$G$について，
     その位数が素数$p$，$p$に互いに素な正数$m$，そして非負整数$n$によって
     $|G|=p^{n}m$と表されるとする．
     更に群$G$の$p$-Sylow部分群全体の集合を$\Syl_p(G)$とおく．以下が成り立つ．
-    \begin{enumerate}
-        \renewcommand{\labelenumi}{\Roman{enumi}.}
-        \item $G$は$p$-Sylow部分群を持ち\footnote{すなわち$\Syl_p(G) \neq \emptyset$}，またこれは$G$の任意の$p$-部分群を含む．
+    \begin{enumerate}[label=\Roman*.]
+        \item
+            $G$は$p$-Sylow部分群を持ち
+            \footnote{すなわち$\Syl_p(G) \neq \emptyset$}，
+            またこれは$G$の任意の$p$-部分群を含む．
         \item $G$の全ての$p$-Sylow部分群は互いに共役である．
         \item $|\Syl_p(G)| \equiv 1 \mod p$
         \item 任意の$p$-Sylow部分群$P$について$|\Syl_p(G)| = [G:\Norm_G(P)]$
         \item $|\Syl_p(G)|$は$m$の約数である．
     \end{enumerate}
-\end{Thm}
+\end{Thm*}
 
 \section{Prepares for The proof}
+    群$G$は集合$X$に作用するものとする．
+    この時，$g \in G, x \in X$について，
+    $g$が$x$に作用したものを（このセクションでは）$g \ast x$で表す．
+    \begin{Def}
+        安定化群$\Stab_G$，不変元の全体$\Fix_G$を以下で定める．
+        \[
+            \Stab_G(X)=\{ g \in G \mid g \ast x=x \},~~~
+            \Fix_G(X)=\{x \in X \mid \Forall{g \in G} g \ast x=x \}.
+        \]
+        また正規化群$\Norm_G$を部分集合$S \subseteq G$について次のように定める．
+        \[ \Norm_G(S)=\{ g \in G \mid gSg^{-1}=S \}. \]
+    \end{Def}
+    $\Stab_G, \Norm_G$がそれぞれ群であることは使う．
+    また，$S \subseteq G$が部分群である時に
+    $\Norm_G(S)$は$S$を正規部分群に持つ最大の部分群であることも
+    （特にsection 4で）使う．
+
     \begin{Thm}[Orbit-Stabilizer Theorem]
         群$G$は集合$X$に作用するものとする．以下が成り立つ．
-        \[ \Forall{x \in  X} |G / \Stab_G(x)|=|G \ast x| \]
-        \footnote{$\Stab_G(x):=\{g \in G : g \ast x=x \}$}
+        \[ \Forall{x \in  X} |G / \Stab_G(x)|=|G \ast x|. \]
     \end{Thm}
     \begin{proof}
-        任意の$g, h \in G$を取る．
-        \begin{eqnarray*}
-            g \ast x=h \ast x
-                &\iff& (h^{-1}g) \ast x=x \iff (g^{-1}h) \ast x=x \\
-                &\iff& g \ast \Stab_G(x)= h \ast \Stab_G(x) ~(=\Stab_G(x))
-        \end{eqnarray*}
-        よって$g \ast \Stab_G(x) \mapsto g \ast x$は全単射．
+        次の写像を考える（準同型とは限らない）．
+        \begin{defmap}
+            \phi:& G / \Stab_G(x)& \to& G \ast x \\
+            {}& g \Stab_G(x)& \mapsto& g \ast x
+        \end{defmap}
+        明らかに$\phi$は全射．
+        あとはwell-definedであることと単射であることを見れば良い．
+        $g, h \in G$を任意に取る．
+        \begin{align*}
+        {}&     g \ast x=h \ast x \\
+        \iff&   (h^{-1} g) \ast x=x \\
+        \iff&   h^{-1} g \in \Stab_G(x) \\
+        \iff&   (h^{-1} g) \Stab_G(x)=\Stab_G(x) \\
+        \iff&   h^{-1} (g \Stab_G(x))=\Stab_G(x) \\
+        \iff&   g \Stab_G(x)= h \Stab_G(x)
+        \end{align*}
+        上から順に見ればこれは$\phi$が単射であることの証明であり，
+        下から順に見ればwell-definedであることの証明になっている．
     \end{proof}
 
     \begin{Thm}[Lagrange's Theorem]
-        任意の有限群$G$とその部分群$U$の位数について以下が成り立つ．
-        \[ |G/U|=|G|/|U| \]
+        任意の群$G$とその部分群$U$の位数について以下が成り立つ．
+        \[ |G/U||U|=|G|. \]
+        これは$|G|,|U|$が無限群であっても成り立つ．
     \end{Thm}
     \begin{proof}
         \textbf{この段落は『天書の証明』より引用する．}
         二項関係\[ a \sim b \iff ba^{-1} \in U \]を考える．
         群の公理から$\sim$が同値関係であることがわかる．
-        元$a$を含む同値類はコセット\[ aU=\{ ax : x \in U \} \]に一致する．
-        明らかに$|aU|=|U|$なので，$G$は全ての大きさが$|U|$である同値類に分解される．
+        元$a$を含む同値類はコセット\[ aU=\{ ax \mid x \in U \} \]に一致する．
+        明らかに$|aU|=|U|$なので，
+        $G$は全ての大きさが$|U|$である同値類に分解される．
         それゆえ，$|U|$は$|G|$を割る．
-
-        あとは
-        \[ |G|=\sum_{i=1}^{|G/U|}{|a_i U|}=\sum_{i=1}^{|G/U|}{|U|}=|G/U||U| \]より，
-        最終的な等式が成り立つ．
-        
+        \[ |G|=\sum_{i=1}^{|G/U|}{|a_i U|}=\sum_{i=1}^{|G/U|}{|U|}=|G/U||U|. \]
+        こうして主張の等式が得られる．
     \end{proof}
 
     \begin{Lemma}[Fixed Points Congurance]
         群$G$は集合$X$に作用するものとする．
         $|G|$が素数$p$の倍数ならば，以下が成り立つ．
         \[ |X| \equiv |\Fix_G(X)| \mod p\]
-        \footnote{$\Fix_G(X):=\{x \in X : \Forall{g \in G} g \ast x=x \}$}
     \end{Lemma}
     \begin{proof}
         $X$の$G$による軌道分解を考える．
@@ -84,10 +112,15 @@
     \end{proof}
 
     \begin{Thm}[Cauchy's Group Theorem]
-        群$G$の位数が$p$の倍数ならば，$G$は位数$p$の巡回群を含む．
+        群$G$の位数が$p$の倍数ならば，$G$は位数$p$の巡回部分群を含む．
     \end{Thm}
     \begin{proof}
-        位数$p$の元の存在を示す．この元は求める巡回群の生成元である．
+        位数$p$の元の存在を示せば良い．
+        この元は求める巡回群の生成元である．
+        ここではJames H. McKayによる論文
+        ``Another Proof of Cauchy's Group Theorem"
+        \footnote{\url{http://www.jstor.org/stable/2310010}}
+        を紹介するに留める．
     \end{proof}
 
 \section{Proof of Sylow Theorem I.}
@@ -100,99 +133,97 @@
     $i=k<n$の時$|H|=p^k$となる部分群$H$が存在するならば，
     $H \subset H'$かつ$|H'|=p^{k+1}$，すなわち$[H':H]=p$となる部分群$H'$が存在することを示す．
 
-    \paragraph{$\Fix_{H}(G/H)$の定義}
-    中心となるアイデアは，集合$G/H$の元で，$H$による左からの積作用によって不変なものを考える，ということである．
+    \paragraph{$\Fix_{H}(G/H)$の定義．}
+    中心となるアイデアは，
+    集合$G/H$の元であって，
+    $H$による左からの積作用によって不変なものを考える，ということである．
     このような元全体を$\Fix_{H}(G/H)$と置く．
     \[
-        \Fix_{H}(G/H) := \{ gH \in G/H : \Forall{h \in H} hgH=gH \}
+        \Fix_{H}(G/H) := \{ gH \in G/H \mid \Forall{h \in H} hgH=gH \}
     \]
 
-    \paragraph{$\Fix_{H}(G/H)=\Norm_G(H)/H$}
+    \paragraph{$\Fix_{H}(G/H)=\Norm_G(H)/H$.}
     この$\Fix_{H}(G/H)$を別の表現にしよう．
     \begin{eqnarray*}
-        &{}&    gH \in G/H \\
+        &{}&    gH \in \Fix_H(G/H) \\
         &\iff&  \Forall{h \in H} hgH=gH \\
         &\iff&  \Forall{h \in H} (g^{-1}hg)H=H \\
         &\iff&  \Forall{h \in H} (g^{-1}hg) \in H \\
         &\iff&  g^{-1}Hg = H \\
         &\iff&  g \in \Norm_G(H)
     \end{eqnarray*}
-    ただし$\Norm_G(H)$は正規化群で$\Norm_G(H) := \{ g \in G : g^{-1}Hg = H\}$である．
-    途中で$h \mapsto g^{-1}hg$が全単射だから集合として$|g^{-1}Hg|=|H|$，ということを用いた．
-    以上から，$\Fix_{H}(G/H)=\{ gH : g \in \Norm_G(H) \} = \Norm_G(H)/H$となる．
+    以上から，$\Fix_{H}(G/H)=\{ gH \mid g \in \Norm_G(H) \} = \Norm_G(H)/H$となる．
     $\Fix_{H}(G/H)$が群だから，$H$は$\Norm_G(H)$の正規部分群である．
 
-    \paragraph{$\Norm_G(H)/H$は$p$群}
+    \paragraph{$\Norm_G(H)/H$は$p$群．}
     さて，補題から次が成り立つ．
     \[ |G/H| \equiv |\Fix_{H}(G/H)| \mod p \]
     $k<n$という条件とLagrange's Theoremから，
     $|G/H|=|G|/|H|=p^{n-k}m$は$p$の倍数．
     したがって$|\Fix_{H}(G/H)|=|\Norm_G(H)/H|$も$p$の倍数．
 
-    \paragraph{Cauchy's Group Theoremから$H'$が存在}
+    \paragraph{Cauchy's Group Theoremから$H'$が存在．}
     $|\Norm_G(H)/H|$が$p$の倍数であるということは，
-    Cauchy's Group Theoremから，これは位数$p$の巡回群を持つ．
+    Cauchy's Group Theoremから，$\Norm_G(H)/H$は位数$p$の巡回部分群を含む．
     それは群$H' \subset \Norm_G(H)$によって$H'/H$と表される．
     $|H'/H|=[H':H]=p$だから，帰納法が完成した．
     
-
     \section{Proof of Sylow Theorem II}
-    \paragraph{$\Fix_Q(G/P)$は空でない}
+    \paragraph{$\Fix_Q(G/P)$は空でない．}
     群$G$の$p$-Sylow部分群$P$,$Q$をとり，これらが共役であることを示す．
-    使うのはやはりFixed Points Conguranceだ．$Q$は$p$-部分群なので以下が成り立つ．
+    $Q$は$p$-部分群なので以下が成り立つ．
     \[ |G/P|=[G:P] \equiv |\Fix_Q(G/P)| \mod p \]
     $|P|=p^n$から，$|G/P|=|G|/|P|=m$は$p$の倍数でない．
-    したがって$\Fix_Q(G/P)=\{ gP \in G/P : \Forall{q \in Q} qgP=gP \}$は空集合でない．
+    特に$|G/P| \equiv |\Fix_Q(G/P)| \not \equiv 0$
+    すなわち$\Fix_Q(G/P)$は空集合でない．
 
-    \paragraph{$\Fix_Q(G/P)$の元の定義から結論へ}
+    \paragraph{$\Fix_Q(G/P)$の元の定義から結論へ．}
     $\Fix_Q(G/P)$の元を一つ取って$gP$とおく．
     定義から，全ての$Q$の元$q$に対して
     \[ qg \cdot P=gP \implies qg \cdot e \in gP \iff qg \in gP \iff Q \subset gPg^{-1} \]となる．
     $P,Q$はどちらも$p$-Sylow部分群で，位数は同じ．したがって$Q=gPg^{-1}$
-    
 
     \section{Proof of Sylow Theorem III}
-    \paragraph{方針}
+    \paragraph{方針．}
     $\Syl_p(G)$の元を一つとり$P$とする．そして集合$\Syl_p(G)$への$P$の共役作用を考える．
-    $P$は$p$-部分群なので，ここでもFixed Points Conguranceを使える．
-    \[ |\Syl_p(G)| \equiv |\Fix_P(\Syl_p(G))| \mod p\]
+    $P$は$p$-部分群なので，
+    \[ |\Syl_p(G)| \equiv |\Fix_P(\Syl_p(G))| \mod p. \]
     以下で$|\Fix_P(\Syl_p(G))|=1$を示す．
 
-    \paragraph{不動点$Q$を取る}
-    $\Fix_P(\Syl_p(G))$に$P$が属すことは$\Forall{p \in P} p^{-1}Pp=P$から自明なので，
-    $\Fix_P(\Syl_p(G))$からもうひとつ元をとって$Q$とする．
+    \paragraph{不動点$Q$を取る．}
+    $\Fix_P(\Syl_p(G))$に$P$が属すことは，
+    任意の$p \in P$について$p^{-1}Pp=P$であることから自明．
+    なので$\Fix_P(\Syl_p(G))$からもうひとつ元をとって$Q$とする．
 
-    \paragraph{$P, Q, \Norm_G(Q)$の関係}
+    \paragraph{$P, Q, \Norm_G(Q)$の関係．}
     この時，$P,Q \subset \Norm_G(Q) \subset G$だから
     \footnote
     {
-        念の為．$\Norm_G(Q):=\{ g \in G : g^{-1}Qg=Q \}$であり，
-        $Q \in \Fix_P(\Syl_p(G))$から$\Forall{g \in P} g^{-1}Qg=Q$が成立する．
+        念の為．$\Norm_G(Q):=\{ g \in G \mid g^{-1}Qg=Q \}$であり，
+        $Q \in \Fix_P(\Syl_p(G))$から任意の$p \in P$について$p^{-1}Qp=Q$が成立する．
     }，
     位数を考えれば$P,Q \in \Syl_p(\Norm_G(Q))$も成り立つ．
     また，$Q$は$\Norm_G(Q)$の正規部分群（Sylow Theorem Iでも触れた）である．
 
-    \paragraph{$P=Q$を示す}
+    \paragraph{$P=Q$を示す．}
     Sylow Theorem IIから$P,Q$は$\Norm_G(Q)$の部分群として互いに共役．
     ところが正規部分群の定義より，$\Norm_G(Q)$の部分群で$Q$と共役なものは$Q$自身しか無い．
     よって$P=Q$となり，$\Fix_P(\Syl_p(G))=\{ P \}$が示された．
-    
 
     \section{Proof of Sylow Theorem IV}
     Orbit-Stabilizer Theoremを集合$\Syl_p(G)$とこれに共役作用する群$G$に用いる．
     Sylow Theorem IIから$\Syl_p(G)$の元は互いに共役だから，
     $G$の共役作用による軌道は一つしか無い．
-    \[ \Forall{P \in \Syl_p(G)} |G/\Stab_G(P)|=|G \ast P|=|\Syl_p(G)|\]
-    $\Stab_G(P)=\{ g \in G : g^{-1}Pg=P \}=\Norm_G(P)$なので，
-    \[ \Forall{P \in \Syl_p(G)} |\Syl_p(G)|=[G:\Norm_G(P)] \]
-    
+    \[ \Forall{P \in \Syl_p(G)} |G/\Stab_G(P)|=|G \ast P|=|\Syl_p(G)|. \]
+    $\Stab_G(P)=\{ g \in G \mid g^{-1}Pg=P \}=\Norm_G(P)$なので，
+    \[ \Forall{P \in \Syl_p(G)} |\Syl_p(G)|=[G:\Norm_G(P)]. \]
 
     \section{Proof of Sylow Theorem V}
     Sylow Theorem Vから$|\Syl_p(G)|$は素数$p$と互いに素．
-    また，Sylow Theorem IVとLagrange's Theoremから$|\Syl_p(G)|=[G:\Norm_G(P)]=|G|/|\Norm_G(P)|$なので
+    また，Sylow Theorem IVとLagrange's Theoremから
+    $|\Syl_p(G)|=[G:\Norm_G(P)]=|G|/|\Norm_G(P)|$なので
     $|\Syl_p(G)|$は$|G|=p^n m$の約数である．
     よって$|\Syl_p(G)|$は$m$の約数．
-    
 
     \section{Applications}
     \begin{Lemma}[Frattini's Argument]
@@ -200,14 +231,15 @@
         $G=\Norm_G(P)H$である．
     \end{Lemma}
     \begin{proof}
+        $H,\Norm_G(H) \subseteq G$から$G \supseteq \Norm_G(P)H$．
+        逆の包含関係を示す．
         $G$の任意の元$g$を取る．$H$は$G$の正規部分群だから，
         \[ g^{-1}Pg \subset g^{-1}Hg=H \]
         したがって$g^{-1}Pg$も$H$の$p$-Syllow部分群である．
         するとSylow Theorem IIより，ある$h \in H$が存在して
-        \[ hg^{-1} P gh^{-1} = (gh^{-1})^{-1} P gh^{-1} = P \]
+        \[ hg^{-1} P gh^{-1} = (gh^{-1})^{-1} P gh^{-1} = P. \]
         $\Norm_G(P)$の定義から，$gh^{-1} \in \Norm_G(P)$．
         よって$g \in \Norm_G(P)H$が成立．
-        
     \end{proof}
 
     \begin{Prop}[Sylow's test]

@@ -7,9 +7,20 @@
 \usepackage{mathrsfs}
 \usepackage{url}
 \usepackage{bussproofs}
+\usepackage{stmaryrd}
 
-\theoremstyle{definition}
+\newtheoremstyle{mathnotestyle}% % Name
+    {}%                      % Space above
+    {}%                      % Space below
+    {\normalfont}%           % Body font
+    {}%                      % Indent amount
+    {\bf}%                   % Theorem head font
+    {}%                      % Punctuation after theorem head
+    {\newline}%              % Space after theorem head, ' ', or \newline
+    {}%                      % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{mathnotestyle}
 \newtheorem{Thm}{定理}[section]
+\newtheorem*{Thm*}{定理}
 \newtheorem{Def}[Thm]{定義}
 \newtheorem{Lemma}[Thm]{補題}
 \newtheorem{Prop}[Thm]{命題}
@@ -44,9 +55,7 @@
 %% }}}
 
 %% \mapedfrom {{{
-\usepackage{graphicx}
-%\newcommand{\mapedfrom}{\makebox[1.5em][c]{\reflectbox{$\mapsto$}}}
-\newcommand{\mapedfrom}{\reflectbox{$\mapsto$}}
+\newcommand{\mapedfrom}{\mapsfrom} %% from stmaryrd.sty
 %% }}}
 
 %% defmap environment {{{
