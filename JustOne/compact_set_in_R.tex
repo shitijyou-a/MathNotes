@@ -1,0 +1,149 @@
+\documentclass[]{jsarticle}
+\usepackage{../math_note}
+
+\newcommand{\U}{\mathfrak{U}}
+
+\title{実数集合$\R$のコンパクト集合}
+\author{七条 彰紀}
+
+\begin{document}
+\maketitle
+
+\section{準備}
+\begin{Lemma}\label{lemma:1}
+    コンパクト空間の閉部分集合はコンパクト．
+\end{Lemma}
+\begin{proof}
+    $C \subseteq X$で$X$はコンパクトだとする．
+    $C$の開被覆 $\{U_{\lambda}\}_{\lambda \in \Lambda}$をとると，
+    $\{C^c \cup U_{\lambda}\}_{\lambda \in \Lambda}$は$X$の開被覆になる．
+    $X$がコンパクトであることから，
+    以下を満たす有限部分集合$\Lambda_f \subseteq \Lambda$が存在する．
+    \[ C \subseteq X=\bigcup_{\lambda \in \Lambda_f} (C^c \cup U_{\lambda}). \]
+    よって$C \subseteq \bigcup_{\lambda \in \Lambda_f} U_{\lambda}$．
+\end{proof}
+
+\begin{Lemma}\label{lemma:2}
+    ハウスドルフ空間のコンパクト部分集合は閉集合．
+\end{Lemma}
+\begin{proof}
+    $X$がハウスドルフ空間で，$C \subseteq X$はコンパクトだとする．
+    $C^c$の任意の点が内点であること，
+    すなわち$C^c$の任意の点が$C^c$に含まれる開近傍を持つことを示そう．
+
+    $x \in C^c$と$y \in C$を任意に取ると，
+    $X$がハウスドルフであることから，
+    以下を満たす開集合$U_y, V_y \subset X$がとれる．
+    \[ x \in U_y,~~~ y \in V_y,~~~ U_y \cap V_y = \emptyset. \]
+    この時$C=\bigcup_{y \in C} V_y$．
+    $C$はコンパクトだから，$y_1,\dots,y_r \in C$を適当に選ぶことで
+    $C \subseteq \bigcup_{i=1}^r V_{y_i}$とできる．
+    $U_{y_i} \subseteq (V_{y_i})^c$から，
+    \[ U=\bigcap_{i=1}^r U_{y_i} \]
+    とおけば$x \in U$かつ$U \subseteq C^c$．
+\end{proof}
+
+\begin{Remark}\label{remark:1}
+    このノートでは以下を公理として認める． \\
+    (\textbf{カントールの公理}あるいは\textbf{区間縮小法の原理})
+    閉区間の減少列 $\R \supset I_1 \supsetneq I_2 \supsetneq \cdots$が任意に与えられた時，
+    $\bigcup_{i \in \N} I_i \neq \emptyset$．
+\end{Remark}
+
+\section{主定理}
+\begin{Thm}
+    $\R$のコンパクト部分集合は有界閉集合．
+\end{Thm}
+\begin{proof}
+    $\R$のコンパクト部分集合 $C$を考える．
+    \[ C \subset \R=\bigcup_{n \in \N} (-n,+n) \]
+    という開被覆を考えると，
+    $C$がコンパクトであることから，
+    この内の有限個で$C$は被覆できる．
+    \[ C \subset (-n_1,+n_1) \cup (-n_2,+n_2) \cup \dots \cup (-n_r,+n_r). \]
+    $N=\max_{1 \leq i \leq r} n_i$とすれば
+    $C \subset (-N, +N)$．
+\end{proof}
+
+\begin{Thm}
+    $\R$の有界閉集合はコンパクト．
+\end{Thm}
+証明を二つ述べる．
+この二つの証明は
+\begin{proof}
+    補題\ref{lemma:1}から，
+    有界閉区間$[a,b] ~~(a,b \in \R, a < b)$が
+    コンパクトであることを示せば十分である．
+    $[a,b]$がコンパクトでないとすると，
+    有限部分被覆を持たない$[a,b]$の開被覆 $\U$が存在する．
+
+    これは$[a_0,b_0]=[a,b]$からはじめて$\{[a_k, b_k]\}_{k \geq 0}$を次のように作る．
+    すなわち，
+    $[a_k,b_k]$が構成されている時，
+    $[a_{k+1},b_{k+1}]$は
+    \[
+        \left[ a_k, \frac{a_k+b_k}{2} \right],
+        \left[ \frac{a_k+b_k}{2}, b_k \right]
+    \]
+    のうちで，
+    $\U$の有限部分で被覆できないものである．
+    こうして出来る$[a,b]$の閉部分集合鎖
+    \[ [a,b]=[a_0,b_0] \supsetneq [a_1,b_1] \supsetneq \dots \]
+    は無限に伸ばすことが出来る
+    （特に任意の$k \geq 0$について$[a_k,b_k]$は空でない）．
+    実際，
+    $\left[ a_k, \frac{a_k+b_k}{2} \right],\left[ \frac{a_k+b_k}{2}, b_k \right]$
+    の両方が$\U$の有限部分で被覆できるのであれば，
+    前者，後者を覆い尽くす有限部分被覆を合わせて，
+    $[a_k,b_k]$が$\U$の有限部分で被覆できる．
+    これを繰り返すと，
+    結局$\U$は$[a,b]$の有限部分被覆をもつということになってしまう．
+
+    こうして出来た閉区間列の幅は
+    $0 < |a_k-b_k| \leq \frac{|a-b|}{2^k}$の様に縮小していく．
+    したがって注意\ref{remark:1}で述べたカントールの公理から，
+    $c \in \bigcap_{k \geq 0} [a_k,b_k] \subseteq [a,b]$がとれる．
+    $\U$は$[a,b]$の開被覆だから，$c \in U$なる$U \in \U$が存在する．
+    $U$は開集合だから，十分小さい$\varepsilon>0$について
+    \[ (-\varepsilon+c, c+\varepsilon) \subseteq U \]
+    とできる．
+    $\varepsilon$に対して，
+    整数$N$を$\frac{|a-b|}{2^N}<\frac{\varepsilon}{2}$が成り立つものとすれば，
+    次のようになる．
+    \[ [a_N, b_N] \subseteq (-\varepsilon+c, c+\varepsilon) \subseteq U. \]
+    これは$[a_k, b_k]$のとり方
+    （$[a_k, b_k]$は$U$の有限部分で被覆できない）に反する．
+\end{proof}
+
+\begin{proof}
+    閉区間$[a,b] ~(a<b)$を考えれば十分であることは
+    1つめの証明と変わらない．
+    $[a,b]$の\kenten{任意}の開被覆$\U$をとる．
+    明らかに，$\U$は$[a,x] ~(x \in [a,b])$の開被覆でもある．
+    そこで$I$を以下のように取る．
+    \[ I=\{ x \in [a,b] \mid \text{$\U$は$[a,x]$の有限部分被覆をもつ}\}. \]
+    $b \in I$が我々の目標である．
+
+    $c \in I$を任意に取ると，
+    $\U$は$[a,b]$の被覆であることから$c \in U \in \U$なる$U$が存在する．
+    $U$が開集合であることから，
+    十分小さい$2\varepsilon>0$について
+    \[ [-\varepsilon+c, c+\varepsilon] \subsetneq (-2\varepsilon+c, c+2\varepsilon) \subseteq U. \]
+    $\U$がもつ$[a,c]$の有限開被覆に$U$を付け加えると，
+    $[-\varepsilon+c, c+\varepsilon] \cap [a,b] \subset I$が分かる．
+    すなわち，$I$の任意の点は$[a,b]$の位相で閉近傍をもつ．
+
+    以上から直ちに$I$が$[a,b]$の開集合であることが分かる．
+    また，$I$が閉集合であることも，次の様に考えれば分かる．
+    $l$を$I$の集積点としよう．
+    集積点の定義から，$l$の開近傍$U \in \U$は$I$と交わる．
+    開近傍の閉包を取れば，これは任意の$l$の閉近傍と言い換えても良いことが分かる．
+    この閉近傍を十分小さく取れば$[c,l] \subset I$の様に出来る．
+    これを$I$の点$c$の閉近傍と見れば，前段落から$l \in I$が得られる．
+
+    よって$I$は$[a,b]$の閉かつ開な部分集合．
+    $a \in I$から$I \neq \emptyset$で，
+    しかも$[a,b]$は連結だから，$I=[a,b]$．
+\end{proof}
+
+\end{document}
