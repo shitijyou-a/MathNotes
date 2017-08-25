@@ -1,0 +1,151 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[all]{xy}
+\usepackage{../math_note, exercise, enumitem}
+\renewcommand{\thesection}{Ex5.\arabic{section}}
+
+\newcommand{\shE}{\mathcal{E}}
+\newcommand{\shF}{\mathcal{F}}
+\newcommand{\shG}{\mathcal{G}}
+\newcommand{\shH}{\mathcal{H}}
+\newcommand{\shI}{\mathcal{I}}
+\newcommand{\shJ}{\mathcal{J}}
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\coverU}{\mathfrak{U}}
+\newcommand{\OpenIn}{\text{ :: open in }}
+\newcommand{\ClosedIn}{\text{ :: open in }}
+
+\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
+\newcommand{\shHom}{\mathscr{H\!o\!m}}
+
+\begin{document}
+
+\section{The Dual of Locally Free Module Sheaf.} %% Ex5.1 
+    $(X,\shO_X)$をringed spaceとし，
+    $\shE$を有限階数のlocally free $\shO_X$-moduleとする．
+    また，$\shE$の双対を$\check{\shE}=\shHom_{\shO_X}(\shE, \shO_X)$で定める．
+    （$\shHom$はEx1.15で定義されている．）
+    $(\check{\shE}) \check{}$も同様である．
+
+    \begin{Lemma}
+        $\shF$ :: $\shO_X$-module, $x \in X$とする．
+        このとき，$x$に対して$n>0$が存在して
+        \[ (\shHom_{\shO_X}(\shE, \shF))_x \cong (\shF_x)^{\oplus n} \cong \Hom_{\shO_{X,x}}(\shE_x, \shF_x). \]
+    \end{Lemma}
+    \begin{proof}
+        Ex5.7の内容は使う．
+        $U \OpenIn X$を十分小さく取れば$\shE|_U$はfree moduleになる．
+        したがって以下が成り立つ．
+        \begin{align*}
+            {}&     (\shHom_{\shO_X}(\shE, \shF))(U) \\
+            =&      \Hom_{\shO_U}(\shE|_U, \shF|_U) \\
+            \cong& \Hom_{\shO_U}(\shO_U^{\oplus n}, \shF|_U) \\
+            \cong& \Hom_{\shO_U}(\shO_U, \shF|_U)^{\oplus n} \\
+            \cong& (\shF|_U)^{\oplus n} \\
+            =& \varinjlim_{W \supseteq U} (\shF(W))^{\oplus n}
+        \end{align*}
+        最後で$\bigoplus$と$\varinjlim$が可換であることを用いた．
+        このことから以下を得る．
+        \[
+            \varinjlim_{U \ni x} \varinjlim_{W \supseteq U} (\shF(W))^{\oplus n}
+            =\varinjlim_{W \ni x}(\shF(W))^{\oplus n}
+            =(\shF_x)^{\oplus n}.
+        \]
+        あとは$\shO_{X,x}$-moduleの同型から最後の同型を得る．
+        \[
+            (\shF_x)^{\oplus n}
+            \cong \Hom_{\shO_{X,x}}((\shO_{X,x})^{\oplus n}, \shF_x)
+            \cong \Hom_{\shO_{X,x}}(\shE_x, \shF_x).
+        \]
+    \end{proof}
+    $\shO_X$-homomorphismを構成し，
+    それがstalkでmoduleの射としてisomorphismになっていることを確認する．
+
+\subsection{$(\check{\shE}) \check{} \cong \shE$．}
+    写像$\Phi: \shE \to (\check{\shE}) \check{}$を以下のように定める．
+    \[
+        (\Phi_U(s))_V(\phi)=\phi(s|_V)
+        ~\mwhere~
+        U,V \OpenIn X, V \subseteq U, s \in \shE(U), \phi \in \Hom_{\shO_V}(\shE|_V, \shO_V).
+    \]
+    これが$\shO_X$-homomorphismであることは明らか．
+
+%    $\Phi$が単射であることは，
+%    任意の$\phi \in \Hom_{\shO_V}(\shE|_V, \shO_V)$について
+%    $\phi(s)=0$となる$s \in \shE(U)$が$0$しか無い($\ker \Phi=0$)ことから分かる．
+
+%    全射になることを確かめる．
+%    $\shE|_U \cong \shO_U^{\oplus n}$となる$U \OpenIn X, n \in \N$をとる．
+%    また，$V \subseteq U$を開集合とする．
+%    $\{e_i\}_{i=1}^n \subset \shO_U^{\oplus n}$を基底とし，
+%    $\{e^i\}_{i=1}^n \subset \Hom_{\shO_V}(\shO_V^{\oplus n}, \shO_V)$を
+%    $e^i(e_j|_V)=\delta_{ij}$\footnote{左辺はクロネッカーのデルタである．}で定めると，
+%    $\{e^i\}_{i=1}^n$は$\Hom_{\shO_V}(\shO_V^{\oplus n}, \shO_V)$の基底となる．
+%    そして$\psi \in ((\check{\shE}) \check{})(U)$をとる．
+%    \[
+%        ((\check{\shE}) \check{})(U)
+%        =\Hom_{\shO_U}(\shHom_{\shO_U}(\shO_U^{\oplus n}, \shO_X)|_U, \shO_U)
+%        \cong \Hom_{\shO_U}(\shHom_{\shO_U}(\shO_U^{\oplus n}, \shO_U), \shO_U)
+%    \]
+%    最後の$\cong$はEx1.18を用いた．
+%    そこで$\tilde{\psi} \in \shE|_U=\shO_U^{\oplus n}$を以下のように定める．
+%    \[ \tilde{\psi}=\psi(e^1)e_1+\dots+\psi(e^n)e_n. \]
+%    すると$\Phi(\tilde{\psi})=\psi$となる．
+%    実際，$\alpha=c_1 e^1+\dots+c_n e^n \in \shE|_U$について
+%    \[ \Phi(\tilde{\psi})(\alpha)=\alpha(\tilde{\psi})=c_1 \psi(e^1)+\dots+c_n \psi(e^n)=\psi(\alpha). \]
+%    $U,V$を動かせば，$X$の任意の開集合$U,V$で$(\Phi_U(-))_V$が全射になる事が分かる（？）．
+
+\subsection{For any $\shO_X$-module $\shF$,
+    $\shHom_{\shO_X}(\shE,\shF) \cong \check{\shE} \otimes_{\shO_X} \shF.$}
+%    $\shE|_U \cong \shO_U^{\oplus n}$となる$U \OpenIn X, n \in \N$をとる．
+%    また，$V \subseteq U$を開集合とする．
+%    \[
+%        \shHom(\shE,\shF)(U)=\Hom(\shO_U^{\oplus n},\shF|_U),~~
+%        \check{\shE} \otimes \shF=\Hom(\shO_U^{\oplus n},\shO_U) \otimes \shF(U)
+%    \]
+%    $\Hom, \shHom, \otimes$は$\shO_X(U)$-moduleとしてのものである．
+    
+
+\subsection{For any $\shO_X$-module $\shF,\shG$,
+    $\Hom_{\shO_X}(\shE \otimes \shF,\shG) \cong \Hom_{\shO_X}(\shF, \shHom_{\shO_X}(\shE,\shG))$}
+    
+
+\subsection{Projection Formula.}
+
+
+\section{Module Sheaves over the $\Spec$ of a valuation ring.} %% Ex5.2 
+
+\section{$\tilde{\square}$ and $\Gamma$ are Adjoint Pair.} %% Ex5.3 
+
+\section{The Original Definition of (Quasi-)Coherent Sheaves.} %% Ex5.4 
+
+\section{Is $f_* \shF$ Coherent?} %% Ex5.5 
+
+\section{Support.} %% Ex5.6 
+
+\section{The Stalks of Locally Free Sheaves are Free.} %% Ex5.7 
+
+\section{$\phi(x)=\dim_{k(x)} \shF_x \otimes_{\shO_x} k(x)$.} %% Ex5.8 
+
+\section{Quasi-Finitely Generated Graded $S$-Modules.} %% Ex5.9 
+
+\section{Saturated Ideals and Closed Sub-Schemes.} %% Ex5.10 
+
+\section{The Segre Embedding.} %% Ex5.11 
+
+\section{Very Ample Invertible Sheaves.} %% Ex5.12 
+
+\section{The $d$-uple Embedding.} %% Ex5.13 
+
+\section{The $d$-uple Embedding is Projectively Normal.} %% Ex5.14 
+これはch I, Ex3.17bで私が考察したことのSchemeにおける一般化である．
+
+\section{Extension of Coherent Sheaves.} %% Ex5.15 
+
+\section{Tensor Operations on Sheaves.} %% Ex5.16 
+
+\section{Affine Morphisms.} %% Ex5.17 
+
+\section{Vector Bundles.} %% Ex5.18 
+
+\end{document}

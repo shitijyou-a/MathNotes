@@ -194,26 +194,26 @@
     これは(b)に反する．
 
     \begin{Claim}
-        \[ a \in \overline{k[a^{-1}]} \implies a,a^{-1} \in \bar{k}. \] 
+        \[ \Forall{a \in K^{\times}} a \in \overline{k[a^{-1}]} \implies a,a^{-1} \in \bar{k}. \] 
     \end{Claim}
     \begin{proof}
-        $a \in K-\{0\}$が$k[a^{-1}]$上整ならば，
+        $a \in K^{\times}=K-\{0\}$が$k[a^{-1}]$上整ならば，
         以下のような零でない多項式$f \in k[X, X^{-1}]$が存在する．
         \[
             f(X)=X^d+c_{d-1}(X^{-1})X^{d-1}+\dots+c_0(X^{-1}) \neq 0 ,~~
             f(a)=0.
         \]
+        ここで$c_i(X^{-1}) \in k[X^{-1}]$．
         $f$に$X^{-d} \in k[X,X^{-1}]$をかける．
         \[
             X^{-d}f(X)=1+c_{d-1}(X^{-1})X^{-1}+\dots+c_0(X^{-1})(X^{-1})^d \neq 0,~~
             (X^{-d}f)(a)=a^{-d}f(a)=0.
         \]
-        したがって，$f'(a^{-1})=0$を満たす
-        零でない多項式$f'=X^{d}f(X^{-1}) \in k[X]$が存在する．
+        したがって，$f'(X)=1+c_{d-1}(X)X+\dots+c_0(X)X^d$とおくと，
+        $f' \neq 0, f'(a^{-1})=0$が成立する．
         すなわち$a^{-1}$は$k$上代数的である．
         よって$a^{-1} \in \bar{k}$．
-        $a \neq 0$だから$a,a^{-1} \in \bar{k}$．
-        これは矛盾．
+        $a \neq 0$から$a,a^{-1} \in \bar{k}$．
     \end{proof}
 
     \subsection*{Another Proof of (d).}
@@ -222,13 +222,10 @@
     すると任意の点$x$について$a \in \shO_{X,x}$．
     また，$K/k$の任意のvaluation ring $R$はEx4.5bより少なくとも$1$点$x$について
     $a \in \shO_{X,x} \subseteq R$となる．
-
-    $a \in G-\{0\}$をとる．
-    すると$k[a^{-1}] \subseteq K$．
-    今見たように$K/k$の任意のvaluation ringは$a$を含むから，
-    $a \in \overline{k[a^{-1}]}$．
-    主張から$a, a^{-1} \in \bar{k}$が得られる．
-    よって$G \subseteq \bar{k}$．
+    よってThm4.11より以下が得られる．
+    \[ k \subseteq G \subseteq \bar{k}. \]
+    すなわち$G$は$k$上整である．このこととAti-Mac Prop5.7より$G$は体．
+    以上より，$G$は$k$の代数拡大体．
 
 \section{$f$ :: proper morphism of affine varieties/$k$. Then $f$ :: finite.} %% Ex4.6 
     $f: X \to Y$を考える．
