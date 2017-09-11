@@ -1,0 +1,143 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[all]{xy}
+\usepackage{../math_note, exercise, enumitem}
+\renewcommand{\thesection}{Ex6.\arabic{section}}
+
+\newcommand{\shA}{\mathcal{A}}
+\newcommand{\shE}{\mathcal{E}}
+\newcommand{\shF}{\mathcal{F}}
+\newcommand{\shG}{\mathcal{G}}
+\newcommand{\shH}{\mathcal{H}}
+\newcommand{\shI}{\mathcal{I}}
+\newcommand{\shJ}{\mathcal{J}}
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\basesp}{\operatorname{sp}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\coverU}{\mathfrak{U}}
+\newcommand{\OpenIn}{\text{ :: open in }}
+\newcommand{\ClosedIn}{\text{ :: open in }}
+
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\CaCl}{\operatorname{CaCl}}
+\newcommand{\nullCaCl}{\operatorname{CaCl}^{\circ}}
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\begin{document}
+    以下での(*)とは，次のもの:
+    $X$ :: integral noetherian separated (over $\Z$) scheme which is regular in codimension one.
+
+\section{If $X$ Satisfies (*), $\Cl(X \times \proj^n) \cong \Cl(X) \times \Z$.} %% Ex6.1 
+    $X'=X \times_{\Z} \proj^n_{\Z}=\proj_X^n$とおく．
+    また，$S=\Z[t_0,\dots,t_n]$とし，$\proj^n=\Proj S$とみなす．
+
+    \paragraph{$X'$ :: integral noetherian separated．}
+    $X$のaffine open coverを$\{\Spec A_i\}_{i=0}^r$とすると，
+    $A_i$ :: integral noetherian $\Z$-algebra.
+    $\proj^n$のaffine open coverは$\{\Spec S_{(x_j)}\}_{j=0}^n$で与えられる．
+    $S_{(x_j)}$もintegral noetherian $\Z$-algebra.
+    したがって$R_{ij}=A_i \otimes_{\Z} S_{(x_j)}$とおくと，
+    $X'$は$\Spec R_{ij}$の張り合わせであり（Thm3.3），
+    $R_{ij}$ :: integral noetherian $\Z$-algebra．
+    任意の$(i,j), (i',j')$について$R_{ij}, R_{i'j'}$が交わることから，
+    $X'$全体でもirreducible．
+    よって$X'$ :: integral noetherian scheme．
+    being separated :: stable under base extensionより，
+    $X'$ :: separated．
+
+    \paragraph{$X'$ :: regular in codimension one.}
+%    Prop6.6の証明を参考にする．
+%    $\pr_1,\pr_2$を$X'=X \times_{\Z} \proj^n_{\Z}$から
+%    それぞれ$X, \proj^n_{\Z}$への射影とする．
+%    $d=\dim X$とおくと$\dim X'=d+n$（？）．
+%    $d+n-1=(d-1)+n=d+(n-1)$だから，
+%    $x \in X'$がcodimension oneならば，
+%    \begin{enumerate}[label=(\roman*)]
+%        \item $I \subset X$ :: irreducible closed subset of codimension oneに対する$\pr^{-1}_1(I)$のgeneric point.
+%        \item $\pr_1(x)$ :: point of codimension one in $X$ \& $\pr_2(x)$ :: generic point of $\proj^n$.
+%        \item $J \subset \proj^n$ :: irreducible closed subset of codimension oneに対する$\pr^{-1}_2(J)$のgeneric point.
+%        \item $\pr_1(x)$ :: generic point of $X$ \& $\pr_2(x)$ :: point of codimension one in $\proj^n$.
+%    \end{enumerate}
+%    のどちらかが成り立つ．
+%    $X, \proj^n$ :: integralより，$\codim=0$の点はgeneric pointに限ることに注意．
+%    (i)の場合を考えよう．
+    $x=\I{p} \in \Spec R_{ij}$とする．
+    $A_i \otimes \Z[t_0,\dots,t_n]_{(t_j)} \cong A_i[t_0,\dots,t_n]_{(t_j)}$を，
+    簡単のため$A[T]_{(t)}$を書くことにする．
+    Ati-Mac Prop3.1より，$\I{p} \subset A[T]_{(t)}$に対応する
+    $\height=1$の素イデアル$\tilde{\I{p}} \subset A[T]$がただひとつ存在し，
+    $\I{p}=\tilde{\I{p}}_{(t)}$となる．
+    これを使って計算すると，以下のようになる．
+    \[ \shO_{X',x}=(A[T]_{(t)})_{\I{p}} \cong A[T]_{(\tilde{\I{p}})}. \]
+    さて，$A$の素イデアル$\I{q}$であって$\height \I{q}=1$を満たすものについて，
+    局所化$A_{\I{q}}$は$\dim A_{\I{q}}=1$を満たすregular local ringである．
+    したがってch I, Thm6.3より$A_{\I{q}}$はintegrally closedであり，
+    Thm6.
+
+\section{Varieties in Projective Space.} %% Ex6.2 
+
+\section{Cones.} %% Ex6.3 
+
+\section{$A=k[x_1,\dots,x_n,z]/(z^2-f)$ :: integrally closed.} %% Ex6.4 
+    $\fchar k \neq 2$とする．
+    $x_1,\dots,x_n$を$\vec{x}$と略す．
+    $f \in k[\vec{x}]$ :: square-freeとし，
+    $A=k[\vec{x},z]/(z^2-f)$とおく．
+    また，$\bar{z}=z+(z^2-f)$とする．
+    （$\bar{z}=\sqrt{f}, A=k[\vec{x}, \sqrt{f}]$と考えて良い．）
+    $f$ :: square-freeより$z^2-f$ :: irreducible, $A$ :: integral domain．
+
+    \paragraph{$K$の同定．}
+    この時，$K=\Quot(A)$は$k(\vec{x})[z]/(z^2-f)$である．
+    実際，$K$の元は$g,h \in A$の元によって$g/h$と表されるが，
+    $z^2=f$なので，$g/h$は分母の「有理化」によって$k(\vec{x})[z]/(z^2-f)$に属すことが分かる．
+    したがって$k(\vec{x})[z]/(z^2-f) \subseteq K$であり，逆の包含関係は明らか．
+
+    \paragraph{$K/k(\vec{x})$.}
+    $K$は$k(\vec{x})$上の2次式$\bar{z}^2-f$の最小分解体だから，
+    $K/k(\vec{x})$は2次のガロア拡大である．
+    $\Gal(K/k(\vec{x}))$は，
+    $\sigma: \bar{z} \mapsto -\bar{z}$で生成される位数$2$の群．
+
+    \paragraph{$A$ :: integral closure of $k[\vec{x}]$ in $K$.}
+    $\alpha \in K$をとると，
+    これは$g,h \in k(\vec{x})$を用いて$g+h\bar{z}$と書ける．
+    $\alpha$の最小多項式は，
+    \[ (X-\alpha)(X-\sigma(\alpha))=X^2-2gX + (g^2 - h^2 f). \]
+    この多項式の各係数が$k[\vec{x}]$に属しているとしよう．
+    すると，まず明らかに$g \in k[\vec{x}]$である．
+    また$f$ :: square-freeより，
+    $h \not \in k[\vec{x}]$ならば$h^2$の分母は$f$の因子で打ち消されず，
+    $h^2 f, g^2 - h^2 f\not \in k[\vec{x}]$となる．
+    よって$\alpha$ :: integral / $k[\vec{x}]$ならば$\alpha \in k[\vec{x}]$．
+    逆に$\alpha \in k[\vec{x}]$ならば$g,h \in k[\vec{x}]$だから
+    $\alpha$の最小多項式は$k[\vec{x}]$係数多項式になる．
+    以上をまとめて$A$ :: integrally closedが分かる．
+
+    \paragraph{系.}
+    以上から，$z^2-f=0$で定まるhypersurfaceはaffine varietyとしてnormalである．
+    特に，$f(x) \in k[x]$が重根を持たない$3$次多項式であるとき，
+    楕円曲線$y^2=f(x)$はnormal curveである．
+
+\section{Quadric Hypersurfaces.} %% Ex6.5 
+
+\section{Consider $X=\zerosp(y^2z-x^3+xz^2)$.} %% Ex6.6 
+TODO
+
+\section{For $X=\zerosp(y^2z-x^3-x^2z)$, $\nullCaCl(X) \iso \mathbf{G}_m$.} %% Ex6.7 
+
+\section{Morphism of Schemes Induces Homomorphism of $\Pic$ / $\Cl$.} %% Ex6.8 
+TODO
+
+\section{(Culating the Picard Groups of ) Singular Curves.} %% Ex6.9 
+TODO
+
+\section{The Grothendieck Group $K(X)$.} %% Ex6.10 
+TODO
+
+\section{The Grothendieck Group of a Nonsingular Curve.} %% Ex6.11 
+
+\section{The Degree of Coherent Sheaf.} %% Ex6.12 
+TODO
+
+\end{document}

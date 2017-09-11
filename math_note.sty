@@ -77,7 +77,7 @@
 \mathchardef\mdash="2D %% dash in math-mode
 \newcommand{\mor}           {\text{ or }}
 \newcommand{\mand}          {\text{ and }}
-\newcommand{\mwhere}        {\text{ where }}
+\newcommand{\mwhere}        {~~\text{where}~~}
 
 %% fundamental spaces
 \newcommand {\C}            {\mathbb{C}}
@@ -139,11 +139,11 @@
 \newcommand{\reg}           [2]{\langle #1,#2 \rangle} %% a regular function f on U : <U,f>
 \newcommand{\germ}          [2]{\langle #1,#2 \rangle} %% a germ f on U : <U,f>
 
-%% equivalence relation of varieties
+%% equivalence relation of varieties {{{
 %% the more rigid, the less tilde and more bar.
-\newcommand{\iso}           {\equiv} %% isomorphic (3bar)
-\newcommand{\bi}            {\cong} %% birational (1tilde 2bar)
-\newcommand{\homeo}         {\approx} %% homeomorphic (2tilde)
+%\newcommand{\iso}           {\equiv} %% isomorphic (3bar)
+%\newcommand{\bi}            {\cong} %% birational (1tilde 2bar)
+%\newcommand{\homeo}         {\approx} %% homeomorphic (2tilde)
 %% \Xi
 %% triple vertical bar
 %% \doteq
@@ -151,9 +151,21 @@
 %% \approx
 
 %% and maps
+%\newcommand{\isomap}        {\xrightarrow{\iso}}
+%\newcommand{\bimap}         {\xrightarrow{\bi}}
+%\newcommand{\homeomap}      {\xrightarrow{\homeo}}
+
+%% }}}
+
+%% equivalence relation of schemes {{{
+\newcommand{\iso}           {\cong} %% isomorphic (3bar)
+\newcommand{\homeo}         {\approx} %% homeomorphic (2tilde)
+
+%% and maps
 \newcommand{\isomap}        {\xrightarrow{\iso}}
-\newcommand{\bimap}         {\xrightarrow{\bi}}
 \newcommand{\homeomap}      {\xrightarrow{\homeo}}
+
+%% }}}
 
 %% liner algebra
 \newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}

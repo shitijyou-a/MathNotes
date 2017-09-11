@@ -3,6 +3,7 @@
 \usepackage{../math_note, exercise, enumitem}
 \renewcommand{\thesection}{Ex5.\arabic{section}}
 
+\newcommand{\shA}{\mathcal{A}}
 \newcommand{\shE}{\mathcal{E}}
 \newcommand{\shF}{\mathcal{F}}
 \newcommand{\shG}{\mathcal{G}}
@@ -10,13 +11,21 @@
 \newcommand{\shI}{\mathcal{I}}
 \newcommand{\shJ}{\mathcal{J}}
 \newcommand{\shO}{\mathcal{O}}
+\newcommand{\shM}{\mathcal{M}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\basesp}{\operatorname{sp}}
 \newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\bfSpec}{\mathbf{Spec}}
 \newcommand{\coverU}{\mathfrak{U}}
 \newcommand{\OpenIn}{\text{ :: open in }}
 \newcommand{\ClosedIn}{\text{ :: open in }}
+\newcommand{\sidetilde}{\,\tilde{}}
+\newcommand{\sidecheck}{\,\check{}}
+\newcommand{\ccheck}[1]{#1\sidecheck\,\sidecheck\,}
 
 \usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
 \newcommand{\shHom}{\mathscr{H\!o\!m}}
+
 
 \begin{document}
 
@@ -25,12 +34,12 @@
     $\shE$を有限階数のlocally free $\shO_X$-moduleとする．
     また，$\shE$の双対を$\check{\shE}=\shHom_{\shO_X}(\shE, \shO_X)$で定める．
     （$\shHom$はEx1.15で定義されている．）
-    $(\check{\shE}) \check{}$も同様である．
+    $\ccheck{\shE}$も同様である．
 
     \begin{Lemma}
         $\shF$ :: $\shO_X$-module, $x \in X$とする．
         このとき，$x$に対して$n>0$が存在して
-        \[ (\shHom_{\shO_X}(\shE, \shF))_x \cong (\shF_x)^{\oplus n} \cong \Hom_{\shO_{X,x}}(\shE_x, \shF_x). \]
+        \[ (\shHom_{\shO_X}(\shE, \shF))_x \iso (\shF_x)^{\oplus n} \iso \Hom_{\shO_{X,x}}(\shE_x, \shF_x). \]
     \end{Lemma}
     \begin{proof}
         Ex5.7の内容は使う．
@@ -39,9 +48,9 @@
         \begin{align*}
             {}&     (\shHom_{\shO_X}(\shE, \shF))(U) \\
             =&      \Hom_{\shO_U}(\shE|_U, \shF|_U) \\
-            \cong& \Hom_{\shO_U}(\shO_U^{\oplus n}, \shF|_U) \\
-            \cong& \Hom_{\shO_U}(\shO_U, \shF|_U)^{\oplus n} \\
-            \cong& (\shF|_U)^{\oplus n} \\
+            \iso& \Hom_{\shO_U}(\shO_U^{\oplus n}, \shF|_U) \\
+            \iso& \Hom_{\shO_U}(\shO_U, \shF|_U)^{\oplus n} \\
+            \iso& (\shF|_U)^{\oplus n} \\
             =& \varinjlim_{W \supseteq U} (\shF(W))^{\oplus n}
         \end{align*}
         最後で$\bigoplus$と$\varinjlim$が可換であることを用いた．
@@ -54,78 +63,452 @@
         あとは$\shO_{X,x}$-moduleの同型から最後の同型を得る．
         \[
             (\shF_x)^{\oplus n}
-            \cong \Hom_{\shO_{X,x}}((\shO_{X,x})^{\oplus n}, \shF_x)
-            \cong \Hom_{\shO_{X,x}}(\shE_x, \shF_x).
+            \iso \Hom_{\shO_{X,x}}((\shO_{X,x})^{\oplus n}, \shF_x)
+            \iso \Hom_{\shO_{X,x}}(\shE_x, \shF_x).
         \]
     \end{proof}
     $\shO_X$-homomorphismを構成し，
     それがstalkでmoduleの射としてisomorphismになっていることを確認する．
 
-\subsection{$(\check{\shE}) \check{} \cong \shE$．}
-    写像$\Phi: \shE \to (\check{\shE}) \check{}$を以下のように定める．
+\subsection{$\ccheck{\shE} \iso \shE$．}
+    写像$\Phi: \shE \to \ccheck{\shE}$を以下のように定める．
     \[
         (\Phi_U(s))_V(\phi)=\phi(s|_V)
         ~\mwhere~
-        U,V \OpenIn X, V \subseteq U, s \in \shE(U), \phi \in \Hom_{\shO_V}(\shE|_V, \shO_V).
+        U,V \OpenIn X, V \subseteq U, s \in \shE(U), \phi \in \check{\shE}(V).
     \]
     これが$\shO_X$-homomorphismであることは明らか．
-
-%    $\Phi$が単射であることは，
-%    任意の$\phi \in \Hom_{\shO_V}(\shE|_V, \shO_V)$について
-%    $\phi(s)=0$となる$s \in \shE(U)$が$0$しか無い($\ker \Phi=0$)ことから分かる．
-
-%    全射になることを確かめる．
-%    $\shE|_U \cong \shO_U^{\oplus n}$となる$U \OpenIn X, n \in \N$をとる．
-%    また，$V \subseteq U$を開集合とする．
-%    $\{e_i\}_{i=1}^n \subset \shO_U^{\oplus n}$を基底とし，
-%    $\{e^i\}_{i=1}^n \subset \Hom_{\shO_V}(\shO_V^{\oplus n}, \shO_V)$を
-%    $e^i(e_j|_V)=\delta_{ij}$\footnote{左辺はクロネッカーのデルタである．}で定めると，
-%    $\{e^i\}_{i=1}^n$は$\Hom_{\shO_V}(\shO_V^{\oplus n}, \shO_V)$の基底となる．
-%    そして$\psi \in ((\check{\shE}) \check{})(U)$をとる．
-%    \[
-%        ((\check{\shE}) \check{})(U)
-%        =\Hom_{\shO_U}(\shHom_{\shO_U}(\shO_U^{\oplus n}, \shO_X)|_U, \shO_U)
-%        \cong \Hom_{\shO_U}(\shHom_{\shO_U}(\shO_U^{\oplus n}, \shO_U), \shO_U)
-%    \]
-%    最後の$\cong$はEx1.18を用いた．
-%    そこで$\tilde{\psi} \in \shE|_U=\shO_U^{\oplus n}$を以下のように定める．
-%    \[ \tilde{\psi}=\psi(e^1)e_1+\dots+\psi(e^n)e_n. \]
-%    すると$\Phi(\tilde{\psi})=\psi$となる．
-%    実際，$\alpha=c_1 e^1+\dots+c_n e^n \in \shE|_U$について
-%    \[ \Phi(\tilde{\psi})(\alpha)=\alpha(\tilde{\psi})=c_1 \psi(e^1)+\dots+c_n \psi(e^n)=\psi(\alpha). \]
-%    $U,V$を動かせば，$X$の任意の開集合$U,V$で$(\Phi_U(-))_V$が全射になる事が分かる（？）．
+    $x \in X$を任意に取ると，$\Phi_x$は以下のようになる．
+    \[ \Phi_x(s_x)(\phi_x)=\phi_x(s_x) \mwhere s_x \in \shE_x, \phi_x \in \check{\shE}_x \]
+    補題より，$\check{\shE}_x, (\ccheck{\shE})_x$が計算できる．
+    \[
+        \check{\shE}_x \iso \shHom(\shE, \shO_X)_x \iso (\shE_x)^*,~~
+        (\ccheck{\shE})_x
+        \iso \Hom(\check{\shE}_x, \shO_{X,x})
+        = (\shE_x)^{**}.
+    \]
+    ただし，$(\shE_x)^*$は$\shE_x$の$\shO_{X,x}$-moduleとしての双対である．
+    $(\shE_x)^*$はfree moduleだから，上記の同型が成り立つ．
+    上記の$\Phi_x: \shE_x \to (\ccheck{\shE})_x \iso (\shE_x)^{**}$が
+    同型写像であることはよく知られている．
+    よってProp1.1より，$\Phi$も同型．
 
 \subsection{For any $\shO_X$-module $\shF$,
-    $\shHom_{\shO_X}(\shE,\shF) \cong \check{\shE} \otimes_{\shO_X} \shF.$}
-%    $\shE|_U \cong \shO_U^{\oplus n}$となる$U \OpenIn X, n \in \N$をとる．
-%    また，$V \subseteq U$を開集合とする．
-%    \[
-%        \shHom(\shE,\shF)(U)=\Hom(\shO_U^{\oplus n},\shF|_U),~~
-%        \check{\shE} \otimes \shF=\Hom(\shO_U^{\oplus n},\shO_U) \otimes \shF(U)
-%    \]
-%    $\Hom, \shHom, \otimes$は$\shO_X(U)$-moduleとしてのものである．
-    
+    $\shHom_{\shO_X}(\shE,\shF) \iso \check{\shE} \otimes_{\shO_X} \shF.$}
+    写像$\Psi$を以下で定める．
+    \begin{defmap}
+        \Psi_U:& \check{\shE}(U) \otimes \shF(U)& \to& \shHom(\shE,\shF)(U) \\
+        {}& \phi_U \otimes f& \mapsto& \big[ \shE(V) \ni s \mapsto \phi_V(s) \cdot f|_V \in \shF(V) \big]
+    \end{defmap}
+    ただし$U,V$は$X$の開集合で$V \subseteq U$を満たし，
+    $\big[ \big]$内は$\shE(V) \to \shF(V)$の写像の定義である．
+    これの$x \in X$におけるstalkは以下のようになる．
+    \begin{defmap}
+        \Psi_x:& \Hom(\shE_x, \shO_{X,x}) \otimes \shF_x& \to& \Hom(\shE_x,\shF_x) \\
+        {}& \phi_x \otimes f_x& \mapsto& \big[ \shE_x \ni s_x \mapsto \phi_x(s_x) \cdot f_x \in \shF_x \big]
+    \end{defmap}
 
 \subsection{For any $\shO_X$-module $\shF,\shG$,
-    $\Hom_{\shO_X}(\shE \otimes \shF,\shG) \cong \Hom_{\shO_X}(\shF, \shHom_{\shO_X}(\shE,\shG))$}
-    
+    $\Hom_{\shO_X}(\shE \otimes \shF,\shG) \iso \Hom_{\shO_X}(\shF, \shHom_{\shO_X}(\shE,\shG))$}
+    $U \OpenIn X$を任意に取る．
+    テンソル積の定義（普遍性）より，以下が成り立つ．
+    \[ \Hom(\shE(U) \otimes \shF(U),\shG(U)) \iso \Hom(\shF(U), \Hom(\shE(U),\shG(U))) \]
+    テンソル積と$\Hom$は$\shO_X(U)$-moduleとしてのものである．
+    なので
+    \[ \Hom_{\shO_X(U)}(\shE(U),\shG(U)) \iso \shHom_{\shO_X}(\shE,\shG)(U) \]
+    を示せば良い．
+    これは以下の写像で得られる．
+    \begin{defmap}
+        \Theta_U:& \shHom_{\shO_X}(\shE,\shG)(U) & \to& \Hom_{\shO_X(U)}(\shE(U),\shG(U))   \\
+        {}& \phi:\shE|_U \to \shG|_U& \mapsto& \phi_U:\shE(U) \to \shG(U) \\
+    \end{defmap}
+    これは$x \in U$について$\Theta_x: \phi_x \mapsto \phi_x$を与えるから，
+    同型写像．
 
 \subsection{Projection Formula.}
+    $f: (X,\shO_X) \to (Y,\shO_Y)$をringed spaceのmorphismとし，
+    $\shF$を$\shO_X$-module, $\shE$を
+    finite rank locally free $\shO_Y$-moduleとする．
+    すると
+    $f_*(\shF \otimes_{\shO_X} f^* \shE) \iso f_*(\shF) \otimes_{\shO_X} \shE$
+    という自然同型がある．
+    これを示す．
 
+    米田の補題を用いて証明する．
+    $\shG$を任意の$\shO_Y$-moduleとする．
+    \begin{align*}
+        {}&     \Hom_{\shO_Y}(\shG, f_*(\shF \otimes f^* \shE)) \\
+        \iso&  \Hom_{\shO_X}(f^* \shG, \shF \otimes f^* \shE)                          & (\text{Ex1.18})\\
+        \iso&  \Hom_{\shO_X}(f^* \shG, \shF \otimes f^* \ccheck{\shE})                 & (\text{a})\\
+        \iso&  \Hom_{\shO_X}(f^* \shG, \shF \otimes (f^* \check{\shE})\,\check{}\,)    & (\text{?})\\
+        \iso&  \Hom_{\shO_X}(f^* \shG, \shHom_{\shO_X}(f^* \check{\shE},\shF))         & (\text{b})\\
+        \iso&  \Hom_{\shO_X}(f^* \shG \otimes f^* \check{\shE}, \shF)                  & (\text{c})\\
+        \iso&  \Hom_{\shO_X}(f^* (\shG \otimes \check{\shE}), \shF)                    & (\text{?})\\
+        \iso&  \Hom_{\shO_X}(\shG \otimes \check{\shE}, f_* \shF)                      & (\text{Ex1.18})\\
+        \iso&  \Hom_{\shO_X}(\shG, \shHom(\check{\shE}, f_* \shF))                     & (\text{c})\\
+        \iso&  \Hom_{\shO_X}(\shG, \ccheck{\shE} \otimes f_* \shF)                     & (\text{b})\\
+        \iso&  \Hom_{\shO_X}(\shG, f_* \shF \otimes \shE)                              & (\text{a})\\
+    \end{align*}
+    $\check{\shE}, \ccheck{\shE}, f^* \shE$が
+    finite rank locally free moduleであることは容易に分かる．
+    残すは以下の2つの主張である．
 
-\section{Module Sheaves over the $\Spec$ of a valuation ring.} %% Ex5.2 
+    \begin{Claim}
+        \[ f^* \ccheck{\shE} \iso (f^* \check{\shE})\check{}. \]
+    \end{Claim}
+    \begin{proof}
+        $U \OpenIn X$をとる．
+        \begin{align*}
+            (f^* \check{\shE})\check{}
+            =&\shHom(f^{-1}\check{\shE}, \shO_X) \\
+            =&f^{-1}\shHom(\check{\shE}, \shO_X) \\
+            =&f^{-1}\ccheck{\shE} \otimes \shO_X
+        \end{align*}
+        ここで$\shHom(f^{-1}*,*) \iso f^{-1}\shHom(*,*)$とした．
+        TODO:どう示す．
+    \end{proof}
 
-\section{$\tilde{\square}$ and $\Gamma$ are Adjoint Pair.} %% Ex5.3 
+    \begin{Claim}
+        \[ f^* \shG \otimes f^* \check{\shE} \iso f^* (\shG \otimes \check{\shE}). \]
+    \end{Claim}
+    \begin{proof}
+        \begin{align*}
+            {}&     f^* \shG \otimes f^* \check{\shE} \\
+            =&      (f^{-1}\shG \otimes \shO_X) \otimes (f^{-1}\check{\shE} \otimes \shO_X) \\
+            \iso&  (f^{-1}\shG \otimes f^{-1}\check{\shE}) \otimes \shO_X \\
+            \iso&  f^{-1}(\shG \otimes f^{-1}\check{\shE}) \otimes \shO_X \\
+            \iso&  f^{-1}f^{-1}(\shG \otimes \check{\shE}) \otimes \shO_X \\
+            =&      f^{-1}(\shG \otimes \check{\shE}) \otimes \shO_X \\
+            =&      f^*(\shG \otimes \check{\shE})
+        \end{align*}
+        ここで$f^{-1}(\shF \otimes \shG) \iso (f^{-1}\shF \otimes \shG)$を用いた．
+    \end{proof}
+
+\section{Module Sheaves over the $\Spec$ of a D.V.R.} %% Ex5.2 
+    $R$ :: D.V.R., $X=\Spec R, K=\Quot(R)$とおく．
+    $X$は2点空間$\{ \zeta, \I{m} \}~~(\zeta=(0))$であり，
+    開集合系は$\{ \emptyset, \{\zeta\}, X \}$である．
+
+    \subsection{$\shO_X$-module $\shF$ $\leftrightarrow$ $\rho: M \otimes_R K \to L$.}
+    $\shF$ :: $\shO_X$-moduleをとる．
+    $\shO_X(\{\zeta\})=K,\shO_X(X)=R$
+    \footnote
+    {
+        $\shO_X(\{\zeta\})$はaffine schemeのsheafの定義から分かる．
+        つまり，$\shO_X(\{\zeta\})$の元は
+        $\{\zeta\} \to \shO_{X,\zeta}=K$の写像であって
+        localには$R$の元の分数で書けるものである．
+        $\{\zeta\}$は１点集合だから，
+        これは$\zeta \mapsto f/g \in K$なる写像全体を取れば良い．
+        $\shO_X(\{\zeta\})$と$K$に集合としての全単射だけでなく
+        同型もあることは自明であろう．
+        一般に，点$x \in X$について$\{x\}$が開集合ならば
+        $\shF(\{x\}) \iso \shF_{x}$．
+    }
+    だから，
+    $\shF$は$K$-module $L=\shF(\{\zeta\})$と$R$-module $M=\shF(X)$と，
+    以下の図式を可換にするrestriction map $\tilde{\rho}$で与えられる．
+    \[
+    \xymatrix
+    {
+        M \ar[r]_{\tilde{\rho}}& L \\
+        R \ar[u]\ar[r]_{l}& K \ar[u]
+    }
+    \]
+    ここで$l: R \to K=R_{(0)}$は標準的な局所化写像である．
+    したがって$L$も$R$-moduleとみなせて，
+    以下の図式にある$\rho: m \otimes x \mapsto \tilde{\rho}(m) \cdot x$が得られる．
+    \[
+    \xymatrix
+    {
+        M \otimes_R K \ar[rd]^{\rho} & {} \\
+        M \ar[r]_{\tilde{\rho}} \ar[u]& L \\
+        R \ar[u]\ar[r]_{l}& K \ar[u]
+    }
+    \hspace{2cm}
+    \]
+    逆に$\rho: M \otimes_R K \to L$があるとき，
+    $\tilde{\rho}=\rho|_{M \otimes R}$とすれば$\tilde{\rho}: M \to L$が得られる．
+
+    \subsection{$\shF$ :: quasi-coherent $\iff$ $\rho$ :: isomorphism.}
+    \paragraph{$\implies$.}
+    $\shF$ :: quasi-coherentのとき，$M:=\Gamma(X,\shF)$とすると，
+    Prop5.1aから$\shF=\tilde{M}$．
+    $\tilde{M}$の定義から，restriction map $\tilde{\rho}$は次のようなものである．
+    \begin{defmap}
+        \tilde{\rho}:& M& \to& \tilde{M}(\{\zeta\}) \\
+        {}& m& \mapsto& [\zeta \mapsto m/1 \in M_{\zeta}]
+    \end{defmap}
+    こうして$\rho$が定まる．
+    \begin{defmap}
+        \rho:& M \otimes K& \to& \tilde{M}(\{\zeta\}) \\
+        {}& m \otimes x& \mapsto& [\zeta \mapsto x(m/1) \in M_{\zeta}]
+    \end{defmap}
+    逆写像が$[\zeta \mapsto m/s] \mapsto m \otimes (1/s)$
+    （この逆写像が加群準同型かつwell-defined mapであることは容易に分かる）
+    で定まるからこれは同型である．
+
+    \paragraph{$\impliedby$.}
+    仮定より，
+    \[
+        \shF(X)=M,~~
+        \shF(\{\zeta\})=L \overset{\rho}{\iso} M \otimes K \iso M_{\zeta} \iso \tilde{M}(\{\zeta\})
+    \]
+    なので$\shF=\tilde{M}$．
+
+    \section{$\tilde{\square}$ and $\Gamma(X,\square)$ are Adjoint Pair.} %% Ex5.3 
+    $A$ :: ring, $X=\Spec A$とする．
+    この時，$\tilde{\square}$と$\Gamma(X,\square)$はadjointである．
+    すなわち，任意の$M$ :: $A$-module, $\shF$ :: $\shO_X$-moduleについて，
+    \[ \Hom_A(M,\Gamma(X,\shF)) \iso \Hom_{\shO_X}(\tilde{M}, \shF). \]
+    
+    写像$\Phi: \Hom_A(M,\Gamma(X,\shF)) \to \Hom_{\shO_X}(\tilde{M}, \shF)$を次のように定める．
+    $U \OpenIn X$に対し，$\tilde{M}(U)$の元$s$は
+    \begin{defmap}
+        \sigma:& U& \to& M_u \\
+        {}& u& \mapsto& m/s
+    \end{defmap}
+    のような写像である．
+    この元$\sigma$を$\alpha \in \Hom_A(M,\Gamma(X,\shF))$によって以下のように写す．
+    \begin{defmap}
+        (\Phi(\alpha))_U:& \tilde{M}(U)& \to& \shF(U) \\
+        {}& \sigma& \mapsto& \bar{\alpha}(\sigma)|_U
+    \end{defmap}
+    ただし$A_u$-module homomorphism $\alpha_{(u)}$を
+    $m/s \mapsto \alpha(m)/s$で定めた．
+
+    TODO:
+    $A$-module homomorphism $\alpha \in \Hom_A(M,\Gamma(X,\shF))$に対し，
+    $A_x$-module homomorphism $\tilde{M}_x \to \shF_x$は$m/s \mapsto \alpha(m)_x/s$で定まる．
+    これを貼り合わせれば良い．
 
 \section{The Original Definition of (Quasi-)Coherent Sheaves.} %% Ex5.4 
+    \paragraph{quasi-coherent $\iff$ cokernel of free sheaves locally.}
+    $\shF$ :: sheaf on $X$がquasi-coherentならば，
+    任意のopen affine subset $U=\Spec A$について$\shF|_U \iso \tilde{M}$となる
+    $A$-module $M$が存在する(Prop5.4)．
+    $M$はcokernel of free moduleとして表現できる（Ati-Mac Prop2.3の証明を参照せよ）から，
+    完全列$0 \to A^m \to A^n \to M \to 0$に対してfunctor $\tilde{\square}$を用いれば
+    $\shF|_U \iso \tilde{M}$はcokernel of free sheavesで表現できる事が得られる
+    \footnote{Ex5.3から$\tilde{\square}$はleft adjointなのでdirect sum (colimit)と可換であることに注意．}．
+    逆はfree sheafがquasi-coherentであることとProp5.7より従う．
+
+    \paragraph{coherent $\iff$ cokernel of finite rank free sheaves locally.}
+    $X$がNoetherianで$\shF$がcoherentならば，
+    任意のopen affine subset $U=\Spec A$について$\shF|_U \iso \tilde{M}$となる
+    finitely generated $A$-module $M$が存在する(Prop5.4)．
+    $\tilde{M}$がfinite rank free sheafであることはquasi-coherentの場合と同様．
+    逆はfinite rank free sheafがcoherentであることとProp5.7より従う．
 
 \section{Is $f_* \shF$ Coherent?} %% Ex5.5 
+    \subsection{An Example that $\shF$ is Coherent but $f_*\shF$ is NOT Coherent.}
+    材料は次の通り．
+    \[ A=\C,~~ B=\C[x],~~ X=\Spec A=\Spec \C,~~ \shF=\tilde{\C}=\shO_X. \]
+%    材料は次の通り．
+%    \[ A=\Z,~~ B=\Z[t],~~ X=\Spec A=\Spec \Z,~~ \shF=\tilde{\Z[i]}. \]
+%    ただし$t$は不定元で$i$は虚数単位である．
+    明らかに$\shF$はcoherent $\shO_X$-moduleである(Example 5.2.1)．
+    $f: \Spec B \to \Spec A$を
+    標準的埋込み$A \hookrightarrow B$から誘導されるものとすると，
+    Prop5.1eより
+    \[ f_* \shF \iso (\C \otimes_{\C} \C[x])~\tilde{} \iso (\C[x])~\tilde{}=\tilde{B} \]
+    となる．
+    $B=\C[x]$は明らかにfinitely generated $A$-moduleでない．
+
+    \subsection{Closed Immersion is a Finite Morphism.}
+    $f: X \to Y$ :: closed immersionをとる．
+    $Y$のopen affine subset $U=\Spec A$をとり，
+    $V=f^{-1}(U)$とすると，
+    $f|_V: V \to \Spec A$はclosed immersionになっている．
+    Cor5.10（あるいはEx3.11b）より
+    $V \iso \Spec A/\I{a}$となるイデアル$\I{a}$が存在する．
+
+    以上から任意のopen affine subset $U=\Spec A \subseteq Y$に対し
+    $V=f^{-1}(U)=\Spec A/\I{a}$かつ$B$ :: finitely generated $A$-module
+    （$1+\I{a}$で生成される）なので$f$ :: finite．
+
+    \subsection{If $X,Y$ :: noetherian schemes, $f: X \to Y$ :: finite and $\shF$ :: coherent on $X$, then $f_*\shF$ :: coherent.}
+    $f$ :: finiteから，
+    任意のaffine open subset $\Spec B \subset Y$に対して
+    $f^{-1}\Spec B$はaffine scheme $\Spec A$であり，
+    かつ$A$ :: finitely generated $B$-moduleである．
+    $U=\Spec A, V=\Spec B$としておこう．
+
+    Prop5.4より，$\shF|_{\Spec A}=\tilde{M}$なる
+    finitely generated $A$-module $M$が存在する．
+    $f|_{U}: \Spec A \to \Spec B$だから
+    Prop5.1から
+    \[ (f_* \shF)|_V \iso f_* (\shF|_U) \iso f_* \tilde{M} \iso (M \otimes_{B} A) \check{}. \]
+    （一番左の同型は任意の$V$の開集合上でのsectionを見れば良い．）
+    今$M,B$は共にfinitely generated $A$-moduleだから，
+    $f_* \tilde{M}$もfinitely generated $\shO_V$-module．
+    $V$は任意のaffine open subsetとしていたから，
+    $f_* \shF$ :: coherent.
 
 \section{Support.} %% Ex5.6 
+    \subsection{$\Supp m=V(\Ann(m))$.}
+    $A$ :: ring, $M$ :: $A$-module, $X=\Spec A$とおく．
+    さらに$\shF=\tilde{M}$とする．
+    $m \in M=\Gamma(X,\shF)$について，
+    $\Supp m=\{ \I{p} \in X \mid m_{\I{p}} \neq 0 \}$を考える．
+    $\Ann m=\{a \in A \mid am=0 \}$とする．
+    \[ m_{\I{p}}=0 \iff \Exists{a \in A-\I{p}} am=0 \]
+    だから，$m_{\I{p}} \neq 0$となるのは
+    $(A-\I{p}) \cap \Ann m=\emptyset$であるとき，
+    すなわち$\Ann m \subseteq \I{p}$となっているときである．
+    よって$\Supp m=V(\Ann m)$．
 
-\section{The Stalks of Locally Free Sheaves are Free.} %% Ex5.7 
+    \subsection{If $X$ :: Noetherian and $M$ :: Finitely Generated, then $\Supp \shF=V(\Ann M)$.}
+    Prop5.1から$\shF_{\I{p}} \iso M_{\I{p}}$．
+    $M$の生成元全体を$G$とすると，以下のようになる．
+    \[
+        M_{\I{p}} \neq 0
+        \iff \Exists{g \in G} g_{\I{p}} \neq 0
+        \iff \Exists{g \in G} \I{p} \supseteq \Ann g
+        \iff \I{p} \supseteq \bigcap_{g \in G} \Ann g.
+    \]
+    $\Ann M=\bigcap_{g \in G} \Ann g$は明らか．
+    よって$\Supp \shF=V(\Ann M)$．
+
+    \subsection{The Support of a Coherent Sheaf on a Noetherian Scheme is Closed.}
+    $\shF|_{U}$がfinitely generated moduleならば$\Supp \shF|_{U}$ :: closed．
+    このような開集合$U$は有限個で十分だから
+    $\Supp \shF$が閉集合の有限和となり，したがって閉集合である．
+
+    \subsection{$\Gamma_{\I{a}}(M)\sidetilde \iso \mathcal{H}_Z^0(\shF)$.}
+
+    \subsection{$\shF$ :: (Quasi-)Coherent $\implies$ $\mathcal{H}_Z^0(\shF)$ :: (Quasi-)Coherent.}
+
+\section{A Sheaf is Locally Free $\iff$ Its Stalks are Free.} %% Ex5.7 
+    $(X,\shO_X)$をnoetherian ringed spaceとし，$\shF$をcoherent sheafとする．
+
+    \subsection{$\shF_x$ :: free $\implies$ $\shF|_U$ is free for a $x \in U \OpenIn X$.}
+    $\shF$ :: coherentより，$\shF|_U=\tilde{M}$となる
+    $U=\Spec A \OpenIn X$と$M$ :: finitely generated $A$-moduleが存在する．
+    $M$のgeneratorが$n$個あるとすると，
+    finite rank free module $A^{\oplus n}$のgeneratorを$M$のgeneratorに写す
+    surjective module homomorphism $f$によってexact sequenceが出来る．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \ker f \ar[r]& A^{\oplus n} \ar@{>->}[r]^{f}& M \ar[r]& \coker f=0 \ar[r]& 0
+        }
+    \]
+    このexact sequenceをfunctor $\tilde{\square}$で写し$x$でのstalkをとると，
+    Prop5.2, 5.1から，再びexact sequenceが得られる．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \ker f_x \ar[r]& (A_x)^{\oplus n} \ar@{>->}[r]^{f_x}& M_x \ar[r]& \coker f_x=0 \ar[r]& 0
+        }
+    \]
+    今$(\shF|_U)_x=\tilde{M}_x=M_x$だから，$f$の作り方から$f_x$ :: iso．
+    よって$\ker f_x=0$．
+    したがって十分小さな開集合$(x \in)~ V ~(\subseteq U)$をとれば$\ker f|_V=0$となる．
+    $f$ :: iso on $V$ということになるから，$\Gamma(V,\shF|_V) \iso A^{\oplus n}$，
+    $\shF|_V \iso (A^{\oplus n})\sidetilde$．
+
+    \subsection{$\shF$ :: locally free $\iff$ $\shF_x$ are free $\shO_{X,x}$-modules for all $x \in X$.}
+    $\implies$は定義から，$\impliedby$は(a)から明らか．
+
+    \subsection{$\shF$ :: invertible $\iff$ $\Exists{\shG\text{ :: coherent}} \shF \otimes \shG \iso \shO_X$.}
+    \paragraph{$\implies$.}
+    $\shG=\check{\shF}$とおくと，Ex5.1bから
+    \[ \shF \otimes \shG \iso \shHom_{\shO_X}(\shF, \shF) \iso \shO_X. \]
+
+    \paragraph{$\impliedby$.}
+    $x \in X$を任意にとり，stalkをみる．
+    $\shF, \shG$ :: coherentだから，
+    $\shF_x, \shG_x$はfinitely generated $\shO_{X,x}$-moduleと同型である．
+    \[ M_x \otimes N_x \iso \shO_{X,x}. \]
+    $\{\id{\shO_{X,x}}\}=\Hom(M_x \otimes N_x, *) \iso \Hom(M_x, \Hom(N_x, *))$だから
+    $M_x \iso \shO_{X,x}$（？）．
+    (a)から$\tilde{M} \iso \shO_X$が得られる．
+    よって$\shF$はinvertible．
 
 \section{$\phi(x)=\dim_{k(x)} \shF_x \otimes_{\shO_x} k(x)$.} %% Ex5.8 
+    $X$ :: noetherian scheme, $\shF$ :: coherent sheaf on $X$とする．
+    \[ \phi(x)=\dim_{k(x)} \shF_x \otimes_{\shO_x} k(x),~~~ k(x)=\shO_x/\I{p}_x \]
+    という関数を考えよう．
+    Ati-Mac Ex2.1から$\shF_x \otimes_{\shO_x} k(x) \iso \shF_x/\I{p}_x \shF_x$．
+
+    \subsection{$\phi$ :: upper semi-continuous.}
+    任意の$n \in \Z$について$\phi^{-1}(\Z_{\geq n})$ :: closed in $X$を示す．
+    $\shF|_U$が$A=\shO_X(U)$と置いた時finitely generated $A$-module $M$を用いて
+    $\tilde{M}$と書けるような$U \OpenIn X$をとる．
+    このような$U$で$X$を被覆できるから，
+    $U \cap \phi^{-1}(\Z_{\geq n})$ :: closed in $U$
+    を示せば十分である．
+
+    Prop5.1から$x \in U$について$\shF_x \iso M_x$．
+    完全列$0 \to \I{m}_x M_x \to M_x \to M_x/\I{m}_x M_x \to 0$と，
+    $\I{m}_x=0$ in $k(x)$を考えれば，
+    $\phi(x)=\dim_{k(x)} M_x$と分かる．
+    $M$の最小の生成元集合を$G$とおくと，
+    $\dim_{k(x)} M_x$は$g_x \neq 0$であるような$g \in G$の個数に等しい．
+    そこで次の集合をとる．
+    \[ \bigcup_{G_n \subseteq G} \bigcap_{g \in G_n} \Supp g \subseteq U \]
+    この集合の点では$n$個以上の$g \in G$が$0$にならず，$\phi(x) \geq n$となる．
+    ただし$\bigcup_{G_n \subseteq G}$は丁度$n$個の元を持つ$G$の部分集合$G_n$すべてを渡る．
+    Ex5.6aより，$g \in G$について$\Supp g$ :: closedで，
+    $G$は有限だから，これは閉集合である．
+
+    \subsection{If $\shF$ :: locally free and $X$ :: connected then $\phi$ :: constant.}
+    $\shF$ :: locally freeから，$U \OpenIn X$について，
+    $A_U=\shO_X(U)$とおくと$\shF|_U=(A_U^{\oplus n_U})\sidetilde$となる$n_U$が存在する．
+    したがって$U$においては$\phi$の値は常に$n_U$である．
+    この$n_U$を$\rank \shF|_U$と書くことにする．
+
+    さて，$U \subseteq V$ならば，
+    $\shF|_U=(\shF|_V)|_U=((A_V^{\oplus n_V})\sidetilde)|_U$なので$\rank \shF|_U=\rank \shF|_V$．
+    ここから一般に，
+    $U \cap V \neq \emptyset$ならば$\rank \shF|_U=\rank \shF|_V$だと分かる．
+    このことを元に次の同値関係を考える．
+    \[ U \frown V \iff \Exists{W_1,\dots,W_s \OpenIn X} U \cap W_1, W_1 \cap W_2, \dots, W_s \cap V \neq \emptyset. \]
+    $U \frown V$ならば$\rank \shF|_U=\rank \shF|_V$であることは今や明らか．
+    $X$ :: connctedより，この同値関係による$X$の開集合の同値類はただひとつ．
+    よって$\phi$ :: constant.
+
+    \subsection{If $X$ :: reduced and $\phi$ :: constant then $\shF$ :: locally free.}
+    $\shF|_U=\tilde{M}$となるような
+    $U$ :: affine open in $X$, 
+    $M$ :: finitely generated $A$-module ($A:=\shO_X(U)$)をとる．
+    $X$ :: reduced noetherian schemeより$A$ :: reduced noetherian ring.
+    
+    点$\I{p} \in \Spec A=U$をとり，$n=\phi(\I{p})$とする．
+    次の完全列を考える．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \ker \iota_{\I{p}} \ar[r]& A_{\I{p}}^{\oplus n} \ar[r]^-{\iota_{\I{p}}}& M_{\I{p}} \ar[r]& 0.
+        }
+    \]
+    $A^{\oplus n}$の標準的基底を$\{e_i\}_{i=1}^n$とすると，
+    $\iota$は$e_i \mapsto g_i$なるものである．
+    $k(\I{p})$ :: fieldは平坦だから，$\otimes_{A_{\I{p}}} k(\I{p})$は完全列を保つ．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]
+            & (\ker \iota_{\I{p}}) \otimes k(\I{p}) \ar[r]
+            & A_{\I{p}}^{\oplus n}\otimes k(\I{p}) \ar[r]^-{\iota_{\I{p}} \otimes 1}
+            & M_{\I{p}} \otimes k(\I{p}) \ar[r]& 0.
+        }
+    \]
+    $n=\dim_{k(\I{p})} A_{\I{p}}^{\oplus n}\otimes k(\I{p})=\dim_{k(\I{p})} M_{\I{p}} \otimes k(\I{p})$と
+    $\dim_{k(\I{p})}$の加法性から，
+    $(\ker \iota_{\I{p}}) \otimes k(\I{p})=0$．
+    変形すると$\ker \iota_{\I{p}}/\I{p}\ker \iota_{\I{p}}=0$．
+    $\ker \iota_{\I{p}}$は$A_{\I{p}}$-moduleだったから，
+    中山の補題より$\ker \iota_{\I{p}}=0$．
+
+    $\iota: A^{\oplus n} \to M$を，生成元を生成元へ写す標準的全射とする．
+    もし$\ker \iota \neq 0$ならば，
+    $\ker \iota_{\I{p}} \neq 0$であるような$\I{p}$がとれる（by $A$ :: reduced?）．
+    （(a)での議論と$\phi$ :: constantから，$M$の生成元の任意の点での局所化は常にnon-zero．）
+    しかし上での議論から常に$\ker \iota_{\I{p}}=0$だから，
+    $\ker \iota=0$．
+    よって$M$ :: free module.
 
 \section{Quasi-Finitely Generated Graded $S$-Modules.} %% Ex5.9 
 
@@ -136,15 +519,320 @@
 \section{Very Ample Invertible Sheaves.} %% Ex5.12 
 
 \section{The $d$-uple Embedding.} %% Ex5.13 
+    $S$ :: graded ringとし，$S_0$-algebra として$S_1$で生成されているとする．
+    この$S$と正整数$d>0$に対して
+    \[ S_n^{(d)}:=S_{nd},~~~ S^{(d)}:=\bigoplus_{n \geq 0} S_n^{(d)} \]
+    とおく．
+    $\Proj S^{(d)} \iso \Proj S$を示そう．
+
+    仮定より$S_{1}$が$S$を$S_0$-algebraとして生成する．
+    また，明らかに$S_{1}^{(d)}=S_d$が$S^{(d)}$を$S_0$-algebraとして生成する．
+    そこで$g_0 \in S_1$を適当にとる．
+    すると$f \in S_1$について$S_{(f)}=S_{(f f_0^{d-1})}^{(d)}$が簡単に分かる．
+    \[ \frac{a}{f^n}=\frac{a \cdot f_0^{n(d-1)}}{f^n \cdot f_0^{n(d-1)}}. \]
+    ここで$a, f^n \in S_n, a f_0^{n(d-1)}, f^n f_0^{n(d-1)} \in S_n^{(d)}$に注意する．
+    逆に$f' \in S_1^{(d)}$をとると，
+    $f \backslash f'$であるような$f \in S_1$について$S_{(f)}=S_{(f')}^{(d)}$となる．
+    したがって次が分かる．
+    \[ \Forall{f \in S_1, f' \in S_1^{(d)}} f \backslash f' \implies \Spec S_{(f)}=\Spec S_{(f')}^{(d)}. \]
+    $S$の生成元$f \in S_1$(resp. $S^{(d)}$の生成元$f' \in S_1^{d}$)を様々に取れば
+    $\Spec S_{(f)}$(resp. $\Spec S_{(f')}^{(d)}$)で
+    $\Proj S$(resp. $\Spec S^{(d)}$)を被覆できる
+    （$S_1$の$n$個の元の積全体で$S_1^{(d)}$は生成されるから$f'$に対応する$f$は常に存在すると考えて良い）．
+    よって$\Proj S \iso \Proj S^{(d)}$．
+
+    $S_1$の$n$個の元の積$f'$をとり，$f \backslash f'$となる$f \in S_1$をとる．
+    $X_{(f')}=\Spec S_{(f')}^{(d)}$上の$\shO(1)$の元
+    \[ h \cdot \frac{a'}{f'^n} ~~~(a' \in S_n^{(d)}, h \in S_1^{(d)}) \]は，
+    分子分母に$(f/f')^n$をかければ直ちに
+    \[ h \cdot \frac{a}{f^{n}} ~~~ (a \in S_{n}, h \in S_d) \]と読み替えられる．
+    よって$\shO_{\Spec S_{(f')}^{(d)}}(1)=\shO_{\Spec S_{(f)}}(d)$，
+    $\shO_{\Spec S^{(d)}}(1)=\shO_{\Spec S}(d)$．
 
 \section{The $d$-uple Embedding is Projectively Normal.} %% Ex5.14 
-これはch I, Ex3.17bで私が考察したことのSchemeにおける一般化である．
+    これはch I, Ex3.17bで私が考察したことのSchemeにおける一般化である．
+
+    $A$ :: ring, $S_A^r=A[x_0,\dots,x_r]$，$X$ :: closed subscheme of $\proj^r_A=\Proj S_A-r$とおく．
+    $i: X \to \proj^r_A$を埋め込みとし，$\shI_X=\ker i^{\#}$とおく．
+    さらに$n \in \Z$に対して以下のように定義する(p.50, p.117, p.118)．
+    \[
+        S_A^r(n)=\bigoplus_{d \in \Z} (S_A^r)_{d+n},~~~
+        \shO_X(n)=(S_A^r(n))\sidetilde,~~~
+        \shI_X(n)=\shI_X \otimes_{\shO_X} \shO_X(n),~~~
+        \Gamma_*(\shI_X)=\bigoplus_{d \in \Z} \Gamma(X,\shI_X(d))
+    \]
+    Ex3.12, Cor5.12より，
+    $I=\Gamma_*(\shI_X), S(X)=S_A^r/I$とおくと$X \iso \Proj S(X)$となる．
+    また，$X$がnormalであるとは，
+    任意の点で$X$のlocal ringがintegrally closedであることで，
+    $X$がprojectively normalであるとは，
+    $S(X)$がintegrally closedであることである．
+
+    以下
+    $k$ :: integrally closed field,
+    $X$ :: connected normal closed subscheme of $\proj_k^r$とし，
+    $S=S(X)$とする．
+    $X$の$d$-uple embedding(Ex5.13)が
+    十分大きな$d>0$についてprojectively normalであることを示す．
+
+    \subsection{$S$ :: domain and $S':=\bigoplus_{n \geq 0} \Gamma(X,\shO_X(n))=\bar{S}$.}
+    \paragraph{$X$ :: integral scheme.}
+    $X$ :: integral schemeを示すと$S=\Gamma(X,\shO_X)$ :: integral domainが分かる．
+    まず$X$ :: normalより，任意の$x \in X$について$\shO_{X,x}$ :: integral．
+    なのでEx2.3aより$X$ :: reduced．
+    $X$が二つ以上の異なるirreducible componentを持っていたとして，
+    それぞれ$C_1, C_2$とする．
+    $X$ :: connectedより，$C_1 \cap C_2 \neq \emptyset$であるようにとれる．
+    そこで$x \in C_1 \cap C_2$をとると，
+    $\shO_{X,x}$はintegrally closedになり得ない．
+    実際，
+    $x \in \Spec R=U$をaffine open subsetとすると，
+    $U$は二つの異なるirreducible component $U \cap C_1, U \cap C_2$をもつから，
+    $R$はこれらに対応する2つの極小素イデアル$\I{p}_1, \I{p}_2$をもつ．
+    $x$に対応する素イデアル$\I{q} \in V(\I{p}_1) \cap V(\I{p}_2)$での
+    局所化によって$R$の極小素イデアルが消えることはないから，
+    結局$R_{\I{q}} \iso \shO_{X,x}$は二つの極小素イデアルをもつ．
+    これは$\shO_{X,x}$ :: integral domainに反する．
+    よって$X$ :: reduced \& irreducible．
+    Prop1.1から$X$ :: integral scheme．
+    （以上の証明から，
+    $X$ :: normal scheme $\implies$ $X$ :: disjoint union of integral schemesが分かる．）
+
+    \paragraph{$S'=\bar{S}$.}
+    $\shJ=\bigoplus_{n \geq 0} \shO_X(n)$とおくと$S'=\Gamma(X,\shJ)$とみなせる．
+    点$x \in X$をとり，$\shJ_x$を考えよう．
+    direct sumとstalk（どちらもdirect limit）は可換だから，
+    \[ \shJ_x=\bigoplus_{n \geq 0} (\shO_X(n))_x=\bigoplus_{n \geq 0} (S(n))_x. \]
+    各$(S(n))_x$は次のような集合である．
+    \[ (S(n))_x=\left\{ \frac{a}{f} ~\middle|~ d \geq 0, f \in (S-\I{p}_x)_d,~ a \in (S(n))_{d}=S_{d+n} \right\}. \]
+    ただし$\deg$は$S$に付与されているもので，
+    $\I{p}_x$は点$x$に対応する$S$の斉次素イデアルである．
+    $n \geq 0$だから
+    \[ \shJ_x=\left\{ \frac{a}{f} ~\middle|~ d \geq 0,~ f \in (S-\I{p}_x)_d,~ a \in S,~ \deg a \geq \deg f=d \right\}. \]
+    $\Quot(\shJ_x)=\Quot(S)$も分かる．
+    $\shJ_x$ :: integrally closedであることを示すため，
+    次の等式を考える．
+    \[
+        \left(\frac{a}{f}\right)^r+\frac{u_{r-1}}{v_{r-1}}\left(\frac{a}{f}\right)^{r-1}+\dots+\frac{u_0}{v_0}=0
+        \mwhere
+        a/f \in \Quot(S),~~ \{ u_i/v_i \}_{i=0}^{r-1} \subset \shJ_x.
+    \]
+    $\deg a/f<0$の時，$\deg u_i/v_i \geq 0$より左辺の次数は有限負になる．
+    したがって$\deg a/f \geq 0$．
+%    斉次多項式と非斉次多項式の積は非斉次だから，
+%    $(a/f)^r$を移項して両辺で分母を比較すると$f$が斉次だと分かる．
+%    また，$u_0/v_0$を移項して両辺で分母を比較すると，
+%    $f \not \in \I{p}_x$が分かる．
+    （TODO: $f \in S-\I{p}_x$かつ$f$ :: homoを示す．分母の比較はダメ．）
+    まとめて，$a/f \in \shJ_x$．
+    よって$\shJ_x$ :: integrally closed．
+    $S'=\Gamma(X,\shJ)=\bigcap_{x \in X} \shJ_x$
+    \footnote
+    {
+        $S'=\shJ(X) \subseteq \bigcap_{x \in X} \shJ_x$は明らか．
+        $s \in \bigcap_{x \in X} \shJ_x$ならば，
+        任意の$x \in X$に対して開近傍$x \in U$が存在し，$s_x=(s_U)_x$となる$s_U \in \shJ(U)$が存在する．
+        よってGluability Axiomから$s \in \shJ(X)$．
+    }
+    だから，$S'$ :: integrally closed．
+    （Thm5.19の証明後半も参照．）
+
+    \subsection{$S_d=S'_d$ for all sufficiently large $d$.}
+    $S$がEx5.9の仮定を満たすことは明らか．
+    $\tilde{S}=\shO_X$なので，Ex5.9cから$S \approx S'=\Gamma_*(\shO_X)$．
+
+    \subsection{$S^{(d)}$ is integrally closed for sufficiently large $d$.}
+    (b)より，$d$を十分大きく取れば，$S_{nd}=S'_{nd} ~(n \geq 0)$となる
+    （$S_0=k=\bar{k}=S'_0$に注意）．
+    なので，この$d$について，
+    斉次環$S^{(d)}=\bigoplus_{n \geq 0} S_{nd}$は$S'$の部分環である．
+    $S^{(d)}$の元を係数に持つ
+    多項式が$\Quot(S^{(d)})$に根を持っていたとする．
+    \[
+        \left(\frac{f}{g}\right)^r+c_{r-1}\left(\frac{f}{g}\right)^{r-1}+\dots+c_0=0
+        \mwhere
+        f,g \in S^{(d)}, \{c_i\}_{i=0}^{r-1} \subset S^{(d)}.
+    \]
+%    斉次分解を行えば，$f, \{c_i\}_{i=0}^{r-1}$は斉次元として考えても良いことが分かる．
+    $S^{(d)} \subset S'$かつ(a)から$S'$はintegrally closedなので，$h:=f/g \in S'$．
+    上の等式で$(f/g)^r=h^r$を移項してみると，
+    $\deg c_i$が$d$の倍数であることから，
+    $\deg h^r=r \deg h$も$d$の倍数だと分かる．
+    $r$はいくらでも大きくできるから，
+    $r$と$d$が互いに素であるようにすれば，
+    $\deg h$が$d$の倍数であることが得られる．
+    以上から$h=f/g \in S^{(d)}$であり，
+    $S^{(d)}$ :: integrally closed．
+
+    \subsection{$X$ :: projectively normal $\iff$ $X$ :: normal and
+        $\Gamma(\proj^r_A, \shO_{\proj^r_A}(n)) \to \Gamma(X,\shO_X(n))$ is surj.}
+
+    $X \subseteq \proj^r_A$ :: connected closed subschemeとする．
+    $X$ :: projectively normalと，
+    $X$ :: normalかつ
+    自然な写像$\Gamma(\proj^r, \shO_{\proj^r}(n)) \to \Gamma(X,\shO_X(n))$が
+    $n \geq 0$の時全射であること，
+    が同値であることを示す．
+
+    \paragraph{$\implies$.}
+    $X$ :: projectively normalの時，
+    定義から$S=\bar{S}$なので，
+    (a)後半から$S \iso S'=\Gamma(X,\shJ)$．
+    $x \in X$とすると，$\shO_{X,x}=S_{(\I{p}_x)}=\shJ_x$であり，
+    (a)後半の証明から$\shJ_x$ :: integrally closed．
+    またclosed immersionの定義から全射$\shO_{\proj^r} \to \shO_{X}$が存在する．
+    homomorphism of graded ringsの定義を考えれば，
+    全射が$\Gamma(\proj^r, \shO_{\proj^r}(n)) \to \Gamma(X,\shO_X(n))$に遺伝することが分かる．
+
+    \paragraph{$\impliedby$.}
+    $S_A^r(n)=\Gamma(\proj^r, \shO_{\proj^r}(n)) \to \Gamma(X,\shO_X(n))=S(n)$が
+    全射かつ$X$ :: normalとする．
+    (a)後半から$\bigoplus_{n \geq 0} S(n)=S'$ :: integrally closed．
+    （$k$ :: integrally closed fieldは(c)でのみ使われている．）
+    （TODO）
 
 \section{Extension of Coherent Sheaves.} %% Ex5.15 
+    $X$ :: noetherian scheme, $U$ :: open in $X$, 
+    $\shF$ :: coherent sheaf on $U$とする．
+    この時，$\shF'$ :: coherent sheaf on $X$であって
+    $\shF'|_U=\shF$となるものが存在する．
+    つまりNoetherian Schemeの開集合上のcoherent sheafは拡張できる．
+    これをいくつかの段階に分けて証明する．
 
 \section{Tensor Operations on Sheaves.} %% Ex5.16 
+    $(X, \shO_X)$ :: ringed space, $\shF$ :: $\shO_X$-moduleとする．
 
-\section{Affine Morphisms.} %% Ex5.17 
+    \subsection{If $\shF$ :: locally free $\shO_X$-module then 
+        $T^r(\shF), S^r(\shF), \bigwedge^r(\shF)$ :: locally free.}
+    Prop5.1,5.2（まとめたものがCor5.5）と，
+    $M$ :: free $A$-moduleに対して
+    $T^r(M), S^r(M), \bigwedge^r(M)$ :: free modulesとなることから，
+    $T^r(\shF), S^r(\shF), \bigwedge^r(\shF)$ :: locally freeが分かる．
+
+    また，それぞれの$\rank$も計算できる．
+    $\rank M=n ~~(M \iso A^{\oplus n})$とする．
+    \[ \rank T^r(M)=\rank \left(\bigotimes_{i=1}^r A^{\oplus n} \right)=n^r. \]
+    $\rank S^r(M)$は$r$個の一次独立な元を
+    $n$個の基底($A^{\oplus n}$の基底)からとる重複組み合わせの総数に等しい．
+    \[ \rank S^r(M)=H_r^n=\binom{n+r-1}{r}=\binom{n+r-1}{n-1}. \]
+    $\rank \bigwedge^r(M)$は$r$個の一次独立な元を
+    $n$個の基底($A^{\oplus n}$の基底)からとる（重複なし）組み合わせの総数に等しい．
+    \[ \rank \bigwedge^r(M)=C_r^n=\binom{n}{r}. \]
+
+    \subsection{the multiplication map induces
+        $\bigwedge^r \shF \iso (\bigwedge^{n-r} \shF)\sidecheck \otimes \bigwedge^n \shF$.}
+    $\shF$ :: locally free $\shO_X$-moduleとし，$\bigwedge(\shF)$の積を
+    \[ \mu_{n,r}: \bigwedge^r \shF \otimes \bigwedge^{n-r} \shF \to \bigwedge^n \shF \]
+    とする．
+
+\section{Affine Morphisms.} %% Ex5.17
+    Scheme morphism $f: X \to Y$がaffine morphismであるとは，
+    $\Spec A \in \coverU$ならば$f^{-1}(\Spec A)$もaffineであるような
+    $Y$のaffine cover $\coverU$が存在する，
+    ということである．
+
+    \subsection{$f: X \to Y$ :: affine $\iff$ for any $\Spec A \subseteq Y$ $f^{-1}\Spec A$ :: affine.}
+    $\impliedby$は明らか．$\implies$を示す．
+    $\Spec A \subseteq Y$をとり，$U=\Spec A, V=f^{-1} \Spec A$とおく．
+    $f|_V: V \to \Spec A$だけを考えれば十分なので$f: X \to \Spec A=Y$とする．
+    Ex3.1の解答で証明した``Nike’s Lemma"（とEx2.13b; $\basesp(Y)$ :: quasi-compact）を使うと，
+    $\bigcup_{i=1}^r D_A(a_i)=Y$かつ$f^{-1} D_A(a_i)$ :: affineとなる
+    $\{a_i\}_{i=1}^r \subset A$が存在することが分かる．
+
+    $f^{-1} D_A(a_i)=\Spec B_i$としよう．
+    さらに$\phi=f^{\#}_Y: A=\shO_Y(Y) \to \shO_X(X)=B$とする．
+    Ex3.1で証明した別の補題``Preimage of POS is POS"を使うと，
+    $f^{-1} D_A(a_i)=D_{B_i}(b_i)$となる$b_i \in B_i$が存在する事が分かる．
+    $\bigcup_{i=1}^r D_A(a_i)=Y$より$(a_1,\dots,a_r)=(1)=A$だから，
+    $(\phi(a_1), \dots,\phi(a_r))=(1)=B$．
+    ``Preimage of POS is POS"の証明（$b_i$の定め方）から，
+    $X_{\phi(a_1)}=D_{B_i}(b_i)$ :: affine．
+    以上からEx2.17bより$f^{-1}\Spec A$ :: affine．
+
+    \subsection{An affine morphism is quasi-compact and separated. finite $\implies$ affine}
+    finite morphismがaffine morphismであることは定義から明らか．
+    affine morphismならばquasi-compact（定義はEx3.2）
+    であることはEx2.13bから分かる．
+    affine morphismならばseparatedであることは，
+    Cor4.6fとProp4.1から．
+    
+    \subsection{$\bfSpec \shA$.}
+    $Y$ :: scheme, $\shA$ :: quasi-coherent sheaf of $\shO_Y$-algebraとする．
+    この時，以下のような$X$ :: scheme, $f : X \to Y$が一意に存在する:
+    任意のaffine open subset $U \subseteq V \subseteq Y$について，
+    $f^{-1}U \iso \Spec \shA(U)$であり，
+    $f^{-1}U \hookrightarrow f^{-1}V$が
+    restrction map $\shA(V) \to \shA(U)$に対応する．
+    この$X$を$\bfSpec \shA$で表す．
+
+    \paragraph{Construct $X$.}
+    Gluing Lemma(Ex2.12)を用いて$X$を構成する．
+    貼り合わせるのは$\Spec \shA(\Spec R)$である．
+    $V, W$ :: affine open subset of $Y$に対し，
+    $U_{V}=\Spec \shA(V), U_{W}=\Spec \shA(W)$とする．
+    2つのrestriction map $\res_V, \res_W: \shA(V), \shA(W) \to \shA(V \cap W)$から
+    誘導される写像$i_V, i_W: \Spec \shA(V \cap W) \to U_V, U_W$をとる．
+    $U_{V,W}=\im i_V, U_{W,V}=\im i_W$とおくと，
+    open immersionの定義に沿って$U_{V,W}, U_{W,V}$ :: open in $U_V, U_W$が確かめられる．
+    （$\shO_{U_V}|_{U_{V,W}} \iso \shO_{\Spec \shA(V \cap W)}$となる．）
+    以上の設定でgluingが出来ることは明らか．
+    $f$はEx2.12にあるisomorphism $(\psi_V)^{-1}: \psi_V(U_V) \to U_V$を貼り合わせれば良い．
+
+    \paragraph{$X$ satisfies the additional condition.}
+    $V, W$ :: affine open subset of $Y$をとる．
+    $V \subseteq W$の時，
+    $f^{-1}V \to f^{-1}W$は$i_W: \Spec \shA(V \cap W)=\Spec \shA(V) \to \Spec \shA(W)$に対応し，
+    $i_W$は定義から$\res_W$に対応する．
+
+    \paragraph{Uniqueness.}
+
+    \subsection{$f: X \to Y$ :: affine $\iff$
+        $\shA \iso f_* \shO_X$ :: quasi-coherent $\shO_Y$-algebra and $X \iso \bfSpec \shA$.}
+
+    \paragraph{$\implies$.}
+    $\shA=f_* \shO_X$とおく．$U=\Spec A \subseteq Y$とすると，
+    $f^{-1}U$ :: affineだから$f^{-1}U=\Spec \shO_X(f^{-1}U)=\Spec \shA(U)$．
+    またあ，$\Spec \shA(U)=f^{-1}U \hookrightarrow f^{-1}V=\Spec \shA(V)$は
+    直ちに$\res_V^U: \shA(V) \to \shA(U)$を誘導する．
+    したがって(c)より$X \iso \bfSpec \shA$．
+    また，任意の$U$ :: affine open subset in $Y$について，
+    $\shA(U)$は$f^{\#}_U: \shO_Y(U) \to f_*\shO_X(U)=\shA(U)$によって
+    $\shO_Y(U)$-algebraとみなすことが出来る．
+    よって$\shA$ :: quasi-coherent $\shO_Y$-algebra．
+
+    \paragraph{$\impliedby$.}
+    $\shA$ :: quasi-coherent $\shO_Y$-algebraならば，
+    (c)から$\bfSpec \shA$が存在する．
+    $\bfSpec \shA$の定義から$f: \bfSpec \shA \to Y$はaffine．
+    $f^{\#}: \shO_Y \to f_*\shO_X$を考えると，
+    $U=\Spec A \subseteq Y$について$f^{-1}U \iso \Spec \shA(U)$だから
+    $\shO_X(f^{-1}U)=(f_*\shO_X)(U) \iso \shA(U)$．
+    このような$U$で$Y$を被覆できるから，$\shA \cong f_*\shO_X$．
+
+    \subsection{$\{$ quasi-coherent $\shO_X$-modules $\} \leftrightarrow$ $\{$ quasi-coherent $\shA$-modules $\}$.}
+    $f: X \to Y$をaffine morphismとし，$\shA=f_*\shO_X$とおく．
+    (b)とProp5.8cより，
+    $\shF$ :: quasi-coherent $\shO_X$-moduleについて
+    $f_* \shF$ :: quasi-coherent $\shA$-moduleが得られる．
+
+    逆に，$\shM$ :: quasi-coherent $\shA$-moduleをとる．
+    $U=\Spec A$ :: open in $Y$をとると，
+    $f^{-1}U$ :: affineなので$f^{-1}U=V=\Spec B$とする．
+    この時，$\shM|_U \iso \tilde{M}$となる$B$-module($B=\shA(U)$)が存在する．
+    $\phi=f^{\#}_U: A \to B$によって$M$を$A$-moduleとみなしたものを${}_A M$と書くことにして，
+    $\tilde{M}|_U=({}_A M)\sidetilde$とおく．
+    こうして$\tilde{\shM}$を構成する
+    \footnote
+    {
+        つまるところ$\tilde{\shM}=f^* \shM$であるが，
+        上の構成は$\shM$が$\shO_X$-moduleでないという点でProp5.2の内容と異なる．
+    }．
+    $({}_A M) \otimes_A B \iso M$が容易にわかるから，
+    Prop5.2から$f_*(\tilde{\shM}|_U) \iso \shM|_U$．
+    ${}_A(M \otimes_A B) \iso M$も同様にわかるから，
+    $\widetilde{f_*(\shM|_U)} \iso \shM|_U$．
+    $\tilde{\square}$と$f_*$がfunctorialであることはProp5.2で述べられているとおりである．
+    以上で主張が示せた．
 
 \section{Vector Bundles.} %% Ex5.18 
 
