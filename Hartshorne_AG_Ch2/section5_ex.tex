@@ -22,6 +22,7 @@
 \newcommand{\sidetilde}{\,\tilde{}}
 \newcommand{\sidecheck}{\,\check{}}
 \newcommand{\ccheck}[1]{#1\sidecheck\,\sidecheck\,}
+\DeclareMathOperator{\sgn}{sgn}
 
 \usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
 \newcommand{\shHom}{\mathscr{H\!o\!m}}
@@ -513,8 +514,22 @@
 \section{Quasi-Finitely Generated Graded $S$-Modules.} %% Ex5.9 
 
 \section{Saturated Ideals and Closed Sub-Schemes.} %% Ex5.10 
+    $S=A[x_0,\dots,x_n], X=\Proj S$とおく．
+    既にhomogeneous ideal $I \subset S$が$X$のclosed subschemeを定めること(Ex3.12)，
+    逆に$X$のclosed subsechemeはこのように定まることを示した(5.16)．
+    homogeneous ideal $I \subset S$に対し，そのsaturationを以下で定める．
+    \[ \bar{I}=\{s \in S \mid \Forall{i=0,\dots,n} \Exists{n \geq 0} x_i^n s \in I. \} \]
+    $I=\bar{I}$の時，$I$はsaturated idealであると言われる．
+    $S$のsaturated idealと$X$のclosed subschemeの間に一対一対応があることを示そう．
 
 \section{The Segre Embedding.} %% Ex5.11 
+    $S,T$を$S_0=T_0=A$であるようなgraded ringとする．
+    （$S,T$は$A$-moduleである．）
+    これらのCartesian product $S \times_A T$を
+    $\bigoplus_{d \geq 0} S_d \otimes_A T_d$とする．
+    $X=\Proj S, Y=\Proj T$の時，$\Proj (S \times_A T)=X \times_A Y$であること，
+    加えて$\shO_{\Proj (S \times_A T)}(1) \iso (\pr_1^*\shO_{X}(1)) \otimes (\pr_2^*\shO_Y(1))$
+    となることを示す．
 
 \section{Very Ample Invertible Sheaves.} %% Ex5.12 
 
@@ -552,7 +567,8 @@
 \section{The $d$-uple Embedding is Projectively Normal.} %% Ex5.14 
     これはch I, Ex3.17bで私が考察したことのSchemeにおける一般化である．
 
-    $A$ :: ring, $S_A^r=A[x_0,\dots,x_r]$，$X$ :: closed subscheme of $\proj^r_A=\Proj S_A-r$とおく．
+    $A$ :: ring, $S_A^r=A[x_0,\dots,x_r]$，
+    $X$ :: closed subscheme of $\proj^r_A=\Proj S_A^r$とおく．
     $i: X \to \proj^r_A$を埋め込みとし，$\shI_X=\ker i^{\#}$とおく．
     さらに$n \in \Z$に対して以下のように定義する(p.50, p.117, p.118)．
     \[
@@ -576,10 +592,17 @@
     十分大きな$d>0$についてprojectively normalであることを示す．
 
     \subsection{$S$ :: domain and $S':=\bigoplus_{n \geq 0} \Gamma(X,\shO_X(n))=\bar{S}$.}
+
     \paragraph{$X$ :: integral scheme.}
     $X$ :: integral schemeを示すと$S=\Gamma(X,\shO_X)$ :: integral domainが分かる．
     まず$X$ :: normalより，任意の$x \in X$について$\shO_{X,x}$ :: integral．
     なのでEx2.3aより$X$ :: reduced．
+    次の段落で証明するとおり$X$ :: irreducibleもわかる．
+    Prop1.1から$X$ :: integral scheme．
+    （以上の証明から，
+    $X$ :: normal scheme $\implies$ $X$ :: disjoint union of integral schemesが分かる．）
+
+    \paragraph{$X$ :: irreducible．}
     $X$が二つ以上の異なるirreducible componentを持っていたとして，
     それぞれ$C_1, C_2$とする．
     $X$ :: connectedより，$C_1 \cap C_2 \neq \emptyset$であるようにとれる．
@@ -593,23 +616,26 @@
     局所化によって$R$の極小素イデアルが消えることはないから，
     結局$R_{\I{q}} \iso \shO_{X,x}$は二つの極小素イデアルをもつ．
     これは$\shO_{X,x}$ :: integral domainに反する．
-    よって$X$ :: reduced \& irreducible．
-    Prop1.1から$X$ :: integral scheme．
-    （以上の証明から，
-    $X$ :: normal scheme $\implies$ $X$ :: disjoint union of integral schemesが分かる．）
+    よって$X$ :: irreducible．
 
-    \paragraph{$S'=\bar{S}$.}
+    \paragraph{$\shJ_x$の元.}
     $\shJ=\bigoplus_{n \geq 0} \shO_X(n)$とおくと$S'=\Gamma(X,\shJ)$とみなせる．
     点$x \in X$をとり，$\shJ_x$を考えよう．
     direct sumとstalk（どちらもdirect limit）は可換だから，
     \[ \shJ_x=\bigoplus_{n \geq 0} (\shO_X(n))_x=\bigoplus_{n \geq 0} (S(n))_x. \]
     各$(S(n))_x$は次のような集合である．
-    \[ (S(n))_x=\left\{ \frac{a}{f} ~\middle|~ d \geq 0, f \in (S-\I{p}_x)_d,~ a \in (S(n))_{d}=S_{d+n} \right\}. \]
-    ただし$\deg$は$S$に付与されているもので，
-    $\I{p}_x$は点$x$に対応する$S$の斉次素イデアルである．
+    \[
+        (S(n))_x=
+        (S(n))_{(\I{p}_x)}=
+        \left\{ \frac{a}{f} ~\middle|~ d \geq 0, f \in (S-\I{p}_x)_d,~ a \in (S(n))_{d}=S_{d+n} \right\}.
+    \]
+    ただし$\I{p}_x$は点$x$に対応する$S$の斉次素イデアルである．
     $n \geq 0$だから
-    \[ \shJ_x=\left\{ \frac{a}{f} ~\middle|~ d \geq 0,~ f \in (S-\I{p}_x)_d,~ a \in S,~ \deg a \geq \deg f=d \right\}. \]
+    \[ \shJ_x=\left\{ \frac{a}{f} \in S_{\I{p}_x}~\middle|~ f\text{ :: homogeneous}, \deg a \geq \deg f \right\}. \]
+    ここでの$\deg$は$S$に付与されているものである．
     $\Quot(\shJ_x)=\Quot(S)$も分かる．
+
+    \paragraph{$\shJ_x$ :: integrally closed.}
     $\shJ_x$ :: integrally closedであることを示すため，
     次の等式を考える．
     \[
@@ -617,15 +643,41 @@
         \mwhere
         a/f \in \Quot(S),~~ \{ u_i/v_i \}_{i=0}^{r-1} \subset \shJ_x.
     \]
-    $\deg a/f<0$の時，$\deg u_i/v_i \geq 0$より左辺の次数は有限負になる．
-    したがって$\deg a/f \geq 0$．
-%    斉次多項式と非斉次多項式の積は非斉次だから，
-%    $(a/f)^r$を移項して両辺で分母を比較すると$f$が斉次だと分かる．
-%    また，$u_0/v_0$を移項して両辺で分母を比較すると，
-%    $f \not \in \I{p}_x$が分かる．
-    （TODO: $f \in S-\I{p}_x$かつ$f$ :: homoを示す．分母の比較はダメ．）
+    $d=\deg a/f<0$の時，$\deg u_i/v_i \geq 0$より左辺の次数は有限負になる．
+    したがって$d \geq 0$．
+    $f \in S-\I{p}_x$かつhomogeneousであることを確かめよう．
+    これは$S_{(\I{p}_x)}$ :: integrally closedを利用する．
+    まず，$\I{p}_x$が$S_1$全体を含むことはない
+    （そうなれば$S_+ \subseteq \I{p}_x$となるが，これは$\Proj S$の定義からありえない）．
+    なので$u \in (S-\I{p}_x)_1$がとれる．
+    上の等式から$rd$次斉次成分を取り出し，$u^{-rd}$を両辺にかけても正しい等式となる．
+    \[
+        \left(\frac{a_d}{u^df}\right)^r+
+        \frac{1}{u^d}\left(\frac{u_{r-1}}{v_{r-1}}\right)_{d}\left(\frac{a_d}{u^df}\right)^{r-1}+
+        \dots+
+        \frac{1}{u^{rd}}\left(\frac{u_{0}}{v_{0}}\right)_{rd}
+        =0
+    \]
+    すると，$a_d/u^df$及び係数の次数は$0$になる．
+    特に，係数はその分子・分母が共に斉次元となるから$S_{(\I{p}_x)}$の元となる．
+    このことから$f$ :: homogeneous
+    \footnote
+    {
+        変形前の等式で$\deg a/f=0$，係数$ \in S_{(\I{p}_x)}$とする．
+        等式の両辺に$f^r$を掛けて$a^r$を移項する:
+        $\frac{u_{r-1}}{v_{r-1}}a^{r-1}f+\dots+\frac{u_0}{v_0}f^r=-a^r$．
+        $f=f_n+\dots+f_m (n>m)$と斉次分解出来た時，
+        両辺の$mr$次斉次成分をとると$\frac{u_0}{v_0}f_m^r=0$なので$S$ :: domainより$u_0=0$．
+        両辺を$a$で割って同様の手順を踏むと，
+        帰納的にすべての係数が$0$になってしまうので，
+        $m=n$．
+    }
+    ，したがって$a_d/u^df \in S_{((0))}$が分かり，
+    $S_{(\I{p}_x)}$ :: integrally closedより$f \in S-\I{p}_x$．
     まとめて，$a/f \in \shJ_x$．
     よって$\shJ_x$ :: integrally closed．
+
+    \paragraph{$S'$ :: integrally closed．}
     $S'=\Gamma(X,\shJ)=\bigcap_{x \in X} \shJ_x$
     \footnote
     {
@@ -687,9 +739,12 @@
     \paragraph{$\impliedby$.}
     $S_A^r(n)=\Gamma(\proj^r, \shO_{\proj^r}(n)) \to \Gamma(X,\shO_X(n))=S(n)$が
     全射かつ$X$ :: normalとする．
-    (a)後半から$\bigoplus_{n \geq 0} S(n)=S'$ :: integrally closed．
+    すると直ちに全射$\Gamma_*(\shO_{\proj^r}) \to \Gamma_*(\shO_X)$が得られる．
+    Prop5.13より$\Gamma_*(\shO_{\proj^r}) \iso S_A^r$なので，
+    この全射の$\ker$を$I$とすれば$S_A^r/I \iso \Gamma_*(\shO_X)=S'$．
+    $S$の定義（特に$\shI_X$の定義）から$S=S_A^r/I \iso S'$．
+    (a)後半から，これはintegrally closed．
     （$k$ :: integrally closed fieldは(c)でのみ使われている．）
-    （TODO）
 
 \section{Extension of Coherent Sheaves.} %% Ex5.15 
     $X$ :: noetherian scheme, $U$ :: open in $X$, 
@@ -721,9 +776,48 @@
 
     \subsection{the multiplication map induces
         $\bigwedge^r \shF \iso (\bigwedge^{n-r} \shF)\sidecheck \otimes \bigwedge^n \shF$.}
-    $\shF$ :: locally free $\shO_X$-moduleとし，$\bigwedge(\shF)$の積を
-    \[ \mu_{n,r}: \bigwedge^r \shF \otimes \bigwedge^{n-r} \shF \to \bigwedge^n \shF \]
-    とする．
+    $M$ :: locally free $A$-moduleとし，
+    $M$の基底を$x_1,\dots,x_n$とする．
+    
+    \paragraph{Notation.}
+    $S=\{1,\dots,n\}$とし，$I \subseteq S$に対して$x_I=\bigwedge_{i \in I} x_i$とする．
+    ただし，$i \in I$は小さいものから取る．
+    例えば$I=\{3,2,5\}$なら$x_I=x_2 \wedge x_3 \wedge x_5$である．
+    $x_{\emptyset}=1 \in A$としておく．
+    また，$I ~(\#I=r)$の元を小さいものから並べた列$i_1<\dots<i_{n-r}$に対し，
+    列$1<\dots<n$から（順序を保って）$i_1<\dots<i_{n-r}$を
+    取り除いたものを$i_{n-r+1}<\dots<i_n$とする．
+    $S=\{1,2,3,4,5\}, I=\{2,3,5\}$なら$i_4=1, i_5=4$である．
+    そこで$\sigma_{I} \in S_n$を$\sigma_I(j)=i_j$で定める．
+
+    \paragraph{$\to$．}
+    $\bigwedge^n M=Ax_S \iso A$が分かる．
+    $\bigwedge M$のmultiplication mapは次のものである．
+    \begin{defmap}
+        \mu:& \bigwedge^r M \otimes \bigwedge^{n-r} M& \to& \bigwedge^n M \iso A \\
+        {}& x_I \otimes x_{J}& \mapsto& x_I \wedge x_{J}.
+    \end{defmap}
+    ただし$I,J \subset S$は$\#I=r, \#J=n-r$を満たす．
+    定義より$I \cap J \neq \emptyset$ならば$\mu(x_I, x_J)=0$，
+    $I \cap J = \emptyset$ならば$\mu(x_I, x_J)$は$\pm 1 \in A$へ写る．
+    そこで，$I \subseteq S, x_I \in \bigwedge^r M$に対し，
+    $\mu(x_I,*) \otimes (x_{I^c} \wedge x_I)$を$x_I$の像とする．
+    以上で$\bigwedge^r M$全体からの写像が出来た．
+
+    \paragraph{$\leftarrow$．}
+    $\phi \otimes x_S \in (\bigwedge^{n-r} M)\sidecheck \otimes \bigwedge^n M$の像を次のように定める．
+    \[ \sum_{I \subseteq S, \#I=n-r} (\sgn \sigma_I) \phi(x_I)x_{I^c}. \]
+    ただし$S_n$は$n$次対称群である．
+
+    \paragraph{isomorphismであること．}
+    $I \subseteq S$について，
+    $x_I \wedge x_{I^c}=(\sgn \sigma) x_S$となる．
+    $\mu(x_I, x_J) \neq 0$となるのは$J=I^c$の時のみ．
+    なので$x_I$の像$\mu(x_I,*) \otimes (x_{I^c} \wedge x_I)$の像は，
+    上のように定めた$\sigma$について$(\sgn \sigma)^2 x_I=x_I$．
+    逆に$\phi \otimes x_S$の像
+    $\sum_I (\sgn \sigma_I) \phi(x_I)x_{I^c}$の像は，
+    $\phi=\sum_I (\sgn \sigma_I) \phi(x_I)\mu(x_{I^c}, *)$ゆえに$\phi \otimes x_S$．
 
 \section{Affine Morphisms.} %% Ex5.17
     Scheme morphism $f: X \to Y$がaffine morphismであるとは，
