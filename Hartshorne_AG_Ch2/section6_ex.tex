@@ -58,9 +58,9 @@
     \paragraph{$X'$ :: integral noetherian separated．}
     $X$のaffine open coverを$\{\Spec A_i\}_{i=0}^r$とすると，
     $A_i$ :: integral noetherian $\Z$-algebra.
-    $\proj^n$のaffine open coverは$\{\Spec S_{(x_j)}\}_{j=0}^n$で与えられる．
+    $\proj^n$のaffine open coverは$\{\Spec S_{(t_j)}\}_{j=0}^n$で与えられる．
     $S_{(x_j)}$もintegral noetherian $\Z$-algebra.
-    したがって$R_{ij}=A_i \otimes_{\Z} S_{(x_j)}$とおくと，
+    したがって$R_{ij}=A_i \otimes_{\Z} S_{(t_j)}$とおくと，
     $X'$は$\Spec R_{ij}$の張り合わせであり（Thm3.3），
     $R_{ij}$ :: integral noetherian $\Z$-algebra．
     任意の$(i,j), (i',j')$について$R_{ij}, R_{i'j'}$が交わることから，
@@ -95,7 +95,8 @@
     $A \subset R_1$はflat extensionだから，
     going-down theoremが成立し，$\height \I{q} \leq \height \I{p}'=1$．
     また，計算すると
-    \[ (R_1)_{\I{p}'} \cong (A_{\I{q}}[\{t_j\}_{j=1}^n])_{\I{p}'}. \]
+    \[ (R_1)_{\I{p}'} \cong (A_{\I{q}}[\{t_j\}_{j=1}^n])_{\I{p}''}. \]
+    ただし$\I{p}''=\I{p}'A_{\I{q}}$．
     $\height \I{q}=1$の時，
     仮定から$A_{\I{q}}=\shO_{X,\I{q}}$ :: regular local ring．
     よって$(R_1)_{\I{p}'}$はD.V.R．
@@ -110,20 +111,24 @@
     $X \times \proj^n$も(*)を満たす．
 
     \paragraph{Define $\Cl(X \times \proj^n) \cong \Cl(X) \times \Z$.}
-    $\I{p}=(t_0) \in \Z[t_0,\dots,t_n]=S$とすると，
-    Krulls Hauptidealsatzより$\height \I{p}=1$．
-    したがって$Z=\pr_2^{-1}(V(\I{p}))$とおくと，
+    $\I{p}=(t_0) \in \Z[t_0,\dots,t_n]=S$とする．
+    $Z=\pr_2^{-1}(V(\I{p}))$とおくと，
     $Z$ :: irreducible closed subset of $\codim=1$ in $X \times \proj^n$
     \footnote
         {
-            $Z$ :: irreducibleは最初のparagraphと同様に示しても良いし，
-            ch I, Ex3.5と同様にtopologicalに示しても良い．
-            $\codim=1$はtopologicalに分かる．
-            $\pr_1$は連続な全射だから，
-            $Z_0 \subsetneq Z_1$が異なる2つのirreducible closed subsetの列ならば，
-            $\pr_1^{-1}Z_0 \subsetneq \pr_1^{-1}Z_1$もそうである（$\neq$は全射性からくる）．
-            したがって$\codim(\I{p}, X)=1$より$\codim(\pr_1^{-1}\I{p}, X) \leq 1$．
-            $\codim(\pr_1^{-1}\I{p}, X)=0$は$V(\pr_1^{-1}\I{p})=X$と同値である．
+            $\Spec A_i \subseteq X, U_{ij}=\Spec A_i \otimes S_{(t_j)}, j \neq 0$とする．
+            $\pr_2|_{U_{ij}}$は$s \mapsto 1 \otimes s$から誘導されるから，
+            \[
+                Z \cap U_{ij}
+                =(\pr_2|_{U_{ij}})^{-1}(V(\I{p}))
+                =V(1 \otimes \I{p})=V((1 \otimes t_0))
+                \subset \Spec A_i \otimes S_{(t_j)}
+            \]
+            $1 \otimes t_0$は非単元かつ不定元だから，
+            Krulls Hauptidealsatzより，
+            $(1 \otimes t_0) \subset A_i \otimes S_{(t_j)}$が
+            高さ$1$の素イデアルであることは明らか．
+            よって$\codim (Z \cap U_{ij}, U_{ij})=1, \codim(Z,X')=1$．
         }．
     $U=Z^c=\pr_2^{-1}(V(\I{p})^c) \cong X \times \affine^n$だから，
     Ex3.9aとProp6.6より，$\Cl(U) \cong \Cl(X)$．
@@ -136,12 +141,13 @@
     \]
     $\Cl(X \times \proj^n) \cong \Cl(X) \times \Z$を示すには，
     $i: 1 \mapsto 1 \cdot Z$が単射であること，
-    および$j: Y \mapsto Y \cap U$がsplitすることを示せば十分である．
+    および$j: Y \mapsto (\pr_1^*)^{-1}(Y \cap U)$が
+    splitすることを示せば十分である．
     後者はすぐに分かる．
-    実際，prime divisor $Y$がirreducible closed subschemeであることから，
-    $j$は\[ Y \mapsto Y \cap U \mapsto \cl_{X \times \proj^n}(Y \cap U) \]とsplitする．
+    実際，$Y \subseteq X \times \proj^n, U=X \times \affine^n$なので
+    $\pr_1^* \circ j=\id{\Cl(X \times \proj^n)}$．
 
-    \paragraph{$i$ :: inj.}
+    \paragraph{$i$ :: injective.}
     $X'=X \times \proj^n, K$ :: function field of $X'$とし，$d \in \Z-\{0\}$をとる．
     示すべきことは，$dZ=(f)$を満たす$f \in K^{\times}$が存在しないこと．
     正次数の斉次元$u \in A[t_0,\dots,t_n]$をとり，
@@ -167,11 +173,13 @@
         \mwhere
         m:=\deg u,~~ e \geq 0,~~ g \in A[t_0,\dots,t_n]_{em},~~ u, t_0^m \ndivible g
     \]
+    $d \neq 0$と仮定する．
     $e=\deg g=0$の時，
     $u$の既約因数によって定まるprime divisor $U$上で$v_U(f)<0$となる．
     $e>0$の時，
     $g$の既約因数によって定まるprime divisor $G$上で$v_G(f)>0$となる．
-    以上から，$dZ=(f)$となることはない．
+    以上から，$dZ=(f)$となるならば$d=0$．
+    よって$i$ :: injective．
 
 \section{Varieties in Projective Space.} %% Ex6.2 
 

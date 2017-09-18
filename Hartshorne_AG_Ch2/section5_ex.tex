@@ -54,6 +54,7 @@
             \iso& (\shF|_U)^{\oplus n} \\
             =& \varinjlim_{W \supseteq U} (\shF(W))^{\oplus n}
         \end{align*}
+        （TODO: 4行目が怪しい）
         最後で$\bigoplus$と$\varinjlim$が可換であることを用いた．
         このことから以下を得る．
         \[
@@ -115,9 +116,10 @@
     テンソル積の定義（普遍性）より，以下が成り立つ．
     \[ \Hom(\shE(U) \otimes \shF(U),\shG(U)) \iso \Hom(\shF(U), \Hom(\shE(U),\shG(U))) \]
     テンソル積と$\Hom$は$\shO_X(U)$-moduleとしてのものである．
-    なので
+    あとは
     \[ \Hom_{\shO_X(U)}(\shE(U),\shG(U)) \iso \shHom_{\shO_X}(\shE,\shG)(U) \]
     を示せば良い．
+    （TODO: 主張自体が怪しい．）
     これは以下の写像で得られる．
     \begin{defmap}
         \Theta_U:& \shHom_{\shO_X}(\shE,\shG)(U) & \to& \Hom_{\shO_X(U)}(\shE(U),\shG(U))   \\
@@ -649,16 +651,16 @@
     これは$S_{(\I{p}_x)}$ :: integrally closedを利用する．
     まず，$\I{p}_x$が$S_1$全体を含むことはない
     （そうなれば$S_+ \subseteq \I{p}_x$となるが，これは$\Proj S$の定義からありえない）．
-    なので$u \in (S-\I{p}_x)_1$がとれる．
-    上の等式から$rd$次斉次成分を取り出し，$u^{-rd}$を両辺にかけても正しい等式となる．
+    なので$s \in (S-\I{p}_x)_1$がとれる．
+    上の等式の両辺に$s^{-rd}$を両辺にかけて，$0$次斉次成分を取り出しても正しい等式となる．
     \[
-        \left(\frac{a_d}{u^df}\right)^r+
-        \frac{1}{u^d}\left(\frac{u_{r-1}}{v_{r-1}}\right)_{d}\left(\frac{a_d}{u^df}\right)^{r-1}+
+        \left(\frac{a_d}{s^df}\right)^r+
+        \left(\frac{1}{s^d}\frac{u_{r-1}}{v_{r-1}}\right)_0\left(\frac{a_d}{s^df}\right)^{r-1}+
         \dots+
-        \frac{1}{u^{rd}}\left(\frac{u_{0}}{v_{0}}\right)_{rd}
+        \left(\frac{1}{s^{rd}}\frac{u_{0}}{v_{0}}\right)_0
         =0
     \]
-    すると，$a_d/u^df$及び係数の次数は$0$になる．
+    すると，$a_d/s^df$及び係数の次数は$0$になる．
     特に，係数はその分子・分母が共に斉次元となるから$S_{(\I{p}_x)}$の元となる．
     このことから$f$ :: homogeneous
     \footnote
@@ -740,9 +742,10 @@
     $S_A^r(n)=\Gamma(\proj^r, \shO_{\proj^r}(n)) \to \Gamma(X,\shO_X(n))=S(n)$が
     全射かつ$X$ :: normalとする．
     すると直ちに全射$\Gamma_*(\shO_{\proj^r}) \to \Gamma_*(\shO_X)$が得られる．
+    Ex5.9より，全射$(\shO_{\proj^r}) \to \shO_X$が存在し，
+    $\shI_X$の定義から，これの$\ker$が$I$である．
     Prop5.13より$\Gamma_*(\shO_{\proj^r}) \iso S_A^r$なので，
-    この全射の$\ker$を$I$とすれば$S_A^r/I \iso \Gamma_*(\shO_X)=S'$．
-    $S$の定義（特に$\shI_X$の定義）から$S=S_A^r/I \iso S'$．
+    $S=S_A^r/I \iso \Gamma_*(\shO_X)=S'$．
     (a)後半から，これはintegrally closed．
     （$k$ :: integrally closed fieldは(c)でのみ使われている．）
 
@@ -784,11 +787,7 @@
     ただし，$i \in I$は小さいものから取る．
     例えば$I=\{3,2,5\}$なら$x_I=x_2 \wedge x_3 \wedge x_5$である．
     $x_{\emptyset}=1 \in A$としておく．
-    また，$I ~(\#I=r)$の元を小さいものから並べた列$i_1<\dots<i_{n-r}$に対し，
-    列$1<\dots<n$から（順序を保って）$i_1<\dots<i_{n-r}$を
-    取り除いたものを$i_{n-r+1}<\dots<i_n$とする．
-    $S=\{1,2,3,4,5\}, I=\{2,3,5\}$なら$i_4=1, i_5=4$である．
-    そこで$\sigma_{I} \in S_n$を$\sigma_I(j)=i_j$で定める．
+    また$\sgn I=\pm 1$を$x_I \wedge x_{I^c}=(\sgn I) x_S$で定める．
 
     \paragraph{$\to$．}
     $\bigwedge^n M=Ax_S \iso A$が分かる．
@@ -799,7 +798,7 @@
     \end{defmap}
     ただし$I,J \subset S$は$\#I=r, \#J=n-r$を満たす．
     定義より$I \cap J \neq \emptyset$ならば$\mu(x_I, x_J)=0$，
-    $I \cap J = \emptyset$ならば$\mu(x_I, x_J)$は$\pm 1 \in A$へ写る．
+    $I \cap J = \emptyset$ならば$\mu(x_I, x_J)$は$\sgn I=\pm 1 \in A$へ写る．
     そこで，$I \subseteq S, x_I \in \bigwedge^r M$に対し，
     $\mu(x_I,*) \otimes (x_{I^c} \wedge x_I)$を$x_I$の像とする．
     以上で$\bigwedge^r M$全体からの写像が出来た．
@@ -810,14 +809,11 @@
     ただし$S_n$は$n$次対称群である．
 
     \paragraph{isomorphismであること．}
-    $I \subseteq S$について，
-    $x_I \wedge x_{I^c}=(\sgn \sigma) x_S$となる．
     $\mu(x_I, x_J) \neq 0$となるのは$J=I^c$の時のみ．
-    なので$x_I$の像$\mu(x_I,*) \otimes (x_{I^c} \wedge x_I)$の像は，
-    上のように定めた$\sigma$について$(\sgn \sigma)^2 x_I=x_I$．
+    なので$x_I$の像$\mu(x_I,*) \otimes (x_{I^c} \wedge x_I)$の像は$(\sgn I)^2 x_I=x_I$．
     逆に$\phi \otimes x_S$の像
-    $\sum_I (\sgn \sigma_I) \phi(x_I)x_{I^c}$の像は，
-    $\phi=\sum_I (\sgn \sigma_I) \phi(x_I)\mu(x_{I^c}, *)$ゆえに$\phi \otimes x_S$．
+    $\sum_I (\sgn I) \phi(x_I)x_{I^c}$の像は，
+    $\phi=\sum_I (\sgn I) \phi(x_I)\mu(x_{I^c}, *)$ゆえに$\phi \otimes x_S$．
 
 \section{Affine Morphisms.} %% Ex5.17
     Scheme morphism $f: X \to Y$がaffine morphismであるとは，
@@ -886,7 +882,7 @@
     \paragraph{$\implies$.}
     $\shA=f_* \shO_X$とおく．$U=\Spec A \subseteq Y$とすると，
     $f^{-1}U$ :: affineだから$f^{-1}U=\Spec \shO_X(f^{-1}U)=\Spec \shA(U)$．
-    またあ，$\Spec \shA(U)=f^{-1}U \hookrightarrow f^{-1}V=\Spec \shA(V)$は
+    また，$\Spec \shA(U)=f^{-1}U \hookrightarrow f^{-1}V=\Spec \shA(V)$は
     直ちに$\res_V^U: \shA(V) \to \shA(U)$を誘導する．
     したがって(c)より$X \iso \bfSpec \shA$．
     また，任意の$U$ :: affine open subset in $Y$について，
