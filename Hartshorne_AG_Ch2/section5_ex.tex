@@ -12,6 +12,7 @@
 \newcommand{\shJ}{\mathcal{J}}
 \newcommand{\shO}{\mathcal{O}}
 \newcommand{\shM}{\mathcal{M}}
+\newcommand{\ord}{\operatorname{ord}}
 \newcommand{\res}{\operatorname{res}}
 \newcommand{\basesp}{\operatorname{sp}}
 \newcommand{\Proj}{\operatorname{Proj}}
@@ -595,8 +596,20 @@
 
     \subsection{$S$ :: domain and $S':=\bigoplus_{n \geq 0} \Gamma(X,\shO_X(n))=\bar{S}$.}
 
+    \paragraph{$S$ :: not domain $\implies$ $\Exists{f \in S_+} S_{(f)}$ :: not domain．}
+    $S$ :: not domainと仮定し，
+    $ab=0$となる$a,b \in S-\{0\}$，及びゼロ因子でない元$f \in S_1$をとる（?）．
+    （次数さえ揃えれば$f \in S_+$でよい．しかし面倒なので$f \in S_1$をとる．）
+    すると任意の$r>0$について$f^r a, f^r b \neq 0$なので
+    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$は$0$でない．
+    しかしこの2元は明らかに$S_{(f)}$のゼロ因子である．
+    したがって$S$ :: not domainならば$S_{(f)}$ :: not domain．
+
     \paragraph{$X$ :: integral scheme.}
-    $X$ :: integral schemeを示すと$S=\Gamma(X,\shO_X)$ :: integral domainが分かる．
+    $X$ :: integral schemeならば，
+    任意の$f \in S_+$について$\shO_X(D_+(f))=S_{(f)}$ :: domain．
+    したがって前段落より$S$ :: domainとわかる．
+    なので$X$ :: integral schemeを示す．
     まず$X$ :: normalより，任意の$x \in X$について$\shO_{X,x}$ :: integral．
     なのでEx2.3aより$X$ :: reduced．
     次の段落で証明するとおり$X$ :: irreducibleもわかる．
@@ -633,34 +646,58 @@
     \]
     ただし$\I{p}_x$は点$x$に対応する$S$の斉次素イデアルである．
     $n \geq 0$だから
-    \[ \shJ_x=\left\{ \frac{a}{f} \in S_{\I{p}_x}~\middle|~ f\text{ :: homogeneous}, \deg a \geq \deg f \right\}. \]
-    ここでの$\deg$は$S$に付与されているものである．
+    \[ \shJ_x=\left\{ \frac{a}{f} \in S_{\I{p}_x}~\middle|~ f\text{ :: homogeneous},~ \ord a \geq \deg f \right\}. \]
+    ここでの$\deg,\ord$は$S$に付与されているものである．
+    ただし$\ord a$は$a$が持つ斉次成分の次数で最低のものである．
     $\Quot(\shJ_x)=\Quot(S)$も分かる．
 
     \paragraph{$\shJ_x$ :: integrally closed.}
     $\shJ_x$ :: integrally closedであることを示すため，
     次の等式を考える．
     \[
-        \left(\frac{a}{f}\right)^r+\frac{u_{r-1}}{v_{r-1}}\left(\frac{a}{f}\right)^{r-1}+\dots+\frac{u_0}{v_0}=0
+        \left(\frac{a}{f}\right)^r+c_{r-1}\left(\frac{a}{f}\right)^{r-1}+\dots+c_0=0
         \mwhere
-        a/f \in \Quot(S),~~ \{ u_i/v_i \}_{i=0}^{r-1} \subset \shJ_x.
+        a/f \in \Quot(S),~~ \{ c_i \}_{i=0}^{r-1} \subset \shJ_x.
+        \leqno{(*)}
     \]
-    $d=\deg a/f<0$の時，$\deg u_i/v_i \geq 0$より左辺の次数は有限負になる．
-    したがって$d \geq 0$．
-    $f \in S-\I{p}_x$かつhomogeneousであることを確かめよう．
-    これは$S_{(\I{p}_x)}$ :: integrally closedを利用する．
-    まず，$\I{p}_x$が$S_1$全体を含むことはない
-    （そうなれば$S_+ \subseteq \I{p}_x$となるが，これは$\Proj S$の定義からありえない）．
-    なので$s \in (S-\I{p}_x)_1$がとれる．
-    上の等式の両辺に$s^{-rd}$を両辺にかけて，$0$次斉次成分を取り出しても正しい等式となる．
+    $d=\deg a/f \geq 0$を示すために，$d < 0$と仮定する．
+    すると十分大きな$s \in \N$をとって($*$)に$(a/f)^s$をかけることにより，
+    各項の次数$\deg c_i+(i+s)d$を有限負に出来る．
+    しかし$\deg 0=-\infty$なので等式($*$)が成立しなくなってしまう．
+    よって$d \geq 0$．
+    $S_{(\I{p}_x)}$ :: integrally closedを利用して
+    $\shJ_x$ :: integrally closed示すために，等式($*$)に手を加える．
+    まず，$\deg a/f=d=0$だったとすると，
+    $a/f$が負の斉次成分を持つことはないので，$a$は斉次である．
+    なので係数から$0$次斉次成分を取り出しても正しい等式となる．
+    （ch I, Thm3.4で同様の操作を行った．）
+    $d>0$ならば$a/f$の代わりに，
+    より次数が大きい$(a/f)^t ~(t>0)$を考える
+    （あるいは$(a/f)^rt$を両辺にかける）ことで，
+    各$i$について$\deg c_{r-i} \leq id$と仮定出来る．
+    その上で$s \in (S-\I{p}_x)_1$をとり
+    \footnote
+    {
+        $\I{p}_x$が$S_1$全体を含むことはない．
+        そうなれば$S_+ \subseteq \I{p}_x$となるが，これは$\Proj S$の定義からありえない．
+        なので$s \in (S-\I{p}_x)_1$がとれる．
+    }，
+    等式($*$)の両辺に$s^{-rd}$を両辺にかけて，
+    $0$次斉次成分を取り出しても正しい等式となる．
     \[
         \left(\frac{a_d}{s^df}\right)^r+
-        \left(\frac{1}{s^d}\frac{u_{r-1}}{v_{r-1}}\right)_0\left(\frac{a_d}{s^df}\right)^{r-1}+
+        \left(\frac{c_{r-1}}{s^d}\right)_0\left(\frac{a_d}{s^df}\right)^{r-1}+
         \dots+
-        \left(\frac{1}{s^{rd}}\frac{u_{0}}{v_{0}}\right)_0
+        \left(\frac{c_0}{s^{rd}}\right)_0
         =0
     \]
-    すると，$a_d/s^df$及び係数の次数は$0$になる．
+    各項の$0$次斉次成分が$\frac{(c_i a^i)_0}{s^{rd}f^{r-1}}$でなく
+    上のように取れるのは，
+    $\frac{c_i}{s^{d(r-i)}}$と$\frac{a}{a^df}$の斉次成分が
+    どちらも$0$以下のものしか無いことに拠る．
+    $0$以下の整数同士を加えて$0$になるのは$0$同士の和のみ，
+    ということである．
+    以上の操作により，$a_d/s^df$及び係数の次数は$0$になる．
     特に，係数はその分子・分母が共に斉次元となるから$S_{(\I{p}_x)}$の元となる．
     このことから$f$ :: homogeneous
     \footnote
@@ -680,16 +717,12 @@
     よって$\shJ_x$ :: integrally closed．
 
     \paragraph{$S'$ :: integrally closed．}
-    $S'=\Gamma(X,\shJ)=\bigcap_{x \in X} \shJ_x$
-    \footnote
-    {
-        $S'=\shJ(X) \subseteq \bigcap_{x \in X} \shJ_x$は明らか．
-        $s \in \bigcap_{x \in X} \shJ_x$ならば，
-        任意の$x \in X$に対して開近傍$x \in U$が存在し，$s_x=(s_U)_x$となる$s_U \in \shJ(U)$が存在する．
-        よってGluability Axiomから$s \in \shJ(X)$．
-    }
-    だから，$S'$ :: integrally closed．
-    （Thm5.19の証明後半も参照．）
+    Thm5.19の証明後半から，$S'=\Gamma(X,\shJ) \subseteq \bar{S}$．
+    そこで$a/f \in \bar{S} \subseteq \Quot S$をとって考える．
+    もし$f$が単元でなければ$f \in \I{p}_x$なる$x \in X$がとれる．
+    この時，$\{c_i\} \subseteq S \subseteq \shJ_x$より($*$)が成立している．
+    なので$\shJ_x$ :: integrally closedより$a/f \in \shJ_x \subseteq S_{\I{p}_x}$．
+    しかし$f \in \I{p}_x$なので，これはありえない．
 
     \subsection{$S_d=S'_d$ for all sufficiently large $d$.}
     $S$がEx5.9の仮定を満たすことは明らか．
