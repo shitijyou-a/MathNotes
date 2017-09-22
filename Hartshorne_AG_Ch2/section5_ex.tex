@@ -521,9 +521,35 @@
     既にhomogeneous ideal $I \subset S$が$X$のclosed subschemeを定めること(Ex3.12)，
     逆に$X$のclosed subsechemeはこのように定まることを示した(5.16)．
     homogeneous ideal $I \subset S$に対し，そのsaturationを以下で定める．
-    \[ \bar{I}=\{s \in S \mid \Forall{i=0,\dots,n} \Exists{n \geq 0} x_i^n s \in I. \} \]
+    \[ \bar{I}=\{s \in S \mid \Forall{i=0,\dots,n} \Exists{r \geq 0} x_i^r s \in I. \} \]
     $I=\bar{I}$の時，$I$はsaturated idealであると言われる．
     $S$のsaturated idealと$X$のclosed subschemeの間に一対一対応があることを示そう．
+
+    \begin{Remark}
+        $x_i^r s \in I$は$s \in (I:x_i^r), x_i^r \in (I:s)$と同値である．
+        なので$I$ :: saturated idealについて次が成り立つ．
+        \[ \Forall{s \in S} \lbra{\Forall{i=0,\dots,n} x_i \in \sqrt{(I:s)}}  \implies s \in I. \]
+        $\implies$の左辺は$S_1 \subseteq \sqrt{(I:s)}$とも表現できる．
+        あるいは次のようにも表現できる．
+        \[ \bigcup_{i=0,\dots,n} \bigcup_{r>0} (I:x_i^r) \subseteq I. \]
+    \end{Remark}
+
+    \subsection{$I$ :: Homogeneous Ideal $\implies$ $\bar{I}$ :: Also.}
+    $s \in \bar{I}$をとり，$s=s_u+\dots+s_v$と斉次分解する．
+    今，$i=0,\dots,n$を任意に取る．
+    $i$に対して次を満たす$r$が存在する: $x_i^r s \in I$．
+    したがって
+    \[ (x_i^r s_u)+\dots+(x_i^r s_v) \in I \]
+    が成立している．
+    $I$ :: homogeneousなので$x_i^r s_u,\dots,x_i^r s_v \in I$．
+    よって$s_u,\dots,s_v \in \bar{I}$となる．
+
+    \subsection{$\bar{I}_1=\bar{I}_2 \iff \Proj S/I_1 \iso \Proj S/I_2$.}
+    
+
+    \subsection{The Ideal $\Gamma_*(\shI_Y)$ is saturated.}
+
+    \subsection{Saturated Ideals $\leftrightarrow$ Closed Subschemes of $X=\Proj S$.}
 
 \section{The Segre Embedding.} %% Ex5.11 
     $S,T$を$S_0=T_0=A$であるようなgraded ringとする．
@@ -596,14 +622,32 @@
 
     \subsection{$S$ :: domain and $S':=\bigoplus_{n \geq 0} \Gamma(X,\shO_X(n))=\bar{S}$.}
 
-    \paragraph{$S$ :: not domain $\implies$ $\Exists{f \in S_+} S_{(f)}$ :: not domain．}
-    $S$ :: not domainと仮定し，
-    $ab=0$となる$a,b \in S-\{0\}$，及びゼロ因子でない元$f \in S_1$をとる（?）．
-    （次数さえ揃えれば$f \in S_+$でよい．しかし面倒なので$f \in S_1$をとる．）
-    すると任意の$r>0$について$f^r a, f^r b \neq 0$なので
-    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$は$0$でない．
-    しかしこの2元は明らかに$S_{(f)}$のゼロ因子である．
-    したがって$S$ :: not domainならば$S_{(f)}$ :: not domain．
+    \paragraph{$\Forall{f \in S_1} S_{(f)}$ :: domain $\implies$ $S$ :: domain.}
+    $S$ :: reducedから示す．
+    $z \in \Nil(S)-\{0\}$がとれると仮定する．
+    $I$はsaturated idealなので，Ex5.10の解答に書いた注意より，次が成立する．
+    \[ \Forall{s \in S} S_1 \subseteq \sqrt{\Ann(s)} \implies s=0. \]
+    したがって$f \in S_1-\sqrt{\Ann(s)}$がとれる．
+    任意の$m>0$について$f^mz \neq 0$となるから，
+    $\frac{z}{f^{\deg z}} \in S_{(f)}$は$0$でないべきゼロ元となる．
+    矛盾が生じたので$S$ :: reduced noetherian ring．
+    この時，$S$のゼロ因子全体は極小素イデアルの和集合$D=\bigcup_{i=1}^t \I{p}_i$である
+    \footnote
+    {
+        $S_{\I{p}_i}$の素イデアルは$\I{p}_iS_{\I{p}_i}$しか無い．
+        べきゼロ根基は素イデアルの共通部分だから，$\I{p}_iS_{\I{p}_i}$はべきゼロ根基．
+        したがって$\I{p}_i$の元はゼロ因子である．
+        すなわち$\bigcup_{i=1}^t \I{p}_i \subseteq D$．
+        逆に$f \not \in \bigcup_{i=1}^t \I{p}_i$をとると，
+        $fg=0 \in \I{p}_i$ならば$f \not \in \I{p}_i$より$g \in \bigcap_{i} \I{p}_i=\Nil(S)=(0)$．
+        よって$f \not \in D$．
+    }．
+    $S_1 \not \subseteq \I{p}_i$なので（？），
+    prime avoidance lemmaから$S_1 \not \subseteq D$．
+    なので$f \in S_1-D$がとれる．
+    $a,b \in S$が$0$でないゼロ因子ならば
+    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$も$0$でないゼロ因子だから，
+    $S$ :: not domain $\implies$ $S_{(f)}$ :: not domain．
 
     \paragraph{$X$ :: integral scheme.}
     $X$ :: integral schemeならば，
@@ -633,7 +677,9 @@
     これは$\shO_{X,x}$ :: integral domainに反する．
     よって$X$ :: irreducible．
 
-    \paragraph{$\shJ_x$の元.}
+    \subsubsection{$S'$ :: integrally closed．}
+
+    \paragraph{$\shJ$の定義．$\shJ_x$の元.}
     $\shJ=\bigoplus_{n \geq 0} \shO_X(n)$とおくと$S'=\Gamma(X,\shJ)$とみなせる．
     点$x \in X$をとり，$\shJ_x$を考えよう．
     direct sumとstalk（どちらもdirect limit）は可換だから，
@@ -651,7 +697,7 @@
     ただし$\ord a$は$a$が持つ斉次成分の次数で最低のものである．
     $\Quot(\shJ_x)=\Quot(S)$も分かる．
 
-    \paragraph{$\shJ_x$ :: integrally closed.}
+    \paragraph{$\shJ_x$ :: integrally closed / Introduction.}
     $\shJ_x$ :: integrally closedであることを示すため，
     次の等式を考える．
     \[
@@ -660,21 +706,25 @@
         a/f \in \Quot(S),~~ \{ c_i \}_{i=0}^{r-1} \subset \shJ_x.
         \leqno{(*)}
     \]
-    $d=\deg a/f \geq 0$を示すために，$d < 0$と仮定する．
+    $d=\deg a/f$とおく．
+    $\shO_{X,x}=S_{(\I{p}_x)}$ :: integrally closedを利用するため，
+    操作を加えて$a/f, \{c_i\}$を$0$次斉次元にしたい．
+    操作は$d$の符号に依って変わってくる．
+
+    \paragraph{$d<0$はありえない．}
+    最初に$d < 0$と仮定する．
     すると十分大きな$s \in \N$をとって($*$)に$(a/f)^s$をかけることにより，
     各項の次数$\deg c_i+(i+s)d$を有限負に出来る．
     しかし$\deg 0=-\infty$なので等式($*$)が成立しなくなってしまう．
     よって$d \geq 0$．
-    $S_{(\I{p}_x)}$ :: integrally closedを利用して
-    $\shJ_x$ :: integrally closed示すために，等式($*$)に手を加える．
-    まず，$\deg a/f=d=0$だったとすると，
+    
+    \paragraph{$d=0$の場合．}
     $a/f$が負の斉次成分を持つことはないので，$a$は斉次である．
     なので係数から$0$次斉次成分を取り出しても正しい等式となる．
     （ch I, Thm3.4で同様の操作を行った．）
-    $d>0$ならば$a/f$の代わりに，
-    より次数が大きい$(a/f)^t ~(t>0)$を考える
-    （あるいは$(a/f)^rt$を両辺にかける）ことで，
-    各$i$について$\deg c_{r-i} \leq id$と仮定出来る．
+
+    \paragraph{$d>0$の場合．}
+    (TODO:)
     その上で$s \in (S-\I{p}_x)_1$をとり
     \footnote
     {
@@ -684,6 +734,7 @@
     }，
     等式($*$)の両辺に$s^{-rd}$を両辺にかけて，
     $0$次斉次成分を取り出しても正しい等式となる．
+    以上から，次の等式が得られる．
     \[
         \left(\frac{a_d}{s^df}\right)^r+
         \left(\frac{c_{r-1}}{s^d}\right)_0\left(\frac{a_d}{s^df}\right)^{r-1}+
@@ -697,32 +748,39 @@
     どちらも$0$以下のものしか無いことに拠る．
     $0$以下の整数同士を加えて$0$になるのは$0$同士の和のみ，
     ということである．
-    以上の操作により，$a_d/s^df$及び係数の次数は$0$になる．
-    特に，係数はその分子・分母が共に斉次元となるから$S_{(\I{p}_x)}$の元となる．
-    このことから$f$ :: homogeneous
-    \footnote
-    {
-        変形前の等式で$\deg a/f=0$，係数$ \in S_{(\I{p}_x)}$とする．
-        等式の両辺に$f^r$を掛けて$a^r$を移項する:
-        $\frac{u_{r-1}}{v_{r-1}}a^{r-1}f+\dots+\frac{u_0}{v_0}f^r=-a^r$．
-        $f=f_n+\dots+f_m (n>m)$と斉次分解出来た時，
-        両辺の$mr$次斉次成分をとると$\frac{u_0}{v_0}f_m^r=0$なので$S$ :: domainより$u_0=0$．
-        両辺を$a$で割って同様の手順を踏むと，
-        帰納的にすべての係数が$0$になってしまうので，
-        $m=n$．
-    }
-    ，したがって$a_d/u^df \in S_{((0))}$が分かり，
-    $S_{(\I{p}_x)}$ :: integrally closedより$f \in S-\I{p}_x$．
+    
+    \paragraph{$\shJ_x$ :: integrally closed / Conclusion.}
+    以上の操作により，$a/f$及び係数$\{c_i\}$が$0$次斉次元になる．
+    このことから$f$が斉次だと分かる．
+    等式($*$)が操作後の条件を満たすとして，
+    等式の両辺に$f^r$を掛けて$a^r$を移項する:
+    \[ c_{r-1}a^{r-1} \cdot f+\dots+c_1a^1 \cdot f^{r-1}+c_0 \cdot f^r=-a^r. \]
+    $c_i, a$は斉次元だから，左辺は斉次元である．
+    加えて左辺の各項は次数が同じだから，各項が斉次元．
+    したがって$f$は斉次でなくてはならない．
+    以上から，$a/f \in S_{((0))}, \{c_i\} \subset S_{(\I{p}_x)}$が分かり，
+    $\shO_{X,x}=S_{(\I{p}_x)}$ :: integrally closedより$f \in S-\I{p}_x$．
     まとめて，$a/f \in \shJ_x$．
     よって$\shJ_x$ :: integrally closed．
 
-    \paragraph{$S'$ :: integrally closed．}
-    Thm5.19の証明後半から，$S'=\Gamma(X,\shJ) \subseteq \bar{S}$．
-    そこで$a/f \in \bar{S} \subseteq \Quot S$をとって考える．
-    もし$f$が単元でなければ$f \in \I{p}_x$なる$x \in X$がとれる．
-    この時，$\{c_i\} \subseteq S \subseteq \shJ_x$より($*$)が成立している．
-    なので$\shJ_x$ :: integrally closedより$a/f \in \shJ_x \subseteq S_{\I{p}_x}$．
-    しかし$f \in \I{p}_x$なので，これはありえない．
+    \paragraph{$\Forall{x \in X} \shJ_x$ :: integrally closed $\implies$ $S'$ :: integrally closed．}
+    Thm5.19の証明後半から，$S' \subseteq \bar{S}$．
+    そこで$a/f \in \bar{S} \subset \Quot S$をとって考える．
+    この時，次のような等式が成立する．
+    \[
+        \left(\frac{a}{f}\right)^r+c_{r-1}\left(\frac{a}{f}\right)^{r-1}+\dots+c_0=0
+        \mwhere
+        \{ c_i \}_{i=0}^{r-1} \subset S \subseteq S'.
+    \]
+    $S'=\Gamma(X,\shJ)$だから，任意の$x \in X$について$\{c_i\} \subset \shJ_x$．
+    したがって$\shJ_x$ :: integrally closedより$a/f \in \shJ_x \subset S_{\I{p}_x}$．
+    特に，$f$は斉次元である．
+    $f$が$S$の単元でないと仮定すると，
+    $f$が斉次元であることから，$f \in \I{p}_x$なる$x \in X$がとれる．
+    この$x$について$a/f \not \in \shJ_x$となり，矛盾が生じる．
+    よって$f$は単元でしかありえない．
+    すなわち$a/f \in S \subseteq S'$．
+    以上から$S' \supseteq \bar{S}$が示された．
 
     \subsection{$S_d=S'_d$ for all sufficiently large $d$.}
     $S$がEx5.9の仮定を満たすことは明らか．
