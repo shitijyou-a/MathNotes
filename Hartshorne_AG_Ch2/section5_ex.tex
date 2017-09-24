@@ -22,6 +22,7 @@
 \newcommand{\ClosedIn}{\text{ :: open in }}
 \newcommand{\sidetilde}{\,\tilde{}}
 \newcommand{\sidecheck}{\,\check{}}
+\newcommand{\sidebar}{\,\bar{}}
 \newcommand{\ccheck}[1]{#1\sidecheck\,\sidecheck\,}
 \DeclareMathOperator{\sgn}{sgn}
 
@@ -531,7 +532,7 @@
         \[ \Forall{s \in S} \lbra{\Forall{i=0,\dots,n} x_i \in \sqrt{(I:s)}}  \implies s \in I. \]
         $\implies$の左辺は$S_1 \subseteq \sqrt{(I:s)}$とも表現できる．
         あるいは次のようにも表現できる．
-        \[ \bigcup_{i=0,\dots,n} \bigcup_{r>0} (I:x_i^r) \subseteq I. \]
+        \[ \bigcap_{i=0,\dots,n} \bigcup_{r>0} (I:x_i^r) \subseteq I. \]
     \end{Remark}
 
     \subsection{$I$ :: Homogeneous Ideal $\implies$ $\bar{I}$ :: Also.}
@@ -544,12 +545,115 @@
     $I$ :: homogeneousなので$x_i^r s_u,\dots,x_i^r s_v \in I$．
     よって$s_u,\dots,s_v \in \bar{I}$となる．
 
-    \subsection{$\bar{I}_1=\bar{I}_2 \iff \Proj S/I_1 \iso \Proj S/I_2$.}
-    
+    \subsection{$\bar{I}_1 \iso \bar{I}_2 \iff \Proj S/I_1 \iso \Proj S/I_2$.}
+    次を示す:
+    \begin{enumerate}
+        \item $I$ :: homogeneous idealについて$\Proj S/I \iso \Proj S/\bar{I}$．
+        \item $I_1, I_2$ :: saturated homogeneous idealについて
+              $\Proj S/I_1 \iso \Proj S/I_2$ならば$I_1 \iso I_2$．
+    \end{enumerate}
+
+    \begin{Remark}
+        $S=k[x,y], I_1=(x), I_2=(y)$の時，
+        $I_1, I_2$はsaturated idealかつ$I_1 \neq I_2$．
+        しかし$\Proj S/I_1, \Proj S/I_2$はどちらもhyperplaneで同型である．
+        なので，主張を$\bar{I}_1=\bar{I}_2 \iff \Proj S/I_2 \cong \Proj S/I_2$と
+        理解してはいけない．
+    \end{Remark}
+
+    \paragraph{$\Proj S/I \iso \Proj S/\bar{I}$.}
+    $I \subseteq \bar{I}$なので，次の全射準同型がある．
+    \begin{defmap}
+        \iota:& S/I& \to& S/\bar{I} \\
+        {}& s+I& \mapsto& s+\bar{I}
+    \end{defmap}
+    $\iota$が誘導する
+    $(S/I)_{(x_i+I)} \to (S/\bar{I})_{(x_i+\bar{I})}$の写像は
+    明らかに全射であり，以下で示すように単射でもある．
+    これはisomorphism of affine schemes
+    $\Spec (S/\bar{I})_{(x_i+\bar{I})} \isomap \Spec (S/I)_{(x_i+I)}$
+    を誘導し，これで被覆される$\Proj S/\bar{I} \isomap \Proj S/I$も同型である．
+
+    \begin{Claim}
+        $\iota$から誘導される
+        $\phi_i: (S/I)_{(x_i+I)} \to (S/\bar{I})_{(x_i+\bar{I})}$
+        は単射．
+    \end{Claim}
+    \begin{proof}
+        $i=0,\dots,n$を一つ取る．
+        \begin{defmap}
+            \phi_i:& (S/I)_{(x_i+I)}& \to& (S/\bar{I})_{(x_i+\bar{I})} \\
+            {}& \frac{s+I}{x_i^{\deg s}+I}& \mapsto& \frac{s+\bar{I}}{x_i^{\deg s}+\bar{I}}
+        \end{defmap}
+        $\frac{s+I}{x_i^{d}+I}$の像が$0$となるのは
+        次が成立する時．
+        \[ \Exists{r \geq 0} x_i^{r}s \in \bar{I}. \]
+        $\bar{I}$の定義より，$R \geq 0$を十分大きくすると$x_i^{r+R}s \in I$となる．
+        これは$\frac{s+I}{x_i^{\deg s}+I}=0$を意味する．
+        よって$\ker \phi_i=0$．
+    \end{proof}
+
+    \paragraph{$\Proj S/I_1 \iso \Proj S/I_2 \implies I_1 \iso I_2$.}
+    $S/I_1, S/I_2$が$S_0$-moduleとして同型であることを示す．
+    $f: \Proj S/I_2 \isomap \Proj S/I_1, \phi_i=(f|_{D_+(x_i+I_1)})^{\#}$とする．
+    この時，$\phi_i: (S/I_1)_{(x_i+I_1)} \isomap (S/I_2)_{(y_i+I_2)}$であり，
+    $y_i+I_2 \in (S/I_2)_1$である
+    \footnote
+    {
+        $D_+(x_i)$が$\Proj S/I_1$を被覆するから
+        $\phi D_+(x_i)=D_+(y_i)$が$\Proj S/I_2$を被覆する．
+        したがって$\{y_i\}$が$S/I_2$の生成元であり，それは$(S/I_2)_1$の元である．
+    }．
+    \begin{Claim}
+        $\rho_i: S/I_1 \to (S/I_1)_{(x_i+I_1)}$を
+        $s+I_1 \mapsto \frac{s+I_1}{x_i^{\deg (s+I_1)}+I_1}$で定める．
+        $d \geq 0，s+I_1, t+I_1 \in (S/I_1)_d$をとる．
+        \[
+            \lbra{ \Forall{i=0,\dots,n} \rho_i(s+I_1)=\rho_i(t+I_2) }
+                \implies s+I_1=t+I_1.
+        \]
+        すなわち，$\bigoplus_{0 \leq i \leq n} \rho_i$は単射である．
+    \end{Claim}
+    \begin{proof}
+        任意の$i$について
+        $\frac{s+I_1}{x_i^d+I_1}=\frac{t+I_1}{x_i^d+I_1}$となることは次と同値．
+        \[ \Forall{i=0,\dots,n} \Exists{r \geq 0} x_i^r(s x_i^d-x_i^d t)=x_i^{r+d}(s-t) \in I_1. \]
+        saturated idealの定義から，$s-t \in I_1$．
+    \end{proof}
+    $I_1$を$I_2$に，$x_i$を$y_i$に変えても同様である．
+    （$s-t$の斉次分解を経由する．）
+    これを$\sigma_i: S/I_2 \to (S/I_2)_{(y_i+I_2)}$としておこう．
+    $\rho_i, \sigma_i$は定義の仕方から全射である．
+    したがって主張と合わせて次の全単射が構成できる．
+    \[
+        \xymatrix
+        {
+            (S/I_1)_d \ar[r]^-{\bigoplus_i \rho_i}&
+            \bigoplus_{0 \leq i \leq n} \{ s/x_i^d \in (S/I_1)_{(x_i+I_1)} \} \ar[r]^-{\bigoplus_i \phi_i}&
+            \bigoplus_{0 \leq i \leq n} \{ t/y_i^d \in (S/I_2)_{(y_i+I_2)} \} \ar[r]^-{(\bigoplus_i \sigma_i)^{-1}}&
+            (S/I_2)_d.
+        }
+    \]
+    すなわち$S/I_1$と$S/I_2$は$S_0$-moduleとして同型である．
+    $I_1, I_2$は同じ$S$の部分加群だから，$I_1 \iso I_2$．
 
     \subsection{The Ideal $\Gamma_*(\shI_Y)$ is saturated.}
+    $i: Y \to X=\Proj S$をclosed immsersionとすると，
+    $\shI_Y=\ker i^{\#} \subseteq \shO_X$．
+    $\shO_X(n) \otimes \shJ_Y(d) \iso \shJ_Y(n+d)$(pp.115-116)に注意．
 
-    \subsection{Saturated Ideals $\leftrightarrow$ Closed Subschemes of $X=\Proj S$.}
+    Prop5.13より，$S=\Gamma_*(X,\shO_X)$，
+    そこで$s \in \Gamma(X,\shO_X(n))$をとり，次が成り立つとする．
+    \[ \Forall{i=0,\dots,n} \Exists{r_i \geq 0} x_i^{r_i}s \in \Gamma(X,\shJ_Y(n+r_i)). \]
+    この時$s \in \Gamma(X,\shJ_Y(n))$となることを示せば良い．
+    $x_i^{-r_i}$は$\Gamma(D_+(x_i),\shO_X(-r_i))=(S(-r_i))_{(x_i)}$の元だから，
+    \[  x_i^{-r_i}(x_i^{r_i}s)=s \in \Gamma(D_+(x_i),\shO_X(-r_i) \otimes \shJ_Y(n+r_i)) \iso \Gamma(D_+(x_i),\shJ_Y(n)). \]
+    よって$s \in \bigcap_i \Gamma(D_+(x_i),\shJ_Y(n))$．
+    $\shJ_Y$のGluability Axiomを用いて，主張が得られる．
+
+    \subsection{Saturated Homogeneous Ideals $\leftrightarrow$ Closed Subschemes of $X=\Proj S$.}
+    $\rightarrow$は(b)から，
+    $\leftarrow$は(c)からわかる．
 
 \section{The Segre Embedding.} %% Ex5.11 
     $S,T$を$S_0=T_0=A$であるようなgraded ringとする．
@@ -621,35 +725,8 @@
     十分大きな$d>0$についてprojectively normalであることを示す．
 
     \subsection{$S$ :: domain and $S':=\bigoplus_{n \geq 0} \Gamma(X,\shO_X(n))=\bar{S}$.}
-
-    \paragraph{$\Forall{f \in S_1} S_{(f)}$ :: domain $\implies$ $S$ :: domain.}
-    $S$ :: reducedから示す．
-    $z \in \Nil(S)-\{0\}$がとれると仮定する．
-    $I$はsaturated idealなので，Ex5.10の解答に書いた注意より，次が成立する．
-    \[ \Forall{s \in S} S_1 \subseteq \sqrt{\Ann(s)} \implies s=0. \]
-    したがって$f \in S_1-\sqrt{\Ann(s)}$がとれる．
-    任意の$m>0$について$f^mz \neq 0$となるから，
-    $\frac{z}{f^{\deg z}} \in S_{(f)}$は$0$でないべきゼロ元となる．
-    矛盾が生じたので$S$ :: reduced noetherian ring．
-    この時，$S$のゼロ因子全体は極小素イデアルの和集合$D=\bigcup_{i=1}^t \I{p}_i$である
-    \footnote
-    {
-        $S_{\I{p}_i}$の素イデアルは$\I{p}_iS_{\I{p}_i}$しか無い．
-        べきゼロ根基は素イデアルの共通部分だから，$\I{p}_iS_{\I{p}_i}$はべきゼロ根基．
-        したがって$\I{p}_i$の元はゼロ因子である．
-        すなわち$\bigcup_{i=1}^t \I{p}_i \subseteq D$．
-        逆に$f \not \in \bigcup_{i=1}^t \I{p}_i$をとると，
-        $fg=0 \in \I{p}_i$ならば$f \not \in \I{p}_i$より$g \in \bigcap_{i} \I{p}_i=\Nil(S)=(0)$．
-        よって$f \not \in D$．
-    }．
-    $S_1 \not \subseteq \I{p}_i$なので（？），
-    prime avoidance lemmaから$S_1 \not \subseteq D$．
-    なので$f \in S_1-D$がとれる．
-    $a,b \in S$が$0$でないゼロ因子ならば
-    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$も$0$でないゼロ因子だから，
-    $S$ :: not domain $\implies$ $S_{(f)}$ :: not domain．
-
-    \paragraph{$X$ :: integral scheme.}
+    \subsubsection{$S$ :: domain．}
+    \paragraph{$X$ :: integral projective scheme.}
     $X$ :: integral schemeならば，
     任意の$f \in S_+$について$\shO_X(D_+(f))=S_{(f)}$ :: domain．
     したがって前段落より$S$ :: domainとわかる．
@@ -676,6 +753,56 @@
     結局$R_{\I{q}} \iso \shO_{X,x}$は二つの極小素イデアルをもつ．
     これは$\shO_{X,x}$ :: integral domainに反する．
     よって$X$ :: irreducible．
+
+    \paragraph{$X$ :: integral projective scheme $\implies$ $S$ :: domain.}
+    $k$ :: algebraically closed fieldなので，
+    Prop4.10から，$X$はprojective variety $V$に対応する．
+    $V$ :: irreducibleに注意．
+    Ex2.14dから$V$のhomogeneous coordinate ringは$S$だから，
+    $S$ :: domain (cf. ch I, Ex2.4)．
+
+    \paragraph{Another Proof: $X$ :: integral projective scheme $\implies$ $S$ :: domain.}
+    仮定より，任意の$f \in S_+$について$\shO_X(D_+(f))=S_{(f)}$ :: integral domain．
+    これを使って示していく．
+    $S$ :: reducedから示す．
+    $z \in \Nil(S)-\{0\}$がとれると仮定する．
+    $I$はsaturated idealなので，Ex5.10の解答に書いた注意より，次が成立する．
+    \[ \Forall{s \in S} S_1 \subseteq \sqrt{\Ann(s)} \implies s=0. \]
+    したがって$f \in S_1-\sqrt{\Ann(s)}$がとれる．
+    任意の$m>0$について$f^mz \neq 0$となるから，
+    $\frac{z}{f^{\deg z}} \in S_{(f)}$は$0$でないべきゼロ元となる．
+    矛盾が生じたので$S$ :: reduced noetherian ring．
+    この時，$S$のゼロ因子全体は極小素イデアルの和集合$D=\bigcup_{i=1}^t \I{p}_i$である
+    \footnote
+    {
+        $S_{\I{p}_i}$の素イデアルは$\I{p}_iS_{\I{p}_i}$しか無い．
+        べきゼロ根基は素イデアルの共通部分だから，$\I{p}_iS_{\I{p}_i}$はべきゼロ根基．
+        したがって$\I{p}_i$の元はゼロ因子である．
+        すなわち$\bigcup_{i=1}^t \I{p}_i \subseteq D$．
+        逆に$f \not \in \bigcup_{i=1}^t \I{p}_i$をとると，
+        $fg=0 \in \I{p}_i$ならば$f \not \in \I{p}_i$より$g \in \bigcap_{i} \I{p}_i=\Nil(S)=(0)$．
+        よって$f \not \in D$．
+    }．
+    $S_1 \not \subseteq \I{p}_i$なので
+    \footnote
+    {
+        $S$の$S_0$-algebraとしての生成元を$g_1,\dots,g_t \in S_1$とする．
+        これは$S$の生成元だから，$Y=\Spec S$とすると$Y=\bigcup_i D(g_k)$．
+        $h \in \bigcap_k \sqrt{(0:g_k)} \subset \Gamma(Y, \shO_Y)$を任意にとる．
+        $h/1 \in S_{g_k}=\Gamma(D(g_k), \shO_Y)$はすべての$k$で$0$だから，
+        Identity Axiomより$h=0$．
+        よって$\bigcap_i \sqrt{(0:g_k)}=(0)$．
+        一方，$\bigcap_i \sqrt{(0:g_k)}=\sqrt{(0:\sum_k g_k)}=(0)$．
+        なので$\sum_k g_k$はゼロ因子でない．
+        前のfootnoteの通り，$\I{p}_i$の元はゼロ因子であるから，
+        $S_1 \subseteq \I{p}_i$ならば$\sum_k g_k \in \I{p}_i$もゼロ因子でなくてはならない．
+        これは矛盾なので，$S_1 \not \subseteq \I{p}_i$．
+    }，
+    prime avoidance lemmaから$S_1 \not \subseteq D$．
+    なので$f \in S_1-D$がとれる．
+    $a,b \in S$が$0$でないゼロ因子ならば
+    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$も$0$でないゼロ因子だから，
+    $S$ :: not domain $\implies$ $S_{(f)}$ :: not domain．
 
     \subsubsection{$S'$ :: integrally closed．}
 
@@ -713,13 +840,13 @@
 
     \paragraph{$d<0$はありえない．}
     最初に$d < 0$と仮定する．
-    すると十分大きな$s \in \N$をとって($*$)に$(a/f)^s$をかけることにより，
-    各項の次数$\deg c_i+(i+s)d$を有限負に出来る．
-    しかし$\deg 0=-\infty$なので等式($*$)が成立しなくなってしまう．
-    よって$d \geq 0$．
-    
+    すると$\ord c_i \geq 0$より，
+    $i=r-1,\dots,0$では$\ord c_i+di>dr$が成り立つ．
+    したがって左辺の$dr$次斉次成分を取り出すと
+    先頭項（$i=r$の項）のみになり，これは明らかに$0$でない．
+
     \paragraph{$d=0$の場合．}
-    $a/f$が負の斉次成分を持つことはないので，$a$は斉次である．
+    $a/f$が負の斉次成分を持つことはないので，$a/f$は$0$次斉次元である．
     なので係数から$0$次斉次成分を取り出しても正しい等式となる．
     （ch I, Thm3.4で同様の操作を行った．）
 
@@ -988,7 +1115,7 @@
     $f^{\#}: \shO_Y \to f_*\shO_X$を考えると，
     $U=\Spec A \subseteq Y$について$f^{-1}U \iso \Spec \shA(U)$だから
     $\shO_X(f^{-1}U)=(f_*\shO_X)(U) \iso \shA(U)$．
-    このような$U$で$Y$を被覆できるから，$\shA \cong f_*\shO_X$．
+    このような$U$で$Y$を被覆できるから，$\shA \iso f_*\shO_X$．
 
     \subsection{$\{$ quasi-coherent $\shO_X$-modules $\} \leftrightarrow$ $\{$ quasi-coherent $\shA$-modules $\}$.}
     $f: X \to Y$をaffine morphismとし，$\shA=f_*\shO_X$とおく．
