@@ -761,49 +761,6 @@
     Ex2.14dから$V$のhomogeneous coordinate ringは$S$だから，
     $S$ :: domain (cf. ch I, Ex2.4)．
 
-    \paragraph{Another Proof: $X$ :: integral projective scheme $\implies$ $S$ :: domain.}
-    仮定より，任意の$f \in S_+$について$\shO_X(D_+(f))=S_{(f)}$ :: integral domain．
-    これを使って示していく．
-    $S$ :: reducedから示す．
-    $z \in \Nil(S)-\{0\}$がとれると仮定する．
-    $I$はsaturated idealなので，Ex5.10の解答に書いた注意より，次が成立する．
-    \[ \Forall{s \in S} S_1 \subseteq \sqrt{\Ann(s)} \implies s=0. \]
-    したがって$f \in S_1-\sqrt{\Ann(s)}$がとれる．
-    任意の$m>0$について$f^mz \neq 0$となるから，
-    $\frac{z}{f^{\deg z}} \in S_{(f)}$は$0$でないべきゼロ元となる．
-    矛盾が生じたので$S$ :: reduced noetherian ring．
-    この時，$S$のゼロ因子全体は極小素イデアルの和集合$D=\bigcup_{i=1}^t \I{p}_i$である
-    \footnote
-    {
-        $S_{\I{p}_i}$の素イデアルは$\I{p}_iS_{\I{p}_i}$しか無い．
-        べきゼロ根基は素イデアルの共通部分だから，$\I{p}_iS_{\I{p}_i}$はべきゼロ根基．
-        したがって$\I{p}_i$の元はゼロ因子である．
-        すなわち$\bigcup_{i=1}^t \I{p}_i \subseteq D$．
-        逆に$f \not \in \bigcup_{i=1}^t \I{p}_i$をとると，
-        $fg=0 \in \I{p}_i$ならば$f \not \in \I{p}_i$より$g \in \bigcap_{i} \I{p}_i=\Nil(S)=(0)$．
-        よって$f \not \in D$．
-    }．
-    $S_1 \not \subseteq \I{p}_i$なので
-    \footnote
-    {
-        $S$の$S_0$-algebraとしての生成元を$g_1,\dots,g_t \in S_1$とする．
-        これは$S$の生成元だから，$Y=\Spec S$とすると$Y=\bigcup_i D(g_k)$．
-        $h \in \bigcap_k \sqrt{(0:g_k)} \subset \Gamma(Y, \shO_Y)$を任意にとる．
-        $h/1 \in S_{g_k}=\Gamma(D(g_k), \shO_Y)$はすべての$k$で$0$だから，
-        Identity Axiomより$h=0$．
-        よって$\bigcap_i \sqrt{(0:g_k)}=(0)$．
-        一方，$\bigcap_i \sqrt{(0:g_k)}=\sqrt{(0:\sum_k g_k)}=(0)$．
-        なので$\sum_k g_k$はゼロ因子でない．
-        前のfootnoteの通り，$\I{p}_i$の元はゼロ因子であるから，
-        $S_1 \subseteq \I{p}_i$ならば$\sum_k g_k \in \I{p}_i$もゼロ因子でなくてはならない．
-        これは矛盾なので，$S_1 \not \subseteq \I{p}_i$．
-    }，
-    prime avoidance lemmaから$S_1 \not \subseteq D$．
-    なので$f \in S_1-D$がとれる．
-    $a,b \in S$が$0$でないゼロ因子ならば
-    $\frac{a}{f^{\deg a}}, \frac{b}{f^{\deg b}} \in S_{(f)}$も$0$でないゼロ因子だから，
-    $S$ :: not domain $\implies$ $S_{(f)}$ :: not domain．
-
     \subsubsection{$S'$ :: integrally closed．}
 
     \paragraph{$\shJ$の定義．$\shJ_x$の元.}
