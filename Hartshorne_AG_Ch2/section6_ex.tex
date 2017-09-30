@@ -36,10 +36,14 @@
 \newcommand{\basesp}{\operatorname{sp}}
 \newcommand{\Proj}{\operatorname{Proj}}
 \newcommand{\coverU}{\mathfrak{U}}
+\newcommand{\coverV}{\mathfrak{V}}
 \newcommand{\OpenIn}{\text{ :: open in }}
 \newcommand{\ClosedIn}{\text{ :: open in }}
 \newcommand{\divible}{\!\backslash\,}
 \newcommand{\ndivible}{\!\!\not\!\backslash\,}
+\newcommand{\sidetilde}{\,\tilde{}}
+\newcommand{\sidecheck}{\,\check{}}
+\newcommand{\sidebar}{\,\bar{}}
 
 \newcommand{\Div}{\operatorname{Div}}
 \newcommand{\Cl}{\operatorname{Cl}}
@@ -154,7 +158,7 @@
     および$j: Y \mapsto (\pi^*)^{-1}(Y \cap U)$が
     splitすることを示せば十分である．
     後者はすぐに分かる．
-    $\pi^*: \Cl(X) \to \Cl(U)$は全単射だから，$W \in \Cl(X)$について，
+    $\pi^*: \Cl(X) \to \Cl(U)$は全単射だから，$W$ :: prime divisor in $X$について，
     \[ j(\pr_1^*(W))=(\pi^*)^{-1}(\pr_1^*(W) \cap U)=(\pi^*)^{-1}(\pr_1|_U)^{-1} W=(\pi^*)^{-1}\pi^{-1}W=(\pi^*)^{-1}\pi^* W=W. \]
     $(\pr_1^*W) \cap U=(\pr_1^{-1}W) \cap U=(\pr_1|_U)^{-1} W$を用いた．
 
@@ -327,7 +331,7 @@
     $\widetilde{\shO}_P$ :: integral closure of $\shO_P$ ($P \in X$)とする．
     p.136にあるcurve /$k$の定義から，
     $X$ :: integral, separated, finite type/$k$．
-    このこととEx3.8より，$\pi$ :: finite mmorphism．
+    このこととEx3.8より，$\pi$ :: finite morphism．
 
     \subsection{Show there is an exact sequence.}
     次の完全列を示す．
@@ -339,6 +343,7 @@
         \Pic X \ar[r]^{\pi^*}& \Pic \tilde{X} \ar[r]& 0.
     }
     \]
+
     Prop6.15から，$\Pic X, \Pic \tilde{X}$は
     それぞれ$\CaCl X, \CaCl \tilde{X}$と同型である．
     次の写像を考える．
@@ -346,7 +351,8 @@
         \phi:& (\pi_*\shO_{\tilde{X}})^*/\shO_X^*& \to& \shK^*/\shO_X^* \\
         \phi_U& s+\shO_X(U)^*& \mapsto& s/1+\shO_X(U)^*
     \end{defmap}
-    単元を単元に写す写像だから，これは単射．
+    単元を単元に写す写像だから，これは単射
+    \footnote{$\phi(1)=\phi(x)\phi(x^{-1})=1$なので$\phi(x), \phi(x^{-1}) \neq 0$．}．
     したがって次の完全列が得られる．
     \[
     \xymatrix
@@ -357,11 +363,276 @@
             \shK^*/(\pi_*\shO_{\tilde{X}})^* \ar[r]& 0
     }
     \]
+    （$\coker \phi$は加群の同型定理とsheafificationを通して得られる．）
     （これは$0 \to \ker \to M \to N \to \coker \to 0$という形の完全列である．）
-    （TODO: global sectionをとる？　$\shK^*$ :: quasi-coherentかどうか怪しい．）
+    このexact sequenceについて，各点$P \in X$でのstalkをとると，
+    再びexact sequenceになる (Ex1.2)．
+    それらを$\bigoplus_{P \in X}$でまとめてもexact．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]&
+        \bigoplus_{P \in X} \left[(\pi_*\shO_{\tilde{X}})^*/\shO_X^*\right]_P \ar[r]&
+        \bigoplus_{P \in X} \left[ \shK^*/\shO_X^* \right]_P \ar[r]&
+        \bigoplus_{P \in X} \left[ \shK^*/(\pi_*\shO_{\tilde{X}})^* \right]_P \ar[r]& 0
+    }
+    \eqno{(*)}
+    \]
+
+    ($*$)の最初の要素を見よう．
+    $P \in X$について，
+    $\left[(\pi_*\shO_{\tilde{X}})^*/\shO_X^*\right]_P=(\pi_*\shO_{\tilde{X}})_P^*/\shO_P^*$は明らか．
+    （$\varinjlim_{P \in U} \shO_X^*(U)$の元はすべて可逆であることに注意．）
+    $P \in U=\Spec A \subseteq X$とすると，
+    $\tilde{X}$の作り方から$\pi^{-1}\Spec A=\Spec \tilde{A}$である（$\tilde{A}$は$A$の整閉包）．
+    （正確には，このように$U$がとれるということであり，$U$を適当にとって良いということは分からない．）
+    よって$\Gamma(U, (\pi_*\shO_{\tilde{X}})|_U)=\tilde{A}$．
+    $(\pi_*\shO_{\tilde{X}})|_U$ :: sheaf on affine schemeだから
+    \[
+        [(\pi_*\shO_{\tilde{X}})|_U]_P
+        =\varinjlim_{(\pi|_U)^{-1}(\{P\}) \subseteq V} \shO_{\Spec \tilde{A}}(V).
+    \]
+    $\I{p}$を$P \in \Spec A$に対応する素イデアルとする．
+
+    $S=A-\I{p}$とおくと，
+    $(\pi|_U)^{-1}(\{P\})$は$\I{q} \cap A=\I{p}$となる$\I{q} \in \Spec \tilde{A}$の全体である．
+    （この$\I{q}$が存在すること，すなわち$(\pi|_U)^{-1}(\{P\})$が空でないことはAti-Mac Thm5.10により分かる．）
+    （$\pi|_U$は埋め込み準同型$A \hookrightarrow \tilde{A}$に対応する．）
+    $S=A-\I{p}$とおけば，これは$S \cap \I{q}=\emptyset$となる$\I{q} \in \Spec \tilde{A}$の全体に一致する．
+    したがって次のようになる．
+    \[
+        (\pi|_U)^{-1}(\{P\})
+        =\bigcup_{f \in S} \{\I{q} \in \Spec \tilde{A} \mid f \not \in \I{q}\}
+        =\bigcup_{f \in S} V^c(f),~~
+        \varinjlim_{(\pi|_U)^{-1}(\{P\}) \subseteq V} \shO_{\Spec \tilde{A}}(V)
+        =\varinjlim_{f \in S} \tilde{A}_f
+        =S^{-1}\tilde{A}.
+    \]
+    ただし$\varinjlim_{f \in S}$は
+    $\{D(f) \hookrightarrow D(f') \mid f,f' \in S\}$というdirect systemについての
+    direct limitである．
+    一方，$S^{-1}\tilde{A}$は$S^{-1}A=A_{\I{p}}$の整閉包である(Ati-Mac Prop5.12)．
+    よって$[\pi_*\shO_{\tilde{X}}]_P \iso (A_{\I{p}})\sidetilde=\tilde{\shO}_{P}$．
+    以上から$(\pi_*\shO_{\tilde{X}})_P^*/\shO_P^* \iso \tilde{\shO}_P^*/\shO_P^*$．
+
+    $\shK$は$X$ :: integralよりconstant sheafである．
+    よって($*$)の他の部分も同様に計算できる．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]&
+        \bigoplus_{P \in X} \tilde{\shO}_P^*/\shO_P^* \ar[r]&
+        \bigoplus_{P \in X}  K^*/\shO_P^* \ar[r]&
+        \bigoplus_{P \in X}  K^*/\tilde{\shO}_P^* \ar[r]& 0
+    }
+    \eqno{(*')}
+    \]
+
+    次に$\bigoplus_{P \in X}  K^*/\shO_P^* \iso \CaCl X$を示したい．
+    
 
 \section{The Grothendieck Group $K(X)$.} %% Ex6.10 
-TODO
+    \paragraph{Fundamental Property of $K(X)$.}
+    $\gamma \shF=\gamma \shG+\gamma \shH$となっている時，
+    次の完全列が存在する．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \shG \ar[r]& \shF \ar[r]& \shH \ar[r]& 0.
+        }
+    \]
+    したがって$\shH \iso \shF/\shG$．
+    単位元は$0$ :: zero sheafの像$\gamma 0$である．
+    また$\gamma \shF=\gamma \shF'(+\gamma 0)$ならば$\shF \iso \shF'$．
+
+    \subsection{If $X=\affine^1_k$, $K(X) \iso \Z$.}
+    $A=k[x]$とし，
+    $\shF$ :: coherent sheaf on $X=\Spec A$をとる．
+    $\shI=\shO_X=\tilde{A}$と書くことにする．
+
+    まず，$\gamma \shF=n (\gamma \shI)$となる$n \in \Z$が存在することを示す．
+
+    \paragraph{Reduce Into $\shF=\tilde{M}$ Case.}
+    $X$ :: noetherian affine schemeとCor5.5より，
+    finitely generated $A$-moduleのexact sequenceと
+    coherent sheaf on $X$のexact sequenceが一対一に対応する．
+    なので$\shF$がfinitely generated module $M$によって
+    $\tilde{M}$と書ける場合のみ考えれば良い．
+
+    \paragraph{Case: $\shF=\shI^{\oplus n}$.}
+    次の完全列が存在する．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& A \ar[r]& A^{\oplus n} \ar[r]& A^{\oplus n-1} \ar[r]& 0.
+        }
+    \]
+    $A \to A^{\oplus n}$は$x \mapsto (x,0,\dots,0)$である．
+    この完全列の存在から
+    $\gamma \shI^{\oplus n}=\gamma \shI+\gamma \shI^{\oplus n-1}$
+    が得られる．
+    よって帰納的に$\gamma \shI^{\oplus n}=n (\gamma \shI)$．
+
+    \paragraph{Case: $\shF=\tilde{M}$.}
+    $M$ :: finitely generated moduleなので，
+    $n>0, N \subseteq A^{\oplus n}$が存在し，
+    次の完全列が成立する(Ati-Mac Prop2.3)．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& N \ar[r]& A^{\oplus n} \ar[r]& M \ar[r]& 0.
+        }
+    \]
+    よって$\gamma \tilde{M}=\gamma \shI^{\oplus n}-\gamma \tilde{N}$．
+    また，$A$がPIDであることから，
+    $A$上の自由加群の部分加群はまた自由である．
+    したがって前段落と合わせて，
+    $\gamma \tilde{M}=k (\gamma \shI) ~~(k \in \Z)$が示された．
+
+    \paragraph{対応が一対一であること，及び準同型であること．}
+    対応が単射的であることは明らか．
+    全射的であること，
+    すなわち任意の$n \in \Z$に対して$n(\gamma\shI) \in K(X)$であることは，
+    $K(X)$がfree $\Z$-moduleであることから．
+    また，次の完全列から$(m+n) (\gamma \shI)=m(\gamma \shI)+n(\gamma \shI)$も成り立つ．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& A^{\oplus m} \ar[r]& A^{\oplus (m+n)} \ar[r]& A^{\oplus n} \ar[r]& 0.
+        }
+    \]
+    （これによると任意の$M$について$\tilde{M} \iso \tilde{A}^{\oplus n}$，したがって$M$がfreeとなる．）
+
+    \subsection{$\rank: K(X) \to \Z$ is surjective homomorphism.}
+    $X$ :: integral scheme，
+    $\zeta$ :: generic point of $X$，
+    $k=\shO_{X, \zeta}$ :: function field of $X$とする．
+    $x=\sum_{i} n_i (\gamma \shF_i) \in K(X)$に対して，
+    $\rank x=\sum_{i} n_i \dim_k (\shF_i)_{\zeta}$と定める．
+    この$\rank$を考える．
+
+    \paragraph{$\rank$ :: well-defined homomorphism.}
+    $\gamma \shF=\gamma \shF'$の時，$\shF \iso \shF'$．
+    なので$\rank \gamma \shF=\rank \gamma \shF'$．
+    また，$x$の表現はいろいろあるので，
+    これについて整合的であることを確かめなくてはならない．
+    $\gamma \shF, \gamma \shG, \gamma \shH \in K(X)$をとり，
+    $\gamma \shF+\gamma \shG=\gamma \shH$だとする．
+    この時，次の完全列が存在する．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \shF \ar[r]& \shH \ar[r]& \shG \ar[r]& 0.
+        }
+    \]
+    stalkを取る操作はexact functor (Ex1.2)だから，
+    次が得られる．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \shF_{\zeta} \ar[r]& \shH_{\zeta} \ar[r]& \shG_{\zeta} \ar[r]& 0.
+        }
+    \]
+    これは$\shO_{X, \zeta}=k$-moduleのexact sequence．
+    $\dim_k$はadditiveだから
+    $\rank \gamma \shH=\rank \gamma \shF+\rank \gamma \shG$となる．
+    $x, y \in K(X)$について$\rank (x+y)=\rank x+\rank y$となることは
+    定義と以上のことから分かる．
+
+    \paragraph{$\rank$ :: surjective.}
+    $\rank n (\gamma \shO_X)=n \rank (\gamma \shO_X)=n \dim_k k=n$より，全射．
+
+    \subsection{For $Y$ :: closed subsecheme of $X$, $K(Y) \to K(X) \to K(X-Y) \to 0$ :: exact.}
+    $X$ :: noetherian scheme, $Y$ :: closed subsecheme of $X$とする．
+    $i: Y \to X$をclosed immersion，$j: X-Y \to X$をopen immersionとする．
+    次の写像の列を考える．
+    \[
+        \xymatrix
+        {
+            K(Y) \ar[r]^-{\epsilon}& K(X) \ar[r]^-{\rho}& K(X-Y) \ar[r]& 0.
+       }
+    \]
+    ここで$\epsilon$はextension of coherent sheaf on $Y$, 
+    $\gamma \shF \mapsto \gamma (i_* \shF)$ (Ex1.19)，
+    $\rho$はrestriction, $\gamma \shG \mapsto \gamma (j^{-1}\shG)$である．
+
+    \paragraph{Easy Parts.}
+    Ex5.15から$\rho$は全射．
+    また$\im \rho \circ \epsilon$（$Y$上のsheafを$X$上に$0$で拡張して$X-Y$に制限したもの）
+    が$0$であること，すなわち$\im \epsilon \subseteq \ker \rho$は明らか．
+    したがって，ここで示すべきは$\im \epsilon \supseteq \ker \rho$である．
+
+    \paragraph{Map a Course.}
+    $\shF \in \ker \rho$をとる．
+    言い換えれば，$\shF$を$X$上のcoherent sheafであって
+    $\Supp \shF \subseteq Y$であるものとする．
+    Ex5.6cより，$\Supp \shF$ :: closed in $X$．
+    この$\shF$から，次のようなfinite filtrationの存在を示す:
+    \[ \shF=\shF_0 \supseteq \cdots \supseteq \shF_n=0 \]
+    ここで$\shF_k/\shF_{k+1}$は$\im \epsilon$の元．
+    すると次の完全列が存在する．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \shF_{k+1} \ar@{^{(}->}[r]& \shF_k \ar[r]& \shF_{k}/\shF_{k+1} \ar[r]& 0.
+        }
+    \]
+    したがって$\gamma \shF_{k}=\gamma \shF_{k+1}+\gamma (\shF_{k}/\shF_{k+1})$．
+    帰納的に$\gamma \shF=\gamma \shF_0=\sum_{k=1}^{n} \gamma (\shF_{k}/\shF_{k+1})$が得られる．
+    $\shF_k/\shF_{k+1}$は$\im \epsilon$の元としていたから，
+    $\gamma \shF \in \im \epsilon$．
+
+    \begin{Claim}
+        次のfinite filtrationが存在する．
+        \[ \shF=\shF_0 \supseteq \cdots \supseteq \shF_n=0 \]
+        ここで$\shF_k/\shF_{k+1}$は$\im \epsilon$の元．
+    \end{Claim}
+    \begin{proof}
+        \paragraph{surjective map $\phi_k: \shF_k \to i_* i^* \shF_k$.}
+        surjective map $\phi_0: \shF \to i_* i^* \shF$ が存在することを示す．
+        $U=\Spec A \subseteq X$をとる．
+        $Y \cap U$は$U$のclosed subsechemeなので，
+        Cor5.10より$\I{a} \subseteq A$ :: idealによって
+        $V:=V \iso \Spec A/\I{a}$となる．
+        したがって$i|_{V}: \Spec A/\I{a} \to \Spec A$．
+        $\shF|_{V}=\tilde{M}$ :: finitely generated $A/\I{a}$-moduleとする．
+        Prop5.2より，次のように計算できる．
+        \[ (i_* i^* \shF)|_{V} \iso ({}_A(M \otimes_A A/\I{a}))\sidetilde \iso (M/\I{a}M) \sidetilde. \]
+        よって$M \to M/\I{a}M$から誘導されるsurjective map
+        $\shF|_{V} \to (i_* i^* \shF)|_{V}$が存在する．
+        これがgluingできることは明らか．
+        こうして所望の$\phi_0$が得られる．
+        （adjointのcounitから作りたかったが，これは素性がよくわからない．）
+
+        \paragraph{$\shF_{k+1}:=\ker \phi_k$.}
+        したがって次の完全列がある．
+        \[
+            \xymatrix
+            {
+                0 \ar[r]& \ker \phi_0 \ar[r]& \shF \ar@{->>}[r]& i_*i^* \shF \ar[r]& 0.
+            }
+        \]
+        Ex1.6より$\epsilon(\gamma(i^* \shF))=\gamma(i_* i^* \shF) \iso \gamma(\shF/\ker \phi_0)$となり，
+        $\shF_1=\ker \phi_0$とすれば良いことが分かる．
+        以下，帰納的に$\phi_k: \shF_k \to i_* i^* \shF_k, \shF_{k+1}=\ker \phi_k$とすれば良い．
+        上での構成法から，$(\shF_{k})|_{V} \iso (\I{a}^{k} M)\sidetilde$がわかる．
+
+        \paragraph{This filtration is finite.}
+        最後に，この列が有限であることを見る．
+        $(\shF_{k})|_{V} \iso (\I{a}^{k} M)\sidetilde$なので，
+        十分大きい$k>0$について$\I{a}^{k} M=0$であること，
+        すなわち$\I{a}^k \subseteq \Ann(M)$となることを示せば良い．
+        $V(\Ann(M))=\Supp \shF|_{V} \subseteq V \iso V(\I{a})$ (Ex5.6b)より，
+        $\I{a} \subseteq \sqrt{\I{a}} \subseteq \sqrt{\Ann(M)}$．
+        $A$ :: noetherian ringより，$\I{a}$の生成元は有限個である．
+        したがって十分大きな$k>0$をとると，
+        $\I{a}$の任意の生成元（集合の一元）$g$に対して$g^k \in \Ann(M)$であるように出来る．
+        この$k$について$\I{a}^k \subseteq \Ann(M)$．
+        $Y$は$\coverV$ :: finite affine open coverを持つから，
+        $n=\max_{V \in \coverV} \min_{(\shF_k)|_V=0} k$とすれば，
+        任意の$V \in \coverV$について$(\shF_n)|_V=0$，
+        つまり（Identity Axiomから）$\shF_n=0$となる．
+    \end{proof}
 
 \section{The Grothendieck Group of a Nonsingular Curve.} %% Ex6.11 
     $k$ :: algebraically closed field, $X$ :: nonsingular curve / $k$
