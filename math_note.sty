@@ -78,6 +78,13 @@
 \newcommand{\mor}           {\text{ or }}
 \newcommand{\mand}          {\text{ and }}
 \newcommand{\mwhere}        {~~\text{where}~~}
+\newcommand{\mnot}          {/\hspace{-1.2ex}} %% different from \not
+
+%% accent
+\newcommand{\ccheck}[1]{#1\sidecheck\,\sidecheck\,}
+\newcommand{\sidebar}{\,\bar{}} %% use like (long long term)\sidebar instead of \overline{(long long term)}
+\newcommand{\sidecheck}{\,\check{}}
+\newcommand{\sidetilde}{\,\tilde{}}
 
 %% fundamental spaces
 \newcommand {\C}            {\mathbb{C}}
@@ -102,6 +109,10 @@
 \newcommand{\opint}         {\operatorname{int}} %% !!CAUTION!! THIS IS NOT \int ! \int is already defined.
 \newcommand{\pr}            {\operatorname{pr}} %% projection map(from a product space)
 \newcommand{\codim}         {\operatorname{codim}}
+\newcommand{\ClosedIn}      {\text{ :: open in }}
+\newcommand{\OpenIn}        {\text{ :: open in }}
+\newcommand{\emb}           {\operatorname{emb}} %% embedding map
+\newcommand{\incl}          {\operatorname{incl}} %% inclusion map
 
 %% abelian category
 %\newcommand {\ker}          {\operatorname{ker}}
@@ -120,6 +131,8 @@
 \newcommand{\height}        {\operatorname{height}}
 \newcommand{\length}        {\operatorname{length}}
 \newcommand{\Quot}          {\operatorname{Quot}} %% quotient field
+\newcommand{\divible}       {\!\backslash\,} %% not just m|n
+\newcommand{\ndivible}      {\!\!\not\!\backslash\,}
 
 %% field theory
 \newcommand{\fchar}         {\operatorname{char}} %% characteristic of a field
@@ -139,6 +152,9 @@
 \newcommand{\reg}           [2]{\langle #1,#2 \rangle} %% a regular function f on U : <U,f>
 \newcommand{\sect}          [2]{\langle #1,#2 \rangle} %% a section on U : <U,s>
 \newcommand{\germ}          [2]{\langle #1,#2 \rangle} %% a germ f on U : <U,f>
+\newcommand{\Proj}          {\operatorname{Proj}} %% \Spec is defined in 'commutative algebra' section
+\newcommand{\res}           {\operatorname{res}} %% restriction map
+\newcommand{\basesp}        {\operatorname{sp}} %% base topologicall space
 
 %% equivalence relation of varieties {{{
 %% the more rigid, the less tilde and more bar.
@@ -167,6 +183,38 @@
 \newcommand{\homeomap}      {\xrightarrow{\homeo}}
 
 %% }}}
+
+%% symbols of sheaves {{{
+\newcommand{\shA}{\mathcal{A}}
+\newcommand{\shB}{\mathcal{B}}
+\newcommand{\shC}{\mathcal{C}}
+\newcommand{\shD}{\mathcal{D}}
+\newcommand{\shE}{\mathcal{E}}
+\newcommand{\shF}{\mathcal{F}}
+\newcommand{\shG}{\mathcal{G}}
+\newcommand{\shH}{\mathcal{H}}
+\newcommand{\shI}{\mathcal{I}}
+\newcommand{\shJ}{\mathcal{J}}
+\newcommand{\shK}{\mathcal{K}}
+\newcommand{\shL}{\mathcal{L}}
+\newcommand{\shM}{\mathcal{M}}
+\newcommand{\shN}{\mathcal{N}}
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\shP}{\mathcal{P}}
+\newcommand{\shQ}{\mathcal{Q}}
+\newcommand{\shR}{\mathcal{R}}
+\newcommand{\shS}{\mathcal{S}}
+\newcommand{\shT}{\mathcal{T}}
+\newcommand{\shU}{\mathcal{U}}
+\newcommand{\shV}{\mathcal{V}}
+\newcommand{\shW}{\mathcal{W}}
+\newcommand{\shX}{\mathcal{X}}
+\newcommand{\shY}{\mathcal{Y}}
+\newcommand{\shZ}{\mathcal{Z}}
+%% }}}
+
+\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
+\newcommand{\shHom}{\mathscr{H\!o\!m}} %% sheaf Hom
 
 %% liner algebra
 \newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}

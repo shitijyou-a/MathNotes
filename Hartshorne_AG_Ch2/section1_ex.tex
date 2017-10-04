@@ -4,31 +4,15 @@
 \usepackage{nicefrac}
 \renewcommand{\thesection}{Ex1.\arabic{section}}
 
-\newcommand{\shA}{\mathcal{A}}
-\newcommand{\shB}{\mathcal{B}}
-\newcommand{\shF}{\mathcal{F}}
-\newcommand{\shG}{\mathcal{G}}
-\newcommand{\shH}{\mathcal{H}}
-\newcommand{\shI}{\mathcal{I}}
-\newcommand{\shJ}{\mathcal{J}}
-\newcommand{\shL}{\mathcal{L}}
-
 \newcommand{\Sh}{\mathbf{Sh}}
 \newcommand{\PSh}{\mathbf{PSh}}
-
-\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
-\newcommand{\shHom}{\mathscr{H\!o\!m}}
 
 \newcommand{\ftorSh}{\mathit{Sh}}
 \newcommand{\ftorFgt}{\mathit{Fgt}}
 \newcommand{\ftorSec}{\mathit{Sec}}
 \newcommand{\ftorEt}{\text{\textit{\'Et}}}
 
-\newcommand{\res}{\operatorname{res}}
-\newcommand{\emb}{\operatorname{emb}}
 \newcommand{\Spe}{\text{Sp\'e}}
-
-\newcommand{\OpenIn}{\text{ :: open in }}
 
 \begin{document}
     このnoteではHartshorne ``Algebraic Geometry'' p.61にある
@@ -833,48 +817,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $0 \to \shF' \to \shF \to \shF'' \to 0$がexactかつ$\shF'$がflasqueであったとする．
     この時，任意のopen set $U$について$0 \to \shF'(U) \to \shF(U) \to \shF''(U) \to 0$はexactであることを示す．
 
-    写像に$0 \to \shF' \xrightarrow{f} \shF \xrightarrow{g} \shF'' \to 0$と名前をつけ，
-    $U$ :: open in $X$と$s'' \in \shF''(U)$をとる．
-    Ex1.8より，$0 \to \shF'(U) \xrightarrow{f_U} \shF(U) \xrightarrow{g_U} \shF''(U)$はexact．
-    なのであとは$g_U$がsurjectiveであることを示せば良い．
-    元のexact sequenceから$g$ :: surjが言える．
-    Ex1.3より，以下が成り立つ．
-    \[
-        (*)~~~
-        \bigcup {}^\exists U_i=U,~~
-        \Exists{t_i \in \shF(U_i)}
-        \Forall{i} g(t_i)=s''|_{U_i}.
-    \]
-    任意に$i,j$をとり，以下の可換図式でdiagram chaseをする．
-    ただし$U=U_i \cap U_j$とした．
-    % {{{ diagram
-    \[
-    \xymatrix@C=-5pt
-    {
-        {} & ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U)~ \ar@{->>}[rd] \ar@{->>}[ldd] \ar@{>->}[rrr]^-{f} & {} & {} & \shF(U) \ar[rd] \ar[ldd] \ar[rrr]^-{g} & {} & {} & \shF''(U) \ar[rd] \ar[ldd] & {} \\
-        {} & {} & ~~~0~~~ \ar[rrr]|(0.47)\hole & {} & {} & \shF'(U_j)~ \ar@{->>}[ldd]|(0.50)\hole \ar@{>->}[rrr]|(0.51)\hole^(0.3){f} & {} & {} & \shF(U_j) \ar[ldd]|(0.50)\hole \ar[rrr]|(0.48)\hole^(0.3){g} & {} & {} & \shF''(U_j) \ar[ldd]& {} \\
-        ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U_i)~ \ar@{->>}[rd]\ar@{>->}[rrr]^(0.3){f} & {} & {} & \shF(U_i) \ar[rd]\ar[rrr]^(0.3){g} & {} & {} & \shF''(U_i) \ar[rd]& {} \\
-        {} & ~~~0~~~ \ar[rrr] & {} & {} & \shF'(U_{ij})~ \ar@{>->}[rrr]^-{f} & {} & {} & \shF(U_{ij}) \ar[rrr]^-{g} & {} & {} & \shF''(U_{ij})& {} \\
-    }
-    \]
-    % }}}
-    $s'' \in \shF''(U)$と，
-    $(*)$から存在が示される$t_i \in \shF(U_i), t_j \in \shF(U_j)$から
-    diagram chasingを始める．
-    \begin{enumerate}[(1)]
-    \setlength{\itemindent}{2em}
-        \item naturalityから$g_{U_{ij}}(t_i|_{U_{ij}})=s''|_{U_{ij}}=g(t_j|_{U_{ij}})$．
-        \item よって列の完全性から$t_i-t_j \in \ker g_{U_{ij}}=\im f_{U_{ij}}$．
-        \item したがって$f_{U_{ij}}(u'_{ij})=t_i-t_j$なる$u'_{ij} \in \shF'(U_{ij})$が存在する．
-        \item $\res_U^{U_{ij}}$ :: surjから$s'_{ij}|_{U_{ij}}=u'_{ij}$なる$s'_{ij} \in \shF'(U)$が存在する．
-        \item $s_{ij}=f_U(s'_{ij})|_{U_i}+t_j \in \shF(U_i)$とおく．（足すのは$t_j$であることに注意．）
-%        \item 構成より$s_{ij_1}|_{U_{ij_1} \cap U_{ij_2}}=s_{ij_2}|_{U_{ij_1} \cap U_{ij_2}}$(TODO: 示す．)．
-%        \item Gluability Axiomより，$s_i|_{U_{ij}}=s_{ij}$なる$s_i \in \shF(U_i)$の存在が分かる．
-%        \item $i$を動かして再びGluability Axiomを用いると，$s|_{U_i}=s_i$となる$s \in \shF(U)$が存在する．
-%        \item 構成より，$g_{U}(s)|_{U_{ij}}=g_{U_{ij}}(s_{ij})=g_{U_{ij}}(t_i|_{U_{ij}})=s''|_{U_{ij}}$．
-%        \item Identity Axiomから$g_U(s)=s''$．
-    \end{enumerate}
-    以上から，$g_U(s)=s''$なる$s \in \shF(U)$の存在が示せた．
+    （ここに証明を書いていたが，これは誤りであった．）
 
     \subsubsection{Another Proof}
     次のPDFのLemma2.12(p.10)がこの演習問題と同じ命題である: 
@@ -1000,13 +943,43 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \[ f^p: \Sh(Y) \to \PSh(X), f^{-1}: \Sh(Y) \to \Sh(X), f_*: \PSh(X) \to \PSh(Y) \]
     であり，$f_*$はsheafをsheafに写すfunctorである．
 
-    $ \eta, \epsilon$を定義して，この準備の後，
+    $\eta, \epsilon$を定義して，この準備の後，
     sheaf $\shF, \shG$について$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
     その後，$\ftorSh \dashv \ftorFgt$を用いて
     $\Hom(f^{-1}\shG, \shF) \cong \Hom(\shF, f_*\shF)$を示す．
 
     \paragraph{Construction of $\eta$.}
+    $\eta_{\shF}: f^pf_* \shF \to \shF$を以下のように定義する．
+    $U$ :: open in $X$に対し，
+    $(f^pf_* \shF)(U)$は次のdirect systemのdirect limitである．
+    \[
+        \left\{
+            \res_{f^{-1}(V')}^{f^{-1}(W')}: \shF(f^{-1}(V')) \to \shF(f^{-1}(W'))
+            ~\middle|~
+            f(U) \subseteq W' \subseteq V' \OpenIn Y
+        \right\}.
+    \]
+    $U \subseteq f^{-1}(f(U))$であるから，
+    このdirect systemの各元$\shF(f^{-1}(V))$から$\shF(U)$へのrestriction mapが存在する．
+    このdirect systemから$\shF(U)$への射から，
+    direct systemの普遍性に依って得られる射が$(\eta_{\shF})_U$である．
+
     \paragraph{Construction of $\epsilon$.}
+    $\epsilon_{\shG}: \shG \to f_*f^p\shG$を以下のように定義する．
+    $U'$ :: open in $Y$に対し，
+    $(f_*f^p \shG)(U')$は次のdirect systemのdirect limitである．
+    \[
+        \left\{
+            \res_{V'}^{W'}: \shG(V') \to \shG(W')
+            ~\middle|~
+            f(f^{-1}(U')) \subseteq W' \subseteq V' \OpenIn Y
+        \right\}.
+    \]
+    $f(f^{-1}(U')) \subseteq U'$であるから，
+    このdirect systemに$\shG(U')$が属している．
+    よってdirect limitの定義から$\shG(U')$から$f_*f^p\shG$への射が存在し，
+    これが$(\epsilon_{\shG})_{U'}$である．
+
     \paragraph{Construction of $\Phi_{\shF, \shG}, \Psi_{\shF, \shG}$.}
     $\Phi_{\shF, \shG}: \Hom(\shG, f_* \shF) \leftrightarrow \Hom(f^p\shG, \shF): \Psi_{\shF, \shG}$
     を構築する．
