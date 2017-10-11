@@ -1,0 +1,23 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, braket}
+
+\begin{document}
+定義をまとめておく．
+
+    $A$ :: ring, $S_A^r=A[x_0,\dots,x_r]$，$X$ :: closed subscheme of $\proj^r_A=\Proj S_A-r$とおく．
+    $i: X \to \proj^r_A$を埋め込みとし，$\shI_X=\ker i^{\#}$とおく．
+    さらに$n \in \Z$に対して以下のように定義する(p.50, p.117, p.118)．
+    \[
+        S_A^r(n)=\bigoplus_{d \in \Z} (S_A^r)_{d+n},~~~
+        \shO_X(n)=(S_A^r(n))\sidetilde,~~~
+        \shI_X(n)=\shI_X \otimes_{\shO_X} \shO_X(n),~~~
+        \Gamma_*(\shI_X)=\bigoplus_{d \in \Z} \Gamma(X,\shI_X(d))
+    \]
+    Ex3.12, Cor5.12より，
+    $I=\Gamma_*(\shI_X), S(X)=S_A^r/I$とおくと$X \cong \Proj S(X)$となる．
+    また，$X$がnormalであるとは，
+    任意の点で$X$のlocal ringがintegrally closedであることで，
+    $X$がprojectively normalであるとは，
+    $S(X)$がintegrally closedであることである．
+
+\end{document}

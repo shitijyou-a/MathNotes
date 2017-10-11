@@ -1,21 +1,15 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[all]{xy}
-\usepackage{../math_note, exercise}
+\usepackage{../math_note, exercise, enumitem}
 \renewcommand{\thesection}{Ex2.\arabic{section}}
 
-\newcommand{\shO}{\mathcal{O}}
 \newcommand{\Sch}{\mathbf{Sch}}
 \newcommand{\Var}{\mathbf{Var}}
 \newcommand{\Rings}{\mathbf{Rings}}
 \newcommand{\red}[1]{#1_{\text{red}}}
-\newcommand{\basesp}{\operatorname{sp}}
-\newcommand{\res}{\operatorname{res}}
 \newcommand{\Rat}{\operatorname{Rat}} %% rational points
-\newcommand{\Proj}{\operatorname{Proj}}
 \newcommand{\CoverU}{\mathfrak{U}}
-\newcommand{\OpenIn}{\text{ :: open in }}
-\newcommand{\ClosedIn}{\text{ :: open in }}
 
 \begin{document}
 \section{$(D(f), \shO_X|_{D(f)}) \homeo (\Spec A_f, \shO_{\Spec A_f})$} %% Ex2.1 
@@ -428,9 +422,40 @@
     \end{figure}
     この円錐は上へ限りなく続く．
 
-\section{Gluing Lemma.} %% Ex2.12 
-    topological spaceもsheafもinjective limitとしてglueingが得られる．
+\section{Gluing Lemma.} %% Ex2.12
+    データは次の通り．
+    \begin{itemize}
+        \item $\{U_i\}_{i \in I}$ :: family of schemes,
+        \item $\{U_{ij}\}_{i,j \in I}$ :: open subschemes ($U_{ij} \subset X_i$), and
+        \item $\{\phi_{ij}:U_{ij} \to U_{ji}\}_{i,j \in I}$ :: isomorphisms of schemes.
+    \end{itemize}
+    これらは次を満たす:
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Forall{i \in I} U_{ii}=U_i$.
+        \item $\Forall{i,j,k \in I} \phi_{kj} \circ \phi_{ji}=\phi_{ki}$ ~on~ $U_{ij} \cap U_{ik}$.
+    \end{enumerate}
+    $\#I=3$の場合の図は次の様になる．
+    \begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=8cm]{./images/gluing.eps}
+    \end{center}
+    \end{figure}
+
+    1つめの条件から$\phi_{ii}=\id{U_{ii}}$が従う．
+    2つめの条件はcocycle conditionと呼ばれる．
+    この条件で$i=k$とすれば$\phi_{ij}=\phi_{ji}^{-1}$が分かる．
+    $\phi_{ij}(U_{ij} \cap U_{ik})=U_{ji} \cap U_{jk}$も同様．
+    これを図にすれば次のようになる．
+    \begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=8cm]{./images/cocycle_cond.eps}
+    \end{center}
+    \end{figure}
+
+    これらのデータから得られるcolimitが$\{U_i\}_{i \in I}$のgluingである．
     特にtopologyはfinal topologyである．
+    命題（colimtの存在）の証明は
+    U.Gortz, T.Wedhorn ``Algebraic Geometry I"のpp.70-71を参照した．
 
 \section{Quasi-Compact/Noetherian Space.} %% Ex2.13 
     \begin{Lemma}[I]
@@ -441,7 +466,7 @@
         \[ \sqrt{(f)}=\sqrt{\sum_{i \in I} \I{a}_i} \]
         というイデアル達$\{\I{a}_i\}_{i \in I}$が存在する．
         両辺ともに特に$f$を含むから，ある自然数$n>0$が存在して
-        \[ f^n \in \sqrt{\sum_{i \in I} \I{a}_i} \]
+        \[ f^n \in \sum_{i \in I} \I{a}_i \]
         となる．
         イデアルの和の定義から，（必要なら適当に番号を付け替えることで）
         \[ f^n=\sum_{i=1}^{r} a_i \text{ with } a_i \in \I{a}_i \]
@@ -668,7 +693,7 @@
 
 \section{$\Spec A$ :: disconnected $\iff$ ....} %% Ex2.19 
     可換環$A$について以下が同値であることを示す．
-    \begin{enumerate}[(1)]
+    \begin{enumerate}[label=(\arabic*)]
     \item $\Spec A$ :: disconnected.
     \item $\Exists{e_1, e_2 \in A \setminus \{0\}} e_1e_2=0, e_1^2=e_1, e_2^2=e_2, e_1+e_2=1$.
     \item $\Exists{A_1, A_2 \neq 0} A \cong A_1 \times A_2$.
