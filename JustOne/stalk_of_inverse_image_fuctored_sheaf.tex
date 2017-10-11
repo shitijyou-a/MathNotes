@@ -1,6 +1,8 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage{../math_note}
 
+\newcommand{\ftorSh}{\mathit{Sh}}
+
 \title{$(f^{-1}\shF)_x=\shF_{f(x)}$の証明}
 \author{七条 彰紀}
 \begin{document}
@@ -25,7 +27,15 @@ $X$上のsheaf $\shG$に対して$U \mapsto \shG(f^{-1}(U))$はsheaf $f_*\shG$�
 
 直接の証明は次の通り．
 \begin{proof}
-    sheafificationとtaking stalk at $x$が可換であることは既知とする．
+    sheafificationとtaking stalk at $x$が可換であることは既知とする
+    \footnote
+    {
+        これはsheafification $\ftorSh$がleft adjoint functorであり，
+        taking stalk at $x$ $\varinjlim_{x \in U}$がcolimitであることによる．
+        $\ftorSh$がleft adjoint functorであることは，
+        次のpdfファイルに証明を書いた:
+        \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section1_ex.pdf}
+    }
     したがって我々は次を示せば良い．
     \[ \varinjlim_{V \in \mathcal{D}} \shF(V)=\varinjlim_{V \in \mathcal{S}} \shF(V) \]
     ただし$\mathcal{D}, \mathcal{S}$は以下のようなdirect systemである．
@@ -73,9 +83,16 @@ $X$上のsheaf $\shG$に対して$U \mapsto \shG(f^{-1}(U))$はsheaf $f_*\shG$�
 \begin{proof}
     $i: \{x\} \hookrightarrow X$を包含写像とする．
     すると$i^{-1}f^{-1} \shF=(f \circ i)^{-1} \shF$．
-    $f \circ i$は$\{x\} \to \{f(x)\} \subseteq X$なる写像であるから，
-    これはpresheaf $\varinjlim_{\{f(x)\} \subseteq V} \shF(V)$の
-    sheafificationである．
-    明らかにこれは$\shF_{f(x)}$のconstant sheafに等しい．
+    $f \circ i$は$\{x\} \to \{f(x)\} \subseteq Y$なる写像であるから，
+    これはpresheaf $\{x\} \supseteq U  \mapsto \varinjlim_{f \circ i(U) \subseteq V} \shF(V)$，
+    すなわち次のpresheafのassociated sheafである．
+    これは明らかにsheafなので，実際にはsheafificationは不要である．
+    \[
+        ((f \circ i)^{-1}\shF)(U)=
+        \begin{cases}{}
+            0 & (U=\emptyset) \\
+            \shF_{f(x)} & (U=\{x\})
+        \end{cases}
+    \]
 \end{proof}
 \end{document}

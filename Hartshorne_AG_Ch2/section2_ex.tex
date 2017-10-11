@@ -427,8 +427,9 @@
     \begin{itemize}
         \item $\{U_i\}_{i \in I}$ :: family of schemes,
         \item $\{U_{ij}\}_{i,j \in I}$ :: open subschemes ($U_{ij} \subset X_i$), and
-        \item $\{\phi_{ij}:U_{ij} \to U_{ji}\}_{i,j \in I}$ :: isomorphisms of schemes.
+        \item $\{\phi_{ji}:U_{ij} \to U_{ji}\}_{i,j \in I}$ :: isomorphisms of schemes.
     \end{itemize}
+    $\phi_{ji}$の添字の順番がHartshorneの逆なので注意．
     これらは次を満たす:
     \begin{enumerate}[label=(\arabic*)]
         \item $\Forall{i \in I} U_{ii}=U_i$.
@@ -453,9 +454,57 @@
     \end{figure}
 
     これらのデータから得られるcolimitが$\{U_i\}_{i \in I}$のgluingである．
-    特にtopologyはfinal topologyである．
-    命題（colimtの存在）の証明は
-    U.Gortz, T.Wedhorn ``Algebraic Geometry I"のpp.70-71を参照した．
+    すなわち，
+    これらのデータから，次の性質を満たす
+    $X$ :: schemeと$\{\psi_i: U_i \to X\}_{i \in I}$が得られる．
+    \begin{itemize}
+        \item $\im \psi_i$ :: open subscheme of $X$ (for all $i \in I$).
+        \item $\psi_i: U_i \to \im \psi_i$ :: isomorphism (for all $i \in I$).
+        \item $\psi_j \circ \phi_{ji}=\psi_i$ on $U_{ij}$ (for all $i,j \in I$).
+        \item $X=\bigcup_{i \in I} \psi_i(U_i)$.
+        \item $\psi_i(U_{ij})=\psi_i(U_i) \cap \psi_j(U_j)=\psi_j(U_{ji})$ (for all $i,j \in I$)
+    \end{itemize}
+    また，$X, \{\psi_i\}_i$は与えられたデータから同型を除いて一意に定まる．
+
+    命題（colimitの存在）の証明の詳細は
+    U.Gortz, T.Wedhorn ``Algebraic Geometry I"のpp.70-71を参照するのが良い．
+    ここでは概要
+%    と，``Algebraic Geometry I"で述べられていない詳細
+    を述べる．
+
+    まず，$\basesp X$は$\{ U_i \}_i$と$\{ \phi_{ij} \}_{i,j}$が成す
+    index categoryのcolimitとして与えられる．
+    すなわち，次のように与えられる．
+    \[ \basesp X=\bigsqcup_{i \in I} U_i \Big/ \sim. \]
+    ただし，$\sim$は次のような二項関係である．
+    \[
+        \Forall{i,j \in I}
+        \Forall{x_i \in U_i, x_j \in U_j}
+        \lbra{~ x_i \sim x_j \iff x_j=\phi_{ji}(x_i) ~}.
+    \]
+    この二項関係が同値関係であること，
+    及びwell-definedであることは，cocycle conditionから得られる．
+    これは商位相だから，$V \subseteq X$が開集合であることは
+    すべての$i$について$\psi_i^{-1}(V)$が$U_i$の開集合であることと同値．
+    特に，$\im \psi_i=\psi_i(U_i)$は
+    $\psi_i^{-1}\psi_i(U_i)=U_i$ゆえに開集合である．
+
+    次に，$\shO_X$は次の様に与えられる．
+    こちらはlimitである．
+    （schemeはtopologyとsheafで射が反転することによる．）
+    $V$を$X$の開集合とする．
+    \[
+        \shO_X(V)=
+        \left\{
+            \Sigma \in \prod_{i \in I} \shO_{U_i}(\psi_i^{-1}V)
+            ~\middle|~
+            \Forall{i,j \in I}
+            \phi^{\#}_{ij} \left( \Sigma_j|_{\psi_j^{-1}V \cap U_{ji}} \right)=\phi^{\#}_{ii} \left( \Sigma_i|_{\psi_i^{-1}V \cap U_{ij}} \right)
+        \right\}.
+    \]
+    $\Sigma$の$i$成分を$\Sigma_i (\in \shO_{U_i}(\psi_i^{-1}V))$と書いている．
+    $\phi_{ii}=\id{U_{ii}}=\id{U_i}$に注意．
+    これはinverse limitなので，Ex1.12より，これもsheaf．
 
 \section{Quasi-Compact/Noetherian Space.} %% Ex2.13 
     \begin{Lemma}[I]

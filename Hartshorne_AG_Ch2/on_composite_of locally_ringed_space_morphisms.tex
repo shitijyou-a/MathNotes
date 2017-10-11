@@ -1,0 +1,78 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[all]{xy}
+
+\newcommand{\DL}{\mathfrak{D}}
+
+\title{Locally Ringed Space Morphismの合成について}
+\author{七条 彰紀}
+
+\begin{document}
+\maketitle
+写像の合成は一々$g \circ f$の様に書かず，$gf$と書く．
+
+\begin{Def}
+    $X,Y$をlocally ringed spaceとする．
+    $X,Y$の間のmap $f: X \to Y$がlocally ringed space morphismであるとは，
+    任意の点$x \in X$について，
+    $f^{\#}: \shO_Y \to f_* \shO_X$の$f(x)$におけるstalk
+    $(f^{\#})_{f(x)}: \shO_{Y,f(x)} \to (f_* \shO_X)_{f(x)}$と，
+    direct systemの包含関係から誘導される写像
+    $\iota_{f,x}: (f_* \shO_X)_{f(x)} \to \shO_{X,x}$の合成
+    \[ f^{\#}_x: \shO_{Y,f(x)} \to (f_* \shO_X)_{f(x)} \to \shO_{X,x} \]が，
+    local ring homomorphismであるということである．
+\end{Def}
+
+$X,Y,X$ :: locally ringed space,
+$f:X \to Y, g: Y \to Z$ :: locally ringed space morphismとする．
+$gf: X \to Z$はlocally ringed space morphismになることは
+どのように示すべきだろうか．
+
+\begin{proof}
+    $x \in X$を任意にとり，固定する．
+    \[
+    \xymatrix@=40pt
+    {
+        {} &
+        {} &
+        (g_*f_*\shO_X)_{gf(x)} \ar[d]\\
+        {} &
+        (g_*\shO_Y)_{gf(x)} \ar[d] \ar[ru]^-{(g_*f^{\#})_{gf(x)}}&
+        (f_*\shO_X)_{f(x)} \ar[d] \\
+        \shO_{Z,gf(x)} \ar[ru]^-{(g^{\#})_{gf(x)}}\ar[r]_-{g^{\#}_{f(x)}}&
+        \shO_{Y,f(x)} \ar[ru]^-{(f^{\#})_{f(x)}} \ar[r]_-{f^{\#}_x}&
+        \shO_{X,x}
+    }
+    \]
+
+    斜めに伸びている$(g^{\#})_{gf(x)}$などの射はstalkを取ることで得られる射であり，
+    $g^{\#}_{f(x)}, f^{\#}_{x}$は
+    それにdirect systemの包含関係から誘導される射
+    $(g_*\shO_Y)_{gf(x)} \to \shO_{Y,f(x)}, (f_*\shO_X)_{f(x)} \to \shO_{X,x}$を
+    合成したものである．（p.72終わりからp.73始めに記述がある．）
+    したがって，この図式において，
+    下の二つの三角形が可換であることは$g^{\#}_{f(x)}, f^{\#}_{x}$の定義である．
+    同様に$(gf)^{\#}_x$は$\shO_{Z,gf(x)} \to (g_*f_*\shO_X)_{gf(x)} \to \shO_{X,x}$である．
+    （三つの相似な三角形が見えると思う．）
+
+    $g^{\#}_{f(x)}, f^{\#}_{x}$はl.r.homo (local ring homomorphism)であり，
+    その合成もまたl.r.homoである．
+    示したいことは$(gf)^{\#}_x$がl.r.homoであることだから，
+    図式中心にあるの平行四辺形が可換であることを示せば良い．
+
+    問題の平行四辺形の頂点は，それぞれ次の4つのdirect systemのdirect limitである．
+    \[
+    \xymatrix@=40pt
+    {
+        {} &
+        \{ (f_*\shO_X)(V) \mid fg(x) \in W \subseteq Z, V=g^{-1}W \} \ar@{^{(}->}[d]\\
+        \{ \shO_Y(V) \mid fg(x) \in W \subseteq Z, V=g^{-1}W \} \ar@{^{(}->}[d] \ar[ru]^-{f^{\#}_V}&
+        \{ (f_*\shO_X)(V) \mid f(x) \in V \subseteq Y \} \\
+        \{ \shO_Y(V) \mid f(x) \in V \subseteq Y \} \ar[ru]^-{f^{\#}_V}&
+        {}
+    }
+    \]
+    したがって問題の平行四辺形はdirect systemのレベルで可換．
+\end{proof}
+
+\end{document}
