@@ -56,7 +56,6 @@
 
     Weil/Carier divisorの定義は難しくないので改めて書かない．
 
-
 \section{Cartier Divisor $\leftrightarrow$ Weil Divisor.}
 
     \paragraph{Weil divisor $\leftarrow$ Cartier divisor.}
@@ -109,8 +108,21 @@
     また，$\shO(1)=\shO_{\proj_A^n}(1)=(A[x_0,\dots,x_n](1))\sidetilde$とする．
     これのgeneratorは$x_0,\dots,x_n$である．
 
+    \begin{Def}
+        $f: X \to Y$ :: morphism of schemes,
+        $\shF$ :: $\shO_X$-moduleとする．
+        $\eta_{\shF}: \shF \to f^* f_* \shF$をadjoint pair $f^* \dashv f_*$のunitとする．
+        $V$ :: open in $Y$について，
+        $(\eta_{\shF})_V: \shF(V) \to f^*f_*\shF(V)$を
+        $f^*$と書く．
+    \end{Def}
+    この定義は教科書には書かれていない．
+    私はDaniel Murfetのlecture note
+    \footnote{ \url{http://therisingsea.org/notes/Section2.7-ProjectiveMorphisms.pdf} }
+    を参照した．
+
     \paragraph{Morphism to $\proj^n$ $\rightarrow$ Invertible Sheaf \& Global Generators.}
-    $\phi: X \to \proj_A^n$を$A$-morphismとする．
+    $\phi: X \to \proj_A^n$を$\Spec A$-morphism (p.78)とする．
     $\phi$に対し，$\phi^*(\shO(1))$はinvertible sheafであり，
     $\phi^*(x_0), \dots, \phi^*(x_n)$がそのglobal generatorである．
 
@@ -183,7 +195,8 @@
         この集合が空ならば$\lsd$はbase point freeと呼ばれる．
     \end{Def}
  
-\section{Global (or Relative) Proj $\gProj$ (or $\underline{\Proj})$.}
+    \newpage %% !!!!!!!!!!!!!
+\section{Global (or Relative) Projective Space $\gProj$ (or $\underline{\Proj})$.}
     \paragraph{Assumption ($\dagger$).}
     $X$ :: noetherian scheme, 
     $\shS$ :: graded $\shO_X$-algebra
@@ -201,7 +214,6 @@
     下の二つから，
     任意の$d \geq 0$についても$\shS_d$ :: coherentであることが分かる．
 
-    \newpage %% !!!!!!!!!!!!!
 
     \paragraph{Construction of $\gProj$.}
     $X, \shS$を($\dagger$)を満たすscheme, graded $\shO_X$-algebraとする．
