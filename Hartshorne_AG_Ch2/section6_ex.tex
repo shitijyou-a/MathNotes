@@ -390,7 +390,26 @@
     \]
 
     次に$\bigoplus_{P \in X}  K^*/\shO_P^* \iso \CaCl X$を示したい．
-    
+    これは以下の準同型を用いる．
+    \begin{defmap}
+        \phi:& \CaCl X& \to& \bigoplus_{P \in X}  K^*/\shO_P^* \\
+        {}& \{\sect{U_i}{s_i}\}_i& \mapsto& \sum_{i} \bigoplus_{P \in U_i}((s_i)_P \bmod \shO_P^*)
+    \end{defmap}
+    $\{\sect{U_i}{s_i}\}_i \in \CaCl X$と任意の$i$について，
+    $\{P \in X \mid (s_i)_P \not \in \shO_P^* \}$は閉集合である．
+    $X$は$1$次元だから，これは有限集合．
+    よって$(s_i)_P \bmod \shO_P^*$は有限個の点以外で$0$になる．
+    $i$は有限個だから，確かに像は$\bigoplus_{P \in X}  K^*/\shO_P^*$の元．
+
+    $\phi$の逆写像は次のように作る．
+    $\Sigma \in \bigoplus_{P \in X}  K^*/\shO_P^*$をとる．
+    germと混同しないよう．$\Sigma$の$P \in X$成分を$\Sigma^P$と書くことにする．
+    $U=\{P \in X \mid \Sigma^P=0\}$とおくと，
+    これは$X$から有限個の点を除いたものだから開集合．
+    そして$D=\{\sect{U \cup \{P\}}{\Sigma^P}\}_{P, \Sigma^P \neq 0}$とする．
+    $U \cup \{P\}$はやはり開集合であり，
+    $\shK_P^*=K^*$だから$\Sigma^P \in K^*=K-\{0\}$．
+    よって$D \in \CaCl X$．
 
 \section{The Grothendieck Group $K(X)$.} %% Ex6.10 
     \paragraph{Fundamental Property of $K(X)$.}
@@ -566,14 +585,7 @@
         （adjointのcounitから作りたかったが，これは素性がよくわからない．）
 
         \paragraph{$\shF_{k+1}:=\ker \phi_k$.}
-        したがって次の完全列がある．
-        \[
-            \xymatrix
-            {
-                0 \ar[r]& \ker \phi_0 \ar[r]& \shF \ar@{->>}[r]& i_*i^* \shF \ar[r]& 0.
-            }
-        \]
-        Ex1.6より$\epsilon(\gamma(i^* \shF))=\gamma(i_* i^* \shF) \iso \gamma(\shF/\ker \phi_0)$となり，
+        Ex1.7より$\epsilon(\gamma(i^* \shF))=\gamma(i_* i^* \shF) \iso \gamma(\shF/\ker \phi_0)$となり，
         $\shF_1=\ker \phi_0$とすれば良いことが分かる．
         以下，帰納的に$\phi_k: \shF_k \to i_* i^* \shF_k, \shF_{k+1}=\ker \phi_k$とすれば良い．
         上での構成法から，$(\shF_{k})|_{V} \iso (\I{a}^{k} M)\sidetilde$がわかる．

@@ -142,15 +142,24 @@
 
 \section{Morphism of $\proj^n \to \proj^m$ can be Decomposed into Common Ones.} %% Ex7.3
     $\phi: \proj^n_k \to \proj^m_k$を考える．
-    $\proj^n=\Proj k[x_0,\dots,x_n], \proj^m=\Proj k[y_0,\dots,y_m]$とおく．
-    したがって$\shO_{\proj^n}(1), \shO_{\proj^m}(1)$の
-    global generatorはそれぞれ
-    $x_0,\dots,x_n$と$y_0,\dots,y_m$である．
+    $\shO_{\proj^m}(1), \shO_{\proj^n}(1)$
+     :: invertible sheaves
+    のglobal generatorをそれぞれ
+    $\{x_0,\dots,x_m\}, \{y_0,\dots,y_n\}$
+    とする．
 
     \subsection{$\im \phi=pt$ or $m \geq n$ and $\dim \im \phi=n$.}
-    まず，$m<n$と仮定して$\im \phi=pt$を示す．
-    $\phi^*$は$y_0,\dots,y_m$を$x_0,\dots,x_n$へ写す
-    $k$-linear mapを定める．
+%    $\eta: \Gamma(\proj^m, \shO_{\proj^m}(1)) \to \Gamma(\proj^m, \phi^* \phi_* (\shO_{\proj^m}(1)))$を
+%    adjoint pair $\phi^* \dashv \phi_*$のunitから得られる写像とする．
+%    これが本文中で$\phi^*$と表記されているものである
+    $s_i=\phi^*(x_i)~(i=0,\dots,m)$とおくと，
+    $s_0,\dots,s_m$は$\shL:=\phi^*(\shO_{\proj^m}(1))$のglobal generatorである．
+    $\shL$は$\proj^n$上のinvertible sheafだから，
+    Cor6.17より，$\shL \iso \shO_{\proj^n}(d)$となる$d \in \Z$が存在する．
+    Example7.8.3同様，$\shO_{\proj^n}(d)$は$|d|$次斉次単項式で生成される．
+
+    \paragraph{$m<n \implies \dim \im \phi=0$.}
+    \paragraph{$m \geq n \implies \dim \im \phi=n$.}
 
 \section{If $X$ Admits an Ample Invertible Sheaf, then $X$ is Separated.} %% Ex7.4
 
