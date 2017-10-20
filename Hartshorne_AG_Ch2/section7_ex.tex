@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[all]{xy}
+\usepackage[dvipdfmx]{graphicx}
 \usepackage{../math_note, exercise, enumitem}
 \renewcommand{\thesection}{Ex7.\arabic{section}}
 
@@ -162,6 +163,46 @@
     \paragraph{$m \geq n \implies \dim \im \phi=n$.}
 
 \section{If $X$ Admits an Ample Invertible Sheaf, then $X$ is Separated.} %% Ex7.4
+
+    \subsection{Assumption of Thm7.6 $\implies$ $X$ :: separated.}
+    $A$ :: noetherian ring,
+    $X$ :: scheme of finite type /$A$とする．
+    $\shL$ :: ample invertible sheaf on $X$が存在したとする．
+    Thm7.6の証明（特にp.155の第二段落）から次が分かる:
+    十分大きい$n>0$をとると，
+    $s_1,\dots,s_k \in \Gamma(X,\shL^n)$が存在し，
+    $X_i=X_{s_i}$
+    \footnote
+    {
+        $X_{s_i}$は
+        $\{P \in X \mid (s_i)_P \not \in \I{m}_P \shL^n_{P} \}$
+        で定義される開集合．
+        cf. Ex2.16.
+    }
+    はaffine open coverを成す．
+    $U_i=V^c(x_i)$とすると，これもaffine open cover．
+    Thm7.6において引き続いて構成されるimmertion $\phi: X \to \proj^N_A$は，
+    （証明の最終段落から）$\phi^{-1}(U_i)=X_i$を満たす．
+    $U_i, X_i$は共にaffineであるから，
+    $\phi|_{X_i}: X_i \to U_i$はseparated (Prop4.1)．
+    Cor4.6fより$\phi: X \to \proj^N_A$はseparated．
+    $\proj^N_A \to \Spec A$はprojective (Example4.8.1)なのでsperated．
+    よってseparated morphismの合成$X \to \proj^N_A \to \Spec A$も
+    separatedである．
+
+    \subsection{There is No Ample Invertible Sheaf on 
+        \protect\includegraphics[width=2.5cm]{./images/affine_with_doubled_origin.eps} / a field $k$.}
+    $k$ :: field,
+    $X$ :: affine with doubled origin /$k$とする．
+    また，$X$は持つ二つの原点をそれぞれ$O_1,O_2$とし，
+    $X_1=X-\{O_2\}, X_2=X-\{O_1\}$とする．
+    $X$の構成(Example4.0.1)から$X_1,X_2 \iso \affine^1_k$．
+    このことから$X$ :: noetherian integral schemeは明らか．
+    Example6.3.1, Cor6.16より，$\Pic X_1, \Pic X_2=0$．
+
+    まず$\Pic X$を計算する．
+    $X$ :: integralより$\Pic X \iso \CaCl X$ (Prop6.15)．
+    $X$上のCartier divisorは
 
 \section{Ample and Very Ample are Inherted by Tensor Products.} %% Ex7.5 
 

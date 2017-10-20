@@ -1,0 +1,136 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note, enumitem}
+
+\newcommand{\Der}{\mathrm{Der}}
+
+\title{正標数の環における導分}
+\author{七条 彰紀}
+
+\begin{document}
+\maketitle
+
+\begin{Def}[Derivation, $k$-Derivation.]
+    $A$ :: ring, $M$ :: moduleとする．
+    任意の$a,b \in A$に対して
+    次を満たす写像$D: A \to M$をderivationとよぶ．
+    \begin{enumerate}[label=(\roman*)]
+        \item $D(a+b)=D(a)+D(b)$.
+        \item $D(ab)=D(a) \cdot b+a \cdot D(b)$.
+    \end{enumerate}
+    (ii)はLeibniz Formula (or Rule)と呼ばれる．
+    以下，必要に応じて$D(a)$を$Da$と表記する．
+
+    準同型$f: k \to A$によって$A$を$k$-moduleとみなせる時，
+    $D \circ f=0$を満たすderivation $D$を$k$-derivationと呼ぶ．
+
+    $\Der(A,M)$で$A \to M$のderivation全体を表す．
+    $\Der(A,A)$は$\Der(A)$と略す．
+    $\Der_k(A,M)$で$A \to M$の$k$-derivation全体を表す．
+    $\Der_k(A,A)$は$\Der_k(A)$と略す．
+\end{Def}
+$\Der(A,M), \Der_k(A,M)$が$A$-moduleになることは明らか．
+$a \in A, n \geq 0$について$Da^n=n a^{n-1} Da$が
+成り立つことは帰納法を用いて簡単に示せる．
+
+次が成り立つ．
+\begin{Prop}
+    $A$ :: ring, $D \in \Der(A)$, $a,b \in A$, $n \in \Z_{\geq 0}$とする．
+    \[ D^n(ab)=\sum_{i=0}^n \binom{n}{i} (D^i a)(D^{n-i} b). \]
+    ただし$D^0=\id{A}$とする．
+\end{Prop}
+証明は$n$についての帰納法に拠る．
+
+今，$A$ :: ringが正標数$c>0$
+\footnote
+{
+    $f: \Z \to A$を唯一の写像$1_{\Z} \mapsto 1_A$とすると，
+    $f^{-1}((0))=\ker f \subseteq \Z$は$\Z$のイデアルであり，
+    したがって$\ker f=(c)$となる$c \in \Z_{\geq 0}$が存在する．
+    この$c$を$A$の標数と呼ぶ．
+}
+を持つとしよう．
+$c$が素数ならば，
+$\binom{c}{i}$は$i=1,\dots,c-1$について$c$の倍数であるから，
+次が成り立つ．
+\[ D^c(ab)=(D^c a) \cdot b+a \cdot (D^c b). \eqno{(*)}\]
+すなわち，$D^c \in \Der(A)$となる．
+
+一方，$c$が素数でない，
+すなわち合成数でない時には($*$)が成り立たないことがある．
+
+\begin{Example}
+    $A=(\Z/4\Z)[x], D=x \frac{d}{dx}$とする．
+    この場合，$A$の標数は$4$．
+    ただし$\frac{d}{dx}$は$x$についての通常の微分であり，
+    明示すれば$\frac{d}{dx} x=1, \frac{d}{dx} 1=0$を満たす．
+    $\frac{d}{dx} \in \Der(A)$と$\Der(A)$ :: $A$-moduleより$D \in \Der(A)$．
+    $Dx=x \cdot 1=x$だから，$D^4(x^2)$は次のように成る．
+    \[ D^4(x^2)=D^3(D(x^2))=D^3(2x^{2-1} (Dx))=D^3(2x^2)=\dots=2^4 x^2=0. \]
+    一方，$D^4(x^2)=D^4(x \cdot x)$と考えて($*$)の右辺を計算すると，次のよう．
+    \[ (D^4 x) \cdot x+x \cdot (D^4 x)=2x^2 \neq 0. \]
+    なので($*$)は成立しない．
+\end{Example}
+
+\begin{Example}
+    文字$c$を導入して一般化を試みる．
+    $A=(\Z/c\Z)[x], D=x \frac{d}{dx}$とする．
+    \[ D^c(x^2)=2^c x^2,~~~ 2x^2=D^c(x) \cdot x+x \cdot D^c(x). \]
+    この二つはほとんどの$c$で異なり，そのとき($*$)の反例と成る．
+    しかし，よく知られている通り，
+    Fermatの小定理の逆には反例が存在する．
+    なので，ここで与えた$A,D$は，
+    例えば$c$がCarmichael数($561, 1105, 1729, 2465, 2821, \dots$)
+    である場合についての($*$)の反例にならない．
+    （他に例がないか探してみると，$c=341(=11 \cdot 31), 645, 1387, 1905, 2047$でも反例にならない．）
+\end{Example}
+
+\begin{Example}
+    $c>0$を\textbf{square-freeでない}合成数とし，
+    $c$の互いに異なる素因数の積を$r$とする．
+    （$r$は$c$のradicalと呼ばれる．）
+    $c > r$に注意せよ．
+    $A=(\Z/c\Z)[x], D=x^{r+1} \frac{d}{dx}$とする．
+    この時，$Dx=x^{r+1}$．
+    $t \geq 1$とすると，$D^c(x^t)$は次のように成る．
+    \[ D^c(x^t)=\delta_t x^{cr+t},~~~ \delta_t=\prod_{i=0}^{c-1}(ir+t). \]
+    したがって$D^c(x^r)$は$\delta_r x^{(c+1)r}=c! r^c \cdot x^{(c+1)r}$．
+    一方，($*$)の右辺は次のように成る．
+    \[ D^c(x \cdot x^{r-1})=D^c(x) \cdot x^{r-1}+x \cdot D(x^{r-1})=(\delta_1+\delta_{r-1}) x^{(c+1)r}. \]
+    $c>r$より$\delta_1+\delta_{r-1}$が$c$の倍数でないことが示される．
+    （この証明は難しいと思われる．計算機で$c<100$の範囲で正しいことを確かめた．）
+    よって($*$)が成立しない．
+\end{Example}
+残念ながら，Carmichael数はsquare-freeである
+\footnote{\url{http://mathworld.wolfram.com/CarmichaelNumber.html}などを参照せよ．}．
+上で挙げたその他の$c$もsquare-freeである．
+標数がCarmichael数ならば常に($*$)が成り立つ可能性もあるが，
+それはFuture Workとしよう．
+
+標数$c$が合成数であっても($*$)が成り立つのはどんな場合か，
+という問に対しては次がひとつの答えを与える．
+\begin{Prop}
+    $A, k$ :: ring, $D \in \Der_k(A)$とする．
+    $A$の標数$c$は合成数であるとする．
+    $A$は次を満たすとする．
+    \begin{enumerate}[label=(\arabic*)]
+        \item $A$の任意の元が$G \subseteq A$の元の積の$k$線型結合として書ける．
+        \item $G$の任意の元$g$について$D^2g=0$．
+    \end{enumerate}
+    この時，$D^c=0$．
+    したがって任意の$a,b \in A$について($*$)の等号が成り立つ．
+\end{Prop}
+この命題の仮定のうち，条件(2)以外は次のような環で成り立つ:
+$k$上の多項式環・形式的ベキ級数環，及びその剰余環，$k$の元による局所化，テンソル積，直積．
+
+これは次の補題から得られる．
+\begin{Lemma}
+    $A, k$ :: ring, $D \in \Der_k(A)$とする．
+    $x \in A$と$n,k \in \Z_{\geq 0}$について，次が成り立つ．
+    \[ D^k x^n=\sum_{i=0}^{k-1} \binom{k-1}{i} n^{\underline{i+1}} x^{n-(i+1)} (Dx)^i (D^{k-i} x). \]
+    ここで$n^{\underline{i+1}}=n(n-1)\cdots(n-(i+1)+1)$は降下階乗べきである．
+\end{Lemma}
+$D \in \Der_k(A)$は$k$線形写像であること，
+及び$n^{\underline{i+1}}$が$i=0,\dots,k-1$で$(i+1)!$の倍数に成ることに気をつければ，
+この補題から上の命題はすぐに出る．
+
+\end{document}

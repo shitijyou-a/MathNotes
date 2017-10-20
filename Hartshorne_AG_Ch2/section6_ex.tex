@@ -582,7 +582,6 @@
         $\shF|_{V} \to (i_* i^* \shF)|_{V}$が存在する．
         これがgluingできることは明らか．
         こうして所望の$\phi_0$が得られる．
-        （adjointのcounitから作りたかったが，これは素性がよくわからない．）
 
         \paragraph{$\shF_{k+1}:=\ker \phi_k$.}
         Ex1.7より$\epsilon(\gamma(i^* \shF))=\gamma(i_* i^* \shF) \iso \gamma(\shF/\ker \phi_0)$となり，
@@ -606,6 +605,16 @@
         任意の$V \in \coverV$について$(\shF_n)|_V=0$，
         つまり（Identity Axiomから）$\shF_n=0$となる．
     \end{proof}
+
+    \begin{Remark}
+        $\{ \shF_i \}_{i=0}^n$の構成方法はglobalに与えることも出来ると思う．
+        （証明は私には出来なかった．）
+        まず，$\eta_i: \shF_i \to i_* i^* \shF_i$を，
+        adjoint pair $i^* \dashv i_*$のunitとする．
+        これが全射であることが証明出来ると，$\eta_i$が上で述べた$\phi_i$の代わりに働く．
+        $\ker \eta_i$は$(\I{a}\shF_i(X))\sidetilde$に相当する
+        $\shI_Y \shF_i$（$\shI_Y=\ker i^{\#}$はideal sheaf）になるだろう．
+    \end{Remark}
 
 \section{The Grothendieck Group of a Nonsingular Curve.} %% Ex6.11 
     $k$ :: algebraically closed field, $X$ :: nonsingular curve / $k$
