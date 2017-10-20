@@ -1,6 +1,7 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[all]{xy}
 \usepackage{../math_note, exercise, enumitem}
+\usepackage[dvipdfmx]{graphicx}
 \renewcommand{\thesection}{Ex6.\arabic{section}}
 
 \newcommand{\coverU}{\mathfrak{U}}
@@ -156,6 +157,30 @@
     $g$の既約因数によって定まるprime divisor $G$上で$v_G(f)>0$となる．
     以上から，$dZ=(f)$となるならば$d=0$．
     よって$i$ :: injective．
+
+    \paragraph{Another Proof: $i$ :: injective.}
+    $\zeta$ :: generic point of $X$,
+    $k$ :: function field of $X$
+    とする．
+    \[
+    \xymatrix
+    {
+        \Z \ar[r]^-{i}& \Cl(X \times \proj^n) \ar[d]^-{\cap \{\zeta\} \times \proj^n} \ar@{->>}[r]& \Cl(X) \ar[r]& 0 \\
+        {} & \ar[lu]_-{\rotatebox{150}{$\sim$}}^-{\deg} \Cl(\proj^n_{k}) & {} & {}
+    }
+    \]
+    $\{\zeta\} \times \proj^n \iso \proj^n_{k}$が示せる．
+    図式中の``$\cap \{\zeta\} \times \proj^n$"は次の準同型である．
+    \[
+        \Cl(X \times \proj^n) \ni
+        \sum n_Y Y \mapsto \sum n_Y (Y \cap \{\zeta\} \times \proj^n)
+        \in \Cl(\proj^n_{k})
+    \]
+    この写像と$\deg$（Prop6.4からこれは同型写像）の合成が，
+    $i$をsplitさせる．
+    実際，$Z=X \times \proj^{n-1}$なので
+    $Z \cap \{\zeta\} \times \proj^n=\zeta \times \proj^{n-1} \iso \proj^{n-1}_k$．
+    これは$\proj^n_k$のprime divisorである．
 
 \section{Varieties in Projective Space.} %% Ex6.2 
 

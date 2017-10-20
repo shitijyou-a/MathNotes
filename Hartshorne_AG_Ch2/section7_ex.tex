@@ -191,18 +191,42 @@
     separatedである．
 
     \subsection{There is No Ample Invertible Sheaf on 
-        \protect\includegraphics[width=2.5cm]{./images/affine_with_doubled_origin.eps} / a field $k$.}
+        \protect\includegraphics[width=2.5cm]{./images/affine_with_doubled_origin2.eps} / a field $k$.}
     $k$ :: field,
     $X$ :: affine with doubled origin /$k$とする．
-    また，$X$は持つ二つの原点をそれぞれ$O_1,O_2$とし，
-    $X_1=X-\{O_2\}, X_2=X-\{O_1\}$とする．
-    $X$の構成(Example4.0.1)から$X_1,X_2 \iso \affine^1_k$．
-    このことから$X$ :: noetherian integral schemeは明らか．
-    Example6.3.1, Cor6.16より，$\Pic X_1, \Pic X_2=0$．
+    より詳細に，$X$は$X_1=\Spec k[x], X_2=\Spec k[y]$を
+    $U_1=X_1-\{O_1\}, U_2=X_2-\{O_2\}$で貼りあわせたものとする．
+    ただし$O_1 \in X_1,O_2 \in X_2$は原点である．
+    $X_i, U_i, O_i ~~(i=1,2)$はすべて$X$の部分集合とみなす．
+    $X$ :: noetherian integral schemeは明らか．
+    Example 6.3.1, Cor 6.16より，$\Pic X_1, \Pic X_2=0$．
 
     まず$\Pic X$を計算する．
+    これには$k[x], k[y]$がUFDであることを用いる．
     $X$ :: integralより$\Pic X \iso \CaCl X$ (Prop6.15)．
-    $X$上のCartier divisorは
+    なので$\CaCl X$を計算する．
+    Example 4.0.1にある$\shO_X$の定義から計算すると，
+    $K_X$ :: function field of $X$は次のように書ける．
+    \[ K_X=\{ (f,g) \in k(x) \times k(y) \mid \phi(f|_{U_1 \cap U_2})=g|_{U_1 \cap U_2}. \} \]
+    ただし$\phi$は$x \mapsto y$で定まる同型である．
+    $O_1$に対応するイデアルは単項イデアル $(x)$であるから，
+    $f$は$x^n h$の様に書くことが出来る．
+    この$h$は$O_1$で零点も極も持たない元，
+    すなわち$\shO_{X_1, O_1}=k[x]_{(x)}$の単元である．
+    $g$についても同様であるから，
+    結局次のように成る．
+    \[
+        K_X=
+        \{
+            (x^n, y^n) \cdot (f, g)
+            \mid
+            n \in \Z, 
+            ( f,g) \in \shO_{X_1, O_1}^* \times \shO_{X_2, O_2}^*,
+            \phi(f|_{U_1 \cap U_2})=g|_{U_1 \cap U_2}.
+        \}
+    \]
+    $K_X^*$の元がprincipal divisorだから，
+    $\CaCl X \iso \{ (x^n, y^n) \in k(x) \times k(y) \mid n \in \Z \} \iso \Z$．
 
 \section{Ample and Very Ample are Inherted by Tensor Products.} %% Ex7.5 
 
