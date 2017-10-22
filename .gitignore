@@ -3,6 +3,7 @@
 /junks/
 /Hartshorne_AG_TrialSolutions/
 /HirbeltBasisTheorem/glyph/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -183,5 +184,3 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
-/PDF
-/junks/field/field.pdf

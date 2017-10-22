@@ -163,35 +163,33 @@
     \paragraph{$m \geq n \implies \dim \im \phi=n$.}
 
 \section{If $X$ Admits an Ample Invertible Sheaf, then $X$ is Separated.} %% Ex7.4
-
     \subsection{Assumption of Thm7.6 $\implies$ $X$ :: separated.}
     $A$ :: noetherian ring,
     $X$ :: scheme of finite type /$A$とする．
     $\shL$ :: ample invertible sheaf on $X$が存在したとする．
-    Thm7.6の証明（特にp.155の第二段落）から次が分かる:
-    十分大きい$n>0$をとると，
-    $s_1,\dots,s_k \in \Gamma(X,\shL^n)$が存在し，
-    $X_i=X_{s_i}$
+    Thm7.6から，immersion $i: X \to \proj^n_A ~(n>0)$が存在する．
+    これは$X$から$\proj^n_A$のlocally closed subschemeへのisomorphismである．
+    これにprojection $\pr: \proj^n_A=\proj^n_{\Z} \times_{\Z} \Spec A \to \Spec A$を
+    合成したものは，quasi-projective．
+    \[\xymatrix
+    {
+        X \ar[r]^-{\sim}& U \cap Z~ \ar@{^{(}->}[r]& \proj^n_A \ar[r]^-{\pr}& \Spec A
+    }\]
+    $U, Z$はそれぞれ$\proj^n_A$のopen, closed subschemeである．
+    $A,X$についての仮定から$\Spec A, X$ :: noetherian schemeがわかる
     \footnote
     {
-        $X_{s_i}$は
-        $\{P \in X \mid (s_i)_P \not \in \I{m}_P \shL^n_{P} \}$
-        で定義される開集合．
-        cf. Ex2.16.
+        $f: X \to \Spec A$がfinite typeならば
+        $f^{-1}\Spec A=X$はfinite affine open coverをもち，
+        各affine open coverはfinitely generated $A$-algebraの$\Spec$である．
+        finitely generated $A$-algebraは$A$からnoetherianを受け継ぐから，
+        $X$ :: noetherian．
     }
-    はaffine open coverを成す．
-    $U_i=V^c(x_i)$とすると，これもaffine open cover．
-    Thm7.6において引き続いて構成されるimmertion $\phi: X \to \proj^N_A$は，
-    （証明の最終段落から）$\phi^{-1}(U_i)=X_i$を満たす．
-    $U_i, X_i$は共にaffineであるから，
-    $\phi|_{X_i}: X_i \to U_i$はseparated (Prop4.1)．
-    Cor4.6fより$\phi: X \to \proj^N_A$はseparated．
-    $\proj^N_A \to \Spec A$はprojective (Example4.8.1)なのでsperated．
-    よってseparated morphismの合成$X \to \proj^N_A \to \Spec A$も
-    separatedである．
-
+    から，
+    Thm4.9より，この写像$X \to \Spec A$はseparated．
+    
     \subsection{There is No Ample Invertible Sheaf on 
-        \protect\includegraphics[width=2.5cm]{./images/affine_with_doubled_origin2.eps} / a field $k$.}
+        \protect\includegraphics[width=2.5cm]{./images/affine_with_doubled_origin.eps} / a field $k$.}
     $k$ :: field,
     $X$ :: affine with doubled origin /$k$とする．
     より詳細に，$X$は$X_1=\Spec k[x], X_2=\Spec k[y]$を
@@ -202,34 +200,45 @@
     Example 6.3.1, Cor 6.16より，$\Pic X_1, \Pic X_2=0$．
 
     まず$\Pic X$を計算する．
-    これには$k[x], k[y]$がUFDであることを用いる．
-    $X$ :: integralより$\Pic X \iso \CaCl X$ (Prop6.15)．
-    なので$\CaCl X$を計算する．
-    Example 4.0.1にある$\shO_X$の定義から計算すると，
-    $K_X$ :: function field of $X$は次のように書ける．
-    \[ K_X=\{ (f,g) \in k(x) \times k(y) \mid \phi(f|_{U_1 \cap U_2})=g|_{U_1 \cap U_2}. \} \]
-    ただし$\phi$は$x \mapsto y$で定まる同型である．
-    $O_1$に対応するイデアルは単項イデアル $(x)$であるから，
-    $f$は$x^n h$の様に書くことが出来る．
-    この$h$は$O_1$で零点も極も持たない元，
-    すなわち$\shO_{X_1, O_1}=k[x]_{(x)}$の単元である．
-    $g$についても同様であるから，
-    結局次のように成る．
-    \[
-        K_X=
-        \{
-            (x^n, y^n) \cdot (f, g)
-            \mid
-            n \in \Z, 
-            ( f,g) \in \shO_{X_1, O_1}^* \times \shO_{X_2, O_2}^*,
-            \phi(f|_{U_1 \cap U_2})=g|_{U_1 \cap U_2}.
-        \}
-    \]
-    $K_X^*$の元がprincipal divisorだから，
-    $\CaCl X \iso \{ (x^n, y^n) \in k(x) \times k(y) \mid n \in \Z \} \iso \Z$．
+    $\shL \in \Pic X$をとる．
+    $X_{12}:=X_1 \cap X_2 (\iso \affine^1-\{0\})$としておく．
+    %% Lemma5.3, Prop5.4を見ながら考えると，
+    %% \shLはaffine open coverへのrestriction
+    %% $(\shL|_{X_1}, \shL|_{X_2})$で定まると分かる．
+    %% $\shL|_{X_{12}}$は以下のように$x^n$で定まり，
+    %% Lemma5.3から，これは$\shL|_{X_1}$も定める．
+    %% $\shL|_{X_1}=(x^{-n}k[x])\sidetilde, \shL|_{X_2}=(k[y])\sidetilde$となり，
+    %% 確かにこれらの$X_{12}$への制限は（単元倍を除いて）一致する．
+    $\Pic X_{12}=0$ (Prop6.2, Cor6.16)より，
+    $\shO_{X_{12}} \iso \shL|_{X_{12}}$．
+    さらに$X_{12}$は$D(x) \subseteq \Spec k[x]$と同型であるから，
+    \[ \shO_{X_{12}}=\shO_{X_1}|_{X_{12}}=(k[x]_x)\sidetilde=(k[x,x^{-1}])\sidetilde. \]
+    すなわち$\Gamma(X_{12},\shO_{X_{12}})=k[x,x^{-1}]$．
+    $X_{12}$はaffineだから，Ex5.3より，
+    $\shO_{X_{12}} \isomap \shL|_{X_{12}}$は
+    $k[x,x^{-1}] \isomap \Gamma(X_{12}, \shL|_{X_{12}})$の
+    $k[x,x^{-1}]$-isomorphismによって決定される．
+    この同型射は$k[x,x^{-1}]$の単元をかける写像によって定まる．
+    そして単元は$a x^n ~(a \in k^*, n \in \Z)$と書ける．
+    また，$k^*=\Gamma(X_{12},\shO_{X_{12}}^*)$の分の違いは無視されるから，
+    結局同型射は$x^n ~(n \in \Z)$で定まる．
+    こうして，$\shO_{X_{12}} \isomap \shL|_{X_{12}}$が$\Z$に対応することが分かった．
+    この同型射で$\shL$全体も定まる（？？）．
+    以上から$\Pic X \iso \Z$．
 
-\section{Ample and Very Ample are Inherted by Tensor Products.} %% Ex7.5 
+    $n \in \Z$に対応する$\Pic X$の元を$\shL_n$と書く．
+    $\Pic X \iso \CaCl X$に注意して，
+    $\shL_n$に対応するCarier Divisorを考えると，
+    これは$\{\sect{U_1}{x^{-n}}, \sect{U_2}{1} \}$である．
 
+    $\shL_n$がglobal generatorを持つのは$n=0$
+    すなわち$\shL_n=\shO_X$であるときのみ．
+    $\shL_0 \otimes \shL_n \iso \shL_n$なので，
+    ample sheafは存在しない．
+    \url{ https://math.stackexchange.com/questions/70042 }．
+          
+\section{ Ample and Very Ample are Inherted by Tensor Products.} %% Ex7.5 
+          
 \section{The Riemann-Roch Problem.} %% Ex7.6 
 
 \section{Some Rational Surfaces.} %% Ex7.7 
@@ -241,7 +250,7 @@
 
 \section{$P^n$-Bundles Over a Scheme.} %% Ex7.10 
 
-\section{Different Sheaves of Ideals can Give Rise to Isomorphic Blown Up Schemes.} %% Ex7.11 
+\section{Different Sheaves of Ideals can Give Rise to Isomorphic Blow Up Schemes.} %% Ex7.11 
 
 \section{ } %% Ex7.12 
 

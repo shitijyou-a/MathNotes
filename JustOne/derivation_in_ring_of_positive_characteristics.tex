@@ -9,6 +9,7 @@
 \begin{document}
 \maketitle
 
+\section{準備}
 \begin{Def}[Derivation, $k$-Derivation.]
     $A$ :: ring, $M$ :: moduleとする．
     任意の$a,b \in A$に対して
@@ -40,22 +41,26 @@ $a \in A, n \geq 0$について$Da^n=n a^{n-1} Da$が
 \end{Prop}
 証明は$n$についての帰納法に拠る．
 
-今，$A$ :: ringが正標数$c>0$
+今，$A$ :: ringが正標数$n>0$
 \footnote
 {
     $f: \Z \to A$を唯一の写像$1_{\Z} \mapsto 1_A$とすると，
     $f^{-1}((0))=\ker f \subseteq \Z$は$\Z$のイデアルであり，
-    したがって$\ker f=(c)$となる$c \in \Z_{\geq 0}$が存在する．
-    この$c$を$A$の標数と呼ぶ．
+    したがって$\ker f=(n)$となる$n \in \Z_{\geq 0}$が存在する．
+    この$n$を$A$の標数と呼ぶ．
+    $A$が整域，すなわち$(0) \subseteq A$が素イデアルならば，
+    $\ker f$も素イデアルになり（可換環論の基本的命題），
+    したがって標数$n$は素数になる．
 }
 を持つとしよう．
-$c$が素数ならば，
-$\binom{c}{i}$は$i=1,\dots,c-1$について$c$の倍数であるから，
+$n$が素数ならば，
+$\binom{n}{i}$は$i=1,\dots,n-1$について$n$の倍数であるから，
 次が成り立つ．
-\[ D^c(ab)=(D^c a) \cdot b+a \cdot (D^c b). \eqno{(*)}\]
-すなわち，$D^c \in \Der(A)$となる．
+\[ D^n(ab)=(D^n a) \cdot b+a \cdot (D^n b). \eqno{(*)}\]
+すなわち，$D^n \in \Der(A)$となる．
 
-一方，$c$が素数でない，
+\section{($*$)の反例}
+一方，$n$が素数でない，
 すなわち合成数でない時には($*$)が成り立たないことがある．
 
 \begin{Example}
@@ -72,45 +77,51 @@ $\binom{c}{i}$は$i=1,\dots,c-1$について$c$の倍数であるから，
 \end{Example}
 
 \begin{Example}
-    文字$c$を導入して一般化を試みる．
-    $A=(\Z/c\Z)[x], D=x \frac{d}{dx}$とする．
-    \[ D^c(x^2)=2^c x^2,~~~ 2x^2=D^c(x) \cdot x+x \cdot D^c(x). \]
-    この二つはほとんどの$c$で異なり，そのとき($*$)の反例と成る．
-\end{Example}
-
-    しかし，よく知られている通り，
-    Fermatの小定理の逆には反例が存在する．
-    なので，ここで与えた例は，
-    例えば$c$がCarmichael数($561, 1105, 1729, 2465, 2821, \dots$)
-    である場合についての($*$)の反例にならない．
-
-    さて，
-    他に上の例が($*$)の反例にならない$c$がないか探してみると，
-    $c=341(=11 \cdot 31), 645, 1387, 1905, 2047$でも反例にならない．
-    これらについては次の方法で反例が作れる．
-\begin{Example}
-    $c$に加えて文字$a,b$を加えて更に一般化する．
-    $A=(\Z/c\Z)[x], D=x \frac{d}{dx}$とする．
-    ある$a,b>0$について$(a+b)^c \neq a^c+b^c$である
-    （したがって$c$はCarmichael数でない）としよう．
+    $n$に加えて文字$a,b$を加えて更に一般化する．
+    $A=(\Z/n\Z)[x], D=x \frac{d}{dx}$とする．
+    ある$a,b>0$について$(a+b)^n \neq a^n+b^n$であるとしよう．
     この時，($*$)の反例がある:
-    \[ D^c(x^a \cdot x^b)=(a+b)^c x^{a+b} \neq (a^c+b^c)x^{a+b}=D^c(x^a) \cdot x^b+x^a \cdot D^c(x^b). \]
+    \[ D^n(x^a \cdot x^b)=(a+b)^n x^{a+b} \neq (a^n+b^n)x^{a+b}=D^n(x^a) \cdot x^b+x^a \cdot D^n(x^b). \]
 \end{Example}
 
-標数$c$がCarmichael数ならば常に($*$)が成り立つ可能性もあるが，
+一方，次の命題が成立する．
+\begin{Prop}
+    $n$を正整数とする．次は同値
+    \footnote
+    {
+        Pratibha Ghatage and Brian Scott(2005),
+        \textit{Exactly When Is $(a + b)^{n} \equiv a^{n} + b^{n} ~(\bmod~ n)$ ?},
+        \url{http://www.jstor.org/stable/30044877}.
+    }．
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\Forall{a,b \in \Z/n\Z} (a+b)^n=a^n+b^n$．
+        \item $\Forall{x \in \Z/n\Z} x^n=x$．
+        \item $n$は素数またはCarmichael数．
+    \end{enumerate}
+\end{Prop}
+\begin{proof}
+    $(1) \implies (2)$の証明は$x=1+1+\dots+1$とすれば出来るし，
+    $(2) \implies (1)$の証明は$x=a+b$とすれば出来る．
+    $(2) \iff (3)$はFermatの小定理とCarmichael数の定義である．
+\end{proof}
+
+したがって，ここでの方法では$n$がCarmichael数
+($561, 1105, 1729, 2465, 2821, \dots$)であるときの($*$)の反例が作れない．
+標数$n$がCarmichael数ならば常に($*$)が成り立つ可能性もあるが，
 それはFuture Workとしよう．
 
-標数$c$が合成数であっても($*$)が成り立つのはどんな場合か，
+\section{($*$)の成立}
+標数$n$が合成数であっても($*$)が成り立つのはどんな場合か，
 という問に対しては次がひとつの答えを与える．
 \begin{Prop}
     $A, k$ :: ring, $D \in \Der_k(A)$とする．
-    $A$の標数$c$は合成数であるとする．
+    $A$の標数$n$は合成数であるとする．
     $A$は次を満たすとする．
     \begin{enumerate}[label=(\arabic*)]
         \item $A$の任意の元が$G \subseteq A$の元の積の$k$線型結合として書ける．
         \item $G$の任意の元$g$について$D^2g=0$．
     \end{enumerate}
-    この時，$D^c=0$．
+    この時，$D^n=0$．
     したがって任意の$a,b \in A$について($*$)の等号が成り立つ．
 \end{Prop}
 この命題の仮定のうち，条件(2)以外は次のような環で成り立つ:
