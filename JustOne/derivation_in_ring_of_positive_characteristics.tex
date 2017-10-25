@@ -105,10 +105,63 @@ $\binom{n}{i}$は$i=1,\dots,n-1$について$n$の倍数であるから，
     $(2) \iff (3)$はFermatの小定理とCarmichael数の定義である．
 \end{proof}
 
-したがって，ここでの方法では$n$がCarmichael数
+したがって，以上の方法では$n$がCarmichael数
 ($561, 1105, 1729, 2465, 2821, \dots$)であるときの($*$)の反例が作れない．
-標数$n$がCarmichael数ならば常に($*$)が成り立つ可能性もあるが，
-それはFuture Workとしよう．
+しかし，環$A$を多変数にすれば容易に($*$)の反例が作れる．
+というよりも，一般の設定を具体的な環で再現できる．
+
+\begin{Example}
+    $n$を正整数とする．
+    \[
+        A=(\Z/n\Z)[x_0,\dots,x_n],
+        \hspace{20pt}
+        D=\sum_{i=0}^{n-1} x_{i+1} \frac{\partial}{\partial x_{i}}.
+    \]
+    このようにすると，$i=0,\dots,n$について$D^i x_0=x_{i}$となる．
+    したがって$D^n(x_0 \cdot x_0)$は次のようになる．
+    \[ D^n(x_0 \cdot x_0)=x_0 x_n + \sum_{i=1}^{n-1} \binom{n}{i} x_i x_{n-i} + x_n x_0. \]
+    当然，$i \neq j$ならば$x_i x_{n-i} \neq x_j x_{n-j}$となる．
+    したがって$\sum$の部分が$0$になるのは，
+    $i=1,\dots,n-1$について$\binom{n}{i} \bmod n=0$となる時のみである．
+    このことは，次の主張の通り，$n$が素数であることと同値である．
+\end{Example}
+
+\begin{Prop}
+    正整数$n$を考える．
+    $i=1,\dots,n-1$について次式が成り立つことと，
+    $n$が素数であることは同値である．
+    \[ \binom{n}{i} \bmod n=\frac{n!}{i! (n-i)!} \bmod n=0. \]
+\end{Prop}
+\begin{proof}
+    \paragraph{($\implies$).}
+    $n$を合成数とし，$p$をその素因数
+    \footnote
+    {
+        \url{https://www.anothermathblog.com/?p=72}
+        では$p$を特に最小のものとしているが，
+        以下の通り，この仮定は不要である
+    }
+    とする．
+    また$m=n/p$とする．
+    \[
+        \binom{n}{p}
+        =\frac{n(n-1)\cdots(n-p+1)}{p!}
+        =m \cdot \frac{(n-1)\cdots(n-p+1)}{(p-1)!}.
+    \]
+    これが$n$の倍数であると仮定しよう．
+    $n=m \cdot p$なので，仮定により，
+    $\frac{(n-1)\cdots(n-p+1)}{(p-1)!}$は$p$の倍数である．
+    特に$(n-1)\cdots(n-p+1)$が$p$の倍数．
+    しかし$p-1$個の整数$n-1, \dots, n-(p-1)$はいずれも$p$と互いに素であるから，
+    これはありえない．
+
+    \paragraph{($\impliedby$).}
+    $n$が素数であるとする．
+    すると$1 \leq i \leq n-1$より，$i!$は$n$の倍数ではない．
+    $1 \leq i \leq n-1$ならば$1 \leq n-i \leq n-1$だから，$(n-i)!$も同様．
+    したがって$i! (n-i)!$は$n$の倍数ではなく，
+    $\binom{n}{i}=\frac{n!}{i! (n-i)!}$は$n$の倍数．
+\end{proof}
 
 \section{($*$)の成立}
 標数$n$が合成数であっても($*$)が成り立つのはどんな場合か，

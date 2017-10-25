@@ -56,6 +56,35 @@
 
     Weil/Carier divisorの定義は難しくないので改めて書かない．
 
+\section{Remarks on Cartier divisor.}
+    Cartier divisorを$\{\sect{U_i}{f_i}\}$の形で書いたものについて，
+    定義を書き下しておく．
+
+    \paragraph{Local Equations.}
+    Cartier divisor $\{\sect{U_i}{f_i}\}$について，
+    $\{ f_i \}$はlocal equationsと呼ばれる．
+
+    \paragraph{Equivalence of Cartier Divisor.}
+    二つのCartier divisor 
+    \[ D=\{\sect{U_i}{f_i}\}_i, D'=\{\sect{U'_j}{f'_j}\}_j \]
+    は，集合としての合併が再びCartier divisorならば同じものである．
+    すなわち，次が成り立つならば$D=D'$．
+    任意の$i,j$について
+    \[
+        \Forall{i, j}
+        (f_i|_{U_i \cap U'_j}) \cdot (f'_j|_{U_i \cap U'_j})^{-1}
+            \in \Gamma(U_i \cap U'_j, \shO_{U_i \cap U'_j}^*).
+    \]
+
+    以上の二つは I.R.Shafarevich``Algebraic Geometry I" pp.255-256にある．
+
+    \paragraph{Principal Cariter Divisor.}
+    $\{\sect{U_i}{f_i}\}$ :: Cartier divisor on $X$がprincipalであるとは，
+    $f \in \Gamma(X, \shK_X)$が存在し，
+    すべての$i$について$f_i/f \in \Gamma(U_i, \shO_{U_i}^*)$となること．
+    これは$\{\sect{U_i}{f_i}\}-\{\sect{U_i}{f}\}=\{\sect{U_i}{f_i/f}\}\}$が
+    $\Gamma(X, \shO_X^*)$に属すということを言い換えたものである．
+
 \section{Cartier Divisor $\leftrightarrow$ Weil Divisor.}
 
     \paragraph{Weil divisor $\leftarrow$ Cartier divisor.}
@@ -111,9 +140,9 @@
     \begin{Def}
         $f: X \to Y$ :: morphism of schemes,
         $\shF$ :: $\shO_X$-moduleとする．
-        $\eta_{\shF}: \shF \to f^* f_* \shF$をadjoint pair $f^* \dashv f_*$のunitとする．
+        $\eta_{\shF}: \shF \to f_* f^* \shF$をadjoint pair $f^* \dashv f_*$のunitとする．
         $V$ :: open in $Y$について，
-        $(\eta_{\shF})_V: \shF(V) \to f^*f_*\shF(V)$を
+        $(\eta_{\shF})_V: \shF(V) \to f_*f^*\shF(V)$を
         $f^*$と書く．
     \end{Def}
     この定義は教科書には書かれていない．
@@ -195,7 +224,7 @@
         この集合が空ならば$\lsd$はbase point freeと呼ばれる．
     \end{Def}
  
-    \newpage %% !!!!!!!!!!!!!
+%    \newpage %% !!!!!!!!!!!!!
 \section{Global (or Relative) Projective Space $\gProj$ (or $\underline{\Proj})$.}
     \paragraph{Assumption ($\dagger$).}
     $X$ :: noetherian scheme, 

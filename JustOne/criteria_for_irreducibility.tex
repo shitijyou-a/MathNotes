@@ -26,39 +26,39 @@
     この時，単純な計算で
     \[ f_{k}=\sum_{i+j=k}{g_i h_j} \]
     が成り立つと分かる．
-    記法を簡単にするため，$P=(p) \subset \Z$とおく．
+    記法を簡単にするため，$\I{p}=(p) \subset \Z$とおく．
     これが素イデアルであることを何度も使う．
 
-    \paragraph{$g_0 \in P, h_0 \not \in P$.}
+    \paragraph{$g_0 \in \I{p}, h_0 \not \in \I{p}$.}
     $f_0$を考える．
     \[ f_0=g_0 h_0 \]
     前提条件1.より$f_0$は$p$の倍数である．
     さらに前提条件3.から，$f_0$には素因数として$p$がただ一つ含まれる．
     その$p$は$g_0$か$h_0$のどちらか一方に含まれている．
-    そこで前提条件に加えて$(*)~~g_0 \in P, h_0 \not \in P$を仮定する．
+    そこで前提条件に加えて$(*)~~g_0 \in \I{p}, h_0 \not \in \I{p}$を仮定する．
 
-    \paragraph{$g_0, g_1, \dots, g_{n-1} \in P$.}
-    帰納法で$g_0, g_1, \dots, g_{n-1} \in P$を示す．
+    \paragraph{$g_0, g_1, \dots, g_{n-1} \in \I{p}$.}
+    帰納法で$g_0, g_1, \dots, g_{n-1} \in \I{p}$を示す．
     まず，$k=1$で示す．
-    \[ f_1=g_0 h_1 + g_1 h_0 \in P \]
-    $P$はイデアルだから$g_0 h_1 \in P, h_0 \not \in P$．
-    特に$P$は素イデアルだから$g_1 \in P$．
+    \[ f_1=g_0 h_1 + g_1 h_0 \in \I{p} \]
+    $\I{p}$はイデアルだから$g_0 h_1 \in \I{p}, h_0 \not \in \I{p}$．
+    特に$\I{p}$は素イデアルだから$g_1 \in \I{p}$．
     次に，$0 \leq N+1 < n$を満たす自然数$N$について
-    $g_0, g_1, \dots, g_{N} \in P$が成り立つとする．
+    $g_0, g_1, \dots, g_{N} \in \I{p}$が成り立つとする．
     \[ f_{N+1}=g_{N+1} h_0+g_{N} h_1+\sum_{1 \leq j \leq N+1}{g_{N+1-j} h_j } \]
-    そして前提条件1.より$f_{N+1} \in P$が成り立つ．
-    帰納法の仮定より，$g_{N} h_1, \sum_{2 \leq j \leq N+1}{g_{N+1-j} h_j } \in P$．
-    仮定(*)より$h_0 \not \in P$だから$g_{N+1} \in P$．
+    そして前提条件1.より$f_{N+1} \in \I{p}$が成り立つ．
+    帰納法の仮定より，$g_{N} h_1, \sum_{2 \leq j \leq N+1}{g_{N+1-j} h_j } \in \I{p}$．
+    仮定(*)より$h_0 \not \in \I{p}$だから$g_{N+1} \in \I{p}$．
 
-    \paragraph{$g_n \not \in P$.}
+    \paragraph{$g_n \not \in \I{p}$.}
     さて，最後に$f_n$を考える．
     \[ f_{n}=g_{n} h_0+\sum_{1 \leq j \leq n}{g_{n-j} h_j } \]
-    前提条件2.より$f_{n} \not \in P$．すでに示したとおり，$g_0, g_1, \dots, g_{n-1} \in P$が成り立つ．
+    前提条件2.より$f_{n} \not \in \I{p}$．すでに示したとおり，$g_0, g_1, \dots, g_{n-1} \in \I{p}$が成り立つ．
     したがって，仮定(*)と合わせて
-    $g_n \not \in P$が成立する．
+    $g_n \not \in \I{p}$が成立する．
 
     \paragraph{結論: $\deg g=n$.}
-    $0 \in P$だから，このことから$g_n \neq 0$．
+    $0 \in \I{p}$だから，このことから$g_n \neq 0$．
     よって$\deg g=n, \deg h=n-n=0$．これで$f$の既約性が示された．
 \end{proof}
 
@@ -106,15 +106,19 @@
 \begin{Cor}
     $\mathbb{F}_q$を位数$q$の有限体とし，以下の準同型を定める．
     \[ \rho_q: \Z[x] \to \mathbb{F}_q[x];~~ ax^n \mapsto (a \bmod q)x^n. \]
-    $f \in \Q[x]$に適当に$d \in \Z^{\times}$を掛けて$df \in \Z[x]$とする．
+    $f \in \Q[x]$に適当に$d \in \Z \setminus \{0\}$を掛けて
+    $df \in \Z[x]$とする．
     ある$q$について，$\rho_q(df)$が既約ならば$f$は既約である．
 \end{Cor}
 
 \begin{Example}
-    $n \in \Z^{\times}, f=x^3-nx^2+(n-3)+1 \in \Z[x]$とする．
-    $\rho_2(f)=x^3+nx^2+(n+1)+1 $であり，
-    これが一次以上の因子を持つならば，そのうち少なくとも一つは1次式である．
-    しかし$\rho_2(f)(0)=1, \rho_2(f)(1)=1$だから$\rho_2(f)$は1次式で割り切れない．
+    $n \in \Z \setminus \{0\}, f=x^3-nx^2+(n-3)x+1 \in \Z[x]$とする．
+    $\rho_2(f)=x^3+nx^2+(n+1)x+1$となる．
+    $\rho_2(f)$は$3$次多項式だから，$1$次以上の因子を持つならば，
+    そのうち少なくとも一つは$1$次式である．
+    体$\mathbb{F}_2$上の$1$次式は丁度一つの零点を持つから，
+    $\rho_2(f)$も少なくとも一つ零点を持つ．
+    しかし$\rho_2(f)(0)=1, \rho_2(f)(1)=1$だから$\rho_2(f)$は零点を持たない．
     これは矛盾であるから，$\rho_2(f)$は$\mathbb{F}_2[x]$の既約多項式である．
     そして系から，$f$は$\Q[x]$の既約多項式である．
 \end{Example}
