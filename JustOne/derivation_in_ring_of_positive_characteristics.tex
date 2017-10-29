@@ -115,12 +115,13 @@ $\binom{n}{i}$は$i=1,\dots,n-1$について$n$の倍数であるから，
     \[
         A=(\Z/n\Z)[x_0,\dots,x_n],
         \hspace{20pt}
-        D=\sum_{i=0}^{n-1} x_{i+1} \frac{\partial}{\partial x_{i}}.
+        D=\sum_{i=0}^{n} x_{i+1} \frac{\partial}{\partial x_{i}}.
     \]
+    ただし，$x_{n+1}=1$とする．
     このようにすると，$i=0,\dots,n$について$D^i x_0=x_{i}$となる．
     したがって$D^n(x_0 \cdot x_0)$は次のようになる．
     \[ D^n(x_0 \cdot x_0)=x_0 x_n + \sum_{i=1}^{n-1} \binom{n}{i} x_i x_{n-i} + x_n x_0. \]
-    当然，$i \neq j$ならば$x_i x_{n-i} \neq x_j x_{n-j}$となる．
+    当然，$\{x_i x_{n-i}\}_{i=1}^{n-1}$は$\Z/n\Z$上線形独立である．
     したがって$\sum$の部分が$0$になるのは，
     $i=1,\dots,n-1$について$\binom{n}{i} \bmod n=0$となる時のみである．
     このことは，次の主張の通り，$n$が素数であることと同値である．
@@ -152,7 +153,13 @@ $\binom{n}{i}$は$i=1,\dots,n-1$について$n$の倍数であるから，
     $n=m \cdot p$なので，仮定により，
     $\frac{(n-1)\cdots(n-p+1)}{(p-1)!}$は$p$の倍数である．
     特に$(n-1)\cdots(n-p+1)$が$p$の倍数．
-    しかし$p-1$個の整数$n-1, \dots, n-(p-1)$はいずれも$p$と互いに素であるから，
+    しかし$p-1$個の整数$n-1, \dots, n-(p-1)$はいずれも$p$と互いに素である
+    \footnote
+    {
+        $1, \dots, p-1 \bmod n \neq 0$と$n \bmod n=0$から
+        $n-1, \dots, n-(p-1) \bmod \neq 0$が得られる．
+    }
+    から，
     これはありえない．
 
     \paragraph{($\impliedby$).}
@@ -180,15 +187,15 @@ $\binom{n}{i}$は$i=1,\dots,n-1$について$n$の倍数であるから，
 この命題の仮定のうち，条件(2)以外は次のような環で成り立つ:
 $k$上の多項式環・形式的ベキ級数環，及びその剰余環，$k$の元による局所化，テンソル積，直積．
 
-これは次の補題から得られる．
-\begin{Lemma}
-    $A, k$ :: ring, $D \in \Der_k(A)$とする．
-    $x \in A$と$n,k \in \Z_{\geq 0}$について，次が成り立つ．
-    \[ D^k x^n=\sum_{i=0}^{k-1} \binom{k-1}{i} n^{\underline{i+1}} x^{n-(i+1)} (Dx)^i (D^{k-i} x). \]
-    ここで$n^{\underline{i+1}}=n(n-1)\cdots(n-(i+1)+1)$は降下階乗べきである．
-\end{Lemma}
-$D \in \Der_k(A)$は$k$線形写像であること，
-及び$n^{\underline{i+1}}$が$i=0,\dots,k-1$で$(i+1)!$の倍数に成ることに気をつければ，
-この補題から上の命題はすぐに出る．
+%これは次の補題から得られる．
+%\begin{Lemma}
+%    $A, k$ :: ring, $D \in \Der_k(A)$とする．
+%    $x \in A$と$n,k \in \Z_{\geq 0}$について，次が成り立つ．
+%    \[ D^k x^n=\sum_{i=0}^{k-1} \binom{k-1}{i} n^{\underline{i+1}} x^{n-(i+1)} (Dx)^i (D^{k-i} x). \]
+%    ここで$n^{\underline{i+1}}=n(n-1)\cdots(n-(i+1)+1)$は降下階乗べきである．
+%\end{Lemma}
+%$D \in \Der_k(A)$は$k$線形写像であること，
+%及び$n^{\underline{i+1}}$が$i=0,\dots,k-1$で$(i+1)!$の倍数に成ることに気をつければ，
+%この補題から上の命題はすぐに出る．
 
 \end{document}

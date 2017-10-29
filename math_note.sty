@@ -81,10 +81,11 @@
 \newcommand{\mnot}          {/\hspace{-1.2ex}} %% different from \not
 
 %% accent
-\newcommand{\ccheck}[1]{#1\sidecheck\,\sidecheck\,}
-\newcommand{\sidebar}{\,\bar{}} %% use like (long long term)\sidebar instead of \overline{(long long term)}
-\newcommand{\sidecheck}{\,\check{}}
-\newcommand{\sidetilde}{\,\tilde{}}
+%% usage of \sidebar: \overline{(long long term)} -> (long long term)\sidebar
+\newcommand{\sidebar}{\,\bar{}\,}
+\newcommand{\sidecheck}{\,\check{}\,}
+\newcommand{\sidetilde}{\,\tilde{}\,}
+\newcommand{\ccheck}[1]{#1\sidecheck\sidecheck}
 
 %% fundamental spaces
 \newcommand {\C}            {\mathbb{C}}
