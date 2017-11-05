@@ -14,6 +14,8 @@
 \newcommand{\nullCaCl}{\operatorname{CaCl}^{0}}
 \newcommand{\Pic}{\operatorname{Pic}}
 
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\pbundle}{\mathbb{P}}
 \begin{document}
     以下での($*$)とは，次のもの:
     \begin{itemize}
@@ -585,10 +587,53 @@
 
 \section{Some Rational Surfaces.} %% Ex7.7 
 
-\section{Sections of $\pi: \proj(\shE) \to X$
+\section{Sections of $\pi: X \to \pbundle(\shE)$
     $\leftrightarrow$ Quotient Invertible Sheaves of $\shE$.} %% Ex7.8 
 
-\section{ } %% Ex7.9 
+    $X$ :: noetherian scheme,
+    $\shE$ :: coherent locally free sheaf on $X$とする．
+    Prop7.12において$Y=X, g=\id{X}$とすると，
+    以下の図式を成立させる$\sigma: X \to \pbundle(\shE)$と
+    quotient invertible sheaf of $\shE $:: $\shE \to \shL \to 0$が
+    \footnote
+    {
+        $\shE \to \shL \to 0$だけで$\shL$と全射 :: $\shE \to \shL$の組を意味する．
+        $g^*\shE=\shE$に注意．
+    }
+    対応することがわかる．
+    \[
+        \xymatrix
+        {
+            X \ar[r]^-{\sigma}\ar[d]_-{\id{X}}& \pbundle(\shE) \ar[ld]^-{\pi} \\
+            X
+        }
+    \]
+    明らかに$\sigma$は$\pi$のsectionである．
+
+\section{$\Pic \pbundle(\shE) \iso \Pic X \times \Z$.} %% Ex7.9 
+    $X$ :: regular noetherian scheme,
+    $\shE$ :: locally free coherent sheaf of rank $\geq 2$ on $X$とする．
+    $r=\rank \shE (\geq 2)$とおく．
+
+    \subsection{$\Pic \pbundle(\shE) \iso \Pic X \times \Z$.}
+    $X$はlocally factorial, reduced, noetherian schemeである．
+    Prop4.1よりaffine schemeはseparatedだから，
+    $X$の任意のirreducible affine open subset :: $U=\Spec A$はCor6.16の条件を満たす．
+    したがって$\Pic U \iso \Cl U$．
+    そしてp.162から$\pi^{-1}(U) \iso \proj^{r-1}_A$．
+    
+    Ex7.8の図式から，次のsplitする図式が得られる．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \ker \sigma^* \ar[r]& \Pic \pbundle(\shE) \ar@<2pt>[r]^-{\sigma^*}&\ar@<2pt>[l]^-{\pi^*} \Pic X \ar[r]& 0
+        }
+    \]
+
+    \subsection{$\pbundle(\shE) \iso \pbundle(\shE') \iff
+        \Exists{\shL \in \Pic X} \shE'=\shE \otimes \shL$.}
+    $\shE'$ :: locally free coherent sheaf on $X$とする．
+    （$\rank \shE' \geq 2$という条件はついていない．）
 
 \section{$\proj^n$-Bundles Over a Scheme.} %% Ex7.10 
 

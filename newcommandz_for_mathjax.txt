@@ -1,29 +1,40 @@
 \[
+\newcommand{\mapedfrom}{\mapsfrom}
 \newcommand{\mor}           {\text{ or }}
 \newcommand{\mand}          {\text{ and }}
-\newcommand{\mwhere}        {\text{ where }}
-\newcommand{\C}             {\mathbb{C}}
-\newcommand{\R}             {\mathbb{R}}
-\newcommand{\Q}             {\mathbb{Q}}
-\newcommand{\Z}             {\mathbb{Z}}
-\newcommand{\N}             {\mathbb{N}}
-\newcommand{\cat}           [1]{\mathbf{#1}}
-\newcommand{\id}            [1]{\mathrm{id}_{#1}}
-\newcommand{\Hom}           {\operatorname{Hom}}
-\newcommand{\dom}           {\operatorname{dom}}
-\newcommand{\cod}           {\operatorname{cod}}
-\newcommand{\eq}            {\operatorname{eq}}
-\newcommand{\coeq}          {\operatorname{coeq}}
+\newcommand{\mwhere}        {~~\text{where}~~}
+\newcommand{\mnot}          {/\hspace{-1.2ex}}
+\newcommand{\sidebar}{\,\bar{}\,}
+\newcommand{\sidecheck}{\,\check{}\,}
+\newcommand{\sidetilde}{\,\tilde{}\,}
+\newcommand{\ccheck}[1]{#1\sidecheck\sidecheck}
+\newcommand {\C}            {\mathbb{C}}
+\newcommand {\R}            {\mathbb{R}}
+\newcommand {\Q}            {\mathbb{Q}}
+\newcommand {\Z}            {\mathbb{Z}}
+\newcommand {\N}            {\mathbb{N}}
+\newcommand {\cat}          [1]{\mathbf{#1}}
+\newcommand {\id}           [1]{\mathrm{id}_{#1}}
+\newcommand {\Hom}          {\operatorname{Hom}}
+\newcommand {\dom}          {\operatorname{dom}}
+\newcommand {\cod}          {\operatorname{cod}}
+\newcommand {\eq}           {\operatorname{eq}}
+\newcommand {\coeq}         {\operatorname{coeq}}
 \newcommand{\open}          [1]{\mathcal{O}_{#1}}
 \newcommand{\closed}        [1]{\mathcal{A}_{#1}}
 \newcommand{\cl}            {\operatorname{cl}}
 \newcommand{\opint}         {\operatorname{int}}
 \newcommand{\pr}            {\operatorname{pr}}
 \newcommand{\codim}         {\operatorname{codim}}
+\newcommand{\ClosedIn}      {\text{ :: closed in }}
+\newcommand{\OpenIn}        {\text{ :: open in }}
+\newcommand{\emb}           {\operatorname{emb}}
+\newcommand{\incl}          {\operatorname{incl}}
+%\newcommand {\ker}          {\operatorname{ker}}
 \newcommand{\coker}         {\operatorname{coker}}
 \newcommand{\im}            {\operatorname{im}}
 \newcommand{\coim}          {\operatorname{coim}}
-\newcommand{\I}             [1]{\mathfrak{#1}} 
+\newcommand{\I}             [1]{\mathfrak{#1}}
 \newcommand{\Spec}          {\operatorname{Spec}}
 \newcommand{\Max}           {\operatorname{Max}}
 \newcommand{\Ann}           {\operatorname{Ann}}
@@ -32,27 +43,58 @@
 \newcommand{\Nil}           {\operatorname{Nil}}
 \newcommand{\height}        {\operatorname{height}}
 \newcommand{\length}        {\operatorname{length}}
-\newcommand{\Quot}          {\operatorname{Quot}} 
+\newcommand{\Quot}          {\operatorname{Quot}}
+\newcommand{\divible}       {\!\backslash\,}
+\newcommand{\ndivible}      {\!\!\not\!\backslash\,}
 \newcommand{\fchar}         {\operatorname{char}}
 \newcommand{\transdeg}      {\mathrm{tr.deg.\,}}
 \newcommand{\irr}           {\operatorname{irr}}
 \newcommand{\Gal}           {\operatorname{Gal}}
-\newcommand{\zeros}         {\mathcal{Z}} 
-\newcommand{\defs}          {\mathcal{I}} 
-\newcommand{\zerosa}        {\zeros_a} 
-\newcommand{\zerosp}        {\zeros_p} 
-\newcommand{\defsa}         {\defs_a} 
-\newcommand{\defsp}         {\defs_p} 
-\newcommand{\proj}          {\mathbb{P}} 
-\newcommand{\affine}        {\mathbb{A}} 
-\newcommand{\reg}           [2]{\langle #1,#2 \rangle} 
-\newcommand{\germ}          [2]{\langle #1,#2 \rangle} 
-\newcommand{\iso}           {\equiv} 
-\newcommand{\bi}            {\cong} 
-\newcommand{\homeo}         {\approx} 
+\newcommand{\zeros}         {\mathcal{Z}}
+\newcommand{\defs}          {\mathcal{I}}
+\newcommand{\zerosa}        {\zeros_a}
+\newcommand{\zerosp}        {\zeros_p}
+\newcommand{\defsa}         {\defs_a}
+\newcommand{\defsp}         {\defs_p}
+\newcommand{\proj}          {\mathbb{P}}
+\newcommand{\affine}        {\mathbb{A}}
+\newcommand{\reg}           [2]{\langle #1,#2 \rangle}
+\newcommand{\sect}          [2]{\langle #1,#2 \rangle}
+\newcommand{\germ}          [2]{\langle #1,#2 \rangle}
+\newcommand{\Proj}          {\operatorname{Proj}}
+\newcommand{\res}           {\operatorname{res}}
+\newcommand{\basesp}        {\operatorname{sp}}
+\newcommand{\iso}           {\cong}
+\newcommand{\homeo}         {\approx}
 \newcommand{\isomap}        {\xrightarrow{\iso}}
-\newcommand{\bimap}         {\xrightarrow{\bi}}
 \newcommand{\homeomap}      {\xrightarrow{\homeo}}
+\newcommand{\shA}{\mathcal{A}}
+\newcommand{\shB}{\mathcal{B}}
+\newcommand{\shC}{\mathcal{C}}
+\newcommand{\shD}{\mathcal{D}}
+\newcommand{\shE}{\mathcal{E}}
+\newcommand{\shF}{\mathcal{F}}
+\newcommand{\shG}{\mathcal{G}}
+\newcommand{\shH}{\mathcal{H}}
+\newcommand{\shI}{\mathcal{I}}
+\newcommand{\shJ}{\mathcal{J}}
+\newcommand{\shK}{\mathcal{K}}
+\newcommand{\shL}{\mathcal{L}}
+\newcommand{\shM}{\mathcal{M}}
+\newcommand{\shN}{\mathcal{N}}
+\newcommand{\shO}{\mathcal{O}}
+\newcommand{\shP}{\mathcal{P}}
+\newcommand{\shQ}{\mathcal{Q}}
+\newcommand{\shR}{\mathcal{R}}
+\newcommand{\shS}{\mathcal{S}}
+\newcommand{\shT}{\mathcal{T}}
+\newcommand{\shU}{\mathcal{U}}
+\newcommand{\shV}{\mathcal{V}}
+\newcommand{\shW}{\mathcal{W}}
+\newcommand{\shX}{\mathcal{X}}
+\newcommand{\shY}{\mathcal{Y}}
+\newcommand{\shZ}{\mathcal{Z}}
+\newcommand{\shHom}{\mathscr{H\!o\!m}}
 \newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\rank}          {\operatorname{rank}}
 \newcommand{\opnull}        {\operatorname{null}}

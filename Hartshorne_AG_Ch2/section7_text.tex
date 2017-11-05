@@ -7,6 +7,8 @@
 \newcommand{\lsd}{\mathfrak{d}}
 \newcommand{\gProj}{\mathbf{Proj}\,}
 \newcommand{\inclmap}{\hookrightarrow}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\pbundle}{\mathbb{P}\,}
 
 \begin{document}
 \begin{Def}
@@ -246,10 +248,10 @@
 
     \paragraph{Construction of $\gProj$.}
     $X, \shS$を($\dagger$)を満たすscheme, graded $\shO_X$-algebraとする．
-    任意のaffine open subset $U=\Spec A \subseteq X$をとる．
+    任意のaffine open subset :: $U=\Spec A \subseteq X$をとる．
     $\shS_0(U)=\shO_X(U)=A$に注意する．
     $\shS$ :: quasi-coherentなので，
-    $\shS|_U=\tilde{M}$となる$M$ :: $A$-algebraが存在する．
+    $\shS|_U=\tilde{M}$となる$M$ :: graded $A$-algebraが存在する．
     $D_+(g) ~(g \in M_+ \otimes A_f=(M \otimes A_f)_+)$でのsectionを見ると，
     次式の最後の等号が分かる．
     \[ \Proj \shS(U)=\Proj M=\Proj M \otimes_A A=\Proj M \times_{\Spec A} \Spec A. \]
@@ -274,4 +276,30 @@
     こうして$\gProj \shS, \pi: \gProj \shS \to X$が構成できる．
     $\shO_{\Proj \shS(U)}(1)$達も貼りあわせて，$\shO(1)$を得る．
 
+    \begin{Def}[Symmetric algebra, Ex5.16]
+        $A$ :: ring,
+        $M$ :: $A$-moduleとする．
+        $\Sym^n(M)$を次で定める．
+        \[
+            \Sym^0(M)=A,~~~~
+            \Sym^n(M)=\frac{M^{\otimes n}}{(s \otimes t-t \otimes s)_{s,t \in M}} ~~(n>0).
+        \]
+        $\Sym(M), \Sym_+(M)$を次で定める．
+        \[
+            \Sym(M)=\bigoplus_{d \geq 0} \Sym^d(M),~~~~
+            \Sym_+(M)=\bigoplus_{d > 0} \Sym^d(M).
+        \]
+
+        $X$ :: ringed space,
+        $\shF$ :: quasi-coherent sheaf on $X$について，
+        $\Sym^n(\shF)$を
+        presheaf :: $U \mapsto \Sym^n(\shF(U))$のassociated sheafとする．
+        $\Sym(\shF), \Sym_+(\shF)$はこれと同様に定める．
+    \end{Def}
+    \begin{Def}
+        $\shE$ :: locally free coherent sheafについて，
+        $\Sym_+(\shE)$は($\dagger$)を満たすので，
+        $\pbundle(\shE)=\gProj \Sym_+(\shE)$が定義できる．
+        これをProjective space bundleと呼ぶ．
+    \end{Def}
 \end{document}

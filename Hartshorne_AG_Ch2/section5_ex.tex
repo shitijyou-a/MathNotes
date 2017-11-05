@@ -152,19 +152,42 @@
     \end{proof}
 
     \begin{Claim}
-        \[ f^* \shG \otimes f^* \check{\shE} \iso f^* (\shG \otimes \check{\shE}). \]
+        \[ f^* \shF \otimes f^* \shG \iso f^* (\shF \otimes \shG). \]
     \end{Claim}
     \begin{proof}
         \begin{align*}
-            {}&     f^* \shG \otimes f^* \check{\shE} \\
-            =&      (f^{-1}\shG \otimes \shO_X) \otimes (f^{-1}\check{\shE} \otimes \shO_X) \\
-            \iso&  (f^{-1}\shG \otimes f^{-1}\check{\shE}) \otimes \shO_X \\
-            \iso&  f^{-1}(\shG \otimes f^{-1}\check{\shE}) \otimes \shO_X \\
-            \iso&  f^{-1}f^{-1}(\shG \otimes \check{\shE}) \otimes \shO_X \\
-            =&      f^{-1}(\shG \otimes \check{\shE}) \otimes \shO_X \\
-            =&      f^*(\shG \otimes \check{\shE})
+            {}&     f^* \shF \otimes f^* \shG \\
+            =&      (f^{-1}\shF \otimes \shO_X) \otimes (f^{-1}\shG \otimes \shO_X) \\
+            \iso&  (f^{-1}\shF \otimes f^{-1}\shG) \otimes \shO_X \\
+            \iso&  f^{-1}(\shF \otimes f^{-1}\shG) \otimes \shO_X \\
+            \iso&  f^{-1}f^{-1}(\shF \otimes \shG) \otimes \shO_X \\
+            =&      f^{-1}(\shF \otimes \shG) \otimes \shO_X \\
+            =&      f^*(\shF \otimes \shG)
         \end{align*}
-        ここで$f^{-1}(\shF \otimes \shG) \iso (f^{-1}\shF \otimes \shG)$を用いた．
+        ここで$f^{-1}$ (colimit)と$(-) \otimes \shG$ (left adjoint functor)が可換であることを用いた．
+    \end{proof}
+    \begin{proof}
+        これは次のページにある証明である:
+        \url{https://math.stackexchange.com/questions/92398}
+        (c)と$f^* \dashv f_*$ :: adjoint pairをもちいる．
+        \begin{align*}
+            {}&     \Hom(f^* \shF \otimes f^* \shG, -) \\
+            \iso&   \Hom(f^* \shF, \shHom(f^* \shG, -)) \\
+            \iso&   \Hom(\shF, f_* \shHom(f^* \shG, -)) \\
+            \iso&   \Hom(\shF, \shHom(\shG, f_* -)) \\
+            \iso&   \Hom(\shF \otimes \shG, f_* -) \\
+            \iso&   \Hom(f^*(\shF \otimes \shG), -)
+        \end{align*}
+        途中で$f_* \shHom(f^* \shG, -) \iso \shHom(\shG, f_* -)$を使ったが，
+        これは次の計算で示される．
+        \begin{align*}
+            {}& \Gamma(V,f_* \shHom_X(f^* G,H)) \\
+            =&  \Hom_{f^{-1}(V)}(f^* G |_{f^{-1}(V)},H|_{f^{-1}(V)}) \\
+            =&  \Hom_{f^{-1}(V)}(f_V^* G|_V,H|_{f^{-1}(V)}) \\
+            =&  \Hom_V(G|_V,(f_V)_* H|_{f^{-1}(V)}) \\
+            =&  \Hom_V(G|_V,(f_* H)|_V) \\
+            =&  \Gamma(V,\shHom_Y(G,f^* H))
+        \end{align*}
     \end{proof}
 
 \section{Module Sheaves over the $\Spec$ of a D.V.R.} %% Ex5.2 
@@ -738,6 +761,7 @@
     $V$ :: irreducibleに注意．
     Ex2.14dから$V$のhomogeneous coordinate ringは$S$だから，
     $S$ :: domain (cf. ch I, Ex2.4)．
+    $K$ :: function field of $X$としておく．
 
     \subsubsection{$S'$ :: integrally closed．}
 
@@ -759,90 +783,17 @@
     ただし$\ord a$は$a$が持つ斉次成分の次数で最低のものである．
     $\Quot(\shJ_x)=\Quot(S)$も分かる．
 
-    \paragraph{$\shJ_x$ :: integrally closed / Introduction.}
-    $\shJ_x$ :: integrally closedであることを示すため，
-    次の等式を考える．
-    \[
-        \left(\frac{a}{f}\right)^r+c_{r-1}\left(\frac{a}{f}\right)^{r-1}+\dots+c_0=0
-        \mwhere
-        a/f \in \Quot(S),~~ \{ c_i \}_{i=0}^{r-1} \subset \shJ_x.
-        \leqno{(*)}
-    \]
-    $d=\deg a/f$とおく．
-    $\shO_{X,x}=S_{(\I{p}_x)}$ :: integrally closedを利用するため，
-    操作を加えて$a/f, \{c_i\}$を$0$次斉次元にしたい．
-    操作は$d$の符号に依って変わってくる．
-
-    \paragraph{$d<0$はありえない．}
-    最初に$d < 0$と仮定する．
-    すると$\ord c_i \geq 0$より，
-    $i=r-1,\dots,0$では$\ord c_i+di>dr$が成り立つ．
-    したがって左辺の$dr$次斉次成分を取り出すと
-    先頭項（$i=r$の項）のみになり，これは明らかに$0$でない．
-
-    \paragraph{$d=0$の場合．}
-    $a/f$が負の斉次成分を持つことはないので，$a/f$は$0$次斉次元である．
-    なので係数から$0$次斉次成分を取り出しても正しい等式となる．
-    （ch I, Thm3.4で同様の操作を行った．）
-
-    \paragraph{$d>0$の場合．}
-    (TODO:)
-    その上で$s \in (S-\I{p}_x)_1$をとり
-    \footnote
-    {
-        $\I{p}_x$が$S_1$全体を含むことはない．
-        そうなれば$S_+ \subseteq \I{p}_x$となるが，これは$\Proj S$の定義からありえない．
-        なので$s \in (S-\I{p}_x)_1$がとれる．
-    }，
-    等式($*$)の両辺に$s^{-rd}$を両辺にかけて，
-    $0$次斉次成分を取り出しても正しい等式となる．
-    以上から，次の等式が得られる．
-    \[
-        \left(\frac{a_d}{s^df}\right)^r+
-        \left(\frac{c_{r-1}}{s^d}\right)_0\left(\frac{a_d}{s^df}\right)^{r-1}+
-        \dots+
-        \left(\frac{c_0}{s^{rd}}\right)_0
-        =0
-    \]
-    各項の$0$次斉次成分が$\frac{(c_i a^i)_0}{s^{rd}f^{r-1}}$でなく
-    上のように取れるのは，
-    $\frac{c_i}{s^{d(r-i)}}$と$\frac{a}{a^df}$の斉次成分が
-    どちらも$0$以下のものしか無いことに拠る．
-    $0$以下の整数同士を加えて$0$になるのは$0$同士の和のみ，
-    ということである．
-    
-    \paragraph{$\shJ_x$ :: integrally closed / Conclusion.}
-    以上の操作により，$a/f$及び係数$\{c_i\}$が$0$次斉次元になる．
-    このことから$f$が斉次だと分かる．
-    等式($*$)が操作後の条件を満たすとして，
-    等式の両辺に$f^r$を掛けて$a^r$を移項する:
-    \[ c_{r-1}a^{r-1} \cdot f+\dots+c_1a^1 \cdot f^{r-1}+c_0 \cdot f^r=-a^r. \]
-    $c_i, a$は斉次元だから，左辺は斉次元である．
-    加えて左辺の各項は次数が同じだから，各項が斉次元．
-    したがって$f$は斉次でなくてはならない．
-    以上から，$a/f \in S_{((0))}, \{c_i\} \subset S_{(\I{p}_x)}$が分かり，
-    $\shO_{X,x}=S_{(\I{p}_x)}$ :: integrally closedより$f \in S-\I{p}_x$．
-    まとめて，$a/f \in \shJ_x$．
-    よって$\shJ_x$ :: integrally closed．
-
-    \paragraph{$\Forall{x \in X} \shJ_x$ :: integrally closed $\implies$ $S'$ :: integrally closed．}
+    \paragraph{$S'$ :: integrally closed．}
     Thm5.19の証明後半から，$S' \subseteq \bar{S}$．
-    そこで$a/f \in \bar{S} \subset \Quot S$をとって考える．
-    この時，次のような等式が成立する．
-    \[
-        \left(\frac{a}{f}\right)^r+c_{r-1}\left(\frac{a}{f}\right)^{r-1}+\dots+c_0=0
-        \mwhere
-        \{ c_i \}_{i=0}^{r-1} \subset S \subseteq S'.
-    \]
-    $S'=\Gamma(X,\shJ)$だから，任意の$x \in X$について$\{c_i\} \subset \shJ_x$．
-    したがって$\shJ_x$ :: integrally closedより$a/f \in \shJ_x \subset S_{\I{p}_x}$．
-    特に，$f$は斉次元である．
-    $f$が$S$の単元でないと仮定すると，
-    $f$が斉次元であることから，$f \in \I{p}_x$なる$x \in X$がとれる．
-    この$x$について$a/f \not \in \shJ_x$となり，矛盾が生じる．
-    よって$f$は単元でしかありえない．
-    すなわち$a/f \in S \subseteq S'$．
-    以上から$S' \supseteq \bar{S}$が示された．
+    Thm4.11より，$\bar{S}$は$S$を含む$K$の全てのvaluation ringの共通部分である．
+    したがって，$S' \supseteq \bar{S}$は，
+    $a \in K$が$S$を含む全てのvaluation ringに含まれるならば$a \in S'$，
+    ということと同値である．
+
+    証明にはEx4.5を用いる．
+    $R$を$S$を含む$K$のvaluation ringとする．
+    この時，Ex4.5bから，$\shO_{X,x} \subseteq R$となる$x \in X$がただひとつ存在する．
+    Thm4.11と仮定($X$ :: normal)から，$\shO_{X,x}=R$．
 
     \subsection{$S_d=S'_d$ for all sufficiently large $d$.}
     $S$がEx5.9の仮定を満たすことは明らか．
