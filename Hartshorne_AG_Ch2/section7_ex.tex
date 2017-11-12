@@ -440,29 +440,33 @@
         (1)
         \xymatrix@C=12pt
         {
-            {} & {} & {} & {} \\
-            {} & X \times_A X \ar[rr]\ar[dd]\ar[rd]^-{i \times j}& {} &  X \ar[d]^-{i} \\
+            {} & X \ar@/^15pt/[rrd]^-{i}\ar@/_15pt/[ddr]_-{j}\ar[rd]^-{\phi}& {} &  {} \\
             {} & {} & \proj^{N}_A \ar[r]^-{p_1}\ar[d]_-{p_2}& \proj^m_A \ar[d] \\
-            {}& X \ar[r]_-{j}& \proj^n_A \ar[r]& \Spec A
+            {} & {} & \proj^n_A \ar[r]& \Spec A
         }
         \hspace{40pt}
         (2)
-        \xymatrix@C=12pt
+        \xymatrix@C=12pt@R=40pt
         {
-            X \ar@{=}[rrr]\ar@{=}[ddd]\ar@{->}[rrdd]^(.7){\omega}& {} & {} &  X \ar@{=}[d]\\
-            {} & X \times_A X \ar[rr]\ar[dd]& {} &  X \ar[d]^-{i} \\
-            {} & {} & \proj^{N}_A \ar[r]^-{p_1}\ar[d]_-{p_2}& \proj^m_A \ar[d] \\
-            X \ar@{=}[r]& X \ar[r]_-{j}& \proj^n_A \ar[r]& \Spec A
+            X \ar[d]_(.3){i}\ar[rrd]^(.25){j}\ar[rr]^-{\phi}&
+                {} &
+                \proj^m \times \proj^n \ar[lld]_(.3){p_1}\ar[d]^(.3){p_2}\ar[rrr]^-{\psi}&
+                {} &
+                {} &
+                \proj^N \\
+            \proj^m \ar[r]& \Spec A &\ar[l] \proj^n & {} & {}
         }
     \]
-    (2)では$X$を図式に付け加え，
-    fiber product $X \times X$の普遍性から誘導される射と$i \times j$の合成を$\omega$としている．
+    (1)の図式にclosed immersion :: $\psi$を加えたのが(2)である．
+    (2)の図式で$\omega=\psi \circ \phi$とする．
     $\omega^*\shO_{\proj^N}(1)$を計算すると，次のようになる．
+    $\omega^*=\phi^*\psi^*$に注意せよ．
     \begin{align*}
         {}&     ~\omega^*\shO_{\proj^N}(1) \\
-        \iso&   ~\omega^* (p_1^* \shO_{\proj^m}(1) \otimes_A p_2^* \shO_{\proj^m}(1)) \\
-        \iso&   ~\omega^* p_1^* \shO_{\proj^m}(1) \otimes_A \omega^* p_2^* \shO_{\proj^m}(1) \\
-        \iso&   ~(p_1 \circ \omega)^* \shO_{\proj^m}(1) \otimes_A (p_2 \circ \omega)^* \shO_{\proj^m}(1) \\
+        \iso&   ~\phi^*\shO_{\proj^m \times \proj^n}(1) \\
+        \iso&   ~\phi^* (p_1^* \shO_{\proj^m}(1) \otimes_A p_2^* \shO_{\proj^m}(1)) \\
+        \iso&   ~\phi^* p_1^* \shO_{\proj^m}(1) \otimes_A \phi^* p_2^* \shO_{\proj^m}(1) \\
+        \iso&   ~(p_1 \circ \phi)^* \shO_{\proj^m}(1) \otimes_A (p_2 \circ \phi)^* \shO_{\proj^m}(1) \\
         \iso&   ~i^* \shO_{\proj^m}(1) \otimes_A j^* \shO_{\proj^m}(1) \\
         \iso&   ~\shL \otimes_A \shM
     \end{align*}
@@ -482,27 +486,38 @@
     最後に$\omega$がimmersionであることを示そう．
     \begin{Claim}
         $i: X \to \proj^m_A$をimmersionとする．
-        次の可換図式において，$X \to \proj^N_A$はimmersionである．
-        \[
-        \xymatrix@R=35pt@C=15pt
+        次の可換図式において，$\psi \circ \phi: X \to \proj^N_A$はimmersionである．
+        \[ 
+        \xymatrix@C=12pt@R=40pt
         {
-            X \ar@{=}[rrr]\ar@{=}[ddd]\ar[rd]& {} & {} &  X \ar@{=}[d]\\
-            {} & X \times_A X \ar[rd] \ar[r]\ar[d]& \proj^N \times X \ar[r]\ar[d]&  X \ar[d]^-{i} \\
-            {} & X \times \proj^N \ar[d]\ar[r]& \proj^{N}_A \ar[r]^-{p_1}\ar[d]_-{p_2}& \proj^m_A \ar[d] \\
-            X \ar@{=}[r]& X \ar[r]_-{j}& \proj^n_A \ar[r]& \Spec A
+            X \ar[d]_(.3){i}\ar[rrd]^(.25){j}\ar[rr]^-{\phi}&
+                {} &
+                \proj^m \times \proj^n \ar[lld]_(.3){p_1}\ar[d]^(.3){p_2}\ar[rrr]^-{\psi}&
+                {} &
+                {} &
+                \proj^N \\
+            \proj^m \ar[r]& \Spec A &\ar[l] \proj^n & {} & {}
         }
         \]
     \end{Claim}
     \begin{proof}
-        （TODO）
-        多分示す必要があるもの:
-        $j, X \to X \times X$ :: closed immersion,
-        immersion :: stable under base extension \& inherted by composition．
-        以上を示すと，主張は自明になる．
-        $j$ :: closed immersionはProp7.2とThm7.6の証明から得られると思う．
-        $X \to X \times X$ :: closed immersionは
-        $X \times X$との合成がsurjectiveであることから，
-        定義にしたがって示せると思う．
+        次の3つが示せる．
+        \begin{enumerate}[label=(\roman*)]
+            \item closed immersion :: immersion．
+            \item composition of two immersion :: immersion.
+            \item immersion :: stable under base cahnge.
+        \end{enumerate}
+        するとEx4.8の結果がimmersionについて使える．
+        まず，図式において，$p_1$はprojective over $A$かつ$A$ :: noetherian ring．
+        したがってEx4.9からseparatedである．
+        なのでEx4.8eより$\phi$ :: immersion．
+        $\psi$ :: immersionとあわせて$\psi \circ \phi$ :: immersion.
+        
+        上の項目において，(ii)は一般には成立しない．
+        しかし$X$ :: noetherian schemeなので，
+        immersionはclosed $\circ$ openにもopen $\circ$ closedにも分解でき，
+        このことを用いて(ii)が示せる．
+        \url{https://stacks.math.columbia.edu/tag/01QV}を参照するとよい．
     \end{proof}
 
     \subsection{If $\shL$ :: ample then $\shL^{\otimes n}$ :: very ample for sufficiently large all $n>0$.}
@@ -610,30 +625,138 @@
     \]
     明らかに$\sigma$は$\pi$のsectionである．
 
-\section{$\Pic \pbundle(\shE) \iso \Pic X \times \Z$.} %% Ex7.9 
+\section{$\Pic \pbundle(\shE) \iso \Pic X \oplus \Z$.} %% Ex7.9 
     $X$ :: regular noetherian scheme,
     $\shE$ :: locally free coherent sheaf of rank $\geq 2$ on $X$とする．
     $r=\rank \shE (\geq 2)$とおく．
+    また$P=\pbundle(\shE)$としておく．
 
-    \subsection{$\Pic \pbundle(\shE) \iso \Pic X \times \Z$.}
-    $X$はlocally factorial, reduced, noetherian schemeである．
-    Prop4.1よりaffine schemeはseparatedだから，
-    $X$の任意のirreducible affine open subset :: $U=\Spec A$はCor6.16の条件を満たす．
-    したがって$\Pic U \iso \Cl U$．
-    そしてp.162から$\pi^{-1}(U) \iso \proj^{r-1}_A$．
-    
-    Ex7.8の図式から，次のsplitする図式が得られる．
+    \subsection{$\Pic \pbundle(\shE) \iso \Pic X \oplus \Z$.}
+    これはEx6.1 ($\Pic \proj_X^n \iso \Pic X \oplus \Z$) のrelatively versionである．
+
+    全射$\shE \to \shO_X$を考える．
+    Ex7.8の図式から次のsplitする図式が得られる (Ex6.8aを用いる)．
     \[
         \xymatrix
         {
-            0 \ar[r]& \ker \sigma^* \ar[r]& \Pic \pbundle(\shE) \ar@<2pt>[r]^-{\sigma^*}&\ar@<2pt>[l]^-{\pi^*} \Pic X \ar[r]& 0
+            \Pic P \ar@<2pt>[r]^-{\sigma^*}&\ar@<2pt>[l]^-{\pi^*} \Pic X \ar[r]& 0
         }
     \]
+    次の列が完全列であることを示したい．
+    \[
+        \xymatrix
+        {
+            0 \ar[r]& \Z \ar[r]^-{1 \mapsto \shO_P(1)}& \Pic P \ar@<2pt>[r]^-{\sigma^*}&\ar@<2pt>[l]^-{\pi^*} \Pic X \ar[r]& 0
+        }
+    \]
+    Prop7.12（の証明）より$\sigma: X \to P$に対して
+    $\sigma^*(\shO_P(1)) \iso \shO_X$が成立する．
+    このことから$\{ \shO_P(n) \mid n \in \Z \}$が$\ker \sigma^*$に含まれることは明らか
+    \footnote
+    {
+        $-n<0$については$\shO_P(-n)$は$\shO_P(n)$の逆元である．
+    }．
+    よって調べるべきは次の二つである．
+    \begin{enumerate}[label=(\roman*)]
+        \item $\Z \iso \{ \shO_P(n) \mid n \in \Z \}.$
+        \item $\ker \sigma^* \subseteq \{ \shO_P(n) \mid n \in \Z \}.$
+    \end{enumerate}
+
+    \paragraph{$\Z \iso \{ \shO_P(n) \mid n \in \Z \}.$}
+    $1 \mapsto \shO_P(1)$が全射であることは明らか．
+    なので単射であることを示せば良い．
+    $\shO_P(n)=\shO_P$が成立するとして$n=0$を導く．
+    Prop7.11aと$\shO_P(n)=\shO_P$より$\pi_*\shO_P(n) \iso \pi_*\shO_P, \Sym^n(\shE) \iso \shO_X$．
+    Ex5.16aより次が分かる．
+    \[ \rank \Sym^n(\shE)=\binom{r+n-1}{r-1}=1=\rank \shO_X. \]
+    よって$r-1=0 \mor r+n-1$．$r \geq 2$なので$n=0$が得られる．
+
+    \paragraph{$\ker \sigma^* \subseteq \{ \shO_P(n) \mid n \in \Z \}.$}
+    $\shL \in \ker \sigma^*$をとる．
+    $\sigma^* \shL \iso \shO_X \iso \sigma^* \shO_P(1)$なので，
+    Ex6.8aを用いて$\sigma^*(\shL \otimes \shO_P(-1))=\shO_X$を得る．
+
+%    $X$はlocally factorial, reduced, noetherian schemeである．
+%    Prop4.1よりaffine schemeはseparatedだから，
+%    $X$の任意のirreducible affine open subset :: $U=\Spec A$はCor6.16の条件を満たす．
+%    したがって$\Pic U \iso \Cl U$．
+
+%    そしてp.162から$\pi^{-1}(U) \iso \proj^{r-1}_A=\proj^{r-1} \times \Spec A$．
+%    $X$の任意のirreducible affine open subset :: $U$について，
+%    $\Pic \pi^{-1}(U) \iso \Z \oplus \Pic U$ 
+%    (Cor6.16, p.162, Ex6.1)．
 
     \subsection{$\pbundle(\shE) \iso \pbundle(\shE') \iff
         \Exists{\shL \in \Pic X} \shE'=\shE \otimes \shL$.}
     $\shE'$ :: locally free coherent sheaf on $X$とする．
-    （$\rank \shE' \geq 2$という条件はついていない．）
+%    （$\rank \shE' \geq 2$という条件はついていない．）
+    名前を次のように付ける:
+    $P=\pbundle(\shE), \pi: P \to X, P'=\pbundle(\shE'), \pi': P' \to X$．
+
+    \paragraph{$\implies$.}
+    $\phi: P' \isomap P$をとる．
+    \[
+        \xymatrix
+        {
+            P' \ar@<2pt>[rr]^-{\phi}\ar[rd]_-{\pi'}& {} &\ar@<2pt>[ll]^-{\phi^{-1}} P \ar[ld]^-{\pi} \\
+            {} & X & {}
+        }
+    \]
+    $\shO_{P'}(1) \in \Pic P \iso \Pic X \oplus \Z$なので，
+    \[ \phi^* \shO_{P'}(1) \iso \shO_P(1) \otimes \pi^* \shL ~~~(\shL \in \Pic X). \]
+    左辺は$\Pic P'$の，右辺は$\Pic P$の生成元である．
+    （なので$\shO_P(1)$が右辺に現れる．）
+    両辺に$\pi_*$を作用させてEx5.1d, Prop7.11aを用いると次のよう．
+    \[ \pi_*\phi^* \shO_{P'}(1) \iso \shE \otimes \shL. \]
+    あとは$\pi_* \phi^*=\pi'_*$を示せば，
+    Prop7.11aから主張が得られる．
+    $\phi$が同型写像であることに注意して計算する．
+    \begin{align*}
+        {}&     \pi_* \phi^* - \\
+        \iso&   \Hom(\shO_{P}, \pi_* \phi^* -) \\
+        \iso&   \Hom(\pi^* \shO_{P}, \phi^* -) \\
+        \iso&   \Hom((\phi^{-1})^*\pi^* \shO_{P}, (\phi^{-1})^*\phi^* -) \\
+        \iso&   \Hom(\pi'^* \shO_{P}, -) \\
+        \iso&   \Hom(\shO_{P}, \pi'_* -) \\
+        \iso&   \pi'_* -.
+    \end{align*}
+
+    \paragraph{$\impliedby$.}
+    $\shE'=\shE \otimes \shL (, \shE=\shE' \otimes \shL^{-1})$とする．
+    Prop7.11bから次の全射が得られる．
+    \[
+        \pi^* \shE \to \shO_{P}(1) \to 0
+        ,~~~~
+        \pi'^* \shE' \to \shO_{P'}(1) \to 0.
+    \]
+    それぞれ$\pi^* \shL, \pi'^* \shL^{-1}$をtensorする．
+    $\pi^*, \pi'^*$が準同型であること(Ex6.8a)から，次のように成る．
+    \[
+        \pi^* \shE' \to \shO_{P}(1) \otimes \pi^* \shL \to 0
+        ,~~~~
+        \pi'^* \shE \to \shO_{P'}(1) \otimes \pi'^* \shL^{-1} \to 0.
+    \]
+    Prop7.12から，それぞれ$\phi: P' \to P, \phi': P \to P'$を誘導し，
+    次を満たす．
+    \[
+        \phi^* \shO_{P}(1) \iso \shO_{P}(1) \otimes \pi^* \shL
+        ,~~~~
+        \phi'^* \shO_{P'}(1) \iso \shO_{P'}(1) \otimes \pi'^* \shL^{-1}
+    \]
+    及び$\pi' \circ \phi=\pi, \pi \circ \phi'=\pi'$．
+    さて，(a)より，$\Pic P$の元は$\shM \in \Pic X, n \in \Z$を用いて
+    $\pi^* \shM \otimes \shO_P(n)$と書ける．
+    これに対して$(\phi' \circ \phi)^*$を作用させると次のように成る．
+    \begin{align*}
+        {}&     (\phi' \circ \phi)^*(\pi^* \shM \otimes \shO_P(n)) \\
+        \iso&   (\pi \circ \phi' \circ \phi)^*\shM \otimes (\phi' \circ \phi)^*\shO_P(n) \\
+        \iso&   (\pi' \circ \phi)^*\shM \otimes \phi^*(\shO_{P'}(n) \otimes \pi'^* \shL^{-n}) \\
+        \iso&   \pi^*\shM \otimes \shO_{P}(n) \otimes \pi^* \shL^{n} \otimes \phi^*\pi'^* \shL^{-n} \\
+        \iso&   \pi^*\shM \otimes \shO_{P}(n)
+    \end{align*}
+    $\phi \circ \phi'$についても同様である．
+    $\Pic$の同型射は$P \to P'$の同型射に対応することを示せば証明は終わる．
+    （これはProp7.12から分かると思う．）
 
 \section{$\proj^n$-Bundles Over a Scheme.} %% Ex7.10 
 
