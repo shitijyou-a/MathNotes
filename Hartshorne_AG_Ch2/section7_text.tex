@@ -4,7 +4,7 @@
 
 \newcommand{\CaCl}{\operatorname{CaCl}}
 \newcommand{\Pic}{\operatorname{Pic}}
-\newcommand{\lsd}{\mathfrak{d}}
+\newcommand{\lsd}{\mathfrak{d}} % linear system d
 \newcommand{\gProj}{\mathbf{Proj}\,}
 \newcommand{\inclmap}{\hookrightarrow}
 \newcommand{\Sym}{\operatorname{Sym}}
@@ -296,10 +296,22 @@
         presheaf :: $U \mapsto \Sym^n(\shF(U))$のassociated sheafとする．
         $\Sym(\shF), \Sym_+(\shF)$はこれと同様に定める．
     \end{Def}
+
     \begin{Def}
         $\shE$ :: locally free coherent sheafについて，
         $\Sym(\shE)$は($\dagger$)を満たすので，
         $\pbundle(\shE)=\gProj \Sym(\shE)$が定義できる．
         これをProjective space bundleと呼ぶ．
     \end{Def}
+
+    \begin{Def}
+        $X$ :: noetherian scheme，
+        $\shI$ :: coherent sheaf of ideals on $X$とする．
+        $\shJ=\bigoplus_{d \geq 0} \shI^{d}$
+        （$\shI^d$はイデアルの$d$乗）について，
+        $\tilde{X}=\gProj \shJ$を
+        blowing-up of $X$ with respect to $\shI$
+        （$\shI$に関する$X$のblowing-up）と呼ぶ．
+    \end{Def}
+
 \end{document}
