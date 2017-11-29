@@ -674,18 +674,52 @@
     Prop4.1と合わせて$U$ :: ($*$) (p.130)．
     またCor6.16が成り立つ．
     \begin{Claim}
-        $X$を，Prop6.11が成立するものとする．
+        $X$を，Cor6.16が成立するものとする（特に$X$ :: integral）．
         $Y=\proj^n_X(=\proj^n_{\Z} \times X)$とし，
         また$\pi: Y \to X$をprojection of fiber productとする．
-        $Z$ :: prime divisor in $X$をとり，
-        $\shL \in \Pic X$が$Z$に対応するinvertible sheafだとする．
-        $\pi^* Z=\pi^{-1}(Z)$ (cf. Prop6.6)に対応するinvertible sheafは
-        $\pi^* \shL \in \Pic Y$である．
+        $Z$ :: prime divisor in $X$をとる．
+        Cor6.16の同型写像$\Cl X \isomap \Pic X$によって，
+        $\shL \in \Pic X$が$Z$に対応するならば，
+        $\pi^* \shL \in \Pic Y$は
+        $\pi^* Z=\pi^{-1}(Z)$ (cf. Prop6.6)に対応する．
     \end{Claim}
     \begin{proof}
         U.G\"orts, T.Wedhorn ``Algebraic Geometry I" p.312にある
         ``(11.16) Inverse image of divisors."を参照した．
 
+        準備として，
+        $y \in Y$について$\pi^{\#}_{\pi(y)}: \shO_{X, \pi(y)} \to \shO_{Y, y}$を調べよう．
+        $\pi(y) \in V=\Spec A, y \in U=\Spec A[x_0,\dots,x_n]_{(f)} (\subset \pi^{-1}(V))$とする．
+        ただし$f \in A[x_0,\dots,x_n]$は正次数をもつ斉次元である．
+        今，projection :: $\pi|_U$は
+        包含写像$A \inclmap A[x_0,\dots,x_n]_{(f)}$から誘導されている
+        \footnote
+        {
+            より正確には$A \to A \otimes \Z[x_0,\dots,x_n]_{(f)};~ a \mapsto a \otimes 1$から誘導されている．
+            しかし$A \otimes \Z[x_0,\dots,x_n]_{(f)} \iso A[x_0,\dots,x_n]_{(f)};~ a \otimes b \mapsto ab$を通せば
+            これは単なる包含写像である．
+        }．
+        なので$y, \pi(y)$に対応する素イデアルを
+        それぞれ$\I{p}, \I{q}$とすると$\I{q}=\I{p} \cap A$が成り立つ．
+        また$\pi^{\#}_{\pi(y)}=(\pi|_U)^{\#}_{\pi(y)}$だから，
+        $\pi^{\#}_{\pi(y)}$も包含写像である．
+
+        ここで，$l \geq 0$について$\I{q}^{l}=\I{p}^{l} \cap A$が成り立つことに注意する．
+        このことから，$a \in A$について
+        \[ \pi^{\#}_{\pi(y)}(a)=a \in \I{p}^{l} \iff a \in \I{q}^{l}. \]
+        一般に，DVR :: $(R, \I{m})$のvaluation :: $v_R$は
+        $r \in R$について次を満たす．
+        \[ v_R(r)=\sup \left\{ l \geq 0 \,\middle|\, r \in \I{m}^l \right\}. \]
+        したがって$\shO_{X, \pi(y)}, \shO_{Y, y}$が共にDVRである時，
+        $\pi^{\#}_{\pi(y)}$はvaluationを保つ．
+        \[
+            v_y \left( \pi^{\#}_{\pi(y)}(*) \right)
+            =\sup \left\{ l \geq 0 \,\middle|\, \pi^{\#}_{\pi(y)}(*) \in (\I{m}_{Y,y})^l \right\}
+            =\sup \left\{ l \geq 0 \,\middle|\, * \in (\I{m}_{X,\pi(y)})^l \right\}
+            =v_{\pi(y)}(*)
+        \]
+
+        いよいよinvertible sheafとdivisorの関係を調べていく．
         $Z$のgeneric pointを$\zeta$とし，
         $Z$に対応するCartier divisorを
         $D=\{\sect{U_i}{f_i}\}_i \in \CaCl X$とする．
@@ -718,60 +752,26 @@
         今，$\pi^{\dsharp}_{\pi(y)}: \shO_{X, \pi(y)} \to \shO_{Y, y}$を用いて
         $\shO_{Y, y}$を$\shO_{X, \pi(y)}$-module (submodule of $\shK_{Y,y}$)とみなしている．
         したがって更に計算が出来て次が得られる．
-        \[ (\pi^* \shL)_y \iso (\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)}))^{-1}\shO_{Y, y}. \]
+        \[ (\pi^* \shL)_y \iso [\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)})]^{-1}\shO_{Y, y}. \]
         こうして，$\pi^*\shL$に対応するCartier divisorのgermが分かった．
 
         点$y \in Y, \pi(y) \in X$を共にcodimension oneの点だとする．
         $i$を$\pi(y) \in U_i$なるものとしてとる．
         この時，$X$については仮定から，$Y$についてはEx6.1から($*$)が成立する．
         したがって$v_y(\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)}))$の値が考えられる．
-        $\pi$はlocalには単なるinclusion mapから誘導される射であるから，
-        $\pi^{\#}_{\pi(y)}$は
+        上述した$v_y \circ \pi^{\#}_{\pi(y)}=v_{\pi(y)}$より，これは次の通り．
         \[
-            v_y(\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)}))=
+            v_y \left(\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)})\right)=
+            v_{\pi(y)}((f_i)_{\pi(y)})=
             \begin{cases}{}
                 1 & \pi(y)=\zeta \\
                 0 & \pi(y) \neq \zeta.
             \end{cases}
         \]
-        よって$\pi^*\shL$は$\pi^*Z=\pi^{-1}(Z)=\cl_{Y}(\pi^{-1}(\{\zeta\}))$に対応する．
-
-        TODO:
-        「valuationを変化させない．」を詳細に．
-        また$\pi$ :: continuousからは
-        $\pi^{-1}(\cl_{X}(\{\zeta\})) \supseteq \cl_{Y}(\pi^{-1}(\{\zeta\}))$
-        しか示せないので逆を示す．
-        （$\pi^{-1}(\cl_{X}(\{\zeta\}))$ :: irreducible故に？）
-
-%        準備として，
-%        $y \in Y$について$\pi^{\#}_{\pi(y)}: \shO_{X, \pi(y)} \to \shO_{Y, y}$を計算しよう．
-%        $\pi(y) \in V=\Spec A, y \in U=\Spec A[x_0,\dots,x_n]_{(f)}$とする．
-%        ただし$f \in A[x_0,\dots,x_n]$は斉次元である．
-%        すると$\pi^{\#}_{\pi(y)}=(\pi|_U)^{\#}_{\pi(y)}$．
-%        なので$y=\I{p} \in \Spec A[x_0,\dots,x_n]_{(f)}, \pi(y)=\I{q}=\I{p} \cap A$とすると，
-%        \begin{defmap}
-%            \pi^{\#}_{\pi(y)}:& A_{\I{q}}& \to& A[x_0,\dots,x_n]_{(\I{p})} \\
-%            {}& a& \mapsto& a
-%        \end{defmap}
-%        つまり，$\pi^{\#}_{\pi(y)}$は単なるinclusion mapである．
-%        $\alpha(y)=\pi^{\#}_{\pi(y)}((f_i)_{\pi(y)})$としておこう．
-%        まず$\alpha(y) \in \shO_{Y,y}$だから$v_y(\alpha(y)) \geq 0$．
-%        \[
-%            v_{\pi(y)}((f_i)_{\pi(y)}))=0
-%            \iff (f_i)_{\pi(y)} \text{ :: unit}
-%            \iff \alpha(y) \text{ :: unit}
-%            \iff v_y(\alpha(y))=0.
-%        \]
-%        $\shO_{X, \pi(y)}, \shO_{Y,y}$ :: DVRより，
-%        $\I{m}_{X, \pi(y)}, \I{m}_{Y,y}$は単項イデアル(ch I, Thm6.2)．
-%        それぞれの生成元を$s, t$とすると，以下が成り立つ．
-%        \[
-%            v_{\pi(y)}((f_i)_{\pi(y)}))=1
-%            \iff        (f_i)_{\pi(y)} \in \I{m}_{X, \pi(y)}-\I{m}_{X, \pi(y)}^2
-%            \iff        \Exists{u \text{ :: unit}} (f_i)_{\pi(y)}=su.
-%        \]
-%        また$\pi^{\#}_{\pi(y)}$ :: local ring homomorphismだから，
-%        $\pi^{\#}_{\pi(y)}(s) \in \I{m}_{Y,y}$．
+        よって，
+        点$\eta \in Y$を$\pi(\eta)=\zeta$を満たすcodimension oneの点だとすれば，
+        $\pi^*\shL$は$\cl_{Y}(\{\eta\})$に対応する．
+        計算すると，$\cl_{Y}(\{\eta\})=\pi^{-1}(Z)=\pi^*Z$．
     \end{proof}
 
     \begin{Cor}
@@ -915,12 +915,77 @@
 
 \section{* A Complete Nonprojective Variety.} %% Ex7.13 
 
-\section{Very ample invertible sheaf on $\gProj \shJ$.} %% Ex7.14 
+\section{Very ample invertible sheaf on $\gProj$.} %% Ex7.14 
+    \begin{Thm}
+        Let $X$ be a quasi-compact and finite type scheme over a scheme $S$,
+        and let $\shL$ be an invertible sheaf on $X$.
+        Then $\shL$ is ample if and only if 
+        $\shL^{\otimes m}$ is very ample over $S$ for some $m>0$.
+    \end{Thm}
+    \begin{Remark}
+        この定理はThm7.1の拡張である．
+        他にこの定理の拡張は様々に述べられているが，
+        最も拡張して述べているのはこれであろう:
+        $X$ is locally of finite type over $S$
+        \footnote{ \url{https://stacks.math.columbia.edu/tag/01VS} }.
+        ただし，脚注で示したページにある証明では，
+        EGAでのimmersionの定義を用いている．
+        また証明には``we can find finitely many such elements"という文があるが，
+        この文が成り立つためには$X$ :: quasi-compactが必要である．
+        $X$ :: quasi-compactを加えると，
+        EGAでのimmersionの定義と教科書でのimmersionの定義が一致する．
+        また``$X$ is locally of finite type over $S$"は
+        ``$X$ is of finite type over $S$"になる．
+        なのでこの命題の仮定は，弱めてもこの命題のように成る．
+    \end{Remark}
+    \begin{proof}
+        まず，$U=\Spec A \subseteq S$をとる．
+        そして$f^{-1}(U)$に含まれるaffine open subset :: $V$をとる．
+        $X-V$についてp.154最下からp.155最上までの議論を行うと，
+        適当な$s \in \Gamma(X, \shL^{\otimes n_s})$について
+        $X_s$ :: affine open subset of $X$となる．
+        $X_s \subset V \subset f^{-1}(U)$かつ$X_s$ :: affineなので，
+        Ex3.3cより$\Gamma(X_s, \shO_X)$ :: finitely generated $A$-algebra.
+        $U, s$を動かせば$X$が$X_s$で被覆できる．
+        $X$ :: quasi-compactなので，$U, s$は有限個で事足りる．
+        $U_i=\Spec A_i$と$s_{ij} \in \Gamma(X, \shL^{\otimes n})$を使うことにしよう．
+        ただし$n=\max_{ij} n_{s_{ij}}$．
+        また$X_{ij}=X_{s_{ij}}$とする．
+        後の議論はp.155の``Now for each $i$, let $B_i=$..."と全く同じ．
+        $A$の代わりに$A_i$を，
+        $B_i$の代わりに$B_{ij}=\Gamma(X_{ij}, \shO_X)$を用いる．
+        そして$B_{ij}$の$A_i$-algebraとしてのgeneratorを$b_{ijk}$とし，
+        これをLemma5.14を用いて拡張して$c_{ijk}$とする．
+        $\{ s_{ij}^n \},\{ c_{ijk} \}$は，全て合わせて$N+1$個あるとしよう．
+        これらのglobal sectionsから，Thm7.1bの方法を一般化して$X \to \proj^N_S$の射を得る．
+        （TODO: 貼り合わせの詳細．）
+        \[
+        \xymatrix
+        {
+            X \ar[d]_-{f}\ar[r]^-{\phi}& \proj^N_S \ar[ld]^-{\pi'}\\
+            S & {}
+        }
+        \]
+
+        $i,j$を適当にとり，
+        $U=U_i \subseteq S, V=\bigcup_j X_{ij}=f^{-1}(U) \subseteq X$とする．
+        そこで次の図式を考える．
+        \[
+        \xymatrix
+        {
+            V \ar[d]_-{f|_V}\ar[r]^-{\phi|_V}& \proj^N_U \ar[ld]^-{\pi'|_{\proj^N_U}}\\
+            U & {}
+        }
+        \]
+        Thm7.6の証明と同様に$\phi|_V$ :: immersion.
+        immersionはlocalな性質だから，$\phi$ :: immersion.
+    \end{proof}
+
     \subsection{Example: $\shO_{\pbundle(\shE)}(1)$ is not very ample relative to $X$.}
-    $k$ :: field, $X=\proj^1_k, r \geq 2, \shE=(\shO_X(-1))^{\oplus r}$とする．
+    $k$ :: field, $X=\proj^1_k, r-1>0, \shE=(\shO_X(-1))^{\oplus r}$とする．
     また$P=\pbundle(\shE)$としておく．
 
-    もし$\shO_P(1)$がvery ampleならば，Thm7.6から，これはvery ampleである．
+    もし$\shO_P(1)$がvery ampleならば，上のThmから，これはampleでもある．
     したがって十分大きい全ての$n>0$について
     $\shO_P(n)(=\shO_P(1)^{\otimes n})$ :: generated by global sections （以降はgbgsと略す）
     \footnote
@@ -933,8 +998,7 @@
     \begin{Claim}
         \[ \Forall{n>0} \Gamma(P, \shO_P(n))=0. \]
     \end{Claim}
-    一方，$U=\Spec A \subseteq X$について
-    $\shO_P(n)|_U=\shO_A(n)$だから$\shO_P(n) \neq 0$.
+    一方，$\shO_P(n)$はinvertible sheafだから$\shO_P(n) \neq 0$.
     したがって$\shO_P(n)$はgbgsでなく，$\shO_P(1)$はvery ampleでない．
     \begin{proof}
         $n>0$を任意にとる．
@@ -957,7 +1021,7 @@
 
     \begin{Remark}
         very ampleの定義から$\shO_X(1)$ :: very ample on $X$ relative to $\Spec k$.
-        Thm7.6から$\shO_X(1)$ :: ample.
+        Thmから$\shO_X(1)$ :: ample.
         これらとProp7.10から，十分大きい全ての$n \gg 0$について，
         $\shO_P(1) \otimes \pi^* \shO_X(n)$ :: very ample.
         Prop7.11aから
@@ -967,7 +1031,9 @@
     \subsection{$\Forall{n \gg 0} \shO_{\pbundle(\shE)}(1) \otimes \pi^* \shL^n$ :: very ample.}
     以下のように設定する．
     \begin{itemize}
-        \item $X,Y$ :: noetherian scheme \footnote{ 教科書では明記されていない．},
+        \item $X$ :: noetherian scheme
+            \footnote{ 教科書では明記されていないが($\dagger$)の一部である．},
+        \item $Y$ :: scheme,
         \item $\shL$ :: ample invertible sheaf on $X$,
         \item $\shJ$ :: sheaf of graded $\shO_X$-algebra satisfying ($\dagger$),
         \item $f: X \to Y$ :: morphism of finite type.
@@ -984,64 +1050,10 @@
     $\shL$ :: ample on $X$が存在するので，
     Prop7.10より，
     $\shO_P(1) \otimes \pi^* \shL^{\otimes m}$ :: [$P/X$].
-    以下の主張とEx5.12bより
+    またThmより十分大きい$n>0$について$\shL^{\otimes n} :: [X/Y]$．
+    このこととEx5.12bより以下は$[P/Y]$.
     \[
         (\shO_P(1) \otimes \pi^* \shL^{\otimes m}) \otimes \pi^*(\shL^{\otimes n})
         =\shO_P(1) \otimes \pi^* \shL^{\otimes m+n}
     \]
-    は$[P/Y]$.
-
-    \begin{Claim}
-        \[ \Forall{n \gg 0} \shL^{\otimes n} :: [X/Y] \]
-    \end{Claim}
-    \begin{proof}
-        $\shL$ :: ampleより，
-        任意の$n \gg 0$について$\shL^{\otimes n}$ :: gbgs．
-
-        $n>0$と$\{ s_{ij}^n \},\{ c_{ijk} \} \subset \Gamma(X, \shL^{\otimes n})$を次のようにとる．
-        まず，$U=\Spec A \subseteq Y$をとる．
-        そして$f^{-1}(U)$に含まれるaffine open subset :: $V$をとる．
-        $X-V$についてp.154最下からp.155最上までの議論を行うと，
-        適当な$s \in \Gamma(X, \shL^{\otimes n_s})$について
-        $X_s$ :: affine open subset of $X$となる．
-        $X_s \subset V \subset f^{-1}(U)$かつ$X_s$ :: affineなので，
-        Ex3.3cより$\Gamma(X_s, \shO_X)$ :: finitely generated $A$-algebra.
-        $U, s$を動かせば$X$が$X_s$で被覆できる．
-        $X$ :: noetherianなので，$U, s$は有限個で事足りる．
-        $U_i=\Spec A_i$と$s_{ij} \in \Gamma(X, \shL^{\otimes n})$を使うことにしよう．
-        ただし$n=\max_{ij} n_{s_{ij}}$．
-        また$X_{ij}=X_{s_{ij}}$とする．
-        後の議論はp.155の``Now for each $i$, let $B_i=$..."と全く同じ．
-        $A$の代わりに$A_i$を，
-        $B_i$の代わりに$B_{ij}=\Gamma(X_{ij}, \shO_X)$を用いる．
-        そして$B_{ij}$の$A_i$-algebraとしてのgeneratorを$b_{ijk}$とし，
-        これをLemma5.14を用いて拡張して$c_{ijk}$とする．
-        $\{ s_{ij}^n \},\{ c_{ijk} \}$は，全て合わせて$N+1$個あるとしよう．
-        
-        Prop7.12を使うと$X$から$\pbundle(\shO_Y^{\oplus N+1}) \iso \proj^N_Y$への
-        射がとれる．
-        \[
-        \xymatrix
-        {
-            X \ar[d]_-{f}\ar[r]^-{\phi}& \proj^N_Y \ar[ld]^-{\pi'}\\
-            Y & {}
-        }
-        \]
-
-        $i,j$を適当にとり，
-        $U=U_i \subseteq Y, V=\bigcup_j X_{ij}=f^{-1}(U) \subseteq X$とする．
-        そこで次の図式を考える．
-        \[
-        \xymatrix
-        {
-            V \ar[d]_-{f|_V}\ar[r]^-{\phi|_V}& \proj^N_U \ar[ld]^-{\pi'|_{\proj^N_U}}\\
-            U & {}
-        }
-        \]
-        Thm7.1が示す$\phi|_V$のuniquenessから，
-        $\phi|_V$はThm7.6の証明と同じ方法で作られている．
-        なのでThm7.6の証明と同様に$\phi|_V$ :: immersion.
-        immersionはlocalな性質だから，$\phi$ :: immersion.
-    \end{proof}
-
 \end{document}
