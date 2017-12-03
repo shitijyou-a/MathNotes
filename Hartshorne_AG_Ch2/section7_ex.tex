@@ -917,13 +917,32 @@
 
 \section{Very ample invertible sheaf on $\gProj$.} %% Ex7.14 
     \begin{Thm}
+        Let $S$ be a scheme, and let $X$ be a scheme over $S$.
+        If $\shL$ is an invertible sheaf on $X$,
+        and if $s_0, \dots ,s_n \in \Gamma(X, \shL)$ are global sections which generate $\shL$,
+        then there exists a unique $S$-morphisn1 $\phi:X \to \proj^n_A$ such that 
+        $\shL \iso \phi^*(\shO_X(1))$ and $s_i = \phi^*(x_i)$ under this isomorphism.
+    \end{Thm}
+    \begin{proof}
+        この定理はThm7.1bの拡張である．
+        前提より，$f: X \to S$がある．
+        まず$V=\Spec A \subseteq S$をとり，$U=f^{-1}(V)$としよう．
+        すると$f|_U: U \to \Spec A$なる射が出来る．
+        そしてThm7.1の証明と同じことを$U$と$\Spec A$に行う．
+        ただし，$X_i$の代わりに使うのは$U \cap X_i$である．
+        $V$を動かしていけば，$U \cap X_i$で$X$を覆うことができる．
+        そして出来上がる大量の射 :: $U \cap X_i \to \Spec A[x_0,\dots,x_n]_{(x_0)}$を
+        貼り合わせられることは明らか．
+    \end{proof}
+
+    \begin{Thm}
         Let $X$ be a quasi-compact and finite type scheme over a scheme $S$,
         and let $\shL$ be an invertible sheaf on $X$.
         Then $\shL$ is ample if and only if 
         $\shL^{\otimes m}$ is very ample over $S$ for some $m>0$.
     \end{Thm}
     \begin{Remark}
-        この定理はThm7.1の拡張である．
+        この定理はThm7.6の拡張である．
         他にこの定理の拡張は様々に述べられているが，
         最も拡張して述べているのはこれであろう:
         $X$ is locally of finite type over $S$
@@ -949,6 +968,7 @@
         $U, s$を動かせば$X$が$X_s$で被覆できる．
         $X$ :: quasi-compactなので，$U, s$は有限個で事足りる．
         $U_i=\Spec A_i$と$s_{ij} \in \Gamma(X, \shL^{\otimes n})$を使うことにしよう．
+        $X$ :: quasi-compactを加えると，
         ただし$n=\max_{ij} n_{s_{ij}}$．
         また$X_{ij}=X_{s_{ij}}$とする．
         後の議論はp.155の``Now for each $i$, let $B_i=$..."と全く同じ．
@@ -957,8 +977,8 @@
         そして$B_{ij}$の$A_i$-algebraとしてのgeneratorを$b_{ijk}$とし，
         これをLemma5.14を用いて拡張して$c_{ijk}$とする．
         $\{ s_{ij}^n \},\{ c_{ijk} \}$は，全て合わせて$N+1$個あるとしよう．
-        これらのglobal sectionsから，Thm7.1bの方法を一般化して$X \to \proj^N_S$の射を得る．
-        （TODO: 貼り合わせの詳細．）
+        これらのglobal sectionsを元に，
+        上の定理（Thm7.1bの一般化）から$X \to \proj^N_S$の射を得る．
         \[
         \xymatrix
         {
@@ -966,7 +986,6 @@
             S & {}
         }
         \]
-
         $i,j$を適当にとり，
         $U=U_i \subseteq S, V=\bigcup_j X_{ij}=f^{-1}(U) \subseteq X$とする．
         そこで次の図式を考える．

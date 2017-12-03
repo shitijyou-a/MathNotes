@@ -4,20 +4,73 @@
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
 \begin{document}
-\section{ } %% Ex8.1 
+\section{Strengthen Some Results in the Text.} %% Ex8.1 
 
-\section{ } %% Ex8.2 
+\section{$0 \to \shO_X \to \shE \to \shE' \to 0$.} %% Ex8.2 
+    $X$ :: variety of dimension $n$ over $k$,
+    $\shE$ :: locally free sheaf of rank $>n$,
+    $V \subset \Gamma(X,\shE)$ :: $k$-vector space of global sections which generate $\shE$
+    とする．
+    $X$ :: varietyより$X$ :: connectedなので$\shE$のrankは$X$全体で一定である．
+    $\rank \shE=r (>n)$としておこう．
 
-\section{ } %% Ex8.3 
+    $x \in X$について次の写像を考える．
+    \begin{defmap}
+        \phi_x:& V \otimes_{k} k(x)& \to& \shE_x \otimes_k k(x) \\
+        {}& s \otimes \alpha& \mapsto& s_x \otimes \alpha
+    \end{defmap}
+    $k(x)$-linear mapであることは明らか．
+    $\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x \shE_x$と
+    $V$ :: global generators of $\shE$から，これはsurjective．
+    なので
+    \[
+        \dim_{k(x)} \ker \phi_x
+        =\dim_{k(x)} V \otimes_{k} k(x)-\dim_{k(x)} \shE_x \otimes_k k(x)
+        =\dim_k V-r.
+    \]
+    $\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x \shE_x$と$\phi_x$の定義の仕方から，
+    $\ker \phi_x=\{ s \otimes \alpha \mid s_x \alpha \in \I{m}_x\shE_x \}.$
 
-\section{ } %% Ex8.4 
+    $V$をprojective linear spaceとみなして，
+    $B \subseteq X \times V$を次のように置く．
+    \[ B=\{ (x, s) \mid x \in X, s \in V, s_x \in \I{m}_x\shE_x \}. \]
+    $B$は$X \times V$のclosed subschemeである．
+    （以下がclosedであることはEx2.16を参照．）
+    \[ B=\bigcap_{s \in V} \pr_1^{-1}(\{ x \in X \mid s_x \in \I{m}_x\shE_x \}). \]
+    $\pr_1|_{B}: B \to X$を$p_1$と略す．
+    $p_1$についての$x \in X^+$のfiberは，Ex3.10aより，次のような点から成る．
+    \[ \basesp B_x=p_1^{-1}(x)=\{x\} \times \{ s \in V \mid s_x \in \I{m}_x\shE_x \}. \]
+    これは$\ker \phi_x$と同型である．
+    したがって$\dim B_x=\dim_k V-r$.
+    $B$ :: irreducibleだから，
+    \[ \dim B=\dim_k V-r+n. \]
+    $r>n$なので，$\dim B<\dim_k V=\dim V-1$.
+    （$\dim V$はprojective spaceとしての次元．）
+    したがって$\pr_2|_B$ :: not surjective.
+    よって$s \in V-\pr_2(B)$が存在し，
+    この$s$と任意の$x \in X$について$s_x \not\in \I{m}_x\shE_x$が成り立つ．
 
-\section{ } %% Ex8.5 
+    $\psi$を以下で定める．
+    \begin{defmap}
+        \psi:& \shO_X& \to& \shE  \\
+        {}& \sect{U}{\sigma}& \mapsto& \sect{U}{(s|_U) \cdot \sigma}
+    \end{defmap}
+    $s_x \not\in \I{m}_x\shE_x$から，($(s|_U)^{-1}$が存在し，)これはinjective．
+    Prop5.7から$\coker \psi$もcoherent sheaf.
+    すなわち，以下はcoherent sheafのexact sequence.
+    \[ 0 \to \shO_X \to \shE \to \coker \psi \to 0. \]
+    Ex5.7bから$\coker \psi$はlocally free.
 
-\section{ } %% Ex8.6 
+\section{Product Schemes.} %% Ex8.3 
 
-\section{ } %% Ex8.7 
+\section{Complete Intersections in $\proj^n$.} %% Ex8.4 
 
-\section{ } %% Ex8.8 
+\section{Blowing Up a Nonsingular Subvariety.} %% Ex8.5 
+
+\section{The Infinitesimal Lifting Property.} %% Ex8.6 
+
+\section{Classifying Infinitesimal Extension: One Case.} %% Ex8.7 
+
+\section{Plurigenera and Hodge Numbers are Birational Invariants.} %% Ex8.8 
 
 \end{document}
