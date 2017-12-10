@@ -9,57 +9,220 @@
 \section{$0 \to \shO_X \to \shE \to \shE' \to 0$.} %% Ex8.2 
     $X$ :: variety of dimension $n$ over $k$,
     $\shE$ :: locally free sheaf of rank $>n$,
-    $V \subset \Gamma(X,\shE)$ :: $k$-vector space of global sections which generate $\shE$
+    $V^{\#} \subset \Gamma(X,\shE)$ ::
+    $k$-vector space of global sections which generate $\shE$
     とする．
     $X$ :: varietyより$X$ :: connectedなので$\shE$のrankは$X$全体で一定である．
     $\rank \shE=r (>n)$としておこう．
 
+    \begin{Claim}
+        ある$s \in V$について次が成立する．
+        \[ \Forall{x \in X} s_x \not \in \I{m}_x \shE_x. \]
+    \end{Claim}
+
+    \paragraph{Convensions and Notations.}
+    $X$のclosed point全体を$X^+$と書く．
+    Ex3.14より，これはdense in $X$．
+    また，$d=\dim_k V^{\#}, V=\proj_k^{d-1}$とし，
+    $V^+=(V^{\#}-\{0\})/k^*$を$V$のclosed pointsと同一視する．
+    この同一視の仕方はProp7.7やdual projective spaceと同じである．
+    $\dim_k V^{\#}-1=\dim V$に注意．
+    $V^{\#}$のsubspaceも同様に$V$のsubspaceとみなす．
+
+    \paragraph{Definition of $B, B^+$．}
+    $B \subseteq X \times_k V$を次のように置く．
+    \[ B=\bigcap_{s \in V^{\#}} \pr_1^{-1}(\{ x \in X \mid s_x \in \I{m}_x\shE_x \}). \]
+    $B$は$X \times V$のclosed subschemeである．
+    （$\{\}$部分がclosedであることはEx2.16を参照．）
+    $B$にはreduced structureを与えておく．
+    $\pr_1|_{B}: B \to X$を$p_1$と略す．
+    $B$のclosed points :: $B^+$は次のような集合である．
+    \[ B^+=\{ (x, s) \in X^+ \oplus V^+ \mid s_x \in \I{m}_x\shE_x \}. \]
+
+    \paragraph{Plot.}
+    主張は，$\pr_2(B) \not \supseteq V^+$と言い換えられる．
+    （詳細は後ほど．）
+    これには$B$の次元が$V$の次元より小さいことを言えば良い．
+    $B$の次元はEx3.22の結果を用いればそのfiber :: $B_x$から計算できる．
+    全ての$x \in X$について$\dim B_x$を計算することは難しい．
+    しかし少し妥協して，$x \in X^+$についての$\dim B_x$を計算することは出来る．
+    この場合でもEx3.22cの結果を用いて$\dim B_x$が計算できる．
+
+    \paragraph{Definition of $\phi_x$．}
     $x \in X$について次の写像を考える．
     \begin{defmap}
-        \phi_x:& V \otimes_{k} k(x)& \to& \shE_x \otimes_k k(x) \\
-        {}& s \otimes \alpha& \mapsto& s_x \otimes \alpha
+        \phi_x:& V^{\#}& \to& \shE_x \otimes_k k(x) \\
+        {}& s& \mapsto& s_x \otimes 1
     \end{defmap}
-    $k(x)$-linear mapであることは明らか．
-    $\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x \shE_x$と
-    $V$ :: global generators of $\shE$から，これはsurjective．
-    なので
+    これが$k$-linear mapであることは明らか．
+    $k(x):=\shO_x/\I{m}_x$より$\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x \shE_x$．
+    このことと$\phi_x$の定義の仕方から，
+    $\ker \phi_x=\{ s \in V^{\#} \mid s_x \in \I{m}_x\shE_x \}.$
+    
+    \paragraph{$\phi_x$ for $x \in X^+$．}
+    この段落では$x \in X^+$とする．
+    すると$k(x)=k$
+    \footnote
+    {
+        $X$ :: varietyより，
+        $k$ :: algebraically closed fieldかつ$X$ :: finite type / $k$.
+        $A=k[x_1,\dots,x_n], \I{a} \subseteq A$とし，
+        $\I{m}/\I{a} \in \Spec A/\I{a} \subseteq X$が$x$に対応する極大イデアルだとする．
+        ここで$\I{m}$は$A$の極大イデアル．
+        $S=A-\I{m}$とすると
+        \[
+            k(x)
+            =\frac{S^{-1}(A/\I{a})}{S^{-1}(\I{m}/\I{a})}
+            \iso S^{-1}\left( \frac{A/\I{a}}{\I{m}/\I{a}} \right)
+            \iso S^{-1}(A/\I{m}).
+        \]
+        $A/\I{m} \iso k$は体だから，これは$k(x) \iso k$．
+    }
+    なので$\shE_x \otimes_k k(x) \iso \shE_x$．
+    また$\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x\shE_x$．
+    さらに$V^{\#}$ :: global generators of $\shE$であるから，
+    $\phi_x$はsurjective．
+    なので$x \in X^+$について$\dim \ker \phi_x$が分かる．
     \[
-        \dim_{k(x)} \ker \phi_x
-        =\dim_{k(x)} V \otimes_{k} k(x)-\dim_{k(x)} \shE_x \otimes_k k(x)
-        =\dim_k V-r.
+        \dim_k \ker \phi_x
+        =\dim_k V^{\#} \otimes_k k(x)-\dim_k \shE_x
+        =\dim_k V^{\#}-r.
     \]
-    $\shE_x \otimes_k k(x) \iso \shE_x/\I{m}_x \shE_x$と$\phi_x$の定義の仕方から，
-    $\ker \phi_x=\{ s \otimes \alpha \mid s_x \alpha \in \I{m}_x\shE_x \}.$
 
-    $V$をprojective linear spaceとみなして，
-    $B \subseteq X \times V$を次のように置く．
-    \[ B=\{ (x, s) \mid x \in X, s \in V, s_x \in \I{m}_x\shE_x \}. \]
-    $B$は$X \times V$のclosed subschemeである．
-    （以下がclosedであることはEx2.16を参照．）
-    \[ B=\bigcap_{s \in V} \pr_1^{-1}(\{ x \in X \mid s_x \in \I{m}_x\shE_x \}). \]
-    $\pr_1|_{B}: B \to X$を$p_1$と略す．
-    $p_1$についての$x \in X^+$のfiberは，Ex3.10aより，次のような点から成る．
-    \[ \basesp B_x=p_1^{-1}(x)=\{x\} \times \{ s \in V \mid s_x \in \I{m}_x\shE_x \}. \]
-    これは$\ker \phi_x$と同型である．
-    したがって$\dim B_x=\dim_k V-r$.
-    $B$ :: irreducibleだから，
-    \[ \dim B=\dim_k V-r+n. \]
-    $r>n$なので，$\dim B<\dim_k V=\dim V-1$.
-    （$\dim V$はprojective spaceとしての次元．）
-    したがって$\pr_2|_B$ :: not surjective.
-    よって$s \in V-\pr_2(B)$が存在し，
+    \paragraph{Dimension of fiber :: $\dim B_x$．}
+    $p_1$についての$x \in X^+$のfiber :: $B_x$のbase spaceは，
+    Ex3.10 より，$\basesp B_x \homeo p_1^{-1}(x)$．
+    したがって次が分かる．
+    \[ \basesp B_x \cap \basesp B^+ \homeo p_1^{-1}(x) \cap \basesp B^+=\{x\} \times \ker \phi_x. \]
+    ここで$\times$は集合としての直積を表す．
+    よって$B_x$の次元が分かる
+    \footnote
+    {
+        closed subscheme of $B$ :: $C$について$\dim C=\dim C \cap B^+$を示す．
+        $C \cap B^+ \subset C$より$\dim C \geq \dim C \cap B^+$は明らか．
+        $d=\dim C$とし，
+        $C$のirreducible closed subsetが成す真の極大上昇鎖をとる:
+        $Z_0 \subsetneq \dots \subsetneq Z_d.$
+        closed immersion $\implies$ finite typeに注意すると，
+        $Z_i$ :: finite type/$k$．
+        なのでEx3.14より$Z_i \cap B^+$ :: dense in $Z_i$.
+        したがって$Z_i \cap B^+=Z_j \cap B^+ \implies Z_i=Z_j$となり，
+        $Z_0 \cap B^+ \subsetneq \dots \subsetneq Z_d \cap B^+$
+        は$B^+$のirreducible closed subsetが成す真の上昇鎖．
+        以上から$\dim C \leq \dim C \cap B^+$も成り立つ．
+    }．
+    \[ \dim B_x=\dim_k \ker \phi_x-1=\dim_k V^{\#}-r-1=\dim V-r. \]
+
+    \paragraph{$p_1$ :: closed map.}
+    $V \to \Spec k$はprojectiveであり，
+    $V, \Spec k$共にnoetherianであるからこの射はproper.
+    よってuniversally closedである．
+    \[
+    \xymatrix
+    {
+        X \times_k V \ar[r]\ar[d]_-{\pr_1}& V
+            \ar[d]^-{\substack{\text{universally} \\ \text{closed}}}\\
+        X \ar[r]& \Spec k
+    }
+    \]
+    $B$ :: closedなので$B$のclosed subsetは$X$でもclosed．
+    したがって
+    $p_1=\pr_1|_B$ :: closed map.
+
+    \paragraph{$p_1(B)=X$ or $B=\emptyset$.}
+    $p_1(B) \supseteq X^+$とする．
+    すると$p_1(B)$ :: closedより$p_1(B) \supseteq \cl_X(X^+)=X$．
+    次に$p_1(B) \not \supseteq X^+$とする．
+    すると上で述べたこと
+    （全ての$x \in X^+$について$\dim p_1^{-1}(x)$が等しいこと）
+    から，結局$p_1(B) \cap X^+=\emptyset$が分かる．
+    $p_1(B)$が空でないと仮定しよう．
+    すると$p_1$ :: closed mapより，
+    $x \in p_1(B)$なら$\cl_X(\{x\}) \subseteq p_1(B)$．
+    $\cl_X(\{x\})$はclosed pointを含むので矛盾が生じる．
+    よって$p_1(B) \not \supseteq X^+$ならば$p_1(B)=\emptyset$．
+    これは$B=\emptyset$を意味し，
+    さらにこれは$0$を除く全ての$V^{\#}$の元がclaimの条件を満たすことを意味する．
+    \underline{以下，$B \neq \emptyset$と仮定する．}
+
+    \paragraph{$B$ :: irreducible．}
+    以上から$B$ :: irreducibleが分かる．
+    実際，$B$が二つの閉集合$C_1, C_2 (\neq \emptyset, X)$の和であったとすると，
+    $p_1(B)=X$より，
+    \[ X=p_1(C_1) \cup p_1(C_2). \]
+    一方，$X$ :: irreducible．
+    よって矛盾が生じ，$B$ :: irreducibleが示される．
+
+    \paragraph{Dimension of $B$．}
+    $B$ :: integral \& finite type/$k$ ($\implies$ variety/$k$)なので，
+    Ex3.22cから次が成り立つ:
+    $x \in U$ならば$\dim B_x=\dim B-\dim X$，
+    となる$U$ :: open dense subset in $X$が存在する．
+    $U$ :: non-empty open subsetと$X^+$ :: denseから，$U \cap X^+ \neq \emptyset$．
+    $x \in X^+$であるときの及び開集合$\dim B_x$が既に分かっているから，
+    $\dim B$も分かる．
+    \[ \dim B=\dim B_x+\dim X=\dim V-r+n. \]
+    $r>n$なので，$\dim B<\dim V$.
+
+    \paragraph{$\pr_2(B) \supseteq V^+ \implies \dim B \geq \dim V$.}
+    $\pr_2(B) \supseteq V^+$としよう．
+    $B^+$の場合と同様に$\dim V^+=\dim V$．
+    ch I, Ex1.10より，$\dim U=\dim V$を満たす
+    affine open subset of $V$ :: $U$がとれる．
+    適当に$\pr_1(B)$からもaffine open subset ::  $U'$をとると，
+    $X, V$共にfinite type /$k$だから，
+    ch I, Ex3.15 (Products of Affine Varieties)が使える．
+    よって$\dim U \times U'=\dim U+\dim U' \geq \dim U=\dim V$．
+    $U \times_k U' \subset B$だから$\dim B \geq \dim V$
+    
+    \paragraph{Complete proof of the claim.}
+    今はこれの対偶が成立する．
+    すなわち，$s \in V^+-\pr_2(B)$が存在する．
     この$s$と任意の$x \in X$について$s_x \not\in \I{m}_x\shE_x$が成り立つ．
 
-    $\psi$を以下で定める．
+    \paragraph{An exact sequence.}
+    $\Phi$を以下で定める．
     \begin{defmap}
-        \psi:& \shO_X& \to& \shE  \\
+        \Phi:& \shO_X& \to& \shE  \\
         {}& \sect{U}{\sigma}& \mapsto& \sect{U}{(s|_U) \cdot \sigma}
     \end{defmap}
-    $s_x \not\in \I{m}_x\shE_x$から，($(s|_U)^{-1}$が存在し，)これはinjective．
-    Prop5.7から$\coker \psi$もcoherent sheaf.
-    すなわち，以下はcoherent sheafのexact sequence.
-    \[ 0 \to \shO_X \to \shE \to \coker \psi \to 0. \]
-    Ex5.7bから$\coker \psi$はlocally free.
+    これの$x \in X$におけるstalkを見ると，
+    $\Phi_x: \sigma_x \mapsto s_x \cdot \sigma_x$と成っている．
+    $\shE_x \iso \shO_x^{\oplus r}$かつ$\shO_x$ :: domainより，
+    $\Ann(\shE_x)=0$．
+    そして$s_x \not\in \I{m}_x\shE_x$から，$s_x \neq 0$．
+    なので$\Phi_x$は，したがって$\Phi$はinjective．
+    よって$\shE'=\coker \Phi$とおくと以下はexact sequence.
+    \[ 0 \to \shO_X \to \shE \to \shE' \to 0. \]
+    
+    \paragraph{$\shE'$ :: locally free.}
+    $\shE'$がlocally freeであることを示そう．
+    Ex5.7bから，任意の点におけるstalkがfreeであることを示せば十分．
+    以下，$\shE_x=\shO_x^{\oplus r}$（$\iso$でなく$=$）とする．
+    点$x \in X$について
+    \[ s_x=(s_x^{(i)})_i \in \shO_x^{\oplus r}=\shE_x \]とする．
+    $s_x \not\in \I{m}_x\shE_x=\I{m}_x^{\oplus r}$から，
+    ある$i$について$s_x^{(i)} \not \in \I{m}_x$．
+    すなわち$s_x^{(i)}$ :: unit．
+    ここでは$i=0$とし，
+    \[
+        u
+        =(s_x^{(0)})^{-1}s_x
+        =\left( 1, s_x^{(2)}(s_x^{(0)})^{-1}, \dots, s_x^{(r)}(s_x^{(0)})^{-1} \right) \in s_x\shO_x
+    \]
+    と置く．
+    すると$\shE'_x \iso \shE_x/\im \Phi_x=\shO_x^{\oplus r}/s_x\shO_x$は
+    次の写像で$\shO_x^{\oplus r-1}$と同型．
+    \begin{defmap}
+        {}& \shO_x^{\oplus r}/s_x\shO_x& \to& 0 \oplus \shO_x^{\oplus r-1} \\
+        {}& (t^{(j)})_j \bmod s_x\shO_x& \mapsto& (t^{(j)})_j-t^{(0)}u
+    \end{defmap}
+    well-definedであることは明らか．
+    逆写像は次のもの．
+    \begin{defmap}
+        {}& \shO_x^{\oplus r-1}& \to& \shO_x^{\oplus r}/s_x\shO_x \\
+        {}& t & \mapsto& (0 \oplus t) \bmod s_x\shO_x
+    \end{defmap}
 
 \section{Product Schemes.} %% Ex8.3 
 
