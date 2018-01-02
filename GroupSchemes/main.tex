@@ -1,0 +1,565 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[]{enumitem}
+\usepackage[all]{xy}
+
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
+\newcommand{\GrpSch}{\mathbf{GrpSch}}
+
+\newcommand{\func}[1]{\underline{#1}}
+\newcommand{\ftorM}{\mathcal{M}}
+
+\newcommand{\Ga}{\mathbb{G}_a}
+\newcommand{\Gm}{\mathbb{G}_m}
+\newcommand{\GL}{GL}
+
+\begin{document}
+\title{Group Schemes}
+\author{七条 彰紀}
+\maketitle
+
+\section{Preface}
+    このノートの想定読者は，
+    \cite{HarAG}のII, \S 3までを読んだ，
+    Geometric Invariant TheoryとModuli Problemに興味がある者である．
+    主な参考文献は\cite{Muk1},\cite{AV},\cite{Hos}である．
+    大まかな議論の流れは前者の流れを採用し，
+    用語などの定義は\cite{Muk1}で述べられているものより
+    一般的なものを\cite{AV}と\cite{Hos}から採る．
+    \cite{Muk1}で使われる定義は素朴すぎるからである．
+    一般的な定義で概念を導入した後，
+    特別な場合では\cite{Muk1}での定義と同値に成ることを確かめる，
+    という方針を採る．
+
+    このノートでは，次の順に定義していく．
+    \begin{enumerate}
+        \item $T$-valued point (where $T$ :: scheme),
+        \item group scheme,
+        \item fine/corse moduli,
+        \item categorical/good/geometric/GIT quotient,
+        \item representation of group (scheme),
+        \item linearly reductive group,
+        \item closure equivalence,
+        \item unstable/semi-stable/stable.
+    \end{enumerate}
+
+    目標とする命題は次のものである．
+    \begin{Thm}
+        $X$ :: affine scheme,
+        $G$ :: linearly reductive group scheme acting on $X$とする．
+        affine GIT quotient of $X$ by $G$ :: $X \sslash G$はgood quotientである．
+        $X$のstable pointsを$X^s$とすると，
+        $X \sslash G$の制限 :: $X^s \slash G$は
+        geometric quotient of $X^s$ by $G$である．
+%        また，$X \sslash G$はquotient functor :: $\func{X} \slash G$の最良近似である．
+    \end{Thm}
+
+\section{$T$-valued Points}
+    圏論で言う``generalized point"の概念を，
+    名前を変えて用いる．
+
+    \begin{Def}
+    \enumfix
+    \begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item 
+    $X, T \in \Sch/S$に対し，
+    $\func{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
+
+    \item
+    field extension :: $k \subseteq K$について
+    $S=\Spec k, T=\Spec K$であるときには，
+    $\func{X}(T)$を$\func{X}(K)$と書き，$X$の\textbf{$K$-rational points}と呼ぶ．
+
+    \item
+    morphism :: $h: G \to H$について
+    自然変換$\func{h}: \func{G} \to \func{H}$は
+    $\phi \mapsto h \circ \phi$のように射を写す．
+    \end{enumerate}
+    \end{Def}
+    この関手$\func{X}$はfunctor of pointsと呼ばれる．
+
+    $K$-rational pointについては，
+    $\func{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
+    ここで$k(x)$は$x$でのresidue fieldである．
+    しかし\cite{HarAG} Chapter.2 Ex2.7から分かる通り，
+    この二つの定義は翻訳が出来る．
+    すなわち，
+    $k(x) \subseteq K$を満たす$x \in X$と，
+    $\Spec k$-morpsihm :: $\Spec K \to X$は一対一に対応する．
+
+    また$X$ :: finite type /$k$であるとき，
+    closed point :: $x \in X$について，
+    $k(x)$は$k$の有限次代数拡大体である．
+    これはZariski's Lemmaの帰結である．
+    したがって$\func{X}(\bar{k})$は$X$のclosed point全体に対応する．
+    ただし$\bar{k}$は$k$の代数閉包である．
+
+    \begin{Example}
+        $\R$上のaffine scheme $X=\Spec \R[x,y]/(x^2+y^2)$の
+        $\R$-rational pointと$\C$-rational pointを考えよう．
+
+        $\Spec \R \to X$の射は環準同型 $\R[x,y]/(x^2+y^2) \to \R$と一対一に対応する．
+        しかし直ちに分かる通り，
+        このような環準同型は
+        \[ (\bar{x}, \bar{y}) \mapsto (0, 0) \]
+        で定まるものしか存在し得ない．
+        ここで$\bar{x}=x \bmod (x^2+y^2), \bar{y}=y \bmod (x^2+y^2)$と置いた．
+        よって$\func{X}(\R)$は1元集合．
+        また，この環準同型が誘導する$\Spec R \to X$の射は
+        1点空間$\Spec \R$を原点へ写す．
+
+        一方，環準同型 $\R[x]/(x^2+1) \to \C$は
+        \[ (\bar{x}, \bar{y}) \mapsto (a, \pm ia) \]
+        （ここで$i=\sqrt{-1}, a \in \R$）で定まることが分かる．
+        すなわち，$\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に対応して，
+        $\R[x]/(x^2+1) \to \C$の環準同型が定まる．
+        逆の対応も明らか．
+        よって$\func{X}(\C)$の元は
+        $\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に
+        対応している．
+    \end{Example}
+
+    \begin{Example}
+        体$k$上のaffine variety :: 
+        $X \subseteq \affine^n_k$を
+        多項式系 :: $F_1,\dots,F_n \in k[x_1,\dots,x_n]$で定まるものとする．
+        すると$k$上の環$R$に対して，次の集合が考えられる．
+        \[ V_R=\left\{ p=(r_1,\dots,r_n) \in R^{\oplus n} ~\middle|~ F_1(p)=\dots=F_n(p)=0 \right\}. \]
+        この集合の元も$R$-value pointと呼ばれる．
+        (\cite{Muk1}ではこちらのみを$R$-value pointと呼んでいる．
+        実際，こちらのほうが字句``value point"の意味が分かりやすいだろう．)
+        $V_R$の点が$\func{X}(R)$の元と一対一に対応することを見よう．
+
+        $X$のaffine coordinate ringを
+        $A=k[x_1,\dots,x_n]/(F_1,\dots,F_n)$とし，
+        $\bar{x}_i=x_i \bmod (F_1,\dots,F_n) ~(i=1,\dots,n)$とおく．
+        $\phi: A \to R$を考えてみると，
+        これは次のようにして定まる．
+        \[ (\bar{x}_1,\dots,\bar{x}_n) \mapsto (r_1,\dots,r_n) \in V_R. \]
+        すなわち，$V_R$の点に対して$\Hom_{\Ring/k}(A,R)$の元が定まる．
+        逆の対応は明らか．
+        そして，$\Hom_{\Ring/k}(A,R)$が
+        $\Hom_{\Sch/\Spec k}(\Spec R, X)=\func{X}(R)$と一対一対応することはよく知られている．
+    \end{Example}
+
+\section{Fine/Corse Moduli}
+    moduli問題を語るには用語``family"が必要である．
+
+    \begin{Def}
+        $\mathcal{P}$を集合のクラス
+        \footnote
+        {
+            集合$X$を変数とする
+            述語$X \in \mathcal{C}$の意味を
+            「$X$はある条件を満たす対象である」と定義した，
+            と考えて良い．
+            「属す」の意味は集合と同様に定める．
+        }
+        とする．
+        集合$B$について，
+        $B$の構造と整合的な構造を持った集合$\mathcal{F}$と
+        写像$\pi: \mathcal{F} \to B$の組が
+        $\mathcal{P}$の$B$上の\textbf{family}であるとは，
+        各$b \in B$について$\pi^{-1}(s)$は空であるか$\mathcal{P}$に属すということ．
+%        $B$はfamily $\pi: \mathcal{F} \to B$のbaseと呼ばれる．
+    \end{Def}
+    「何らかの上部構造」というのは，
+    例えば，
+    $S$が位相空間であって
+    写像$\ftorM(S) \to S$を連続にするような位相が$\ftorM(S)$に入っている，
+    ということである．
+
+    用語``family"を厳密に定義しているものは全くと言っていいほど無いが，
+    ここではRenzoのノート
+    \footnote{ \url{http://www.math.colostate.edu/~renzo/teaching/Topics10/Notes.pdf} }
+    の定義を参考にした．
+    ただし，Renzoのノートの定義は一般化されすぎている．
+    Renzoのノートでは$\mathcal{P}$を
+    ``Let $\mathcal{P}$ define a class of objects in some category $\mathcal{C}$."
+    としているが，
+    これでは写像$\mathcal{F} \to B$が定義できるか怪しい．
+    なので私のこのノートでは$\mathcal{P}$を集合のクラスに限定している．
+    結果的に，内容としては``The Encyclopedia of Mathematics"
+    \footnote
+    {
+        ``Moduli theory"のページ．
+        \url{ https://www.encyclopediaofmath.org/index.php/Moduli_theory }
+    }
+    と同様になった．
+    ``family"を上のように解釈して不整合が生じたことは，
+    私の経験の中ではない．
+
+    \begin{Example}
+        $X, B$ :: scheme,
+        morphism of schemes :: $f: X \to B$をとる．
+        $f$のfibreが成す集合$\{ X_b \mid b \in B\}$は，
+        $\pi: X_b \mapsto b$によって$B$上のfamilyを成す．
+        fibreが代数幾何学的対象（例えばsmooth curve）であるようなfamilyは
+        deformation theoryの対象である．
+    \end{Example}
+
+    \begin{Example}
+        $k$を適当な体とし，
+        $\proj^1_k$の点$O_i~(i=1,2,3)$を順に$(0:1), (1:0), (1:1)$とする．
+        この時，$PGL_2(k)$は
+        次の全単射で$\proj^1_k$の自己同型写像の$(\proj^1_k)^{\oplus 3}$上のfamilyになる．
+        \begin{defmap}
+            \pi:& PGL_2(k)& \to& (\proj^1_k)^{\oplus 3} \\
+            {}& \phi& \mapsto& (\phi^{-1}(O_i))_{i=1}^3.
+        \end{defmap}
+    \end{Example}
+
+    以下の定義は\cite{HaMo}など，
+    Moduli問題に関する殆どの入門書で述べられている．
+    \begin{Def}
+        contravariant functor :: $\ftorM : \Sch \to \Set$が
+        \textbf{moduli functor}（またはfunctor of families）であるとは，
+        各scheme :: $S$に対して，
+        $\ftorM(S)$が代数幾何学的対象の$S$上のfamily達を
+        familyの間の同値関係で割ったもの
+        (``$\{ \text{families over }S \}/\sim_S$" in \cite{Hos})である，
+        ということ．
+        $\ftorM(S)$には$S$の構造と「整合的」な構造が与えられる．
+    \end{Def}
+    moduli functorの定義はあえて曖昧に述べられている．
+    これは「出来る限り多くのものをmoduli theoryの範疇に取り込みたい」
+    という思いがあるからである(\cite{HaMo})．
+
+    \begin{Def}
+        scheme :: $M$が
+        moduli fuctor :: $\ftorM$に対するfine moduli spaceであるとは，
+        $M$が$\ftorM$を表現する(represent)ということである．
+        言い換えれば，
+        関手$\func{M}=\Hom_{\Sch}(-, M)$が$\ftorM$と自然同型，ということである．
+    \end{Def}
+
+%    \begin{Remark}
+%        $\Sch$はlocally smallである．
+%        2つのscheme :: $X, Y$について，
+%        \begin{enumerate}[label=(\arabic*), leftmargin=*]
+%            \item 
+%                continuous map :: $|X| \to |Y|$の全体が成す集合の濃度は高々$\mathfrak{t}=\#|Y|^{\#|X|}$．
+
+%            \item
+%            $Y$の開集合$U$について，
+%            写像$\shO_Y(U) \to (f_*\shO_X)(U)$全体の濃度は高々$\mathfrak{s}_U=\#(f_*\shO_X)(U)^{\#\shO_Y(U)}$．
+
+%            \item
+%            この写像の集合は開集合で添字付けられているから，
+%            結局structure sheafの間の射全体の濃度は
+%            高々$\prod_{U \text{ :: open in }Y}\mathfrak{s}_U$．
+
+%            \item
+%            $Y$の開集合系の濃度は高々$2^{\#|Y|}$．
+
+%            \item
+%            よって
+%        \end{enumerate}
+%    \end{Remark}
+
+    \begin{Remark}
+        $X \in \Sch$をとる．
+        moduli functor :: $\ftorM$のfine moduli space :: $M$が存在したとしよう．
+        この時，$\ftorM(X) \iso \func{M}(X)$．
+        これは
+        $X$上の代数幾何学的対象が成す同値類が
+        $M$の$X$-value pointと一対一に対応していることを意味する．
+        したがって，
+        $\ftorM$が指定する代数幾何学的対象の集合の同値類を
+        $M$が「パラメトライズ」していると考えられる．
+    \end{Remark}
+
+    残念ながら，多くのmoduli functorに対してfine moduli spaceが存在し得ない．
+    （このあたりの議論は\cite{HaMo} p.3や\cite{HarDef} p.150にある．）
+    そのためMumfordは（おそらくGIT本で）
+    fine moduli spaceの代わりとしてcoarse moduli spaceを提唱した．
+
+    \begin{Def}
+        moduli functor :: $\ftorM$に対して，
+        以下を満たすscheme :: $M$を$\ftorM$のcoarse moduli spaceと呼ぶ．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+            \item
+                自然変換$\rho: \ftorM \to \func{M}$が存在する．
+            \item
+                $\rho$は自然変換$\ftorM \to \func{\tilde{M}}$の中で最も普遍的である:
+                \[
+                \xymatrix
+                {
+                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\rho}& {} \\
+                    {}^{\forall}\func{\tilde{M}} \ar[rr]_-{{}^{\exists!} \func{f}}& {} & \func{M}
+                }
+                \]
+                この図式で$\tilde{M}$ :: scheme, $f: M \to \tilde{M}$．
+            \item
+                任意の代数閉体 :: $k$について
+                $\rho_{\Spec k}: \ftorM(\Spec k) \to \func{M}(\Spec k)$は全単射である．
+        \end{enumerate}
+    \end{Def}
+
+    \begin{Example}
+        \cite{HarDef}の\S 26で，
+        elliptic curveのmoduliがfine moduliを持たず，
+        coarse moduliのみをもつことが述べられている．
+        % marrten.pdf Example 3.2
+        一般に，
+        対象が非自明な自己同型写像をもつときには
+        fine moduli spaceが存在し得ない．
+        これを述べるにはuniversal familyの定義が
+        必要と思われるので省略する．
+    \end{Example}
+
+    \begin{Prop}
+        moduli functor :: $\ftorM$に対して
+        coarse moduli spaceは同型を除いて一意である．
+    \end{Prop}
+
+    \begin{Prop}[\cite{HarDef}, Prop23.6]
+        scheme :: $M$が
+        moduli functor :: $\ftorM$に対する
+        fine moduli spaceであるならば，
+        $M$は$\ftorM$のcoarse moduli spaceでもある．
+    \end{Prop}
+
+    \begin{Prop}[\cite{HarDef}, Prop23.5]
+        $S$ :: schemeのopen subschemeと包含写像が成す圏を
+        $\OpenSubSch(S)$と書くことにする．
+        これは$\Sch/S$のfull subcategoryである．
+
+        moduli functor :: $\ftorM$が
+        fine moduli spaceをもつならば，
+        任意の$S$ :: schemeについて
+        $\ftorM|_{\OpenSubSch(S)}$は$S$上のsheafである．
+    \end{Prop}
+    \begin{proof}
+        $M$ :: fine moduli scheme for $\ftorM$とし，
+        $S$ :: schemeを固定する．
+        $\shF:=\func{M}|_{\OpenSubSch(S)}$は
+        開集合系からのcontravariant functorだから
+        presheafであることは定義から従う．
+        また$\shF$の元はschemeのmorphismである．
+        このことからsheafの公理Identity AxiomとGluability Axiomを
+        満たすことも簡単に分かる．
+        （一応，\cite{HarAG} II, Thm3.3 Step3を参考に挙げる．）
+    \end{proof}
+
+    familyの同値関係は，
+    しばしば群作用の軌道分解で与えられる．
+    この場合，
+    moduli問題は適当なschemeを群作用で「割」ったものを求めることに帰着する．
+
+\section{Definition of Group Schemes}
+    $S$ :: scheme上のschemeと$S$-morphismが成す圏を
+    \textbf{$\Sch/S$}で表す．
+    これはslice categoryの一般的なnotationから来ている．
+
+    group schemeは圏論的に定義される．
+    まずは圏論の言葉で述べよう．
+    \begin{Def}
+        $S$ :: schemeとする．
+        $G$ :: scheme over $S$がgroup scheme (over $S$)であるとは，
+        $G$が$\Sch/S$におけるgroup objectであるということである．
+        group scheme over $S$とhomomorphismsが成す圏を
+        $\GrpSch(S)$と書く．
+    \end{Def}
+    group objectとhomomorphismsの定義を展開すれば次のよう．
+    \begin{Def}
+    \enumfix
+    \begin{enumerate}[label=(\roman*),leftmargin=*]
+        \item
+        $S$ :: schemeとする．
+        $G$ :: scheme over $S$と次の3つの射から成る4つ組が
+        \textbf{group scheme (over $S$)}であるとは，
+        任意の$T \in \Sch/S$について
+        $\func{G}(T)$の群構造が誘導されるということである．
+        \begin{alignat*}{2}
+            \mu&:       G \times G \to G    && \quad \text{multiplication} \\
+            \epsilon&:  S \to G             && \quad \text{identity section}\\
+            \iota&:     G \to G             && \quad \text{inverse}
+        \end{alignat*}
+        $\mu$はgroup lawとも呼ばれる．
+        なお，$x, y \in \func{G}(T)$の
+        積$x \ast y \in \func{G}(T)$は次のように誘導される．
+        \[
+            x \ast y:
+        \xymatrix
+        {
+            T \ar[r]^-{\langle x, y \rangle}& G \times G \ar[r]^-{\mu}& G
+        }
+        \]
+        ここで$\langle x, y \rangle$は
+        $G \xleftarrow{x} T \xrightarrow{y} G$から
+        productの普遍性により誘導される射である．
+        単位元は$\epsilon!: T \to S \xrightarrow{\epsilon} G$
+        \footnote{ この射は$T \to G \to S \to G$と書いても同じである． }，
+        $x \in \func{G}(T)$の逆元は$i \circ x$である．
+
+        \item
+        group scheme over $S$ :: $G,H$の間の射
+        $h: G \to H$が\textbf{homomorphism}であるとは，
+        任意の$T \in \Sch/S$について
+        $\func{h}(T):\func{G}(T) \to \func{H}(T)$が群準同型であることである．
+
+        \item 
+            group schemes over $S$とその間のhomomorphismsが成す圏を\textbf{$\GrpSch(S)$}とする．
+    \end{enumerate}
+    \end{Def}
+
+    以下の例では$k$を適当な体とし，$k$上のaffine group schemeを定義する．
+    \begin{Example}[$\Ga$]
+        finitely generated $k$-algebra :: $A=k[x]$と次の3つの$k$-linear mapから，
+        $k$上のgroup scheme :: $\Ga$ \& $\mu,\epsilon,\iota$が誘導される．
+        \begin{alignat*}{3}
+            \tilde{\mu}&:
+                A \to A \otimes_k A; &&
+                \quad x \mapsto (x \otimes 1)+(1 \otimes x) \\
+            \tilde{\epsilon}&:
+                A \to k; &&
+                \quad x \mapsto 1 \\
+            \tilde{\iota}&:
+                A \to A; &&
+                \quad x \mapsto -x
+        \end{alignat*}
+        群構造を無視すれば$\Ga=\affine^1_k$．
+        この$\Ga$はadditive groupと呼ばれる．
+
+        $x_1=x \otimes 1, x_2=1 \otimes x$とすると，
+        $A \otimes A \iso k[x_1,x_2]$となる．
+        したがって$f \in A$について$\tilde{\mu}(f)(x_1,x_2) \in k[x_1,x_2]$とみなせる．
+        そして$k[x]$のalgebraとしての和は
+        $\tilde{\mu}(f)(x_1,x_2)=f(x_1+x_2)$のようにco-algebraに反映されている．
+        単位元と逆元は$\tilde{\epsilon}(f)(x)=f(1), \tilde{\iota}(f)(x)=f(-x)$のように
+        反映されている．
+    
+        $\Ga$に備わった群構造はclosed point :: $(a,b)$を$a+b$に写す．
+        これを確かめておこう．
+        $\affine^1_k \times_k \affine^1_k \iso \affine^2_k$の
+        $\bar{k}$-rational point :: $(a,b)$（$\bar{k}$は$k$の代数閉体）は
+        素イデアル
+        \[ \I{p}=(x_1-a, x_2-b)=\{ f \in k[x_1,x_2] \mid f(a,b)=0 \} \]に対応する．
+        したがって$\mu(\I{p})=\tilde{\mu}^{-1}(\I{p})$は次のよう．
+        \[ \tilde{\mu}^{-1}(\I{p})=\{ g \in A=k[x] \mid \tilde{\mu}(g)(a,b)=g(a+b)=0 \}. \]
+        これは$a+b$に対応する素イデアル$(x-(a+b))$に他ならない．
+    \end{Example}
+
+    \begin{Example}
+        finitely generated $k$-algebra :: $A=k[x,x^{-1}]$と次の3つの$k$-linear mapから，
+        $k$上のgroup scheme :: $\Gm$ \& $\mu,\epsilon,\iota$が誘導される．
+        \begin{alignat*}{3}
+            \tilde{\mu}&:
+                A \to A \otimes_k A; &&
+                \quad x \mapsto (x \otimes 1) \cdot (1 \otimes x) \\
+            \tilde{\epsilon}&:
+                A \to k; &&
+                \quad x \mapsto 1 \\
+            \tilde{\iota}&:
+                A \to A; &&
+                \quad x \mapsto -x
+        \end{alignat*}
+        群構造を無視すれば$\Gm=\affine^1_k-\{0\}$．
+
+        こちらも$\tilde{\mu}(f)(x_1,x_2)=f(x_1x_2)$の様に積が入っている．
+        $\mu: \Gm \times \Gm \to \Gm$が
+        $\bar{k}$-rational point :: $(a,b) \in \affine^2-\{(a,b) \mid ab=0\}$を
+        $ab \in \affine^1$に写すことは$\Ga$の場合と同様である．
+    \end{Example}
+    \begin{Example}
+        正整数$n$に対し
+        finitely generated $k$-algebra :: $A=k[x_{ij}]_{i,j=1}^n [\det^{-1}]$とおく．
+        ここで$\det$は不定元が成す$n$次正方行列$X=\tatev{x_{ij}}_{i,j=1}^n$のdeterminantである．
+        $A$と次の3つの$k$-linear mapから，
+        $k$上のgroup scheme :: $\GL_n$ \& $\mu,\epsilon,\iota$が誘導される．
+        \begin{alignat*}{3}
+            \tilde{\mu}&:
+                A \to A \otimes_k A; &&
+                \quad X \mapsto (X \otimes 1) \cdot (1 \otimes X) \\
+            \tilde{\epsilon}&:
+                A \to k; &&
+                \quad X \mapsto I \\
+            \tilde{\iota}&:
+                A \to A; &&
+                \quad X \mapsto X^{-1}
+        \end{alignat*}
+        $I$は$n$次単位行列．
+        ここで$\tilde{\iota}: X \mapsto I$は
+        ($X$の$(i,j)$成分)$\mapsto$($I$の$(i,j)$成分)という意味である．
+        $\tilde{\mu}, \tilde{\iota}$の定義も同様である．
+
+        $X_1=X \otimes 1=\tatev{x_{ij} \otimes 1}_{i,j=1}^n,
+        X_2=1 \otimes X=\tatev{1 \otimes x_{ij}}_{i,j=1}^n$
+        とおけば，
+        $f \in k[x_{ij}]$について
+        $\tilde{\mu}(f)(X_1, X_2)=f(X_1X_2)$となっている．
+        $\mu: \GL_n \times \GL_n \to \GL_n$が
+        $\bar{k}$-rational point :: $(M,N) \in \GL_n \times \GL_n$を
+        $MN \in \GL_n$へ写すことは$\Ga$での議論と同様である．
+        $n=1$の時$\GL_n=\Gm$であることに留意せよ．
+    \end{Example}
+
+    3つの例に現れた準同型$\tilde{\mu},\tilde{\epsilon},\tilde{\iota}$は
+    それぞれco-multiplication，co-unit, co-inversionと呼ばれる．
+    この3つの準同型によってそれぞれの$k$-finitely generatedに
+    Hopf algebra
+    \footnote
+    {
+        algebra, co-algebraの構造をもつfinitely generated $k$-moduleであって
+        antipodeと呼ばれる自己準同型射を備えるもの．
+    }
+    の構造が入る．
+    一般にaffine group schemeとHopf algbraが
+    一対一に対応する(\cite{MilneAGS} II,Thm5.1)．
+
+
+\section{Categorical/Good/Geometric/GIT Quotients}
+    % Moduli Theory and Classification Theory of Algebraic Varieties(H_Popp)
+    % のp.55からのlecture 5も参考に成る．
+    % 特にRemark5.3にcategorialだがgoodでないquotientの例がある．
+    % 同様にgoodだがgeometricでないquotientの例もある．
+    % graph mapがproperの時，
+    % geometric quotientは単に|Q|=|X|/Gなるgood quotientだと言える．
+
+\section{Linearly Reductive Group}
+
+\section{Affine GIT Quotient is Good Quotient.}
+
+\begin{thebibliography}{99}
+    \bibitem{Muk1}
+        向井茂(2008)『モジュライ理論 I』岩波書店
+
+    \bibitem{AV}
+        Gerard van der Geer, Ben Moonen
+        ``Abelian Varieties"
+        \url{https://www.math.ru.nl/~bmoonen/research.html}
+        （Preliminary Version. 2017/12/31参照）
+
+    \bibitem{Hos}
+    Victoria Hoskins (2016)
+    ``Moduli Problems and Geometric Invariant Theory"
+    \url{https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf}
+
+    \bibitem{HarAG}
+    Robin Hartshorne(1977)
+    ``Algebraic Geometry"
+    Springer
+
+    \bibitem{HarDef}
+    Robin Hartshorne
+    ``Deformation Theory"
+    Springer
+
+    \bibitem{Eisen}
+    David Eisenbud(1999)
+    ``Commutative Algebra: with a View Toward Algebraic Geometry"
+    Springer
+    
+    \bibitem{MilneAGS}
+    J. Milne, ``The basic theory of affine group schemes", 
+    \url{www.jmilne.org/math/CourseNotes/AGS.pdf}
+
+    \bibitem{HaMo}
+    J. Harris,I. Morrison ``Moduli of Curves"
+
+\end{thebibliography}
+\end{document}

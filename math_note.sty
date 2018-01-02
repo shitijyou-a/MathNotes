@@ -18,6 +18,7 @@
     {}%                      % Punctuation after theorem head
     {\newline}%              % Space after theorem head, ' ', or \newline
     {}%                      % Theorem head spec (can be left empty, meaning `normal')
+
 \theoremstyle{mathnotestyle}
 \newtheorem{Thm}{定理}[section]
 \newtheorem*{Thm*}{定理}
@@ -28,6 +29,15 @@
 \newtheorem{Cor}[Thm]{系}
 \newtheorem{Remark}[Thm]{注意}
 \newtheorem{Example}[Thm]{例}
+
+%% usage: \begin{Thm} \enumfix \begin{enumerate}
+%% https://tex.stackexchange.com/questions/46357
+\makeatletter
+\def\enumfix{%
+\if@inlabel
+ \noindent \par\nobreak\vskip-\parskip\vskip-\baselineskip\hrule\@height\z@
+\fi}
+\makeatother
 
 \renewcommand{\proofname}{\textnormal{(証明)}}
 \renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}

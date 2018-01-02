@@ -3,6 +3,8 @@
 \usepackage[all]{xy}
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
+\newcommand{\pbundle}{\mathbb{P}}
+
 \begin{document}
 \section{Strengthen Some Results in the Text.} %% Ex8.1 
 
@@ -145,13 +147,36 @@
     さらにこれは$0$を除く全ての$V^{\#}$の元がclaimの条件を満たすことを意味する．
     \underline{以下，$B \neq \emptyset$と仮定する．}
 
+    \paragraph{$p_1^{-1}(x)$ :: irreducible．}
+    任意のclosed point :: $x \in X^+$について$p_1^{-1}=(\ker \phi_x-\{0\})/k^*$．
+    これはprojective linear spaceだからirreducible．
+
     \paragraph{$B$ :: irreducible．}
     以上から$B$ :: irreducibleが分かる．
-    実際，$B$が二つの閉集合$C_1, C_2 (\neq \emptyset, X)$の和であったとすると，
-    $p_1(B)=X$より，
-    \[ X=p_1(C_1) \cup p_1(C_2). \]
-    一方，$X$ :: irreducible．
-    よって矛盾が生じ，$B$ :: irreducibleが示される．
+    $B$が二つの閉集合$C_1, C_2$の和であったとすると，
+    $x \in X^+$について$p_1^{-1}(x)$は次のように書ける．
+    \[ p_1^{-1}(x)=(C_1 \cap \pr_1^{-1}(x)) \cup (C_2 \cap \pr_1^{-1}(x)). \]
+    これはirreducibleだから，
+    $C_1 \cap \pr_1^{-1}(x)$か$C_2 \cap \pr_1^{-1}(x)$に一致する．
+    $x_1, x_2 \in X^+$について次のようになっていたと仮定しよう．
+    \[
+        p_1^{-1}(x_1)=C_1 \cap \pr_1^{-1}(x),~~~
+        p_1^{-1}(x_2)=C_2 \cap \pr_1^{-1}(x).
+    \]
+    すると，$x_1 \in, x_2 \not \in p_1(C_1)$となる．
+    $p_1(C_2)$も同様．
+    すなわち$p_1(C_1), p_1(C_2)$は$p_1(B)(=X)$空でないの真の閉集合である．
+    しかし$X=p_1(B)=p_1(C_1) \cup p_1(C_2)$であり$X$ :: irreducibleであるから，
+    これはありえない．
+    よって任意の$x \in X^+$について
+    $p_1^{-1}(x)=C_1 \cap \pr_1^{-1}(x)$（あるいは$=C_2 \cap$...）となる．
+    両辺で$\bigcup_{x \in X^+}$として
+    \[ p_1^{-1}(X^+)=C_1 \cap p_1^{-1}(X^+). \]
+    $p_1^{-1}(X^+)=(X^+ \times V) \cap B \supset B^+$であり，
+    $B^+$ :: dense in $B$．
+    $B^+ \cap C_1$ :: dense in $C_1$もEx3.14から得られるので，
+    両辺の$B$での閉包を取って$B=C_1$．
+    したがって$B$ :: irreducible．
 
     \paragraph{Dimension of $B$．}
     $B$ :: integral \& finite type/$k$ ($\implies$ variety/$k$)なので，
@@ -223,6 +248,51 @@
         {}& \shO_x^{\oplus r-1}& \to& \shO_x^{\oplus r}/s_x\shO_x \\
         {}& t & \mapsto& (0 \oplus t) \bmod s_x\shO_x
     \end{defmap}
+
+    \subsubsection{$B$の別構成．}
+    $d+1=\dim_k V^{\#}$とし，$\shV=(V^{\#})\sidetilde$とする．
+    $V^{\#} \iso k^{\oplus d+1}$から
+    $\shV$は$\rank \shV=d+1$のlocally free sheafとなる．
+    そして全射$\shV \otimes_k \shO_X \to \shE$が
+    $\sect{U}{s} \otimes \sect{U}{a} \mapsto \sect{U}{sa}$の様に構成できる
+    \footnote
+    {
+        $\shO_X$が$k$-moduleであることは次のように分かる．
+        今，$f: X \to \Spec k$が存在するので
+        $\shO_{\Spec k} \to f^*\shO_X$が存在する．
+        これのadjoint :: $f^{-1}\shO_{\Spec k} \to \shO_X$を考えれば，
+        開集合$U \subseteq X$について$\shO_X(U)$が$k$-moduleであることが分かる．
+        また，ここで書いた$\shV \otimes_k \shO_X \to \shE$の定義は
+        presheaf :: $U \mapsto \shV(U) \otimes_k \shO_X(U)$からの
+        morphismなのでsheafificationが必要である．
+    }．
+    これの$\ker$を$\shB$とおく．
+    \[ \xymatrix{ 0 \ar[r]& \shB \ar[r]& \shV \otimes \shO_X \ar[r]& \shE \ar[r]& 0 } \]
+    構成から$\shB$ :: locally freeと$\rank \shB=d+1-r$が分かる（？）．
+    双対をとる．（すなわち$\shHom(-, \shO_X)$で写す．）
+    \[ \xymatrix{ 0 \ar[r]& \check{\shE} \ar[r]& \check{\shV} \otimes \shO_X \ar[r]& \check{\shB} \ar[r]& 0 } \]
+    全射$\check{\shV} \otimes \shO_X \to \check{\shB}$から，
+    injective $X$-morphism :: $\pbundle(\check{\shB}) \to \proj_k^{d} \times X$が誘導される（？）．
+    ここでの$\pbundle(\check{\shB})$が$B$である（？）．
+    構成の仕方から，$\dim B=\rank \check{\shB}-1$．
+
+    \subsubsection{$\shE'$ :: locally freeの別証明．}
+    任意の点$x \in X$におけるstalkを考える．
+    \[ \xymatrix{ 0 \ar[r]& \shO_x \ar[r]^-{\times s_x}& \shE_x \ar[r]& \shE'_x \ar[r]& 0 } \]
+    これを$\otimes_{\shO_x} k(x)$で写し，
+    $k(x)$-moduleのexact sequenceにする．
+    \[ \xymatrix{ \shO_x \otimes k(x) \ar[r]^-{\times (s_x \otimes 1)}& \shE_x \otimes k(x) \ar[r]& \shE'_x \otimes k(x) \ar[r]& 0 } \]
+    同型で書き換える．
+    \[ \xymatrix{ k(x) \ar[r]^-{\times (s_x)\sidebar}& \shE_x/\I{m}_x\shE_x \ar[r]& \shE'_x \otimes k(x) \ar[r]& 0 } \]
+    ただし$(s_x)\sidebar=s_x \bmod \I{m}_x\shE_x$．
+    これは$s_x \not \in \I{m}_x\shE_x$から，$0$でない．
+    したがって左の写像は$1 \in k(x)$を非ゼロ元に写す．
+    このexact sequenceは$k(x)$-moduleのものだったから，
+    左の写像はinjective．
+    よって次が分かる．
+    \[ \dim_{k(x)} \shE'_x \otimes k(x)=\dim_{k(x)} \shE_x \otimes k(x)-\dim_{k(x)} k(x)=r-1. \]
+    すなわち$\dim_{k(x)} \shE'_x \otimes k(x)$は$x \in X$について定数関数．
+    Ex5.8より，$\shE'$ :: locally freeと分かる．
 
 \section{Product Schemes.} %% Ex8.3 
 

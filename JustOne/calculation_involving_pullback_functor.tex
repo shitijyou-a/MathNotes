@@ -1,0 +1,62 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+\usepackage[all]{xy}
+
+\newcommand{\ftorSh}{\mathit{Sh}}
+
+\begin{document}
+\title{Pullback functorが関係する各種計算．}
+\author{七条 彰紀}
+\maketitle
+
+\begin{Def}
+    $f: X \to Y$をscheme morphismとする．
+    $\shO_Y$-module :: $\shF$に対して，
+    $f^*\shF$はinverse image functorを用いて
+    $f^{-1}\shF \otimes_{f^{-1}\shO_Y} \shO_X$と定義する．
+    あるいは，$\shO_Y$-moduleの圏における$f_*$ :: direct image functorの
+    left adjoint functorとして定義する．
+\end{Def}
+    以下，$X,Y,f$は定義文中のようなものとする．
+
+$V$ :: open in $Y$とし，
+$i: V \to Y$をinclusion mapとする．
+すると$i^*$はrestrictionである．
+\[
+    i_*\shF
+    =i^{-1}\shF \otimes_{i^{-1}\shO_Y} \shO_V
+    \iso \shF|_V.
+\]
+
+\begin{Prop}
+    $V$ :: open in $Y$, $U=f^{-1}(V)$ :: open in $X$とする．
+    このとき，
+    \[ (f^* \shF)|_U \iso (f|_U)^* \shF|_V. \]
+\end{Prop}
+\begin{proof}
+    明らかに次は可換図式である．
+    $i,j$はinclusion mapとする．
+    \[
+        \xymatrix
+        {
+            U \ar[d]_-{f|_U}\ar[r]^-{i}& X\ar[d]^-{f} \\
+            V \ar[r]_-{j}& Y
+        }
+    \]
+    証明は次のよう．
+    \[
+                (f^* \shF)|_U
+        \iso    i^* f^* \shF
+        \iso    (f \circ i)^* \shF
+        \iso    (j \circ f|_U)^* \shF
+        \iso    (f|_U)^* j^*\shF
+        \iso    (f|_U)^* \shF|_V.
+    \]
+\end{proof}
+
+\begin{Prop}
+    $\shF, \shG$ :: locally free $\shO_Y$-moduleとする．
+    \[ f^*(\shF \otimes \shG) \iso f^*\shF \otimes f^*\shG. \]
+\end{Prop}
+
+\end{document}
