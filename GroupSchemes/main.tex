@@ -8,9 +8,13 @@
 \newcommand{\Ring}{\mathbf{Ring}}
 \newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
 \newcommand{\GrpSch}{\mathbf{GrpSch}}
+\newcommand{\famF}{\mathcal{F}}
+\newcommand{\famG}{\mathcal{G}}
 
 \newcommand{\func}[1]{\underline{#1}}
 \newcommand{\ftorM}{\mathcal{M}}
+
+\newcommand{\acton}{\,\curvearrowright\,}
 
 \newcommand{\Ga}{\mathbb{G}_a}
 \newcommand{\Gm}{\mathbb{G}_m}
@@ -39,7 +43,7 @@
         \item $T$-valued point (where $T$ :: scheme),
         \item group scheme,
         \item fine/corse moduli,
-        \item categorical/good/geometric/GIT quotient,
+        \item categorical/good/geometric/affine GIT quotient,
         \item representation of group (scheme),
         \item linearly reductive group,
         \item closure equivalence,
@@ -50,12 +54,31 @@
     \begin{Thm}
         $X$ :: affine scheme,
         $G$ :: linearly reductive group scheme acting on $X$とする．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item 
         affine GIT quotient of $X$ by $G$ :: $X \sslash G$はgood quotientである．
+
+        \item
         $X$のstable pointsを$X^s$とすると，
         $X \sslash G$の制限 :: $X^s \slash G$は
         geometric quotient of $X^s$ by $G$である．
-%        また，$X \sslash G$はquotient functor :: $\func{X} \slash G$の最良近似である．
+
+        \item
+        $X \sslash G$はquotient functor :: $\func{X} \slash G$の最良近似である．
+
+        \item
+        $k$を体とする．
+        $X$がfinite type/$k$ならば$X \sslash G$もそうである．
+%        さらに，$X$がaffine varietyならば$X \sslash G$もそうである．
+        \end{enumerate}
     \end{Thm}
+
+\subsection*{Notation}
+    $S$ :: scheme上のschemeと$S$-morphismが成す圏を
+    \textbf{$\Sch/S$}で表す．
+    これはslice categoryの一般的なnotationから来ている．
+    
+    affine scheme :: $\Spec R$は，混乱の恐れがないときは$R$と略す．
 
 \section{$T$-valued Points}
     圏論で言う``generalized point"の概念を，
@@ -67,11 +90,13 @@
     \item 
     $X, T \in \Sch/S$に対し，
     $\func{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
+    $T=\Spec R$と書けるときは$\func{X}(T)$を$\func{X}(R)$と書く．
+    この関手$\func{X}$はfunctor of pointsと呼ばれる．
 
     \item
-    field extension :: $k \subseteq K$について
-    $S=\Spec k, T=\Spec K$であるときには，
-    $\func{X}(T)$を$\func{X}(K)$と書き，$X$の\textbf{$K$-rational points}と呼ぶ．
+    体$k$上のscheme :: $X$ ($S=\Spec k, X \in \Sch/S$)と
+    field extension :: $k \subseteq K$について，
+    $\func{X}(K)$を$X$の\textbf{$K$-rational points}と呼ぶ．
 
     \item
     morphism :: $h: G \to H$について
@@ -79,23 +104,34 @@
     $\phi \mapsto h \circ \phi$のように射を写す．
     \end{enumerate}
     \end{Def}
-    この関手$\func{X}$はfunctor of pointsと呼ばれる．
 
-    $K$-rational pointについては，
-    $\func{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
-    ここで$k(x)$は$x$でのresidue fieldである．
-    しかし\cite{HarAG} Chapter.2 Ex2.7から分かる通り，
-    この二つの定義は翻訳が出来る．
-    すなわち，
-    $k(x) \subseteq K$を満たす$x \in X$と，
-    $\Spec k$-morpsihm :: $\Spec K \to X$は一対一に対応する．
+    \begin{Remark}
+        Yoneda Lemmaより，
+        自然変換$\func{G} \to \func{H}$と
+        射$G \to H$が一対一対応することに注意しよう．
+        したがって，
+        schemeの間の射についての議論と
+        functor of pointsの間の射の議論は
+        （ある程度）互いに翻訳することが出来る．
+    \end{Remark}
 
-    また$X$ :: finite type /$k$であるとき，
-    closed point :: $x \in X$について，
-    $k(x)$は$k$の有限次代数拡大体である．
-    これはZariski's Lemmaの帰結である．
-    したがって$\func{X}(\bar{k})$は$X$のclosed point全体に対応する．
-    ただし$\bar{k}$は$k$の代数閉包である．
+    \begin{Remark}
+        $K$-rational pointについては，
+        $\func{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
+        ここで$k(x)$は$x$でのresidue fieldである．
+        しかし\cite{HarAG} Chapter.2 Ex2.7から分かる通り，
+        この二つの定義は翻訳が出来る．
+        すなわち，
+        $k(x) \subseteq K$を満たす$x \in X$と，
+        $\Spec k$-morpsihm :: $\Spec K \to X$は一対一に対応する．
+
+        また$X$ :: finite type /$k$であるとき，
+        closed point :: $x \in X$について，
+        $k(x)$は$k$の有限次代数拡大体である．
+        これはZariski's Lemmaの帰結である．
+        したがって$\func{X}(\bar{k})$は$X$のclosed point全体に対応する．
+        ただし$\bar{k}$は$k$の代数閉包である．
+    \end{Remark}
 
     \begin{Example}
         $\R$上のaffine scheme $X=\Spec \R[x,y]/(x^2+y^2)$の
@@ -145,7 +181,8 @@
         $\Hom_{\Sch/\Spec k}(\Spec R, X)=\func{X}(R)$と一対一対応することはよく知られている．
     \end{Example}
 
-\section{Fine/Corse Moduli}
+\section{Moduli Functor and Fine/Corse Moduli Space}
+    \subsection{Families}
     moduli問題を語るには用語``family"が必要である．
 
     \begin{Def}
@@ -160,45 +197,66 @@
         }
         とする．
         集合$B$について，
-        $B$の構造と整合的な構造を持った集合$\mathcal{F}$と
-        写像$\pi: \mathcal{F} \to B$の組が
+        $B$の構造と整合的な構造を持った集合$\famF$と
+        全射写像$\pi: \famF \to B$の組が
         $\mathcal{P}$の$B$上の\textbf{family}であるとは，
-        各$b \in B$について$\pi^{-1}(s)$は空であるか$\mathcal{P}$に属すということ．
+        各$b \in B$について集合$\pi^{-1}(b) \subseteq \famF$が
+        $\mathcal{P}$に属すということ．
 %        $B$はfamily $\pi: \mathcal{F} \to B$のbaseと呼ばれる．
     \end{Def}
-    「何らかの上部構造」というのは，
+    「$B$の構造と整合的な構造」というのは，
     例えば，
     $S$が位相空間であって
-    写像$\ftorM(S) \to S$を連続にするような位相が$\ftorM(S)$に入っている，
+    写像$\famF \to S$を連続にするような位相が$\famF$に入っている，
     ということである．
+    familyの構造は場合毎に明示されなくてはならない．
 
     用語``family"を厳密に定義しているものは全くと言っていいほど無いが，
     ここではRenzoのノート
     \footnote{ \url{http://www.math.colostate.edu/~renzo/teaching/Topics10/Notes.pdf} }
     の定義を参考にした．
-    ただし，Renzoのノートの定義は一般化されすぎている．
-    Renzoのノートでは$\mathcal{P}$を
-    ``Let $\mathcal{P}$ define a class of objects in some category $\mathcal{C}$."
-    としているが，
-    これでは写像$\mathcal{F} \to B$が定義できるか怪しい．
-    なので私のこのノートでは$\mathcal{P}$を集合のクラスに限定している．
-    結果的に，内容としては``The Encyclopedia of Mathematics"
-    \footnote
-    {
-        ``Moduli theory"のページ．
-        \url{ https://www.encyclopediaofmath.org/index.php/Moduli_theory }
-    }
-    と同様になった．
+%    ただし，Renzoのノートの定義は一般化されすぎている．
+%    Renzoのノートでは$\mathcal{P}$を
+%    ``Let $\mathcal{P}$ define a class of objects in some category $\mathcal{C}$."
+%    としているが，
+%    これでは写像$\mathcal{F} \to B$が定義できるか怪しい．
+%    なので私のこのノートでは$\mathcal{P}$を集合のクラスに限定している．
     ``family"を上のように解釈して不整合が生じたことは，
     私の経験の中ではない．
+
+    \begin{Remark}
+        moduli theory以外で``family of $\mathcal{C}$"と言えば，
+        単に$\mathcal{C}$の部分集合であろう．
+        ``family parametrized by $S$"の様に言えば，
+        $S$-indexed family (or set)のことを想像するであろう．
+        しかし$S$-indexed family :: $\famF \subset \mathcal{C}$は
+        $S \to \famF$という写像で定まるから，
+        ここでの``family"とは写像の向きが逆である．
+        
+        上の定義を無心に読めば分かる通り，
+        「$\mathcal{C}$のfamily :: $\famF$」と言った時には，
+        $\mathcal{C}$に属すのは$\famF$の部分集合である．
+        属すのは（一般に）$\famF$の元ではない．
+        また$\famF$は$\mathcal{C}$の元の和集合とみなせる．
+        （正確には$\mathcal{C}$の元を$S$に沿って並べたものである．）
+    \end{Remark}
 
     \begin{Example}
         $X, B$ :: scheme,
         morphism of schemes :: $f: X \to B$をとる．
-        $f$のfibreが成す集合$\{ X_b \mid b \in B\}$は，
-        $\pi: X_b \mapsto b$によって$B$上のfamilyを成す．
-        fibreが代数幾何学的対象（例えばsmooth curve）であるようなfamilyは
+        $X$は$\pi: X \mapsto b$によって$B$上のfamilyを成す．
+        射のfibreとして実現される，
+        scheme（例えばsmooth curve）のfamilyは
         deformation theoryの対象である．
+    \end{Example}
+
+    \begin{Example}\label{example:grassmannian}
+        $k$を体，$S$を適当なschemeとする．
+        $\affine^2_k$の原点を通る直線の$S$上のfamilyは，
+        line bundle :: $\shL \subset \affine^2 \times_k S$である．
+        $\shL \to S$は射影写像で与えられる．
+        同様に$\affine^n$の$r$次元線形空間の$S$上のfamilyは
+        $r$次元vector bundle :: $\shE \subset \affine^n \times S$である．
     \end{Example}
 
     \begin{Example}
@@ -212,6 +270,7 @@
         \end{defmap}
     \end{Example}
 
+    \subsection{Moduli Functor}
     以下の定義は\cite{HaMo}など，
     Moduli問題に関する殆どの入門書で述べられている．
     \begin{Def}
@@ -222,12 +281,12 @@
         familyの間の同値関係で割ったもの
         (``$\{ \text{families over }S \}/\sim_S$" in \cite{Hos})である，
         ということ．
-        $\ftorM(S)$には$S$の構造と「整合的」な構造が与えられる．
     \end{Def}
     moduli functorの定義はあえて曖昧に述べられている．
     これは「出来る限り多くのものをmoduli theoryの範疇に取り込みたい」
     という思いがあるからである(\cite{HaMo})．
 
+    \subsection{Fine Moduli Space}
     \begin{Def}
         scheme :: $M$が
         moduli fuctor :: $\ftorM$に対するfine moduli spaceであるとは，
@@ -272,11 +331,25 @@
         $M$が「パラメトライズ」していると考えられる．
     \end{Remark}
 
+    \begin{Example}[\cite{Hos}, Exercise 2.20]
+        例\ref{example:grassmannian}で述べた
+        $\affine^n$の$r$次元線形空間の$S$上のfamily
+        (vector bundle over $S$)の集合を，
+        vector bundleの同型で割った集合を$\ftorM(S)$とする．
+        $f: T \to S$に対する$\ftorM(f)$は，
+        vector bundleへのpost-compositionで自然に定まる．
+
+        このmoduli functorはfine moduli spaceを持つことが知られている．
+        これがGrassmannian varietyである．
+    \end{Example}
+
     残念ながら，多くのmoduli functorに対してfine moduli spaceが存在し得ない．
-    （このあたりの議論は\cite{HaMo} p.3や\cite{HarDef} p.150にある．）
+    （このあたりの議論は\cite{HaMo} p.3や\cite{HarDef} p.150にある．
+    この節の終わりでも理由と例を示す．）
     そのためMumfordは（おそらくGIT本で）
     fine moduli spaceの代わりとしてcoarse moduli spaceを提唱した．
 
+    \subsection{Coarse Moduli Space}
     \begin{Def}
         moduli functor :: $\ftorM$に対して，
         以下を満たすscheme :: $M$を$\ftorM$のcoarse moduli spaceと呼ぶ．
@@ -300,17 +373,11 @@
     \end{Def}
 
     \begin{Example}
-        \cite{HarDef}の\S 26で，
-        elliptic curveのmoduliがfine moduliを持たず，
-        coarse moduliのみをもつことが述べられている．
-        % marrten.pdf Example 3.2
-        一般に，
-        対象が非自明な自己同型写像をもつときには
-        fine moduli spaceが存在し得ない．
-        これを述べるにはuniversal familyの定義が
-        必要と思われるので省略する．
+        楕円曲線の$j$-不変量．
+        後に示すとおり，これはfineでない．
     \end{Example}
 
+    \subsection{Properties of Fine / Coarse Moduli Spaces}
     \begin{Prop}
         moduli functor :: $\ftorM$に対して
         coarse moduli spaceは同型を除いて一意である．
@@ -321,6 +388,11 @@
         moduli functor :: $\ftorM$に対する
         fine moduli spaceであるならば，
         $M$は$\ftorM$のcoarse moduli spaceでもある．
+    \end{Prop}
+    
+    \begin{Prop}[\cite{Hos} Prop2.26]
+     Let $(M, \eta)$ be a coarse moduli space for a moduli problem $M$.
+     Then $(M, \eta)$ is a fine moduli space if and only if (...)
     \end{Prop}
 
     \begin{Prop}[\cite{HarDef}, Prop23.5]
@@ -345,15 +417,73 @@
         （一応，\cite{HarAG} II, Thm3.3 Step3を参考に挙げる．）
     \end{proof}
 
-    familyの同値関係は，
-    しばしば群作用の軌道分解で与えられる．
-    この場合，
-    moduli問題は適当なschemeを群作用で「割」ったものを求めることに帰着する．
+    \subsection{Pathological behaviour.}
+    $\famF, \famG \to S$をfiber of morphismで実現されるfamilyだとする．
+    （したがって$\famF, \famG$はschemeである．）
+    $\famF, \famG$の同値関係を，schemeとしての同型で定めよう．
+    $M$をcoarse moduli space, 
+    $\eta$をmoduli functorから$\func{M}$への自然変換だとする．
+
+    $\eta_S(\famF): S \to M$は$\famF$のfiberを$M$の点に対応させる．
+    （添字の$S$は以降略す．）
+    \[
+    \xymatrix@R=10pt
+    {
+        \famF \ar[r]& S \ar[r]^-{\eta(\famF)}& M \\
+        \famF_s \ar@{{|}->}[r]& s \ar@{{|}->}[r]& m
+    }
+    \]
+    $\eta(\famG): S \to M$についても同様である．
+    したがって$\famF, \famG$が
+    fiber毎に同型であれば，$\eta(\famF)=\eta(\famG)$となる．
+
+    \cite{Hos} Prop 2.26より，
+    この同値関係についての
+    coarse moduli space $(M, \eta)$がfine moduliであるならば，
+    これは$\famF=\famG$を意味する．
+    しかし，対象が非自明な自己同型写像をもつときには
+    このようにならないfamilyが構成できてしまう．
+    % 構成はmarrten.pdf Example 3.2
+
+    \begin{Example}[\cite{HarDef} \S 26]
+        $S=\affine^1_k-\{0\}$とする．
+        $S$上の楕円曲線のfamily :: $\famF$を次で定める．
+        \[
+            \famF=\zerosa(y^2-x^3-s) \subseteq \affine^2_k \times_k S
+            \xrightarrow{\pr} S.
+        \]
+        $\eta(\famF)$を$j$不変量を用いて$s \mapsto j(\shF_s)$で定める．
+        $j$不変量がcoarse moduliであることは既に見た．
+        計算すると分かる通り，$\eta(\famF)$は定値写像である．
+        したがって$\famF$のそれぞれのfiberは互いに同型である．
+        一方，$\famF'=\zerosa(y^2-x^3-1) \times S$について
+        同様に$\eta(\famF')$を定めると，
+        これも自明に定値写像である．
+        しかし，$\famF \not \iso \famF'$であることが示せる（TODO）．
+        よって$j$不変量はfine moduliにならない．
+        fine/coarse moduliの一意性から，
+        楕円曲線はfine moduliを持たない．
+    \end{Example}
+
+    それぞれのfiberが互いに同型である
+    (i.e. $\Forall{t,s \in S} \famF_t \iso \famF_s$)ような
+    familyをfiberwise trivial family, 
+    $X \times S$の形に書けるfamilyをtrivial familyと呼ぶ．
+    一般に，fine moduli spaceが存在するならば，
+    fiberwise trivial familyはtrivial familyである
+    (\cite{HarDef} Remark23.1.1)．
+
+    また，coarse moduli spaceさえ持ち得ないmoduli functorもある．
+    これはjump phenomenonと呼ばれる性質を持つfamilyが存在する場合や，
+    あるいはmoduli fuctorが``unbounded"であるときに起きる．
+    このノートでは深追いしない．
+    詳しくは\cite{Hos} \S 2.4を参照せよ．
 
 \section{Definition of Group Schemes}
-    $S$ :: scheme上のschemeと$S$-morphismが成す圏を
-    \textbf{$\Sch/S$}で表す．
-    これはslice categoryの一般的なnotationから来ている．
+    familyの同値関係は，
+    しばしば群作用の軌道分解で与えられる．
+    そのためmoduli問題の理解のために，
+    group schemeを知ることは不可欠である．
 
     group schemeは圏論的に定義される．
     まずは圏論の言葉で述べよう．
@@ -381,7 +511,8 @@
         \end{alignat*}
         $\mu$はgroup lawとも呼ばれる．
         なお，$x, y \in \func{G}(T)$の
-        積$x \ast y \in \func{G}(T)$は次のように誘導される．
+        積$x \ast y \in \func{G}(T)$は$\func{\mu}(\langle x, y \rangle)$，
+        すなわち次の射である．
         \[
             x \ast y:
         \xymatrix
@@ -394,7 +525,7 @@
         productの普遍性により誘導される射である．
         単位元は$\epsilon!: T \to S \xrightarrow{\epsilon} G$
         \footnote{ この射は$T \to G \to S \to G$と書いても同じである． }，
-        $x \in \func{G}(T)$の逆元は$i \circ x$である．
+        $x \in \func{G}(T)$の逆元は$\func{\iota}(x)=\iota \circ x$である．
 
         \item
         group scheme over $S$ :: $G,H$の間の射
@@ -433,15 +564,22 @@
         単位元と逆元は$\tilde{\epsilon}(f)(x)=f(1), \tilde{\iota}(f)(x)=f(-x)$のように
         反映されている．
     
-        $\Ga$に備わった群構造はclosed point :: $(a,b)$を$a+b$に写す．
+        $\Ga$に備わった群構造はclosed point :: $(a,b) \in \affine^2$を$a+b \in \affine^1$に写す．
         これを確かめておこう．
         $\affine^1_k \times_k \affine^1_k \iso \affine^2_k$の
-        $\bar{k}$-rational point :: $(a,b)$（$\bar{k}$は$k$の代数閉体）は
-        素イデアル
+        $\bar{k}$-rational point :: $(a,b)$
+        \footnote
+        {
+            $\bar{k}$は$k$の代数閉体．
+            rational pointについての注意で触れたとおり，
+            varietyの$\bar{k}$-rational point全体は
+            closed point全体と一致するのであった．
+        }
+        は極大イデアル
         \[ \I{p}=(x_1-a, x_2-b)=\{ f \in k[x_1,x_2] \mid f(a,b)=0 \} \]に対応する．
         したがって$\mu(\I{p})=\tilde{\mu}^{-1}(\I{p})$は次のよう．
         \[ \tilde{\mu}^{-1}(\I{p})=\{ g \in A=k[x] \mid \tilde{\mu}(g)(a,b)=g(a+b)=0 \}. \]
-        これは$a+b$に対応する素イデアル$(x-(a+b))$に他ならない．
+        これは$a+b$に対応する極大イデアル$(x-(a+b))$に他ならない．
     \end{Example}
 
     \begin{Example}
@@ -511,8 +649,13 @@
     一般にaffine group schemeとHopf algbraが
     一対一に対応する(\cite{MilneAGS} II,Thm5.1)．
 
+    \begin{Thm}[\cite{Hos} Thm3.9]
+        Any affine group scheme over a field 
+        is a linear algebraic group
+        (i.e. subgroup of $GL_n$ for some $n$).
+    \end{Thm}
 
-\section{Categorical/Good/Geometric/GIT Quotients}
+\section{Categorical/Good/Geometric/Affine GIT Quotients}
     % Moduli Theory and Classification Theory of Algebraic Varieties(H_Popp)
     % のp.55からのlecture 5も参考に成る．
     % 特にRemark5.3にcategorialだがgoodでないquotientの例がある．
@@ -520,9 +663,313 @@
     % graph mapがproperの時，
     % geometric quotientは単に|Q|=|X|/Gなるgood quotientだと言える．
 
-\section{Linearly Reductive Group}
+    ここからはschemeへのgroup schemeの作用を考えるのだから，
+    まずは作用の定義を与えよう．
+    \begin{Def}
+        scheme/$S$ :: $X$と，
+        group scheme/$S$ :: $G$が与えられたとする．
+        $G$の$X$への\textbf{(left) action}とは，
+        次を満たす射$\rho: G \times_S X \to X$である．
+        すなわち，任意の$T \in \Sch/S$について，
+        $\rho$は群$\func{G}(T)$から集合$\func{X}(T)$への作用を誘導する．
 
-\section{Affine GIT Quotient is Good Quotient.}
+        なお，$g \in \func{G}(T)$を
+        $x \in \func{X}(T)$に作用させた$g \cdot x \in \func{X}(T)$は
+        $\func{\rho}(\langle g,x \rangle)$，すなわち
+        \[
+        \xymatrix
+        {
+            T \ar[r]^-{\langle g,x \rangle}& G \times_S X \ar[r]^-{\rho}& X
+        }
+        \]
+        である．
+        ここで$\langle g, x \rangle$は
+        $G \xleftarrow{g} T \xrightarrow{x} X$から
+        productの普遍性により誘導される射である．
+
+        action :: $G \times X \to X$のことを$G \acton X$と表す．
+        $g \in G$を$x \in X$に作用させたものをしばしば$g \cdot x$と書く．
+        $Gx:=\rho(G \times \{x\})$と置き，
+        これを点$x$の\textbf{orbit}と呼ぶ．
+    \end{Def}
+
+    \textbf
+    {
+    以下，
+    scheme ::$S$,
+    scheme/$S$ :: $X$,
+    group scheme/$S$ :: $G$,
+    action :: $\rho: G \acton X$が与えられているとする．
+    }
+
+    \subsection{Categorical Quotient}
+    圏論的立場から「schemeのgroup schemeによるquotient」と呼べるschemeは，
+    categorical quotientであろう．
+    \begin{Def}
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item
+            schemeの射 :: $q: X \to Y$は，
+            $q \circ \rho=q \circ \pr_X: G \times X \to Y$であるとき，
+            \textbf{$G$-invariant morphism}と呼ばれる．
+            この条件は次のように翻訳できる:
+            任意の$T \in \Sch/S$と
+            任意の$g \in \func{G}(T), x \in \func{X}(T)$について，
+            \[
+                \func{q}(\rho \circ \langle g,x\rangle)
+                =\func{q}(g \cdot x)
+                =\func{q}(x)
+                =\func{q}(\pr_X \circ \langle g,x \rangle).
+            \]
+
+        \item
+            schemeの射$q: X \to Y$は，
+            $q$が$\rho, \pr_X: G \times X \rightrightarrows X$の
+            coequalizerであるとき，
+            $X$の$G$による\textbf{categorial quotient}と呼ばれる．
+            言い換えれば，
+            $X$からの$G$-invariant morphismとして普遍的なものが$q$である．
+
+%        \item
+%            $S, S' \in \Sch$の間に射$S' \to S$が存在するとしよう．
+%            この時，fiber productは関手$- \times_S S': \Sch/S \to \Sch/S'$とみなすことが出来る．
+
+%            $X$の$G$によるcategorical quotient :: $q: X \to Y$は，
+%            次を満たす時，$X$の$G$による\textbf{universal categorical quotient}と呼ばれる:
+%            任意の$S' \in \Sch/S$について，
+%            $q \times S': X \times S' \to Y \times S'$は
+%            $X \times S'$の$G \times S'$によるcategorical quotientである．
+    \end{enumerate}
+    \end{Def}
+    すぐに分かる通り，
+    この定義は$\Sch$を「finite productを持つcategory」に書き換えても良い．
+    この意味で，
+    categorical quotientは最も普遍的な「群作用での商」を定義していると言える．
+
+    \begin{Remark}
+        categorical quotientは普遍性を持つもの
+        と定義されていることから分かる通り，
+        同型を除いて\kenten{高々}一つしか無い．
+        存在するかどうかは分からない．
+    \end{Remark}
+
+    さて，categorical quotientは確かに「商らしい」が，
+    幾何学的にも「商らしい」と言えるとは限らない．
+
+    \begin{Example}\label{example:P,A/Gm}
+        $\proj^1_k, \affine^1_k$の$\Gm$による群作用の商．
+    \end{Example}
+
+    そのために，他の意味で「商らしい商」もいくつか定義する．
+    どういった意味で「商らしい」かによって定義は異なり，
+    以後は「商らしい商」が存在するかどうか・構成できるかどうかが問題に成る．
+    後に示すが，
+    以下の「商らしい商」はいずれもcategorical quotientである．
+    なので一つ「商らしい商」が存在すれば，
+    その商はより弱い意味でも「商らしい」ことに注意せよ．
+
+    \subsection{$G$-invariant Function}
+    \begin{Def}[\cite{AV}]
+        $U$ :: open in $X$について，
+        $f \in \shO_X(U)$は
+        \[ \rho^{\#}(f)|_{G \times_S U}=\pr_X^{\#}(f) \in \shO_{G \times_S X}(G \times_S U) \]
+        が成り立つとき\textbf{$G$-invariant function}と呼ばれる．
+        ここで，
+        $\rho^{-1}(U) \supseteq G \times_S U=\pr_X^{-1}(U)$であるために
+        左辺にrestrictionが必要であることに注意．
+    \end{Def}
+
+    \begin{Claim}
+        $G$-invariant functionを集めてできる
+        $\shO_X$のsub-presheaf :: $\shO_X^G$は，
+        sheafである．
+    \end{Claim}
+    \begin{proof}
+        sub-presheafであることは明らか．
+        また$\shO_X^G$がidentity axiomを満たすことは
+        sub-presheafであることから従う．
+        なのでgluability axiomを満たすことを示そう．
+
+        $U$ :: open in $X$をとり，
+        $U=\bigcup_i U_i$をそのopen coverとする．
+        section達$t_i \in (\shO_X^G)(U_i)$が次を満たすとしよう．
+        \[
+            \Forall{i,j}
+            t_i|_{U_i \cap U_j}=t_j|_{U_i \cap U_j}
+            \in \shO_X(U_i \cap U_j).
+            \eqno{(@)}
+        \]
+        この時，$t|_{U_i}=t_i$を満たす$t \in \shO_X(U)$が存在する．
+        $t \in \shO_X^G(U)$を示したい．
+        $V_i=\pr_X^{-1}(U_i)=G \times U_i$とおく．
+        上の条件$(@)$で$t|_{U_i}=t_i$と，
+        sheaf morphismがrestriction mapと可換であることを用いる．
+        \[
+            \Forall{i,j}
+            \rho^{\#}(t)|_{V_i \cap V_j}
+            =\rho^{\#}(t|_{U_i \cap U_j})|_{V_i \cap V_j}
+            =
+            \pr_X^{\#}(t|_{U_i \cap U_j})
+            =\pr_X^{\#}(t)|_{V_i \cap V_j}
+            \in \shO_{G \times X}(V_i \cap V_j).
+        \]
+        $\shO_{G \times X}$はsheafだから，
+        identity axiomを満たす．
+        よって$\rho^{\#}(t)=\pr_X^{\#}(t)$，
+        すなわち$t \in \shO_X^G(U)$．
+    \end{proof}
+
+    \begin{Remark}
+        affine scheme :: $X:=\Spec A$のstructure sheafの元は，
+        morphism :: $U \to \affine^1_{\Quot(A)} \in \shO_X(U)$とみなすことが出来る．
+        そこで$G$-invariant functions :: $(\shO_X(U))^G$を
+        $\shO_X(U)$に属す$G$-invariant morphismの全体と定めることも出来る．
+    \end{Remark}
+    
+    \subsection{Good and Geometric Quotient.}
+    \begin{Def}[\cite{Hos}]
+        scheme morphism :: $q: X \to Y$が
+        $X$の$G$による\textbf{good quotient}であるとは，
+        以下の条件が満たされるということ．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item $q$ :: $G$-invariant.
+        \item $q$ :: surjective.
+        \item $q$ :: affine morphism
+              \footnote{ すなわち，$Y$の任意のaffine open subschemeの$q$による逆像がaffine． }.
+        \item $(q_*\shO_X)^G \iso \shO_Y$.
+        \item
+            $W$ :: $G$-invariant closed subset of $X$について，
+            $q(W)$ :: closed subset of $Y$．
+        \item
+            $W_1, W_2$ :: disjoint $G$-invariant closed subsets of $X$について，
+            $q(W_1), q(W_2)$ :: disjoint closed subsets of $Y$．
+    \end{enumerate}
+    \end{Def}
+    $q$ :: surjectiveと$q$ :: affineの2条件は，
+    GIT \cite{GIT}でなく\cite{Ses}で導入された．
+    実際，次の命題はこの2条件がなくとも成立する．
+    しかしsurjectivityはquotientをfamilyとして利用するために
+    望ましい性質である．
+    （affinenessについてはよくわからない．しかし我々が扱う範囲で成立する．）
+
+    \begin{Prop}
+        good quotient is categorical quotient also.
+    \end{Prop}
+
+    \begin{Def}[\cite{Hos}]
+        \textit{good quotient} :: $q: X \to Y$が
+        各点$y \in Y$について$q^{-1}(y)$がただひとつのorbitからなる時，
+        $q$は$X$の$G$による\textbf{categorical quotient}と呼ばれる．
+    \end{Def}
+
+    % \cite{Hos} Moduli spaces and quotients.
+
+    \subsection{Affine GIT Quotient}
+    field :: $k$
+    affine scheme/$k$ :: $X$,
+    affine group scheme/$k$ :: $G$,
+    action :: $\rho: G \acton X$が与えられているとする．
+    この場合には，直接構成できるquotient schemeがある．
+    それがGIT(Geometric Invariant Theory) quotientである．
+    Mumfordが構成した．
+    % \cite{Hos} p.23に$G \acton X=\Spec A$の時の$A^G$の定義がある．
+    % これは通常の$\shO_X(X)^G$の定義を使えば分かる．
+    
+    最初に，affine $\acton$ affineの場合の作用について述べておこう．
+    $\rho: G \acton X$に対応する環準同型を
+    $\tilde{\rho}: k[X] \to k[X] \otimes_k k[G]$とする．
+    一方，$\pr_X: G \times X \to X$に対応する環準同型は
+    \begin{defmap}
+        {}& k[X]& \to& k[X] \otimes_k k[G] \\
+        {}& x & \mapsto& x \otimes_k 1
+    \end{defmap}
+    である．
+    したがって$\shO_X^G( \subseteq \shO_X)$のglobal sectionは次のように成る．
+    \[
+        k[X]^G
+        :=\{ f \in k[X] \mid \tilde{\rho}(f)=f \otimes 1 \}
+        \subseteq \Gamma(X, \shO_X).
+    \]
+
+    \begin{Def}
+        $X \sslash G:=\Spec k[X]^G$を
+        $G$による$X$のaffine GIT quotientと呼ぶ．
+    \end{Def}
+    $X \sslash G$という記号は，
+    affine GIT quotientは必ずしも(affine) geometric quotientでない，
+    ということを意味している（例\ref{example:P,A/Gm}）．
+    しかしどちらもcategorical quotientであるから，
+    両方共存在するならばそれらは同型を除いて一致する．
+
+    affine GIT quotientを張り合わせていくことで，
+    projective GIT quotientが構成される．
+    \cite{Muk1} chapter 6を参照せよ．
+
+    \subsection{Relations of Quotients.}
+    \[
+    \xymatrix@C=10pt
+    {
+        \text{Geometric} \ar@{=>}[rd]& {} & \ar@{=>}[ld]^{\text{Thm} \ref{thm:git=good}} \text{GIT*} \\
+        {} & \text{Good} \ar@{=>}[d]& {}\\
+        {} & \text{Categorical} & {}
+    }
+    \]
+
+\section{Linear Reductivity.}
+%    $X,G$共にfinite type/$k$とする
+%    \footnote{ この条件は$A^G$ :: finitely generatedを示す為に必要である． }．
+    % 作用が局所有限=rational.
+    % \cite{Hos} p.15, Lemma3.8より，今の状況では$G \acton X$ :: rational．
+%    \begin{Thm}[\cite{Hos} Thm4.25]\label{thm:finiteness}
+%        $k$ :: field,
+%        $A$ :: finitely generated $k$-algebra,
+%        $G$ :: linearly reductive (abstruct) group acting on $A$,
+%        とする．
+%        $G$の$A$への作用がrationalならば，
+%        invariant ring :: $A^G$はfinitely generated.
+%    \end{Thm}
+    % \cite{Hos} Thm 4.26
+%    An affine algebraic group G over k is reductive
+%    if and only if
+%    for every rational G-action on a finitely generated k-algebra A,
+%    the subalgebra A G of G-invariants is finitely generated.
+%    $G$がnon-reductive groupであるとき，
+%    $k[X]^G$がnot finitely generatedであるようなaffine scheme :: $X$が
+%    存在することを示した．
+
+    \textbf
+    {
+    引き続き，
+    field :: $k$
+    affine scheme/$k$ :: $X$,
+    affine group scheme/$k$ :: $G$,
+    action :: $\rho: G \acton X$が与えられているとする．
+    }
+    まず現状の確認をしよう．
+    我々はaffine GIT quotientを定義した．
+    affine GIT quotientは不変式環で与えられるため，
+    多くの場合で具体的に計算することが出来る．
+    しかしこれがcategorical/good/geometric quotient
+    であるかどうかはまだ我々には分からない．
+    
+    我々はgroup scheme :: $G$が
+    ``linearly reductive"という性質を備えている場合に
+    $G$によるaffine schemeのaffine GIT quotientが
+    categorical/good/geometric quotientであることを示す．
+    （実はより弱い``reductive"で十分なのだが，
+    これを定義するだけでも骨が折れるので，
+    このノートでは扱わない，）
+    このセクションでは``linearly reductive"を定義し，
+    調べていく．
+
+    \subsection{Linear Representation} 
+    \begin{Def}
+        
+    \end{Def}
+
+\section{Affine GIT Quotient is a Good Quotient.}
+    \begin{Thm}[\cite{Hos} Thm4.30]\label{thm:git=good}
+        Affine GIT Quotient is Good Quotient.
+    \end{Thm}
 
 \begin{thebibliography}{99}
     \bibitem{Muk1}
@@ -561,5 +1008,11 @@
     \bibitem{HaMo}
     J. Harris,I. Morrison ``Moduli of Curves"
 
+    \bibitem{GIT}
+        D.Mumford,J.Forgarty ``Geometric Invariant Theory"
+
+    \bibitem{Ses}
+    C.S. Seshadri (1972)
+    ``Quotient spaces modulo reductive algebraic groups"
 \end{thebibliography}
 \end{document}
