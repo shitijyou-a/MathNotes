@@ -3,6 +3,9 @@
 \usepackage[all]{xy}
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
+\newcommand{\der}[1][\!]{\mathrm{d}_{#1}\,}
+\newcommand{\Der}{\Omega}
+\newcommand{\shCano}{\omega}
 \newcommand{\pbundle}{\mathbb{P}}
 
 \begin{document}
@@ -295,6 +298,148 @@
     Ex5.8より，$\shE'$ :: locally freeと分かる．
 
 \section{Product Schemes.} %% Ex8.3 
+    \subsection{$\Der_{X \times_S Y/S} \iso \pr_X^* \Der_{X/S} \oplus \pr_Y^* \Der_{Y/S}$.}
+    $S$ :: scheme, $X,Y$ :: scheme /$S$とする．
+    Thm8.10より，$\Der_{X \times Y/Y} \iso \pr_X^*\Der_{X/S}$が分かる．
+    これとThm8.11を合わせて次の完全列が得られる．
+    \[
+    \xymatrix
+    {
+        \pr_Y^* \Der_{Y/S} \ar[r]&
+        \Der_{X \times Y/S} \ar[r]&
+        \pr_X^*\Der_{X/S} \ar[r]&
+        0.
+    }
+    \eqno{(*)}
+    \]
+    $X$と$Y$を交換したものと合わせて次の図式を得る．
+    これは$\shO_{X \times Y}$-moduleの図式である．
+    \[
+    \xymatrix
+    {
+        {} &
+        \pr_X^* \Der_{X/S} \ar[r] \ar[d]^-{\bar{\gamma}}&
+        \Der_{X \times Y/S} \ar[r] \ar@{=}[d]^-{\id{}}&
+        \pr_Y^*\Der_{Y/S} \ar[r]&
+        0 \\
+        0 &
+        \pr_X^* \Der_{X/S} \ar[l]&
+        \Der_{X \times Y/S} \ar[l]&
+        \pr_Y^*\Der_{Y/S} \ar[l]&
+        {}
+    }
+    \]
+    この図式において$\bar{\gamma}$は
+    $\Der_{X \times Y/S}$を経由する射の合成である．
+    $\gamma=\id{\pr_Y^* \Der_{Y/S}}$が示せれば，
+    $\alpha$ :: inj \& splitが得られる．
+    これは$X \times Y$のopen affine coverをとって
+    localに調べれば良い．
+    $\Spec R \subseteq S, \Spec A \subseteq X, \Spec B \subseteq Y$を任意にとり，
+    $C=A \otimes_R B$とする．
+    図式全体を$\Gamma(\Spec C,-)$で写す．
+    $\Der$の構成から，これは次のように成る．
+    これは$C$-moduleの図式である．
+    \[
+    \xymatrix
+    {
+        {} &
+        \Der_{A/S} \otimes_A C \ar[r]^-{\alpha} \ar[d]^-{\gamma}&
+        \Der_{C/S} \ar[r] \ar@{=}[d]^-{\id{}}&
+        \Der_{B/S} \otimes_B C \ar[r]&
+        0 \\
+        0 &
+        \Der_{A/S} \otimes_A C \ar[l]&
+        \Der_{C/S} \ar[ld]^-{\beta}&
+        \Der_{B/S} \otimes_B C \ar[l]&
+        {} \\
+        {} & \Der_{C/B} \ar[u]^-{\iso}
+    }
+    \]
+    それぞれの写像は次のように定義される
+    (Matsumura, p.193 \& Eisenbud, Prop16.4)．
+    \begin{defmap}
+        \alpha:& [\der[A/S] a] \otimes c& \mapsto& [\der[C/S] (a \otimes 1_B)] \cdot c \\
+        \beta:& \der[C/S] c& \mapsto& \der[C/B] c \\
+        \iso:& \der[C/B] (a \otimes b)& \mapsto& [\der[A/S] a] \otimes (1_A \otimes b)  \\
+    \end{defmap}
+    よって$\gamma$は次のように成る．
+    \[
+        [\der[A/S] a] \otimes c
+        \mapsto
+        [\der[C/S] (a \otimes 1_B)] \cdot c
+        \mapsto
+        [\der[C/B] (a \otimes 1_B)] \cdot c
+        \mapsto
+        ([\der[B/S] a] \otimes 1_C) \cdot c
+        =
+        [\der[A/S] a] \otimes c.
+    \]
+    以上より$\gamma=\id{}$が示された．
+
+    \subsection{$\shCano_{X \times Y} \iso \pr_X^*\shCano_{X} \otimes \pr_Y^*\shCano_{Y}$.}
+    $X, Y$ :: nonsingular varieties over a field $k$とする．
+    $d_X=\dim X, d_Y=\dim Y$とする．
+    この時Thm8.15より，
+    $\Der_{X/k}, \Der_{Y/k}$は
+    それぞれ$\rank=d_X, d_Y$のlocally free sheafである．
+    また(a)の完全列$(*)$より，
+    $\rank \Der_{X \times_k Y/k}=d_X+d_Y$
+    \footnote
+    {
+        各点でのstalkをとって$\rank$がadditiveであることを使えば分かる．
+    }．
+
+    Ex5.16dを(a)の完全列$(*)$に用いれば，
+    \[
+        \shCano_{X \times Y}
+        =\bigwedge^{d_X+d_Y}\Der_{X \times Y/k}
+        \iso \left( \bigwedge^{d_X}\pr_X^* \Der_{X/k} \right)
+            \otimes \left( \bigwedge^{d_X}\pr_Y^* \Der_{Y/k} \right).
+    \]
+    Ex5.16eより$\pr_X^*, \pr_Y^*$はそれぞれ$\bigwedge$と交換できる．
+    よって$\shCano_{X \times Y} \iso \pr_X^*\shCano_{X} \otimes \pr_Y^*\shCano_{Y}$．
+
+    \subsection{An Example that Gives $p_g \neq p_a$.}
+    $Y \subset \proj^2_k$をnon-singluar cubic curveとする．
+    さらに$Y \times_k Y$をSegre embeddingで
+    $\proj^8$に埋め込んだものを$X$とする．
+
+    Example8.20.3より，$\shCano_Y \iso \shO_Y(0)=\shO_Y$.
+    したがって(b)より$p_g(X)$が計算できる．
+    \[
+        p_g(X)
+        =\dim_k \Gamma(X, \pr_1^*\shO_Y \otimes \pr_2^* \shO_Y)
+        =\dim_k \Gamma(X, \shO_X)
+        =\dim_k k
+        =1.
+    \]
+    ここでEx5.11:
+    $\shO_X(1) \iso \pr_1^*\shO_Y(1) \otimes \pr_2^* \shO_Y(1)$
+    （両辺に逆元をテンソルすれば利用した同型が得られる）と
+    Ex4.5dを順に用いた．
+
+    I, Ex7.2bより$p_a(Y)=\frac{1}{2}(3-1)(3-2)=1$．
+    同じくI, Ex7.2eより$p_a(X)$が計算できる．
+    \[ p_a(X)=(p_a(Y))^2-2p_a(Y)=-1. \]
+
+%    \subsubsection{Direct Calc of $\shCano_Y$.}
+%    $Y \cap \zerosp(x)^c$のcoordinate ringを$R=k[x,y]/(f(x,y))$とする．
+%    加群$\Der_{R/k}$を求めよう．
+%    $\bar{x}=x \bmod (f(x,y)), \bar{y}=y \bmod (f(x,y))$とおくと，
+%    $\Der_{R/k}=R \der\bar{x}+R \der{}\bar{y}$となる(Matsumura, p.192)．
+%    $f(\bar{x}, \bar{y})=0$から，
+%    $\Der_{R/k}$が持つ唯一の関係式が定まり，
+%    次のように成る．
+%    \[
+%        \Der_{R/k} \iso
+%        \frac{ k[x,y]\der x+k[x,y] \der y}
+%        {\left( \partial_x f(x,y) \cdot \der x+\partial_y f(x,y) \cdot \der y \right)}.
+%    \]
+%    これはヤコビ行列で定まる写像の$\coker$である．
+%    $Y=\Spec k[x,y]/(f)$はnon-singularであったからヤコビ行列の$\rank$は$1$．
+%    よって$\rank \Der_{R/k}=1$．
+%    $\dim Y=1$なので$\shCano_Y=\Der_{X/k}=(\Der_{R/k})\sidetilde$.
 
 \section{Complete Intersections in $\proj^n$.} %% Ex8.4 
 
