@@ -1,5 +1,5 @@
 \documentclass[a4paper]{jsarticle}
-\usepackage{../math_note, exercise}
+\usepackage{../math_note}
 \usepackage[all]{xy}
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
@@ -319,7 +319,7 @@
     {
         {} &
         \pr_X^* \Der_{X/S} \ar[r] \ar[d]^-{\bar{\gamma}}&
-        \Der_{X \times Y/S} \ar[r] \ar@{=}[d]^-{\id{}}&
+        \Der_{X \times Y/S} \ar[r] \ar@{=}[d]^-{\id}&
         \pr_Y^*\Der_{Y/S} \ar[r]&
         0 \\
         0 &
@@ -331,7 +331,7 @@
     \]
     この図式において$\bar{\gamma}$は
     $\Der_{X \times Y/S}$を経由する射の合成である．
-    $\gamma=\id{\pr_Y^* \Der_{Y/S}}$が示せれば，
+    $\gamma=\id[\pr_Y^* \Der_{Y/S}]$が示せれば，
     $\alpha$ :: inj \& splitが得られる．
     これは$X \times Y$のopen affine coverをとって
     localに調べれば良い．
@@ -345,7 +345,7 @@
     {
         {} &
         \Der_{A/S} \otimes_A C \ar[r]^-{\alpha} \ar[d]^-{\gamma}&
-        \Der_{C/S} \ar[r] \ar@{=}[d]^-{\id{}}&
+        \Der_{C/S} \ar[r] \ar@{=}[d]^-{\id}&
         \Der_{B/S} \otimes_B C \ar[r]&
         0 \\
         0 &
@@ -353,15 +353,15 @@
         \Der_{C/S} \ar[ld]^-{\beta}&
         \Der_{B/S} \otimes_B C \ar[l]&
         {} \\
-        {} & \Der_{C/B} \ar[u]^-{\iso}
+        {} & \Der_{C/A} \ar[u]^-{\iso}
     }
     \]
     それぞれの写像は次のように定義される
     (Matsumura, p.193 \& Eisenbud, Prop16.4)．
     \begin{defmap}
         \alpha:& [\der[A/S] a] \otimes c& \mapsto& [\der[C/S] (a \otimes 1_B)] \cdot c \\
-        \beta:& \der[C/S] c& \mapsto& \der[C/B] c \\
-        \iso:& \der[C/B] (a \otimes b)& \mapsto& [\der[A/S] a] \otimes (1_A \otimes b)  \\
+        \beta:& \der[C/S] c& \mapsto& \der[C/A] c \\
+        \iso:& \der[C/A] (a \otimes b)& \mapsto& [\der[A/S] a] \otimes (1_A \otimes b)  \\
     \end{defmap}
     よって$\gamma$は次のように成る．
     \[
@@ -369,13 +369,13 @@
         \mapsto
         [\der[C/S] (a \otimes 1_B)] \cdot c
         \mapsto
-        [\der[C/B] (a \otimes 1_B)] \cdot c
+        [\der[C/A] (a \otimes 1_B)] \cdot c
         \mapsto
-        ([\der[B/S] a] \otimes 1_C) \cdot c
+        ([\der[A/S] a] \otimes 1_C) \cdot c
         =
         [\der[A/S] a] \otimes c.
     \]
-    以上より$\gamma=\id{}$が示された．
+    以上より$\gamma=\id$が示された．
 
     \subsection{$\shCano_{X \times Y} \iso \pr_X^*\shCano_{X} \otimes \pr_Y^*\shCano_{Y}$.}
     $X, Y$ :: nonsingular varieties over a field $k$とする．
@@ -423,32 +423,410 @@
     同じくI, Ex7.2eより$p_a(X)$が計算できる．
     \[ p_a(X)=(p_a(Y))^2-2p_a(Y)=-1. \]
 
-%    \subsubsection{Direct Calc of $\shCano_Y$.}
-%    $Y \cap \zerosp(x)^c$のcoordinate ringを$R=k[x,y]/(f(x,y))$とする．
-%    加群$\Der_{R/k}$を求めよう．
-%    $\bar{x}=x \bmod (f(x,y)), \bar{y}=y \bmod (f(x,y))$とおくと，
-%    $\Der_{R/k}=R \der\bar{x}+R \der{}\bar{y}$となる(Matsumura, p.192)．
-%    $f(\bar{x}, \bar{y})=0$から，
-%    $\Der_{R/k}$が持つ唯一の関係式が定まり，
-%    次のように成る．
-%    \[
-%        \Der_{R/k} \iso
-%        \frac{ k[x,y]\der x+k[x,y] \der y}
-%        {\left( \partial_x f(x,y) \cdot \der x+\partial_y f(x,y) \cdot \der y \right)}.
-%    \]
-%    これはヤコビ行列で定まる写像の$\coker$である．
-%    $Y=\Spec k[x,y]/(f)$はnon-singularであったからヤコビ行列の$\rank$は$1$．
-%    よって$\rank \Der_{R/k}=1$．
-%    $\dim Y=1$なので$\shCano_Y=\Der_{X/k}=(\Der_{R/k})\sidetilde$.
+    \subsubsection{Direct Calc of $\shCano_Y$.}
+    体$k$の標数は$0$としておく．
+    $U_z=\zerosp(z)^c \iso \affine^2$とし，
+    $Y \cap U_z \subset \affine^2$の定義多項式を$y^2-f(x) \in k[x,y]$とする．
+    ただし$\deg f=3$．
+    \[ B=k[x,y], \quad I=(y^2-f(x))B, \quad C=B/I \]
+    と置いて加群$\Der_{C/k}$を求めよう．
+    $\shCano_Y=\bigwedge^1 \Der_{Y/k} \iso \Der_{Y/k}$だから，
+    $\shCano_Y$も以下の計算から分かる．
+    second exact sequence (Thm8.4)を用いると$\Der_{C/k}$が計算できる．
+    \begin{align*}
+                \Der_{C/k}
+        \iso&   \frac{\Der_{B/k} \otimes_B C}{\delta(I/I^2)} \\
+        \iso&   \frac{(B \der x \oplus B \der y) \otimes C}
+                {\langle \der \alpha \otimes 1 \mid \alpha \in I \rangle} \\
+        \iso&   \frac{C \der \bar{x} \oplus C \der \bar{y}}
+                {\langle 2 \bar{y} \cdot \der \bar{y} -(\partial_x f) \der \bar{x} \rangle}.
+    \end{align*}
+    ここで$\bar{x}=x \bmod I, \bar{y}=y \bmod I$とした．
+    以下，これらの$\bar{\square}$は省略する．
+    
+    点$\I{p} \in C$における$\Der_{C/k}$の局所化を計算する．
+    $Y$ :: non-singularから，
+    $2y, \partial_x f$の両方が同時に$0$になることはない．
+    なので任意の点において
+    $\der x=(*) \der y$あるいは$\der y=(*) \der x$の形になる．
+    より詳細には次の通り．
+    \[
+        (\Der_{C/k})_{\I{p}} \iso
+        \begin{cases}{}
+            C_{\I{p}} \der x & \text{if} \quad \I{p} \in D(y) \\
+            C_{\I{p}} \der y & \text{if} \quad \I{p} \in D(\partial_x f). \\
+        \end{cases}
+    \]
+    よって$\rank \Der_{C/k}=1$．
+    （TODO: $\Der_{Y/k} \iso \shO_Y$は示せるか？）
 
 \section{Complete Intersections in $\proj^n$.} %% Ex8.4 
 
 \section{Blowing Up a Nonsingular Subvariety.} %% Ex8.5 
 
 \section{The Infinitesimal Lifting Property.} %% Ex8.6 
+    $k$ :: algebraically closed field,
+    $A$ :: finitely generated $k$-algebraとし，
+    $\Spec A$ :: nonsingular variety/$k$と仮定する．
+    さらに$0 \to I \to B' \to B \to 0$を$k$-algebraの完全列とし，
+    $I^2=0$とする．
+
+    以下を示す．
+    \begin{Thm}
+        $A$はInfinitesimal Lifting Propertyを持つ．
+        すなわち，
+        任意の$k$-algebra homomorphism :: $f: A \to B$に対し，
+        次の図式を可換にする$g: A \to B'$がただひとつ存在する．
+        \[
+        \xymatrix@R=15pt@C=30pt
+        {
+            {} & 0 \ar[d]\\
+            {} & I \ar[d]\\
+            {} & B'\ar[d]\\
+            A \ar[r]_-{{}^{\forall} f} \ar@{-->}[ru]^{{}^{\exists_1} g}& B \ar[d]\\
+            {} & 0 \\
+        }
+        \]
+    \end{Thm}
+    $g$は$f$のliftingと呼ばれる．
+    
+    \subsection{$Der_k(A,I)=\{ g-g' \mid g,g' \text{ :: lifting of }f\}$.}
+    Matsumura, p.191と同じ議論をする．
+    $\pi: B' \to B$を与えられた完全列中の全射としよう．
+
+    \paragraph{Consider $I$ as $A$-module.}
+    $a \in A$に対し，$\pi^{-1}(f(a))$の元をひとつ取って
+    $\tilde{a} \in B'$とする．
+    これをもちいて$i \in I$に対し$a \cdot i=\tilde{a}i$と置く．
+    これがwell-definedであることは$I^2=0$から従う．
+    実際，
+    $\tilde{a}_1, \tilde{a}_2 \in \pi^{-1}(f(a))$をとると，
+    $\tilde{a}_1-\tilde{a}_2 \in I$なので
+    \[ \tilde{a}_1 i-\tilde{a}_2 i \in I i=0. \]
+
+    \paragraph{$\subseteq$.}
+    $g, g'$を$f$のliftingとし，$\theta=g-g'$とする．
+    まず$\im \theta \subseteq I$を確かめよう．
+    図式の可換性から次が得られる．
+    \[ \pi \circ \theta=\pi \circ g- \pi \circ g'=f-f=0. \]
+    よって$\im \theta \subseteq \ker \pi=I$.
+    次に$x, y \in A$をとり，
+    $\theta$がLeibniz ruleを満たすことを確かめる．
+    \begin{align*}
+        {}& \theta(xy) \\
+        =&  g(x)g(y)-g'(x)g'(y) \\
+        =&  g(x)g(y)-g'(x)g(y)+g'(x)g(y)-g'(x)g'(y) \\
+        =&  (g(x)-g'(x)) g(y)+g'(x) (g(y)-g'(y)) \\
+        =&  \theta(x) g(y)+g'(x) \theta(y) \\
+        =&  \theta(x) \cdot y+x \cdot \theta(y)
+    \end{align*}
+    ここで$\pi \circ g(y)=f(y)$より
+    $g(y) \in \pi^{-1}(f(a))$であることに注意せよ．
+    $g'(x)$も同様．
+    $\theta(x+y)=\theta(x)+\theta(y)$は自明である．
+
+    \paragraph{$\supseteq$.}
+    $g$を$f$のliftingとし，$\theta \in Der_k(A,I)$をとる．
+    $g'=g+\theta$が$f$のliftingであることを示そう．
+    まず準同型であることを示す．
+    和を保つことは明らかなので積を保つことを見る．
+    $x, y \in A$をとる．
+    \begin{align*}
+        {}& g'(xy) \\
+        =&  g(x)g(y)-\theta(x) \cdot y-x \cdot \theta(y) \\
+        =&  g(x)g(y)-\theta(x) g(y)-g(x) \theta(y)+\theta(x)\theta(y) \\
+        =&  (g(x)-\theta(x))(g(y)-\theta(y)) \\
+        =&  g'(x)g'(y)
+    \end{align*}
+    ここで$\theta(x)\theta(y) \in I^2=0$と
+    $g(x)\in \pi^{-1}(f(x)), g(y) \in \pi^{-1}(f(y))$を用いた．
+    以上から$g'$も代数の準同型．
+    さらに
+    $\im \theta \subseteq \ker \pi=I$だから，
+    \[ \pi \circ g'=f+\pi \circ \theta=f. \]
+    よって$g'$はlifting.
+
+    \subsection{$P=k[x_1,\dots,x_n] \to B'$.}
+    $P=k[x_1,\dots,x_n]$とし，$A=P/J$とする．
+    次の図式を可換にする写像$h$の存在を示す．
+    \[
+    \xymatrix@R=15pt@C=30pt
+    {
+        0 \ar[d]& 0 \ar[d]\\
+        J \ar[d]& I \ar[d]\\
+        P \ar[d]_-{\rho}\ar@{-->}[r]^-{h}& B'\ar[d]^-{\pi}\\
+        A \ar[d]\ar[r]_-{f}& B \ar[d]\\
+        0 & 0 \\
+    }
+    \]
+    $h$は$x_i$の像で決定されるから，
+    $b_i \in \pi^{-1}(f \circ \rho(x_i)))$を選び，
+    $h: x_i \mapsto b_i$で写像を定めれば良い．
+    $b_i$のとり方から図式が可換になることは明らか．
+
+    可換性から，$\pi(h(J))=f(\rho(J))=0$．
+    したがって$h(J) \subseteq \pi^{-1}(0)=I$.
+    また$h(J^2)=(h(J))^2 \subseteq I^2=0$.
+    このことから，次のように$A$-module homomorphismが定まる．
+    \begin{defmap}
+        \bar{h}:& J/J^2& \to& I \\
+        {}& j \bmod J^2& \mapsto& h(j)
+    \end{defmap}
+    
+    \subsection{Complete the proof.}
+    $\Spec A \subseteq \Spec P=\affine^n$がnon-singularであることから，
+    Thm8.17が使える．
+    $\Gamma(\Spec A, -)$がleft-exactであったこととThm8.4から，
+    次はexact．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]& J/J^2 \ar[r]^-{\delta}& \Der_{P/k} \otimes_k A \ar[r]& \Der_{A/k} \ar[r]& 0.
+    }
+    \]
+    これを$\Hom_A(-, I)$で写して次を得る．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]& Der_k(A,I) \ar[r]& Der_k(P,I) \ar[r]^-{\delta^*}& \Hom_A(J/J^2,I).
+    }
+    \]
+    $\delta^*$を計算すると次のように成る．
+    $D \in Der_k(P,I), x \in J$をとり$\bar{x}=x \bmod J^2$とおく．
+    また，$\phi_D \in \Hom_P(\Der_{P/k}, I)$を$D$に対応する写像とし，
+    $\iota: I \otimes B \to I$と標準的同型写像とする．
+    \[
+        \delta^*(D)(\bar{x})
+        =\iota((\phi_D \otimes \id[B']) \circ \delta)(\bar{x}))
+        =\iota((\phi_D \otimes \id[B'])(\der x \otimes 1_{B'}))
+        =\iota(Dx \otimes 1_{B'})
+        =Dx.
+    \]
+
+    \begin{Claim}
+        $\delta^*: Der_k(P,I) \to \Hom_A(J/J^2,I)$は全射である．
+    \end{Claim}
+
+    この主張を仮定すると，
+    $\delta^*(\theta)=\bar{h}$を満たす
+    $\theta \in Der_k(P,I) \subset \Hom_k(P, B')$が存在する．
+    $x \in J$とすると次のよう．
+    \[ \delta^*(\theta)(x \bmod J^2)=\bar{h}(x \bmod J^2)=h(x). \]
+    一方，上で述べた$\delta^*(\theta)$の計算から，
+    $\delta^*(\theta)(x \bmod J^2)=\theta(x)$．
+    よって$x \in J$について$h(x)=\theta(x)$が成立する．
+    すなわち$h'=h-\theta$と置くと$h'(J)=0$.
+    なので$h': P \to B'$から$g: A \to B'$が誘導される．
+    \begin{defmap}
+        g:& A& \to& B' \\
+        {}& x \bmod J& \mapsto& h(x)-\theta(x)
+    \end{defmap}
+    これが求めていた写像である．
+    実際，$x \in P$について，
+    \[ \pi \circ g(x \bmod J)=\pi(h(x)-\theta(x))=f(x \bmod J)-\pi(\theta(x))=f(x \bmod J). \]
+    $\theta: P \to I$に注意．
+
+    \begin{proof}
+        Matsumuraによるsecond fundamental exact sequenceの証明(pp.194-195)を参照する．
+        $\rho$から誘導される
+        $A$加群の準同型$P/J^2 \to A$を$\rho$とする．
+        元の準同型$P \to A$はこの証明に現れない．
+        以下，$A$加群はこの準同型に依って$P/J^2$加群とみなす．
+
+        $J/J^2 \subset P/J^2$と
+        $\frac{P/J^2}{J/J^2} \iso P/J \iso A$に注意して
+        次の図式を考える．
+        \[
+        \xymatrix
+        {
+            A \ar[r]^-{\id} \ar@{-->}[rd]_-{\sigma}& A \\
+            k \ar[u]\ar[r]& P/J^2 \ar[u]_-{\rho}
+        }
+        \]
+        この図式に於いて，$\sigma$は$h$と同様に構成する．
+        すなわち，$\bar{x}_i =x_i \bmod J \in A$に対して
+        $y_i \in \rho^{-1}(\bar{x}_i)$を選び，
+        $\sigma: \bar{x}_i \mapsto y_i$で定義する．
+        $\sigma$によって図式が可換に成ることは明らか．
+        すると明らかに$\sigma$は$\rho$のsection
+        (i.e. $\rho\sigma=\id$)である．
+
+        この時$\id[P/J^2]$と$\sigma \rho$は$\rho$のliftingである．
+        \[
+        \xymatrix
+        {
+            P/J^2 \ar[r]^-{\rho}& A \\
+            {} & P/J^2 \ar[u]_-{\rho}
+            \ar@<-1.5pt>[lu]_-{\id} \ar@<1.5pt>[lu]^-{\sigma \rho}
+        }
+        \]
+        (a)での議論から，
+        $D=\id[P/J^2]-\sigma \rho$は
+        $P/J^2$から$P/J^2$-module :: $J/J^2$への
+        $k$-derivationである．
+
+        $\psi \in \Hom_A(J/J^2, I)$について，
+        $D': P \to I$を次のように写像の合成で定める．
+        \[
+        \xymatrix
+        {
+            P \ar@{->>}[r]& P/J^2 \ar[r]^-{D}& J/J^2 \ar[r]^-{\psi}& I.
+        }
+        \]
+        すると$D' \in Der_k(P,I)$となる．
+        （確認の際は各加群の係数環が何であるか，注意すること．）
+        さらに既に行った計算から$\delta^*(D')(- \bmod J^2)=D'(-)$となる．
+        $x \in J$とすると，
+        \[ \delta^*(D')(x \bmod J^2)=D'(x)=\psi(D(x \bmod J^2))=\psi(x \bmod J^2). \]
+        以上で$\delta^*$が全射であることが示せた．
+    \end{proof}
+
+    \begin{proof}
+        元の完全列
+        \[
+        \xymatrix
+        {
+            0 \ar[r]& J/J^2 \ar[r]^-{\delta}& \Der_{P/k} \otimes_k A \ar[r]& \Der_{A/k} \ar[r]& 0.
+        }
+        \]
+        に現れる加群に対応するsheaves of modules on $X$は，
+        Thm8.17よりいずれもlocally freeである．
+        そのためいずれもprojective $A$-module（？）.
+        特に$\Der_{A/k}$がprojectiveだから，
+        $I$のinjective resolutionから
+        $\Ext_A^i(\Der_{A/k}, I)=0~(i>0)$が得られる．
+        一方，元の完全列を$\Der_{A/k}$のprojective resolutionとみなしても
+        $\Ext_A^i(\Der_{A/k}, I)$が得られる（？）．
+        \begin{gather*}
+        \xymatrix
+        {
+            0 \ar[r]^-{d^0}& \Hom_P(\Der_{P/k},I) \ar[r]^-{d^1}& \Hom_A(J/J^2,I) \ar[r]^-{d^2}& 0,
+        } \\
+        \Ext_A^2(\Der_{A/k},I)=\frac{\ker d^2}{\im d^1}=\frac{\Hom_A(J/J^2,I)}{\im d^1}=0.
+        \end{gather*}
+        よって$d^1$が，したがって$\delta^*$が全射である．
+    \end{proof}
+
+    \subsection*{Notes}
+    証明した図式で$\Spec$をとると，
+    次のように成る．
+    \[
+    \xymatrix@R=15pt@C=30pt
+    {
+        {} & \ar@{-->}[ld]_-{{}^{\exists_1} g} Y'\\
+        X  & \ar[l]^-{{}^{\forall} f} Y \ar[u]
+    }
+    \]
+    $Y \to Y'$がclosed immersionであるとき，
+    $Y \subseteq Y'$をinfinitesimal thickening of $Y$と呼ぶ．
 
 \section{Classifying Infinitesimal Extension: One Case.} %% Ex8.7 
+    \paragraph{Infinitesimal Extension.}
+    $X$ :: scheme of finite type /$k$,
+    $\shF$ :: coherent sheaf on $X$とする．
+    この時，次の条件を満たすsheaf of ideal :: $\shI$をもつ
+    $X'$ :: scheme/$k$の分類を考える:
+    \begin{enumerate}
+        \item $\shI^2=0$,
+        \item $(X', \shO_{X'}/\shI) \iso (X, \shO_X)$,
+        \item $\shI \iso \shF$ as $\shO_X$-module.
+    \end{enumerate}
+    $X', \shI$の組をinfinitesimal extension of $X$ by $\shF$と呼ぶ．
+    
+    \paragraph{Trivial One.}
+    trivialなものは次のように構成される．
+    すなわち，$\basesp X'=\basesp X$とし，
+    structure sheafを$\shO_{X'}=\shO_X \ast \shF$とする．
+    これはMatsumura, p.191にあるtrivial extensionとほぼ同じ構成方法である．
 
+    \paragraph{Setting.}
+    次の場合のinfinitesimal extensionを考える:
+    $X$ :: non-singular affine scheme of finite type /$k$.
+    coherent sheaf :: $\shF$と，
+    infinitesimal extension of $X$ by $\shF$ :: $(X', \shI)$を任意にとる．
+
+    \paragraph{About Global Sections.}
+    $B'=\Gamma(X', \shO_{X'}), I=\Gamma(X', \shI), A=\Gamma(X, \shO_X)$とする．
+    $\Gamma(X',-)$は単射を保つ関手なので
+    包含写像$\shI \inclmap \shO_X$から
+    $I \inclmap B'$が得られる．
+    また$\shI^2$は$U \mapsto (\Gamma(U, \shI))^2$で定まるsheafだから
+    \footnote
+    {
+        このpresheafがsheafであることを示せば良い．
+        問題はgluability axiomであるが，
+        これは$(t|_{U_i})^2=(t^2)|_{U_i}$なので成立する．
+        この等式自体はgermを見れば分かる．
+    }，
+    $I^2=(\Gamma(X', \shI))^2=0$となる．
+    $B=B'/I=\Gamma(X', \shO_{X'}/\shI)$とおこう．
+
+    \paragraph{Lifting of $\id: A \to A$.}
+    同型$(X', \shO_{X'}/\shI) \iso (X, \shO_X)$から
+    環同型$u: A \isomap B'/I=B$が得られる．
+    仮定より$X=\Spec A$はnonsingularなので，
+    Ex8.6から，$A \to A \iso B$のliftingが存在する．
+    ここで$\pi'$は
+    標準的全射$B' \to B'/I=B$と
+    環同型$u^{-1}: B \isomap A$の合成である．
+    \[
+    \xymatrix@R=15pt@C=30pt
+    {
+        {}   & 0 \ar[d]\\
+        {}   & I \ar[d]\\
+        {}   & B' \ar[d]^-{\pi'}\\
+        A \ar[r]_-{\id}\ar@{-->}[ru]^-{\sigma}& A \ar[d]\\
+        {} & 0 \\
+    }
+    \]
+    よって$\pi': B' \to B$はsplitする．
+    また，$I, B', B$を$A$-moduleとみなすことが出来る．
+    $M=\Gamma(X, \shF)$とすると
+    条件$\shI \iso \shF$ as $A$-moduleから
+    $I \iso M$ as $A$-module．
+    以上をまとめて，以下を示すことが出来る．
+    \begin{Claim}
+        \[ B' \iso A \ast M \text{ as $A$-module}. \]
+    \end{Claim}
+    よってこの設定では，
+    infinitesimal extension of $X$ by $\shF$は
+    trivialなものしかない．
+    \begin{proof}
+        five lemmaを用いる．
+        以下の$A$-moduleの可換図式を見よ．
+        \[
+        \xymatrix
+        {
+            0 \ar[r]\ar@{=}[d]& M \ar[r]\ar[d]^-{v}&
+            A \ast M \ar[r]\ar[d]& A \ar[r]\ar[d]^-{u}\ar[ld]_-{\sigma}& 0 \ar@{=}[d]\\
+            0 \ar[r]& I \ar[r]_-{\iota}& B' \ar@<-1.5pt>[r]_-{\pi}& B \ar[r]\ar@<-1.5pt>[l]_-{s}& 0
+        }
+        \]
+        ここで$M \to A \ast M, A \ast M \to A$は標準的な入射と射影である
+        （集合としては$A \ast M=A \oplus M$であったことに注意せよ）．
+        また，$u,v$は既に述べた同型写像である．
+        $A \ast M \to B'$を
+        $(a,m) \mapsto \iota \circ v(m)+s \circ u(a)$で定めると，
+        図式が可換に成ることが分かる．
+        よってfive lemmaより$A \ast M \iso B'$.
+    \end{proof}
+    
 \section{Plurigenera and Hodge Numbers are Birational Invariants.} %% Ex8.8 
+    $X$ ::projective ninsingular variety/$k$とする．
+    正整数$n(>0)$に対して，$n$-th plurigenus of $X$を
+    \[ P_n=\dim_k \Gamma(X, \shCano_X^{\otimes n}) \]
+    と定める．
+    また$0 \leq q \leq \dim X$についてHodge numbersを
+    \[ h^{q,0}=\dim_k \Gamma(X, \Der_{X/k}^{\wedge q}) \]
+    と定める．
+    plurigenusとHodge numbersがbirational invariantであることを示す．
+
+    category of sheaves of modules on $X$の自己関手$M$を，
+    $f^*$ (inverse image functor)と可換であるものとする．
+    $M$は例えば$\square^{\otimes n}$や$\square^{\wedge q}$である．
+    Thm8.19 (geometric genus is birational invarational invariant)
+    の証明を見ると，この証明方法は，
+    $\dim_k \Gamma(X, M \Der_{X/k})$が
+    birational invariantであることの証明に使える．
 
 \end{document}

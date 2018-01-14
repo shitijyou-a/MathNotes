@@ -98,20 +98,22 @@
 \newcommand{\ccheck}[1]{#1\sidecheck\sidecheck}
 
 %% fundamental spaces
-\newcommand {\C}            {\mathbb{C}}
-\newcommand {\R}            {\mathbb{R}}
-\newcommand {\Q}            {\mathbb{Q}}
-\newcommand {\Z}            {\mathbb{Z}}
-\newcommand {\N}            {\mathbb{N}}
+\newcommand{\C}             {\mathbb{C}}
+\newcommand{\R}             {\mathbb{R}}
+\newcommand{\Q}             {\mathbb{Q}}
+\newcommand{\Z}             {\mathbb{Z}}
+\newcommand{\N}             {\mathbb{N}}
 
 %% general category theory
-\newcommand {\cat}          [1]{\mathbf{#1}}
-\newcommand {\id}           [1]{\mathrm{id}_{#1}}
-\newcommand {\Hom}          {\operatorname{Hom}}
-\newcommand {\dom}          {\operatorname{dom}}
-\newcommand {\cod}          {\operatorname{cod}}
-\newcommand {\eq}           {\operatorname{eq}}
-\newcommand {\coeq}         {\operatorname{coeq}}
+\newcommand{\cat}           [1]{\mathbf{#1}}
+\newcommand{\id}            [1][\!]{\mathrm{id}_{#1}}
+\newcommand{\Hom}           {\operatorname{Hom}}
+\newcommand{\End}           {\operatorname{End}}
+\newcommand{\Aut}           {\operatorname{Aut}}
+\newcommand{\dom}           {\operatorname{dom}}
+\newcommand{\cod}           {\operatorname{cod}}
+\newcommand{\eq}            {\operatorname{eq}}
+\newcommand{\coeq}          {\operatorname{coeq}}
 
 %% topology theory
 \newcommand{\open}          [1]{\mathcal{O}_{#1}} %% open sets
@@ -144,6 +146,7 @@
 \newcommand{\Quot}          {\operatorname{Quot}} %% quotient field
 \newcommand{\divible}       {\!\backslash\,} %% not just m|n
 \newcommand{\ndivible}      {\!\!\not\!\backslash\,}
+\newcommand{\Sym}           {\operatorname{Sym}}
 
 %% field theory
 \newcommand{\fchar}         {\operatorname{char}} %% characteristic of a field
@@ -166,6 +169,11 @@
 \newcommand{\Proj}          {\operatorname{Proj}} %% \Spec is defined in 'commutative algebra' section
 \newcommand{\res}           {\operatorname{res}} %% restriction map
 \newcommand{\basesp}        {\operatorname{sp}} %% base topologicall space
+\newcommand{\gProj}         {\mathbf{Proj}\,}
+
+\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
+\newcommand{\shHom}         {\mathscr{H\!o\!m}} %% sheaf Hom
+\newcommand{\inclmap}       {\hookrightarrow} % inclusion map arrow
 
 %% equivalence relation of varieties {{{
 %% the more rigid, the less tilde and more bar.
@@ -224,8 +232,9 @@
 \newcommand{\shZ}{\mathcal{Z}}
 %% }}}
 
-\usepackage[scr=boondoxo,scrscaled=1.0]{mathalfa}
-\newcommand{\shHom}{\mathscr{H\!o\!m}} %% sheaf Hom
+%% homological algebra
+\newcommand{\Tor}           {\operatorname{Tor}}
+\newcommand{\Ext}           {\operatorname{Ext}}
 
 %% liner algebra
 \newcommand{\tatev}         [1]{\begin{bmatrix}#1\end{bmatrix}}

@@ -49,11 +49,11 @@
     \begin{Remark}
         $k(x)$ :: residue fieldと
         $f_x: \shL_x \to \shM_x$をテンソルすると，
-        $f_x \otimes \id{k(x)}$ :: surjective $k(x)$-module morphismが得られる．
-        よって$\ker (f_x \otimes \id{k(x)})=0$．
+        $f_x \otimes \id[k(x)]$ :: surjective $k(x)$-module morphismが得られる．
+        よって$\ker (f_x \otimes \id[k(x)])=0$．
         しかし，ここからNAKをつかって$\ker f_x=0$を導くことは出来ない．
         $k(x)$がflat $\shO_{X,x}$-moduleでなく，
-        したがって$\ker (f_x \otimes \id{k(x)})$と$(\ker f_x) \otimes k(x)$の間に同型があることが
+        したがって$\ker (f_x \otimes \id[k(x)])$と$(\ker f_x) \otimes k(x)$の間に同型があることが
         言えないからである．
         このことはflat $\implies$ torsion-freeに気をつければすぐに分かる．
         同様の議論が$f_x$ :: injective（と$\coker f_x$）の場合に出来ることにも気づくが，
@@ -600,7 +600,7 @@
 
     $X$ :: noetherian scheme,
     $\shE$ :: coherent locally free sheaf on $X$とする．
-    Prop7.12において$Y=X, g=\id{X}$とすると，
+    Prop7.12において$Y=X, g=\id[X]$とすると，
     以下の図式を成立させる$\sigma: X \to \pbundle(\shE)$と
     quotient invertible sheaf of $\shE $:: $\shE \to \shL \to 0$が
     \footnote
@@ -612,7 +612,7 @@
     \[
         \xymatrix
         {
-            X \ar[r]^-{\sigma}\ar[d]_-{\id{X}}& \pbundle(\shE) \ar[ld]^-{\pi} \\
+            X \ar[r]^-{\sigma}\ar[d]_-{\id[X]}& \pbundle(\shE) \ar[ld]^-{\pi} \\
             X
         }
     \]
@@ -833,7 +833,7 @@
 
     あとは$\shM \iso \pi^* \shL \otimes \shO_P(n)$を示せば良い．
     これは次のように示せる．
-    $\id{\shL}: \shL \to \pi_*(\shM \otimes \shO_P(-n))$を考える．
+    $\id[\shL]: \shL \to \pi_*(\shM \otimes \shO_P(-n))$を考える．
     これをadjoint pair :: $\pi^* \dashv \pi_*$を使って写す．
     \[ \pi^* \shL \to \shM \otimes \shO_P(-n). \]
     additive categoryにおけるadjoint functorについての一般論から，

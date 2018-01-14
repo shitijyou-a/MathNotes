@@ -1,11 +1,15 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[]{../math_note}
+\usepackage[dvipdfmx, colorlinks=true]{hyperref}
+\usepackage{pxjahyper}
 \usepackage[]{enumitem}
 \usepackage[all]{xy}
 
 \newcommand{\Sch}{\mathbf{Sch}}
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\Open}{\mathrm{Open}}
 \newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
 \newcommand{\GrpSch}{\mathbf{GrpSch}}
 \newcommand{\famF}{\mathcal{F}}
@@ -13,6 +17,7 @@
 
 \newcommand{\func}[1]{\underline{#1}}
 \newcommand{\ftorM}{\mathcal{M}}
+\newcommand{\ftorGL}{\mathcal{GL}}
 
 \newcommand{\acton}{\,\curvearrowright\,}
 
@@ -24,6 +29,7 @@
 \title{Group Schemes}
 \author{七条 彰紀}
 \maketitle
+\tableofcontents
 
 \section{Preface}
     このノートの想定読者は，
@@ -80,7 +86,7 @@
     
     affine scheme :: $\Spec R$は，混乱の恐れがないときは$R$と略す．
 
-\section{$T$-valued Points}
+\section{\texorpdfstring{$T$}{T}-valued Points}
     圏論で言う``generalized point"の概念を，
     名前を変えて用いる．
 
@@ -106,10 +112,40 @@
     \end{Def}
 
     \begin{Remark}
-        Yoneda Lemmaより，
-        自然変換$\func{G} \to \func{H}$と
-        射$G \to H$が一対一対応することに注意しよう．
-        したがって，
+        $\Sch$はlocally small categoryである．
+        すなわち，任意の$X, T \in \Sch$について$\func{X}(T)$は集合である．
+        これを確かめるために，
+        $X, Y \in \Sch$を任意にとり，
+        $\Hom(X,Y)$の濃度がある濃度で抑えられることを見よう．
+        射$X \to Y$の作られ方に沿って考える．
+        \begin{enumerate}[label=(\arabic*), leftmargin=*]
+        \item
+            base spaceの間の写像$f: \basesp X \to \basesp Y$をとる．
+            このような写像全体の濃度は高々$|\basesp Y|^{|\basesp X|}$．
+        \item
+            $|Y|$の開集合$U$をとる．
+            開集合全体の濃度は高々$2^{|\basesp Y|}$．
+        \item
+            写像$f^{\#}_U: \shO_Y(U) \to (f_* \shO_X)(U)$を定める．
+            このような写像全体の濃度は高々$|(f_* \shO_X)(U)|^{|\shO_Y(U)|}$．
+        \end{enumerate}
+        したがって$\Hom(X,Y)$の濃度は高々
+        \[|\basesp Y|^{|\basesp X|} \times \prod_{U \in 2^{\basesp Y}} |(f_* \shO_X)(U)|^{|\shO_Y(U)|} \]
+        となる．
+        濃度の上限が存在する（すなわち，ある集合への単射を持つ）から，
+        $\Hom(X,Y)$は集合である．
+%        presheaf on $Y$の圏は
+%        $Y$の開集合が成す圏(small)から
+%        集合の圏(locally small)の圏への
+%        関手圏である．
+%        これがlocally smallであることを示しても良いと思う．
+    \end{Remark}
+
+    \begin{Remark}
+        上の注意から，Yoneda Lemmaが成立する．
+        したがって自然変換$\func{G} \to \func{H}$と
+        射$G \to H$が一対一対応する．
+        このため，
         schemeの間の射についての議論と
         functor of pointsの間の射の議論は
         （ある程度）互いに翻訳することが出来る．
@@ -243,8 +279,8 @@
 
     \begin{Example}
         $X, B$ :: scheme,
-        morphism of schemes :: $f: X \to B$をとる．
-        $X$は$\pi: X \mapsto b$によって$B$上のfamilyを成す．
+        $f: X \to B$ :: morphism of schemesをとる．
+        $X$は$f$によって$B$上のfamilyとなる．
         射のfibreとして実現される，
         scheme（例えばsmooth curve）のfamilyは
         deformation theoryの対象である．
@@ -252,8 +288,9 @@
 
     \begin{Example}\label{example:grassmannian}
         $k$を体，$S$を適当なschemeとする．
-        $\affine^2_k$の原点を通る直線の$S$上のfamilyは，
-        line bundle :: $\shL \subset \affine^2 \times_k S$である．
+        $\affine^2_k$の原点を通る直線の$S$上のfamilyとして，
+        line bundle :: $\shL \subset \affine^2 \times_k S$を
+        考えることが出来る．
         $\shL \to S$は射影写像で与えられる．
         同様に$\affine^n$の$r$次元線形空間の$S$上のfamilyは
         $r$次元vector bundle :: $\shE \subset \affine^n \times S$である．
@@ -295,34 +332,9 @@
         関手$\func{M}=\Hom_{\Sch}(-, M)$が$\ftorM$と自然同型，ということである．
     \end{Def}
 
-%    \begin{Remark}
-%        $\Sch$はlocally smallである．
-%        2つのscheme :: $X, Y$について，
-%        \begin{enumerate}[label=(\arabic*), leftmargin=*]
-%            \item 
-%                continuous map :: $|X| \to |Y|$の全体が成す集合の濃度は高々$\mathfrak{t}=\#|Y|^{\#|X|}$．
-
-%            \item
-%            $Y$の開集合$U$について，
-%            写像$\shO_Y(U) \to (f_*\shO_X)(U)$全体の濃度は高々$\mathfrak{s}_U=\#(f_*\shO_X)(U)^{\#\shO_Y(U)}$．
-
-%            \item
-%            この写像の集合は開集合で添字付けられているから，
-%            結局structure sheafの間の射全体の濃度は
-%            高々$\prod_{U \text{ :: open in }Y}\mathfrak{s}_U$．
-
-%            \item
-%            $Y$の開集合系の濃度は高々$2^{\#|Y|}$．
-
-%            \item
-%            よって
-%        \end{enumerate}
-%    \end{Remark}
-
     \begin{Remark}
-        $X \in \Sch$をとる．
         moduli functor :: $\ftorM$のfine moduli space :: $M$が存在したとしよう．
-        この時，$\ftorM(X) \iso \func{M}(X)$．
+        この時，任意の$X \in \Sch$について$\ftorM(X) \iso \func{M}(X)$．
         これは
         $X$上の代数幾何学的対象が成す同値類が
         $M$の$X$-value pointと一対一に対応していることを意味する．
@@ -355,20 +367,20 @@
         以下を満たすscheme :: $M$を$\ftorM$のcoarse moduli spaceと呼ぶ．
         \begin{enumerate}[label=(\roman*), leftmargin=*]
             \item
-                自然変換$\rho: \ftorM \to \func{M}$が存在する．
+                自然変換$\eta: \ftorM \to \func{M}$が存在する．
             \item
-                $\rho$は自然変換$\ftorM \to \func{\tilde{M}}$の中で最も普遍的である:
+                $\eta$は自然変換$\ftorM \to \func{\tilde{M}}$の中で最も普遍的である:
                 \[
                 \xymatrix
                 {
-                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\rho}& {} \\
+                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\eta}& {} \\
                     {}^{\forall}\func{\tilde{M}} \ar[rr]_-{{}^{\exists!} \func{f}}& {} & \func{M}
                 }
                 \]
                 この図式で$\tilde{M}$ :: scheme, $f: M \to \tilde{M}$．
             \item
                 任意の代数閉体 :: $k$について
-                $\rho_{\Spec k}: \ftorM(\Spec k) \to \func{M}(\Spec k)$は全単射である．
+                $\eta_{\Spec k}: \ftorM(\Spec k) \to \func{M}(\Spec k)$は全単射である．
         \end{enumerate}
     \end{Def}
 
@@ -390,11 +402,6 @@
         $M$は$\ftorM$のcoarse moduli spaceでもある．
     \end{Prop}
     
-    \begin{Prop}[\cite{Hos} Prop2.26]
-     Let $(M, \eta)$ be a coarse moduli space for a moduli problem $M$.
-     Then $(M, \eta)$ is a fine moduli space if and only if (...)
-    \end{Prop}
-
     \begin{Prop}[\cite{HarDef}, Prop23.5]
         $S$ :: schemeのopen subschemeと包含写像が成す圏を
         $\OpenSubSch(S)$と書くことにする．
@@ -437,10 +444,8 @@
     したがって$\famF, \famG$が
     fiber毎に同型であれば，$\eta(\famF)=\eta(\famG)$となる．
 
-    \cite{Hos} Prop 2.26より，
-    この同値関係についての
-    coarse moduli space $(M, \eta)$がfine moduliであるならば，
-    これは$\famF=\famG$を意味する．
+    $\eta$は全単射であるから，
+    これは$\famF \iso \famG$を意味する．
     しかし，対象が非自明な自己同型写像をもつときには
     このようにならないfamilyが構成できてしまう．
     % 構成はmarrten.pdf Example 3.2
@@ -485,6 +490,7 @@
     そのためmoduli問題の理解のために，
     group schemeを知ることは不可欠である．
 
+    \subsection{Definition}
     group schemeは圏論的に定義される．
     まずは圏論の言葉で述べよう．
     \begin{Def}
@@ -538,6 +544,7 @@
     \end{enumerate}
     \end{Def}
 
+    \subsection{Examples}
     以下の例では$k$を適当な体とし，$k$上のaffine group schemeを定義する．
     \begin{Example}[$\Ga$]
         finitely generated $k$-algebra :: $A=k[x]$と次の3つの$k$-linear mapから，
@@ -654,32 +661,24 @@
         is a linear algebraic group
         (i.e. subgroup of $GL_n$ for some $n$).
     \end{Thm}
-
-\section{Categorical/Good/Geometric/Affine GIT Quotients}
-    % Moduli Theory and Classification Theory of Algebraic Varieties(H_Popp)
-    % のp.55からのlecture 5も参考に成る．
-    % 特にRemark5.3にcategorialだがgoodでないquotientの例がある．
-    % 同様にgoodだがgeometricでないquotientの例もある．
-    % graph mapがproperの時，
-    % geometric quotientは単に|Q|=|X|/Gなるgood quotientだと言える．
-
-    ここからはschemeへのgroup schemeの作用を考えるのだから，
-    まずは作用の定義を与えよう．
+    
+    \subsection{Action on Scheme}
+    最後に作用の定義を述べる．
     \begin{Def}
         scheme/$S$ :: $X$と，
         group scheme/$S$ :: $G$が与えられたとする．
         $G$の$X$への\textbf{(left) action}とは，
-        次を満たす射$\rho: G \times_S X \to X$である．
+        次を満たす射$\alpha: G \times_S X \to X$である．
         すなわち，任意の$T \in \Sch/S$について，
-        $\rho$は群$\func{G}(T)$から集合$\func{X}(T)$への作用を誘導する．
+        $\alpha$は群$\func{G}(T)$から集合$\func{X}(T)$への作用を誘導する．
 
         なお，$g \in \func{G}(T)$を
         $x \in \func{X}(T)$に作用させた$g \cdot x \in \func{X}(T)$は
-        $\func{\rho}(\langle g,x \rangle)$，すなわち
+        $\func{\alpha}(\langle g,x \rangle)$，すなわち
         \[
         \xymatrix
         {
-            T \ar[r]^-{\langle g,x \rangle}& G \times_S X \ar[r]^-{\rho}& X
+            T \ar[r]^-{\langle g,x \rangle}& G \times_S X \ar[r]^-{\alpha}& X
         }
         \]
         である．
@@ -689,9 +688,18 @@
 
         action :: $G \times X \to X$のことを$G \acton X$と表す．
         $g \in G$を$x \in X$に作用させたものをしばしば$g \cdot x$と書く．
-        $Gx:=\rho(G \times \{x\})$と置き，
+        $Gx:=\alpha(G \times \{x\})$と置き，
         これを点$x$の\textbf{orbit}と呼ぶ．
     \end{Def}
+
+\section{Categorical/Good/Geometric/Affine GIT Quotients}
+    % Moduli Theory and Classification Theory of Algebraic Varieties(H_Popp)
+    % のp.55からのlecture 5も参考に成る．
+    % 特にRemark5.3にcategorialだがgoodでないquotientの例がある．
+    % 同様にgoodだがgeometricでないquotientの例もある．
+    % graph mapがproperの時，
+    % geometric quotientは単に|Q|=|X|/Gなるgood quotientだと言える．
+
 
     \textbf
     {
@@ -699,7 +707,7 @@
     scheme ::$S$,
     scheme/$S$ :: $X$,
     group scheme/$S$ :: $G$,
-    action :: $\rho: G \acton X$が与えられているとする．
+    action :: $\alpha: G \acton X$が与えられているとする．
     }
 
     \subsection{Categorical Quotient}
@@ -709,13 +717,13 @@
     \begin{enumerate}[label=(\roman*), leftmargin=*]
         \item
             schemeの射 :: $q: X \to Y$は，
-            $q \circ \rho=q \circ \pr_X: G \times X \to Y$であるとき，
+            $q \circ \alpha=q \circ \pr_X: G \times X \to Y$であるとき，
             \textbf{$G$-invariant morphism}と呼ばれる．
             この条件は次のように翻訳できる:
             任意の$T \in \Sch/S$と
             任意の$g \in \func{G}(T), x \in \func{X}(T)$について，
             \[
-                \func{q}(\rho \circ \langle g,x\rangle)
+                \func{q}(\alpha \circ \langle g,x\rangle)
                 =\func{q}(g \cdot x)
                 =\func{q}(x)
                 =\func{q}(\pr_X \circ \langle g,x \rangle).
@@ -723,7 +731,7 @@
 
         \item
             schemeの射$q: X \to Y$は，
-            $q$が$\rho, \pr_X: G \times X \rightrightarrows X$の
+            $q$が$\alpha, \pr_X: G \times X \rightrightarrows X$の
             coequalizerであるとき，
             $X$の$G$による\textbf{categorial quotient}と呼ばれる．
             言い換えれば，
@@ -767,14 +775,14 @@
     なので一つ「商らしい商」が存在すれば，
     その商はより弱い意味でも「商らしい」ことに注意せよ．
 
-    \subsection{$G$-invariant Function}
+    \subsection{\texorpdfstring{$G$}{G}-invariant Function}
     \begin{Def}[\cite{AV}]
         $U$ :: open in $X$について，
         $f \in \shO_X(U)$は
-        \[ \rho^{\#}(f)|_{G \times_S U}=\pr_X^{\#}(f) \in \shO_{G \times_S X}(G \times_S U) \]
+        \[ \alpha^{\#}(f)|_{G \times_S U}=\pr_X^{\#}(f) \in \shO_{G \times_S X}(G \times_S U) \]
         が成り立つとき\textbf{$G$-invariant function}と呼ばれる．
         ここで，
-        $\rho^{-1}(U) \supseteq G \times_S U=\pr_X^{-1}(U)$であるために
+        $\alpha^{-1}(U) \supseteq G \times_S U=\pr_X^{-1}(U)$であるために
         左辺にrestrictionが必要であることに注意．
     \end{Def}
 
@@ -805,8 +813,8 @@
         sheaf morphismがrestriction mapと可換であることを用いる．
         \[
             \Forall{i,j}
-            \rho^{\#}(t)|_{V_i \cap V_j}
-            =\rho^{\#}(t|_{U_i \cap U_j})|_{V_i \cap V_j}
+            \alpha^{\#}(t)|_{V_i \cap V_j}
+            =\alpha^{\#}(t|_{U_i \cap U_j})|_{V_i \cap V_j}
             =
             \pr_X^{\#}(t|_{U_i \cap U_j})
             =\pr_X^{\#}(t)|_{V_i \cap V_j}
@@ -814,7 +822,7 @@
         \]
         $\shO_{G \times X}$はsheafだから，
         identity axiomを満たす．
-        よって$\rho^{\#}(t)=\pr_X^{\#}(t)$，
+        よって$\alpha^{\#}(t)=\pr_X^{\#}(t)$，
         すなわち$t \in \shO_X^G(U)$．
     \end{proof}
 
@@ -867,7 +875,7 @@
     field :: $k$
     affine scheme/$k$ :: $X$,
     affine group scheme/$k$ :: $G$,
-    action :: $\rho: G \acton X$が与えられているとする．
+    action :: $\alpha: G \acton X$が与えられているとする．
     この場合には，直接構成できるquotient schemeがある．
     それがGIT(Geometric Invariant Theory) quotientである．
     Mumfordが構成した．
@@ -875,8 +883,8 @@
     % これは通常の$\shO_X(X)^G$の定義を使えば分かる．
     
     最初に，affine $\acton$ affineの場合の作用について述べておこう．
-    $\rho: G \acton X$に対応する環準同型を
-    $\tilde{\rho}: k[X] \to k[X] \otimes_k k[G]$とする．
+    $\alpha: G \acton X$に対応する環準同型を
+    $\tilde{\alpha}: k[X] \to k[X] \otimes_k k[G]$とする．
     一方，$\pr_X: G \times X \to X$に対応する環準同型は
     \begin{defmap}
         {}& k[X]& \to& k[X] \otimes_k k[G] \\
@@ -886,7 +894,7 @@
     したがって$\shO_X^G( \subseteq \shO_X)$のglobal sectionは次のように成る．
     \[
         k[X]^G
-        :=\{ f \in k[X] \mid \tilde{\rho}(f)=f \otimes 1 \}
+        :=\{ f \in k[X] \mid \tilde{\alpha}(f)=f \otimes 1 \}
         \subseteq \Gamma(X, \shO_X).
     \]
 
@@ -942,7 +950,7 @@
     field :: $k$
     affine scheme/$k$ :: $X$,
     affine group scheme/$k$ :: $G$,
-    action :: $\rho: G \acton X$が与えられているとする．
+    action :: $\alpha: G \acton X$が与えられているとする．
     }
     まず現状の確認をしよう．
     我々はaffine GIT quotientを定義した．
@@ -962,29 +970,94 @@
     調べていく．
 
     \subsection{Linear Representation} 
-    \begin{Def}
-        
+    group schemeのlinear representationとして最も一般的なものは次のものである．
+    \begin{Def}[\cite{MilneiAG} 4,a]
+        $V$ :: vectoe space over $k$に対し，
+        $k$代数の圏から群の圏への関手$\ftorGL_V$を
+        \[ R \mapsto \Aut_R(V \otimes_k R) \]
+        で定める．
+        $G$の$V$へのlinear representationとは，
+        （群の圏への関手の）準同型$\rho: \func{G} \to \ftorGL_V$のことである．
     \end{Def}
+%    \begin{Def}[\cite{MilneiAG} 4,aの別の定義]
+%        $V$ :: vectoe space over $k$に対し，
+%        有限生成$k$代数の圏から群の圏への関手$\func{V}$を
+%        \[ R \mapsto V \otimes_k R \]
+%        で定める．
+%        $G$の$V$へのlinear representationとは，
+%        次の条件を満たす自然変換
+%        $\rho: \func{G} \times \func{V} \to \func{V}$のことである．
+%        すなわち，
+%        任意の有限生成$k$代数$R$について
+%        $\rho_R$は作用$\func{G}(R) \acton \func{V}(R)=V \otimes_k R$である．
+%        この準同型は$R$加群としてのものである
+%        \footnote
+%        {
+%            $\func{G}(R)=\Hom_{\Sch}(\Spec R, G)$は，
+%            $G$ :: affine schemeより環準同型 :: $k[G] \to R$に対応する．
+%            これは$(r \cdot \phi)(*)=r \phi(*)$のようにして自然に$R$加群の構造を持つ．
+%        }．
+%    \end{Def}
 
-\section{Affine GIT Quotient is a Good Quotient.}
+    \begin{Remark}
+        $V$が有限次元である場合には$\ftorGL_V$は
+        affine group scheme :: $GL_{\dim V}$で表現できる．
+        また，この時$\rho$はhomomorphism of group schemeである．
+    \end{Remark}
+    \begin{Remark}
+        直前の注意で述べたことを使って
+        有限次元$k$-vector space :: $V$への$G$の表現が
+        \cite{Muk1}での定義と一致することを確かめよう．
+        
+        $n=\dim V$とする．
+        直前の注意から，$G$の$V$への表現は
+        group scheme homomorphism :: $h: G \to GL_n$である．
+        対応する環準同型を$\tilde{h}: k[X, (\det X)^{-1}] \to k[G]$としよう．
+        ここで$X$は不定元からなる行列$\tatev{ x_{ij} }_{i,j=1}^n$である．
+        （group schemeの例にある$GL_n$の定義も参照せよ．）
+        $\tilde{X}:=\tilde{h}(X)$とおいて，
+        $\bar{h}: V \to V \otimes_k k[G]$を次で定める．
+        \[ v \mapsto (v \otimes 1)(1 \otimes \tilde{X}). \]
+        
+        逆に$\mu: V \to V \otimes_k k[G]$が与えられているとして
+        $h: G \to GL_n$を構成する．
+        これには$\bar{h}$から$\tilde{X}$の情報を取り出せば良い．
+        $V$の基底を$\{ e_k \}_{k=1}^n$とし，その双対基底を$\{ e^k \}$とする．
+        また$\iota: k \otimes k[G] \mapsto k[G]$を標準的同型とする．
+        以上の準備の下で$\tilde{X}$の$(i,j)$成分$\tilde{x}_{ij}$は次の様に取り出せる．
+        \[
+        \xymatrix
+        {
+            e_i \ar@{|->}[r]^-{\bar{h}}& 
+            \sum_{k=1}^n e_k \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{e^j \otimes \id}&
+            1 \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{\iota} &
+            \tilde{x}_{ij}
+        }
+        \]
+        こうして取り出した$\tilde{X}$から再び$\mu$を構成できることは明らか．
+    \end{Remark}
+
+\section{Affine GIT Quotient of Variety is Variety Again }
+
+\section{Affine GIT Quotient is a Good Quotient}
     \begin{Thm}[\cite{Hos} Thm4.30]\label{thm:git=good}
         Affine GIT Quotient is Good Quotient.
     \end{Thm}
 
 \begin{thebibliography}{99}
     \bibitem{Muk1}
-        向井茂(2008)『モジュライ理論 I』岩波書店
-
-    \bibitem{AV}
-        Gerard van der Geer, Ben Moonen
-        ``Abelian Varieties"
-        \url{https://www.math.ru.nl/~bmoonen/research.html}
-        （Preliminary Version. 2017/12/31参照）
-
+    向井茂(2008)『モジュライ理論 I』岩波書店
+    
     \bibitem{Hos}
     Victoria Hoskins (2016)
     ``Moduli Problems and Geometric Invariant Theory"
     \url{https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf}
+
+    \bibitem{AV}
+    Gerard van der Geer, Ben Moonen
+    ``Abelian Varieties"
+    \url{https://www.math.ru.nl/~bmoonen/research.html}
+    （Preliminary Version. 2017/12/31参照）
 
     \bibitem{HarAG}
     Robin Hartshorne(1977)
@@ -1003,16 +1076,21 @@
     
     \bibitem{MilneAGS}
     J. Milne, ``The basic theory of affine group schemes", 
-    \url{www.jmilne.org/math/CourseNotes/AGS.pdf}
+    \url{http://www.jmilne.org/math/CourseNotes/AGS.pdf}
+    
+    \bibitem{MilneiAG}
+    J. Milne, ``Algebraic Groups", 
+    \url{http://www.jmilne.org/math/CourseNotes/iAG200.pdf}
 
     \bibitem{HaMo}
     J. Harris,I. Morrison ``Moduli of Curves"
 
     \bibitem{GIT}
-        D.Mumford,J.Forgarty ``Geometric Invariant Theory"
+    D.Mumford,J.Forgarty ``Geometric Invariant Theory"
 
     \bibitem{Ses}
     C.S. Seshadri (1972)
     ``Quotient spaces modulo reductive algebraic groups"
+
 \end{thebibliography}
 \end{document}

@@ -23,7 +23,7 @@
 \section{Constant Sheaf is Associated to Constant Presheaf.} %% Ex1.1 
     $A$ :: abelian group, $X$ :: topological spaceとする．
     任意の空でない開集合$U \subseteq X$について$\shA(U)=A$とし，
-    restriction map $\rho_{UV}: \shF(U) \to \shF(V)$は$\id{A}$とする．
+    restriction map $\rho_{UV}: \shF(U) \to \shF(V)$は$\id[A]$とする．
     この$\shA$をconstant presheafと呼ぶ．
     $\shA$に対応するsheafを$\shA^+$としよう．
     また，開集合$U \subseteq X$に対し，
@@ -474,25 +474,25 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \xymatrix
     {
     \ftorSh \ar@{->}[r]^-{\tilde{\eta}_{}}& \ftorFgt \ftorSh\\
-    \id{\PSh(X)} \ar[ru]_-{\eta} \ar[u]^-{\theta}& {}
+    \id[\PSh(X)] \ar[ru]_-{\eta} \ar[u]^-{\theta}& {}
     }
     \hspace{15mm}
     \xymatrix
     {
-    \ftorSh \ftorFgt \ar@{-->}[r]^-{\epsilon_{}}& \id{\Sh(X)}\\
+    \ftorSh \ftorFgt \ar@{-->}[r]^-{\epsilon_{}}& \id[\Sh(X)]\\
     \ftorFgt \ar[ru]_-{\tilde{\epsilon}_{}} \ar[u]^-{\theta_{\ftorFgt}}& {}
     }
     \]
     こうして
-    unit $\eta: \id{\PSh(X)} \to \ftorFgt \ftorSh$と
-    counit $\epsilon: \ftorSh \ftorFgt \to \id{\Sh(X)}$が得られる．
+    unit $\eta: \id[\PSh(X)] \to \ftorFgt \ftorSh$と
+    counit $\epsilon: \ftorSh \ftorFgt \to \id[\Sh(X)]$が得られる．
     さらに，この二つの可換図式を組み合わせて，以下の可換図式が作れる．
     \[
     %% @C : 列間隔, @R : 行間隔
     \xymatrix@C=5pt@R=35pt
     {
-    \id{\PSh(X)} \ar[rr]^{\theta_{}} & {} & \ftorSh  \\
-    \ftorFgt \ar@{<->}[rr]^-{\tilde{\epsilon}_{}} \ar[rd]_-{\theta_{\ftorFgt}} & {} & \id{\Sh(X)} \\
+    \id[\PSh(X)] \ar[rr]^{\theta_{}} & {} & \ftorSh  \\
+    \ftorFgt \ar@{<->}[rr]^-{\tilde{\epsilon}_{}} \ar[rd]_-{\theta_{\ftorFgt}} & {} & \id[\Sh(X)] \\
     {} & \ftorSh \ftorFgt \ar[ru]_-{\epsilon_{}} & {}
     }
     \]
@@ -557,7 +557,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         \bar{s}:& U& \to& \Spe(\shF) \\ 
         {}& P& \mapsto& s_P.
     \end{defmap}
-    この時，$\pi \circ \bar{s}=\id{U}$．
+    この時，$\pi \circ \bar{s}=\id[U]$．
     すなわち，$\bar{s}$は$U$上で$\pi$の``section"である．
     そして$\Spe(\shF)$に以下のような位相を入れる: 
     任意の$U$と任意の$s$について$\bar{s}$が連続であるような最強の位相．
@@ -589,11 +589,11 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \paragraph{Plan of Proof.}
     二つの写像を定める．
     \begin{defmap}
-        \alpha:& \id{\Sh(X)}& \to& \ftorSec \ftorEt \\ 
+        \alpha:& \id[\Sh(X)]& \to& \ftorSec \ftorEt \\ 
         \vspace{2ex}
         {}& s \in \shF(U)& \mapsto& [\bar{s}: P \mapsto s_P] \\
-        \beta:& \ftorEt \ftorSec& \to& \id{\mathbf{Et}(X)} \\ 
-        {}& P \times [\sigma:U \to \id{\mathbf{Et}(X)}]& \mapsto& \sigma(P) \\
+        \beta:& \ftorEt \ftorSec& \to& \id[\mathbf{Et}(X)] \\ 
+        {}& P \times [\sigma:U \to \id[\mathbf{Et}(X)]& \mapsto& \sigma(P) \\
     \end{defmap}
     ただし$U$は任意の$X$の開集合で，$P$は$U$の任意の点である．
     この$\alpha, \beta$がnatural mapかつisomorphismであることが証明できるので，
@@ -604,7 +604,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     \footnote
     {
         この本では$\alpha$は$\eta$と書かれている．
-        また，この本でいうcross-sectionは$\pi \circ \sigma=\id{U}$なるsectionのこと．
+        また，この本でいうcross-sectionは$\pi \circ \sigma=\id[U]$なるsectionのこと．
         $\dot{s}$は$\bar{s}$のことである．
         その他，germの記法などがだいぶ違うので注意．
     }．
@@ -665,7 +665,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $\ftorSh=\ftorSec \ftorEt$とすると，これがsheafification functorとなる．
     そのUMPを見よう．
     $\shF \in \PSh(X), \shG \in \Sh(X)$とする．
-    $\alpha: \id{\Sh(X)} \to \ftorSh$のnaturalityから，次の可換図式が得られる．
+    $\alpha: \id[\Sh(X)] \to \ftorSh$のnaturalityから，次の可換図式が得られる．
     \[
     \xymatrix
     {
@@ -676,7 +676,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $\alpha_{\shG}: \shG \to \ftorSh \shG$ :: isoだから，
     $\shF \to \shG$から$\ftorSh \shF \to \shG$が得られた．
     次に，以下で示す可換図式(1)が与えられたとしよう．
-    全体を$\ftorSh$で写し，$\ftorSh|_{\Sh(X)} \cong \id{\Sh(X)}$を用いて可換図式(2)が得られる．
+    全体を$\ftorSh$で写し，$\ftorSh|_{\Sh(X)} \cong \id[\Sh(X)]$を用いて可換図式(2)が得られる．
     \[
     (1)
     \xymatrix
@@ -856,7 +856,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     $\shF \in \Sh(X)$とする．
     これに対し，discontinuous sections of $\shF$と呼ばれるsheaf $\shG$が以下のように作れる．
     $\pi$はEx1.13の$s_P \mapsto P$なる写像である．
-    \[ \shG: U \mapsto \left\{ s:U \to \bigsqcup_{P \in U} \shF_P ~\middle|~ \pi \circ s=\id{U} \right\} \]
+    \[ \shG: U \mapsto \left\{ s:U \to \bigsqcup_{P \in U} \shF_P ~\middle|~ \pi \circ s=\id[U] \right\} \]
     $\shG$がflasque sheafであることと，$\shF \to \shG$の自然な単射が存在することを示す．
     
     \paragraph{$\shG$ :: sheaf.}
@@ -1020,12 +1020,12 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     すると$\bar{\alpha} \in \Hom(f^p\shG, \shF)$から
     \[ \Psi_{\shF, \shG}(\bar{\alpha})=f_* \bar{\alpha} \circ \eta_{\shG} \in \Hom(\shG, f_* \shF) \]が得られる．
 
-    \paragraph{$\Psi_{\shF, \shG} \circ \Phi_{\shF, \shG}=\id{\Hom(\shG, f_*\shF)}$.}
+    \paragraph{$\Psi_{\shF, \shG} \circ \Phi_{\shF, \shG}=\id[\Hom(\shG, f_*\shF)]$.}
     今，$\alpha$から$\Psi_{\shF, \shG}(\bar{\alpha})=\Psi_{\shF, \shG}(\Phi_{\shF, \shG}(\alpha))$が得られた．
     この二つが等しいことを示そう．
     これは$\Phi_{\shF, \shG}$が単射であることを意味する．
     そのためには，直前の図式(3)における
-    以下のpathが$\id{f_* \shF}$であることを示せば良い．
+    以下のpathが$\id[f_* \shF]$であることを示せば良い．
     \[
         \xymatrix
         {
@@ -1054,17 +1054,17 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     (f_* f^p f_* \shF)(U) \ar[rr]^-{(\epsilon_{f_*\shF})_U}& {} & \shF(f^{-1}(U)) \\
     \mathscr{D}_1 \ar[u] \ar[urr]^(.2){\res}
     & \ni 
-    & f_*\shF(U) \ar@{=}[u]_-{\res_{f^{-1}(U)}^{f^{-1}(U)}=\id{}} \ar[ull]_(.2){(f_*\eta_{\shF})_U}
+    & f_*\shF(U) \ar@{=}[u]_-{\res_{f^{-1}(U)}^{f^{-1}(U)}=\id} \ar[ull]_(.2){(f_*\eta_{\shF})_U}
     }
     \]
     $\mathscr{D}_1$から伸びる２本の射と整合的に$(\epsilon_{f_*\shF})_U$が生えている．
     これはつまり上の図式で$\mathscr{D}_1$を頂点に持つ三角形が可換である，ということである．
     $f_*\shF(U) \in \mathscr{D}_1$に注目すれば，
-    これは直ちに$\epsilon_{f_*\shF} \circ f_*\eta_{\shF}=\id{}$を意味する．
+    これは直ちに$\epsilon_{f_*\shF} \circ f_*\eta_{\shF}=\id$を意味する．
     ここまでは$f_* f^p f_*\shF$についての議論だったが，
     これをsheafificationすれば最初の目的の等式が得られる．
 
-    \paragraph{$\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}=\id{\Hom(f^p\shG, \shF)}$.}
+    \paragraph{$\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}=\id[\Hom(f^p\shG, \shF)]$.}
     今度は$\beta \in \Hom(f^p\shG, \shF)$をとる．
     $\Phi_{\shF, \shG} \circ \Psi_{\shF, \shG}(\beta)=\beta$を示そう．
     前段落及び前前段落と同様に図式を書く．
@@ -1078,7 +1078,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
         {} & f^p \shG \ar[ru]_-{f^p \bar{\beta}} \ar[lu]^-{f^p \eta_{\shG}} & {} \\
         }
     \]
-    よって以下が$\id{f^p\shG}$であることを示せば良いと分かる．
+    よって以下が$\id[f^p\shG]$であることを示せば良いと分かる．
     \[
         \xymatrix
         {
@@ -1107,7 +1107,7 @@ sheaves $\{\shF^i\}_{i \in I}$ with morphisms $f^{ij}: \shF^i \to \shF^j$ :: dir
     が成り立つからである．
     前半は$\mathscr{D} \supseteq \mathscr{D}'$を意味し，
     後半は$\mathscr{D} \subseteq \mathscr{D}'$を意味する．
-    よって$(f^p \shG)(U)$が持つUMPから，左の$(f^p \shG)(U)$から右の$(f^p \shG)(U)$への射は$\id{}$である．
+    よって$(f^p \shG)(U)$が持つUMPから，左の$(f^p \shG)(U)$から右の$(f^p \shG)(U)$への射は$\id$である．
 
     \paragraph{$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$.}
     以上で$\Hom(f^p\shG, \shF) \cong \Hom(\shF, f_*\shF)$が示せた．
