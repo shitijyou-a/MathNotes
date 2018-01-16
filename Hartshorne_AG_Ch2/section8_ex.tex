@@ -10,6 +10,27 @@
 
 \begin{document}
 \section{Strengthen Some Results in the Text.} %% Ex8.1 
+    \subsection{}
+%        liftingの存在を示せば，
+%        あとはMatsumuraにあるSecond Fundamental Exact Sequenceの証明と同じ．
+%        $B'=M/\I{m}^2, \I{m}'=\I{m/\I{m}^2}$とおくと，
+%        $(B', \I{m}')$はlocal ring．
+%        また$(\I{m}')^2=0$だから，$B'$の$\I{m}'$によるcomplitionは$B'$に等しい．
+%        すなわち，$B'$はlocal complete ring.
+%        また$k(B') \iso k(B)$であり，
+%        仮定からこれはseparably generated extension of $k$である．
+%        Thm8.25より，
+%        $k \subseteq K \subseteq B'$と
+%        $K \iso k(B')(\iso k(B))$ by natural projectionを満たす体$K$が存在する．
+%        よって以下が同型写像に成る．
+%        \[ k(B) \isomap K \inclmap B' \to k(B') \isomap k(B)  \]
+%        $B'$より前半が求めるliftingである．
+
+    \subsection{}
+
+    \subsection{}
+
+    \subsection{}
 
 \section{$0 \to \shO_X \to \shE \to \shE' \to 0$.} %% Ex8.2 
     $X$ :: variety of dimension $n$ over $k$,
@@ -581,8 +602,9 @@
     \[
     \xymatrix
     {
-        0 \ar[r]& J/J^2 \ar[r]^-{\delta}& \Der_{P/k} \otimes_k A \ar[r]& \Der_{A/k} \ar[r]& 0.
+        0 \ar[r]& J/J^2 \ar[r]^-{\delta}& \Der_{P/k} \otimes_P A \ar[r]& \Der_{A/k} \ar[r]& 0.
     }
+    \eqno(*)
     \]
     これを$\Hom_A(-, I)$で写して次を得る．
     \[
@@ -590,21 +612,33 @@
     {
         0 \ar[r]& Der_k(A,I) \ar[r]& Der_k(P,I) \ar[r]^-{\delta^*}& \Hom_A(J/J^2,I).
     }
+    \eqno(**)
     \]
-    $\delta^*$を計算すると次のように成る．
-    $D \in Der_k(P,I), x \in J$をとり$\bar{x}=x \bmod J^2$とおく．
-    また，$\phi_D \in \Hom_P(\Der_{P/k}, I)$を$D$に対応する写像とし，
-    $\iota: I \otimes B \to I$と標準的同型写像とする．
+
+    ここで$\delta^*$は3つの写像の合成である．
+    \[
+    \xymatrix@R=10pt
+    {
+        Der_k(P,I) \ar[r]^-{\iso}& \Hom_P(\Der_{P/k}, I) \ar[r]^-{\iso} &
+        \Hom_A(\Der_{P/k} \otimes_P A, I) \ar[r]^-{(-) \circ \delta}& \Hom_A(J/J^2,I) \\
+        D \ar@{|->}[r]& \phi \ar@{|->}[r]&
+        \iota \circ (\phi \otimes_P \id[A]) \ar@{|->}[r]& (\iota \circ (\phi \otimes_P \id[A])) \circ \delta.
+    }
+    \]
+    $\iota: I \otimes A \to I$は標準的同型写像である．
+    $\delta^*(D)=(\iota \circ (\phi \otimes_P \id[A])) \circ \delta$が
+    どのようなものか計算しておこう．
+    $x \in J$をとり$\bar{x}=x \bmod J^2$とおく．
     \[
         \delta^*(D)(\bar{x})
-        =\iota((\phi_D \otimes \id[B']) \circ \delta)(\bar{x}))
-        =\iota((\phi_D \otimes \id[B'])(\der x \otimes 1_{B'}))
-        =\iota(Dx \otimes 1_{B'})
+        =((\iota \circ (\phi \otimes_P \id[A])) \circ \delta)(\bar{x})
+        =\iota((\phi \otimes_P \id[A])([\der[P/k] x] \otimes 1_A))
+        =\iota(Dx \otimes 1_{A})
         =Dx.
     \]
 
     \begin{Claim}
-        $\delta^*: Der_k(P,I) \to \Hom_A(J/J^2,I)$は全射である．
+        $\delta^*: Der_k(P,I)(\iso \Hom_P(\Der_{P/k}, I)) \to \Hom_A(J/J^2,I)$は全射である．
     \end{Claim}
 
     この主張を仮定すると，
@@ -624,87 +658,40 @@
     これが求めていた写像である．
     実際，$x \in P$について，
     \[ \pi \circ g(x \bmod J)=\pi(h(x)-\theta(x))=f(x \bmod J)-\pi(\theta(x))=f(x \bmod J). \]
-    $\theta: P \to I$に注意．
+    $\im \theta \subseteq I=\ker \pi$に注意．
 
     \begin{proof}
-        Matsumuraによるsecond fundamental exact sequenceの証明(pp.194-195)を参照する．
-        $\rho$から誘導される
-        $A$加群の準同型$P/J^2 \to A$を$\rho$とする．
-        元の準同型$P \to A$はこの証明に現れない．
-        以下，$A$加群はこの準同型に依って$P/J^2$加群とみなす．
-
-        $J/J^2 \subset P/J^2$と
-        $\frac{P/J^2}{J/J^2} \iso P/J \iso A$に注意して
-        次の図式を考える．
-        \[
-        \xymatrix
-        {
-            A \ar[r]^-{\id} \ar@{-->}[rd]_-{\sigma}& A \\
-            k \ar[u]\ar[r]& P/J^2 \ar[u]_-{\rho}
-        }
-        \]
-        この図式に於いて，$\sigma$は$h$と同様に構成する．
-        すなわち，$\bar{x}_i =x_i \bmod J \in A$に対して
-        $y_i \in \rho^{-1}(\bar{x}_i)$を選び，
-        $\sigma: \bar{x}_i \mapsto y_i$で定義する．
-        $\sigma$によって図式が可換に成ることは明らか．
-        すると明らかに$\sigma$は$\rho$のsection
-        (i.e. $\rho\sigma=\id$)である．
-
-        この時$\id[P/J^2]$と$\sigma \rho$は$\rho$のliftingである．
-        \[
-        \xymatrix
-        {
-            P/J^2 \ar[r]^-{\rho}& A \\
-            {} & P/J^2 \ar[u]_-{\rho}
-            \ar@<-1.5pt>[lu]_-{\id} \ar@<1.5pt>[lu]^-{\sigma \rho}
-        }
-        \]
-        (a)での議論から，
-        $D=\id[P/J^2]-\sigma \rho$は
-        $P/J^2$から$P/J^2$-module :: $J/J^2$への
-        $k$-derivationである．
-
-        $\psi \in \Hom_A(J/J^2, I)$について，
-        $D': P \to I$を次のように写像の合成で定める．
-        \[
-        \xymatrix
-        {
-            P \ar@{->>}[r]& P/J^2 \ar[r]^-{D}& J/J^2 \ar[r]^-{\psi}& I.
-        }
-        \]
-        すると$D' \in Der_k(P,I)$となる．
-        （確認の際は各加群の係数環が何であるか，注意すること．）
-        さらに既に行った計算から$\delta^*(D')(- \bmod J^2)=D'(-)$となる．
-        $x \in J$とすると，
-        \[ \delta^*(D')(x \bmod J^2)=D'(x)=\psi(D(x \bmod J^2))=\psi(x \bmod J^2). \]
-        以上で$\delta^*$が全射であることが示せた．
-    \end{proof}
-
-    \begin{proof}
-        元の完全列
+        完全列
         \[
         \xymatrix
         {
             0 \ar[r]& J/J^2 \ar[r]^-{\delta}& \Der_{P/k} \otimes_k A \ar[r]& \Der_{A/k} \ar[r]& 0.
         }
+        \eqno(*)
         \]
-        に現れる加群に対応するsheaves of modules on $X$は，
-        Thm8.17よりいずれもlocally freeである．
-        そのためいずれもprojective $A$-module（？）.
-        特に$\Der_{A/k}$がprojectiveだから，
-        $I$のinjective resolutionから
-        $\Ext_A^i(\Der_{A/k}, I)=0~(i>0)$が得られる．
-        一方，元の完全列を$\Der_{A/k}$のprojective resolutionとみなしても
-        $\Ext_A^i(\Der_{A/k}, I)$が得られる（？）．
-        \begin{gather*}
+        に現れる加群$\Der_{A/k}$に対応するsheaf of modules on $X$は，
+        Thm8.17よりlocally freeである．
+        そのため$\Der_{A/k}$ :: projective $A$-module
+        (by Eisenbud, Ex4.11b).
+        このことから，完全列(*)がsplitすることがわかる．
+        \[
         \xymatrix
         {
-            0 \ar[r]^-{d^0}& \Hom_P(\Der_{P/k},I) \ar[r]^-{d^1}& \Hom_A(J/J^2,I) \ar[r]^-{d^2}& 0,
-        } \\
-        \Ext_A^2(\Der_{A/k},I)=\frac{\ker d^2}{\im d^1}=\frac{\Hom_A(J/J^2,I)}{\im d^1}=0.
-        \end{gather*}
-        よって$d^1$が，したがって$\delta^*$が全射である．
+            {} & \Der_{A/k} \ar[ld] \ar[d]^-{\id} \\
+            \Der_{P/k} \otimes_k A \ar@{->>}[r]& \Der_{A/k}
+        }
+        \]
+        $\delta$のretructを
+        $r: \Der_{P/k} \otimes_k A \to J/J^2$とおく．
+        すると任意の$\phi \in \Hom_A(J/J^2,I)$に対して，
+        \[
+            ((-) \circ \delta)(\phi \circ r)
+            =(\phi \circ r) \circ \delta
+            =\phi \circ \id[J/J^2]
+            =\phi.
+        \]
+        すなわち，$(-) \circ \delta(=\Hom_A(\delta, I))$は全射である．
+        よってこれに二つの同型を合成した$\delta^*$も全射．
     \end{proof}
 
     \subsection*{Notes}
@@ -719,6 +706,7 @@
     \]
     $Y \to Y'$がclosed immersionであるとき，
     $Y \subseteq Y'$をinfinitesimal thickening of $Y$と呼ぶ．
+    Hartshorne, ``Deformation Theory"を参照せよ．
 
 \section{Classifying Infinitesimal Extension: One Case.} %% Ex8.7 
     \paragraph{Infinitesimal Extension.}
