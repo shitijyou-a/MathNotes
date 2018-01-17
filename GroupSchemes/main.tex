@@ -84,7 +84,12 @@
     \textbf{$\Sch/S$}で表す．
     これはslice categoryの一般的なnotationから来ている．
     
-    affine scheme :: $\Spec R$は，混乱の恐れがないときは$R$と略す．
+    affine scheme :: $\Spec R$は，時々$R$と略す．
+
+    affine scheme over a ring $R$ :: $X$の
+    affine coordinate ringを$R[X]$と書く．
+    特に$k[G]$は群環ではないことに注意．
+    群環は$kG$と書く．
 
 \section{\texorpdfstring{$T$}{T}-valued Points}
     圏論で言う``generalized point"の概念を，
@@ -544,6 +549,79 @@
     \end{enumerate}
     \end{Def}
 
+    しかしながら，ここで述べたgroup schemeの定義は実用に向かない．
+    定義にどこの馬の骨とも知れないscheme :: $T$が現れるからである．
+    以上の定義は以下と同値であることを言っておこう．
+    \begin{Prop}[\cite{Awodey}, p.76]
+    \begin{enumerate}[label=(\roman*),leftmargin=*]
+        \item 
+        $S$ :: scheme，
+        $G$ :: scheme over $S$とし，
+        更に3つの射$\mu, \epsilon, \iota$が与えられているとする．
+        \begin{alignat*}{1}
+            \mu&:       G \times G \to G \\
+            \epsilon&:  S \to G          \\
+            \iota&:     G \to G         
+        \end{alignat*}
+        この時，$(G, \mu, \epsilon, \iota)$が
+        group schemeであることと，
+        以下の3つの可換図式が成立することは同値である．
+        \begin{gather}
+            \xymatrix
+            {
+                (G \times G) \times G \ar[d]_-{\mu \times \id} \ar[rr]^-{\iso}&
+                {} & G \times (G \times G) \ar[d]^-{\id \times \mu}\\
+                G \times G \ar[dr]_-{\mu}& {} & \ar[dl]^-{\mu} G \times G \\
+                {} & G & {}
+            } \\
+            \xymatrix@C=40pt
+            {
+                G
+                    \ar[r]^-{\langle \epsilon!, \id[] \rangle}
+                    \ar[d]_-{\langle \id[], \epsilon! \rangle}
+                    \ar[rd]_-{\id}&
+                G \times G \ar[d]^-{\mu} \\
+                G \times G \ar[r]_-{\mu} & G
+            } \\
+            \xymatrix@R=30pt@C=40pt
+            {
+                \ar[d]_-{\id[] \times \iota} G \times G &
+                G
+                    \ar[l]_-{\langle \id[], \id[] \rangle}
+                    \ar[d]_-{\epsilon!}
+                    \ar[r]^-{\langle \id[], \id[] \rangle}&
+                    G \times G \ar[d]^-{\iota \times \id[]}\\
+                    G \times G \ar[r]_-{\mu}& G & \ar[l]^-{\mu}G \times G \\
+            }
+        \end{gather}
+        上から順に，結合律，単位元の存在，逆元の存在に対応する．
+
+        \item
+        group scheme over $S$ :: $G,H$と，
+        射$h: G \to H$が与えられているとする．
+        $h$がhomomorphismであることは，
+        以下の3つの可換図式が成立することは同値である．
+        \begin{gather}
+            \xymatrix
+            {
+                \ar[d]_-{\mu} G \times G \ar[r]^-{h \times h}& H \times H \ar[d]^-{\mu}\\
+                G \ar[r]_-{h}& H
+            } \\
+            \xymatrix
+            {
+                G \ar[r]^-{h}& H \\
+                S \ar[u]^-{\epsilon} \ar[ru]_-{\epsilon}& {}
+            } \\
+            \xymatrix
+            {
+                \ar[d]_-{\iota} G \ar[r]^-{h}& H \ar[d]^-{\iota}\\
+                G \ar[r]_-{h}& H
+            }
+        \end{gather}
+        上から順に，積の保存，単位元の保存，逆元の保存に対応する．
+    \end{enumerate}
+    \end{Prop}
+
     \subsection{Examples}
     以下の例では$k$を適当な体とし，$k$上のaffine group schemeを定義する．
     \begin{Example}[$\Ga$]
@@ -976,7 +1054,7 @@
         $k$代数の圏から群の圏への関手$\ftorGL_V$を
         \[ R \mapsto \Aut_R(V \otimes_k R) \]
         で定める．
-        $G$の$V$へのlinear representationとは，
+        $G$の$V$への\textbf{linear representation}とは，
         （群の圏への関手の）準同型$\rho: \func{G} \to \ftorGL_V$のことである．
     \end{Def}
 %    \begin{Def}[\cite{MilneiAG} 4,aの別の定義]
@@ -1036,6 +1114,17 @@
         \]
         こうして取り出した$\tilde{X}$から再び$\mu$を構成できることは明らか．
     \end{Remark}
+    \begin{Example}
+    \end{Example}
+
+    \subsection{Linear Reductivity}
+    \begin{Def}
+        $G$のfinite dimensional linear representationの間にある
+        任意の全射$\phi: W \to V$に対し，
+        $\phi$から誘導される写像
+        $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である時，
+        $G$は\textbf{linearly reductive}であると呼ばれる．
+    \end{Def}
 
 \section{Affine GIT Quotient of Variety is Variety Again }
 
@@ -1087,6 +1176,9 @@
 
     \bibitem{GIT}
     D.Mumford,J.Forgarty ``Geometric Invariant Theory"
+
+    \bibitem{Awodey}
+    S.Awodey ``Category Theory" 2nd ed.
 
     \bibitem{Ses}
     C.S. Seshadri (1972)
