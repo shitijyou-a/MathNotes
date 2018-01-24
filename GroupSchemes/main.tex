@@ -1140,39 +1140,33 @@
         逆は$\rho_R(g)=\sigma_R(g, -)$．
     \end{proof}
     \cite{Muk1}に習い，基本的に後者を定義として用いる．
+    
+    \begin{Remark}
+        \cite{Muk1}におけるrepresentationは
+        $k[G]$-comodule structure on $V$で与えられている．
+        $G$がaffine group scheme over $k$ならば，
+        $k[G]$-comodule structure on $V$と
+        linear representation of $G$ on $V$（ここでの定義）
+        が一対一に対応する．
+        このことは\cite{MilneAGS} Prop6.1にある．
 
-%    \begin{Remark}
-%        直前の注意で述べたことを使って
-%        有限次元$k$-vector space :: $V$への$G$の表現が
-%        \cite{Muk1}での定義と一致することを確かめよう．
-%        
-%        $n=\dim V$とする．
-%        直前の注意から，$G$の$V$への表現は
-%        group scheme homomorphism :: $h: G \to GL_n$である．
-%        対応する環準同型を$\tilde{h}: k[X, (\det X)^{-1}] \to k[G]$としよう．
-%        ここで$X$は不定元からなる行列$\tatev{ x_{ij} }_{i,j=1}^n$である．
-%        （group schemeの例にある$GL_n$の定義も参照せよ．）
-%        $\tilde{X}:=\tilde{h}(X)$とおいて，
-%        $\bar{h}: V \to V \otimes_k k[G]$を次で定める．
-%        \[ v \mapsto (v \otimes 1)(1 \otimes \tilde{X}). \]
-%        
-%        逆に$\mu: V \to V \otimes_k k[G]$が与えられているとして
-%        $h: G \to GL_n$を構成する．
-%        これには$\bar{h}$から$\tilde{X}$の情報を取り出せば良い．
-%        $V$の基底を$\{ e_k \}_{k=1}^n$とし，その双対基底を$\{ e^k \}$とする．
-%        また$\iota: k \otimes k[G] \mapsto k[G]$を標準的同型とする．
-%        以上の準備の下で$\tilde{X}$の$(i,j)$成分$\tilde{x}_{ij}$は次の様に取り出せる．
-%        \[
-%        \xymatrix
-%        {
-%            e_i \ar@{|->}[r]^-{\bar{h}}& 
-%            \sum_{k=1}^n e_k \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{e^j \otimes \id}&
-%            1 \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{\iota} &
-%            \tilde{x}_{ij}
-%        }
-%        \]
-%        こうして取り出した$\tilde{X}$から再び$\mu$を構成できることは明らか．
-%    \end{Remark}
+        Milneによるこの命題の証明によると，
+        $\rho: \func{G} \times \func{V} \to \func{V}$から
+        次のようにcomodule structure on $V$が定義される．
+        $G=\Spec A$とする．
+        \[
+            S=\id[A] \times (V \otimes_k 1_A),
+            \qquad
+            \rho(A)|_{S}: S \iso V \to V \otimes_k A=\func{V}(A).
+        \]
+        逆に$\sigma: V \to V \otimes A$が与えられている時，
+        $g \in \func{G}(R)$について
+        \[ V \xrightarrow{\sigma} V \otimes A \xrightarrow{\id[V] \otimes g} V \otimes R \]
+        の両辺に$\otimes R$をつければ
+        $\rho(R)(g) \in \ftorGL_V(R)$が得られる．
+        以上の操作が互いに逆であることの証明は長いので
+        \cite{MilneAGS}を見て欲しい．
+    \end{Remark}
 
     \begin{Example}
         trivial representationとは，
@@ -1326,9 +1320,6 @@
         特にこれらの多項式は正次数だと仮定できる（TODO）．
 
         次の$S$-module homomorphismは全射である．
-    \begin{Remark}
-        
-    \end{Remark}
         \begin{defmap}
             \phi:& S^{\oplus N}& \to& J \\
             {}& (h_i)_i& \mapsto& \sum_i h_i f_i
@@ -1366,7 +1357,7 @@
     \begin{proof}
         $A$ :: finitely generated $k$-algebraかつ
         $G \acton X$ :: rational actionなので，
-        $A$の生成元$r_1, \dots, r_N$であって，
+        $A$の生成元$r_1, \dots, r_N$でMilneAGSあって，
         これらが$G$-invariant $k$-vector subspace of $A$
         (sub-representation of $A$)を張るようなものが存在する．
         明らかに次の全射が存在する．
