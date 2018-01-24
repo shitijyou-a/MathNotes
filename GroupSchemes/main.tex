@@ -59,7 +59,7 @@
     目標とする命題は次のものである．
     \begin{Thm}
         $X$ :: affine scheme,
-        $G$ :: linearly reductive group scheme acting on $X$とする．
+        $G$ :: linearly reductive affine group scheme acting on $X$とする．
         \begin{enumerate}[label=(\roman*), leftmargin=*]
         \item 
         affine GIT quotient of $X$ by $G$ :: $X \sslash G$はgood quotientである．
@@ -70,12 +70,11 @@
         geometric quotient of $X^s$ by $G$である．
 
         \item
-        $X \sslash G$はquotient functor :: $\func{X} \slash G$の最良近似である．
+        $X \sslash G$はquotient functor :: $\func{X} \slash \func{G}$の最良近似である．
 
         \item
         $k$を体とする．
-        $X$がfinite type/$k$ならば$X \sslash G$もそうである．
-%        さらに，$X$がaffine varietyならば$X \sslash G$もそうである．
+        $X$がaffine varietyならば$X \sslash G$もそうである．
         \end{enumerate}
     \end{Thm}
 
@@ -110,8 +109,8 @@
     $\func{X}(K)$を$X$の\textbf{$K$-rational points}と呼ぶ．
 
     \item
-    morphism :: $h: G \to H$について
-    自然変換$\func{h}: \func{G} \to \func{H}$は
+    morphism :: $h: X \to Y$について
+    自然変換$\func{h}: \func{X} \to \func{Y}$は
     $\phi \mapsto h \circ \phi$のように射を写す．
     \end{enumerate}
     \end{Def}
@@ -223,9 +222,22 @@
     \end{Example}
 
 \section{Moduli Functor and Fine/Corse Moduli Space}
-    \subsection{Families}
-    moduli問題を語るには用語``family"が必要である．
+    $A$を代数幾何学的対象の集合とし，
+    $\sim$を$Z$の中の同値関係とする．
+    ``naive moduli problem"は，
+    $M$の点と$A/\sim$の元（同値類）が一対一対応するような
+    scheme :: $M$を見つけよ，という問題である．
+    更に$A/\sim$の元が「連続的に変化」する様子も
+    「エンコード」しているような$M$を見つけよ，
+    という問題を``extended moduli problem"と呼ぶ
+    （正確な定義は\cite{Hos} \S 2.2）．
+    ``extended moduli problem"を定式化するには，
+    「連続的に変化」と「エンコード」を定式化しなくてはならない．
+    前者の為に``family"が定義され，
+    後者の為に``moduli functor"が定義される．
+    すると「エンコード」は関手の表現であると理解できる．
 
+    \subsection{Families}
     \begin{Def}
         $\mathcal{P}$を集合のクラス
         \footnote
@@ -492,6 +504,7 @@
 \section{Definition of Group Schemes}
     familyの同値関係は，
     しばしば群作用の軌道分解で与えられる．
+    例えば$\proj^n_k$の自己同型は$PGL_n(k)$という群である．
     そのためmoduli問題の理解のために，
     group schemeを知ることは不可欠である．
 
@@ -621,32 +634,68 @@
         上から順に，積の保存，単位元の保存，逆元の保存に対応する．
     \end{enumerate}
     \end{Prop}
+    \begin{proof}
+        結合律のみについて証明する．他は同様の手順で証明できる．
+        まず以下が可換であることを仮定する．
+        \[
+        \xymatrix
+        {
+            (G \times G) \times G \ar[d]_-{\mu \times \id} \ar[rr]^-{\iso}&
+            {} & G \times (G \times G) \ar[d]^-{\id \times \mu}\\
+            G \times G \ar[dr]_-{\mu}& {} & \ar[dl]^-{\mu} G \times G \\
+            {} & G & {}
+        }
+        \eqno(\#)
+        \]
+        Yoneda embeddingで写して次の可換図式を得る．
+        $\func{G}(T) \times \func{G}(T) \iso \func{G \times_S G}(T)$
+        に注意せよ．
+        \[
+        \xymatrix
+        {
+            (G \times G) \times G \ar[d]_-{\mu \times \id} \ar[rr]^-{\iso}&
+            {} & G \times (G \times G) \ar[d]^-{\id \times \mu}\\
+            G \times G \ar[dr]_-{\mu}& {} & \ar[dl]^-{\mu} G \times G \\
+            {} & G & {}
+        }
+        \eqno(\func{\#})
+        \]
+        これは任意の$T \in \Sch/S$について，
+        $\func(G)(T)$上に
+        誘導される二項演算$\func{\mu}(\langle -,- \rangle)$が
+        結合律を満たすことを意味する．
+
+        逆に，この二項演算が結合律を満たすことを仮定すると
+        $(\func{\#})$が可換である．
+        $(\func{\#})$は$(\#)$のYoneda embeddingなので
+        $(\#)$は可換．
+    \end{proof}
 
     \subsection{Examples}
     以下の例では$k$を適当な体とし，$k$上のaffine group schemeを定義する．
     \begin{Example}[$\Ga$]
-        finitely generated $k$-algebra :: $A=k[x]$と次の3つの$k$-linear mapから，
+        finitely generated $k$-algebra :: $A=k[t]$と次の3つの$k$-linear mapから，
         $k$上のgroup scheme :: $\Ga$ \& $\mu,\epsilon,\iota$が誘導される．
         \begin{alignat*}{3}
             \tilde{\mu}&:
                 A \to A \otimes_k A; &&
-                \quad x \mapsto (x \otimes 1)+(1 \otimes x) \\
+                \quad t \mapsto (t \otimes 1)+(1 \otimes t) \\
             \tilde{\epsilon}&:
                 A \to k; &&
-                \quad x \mapsto 1 \\
+                \quad t \mapsto 1 \\
             \tilde{\iota}&:
                 A \to A; &&
-                \quad x \mapsto -x
+                \quad t \mapsto -t
         \end{alignat*}
         群構造を無視すれば$\Ga=\affine^1_k$．
         この$\Ga$はadditive groupと呼ばれる．
 
-        $x_1=x \otimes 1, x_2=1 \otimes x$とすると，
-        $A \otimes A \iso k[x_1,x_2]$となる．
-        したがって$f \in A$について$\tilde{\mu}(f)(x_1,x_2) \in k[x_1,x_2]$とみなせる．
-        そして$k[x]$のalgebraとしての和は
-        $\tilde{\mu}(f)(x_1,x_2)=f(x_1+x_2)$のようにco-algebraに反映されている．
-        単位元と逆元は$\tilde{\epsilon}(f)(x)=f(1), \tilde{\iota}(f)(x)=f(-x)$のように
+        $t_1=t \otimes 1, t_2=1 \otimes t$とすると，
+        $A \otimes A \iso k[t_1,t_2]$となる．
+        したがって$f \in A$について$\tilde{\mu}(f)(t_1,t_2) \in k[t_1,t_2]$とみなせる．
+        そして$k[t]$のalgebraとしての和は
+        $\tilde{\mu}(f)(t_1,t_2)=f(t_1+t_2)$のようにco-algebraに反映されている．
+        単位元と逆元は$\tilde{\epsilon}(f)(t)=f(1), \tilde{\iota}(f)(t)=f(-t)$のように
         反映されている．
     
         $\Ga$に備わった群構造はclosed point :: $(a,b) \in \affine^2$を$a+b \in \affine^1$に写す．
@@ -661,60 +710,60 @@
             closed point全体と一致するのであった．
         }
         は極大イデアル
-        \[ \I{p}=(x_1-a, x_2-b)=\{ f \in k[x_1,x_2] \mid f(a,b)=0 \} \]に対応する．
+        \[ \I{p}=(t_1-a, t_2-b)=\{ f \in k[t_1,t_2] \mid f(a,b)=0 \} \]に対応する．
         したがって$\mu(\I{p})=\tilde{\mu}^{-1}(\I{p})$は次のよう．
-        \[ \tilde{\mu}^{-1}(\I{p})=\{ g \in A=k[x] \mid \tilde{\mu}(g)(a,b)=g(a+b)=0 \}. \]
-        これは$a+b$に対応する極大イデアル$(x-(a+b))$に他ならない．
+        \[ \tilde{\mu}^{-1}(\I{p})=\{ g \in A=k[t] \mid \tilde{\mu}(g)(a,b)=g(a+b)=0 \}. \]
+        これは$a+b$に対応する極大イデアル$(t-(a+b))$に他ならない．
     \end{Example}
 
     \begin{Example}
-        finitely generated $k$-algebra :: $A=k[x,x^{-1}]$と次の3つの$k$-linear mapから，
+        finitely generated $k$-algebra :: $A=k[t,t^{-1}]$と次の3つの$k$-linear mapから，
         $k$上のgroup scheme :: $\Gm$ \& $\mu,\epsilon,\iota$が誘導される．
         \begin{alignat*}{3}
             \tilde{\mu}&:
                 A \to A \otimes_k A; &&
-                \quad x \mapsto (x \otimes 1) \cdot (1 \otimes x) \\
+                \quad t \mapsto (t \otimes 1) \cdot (1 \otimes t) \\
             \tilde{\epsilon}&:
                 A \to k; &&
-                \quad x \mapsto 1 \\
+                \quad t \mapsto 1 \\
             \tilde{\iota}&:
                 A \to A; &&
-                \quad x \mapsto -x
+                \quad t \mapsto -t
         \end{alignat*}
         群構造を無視すれば$\Gm=\affine^1_k-\{0\}$．
 
-        こちらも$\tilde{\mu}(f)(x_1,x_2)=f(x_1x_2)$の様に積が入っている．
+        こちらも$\tilde{\mu}(f)(t_1,t_2)=f(t_1t_2)$の様に積が入っている．
         $\mu: \Gm \times \Gm \to \Gm$が
         $\bar{k}$-rational point :: $(a,b) \in \affine^2-\{(a,b) \mid ab=0\}$を
         $ab \in \affine^1$に写すことは$\Ga$の場合と同様である．
     \end{Example}
     \begin{Example}
         正整数$n$に対し
-        finitely generated $k$-algebra :: $A=k[x_{ij}]_{i,j=1}^n [\det^{-1}]$とおく．
-        ここで$\det$は不定元が成す$n$次正方行列$X=\tatev{x_{ij}}_{i,j=1}^n$のdeterminantである．
+        finitely generated $k$-algebra :: $A=k[t_{ij}]_{i,j=1}^n [\det^{-1}]$とおく．
+        ここで$\det$は不定元が成す$n$次正方行列$T=\tatev{t_{ij}}_{i,j=1}^n$のdeterminantである．
         $A$と次の3つの$k$-linear mapから，
         $k$上のgroup scheme :: $\GL_n$ \& $\mu,\epsilon,\iota$が誘導される．
         \begin{alignat*}{3}
             \tilde{\mu}&:
                 A \to A \otimes_k A; &&
-                \quad X \mapsto (X \otimes 1) \cdot (1 \otimes X) \\
+                \quad T \mapsto (T \otimes 1) \cdot (1 \otimes T) \\
             \tilde{\epsilon}&:
                 A \to k; &&
-                \quad X \mapsto I \\
+                \quad T \mapsto I \\
             \tilde{\iota}&:
                 A \to A; &&
-                \quad X \mapsto X^{-1}
+                \quad T \mapsto T^{-1}
         \end{alignat*}
         $I$は$n$次単位行列．
-        ここで$\tilde{\iota}: X \mapsto I$は
-        ($X$の$(i,j)$成分)$\mapsto$($I$の$(i,j)$成分)という意味である．
+        ここで$\tilde{\iota}: T \mapsto I$は
+        ($T$の$(i,j)$成分)$\mapsto$($I$の$(i,j)$成分)という意味である．
         $\tilde{\mu}, \tilde{\iota}$の定義も同様である．
 
-        $X_1=X \otimes 1=\tatev{x_{ij} \otimes 1}_{i,j=1}^n,
-        X_2=1 \otimes X=\tatev{1 \otimes x_{ij}}_{i,j=1}^n$
+        $T_1=T \otimes 1=\tatev{t_{ij} \otimes 1}_{i,j=1}^n,
+        T_2=1 \otimes T=\tatev{1 \otimes t_{ij}}_{i,j=1}^n$
         とおけば，
-        $f \in k[x_{ij}]$について
-        $\tilde{\mu}(f)(X_1, X_2)=f(X_1X_2)$となっている．
+        $f \in k[t_{ij}]$について
+        $\tilde{\mu}(f)(T_1, T_2)=f(T_1T_2)$となっている．
         $\mu: \GL_n \times \GL_n \to \GL_n$が
         $\bar{k}$-rational point :: $(M,N) \in \GL_n \times \GL_n$を
         $MN \in \GL_n$へ写すことは$\Ga$での議論と同様である．
@@ -1000,27 +1049,7 @@
     }
     \]
 
-\section{Linear Reductivity.}
-%    $X,G$共にfinite type/$k$とする
-%    \footnote{ この条件は$A^G$ :: finitely generatedを示す為に必要である． }．
-    % 作用が局所有限=rational.
-    % \cite{Hos} p.15, Lemma3.8より，今の状況では$G \acton X$ :: rational．
-%    \begin{Thm}[\cite{Hos} Thm4.25]\label{thm:finiteness}
-%        $k$ :: field,
-%        $A$ :: finitely generated $k$-algebra,
-%        $G$ :: linearly reductive (abstruct) group acting on $A$,
-%        とする．
-%        $G$の$A$への作用がrationalならば，
-%        invariant ring :: $A^G$はfinitely generated.
-%    \end{Thm}
-    % \cite{Hos} Thm 4.26
-%    An affine algebraic group G over k is reductive
-%    if and only if
-%    for every rational G-action on a finitely generated k-algebra A,
-%    the subalgebra A G of G-invariants is finitely generated.
-%    $G$がnon-reductive groupであるとき，
-%    $k[X]^G$がnot finitely generatedであるようなaffine scheme :: $X$が
-%    存在することを示した．
+\section{Linear Representation of Group Scheme.}
 
     \textbf
     {
@@ -1050,87 +1079,328 @@
     \subsection{Linear Representation} 
     group schemeのlinear representationとして最も一般的なものは次のものである．
     \begin{Def}[\cite{MilneiAG} 4,a]
-        $V$ :: vectoe space over $k$に対し，
+        $V$ :: vector space over $k$に対し，
         $k$代数の圏から群の圏への関手$\ftorGL_V$を
         \[ R \mapsto \Aut_R(V \otimes_k R) \]
         で定める．
-        $G$の$V$への\textbf{linear representation}とは，
-        （群の圏への関手の）準同型$\rho: \func{G} \to \ftorGL_V$のことである．
+        $G$の\textbf{linear representation} とは，
+        $V$と（群の圏への関手の）
+        準同型$\rho: \func{G} \to \ftorGL_V$の組のことである．
     \end{Def}
-%    \begin{Def}[\cite{MilneiAG} 4,aの別の定義]
-%        $V$ :: vectoe space over $k$に対し，
-%        有限生成$k$代数の圏から群の圏への関手$\func{V}$を
-%        \[ R \mapsto V \otimes_k R \]
-%        で定める．
-%        $G$の$V$へのlinear representationとは，
-%        次の条件を満たす自然変換
-%        $\rho: \func{G} \times \func{V} \to \func{V}$のことである．
-%        すなわち，
-%        任意の有限生成$k$代数$R$について
-%        $\rho_R$は作用$\func{G}(R) \acton \func{V}(R)=V \otimes_k R$である．
-%        この準同型は$R$加群としてのものである
-%        \footnote
-%        {
-%            $\func{G}(R)=\Hom_{\Sch}(\Spec R, G)$は，
-%            $G$ :: affine schemeより環準同型 :: $k[G] \to R$に対応する．
-%            これは$(r \cdot \phi)(*)=r \phi(*)$のようにして自然に$R$加群の構造を持つ．
-%        }．
-%    \end{Def}
-
     \begin{Remark}
         $V$が有限次元である場合には$\ftorGL_V$は
         affine group scheme :: $GL_{\dim V}$で表現できる．
+        $n=\dim V$としてみると，
+        $V \iso k^{\oplus n}$なので$V \otimes R \iso R^{\oplus n}$．
+        また，
+        \[
+            \func{GL_n}(R)
+            =\Hom_{\Sch/k}(\Spec R, \GL_n)
+            \iso \Hom_{k\mdash\Alg}(k[T, 1/(\det T)], R).
+        \]
+        $\phi \in \Hom_{k\mdash\Alg}(k[T, 1/(\det T)], R), \bar{T}=\phi(T)$とすると，
+        $T \in \Aut(k^{\oplus n})$より$\bar{T} \in \Aut(R^{\oplus n})$．
+        $\bar{X}$と$\phi$の間にあるこの対応が一対一であることは明らか．
+
         また，この時$\rho$はhomomorphism of group schemeである．
     \end{Remark}
-    \begin{Remark}
-        直前の注意で述べたことを使って
-        有限次元$k$-vector space :: $V$への$G$の表現が
-        \cite{Muk1}での定義と一致することを確かめよう．
-        
-        $n=\dim V$とする．
-        直前の注意から，$G$の$V$への表現は
-        group scheme homomorphism :: $h: G \to GL_n$である．
-        対応する環準同型を$\tilde{h}: k[X, (\det X)^{-1}] \to k[G]$としよう．
-        ここで$X$は不定元からなる行列$\tatev{ x_{ij} }_{i,j=1}^n$である．
-        （group schemeの例にある$GL_n$の定義も参照せよ．）
-        $\tilde{X}:=\tilde{h}(X)$とおいて，
-        $\bar{h}: V \to V \otimes_k k[G]$を次で定める．
-        \[ v \mapsto (v \otimes 1)(1 \otimes \tilde{X}). \]
-        
-        逆に$\mu: V \to V \otimes_k k[G]$が与えられているとして
-        $h: G \to GL_n$を構成する．
-        これには$\bar{h}$から$\tilde{X}$の情報を取り出せば良い．
-        $V$の基底を$\{ e_k \}_{k=1}^n$とし，その双対基底を$\{ e^k \}$とする．
-        また$\iota: k \otimes k[G] \mapsto k[G]$を標準的同型とする．
-        以上の準備の下で$\tilde{X}$の$(i,j)$成分$\tilde{x}_{ij}$は次の様に取り出せる．
+
+    \begin{Def}[\cite{MilneiAG} 4,aにある別の定義]
+        $V$ :: vector space over $k$に対し，
+        $k$代数の圏から加群の圏への関手$\func{V}$を
+        \[ R \mapsto V \otimes_k R \]
+        で定める．
+        $G$のlinear representationとは，
+        $V$と，
+        次の条件を満たす自然変換
+        $\rho: \func{G} \times \func{V} \to \func{V}$の2つ組のことである．
+        その条件とはすなわち，
+        任意の$k$代数$R$について
+        $\rho_R$は作用$\func{G}(R) \acton \func{V}(R)=V \otimes_k R$である．
+        この準同型は$R$加群としてのものである
+        \footnote
+        {
+            $\func{G}(R)=\Hom_{\Sch}(\Spec R, G)$は，
+            $G$ :: affine schemeより環準同型 :: $k[G] \to R$に対応する．
+            これは$(r \cdot \phi)(*)=r \phi(*)$のようにして自然に$R$加群の構造を持つ．
+        }．
+    \end{Def}
+
+    \begin{Prop}
+        二つの定義は同値である．
+    \end{Prop}
+    \begin{proof}
+        $V$ :: vector space over $k$を固定する．
+
+        まずは
+        $\rho: \func{G} \to \ftorGL_V$から
+        $\sigma: \func{G} \times \func{V} \to \func{V}$を構成しよう．
+        これは任意の$k$-algebra :: $R$について
+        $\sigma_R(g,v)=\rho_R(g)(v)$とおけば良い．
+        逆は$\rho_R(g)=\sigma_R(g, -)$．
+    \end{proof}
+    \cite{Muk1}に習い，基本的に後者を定義として用いる．
+
+%    \begin{Remark}
+%        直前の注意で述べたことを使って
+%        有限次元$k$-vector space :: $V$への$G$の表現が
+%        \cite{Muk1}での定義と一致することを確かめよう．
+%        
+%        $n=\dim V$とする．
+%        直前の注意から，$G$の$V$への表現は
+%        group scheme homomorphism :: $h: G \to GL_n$である．
+%        対応する環準同型を$\tilde{h}: k[X, (\det X)^{-1}] \to k[G]$としよう．
+%        ここで$X$は不定元からなる行列$\tatev{ x_{ij} }_{i,j=1}^n$である．
+%        （group schemeの例にある$GL_n$の定義も参照せよ．）
+%        $\tilde{X}:=\tilde{h}(X)$とおいて，
+%        $\bar{h}: V \to V \otimes_k k[G]$を次で定める．
+%        \[ v \mapsto (v \otimes 1)(1 \otimes \tilde{X}). \]
+%        
+%        逆に$\mu: V \to V \otimes_k k[G]$が与えられているとして
+%        $h: G \to GL_n$を構成する．
+%        これには$\bar{h}$から$\tilde{X}$の情報を取り出せば良い．
+%        $V$の基底を$\{ e_k \}_{k=1}^n$とし，その双対基底を$\{ e^k \}$とする．
+%        また$\iota: k \otimes k[G] \mapsto k[G]$を標準的同型とする．
+%        以上の準備の下で$\tilde{X}$の$(i,j)$成分$\tilde{x}_{ij}$は次の様に取り出せる．
+%        \[
+%        \xymatrix
+%        {
+%            e_i \ar@{|->}[r]^-{\bar{h}}& 
+%            \sum_{k=1}^n e_k \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{e^j \otimes \id}&
+%            1 \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{\iota} &
+%            \tilde{x}_{ij}
+%        }
+%        \]
+%        こうして取り出した$\tilde{X}$から再び$\mu$を構成できることは明らか．
+%    \end{Remark}
+
+    \begin{Example}
+        trivial representationとは，
+        任意の$k$-algebra :: $R$について
+        次のように定義される作用である．
+        \begin{defmap}
+            {}& \func{G}(R) \times \func{V}(R)& \to& \func{V}(R) \\
+            {}& g \times v& \mapsto& v
+        \end{defmap}
+    \end{Example}
+
+    \begin{Def}
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+    \item 
+        $G$の$V$上のrepresentation :: $(V, \rho)$について
+        $v \in V$が\textbf{$G$-invariant vector}であるとは，
+        任意の$k$-algebra :: $R$に対して
+        $\rho(\func{G}(R), v \otimes_k 1_R)=v \otimes_k R$となること．
+
+    \item
+        $G$の$V$上のrepresentation :: $(V, \rho)$について，
+        linear subspace of $V$ :: $U$が
+        \textbf{subrepresentation} of $V$であるとは，
+        $\rho(\func{G} \times \func{U}) \subseteq \func{U}$が
+        成立しているということ．
+
+    \item
+        $V, W$ :: vector space over $k$に対し，
+        $G$のrepresentationが存在するとする．
+        \[
+            \rho^V: \func{G} \times \func{V} \to \func{V}, \quad
+            \rho^W: \func{G} \times \func{W} \to \func{W}.
+        \]
+        この時，\textbf{$G$-equivariant map} $\phi: V \to W$とは，
+        以下の可換図式を成立させる射$\phi$のことである．
         \[
         \xymatrix
         {
-            e_i \ar@{|->}[r]^-{\bar{h}}& 
-            \sum_{k=1}^n e_k \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{e^j \otimes \id}&
-            1 \otimes \tilde{x}_{ij} \ar@{|->}[r]^-{\iota} &
-            \tilde{x}_{ij}
+            \func{V} \ar[r]^-{\func{\phi}}& \func{W} \\
+            \func{G} \times \func{V} \ar[u]^-{\rho^V} \ar[r]_-{\id \times \func{\phi}}&
+            \func{G} \times \func{W} \ar[u]_-{\rho^W}
         }
         \]
-        こうして取り出した$\tilde{X}$から再び$\mu$を構成できることは明らか．
-    \end{Remark}
-    \begin{Example}
-    \end{Example}
+    \end{enumerate}
+    \end{Def}
 
     \subsection{Linear Reductivity}
     \begin{Def}
-        $G$のfinite dimensional linear representationの間にある
-        任意の全射$\phi: W \to V$に対し，
+        $G$のlinear representationの間にある
+        任意のsurjective $G$-equivariant map $\phi: W \to V$に対し，
         $\phi$から誘導される写像
         $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である時，
         $G$は\textbf{linearly reductive}であると呼ばれる．
     \end{Def}
 
+    \begin{Lemma}
+        $G$がlinearly reductiveであることは次と同値:
+        $G$の\textit{finite dimensional} linear representationの間にある
+        任意のsurjective $G$-equivariant map $\phi: W \to V$に対し，
+        $\phi$から誘導される写像
+        $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である．
+    \end{Lemma}
+    \begin{proof}
+        一方の$\implies$は明らかなので逆を示す．
+        
+    \end{proof}
+
+    \begin{Example}
+        任意のfinite groupはlinearly reductiveである．
+        また，$SL_n, GL_n$もそうである．
+        affine group scheme of finite type /$k$もそう．
+    \end{Example}
+
+    \begin{Prop}[\cite{Muk1} p.131]
+        $G$とそのnormal subgroup $H$
+        % $\func{H}(T)$が$\func{G}(T)$のnormal subgroup
+        を考える．
+        \begin{enumerate}[label=(\roman*)]
+            \item $H, G$がlinerly reductiveならば$G/H$もそうである．
+            \item $H, G/H$がlinerly reductiveならば$G$もそうである．
+        \end{enumerate}
+        特に$G$の単位元$e=\im \epsilon$を含む
+        $G$のconnected component :: $G^0$が
+        linerly reductiveならば$G$もそう.
+    \end{Prop}
+
+    \subsection{Locally Finite Dimensional / Rational Action.}
+    \begin{Def}
+        representation of $G$ :: $(V, \rho)$が
+        \textbf{locally finite dimensional}であるとは，
+        任意の$v \in V$について，
+        $v$を含むfinite dimensional subrepresentation of $V$が
+        存在するという事．
+    \end{Def}
+
+    \begin{Remark}
+        $k$-algebra :: $A$をとる．
+        $A$を$k$-vector spaceと考えると，
+        $G$から$\Spec A$への作用は$G$のrepresentationと考えることが出来る．
+        これがlocally finite dimentionalである時，
+        このactionをrational actionと呼ぶことがある．
+    \end{Remark}
+
+    \begin{Prop}[\cite{Muk1} Prop4.6]
+        任意のaffine group scheme/$k$の
+        任意のrepresentationはlocally finite dimensional.
+    \end{Prop}
+
 \section{Affine GIT Quotient of Variety is Variety Again }
+    $k$をalgebraically closed field，
+    $X=\Spec A$をaffine varietyとし，
+    affine group scheme :: $G$もfinite type/$k$であるとする．
+
+    $X \sslash G$とは$\Spec A^G$のことであった．
+    $A^G$は$A$の部分環であり，
+    $X$ :: varietyより$A$ :: integral domain.
+    なので$A^G$ :: integral domainが得られる．
+    $X \sslash G$が$k$上のschemeであることは明らか．
+    このことと\cite{HarAG} II, Prop4.1から
+    separated/$k$であることも得られる．
+    以上から，$X \sslash G$がvarietyであるためには
+    finite type/$k$だけが足りない．
+
+    \begin{Remark}[\cite{Hos} Ex3.25]
+        $q: X \to Y$がcategorical quotientであり，
+        かつ$X$がconnected (resp. irreducible, reduced)であるとする．
+        この時，$Y$もconnected (resp. irreducible, reduced)である．
+    \end{Remark}
+
+    \begin{Thm}
+        $X=\Spec A$ :: affine variety,
+        $G$ :: linearly reductive affine group scheme acting on $X$ rationally
+        とする．
+        この時，$A^G$は有限生成．
+        したがって$X \sslash G=\Spec A^G$ :: affine variety.
+    \end{Thm}
+
+    まずは$X=\affine^n_k$の場合に証明する．
+    \begin{Prop}[\cite{Muk1} Thm4.51, \cite{Hos} Thm4.25 (first part)]
+        $G$ :: linearly reductive affine group scheme,
+        $S=k[x_1,\dots,x_n]$とする．
+        この時，$S^G$は有限生成．
+    \end{Prop}
+    \begin{proof}
+        $S$の部分環$S^G$は次のように次数付けられる．
+        \[ S^G=\bigoplus_{d \geq 0} \left( S^G \cap S_d \right). \]
+        イデアル$J \subset S$を
+        $S^G_+=\bigoplus_{d > 0} \left( S^G \cap S_d \right)$で生成されるものとする．
+        すると$S$はnoetherian ringであるから，
+        $J$の生成元として有限個の多項式$f_1,\dots,f_N \in S$がとれる．
+        特にこれらの多項式は正次数だと仮定できる（TODO）．
+
+        次の$S$-module homomorphismは全射である．
+    \begin{Remark}
+        
+    \end{Remark}
+        \begin{defmap}
+            \phi:& S^{\oplus N}& \to& J \\
+            {}& (h_i)_i& \mapsto& \sum_i h_i f_i
+        \end{defmap}
+        $\Spec S$への$G$の作用を，$S$上の$G$の表現と考える．
+        これを$(g, (s_i)_{i+1}^N) \mapsto (\rho(g,s_i))_i$の様に
+        $\Spec S^{\oplus N}$上の表現に拡張すると，
+        $(S^{\oplus N})^G$を考えることが出来る．
+        これが$(S^G)^{\oplus N}$と同型であることは直ちに分かる．
+        $G$はlinearly reductiveであることから，
+        $\phi^G: (S^G)^{\oplus N} \to J^G$は全射である．
+
+        \begin{Claim}
+            $S^G$は$k$-algebraとして$\{f_i\}_{i=1}^N$で生成される．
+        \end{Claim}
+        $f_i$達は$S^G$の元であるから，
+        $S^G \supseteq k[\{f_i\}_i]$は明らか．
+        逆の包含関係を示すために，
+        $h \in S^G \subseteq S$を任意にとって，
+        $\deg h$についての帰納法で$h \in k[\{f_i\}_i]$を示す．
+
+        $\deg h=0$の時$h \in k \subset k[\{f_i\}_i]$なので主張は成立する．
+        $\deg h>0$の時，$h \in S^G_+ \subseteq J$．
+        特に（$J \subset S$を$G$のsub-representationとみなすと）$J^G$に属している．
+        上で述べた通り，
+        $\phi^G: (S^G)^{\oplus N} \to J^G$は全射である．
+        また$\phi^G$は$\phi$の制限であるから，
+        次を満たす$\{h'_i\}_i \subseteq S^G$が存在することが分かる．
+        \[ h=\sum_i h'_if_i. \]
+        今$\deg f_i>0$だから，$\deg h'_i<\deg h$．
+        帰納法の仮定から$h'_i \in k[\{f_i\}_i]$なので，
+        $h$も$k[\{f_i\}_i]$に属す．
+    \end{proof}
+
+    \begin{proof}
+        $A$ :: finitely generated $k$-algebraかつ
+        $G \acton X$ :: rational actionなので，
+        $A$の生成元$r_1, \dots, r_N$であって，
+        これらが$G$-invariant $k$-vector subspace of $A$
+        (sub-representation of $A$)を張るようなものが存在する．
+        明らかに次の全射が存在する．
+        \[ S=k[x_1,\dots,x_N] \to A \qquad x_i \mapsto r_i. \]
+        これは$r_i$のとり方から$G$-equivariant mapになる（TODO）．
+        $G$ :: linearly reductiveより，
+        $S^G \to A^G$は全射．
+        $S^G$はfinitely generatedだから，
+        結局$A^G$はfinitely generated.
+    \end{proof}
+
+    \begin{Thm}[\cite{Hos} Thm 4.26]
+        An affine algebraic group $G$ over $k$ is reductive
+        if and only if
+        for every rational $G$-action on a finitely generated $k$-algebra $A$,
+        the subalgebra $A^G$ of $G$-invariants is finitely generated.
+    \end{Thm}
 
 \section{Affine GIT Quotient is a Good Quotient}
+    この節では，
+    $X=\Spec A$ :: affine scheme of finite type over a field $k$,
+    $G$ :: linearly reductive affine group scheme acting on $X$
+    とする．
+    前の節と比べて$X, G$の条件が緩いことに注意．
+
+    \begin{Lemma}
+        $W_1, W_2 \subset X$がdisjoint closed subsetであり，
+        かつorbitの和集合であるとする．
+        すると，$f(W_1)=1, f(W_2)=0$となるような
+        $G$-invariant function :: $f \in A^G$が存在する．
+    \end{Lemma}
+
     \begin{Thm}[\cite{Hos} Thm4.30]\label{thm:git=good}
-        Affine GIT Quotient is Good Quotient.
+        $X \sslash G=\Spec A^G$ :: good quotient.
     \end{Thm}
 
 \begin{thebibliography}{99}

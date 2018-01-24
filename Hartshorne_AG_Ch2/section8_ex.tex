@@ -1,5 +1,5 @@
 \documentclass[a4paper]{jsarticle}
-\usepackage{../math_note}
+\usepackage{../math_note, exercise}
 \usepackage[all]{xy}
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
@@ -482,6 +482,155 @@
     （TODO: $\Der_{Y/k} \iso \shO_Y$は示せるか？）
 
 \section{Complete Intersections in $\proj^n$.} %% Ex8.4 
+    \begin{Def}
+        closed subscheme of $\proj^n_k$ :: $Y$は，
+        $Y$の定義イデアル$I \subseteq S=k[x_0,\dots,x_n]$が
+        $r=\codim (Y, \proj^n)$個の元で生成される時，
+        (strict, global) complete intersetionと呼ばれる．
+    \end{Def}
+
+    \subsection{$Y$ :: complete intersetion $\iff$ $Y=H_1\cap\dots H_r$.}
+    $Y$ :: closed subscheme of $\proj^n$が
+    $\codim=r$のcomplete intersectionであることと，
+    hypersurfaces :: $H_1, H_r \subseteq \proj^n$が存在して
+    schemeとして$Y=H_1\cap\dots H_r$，
+    すなわち$\shI_Y=\shI_{H_1}+\dots+\shI_{H_r}$となることは同値．
+
+    \paragraph{$\impliedby$.}
+    Ex5.?から，$I$はradical idealと考えて良い．
+    $\shI_{H_1}+\dots+\shI_{H_r}$は高さ$r$かつ生成元は$r$個であるか？
+
+    \paragraph{$\implies$.}
+    Matsumura, Thm17.6と$S$ :: Cohen-Macaulay ringより，
+    $I$はunmixed，すなわち，
+    $I$に属す極小素イデアルの高さは全て等しい．
+    $I \subseteq \I{p}$を$I$に属す極小素イデアルとする．
+    $\height \I{p}=1$か？
+
+%    $I$の生成元を$g_1,\dots,g_r$としたとき，
+%    $H_i=\Proj S/{g_i}$とすればよい．
+%    ここから$I=\sum_i (g_i)$.
+%    $\shI=\tilde{I}, \shI_{H_i}=(g_i)\sidetilde$なので
+%    $\shI_Y=\hI_{H_1}+\dots+\shI_{H_r}$は明らか．
+
+    \subsection{$Y$ :: normal complete intersection of dim $ \geq 1$ in $\proj^n$ is projectively normal.}
+    $Y=\Proj S/I$の代わりに
+    affine cone :: $Y^{*}=\Spec S/I \subset \affine^{n+1}_k$を考える．
+    これがnormalであるとき，
+    I, Ex3.17dから$S/I$ :: integrally closed.
+    すなわち$Y$ :: projectively normal.
+
+    $Y \subseteq Y^*$とみなすと，$\codim(Y, Y^*)=1$(TODO).
+    $Y$ :: normalより，$Y^*$ :: regular in codim $1$.
+    よってThm8.23bより$S/I$ :: normal.
+
+    \subsection{With same hypotheses as (b), 
+        $\Gamma(\proj^n, \shO_{\proj^n}(l)) \to \Gamma(Y, \shO_Y(l))$ is surj.}
+    (b)とEx5.14から，
+    \[ \Gamma(\proj^n, \shO_{\proj^n}(l)) \to \Gamma(Y, \shO_Y(l)) \]
+    は任意の$l \geq 0$についてsurjective.
+    Ex4.5より$\Gamma(\proj^n, \shO_{\proj^n})=k$だから，
+    これは$k$-algebra homomorphismである．
+
+    さらに$l=0$とすると，$Y$ :: connectedが示せる．
+    Ex5.14aの証明から$Y$はintegral schemeのdisjoint unionである．
+    なので$Y$のconnected componentの個数を$m$とすると，
+    再びEx4.5を用いて，
+    \[ \Gamma(Y, \shO_Y)=k^{\oplus m} \]
+    となる．
+    $\Gamma(U \sqcup V, \shO_Y)=\Gamma(U, \shO_Y) \oplus \Gamma(V, \shO_Y)$に注意．
+    今，$k \to k^{\oplus m}$が全射なのだから$m=1$．
+    すなわち$Y$はconnected.
+
+    \subsection{For given integers $r<n$ and $d_1, \dots, d_r \geq 1$,
+        there exists complete intersection of codim$=r$ in $\proj^n$.}
+    次の条件を満たす schemes :: $H_1,\dots,H_r \subseteq \proj^n$の存在を示す．
+    \begin{itemize}
+        \item $H_1,\dots,H_r$ :: hypersurface in $\proj^n$,
+        \item and nonsingular.
+        \item $\deg H_i=d_i$.
+        \item $Y=H_1 \cap \dots \cap H_r$ :: irreducible,
+        \item nonsingular,
+        \item and $\codim(Y, \proj^n)=r$.
+    \end{itemize}
+
+    $r$についての帰納法で示そう．
+    $r=1$についてはI, Ex5.5で存在を示した
+    \footnote
+    {
+        私の解答では，
+        $x_0 x_1^{d-1}+x_1 x_2^{d-1}+x_2 x_0^{d-1}$
+        で定まるhypersurfaceを取っている．
+        これはKlein quarticの自然な拡張である．
+    }．
+    $H_1,\dots,H_r$と$Y$は条件を満たしていると仮定して，
+    条件を満たす$r+1$個目のhypersurface :: $H \ (\deg H=d)$の存在を示す．
+    （当然$r+1<n$とする．）
+
+    まず$Y$と$X=\proj^n$を
+    $d_{r+1}$-uple embedding :: $\rho$で$\proj^N$へ埋め込む．
+    ここで$N$は$n, d_{r+1}$で定まる整数である．
+    すると$\proj^N$のhyperplaneは
+    $\proj^n$の$d_{r+1}$次のhypersurfaceに対応する．
+
+    Example 7.8.3より，
+    $\proj^N$のhyperplane全体の集合はcomplete linear systemを成す．
+    これを$L$としよう．
+    Thm8.18より，
+    $\rho(X)$との交わりがnonsingularであるようなhyperplane全体は
+    $L$のopen dense subsetである．
+    $\rho(Y)$についても同様に$L$のopen dense subsetが存在する．
+    どちらものopen dense subsetであるから，
+    その交わりが存在する．
+    これを$\bar{H} \in L$とし，
+    $\rho^{-1}(\bar{H})=H$としよう．
+    すると先程述べたように$H$はdegree $d$のhypersurfaceであり，
+    $\rho$ :: isomorphismから$X \cap H(=H), Y \cap H$はnonsingular.
+    残るは$Y \cap H$ :: irreducibleと$\codim(Y \cap H, X)=r+1$であるが，
+    前者は$r+1<n (\iff \dim Y=n-r>1)$とThm8.18から，
+    後者は(a)から分かる．
+
+    \subsection{$Y$ as in (d), $\shCano \iso \shO_Y(\sum d_i-n-1).$}
+    これも$r$についての帰納法で示す．
+    $r=1$についてはExample8.20.3の通り．
+    $Y'=Y \cap H_{r+1}$とおくと$\codim(Y', Y)=1$だから，
+    Prop8.20より次が成立する．
+    \[
+        \shCano_{Y'}
+        \iso \shCano_Y \otimes \shO_Y(d_{r+1}) \otimes \shO_Y
+        \iso \shO_Y \left(\sum_{i=1}^r d_i-n-1 \right) \otimes \shO_Y(d_{r+1}) \otimes \shO_Y
+        \iso \shO_Y \left(\sum_{i=1}^{r+1} d_i-n-1 \right).
+    \]
+
+    \subsection{Calc geometric genus of nonsingular hyper surface of degree $d$ in $\proj^n$.}
+    (e)より$\shCano_Y \iso \shO_Y(d-n-1)$.
+    (c)より次のsurjective $k$-algebra homomorphismが存在する．
+    \[ \Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \to \Gamma(Y, \shCano_Y). \]
+    両辺のring構造を忘却すれば，
+    これはsurjective linear map.
+    次元等式から両辺の$\dim_k$は等しい．
+    よって$p_g(Y)$が得られる．
+    \[
+        p_g(Y)
+        =\dim_k \Gamma(\proj^n, \shO_{\proj^n}(d-n-1))
+        =\binom{(d-n-1)+n}{n}
+        =\binom{d-1}{n}.
+    \]
+
+    以上とI, Ex7.2の結果を比較すると，$p_g(Y)=p_a(Y)$．
+    特に$Y \subseteq \proj^2$
+    （$Y$ :: nonsingular plane curve of degree $d$）ならば
+    $p_g(Y)=\frac{1}{2}(d-1)(d-2)$.
+
+    \subsection{Calc geometric genus of 
+        complete intersection of nonsingular surfaces of degree $d,e$ in $\proj^3$.}
+    (f)と同様に計算する．
+    \[
+        p_g(Y)
+        =\dim_k \Gamma(\proj^n, \shO_{\proj^3}(d+e-n-1))
+        =\binom{(d+e-3-1)+3}{3}
+        =\binom{d+e-1}{3}.
+    \]
 
 \section{Blowing Up a Nonsingular Subvariety.} %% Ex8.5 
 
