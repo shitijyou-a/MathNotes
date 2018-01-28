@@ -3,6 +3,7 @@
 \usepackage[all]{xy}
 \renewcommand{\thesection}{Ex8.\arabic{section}}
 
+\newcommand{\Cl}{\mathrm{Cl}}
 \newcommand{\der}[1][\!]{\mathrm{d}_{#1}\,}
 \newcommand{\Der}{\Omega}
 \newcommand{\shCano}{\omega}
@@ -482,6 +483,9 @@
     （TODO: $\Der_{Y/k} \iso \shO_Y$は示せるか？）
 
 \section{Complete Intersections in $\proj^n$.} %% Ex8.4 
+    $k$ :: algebraically closed fieldとする．
+    nonsingularはvarietyにのみ定義されている性質であることに注意．
+
     \begin{Def}
         closed subscheme of $\proj^n_k$ :: $Y$は，
         $Y$の定義イデアル$I \subseteq S=k[x_0,\dots,x_n]$が
@@ -489,44 +493,158 @@
         (strict, global) complete intersetionと呼ばれる．
     \end{Def}
 
-    \subsection{$Y$ :: complete intersetion $\iff$ $Y=H_1\cap\dots H_r$.}
-    $Y$ :: closed subscheme of $\proj^n$が
-    $\codim=r$のcomplete intersectionであることと，
-    hypersurfaces :: $H_1, H_r \subseteq \proj^n$が存在して
-    schemeとして$Y=H_1\cap\dots H_r$，
-    すなわち$\shI_Y=\shI_{H_1}+\dots+\shI_{H_r}$となることは同値．
+    \subsection{$Y$ :: complete intersetion $\iff$ $Y=H_1\cap\dots\cap H_r$.}
+    \begin{Claim}
+        $Y (\neq \emptyset)$ :: closed subscheme of $\proj^n$が
+        $\codim=r (<n)$のcomplete intersectionであることと，
+        hypersurfaces :: $H_1, \dots, H_r \subseteq \proj^n$が存在して
+        schemeとして$Y=H_1 \cap\dots\cap H_r$，
+        すなわち$\shI_Y=\shI_{H_1}+\dots+\shI_{H_r}$となることは同値．
+    \end{Claim}
+    $I=\Gamma_*(\shI_Y), I_i=\Gamma_*(\shI_{H_i})$とおく．
 
-    \paragraph{$\impliedby$.}
-    Ex5.?から，$I$はradical idealと考えて良い．
-    $\shI_{H_1}+\dots+\shI_{H_r}$は高さ$r$かつ生成元は$r$個であるか？
+    \begin{Lemma}
+        nonempty closed subschemeに対応するideal sheaf
+        $\shI \subsetneq \shO_{\proj^n}$が
+        locally principalであるとき，
+        $I=\Gamma_*(\shI) \subsetneq S, S_+$はprincipal ideal.
+    \end{Lemma}
+    \begin{proof}
+        Remark 6.17.1を参照すると，
+        $\shI$はeffective Cartier divisorに対応し，
+        $\proj^n_k$のeffective Cartier divisorは
+        effective Weil divisorに対応する．
+        したがって$\shI$は
+        有限個のprime Weil divisor(=irreducible hypersurface)の和に対応する．
+        それぞれのirreducible hypersurfaceの定義多項式の積を
+        $f$とすれば$Y \iso \Spec S/(f)$．
+        $(f)$はsaturated idealであり，$I$もsaturated ideal.
+        よってEx5.10より$I \iso (f)$ (as sub $S$-module)．
+    \end{proof}
+
+    \begin{Lemma}
+        $\tilde{\square}$はイデアルの和と可換．
+    \end{Lemma}
+    \begin{proof}
+        $I=I_1+I_2 \subseteq S$とし，
+        定義にしたがって$\tilde{I}$を計算する．
+        $U$ :: open in $\proj^n$を任意にとる．
+        まず$\tilde{I}(U)$の元は
+        $U \to \bigsqcup_{\I{p} \in U} I_{(\I{p})}$という型の関数であった．
+        局所化は和と交換できるから，
+        \[ (I_1+I_2)_{(\I{p})}=(I_1)_{(\I{p})}+(I_2)_{(\I{p})}. \]
+        よって
+        \[
+            \bigsqcup_{\I{p} \in U} I_{(\I{p})}
+            =
+            \bigsqcup_{\I{p} \in U}(I_1)_{(\I{p})}
+            +\bigsqcup_{\I{p} \in U}(I_2)_{(\I{p})}.
+        \]
+        $\phi \in \tilde{I}(U)$は，
+        以下の条件を満たす関数だと定義されている:
+        任意の点$\I{p} \in U$について
+        \[
+            \I{p} \in D_+(f) \subseteq U
+            \mand
+            \Forall{\I{q} \in D_+(f)}
+                \phi_{\I{q}} \in I_{(f)} \subseteq I_{(\I{q})}.
+        \]
+        を満たす$f \in S_+$が存在する．
+        $I_{(f)}=(I_1)_{(f)}+(I_2)_{(f)}$であるから，
+        $\phi$は
+        $\phi_1 \in \tilde{I_1}(U), \phi_2 \in \tilde{I_2}(U)$の和で書ける．
+    \end{proof}
+    一方，一般に$\Gamma_*$は和と可換でない（と思う）．
 
     \paragraph{$\implies$.}
-    Matsumura, Thm17.6と$S$ :: Cohen-Macaulay ringより，
-    $I$はunmixed，すなわち，
-    $I$に属す極小素イデアルの高さは全て等しい．
-    $I \subseteq \I{p}$を$I$に属す極小素イデアルとする．
-    $\height \I{p}=1$か？
+    $I$の生成元を$f_1,\dots,f_r$とし，$H_i=\Proj S/(f_i)$とする．
+    $I=\sum_i (f_i)$は明らか．
+    よって補題とProp5.15 ($\Gamma_*(\shF)\sidetilde \iso \shF$)から
+    $\shI_Y \iso \tilde{I}=\sum_i \shI_{H_i}$が得られる．
 
-%    $I$の生成元を$g_1,\dots,g_r$としたとき，
-%    $H_i=\Proj S/{g_i}$とすればよい．
-%    ここから$I=\sum_i (g_i)$.
-%    $\shI=\tilde{I}, \shI_{H_i}=(g_i)\sidetilde$なので
-%    $\shI_Y=\hI_{H_1}+\dots+\shI_{H_r}$は明らか．
+    \paragraph{$\impliedby$.}
+    $I_i=(f_i), J=\sum_i I_i=(f_1,\dots,f_r)$とおく．
+    補題から次が得られる．
+    \[ \tilde{J}=\left( \sum_i I_i \right)\sidetilde=\sum_i \tilde{I}_i=\sum_i \shI_{H_i}=\shI_Y. \]
+    よって$\Gamma_*(\tilde{J})=I$.
+    Ex5.10cから$\Gamma_*(\tilde{J})$は$J$のsaturation :: $\bar{J}$である．
+    したがって$J$は$r$個の元で生成され，
+    またEx5.10bから$\Spec S/J=\Spec S/I=Y$も成立する．
+    しかしcomplete intersectionは
+    特定のイデアル$I=\Gamma_*(\shI_Y)$が
+    $r$個の元で生成されるという性質である．
+    なので最後に$J=\Gamma_*(\tilde{J})$，
+    すなわち$J$ :: saturatedを示そう．
+    \begin{Claim}
+        $J$の最短準素イデアル分解を$J=\bigcap_l \I{q}_l$とし，
+        $\I{p}_l=\sqrt{\I{q}_l}$と置く．
+        $J$ :: not saturatedならば，
+        ある$l$について$\I{p}_l=\I{m}:=(x_0,\dots,x_n)$.
+    \end{Claim}
+    今$\height J=\dim \Spec S/J=\dim Y=r$であり，
+    これは$J$の生成元の個数に等しい.
+    したがってMatsumura, Thm17.6と$S$ :: Cohen-Macaulay ringより，
+    $J$はunmixed，すなわち，
+    $J$に属す極小素イデアルの高さは全て$r(<n)$に等しい．
+%    これは$Y$のirreducible componentの次元が全て$r$に等しいということである．
+    一方，$\height \I{m}=n$であるから，
+    $\I{m}$は$J$に属す極小素イデアルでない．
+    よって$J$ :: saturated.
+    \begin{proof}
+        $J$ :: saturatedは，Ex5.10において次のように定義されている．
+        \[
+            \Forall{s \in S}
+            s \in J
+            \iff
+            \Forall{i=0,\dots,n} \Exists{t \geq 0} x_i^t s \in J.
+        \]
+        これは次のように書き直せる．
+        \[ \Forall{s \in S} s \in J \iff \I{m} \subseteq \sqrt{(J:s)}. \]
+        $\sqrt{(J:s)}=\bigcap_l \sqrt{(\I{q}_l:s)}$と
+        Ati-Mac Lemma4.4を使えば更にわかりやすく成る．
+        \[ \Forall{s \in S} s \in J \iff \I{m} \subseteq \bigcap_{s \not \in \I{q}_l} \I{p}_l. \]
+        $J$ :: not saturatedであるから，
+        次を満たす$s \in S$が存在する．
+        \[ s \not \in J=\bigcap_l \I{q}_l \mand \I{m} \subseteq \bigcap_{s \not \in \I{q}_l} \I{p}_l. \]
+        前半から$s \not \in \I{q}_l$なる$l$が存在する．
+        この$l$について後半から$\I{m} \subseteq \I{p}_l$．
+        $\I{m}$ :: maximal idealなので$\I{m}=\I{p}_l$．
+        この条件を満たす$l$が複数あったとしても，
+        $\I{m}$ :: maximal idealであるから
+        そのような全ての$l$について$\I{m}=\I{p}_l$．
+        （最短準素イデアル分解を考えていたから
+        このような場合は起こりえないのだが．）
+    \end{proof}
 
     \subsection{$Y$ :: normal complete intersection of dim $ \geq 1$ in $\proj^n$ is projectively normal.}
     $Y=\Proj S/I$の代わりに
-    affine cone :: $Y^{*}=\Spec S/I \subset \affine^{n+1}_k$を考える．
+    affine cone :: $C=\Spec S/I \subset \affine^{n+1}_k$を考える．
     これがnormalであるとき，
     I, Ex3.17dから$S/I$ :: integrally closed.
     すなわち$Y$ :: projectively normal.
+    Thm8.23bより$C$ :: regular in codim $1$から
+    $C$ :: normalが得られるので，
+    こちらを示す．
 
-    $Y \subseteq Y^*$とみなすと，$\codim(Y, Y^*)=1$(TODO).
-    $Y$ :: normalより，$Y^*$ :: regular in codim $1$.
-    よってThm8.23bより$S/I$ :: normal.
+    $C$のprojective closureを$\bar{C} \subseteq \proj^{n+1}$とする．
+%    I, Ex2.9bより，$\defsp(\bar{C})$は$\beta(I)$で生成される斉次イデアル．
+    $P \in \bar{C}$をthe vertex of cone( :: closed point)，
+    $\pi: \bar{C}-P \to Y$をprojectionとする．
+    この時Ex6.3a(Cone)より$\pi^{-1}(U_i) \iso U_i \times \affine^1$を満たす
+    open cover of $Y$ :: $\{U_i\}$が存在する．
+    各$U_i$がregularなので
+    Prop6.6($\Cl(X) \iso \Cl(X \times \affine^1)$)の証明から
+    $U_i \times \affine^1$ :: regular in codim $1$．
+    合わせて，$\bar{C}-P$ :: regular in codim $1$.
+    $U_0=(V(x_0))^c \iso \affine^{n+1}$とすると，
+    $C-P \iso (\bar{C}-P) \cap U_0$．
+    regular in codim $1$はlocalな性質だから$C-P$ :: regular in codim $1$
+    $\dim C=\dim Y+1>1$だから，$\codim(P, C)=\dim C-0>1$．
+    よって結局$C$ :: regular in codim $1$.
 
     \subsection{With same hypotheses as (b), 
         $\Gamma(\proj^n, \shO_{\proj^n}(l)) \to \Gamma(Y, \shO_Y(l))$ is surj.}
-    (b)とEx5.14から，
+    (b)とEx5.14dから，
     \[ \Gamma(\proj^n, \shO_{\proj^n}(l)) \to \Gamma(Y, \shO_Y(l)) \]
     は任意の$l \geq 0$についてsurjective.
     Ex4.5より$\Gamma(\proj^n, \shO_{\proj^n})=k$だから，
@@ -588,7 +706,17 @@
     $\rho$ :: isomorphismから$X \cap H(=H), Y \cap H$はnonsingular.
     残るは$Y \cap H$ :: irreducibleと$\codim(Y \cap H, X)=r+1$であるが，
     前者は$r+1<n (\iff \dim Y=n-r>1)$とThm8.18から，
-    後者は(a)から分かる．
+    後者は(a)から
+    \footnote
+    {
+        $Y \cap H$をscheme theoretic intersectionと解釈しても
+        $Y \cap H$ :: nonsingularということは変わらない．
+        Thm8.17のステートメントから，
+        irreducible closed subscheme of $X$:: $Y \cap H$の
+        structure sheaf(あるいは$\shI_{Y \cap H}$)が
+        どのようであるかはnonsingularと関係ないからである．
+    }
+    分かる．
 
     \subsection{$Y$ as in (d), $\shCano \iso \shO_Y(\sum d_i-n-1).$}
     これも$r$についての帰納法で示す．
@@ -601,19 +729,40 @@
         \iso \shO_Y \left(\sum_{i=1}^r d_i-n-1 \right) \otimes \shO_Y(d_{r+1}) \otimes \shO_Y
         \iso \shO_Y \left(\sum_{i=1}^{r+1} d_i-n-1 \right).
     \]
+    ここで$Y \cap H_{r+1} \subseteq Y$に対応する
+    invertible sheaf on $Y$を$\shO_Y(d_{r+1})$とした(TODO)．
 
     \subsection{Calc geometric genus of nonsingular hyper surface of degree $d$ in $\proj^n$.}
     (e)より$\shCano_Y \iso \shO_Y(d-n-1)$.
     (c)より次のsurjective $k$-algebra homomorphismが存在する．
-    \[ \Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \to \Gamma(Y, \shCano_Y). \]
-    両辺のring構造を忘却すれば，
-    これはsurjective linear map.
-    次元等式から両辺の$\dim_k$は等しい．
-    よって$p_g(Y)$が得られる．
+    \[ S^{(d-n-1)}=\Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \to \Gamma(Y, \shCano_Y). \]
+    よって次の$k$-moduleの完全列が存在する．
+    \[
+    \xymatrix@R=10pt
+    {
+        0 \ar[r]
+        & \Gamma(\proj^n, \shI_Y(d-n-1)) \ar[r]
+        & \Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \ar[r]
+        & \Gamma(Y, \shCano_Y) \ar[r]
+        & 0 \\
+        {} & \ar@{=}[u]I^{(d-n-1)} & \ar@{=}[u]S^{(d-n-1)} & {} {}
+    }
+    \]
+    $I=f \cdot S \ (f \in S^{homo})$とすると，
+    さらに別の$k$-module 完全列が得られる．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]& 0 \ar[r]& S^{(-n-1)} \ar[r]^-{\cdot f}& I^{(d-n-1)} \ar[r]& 0
+    }
+    \]
+    $(I^{(d-n-1)})\sidetilde=\shI_Y(d-n-1),(S^{(-n-1)})\sidetilde=\shO_{\proj^n}(-n-1)$なので
+    $\dim_k \Gamma(Y, \shI_Y(d-n-1))=\dim_k \Gamma(\proj^n, \shO_{\proj^n}(-n-1))=0$.
+    以上をまとめると$p_g(Y)$が得られる．
     \[
         p_g(Y)
-        =\dim_k \Gamma(\proj^n, \shO_{\proj^n}(d-n-1))
-        =\binom{(d-n-1)+n}{n}
+        =\dim_k \Gamma(\proj^n, \shO_{\proj^n}(d-n-1))-\dim_k \Gamma(\proj^n, \shI_Y(d-n-1))
+        =\binom{(d-n-1)+n}{n}-0
         =\binom{d-1}{n}.
     \]
 
@@ -625,12 +774,32 @@
     \subsection{Calc geometric genus of 
         complete intersection of nonsingular surfaces of degree $d,e$ in $\proj^3$.}
     (f)と同様に計算する．
+    $I=f \cdot S+g \cdot S \ (f,g \in S^{homo}), d=\deg f, e=\deg g$とすると，
+    次の$k$-module 完全列が得られる．
     \[
-        p_g(Y)
-        =\dim_k \Gamma(\proj^n, \shO_{\proj^3}(d+e-n-1))
-        =\binom{(d+e-3-1)+3}{3}
-        =\binom{d+e-1}{3}.
+    \xymatrix@R=5pt
+    {
+        0 \ar[r]
+        & S^{(-n-1)} \ar[r]
+        & S^{(e-n-1)} \oplus S^{(d-n-1)} \ar[r]
+        & I^{(d+e-n-1)} \ar[r]
+        & 0 \\
+        {} & a \ar@{|->}[r]& (ga, -fa) & {} & {} \\
+        {} & {} & (u, v) \ar@{|->}[r]& fu+gv & {}
+    }
     \]
+    したがって$\dim_k \Gamma(\proj^n, \shI_Y(d+e-n-1))$が計算できる．
+    \[
+        \dim_k \Gamma(\proj^n, \shI_Y(d+e-n-1))
+        =\binom{e-1}{n}+\binom{d-1}{n}-0.
+    \]
+    $n=3$なので$p_g(Y)$は次のよう．
+    \begin{align*}
+        p_g(Y)
+        =&\dim_k \Gamma(\proj^n, \shO_{\proj^3}(d+e-4))-\dim_k \Gamma(\proj^3, \shI_Y(d+e-4)) \\
+        =&\binom{d+e-1}{3}-\binom{e-1}{3}-\binom{d-1}{3} \\
+        =&\frac{1}{2}de(d+e-4)+1
+    \end{align*}
 
 \section{Blowing Up a Nonsingular Subvariety.} %% Ex8.5 
 

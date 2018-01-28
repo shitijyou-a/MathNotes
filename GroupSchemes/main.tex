@@ -101,6 +101,8 @@
     $X, T \in \Sch/S$に対し，
     $\func{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
     $T=\Spec R$と書けるときは$\func{X}(T)$を$\func{X}(R)$と書く．
+    したがって$\func{X}$は$\Sch/S$からのcovariant functorと見ることも，
+    $k$-algebraの圏からのcontravariant functorと見ることも出来る．
     この関手$\func{X}$はfunctor of pointsと呼ばれる．
 
     \item
@@ -682,7 +684,7 @@
                 \quad t \mapsto (t \otimes 1)+(1 \otimes t) \\
             \tilde{\epsilon}&:
                 A \to k; &&
-                \quad t \mapsto 1 \\
+                \quad t \mapsto 0 \\
             \tilde{\iota}&:
                 A \to A; &&
                 \quad t \mapsto -t
@@ -698,7 +700,8 @@
         単位元と逆元は$\tilde{\epsilon}(f)(t)=f(1), \tilde{\iota}(f)(t)=f(-t)$のように
         反映されている．
     
-        $\Ga$に備わった群構造はclosed point :: $(a,b) \in \affine^2$を$a+b \in \affine^1$に写す．
+        $\Ga$に備わった群構造は
+        closed point :: $(a,b) \in \affine^2$を$a+b \in \affine^1$に写す．
         これを確かめておこう．
         $\affine^1_k \times_k \affine^1_k \iso \affine^2_k$の
         $\bar{k}$-rational point :: $(a,b)$
@@ -792,7 +795,7 @@
     \subsection{Action on Scheme}
     最後に作用の定義を述べる．
     \begin{Def}
-        scheme/$S$ :: $X$と，
+        scheme/$S$ :: $X$と
         group scheme/$S$ :: $G$が与えられたとする．
         $G$の$X$への\textbf{(left) action}とは，
         次を満たす射$\alpha: G \times_S X \to X$である．
@@ -911,16 +914,26 @@
         ここで，
         $\alpha^{-1}(U) \supseteq G \times_S U=\pr_X^{-1}(U)$であるために
         左辺にrestrictionが必要であることに注意．
+
+        $q: X \to Y$に対してpresheaf :: $(q_* \shO_X)^G$を次で定める．
+        $V$ :: open in $Y$について
+        \[
+            (q_* \shO_X)^G(V)
+            =\{ f \in \shO_X(q^{-1}(V)) \mid f \text{ :: $G$-invariant function } \}
+            \subseteq q_*\shO_X.
+        \]
     \end{Def}
+    人によっては$q_*(\shO_X^G)$という記号のほうが自然だと感じるかも知れない．
+    記号は恣意的なものだから，
+    私としてはあなたがどちらの記号を使おうが構わないが，
+    $(q_* \shO_X)^G$の方が昔からある記号である．
 
     \begin{Claim}
-        $G$-invariant functionを集めてできる
-        $\shO_X$のsub-presheaf :: $\shO_X^G$は，
-        sheafである．
+        $(q_*\shO_X)^G$はsheafである．
     \end{Claim}
     \begin{proof}
         sub-presheafであることは明らか．
-        また$\shO_X^G$がidentity axiomを満たすことは
+        また$(q_*\shO_X)^G$がidentity axiomを満たすことは
         sub-presheafであることから従う．
         なのでgluability axiomを満たすことを示そう．
 
@@ -935,6 +948,12 @@
         \]
         この時，$t|_{U_i}=t_i$を満たす$t \in \shO_X(U)$が存在する．
         $t \in \shO_X^G(U)$を示したい．
+    ここで現れる記号$(q_*\shO_X)^G$は，
+    人によっては$q_* (\shO_X^G)$の方が受け入れやすいかも知れない．
+    というのも，$(q_*\shO_X)^G$が表すものは
+    「$Y$上のfunctionであって$G$-invariantであるもの」
+    であるように読めるからである．
+    実際には
         $V_i=\pr_X^{-1}(U_i)=G \times U_i$とおく．
         上の条件$(@)$で$t|_{U_i}=t_i$と，
         sheaf morphismがrestriction mapと可換であることを用いる．
@@ -1076,14 +1095,14 @@
     このセクションでは``linearly reductive"を定義し，
     調べていく．
 
-    \subsection{Linear Representation} 
-    group schemeのlinear representationとして最も一般的なものは次のものである．
+    \subsection{Representation} 
+    group schemeのrepresentationとして最も一般的なものは次のものである．
     \begin{Def}[\cite{MilneiAG} 4,a]
         $V$ :: vector space over $k$に対し，
         $k$代数の圏から群の圏への関手$\ftorGL_V$を
         \[ R \mapsto \Aut_R(V \otimes_k R) \]
         で定める．
-        $G$の\textbf{linear representation} とは，
+        $G$の\textbf{representation} とは，
         $V$と（群の圏への関手の）
         準同型$\rho: \func{G} \to \ftorGL_V$の組のことである．
     \end{Def}
@@ -1107,22 +1126,23 @@
 
     \begin{Def}[\cite{MilneiAG} 4,aにある別の定義]
         $V$ :: vector space over $k$に対し，
-        $k$代数の圏から加群の圏への関手$\func{V}$を
+        $k$-algebraの圏からmoduleの圏への関手$\func{V}$を
         \[ R \mapsto V \otimes_k R \]
         で定める．
-        $G$のlinear representationとは，
-        $V$と，
+        $G$の$V$へのrepresentationとは，
         次の条件を満たす自然変換
-        $\rho: \func{G} \times \func{V} \to \func{V}$の2つ組のことである．
+        $\rho: \func{G} \times \func{V} \to \func{V}$のことである．
         その条件とはすなわち，
-        任意の$k$代数$R$について
-        $\rho_R$は作用$\func{G}(R) \acton \func{V}(R)=V \otimes_k R$である．
-        この準同型は$R$加群としてのものである
+        任意の$k$-algebra :: $R$について
+        $\rho(R)$は作用$\func{G}(R) \acton \func{V}(R)=V \otimes_k R$である．
+        さらに，この写像は第一引数を固定した時，
+        $R$-moduleの準同型である
         \footnote
         {
             $\func{G}(R)=\Hom_{\Sch}(\Spec R, G)$は，
             $G$ :: affine schemeより環準同型 :: $k[G] \to R$に対応する．
-            これは$(r \cdot \phi)(*)=r \phi(*)$のようにして自然に$R$加群の構造を持つ．
+            これは$(r \cdot \phi)(*)=r \phi(*)$
+            のようにして自然に$R$-moduleの構造を持つ．
         }．
     \end{Def}
 
@@ -1139,8 +1159,28 @@
         $\sigma_R(g,v)=\rho_R(g)(v)$とおけば良い．
         逆は$\rho_R(g)=\sigma_R(g, -)$．
     \end{proof}
-    \cite{Muk1}に習い，基本的に後者を定義として用いる．
+    基本的に後者を定義として用いる．
+    こちらのほうがactionと定義が似ているということや，
+    後に示す定義が書きやすい，というのが理由である．
+    actionと似ている，というのは次を見よ．
     
+    \begin{Def}
+        $S$ :: \textit{$k$-algebra}に対し，
+        $k$-algebraの圏からmoduleの圏への関手$\func{S}$を
+        \[ R \mapsto S \otimes_k R \]
+        で定める．
+        $G$の$S$へのrepresentationとは，
+        次の条件を満たす自然変換
+        $\rho: \func{G} \times \func{S} \to \func{S}$のことである．
+        その条件とはすなわち，
+        任意の$k$-algebra :: $R$について
+        $\rho(R)$は作用$\func{G}(R) \acton \func{S}(R)=S \otimes_k R$である．
+        さらに，この写像は第一引数を固定した時，
+        $R$\textbf{代数}の準同型である．
+    \end{Def}
+    したがってaffine scheme over $k$ :: $X=\Spec S$への$G$のactionは，
+    $G$の$S$へのrepresentationと見ることが出来る．
+
     \begin{Remark}
         \cite{Muk1}におけるrepresentationは
         $k[G]$-comodule structure on $V$で与えられている．
@@ -1170,12 +1210,8 @@
 
     \begin{Example}
         trivial representationとは，
-        任意の$k$-algebra :: $R$について
-        次のように定義される作用である．
-        \begin{defmap}
-            {}& \func{G}(R) \times \func{V}(R)& \to& \func{V}(R) \\
-            {}& g \times v& \mapsto& v
-        \end{defmap}
+        射影$\pr_2: \func{G} \times \func{V} \to \func{V}$で
+        定義される作用である．
     \end{Example}
 
     \begin{Def}
@@ -1194,8 +1230,8 @@
         成立しているということ．
 
     \item
-        $V, W$ :: vector space over $k$に対し，
-        $G$のrepresentationが存在するとする．
+        $V, W$ :: vector space over $k$への
+        $G$のrepresentationを考える．
         \[
             \rho^V: \func{G} \times \func{V} \to \func{V}, \quad
             \rho^W: \func{G} \times \func{W} \to \func{W}.
@@ -1211,6 +1247,10 @@
         }
         \]
     \end{enumerate}
+    $k$-algebraへのrepresenationについても
+    同様に$G$-invariant vector, subrepresentation, $G$-equivariant mapを定義する．
+    ただし，$k$-algebraのsubrepresentationは$k$-subalgebraではなく
+    linear subspaceであることに注意する．
     \end{Def}
 
     \subsection{Linear Reductivity}
@@ -1221,18 +1261,6 @@
         $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である時，
         $G$は\textbf{linearly reductive}であると呼ばれる．
     \end{Def}
-
-    \begin{Lemma}
-        $G$がlinearly reductiveであることは次と同値:
-        $G$の\textit{finite dimensional} linear representationの間にある
-        任意のsurjective $G$-equivariant map $\phi: W \to V$に対し，
-        $\phi$から誘導される写像
-        $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である．
-    \end{Lemma}
-    \begin{proof}
-        一方の$\implies$は明らかなので逆を示す．
-        
-    \end{proof}
 
     \begin{Example}
         任意のfinite groupはlinearly reductiveである．
@@ -1263,9 +1291,7 @@
     \end{Def}
 
     \begin{Remark}
-        $k$-algebra :: $A$をとる．
-        $A$を$k$-vector spaceと考えると，
-        $G$から$\Spec A$への作用は$G$のrepresentationと考えることが出来る．
+        $k$-algebra :: $A$へのactionが
         これがlocally finite dimentionalである時，
         このactionをrational actionと呼ぶことがある．
     \end{Remark}
@@ -1274,6 +1300,18 @@
         任意のaffine group scheme/$k$の
         任意のrepresentationはlocally finite dimensional.
     \end{Prop}
+
+    \begin{Lemma}
+        $G$がlinearly reductiveであることは次と同値:
+        $G$の\textit{finite dimensional} linear representationの間にある
+        任意のsurjective $G$-equivariant map $\phi: W \to V$に対し，
+        $\phi$から誘導される写像
+        $\phi^G=\phi|_{W^G}: W^G \to V^G$も全射である．
+    \end{Lemma}
+%    \begin{proof}
+%        一方の$\implies$は明らかなので逆を示す．
+%        
+%    \end{proof}
 
 \section{Affine GIT Quotient of Variety is Variety Again }
     $k$をalgebraically closed field，
@@ -1305,10 +1343,11 @@
     \end{Thm}
 
     まずは$X=\affine^n_k$の場合に証明する．
-    \begin{Prop}[\cite{Muk1} Thm4.51, \cite{Hos} Thm4.25 (first part)]
+    \begin{Prop}[\cite{Muk1} Thm4.51, \cite{Hos} Thm4.25 (second part)]
         $G$ :: linearly reductive affine group scheme,
         $S=k[x_1,\dots,x_n]$とする．
-        この時，$S^G$は有限生成．
+        $G \acton S$がlinear actionであるとき，
+        $S^G$は有限生成．
     \end{Prop}
     \begin{proof}
         $S$の部分環$S^G$は次のように次数付けられる．
@@ -1317,7 +1356,8 @@
         $S^G_+=\bigoplus_{d > 0} \left( S^G \cap S_d \right)$で生成されるものとする．
         すると$S$はnoetherian ringであるから，
         $J$の生成元として有限個の多項式$f_1,\dots,f_N \in S$がとれる．
-        特にこれらの多項式は正次数だと仮定できる（TODO）．
+        特にこれらの多項式は正次数だと仮定できる
+        （TODO: linear actionだとこのように仮定できる．）．
 
         次の$S$-module homomorphismは全射である．
         \begin{defmap}
@@ -1355,6 +1395,7 @@
     \end{proof}
 
     \begin{proof}
+        (TODO: $A=\Sym(V), A_d=\Sym^d(V)$とすれば$A$の次数付が出来，作用もlinear.)
         $A$ :: finitely generated $k$-algebraかつ
         $G \acton X$ :: rational actionなので，
         $A$の生成元$r_1, \dots, r_N$でMilneAGSあって，
@@ -1375,6 +1416,7 @@
         for every rational $G$-action on a finitely generated $k$-algebra $A$,
         the subalgebra $A^G$ of $G$-invariants is finitely generated.
     \end{Thm}
+
 
 \section{Affine GIT Quotient is a Good Quotient}
     この節では，
