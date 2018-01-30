@@ -489,14 +489,14 @@
     \begin{Def}
         closed subscheme of $\proj^n_k$ :: $Y$は，
         $Y$の定義イデアル$I \subseteq S=k[x_0,\dots,x_n]$が
-        $r=\codim (Y, \proj^n)$個の元で生成される時，
+        $r=\codim (Y, \proj^n)$個の斉次多項式で生成される時，
         (strict, global) complete intersetionと呼ばれる．
     \end{Def}
 
     \subsection{$Y$ :: complete intersetion $\iff$ $Y=H_1\cap\dots\cap H_r$.}
     \begin{Claim}
         $Y (\neq \emptyset)$ :: closed subscheme of $\proj^n$が
-        $\codim=r (<n)$のcomplete intersectionであることと，
+        $\codim=r$のcomplete intersectionであることと，
         hypersurfaces :: $H_1, \dots, H_r \subseteq \proj^n$が存在して
         schemeとして$Y=H_1 \cap\dots\cap H_r$，
         すなわち$\shI_Y=\shI_{H_1}+\dots+\shI_{H_r}$となることは同値．
@@ -516,10 +516,17 @@
         effective Weil divisorに対応する．
         したがって$\shI$は
         有限個のprime Weil divisor(=irreducible hypersurface)の和に対応する．
-        それぞれのirreducible hypersurfaceの定義多項式の積を
-        $f$とすれば$Y \iso \Spec S/(f)$．
-        $(f)$はsaturated idealであり，$I$もsaturated ideal.
-        よってEx5.10より$I \iso (f)$ (as sub $S$-module)．
+        これを$\sum_i n_i V(f_i) \ (f_i \in S^h)$としよう．
+        $f=\prod_i f_i^{n_i}$とすれば，
+        $v_{(f_i)}(f)=n_i$．
+        なので$(f)\sidetilde$に対応するeffective Weil divisor
+        \footnote
+        {
+            $(f)\sidetilde$に対応するeffective Cartier divisorは
+            $\{ \sect{D_+(x_j)}{f / x_j^{\deg f}}\}$.
+        }と
+        $I$に対応するeffective Weil divisorが一致する．
+        よって$\shI_Y \iso (f)\sidetilde$
     \end{proof}
 
     \begin{Lemma}
@@ -557,7 +564,9 @@
     一方，一般に$\Gamma_*$は和と可換でない（と思う）．
 
     \paragraph{$\implies$.}
-    $I$の生成元を$f_1,\dots,f_r$とし，$H_i=\Proj S/(f_i)$とする．
+    $I$の生成元を$f_1,\dots,f_r$とする．
+    complete intersectionの定義から，$f_i$は斉次多項式と仮定できる．
+    そこで$H_i=\Proj S/(f_i)$とする．
     $I=\sum_i (f_i)$は明らか．
     よって補題とProp5.15 ($\Gamma_*(\shF)\sidetilde \iso \shF$)から
     $\shI_Y \iso \tilde{I}=\sum_i \shI_{H_i}$が得られる．
@@ -573,7 +582,7 @@
     しかしcomplete intersectionは
     特定のイデアル$I=\Gamma_*(\shI_Y)$が
     $r$個の元で生成されるという性質である．
-    なので最後に$J=\Gamma_*(\tilde{J})$，
+    なので最後に$J=\Gamma_*(\tilde{J})(=I)$，
     すなわち$J$ :: saturatedを示そう．
     \begin{Claim}
         $J$の最短準素イデアル分解を$J=\bigcap_l \I{q}_l$とし，
@@ -585,9 +594,10 @@
     これは$J$の生成元の個数に等しい.
     したがってMatsumura, Thm17.6と$S$ :: Cohen-Macaulay ringより，
     $J$はunmixed，すなわち，
-    $J$に属す極小素イデアルの高さは全て$r(<n)$に等しい．
+    $J$に属す極小素イデアルの高さは全て$r$に等しい．
 %    これは$Y$のirreducible componentの次元が全て$r$に等しいということである．
-    一方，$\height \I{m}=n$であるから，
+    $Y \neq \emptyset$なので$\codim(Y, \proj^n)=r \leq n$
+    一方，$\height \I{m}=n+1=\dim S$であるから，
     $\I{m}$は$J$に属す極小素イデアルでない．
     よって$J$ :: saturated.
     \begin{proof}
@@ -615,32 +625,42 @@
         （最短準素イデアル分解を考えていたから
         このような場合は起こりえないのだが．）
     \end{proof}
+    このclaimから，例えば$I \cap \I{m}^q$はnot saturatedであることが分かる．
 
     \subsection{$Y$ :: normal complete intersection of dim $ \geq 1$ in $\proj^n$ is projectively normal.}
     $Y=\Proj S/I$の代わりに
     affine cone :: $C=\Spec S/I \subset \affine^{n+1}_k$を考える．
-    これがnormalであるとき，
-    I, Ex3.17dから$S/I$ :: integrally closed.
-    すなわち$Y$ :: projectively normal.
-    Thm8.23bより$C$ :: regular in codim $1$から
-    $C$ :: normalが得られるので，
-    こちらを示す．
+    $C$は任意のclosed pointが直線で原点と繋がっているため，connected．
+    また$C$ :: locally complete intersectionは明らか．
 
-    $C$のprojective closureを$\bar{C} \subseteq \proj^{n+1}$とする．
-%    I, Ex2.9bより，$\defsp(\bar{C})$は$\beta(I)$で生成される斉次イデアル．
-    $P \in \bar{C}$をthe vertex of cone( :: closed point)，
-    $\pi: \bar{C}-P \to Y$をprojectionとする．
-    この時Ex6.3a(Cone)より$\pi^{-1}(U_i) \iso U_i \times \affine^1$を満たす
-    open cover of $Y$ :: $\{U_i\}$が存在する．
-    各$U_i$がregularなので
-    Prop6.6($\Cl(X) \iso \Cl(X \times \affine^1)$)の証明から
-    $U_i \times \affine^1$ :: regular in codim $1$．
-    合わせて，$\bar{C}-P$ :: regular in codim $1$.
-    $U_0=(V(x_0))^c \iso \affine^{n+1}$とすると，
-    $C-P \iso (\bar{C}-P) \cap U_0$．
-    regular in codim $1$はlocalな性質だから$C-P$ :: regular in codim $1$
-    $\dim C=\dim Y+1>1$だから，$\codim(P, C)=\dim C-0>1$．
-    よって結局$C$ :: regular in codim $1$.
+    \begin{Claim}
+        $C$ :: regular in codim $1$.
+    \end{Claim}
+    Thm8.23bより$C$ :: regular in codim $1$から
+    $C$ :: normalが得られる．
+    $C$はconnected and normalであるから，
+    Ex5.14aより$C=\Spec S/I$ :: integral and normal.
+    I, Ex3.17dから$S/I$ :: integrally closed.
+    （主張自体はAti-Mac Prop5.13そのものである．）
+    すなわち$Y$ :: projectively normal.
+
+    \begin{proof}
+        $C$のprojective closureを$\bar{C} \subseteq \proj^{n+1}$とする．
+    %    I, Ex2.9bより，$\defsp(\bar{C})$は$\beta(I)$で生成される斉次イデアル．
+        $P \in \bar{C}$をthe vertex of cone( :: closed point)，
+        $\pi: \bar{C}-P \to Y$をprojectionとする．
+        この時Ex6.3a(Cone)より$\pi^{-1}(U_i) \iso U_i \times \affine^1$を満たす
+        open cover of $Y$ :: $\{U_i\}$が存在する．
+        各$U_i$がregularなので
+        Prop6.6($\Cl(X) \iso \Cl(X \times \affine^1)$)の証明から
+        $U_i \times \affine^1$ :: regular in codim $1$．
+        合わせて，$\bar{C}-P$ :: regular in codim $1$.
+        $U_0=(V(x_0))^c \iso \affine^{n+1}$とすると，
+        $C-P \iso (\bar{C}-P) \cap U_0$．
+        regular in codim $1$はlocalな性質だから$C-P$ :: regular in codim $1$
+        $\dim C=\dim Y+1>1$だから，$\codim(P, C)=\dim C-0>1$．
+        よって結局$C$ :: regular in codim $1$.
+    \end{proof}
 
     \subsection{With same hypotheses as (b), 
         $\Gamma(\proj^n, \shO_{\proj^n}(l)) \to \Gamma(Y, \shO_Y(l))$ is surj.}
@@ -729,13 +749,18 @@
         \iso \shO_Y \left(\sum_{i=1}^r d_i-n-1 \right) \otimes \shO_Y(d_{r+1}) \otimes \shO_Y
         \iso \shO_Y \left(\sum_{i=1}^{r+1} d_i-n-1 \right).
     \]
+
     ここで$Y \cap H_{r+1} \subseteq Y$に対応する
-    invertible sheaf on $Y$を$\shO_Y(d_{r+1})$とした(TODO)．
+    invertible sheaf on $Y$を$\shO_Y(d_{r+1})$とした．
+    これはProp6.4同様，Weil divisorとして
+    $Y \cap H_{r+1} \sim d_{r+1} \cdot (\text{hyperplane in $Y$})$となること，
+    及びprime divisor :: $(\text{hyperplane in $Y$})$が
+    $\shO_Y(1)$に対応することに拠る．
 
     \subsection{Calc geometric genus of nonsingular hyper surface of degree $d$ in $\proj^n$.}
     (e)より$\shCano_Y \iso \shO_Y(d-n-1)$.
     (c)より次のsurjective $k$-algebra homomorphismが存在する．
-    \[ S^{(d-n-1)}=\Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \to \Gamma(Y, \shCano_Y). \]
+    \[ \Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \to \Gamma(Y, \shCano_Y). \]
     よって次の$k$-moduleの完全列が存在する．
     \[
     \xymatrix@R=10pt
@@ -744,8 +769,7 @@
         & \Gamma(\proj^n, \shI_Y(d-n-1)) \ar[r]
         & \Gamma(\proj^n, \shO_{\proj^n}(d-n-1)) \ar[r]
         & \Gamma(Y, \shCano_Y) \ar[r]
-        & 0 \\
-        {} & \ar@{=}[u]I^{(d-n-1)} & \ar@{=}[u]S^{(d-n-1)} & {} {}
+        & 0
     }
     \]
     $I=f \cdot S \ (f \in S^{homo})$とすると，
@@ -753,10 +777,28 @@
     \[
     \xymatrix
     {
-        0 \ar[r]& 0 \ar[r]& S^{(-n-1)} \ar[r]^-{\cdot f}& I^{(d-n-1)} \ar[r]& 0
+        0 \ar[r]& 0 \ar[r]& S(-n-1) \ar[r]^-{\cdot f}& I(d-n-1) \ar[r]& 0
     }
     \]
-    $(I^{(d-n-1)})\sidetilde=\shI_Y(d-n-1),(S^{(-n-1)})\sidetilde=\shO_{\proj^n}(-n-1)$なので
+    $\tilde{\square}$は完全関手
+    \footnote
+    {
+        complex $\tilde{M}' \to \tilde{M} \to \tilde{M}''$が
+        完全であることは，
+        任意の点におけるstalkの列が完全であることと同値であった(Ex1.2)．
+        一方，$M' \to M \to M''$が完全列なら，
+        localizationの完全性から$M'_x \to M_x \to M''_x$も完全．
+        よって
+        complex $\tilde{M}' \to \tilde{M} \to \tilde{M}''$は完全．
+    }
+    だから，次も完全列．
+    \[
+    \xymatrix
+    {
+        0 \ar[r]& 0 \ar[r]& \shO_{\proj^n}(-n-1) \ar[r]& \shI_Y(d-n-1) \ar[r]& 0
+    }
+    \]
+    これは$\shO_{\proj^n}(-n-1) \iso \shI_Y(d-n-1)$を意味するので，
     $\dim_k \Gamma(Y, \shI_Y(d-n-1))=\dim_k \Gamma(\proj^n, \shO_{\proj^n}(-n-1))=0$.
     以上をまとめると$p_g(Y)$が得られる．
     \[
@@ -780,15 +822,17 @@
     \xymatrix@R=5pt
     {
         0 \ar[r]
-        & S^{(-n-1)} \ar[r]
-        & S^{(e-n-1)} \oplus S^{(d-n-1)} \ar[r]
-        & I^{(d+e-n-1)} \ar[r]
+        & S(-n-1) \ar[r]
+        & S(e-n-1) \oplus S(d-n-1) \ar[r]
+        & I(d+e-n-1) \ar[r]
         & 0 \\
         {} & a \ar@{|->}[r]& (ga, -fa) & {} & {} \\
         {} & {} & (u, v) \ar@{|->}[r]& fu+gv & {}
     }
     \]
-    したがって$\dim_k \Gamma(\proj^n, \shI_Y(d+e-n-1))$が計算できる．
+    saturated graded $S$-module :: $M$について
+    $\Gamma(\proj^n_k,\tilde{M})=M_0$なので(Ex5.9)，
+    $\dim_k \Gamma(\proj^n, \shI_Y(d+e-n-1))$が計算できる．
     \[
         \dim_k \Gamma(\proj^n, \shI_Y(d+e-n-1))
         =\binom{e-1}{n}+\binom{d-1}{n}-0.
