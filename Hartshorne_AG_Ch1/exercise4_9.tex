@@ -17,42 +17,51 @@
     $P$から$H$へのstereographic projection :: $\pi : X \to \proj^{n-1}$が
     $X$と$\pi(X)$の間のbirational mapになることを示す．
 
-    $I=\defsp(X)$とする．
-    $\bar{x}_i=x_i \bmod I, \bar{y}_i=\frac{\bar{x}_i}{\bar{x}_0}$とすると，
-    $K:=K(X)=k(\bar{y}_0,\dots,\bar{y}_n)$．
+    あるmorphismがbirational mapであるかどうかというのはlocalな問題なので，
+    $X$のaffine open subsetに絞って考える．
+    $X$は射影変換によって
+    $(1:\dots:1) \in X$かつ$(1:0:\dots:0) \not \in X$であるように出来るので
+    そのようにし，
+    $Y:=X \cap (\zerosp(x_0))^c \subseteq \affine^n$
+    とおく．
+    すると$Y \neq \emptyset, (0,\dots,0) \not \in Y$となる．
+
+    $I=\defsa(Y) \subseteq k[y_1,\dots, y_n]$とし，
+    $\bar{y}_i=y_i \bmod I, K:=K(Y)=k(\bar{y}_1,\dots,\bar{y}_n)$とおくと，
+    $K=K(X)$．
     Thm4.8より拡大$K/k$はfinitely and separably generated．
     Thm4.7より，$\{\bar{y}_i\}_{i=1}^n$は
     separating transcendence baseを部分集合として含む．
     そこで番号を付け替えて，
     $\{\bar{y}_i\}_{i=1}^n$に含まれる
     separating transcendence baseを$\{\bar{y}_i\}_{i=1}^{r}$としよう．
-    baseの濃度が$r(=\dim X)$であることはThm3.2による．
+    baseの濃度が$r(=\dim X=\dim Y)$であることはThm3.2による．
     そして以下の拡大はfinite generated extensionである．
-    \[ k(\{\bar{y}_i\}_{i=1}^{n})/k(\{\bar{y}_i\}_{i=1}^{r}) \]
-    Thm4.6から，この拡大は以下のような元$\bar{\eta}$で生成することが出来る．
+    \[ k(\{\bar{y}_i\}_{i=1}^{n})/k(\{\bar{y}_i\}_{i=1}^{r}). \]
+    $J=k(\{\bar{y}_i\}_{i=1}^{r})$とおけばこの拡大は$K/J$と書ける．
+    Thm4.6から，この拡大は以下のような元$\eta$で生成することが出来る．
     \[
-        \bar{\eta}=\eta \bmod I
+        \eta=\sum_{i=r+1}^{n} \eta_i x_i
         \mwhere
-        d \geq 0,~
-        \eta_{r+1},\dots,\eta_{n} \in k[\{x_i\}_{i=1}^{r}]^d,~
-        \eta=\frac{1}{x_0^d}\sum_{i=r+1}^{n} \eta_i x_i.
+        \eta_{r+1},\dots,\eta_{n} \in J.
     \]
 
-    $\pi(X) \subseteq H$のfunction fieldを$L$とする．
-    $\pi$から誘導される準同型(TODO)$\pi^*$を次で定める．
+    stereographic projectionの像 :: 
+    $\pi(Y) \subseteq H$のfunction fieldを$L$とする．
+    $\pi$から誘導される準同型$\pi^*$を次で定める．
     \begin{defmap}
         \pi^*:& L& \to& K \\
         {}& f& \mapsto& f \circ \pi
     \end{defmap}
-    $\pi$は$Q \in X$を直線 :: $tP+Q$と$H$の交点へ写す写像であった．
+    $\pi$は$Q \in Y$を直線 :: $tP+Q$と$H$の交点へ写す写像であった．
     （$P \not \in H$なので$P=1 \cdot P+0 \cdot Q$は予め除いている．）
-    したがって$R \in \pi(X)$をとると$(\pi^* f)(tP+R)$は$t \in k$について定数．
+    したがって$R \in \pi(Y)$をとると$(\pi^* f)(tP+R)$は$t \in k$について定数．
     この値は$f(R)$であるから$\pi^*$は単射である．
     逆に$g \in K$から得られる関数$g(tP+Q)$が$t$について定数ならば，
-    $f(R) ~(R \in \pi(X))$を$g(\pi^{-1}(R))$
+    $f(R) \ (R \in \pi(Y))$を$g(\pi^{-1}(R))$
     \footnote
     {
-        これは$\{ g(tP+R) \mid t \in k, tP+R \in X \}$に等しい．
+        これは$\{ g(tP+R) \mid t \in k, tP+R \in Y \}$に等しい．
         単元集合なので関数$f$を定めることが出来る．
     }と置くことで
     $g=\pi^*f$となる$f \in L$が取れる．
@@ -60,30 +69,28 @@
     任意の$Q \in X$に対し$g(tP+Q)$は$t \in k$について定数である．
 
     さて，既に分かっている通り
-    $K=k(\bar{y}_1,\dots,\bar{y}_r, \bar{\eta})$であった．
-    なので$\cond(\bar{y}_1),\dots,\cond(\bar{y}_r), \cond(\bar{\eta})$の
+    $K=k(\bar{y}_1,\dots,\bar{y}_r, \eta)$であった．
+    なので$\cond(\bar{y}_1),\dots,\cond(\bar{y}_r), \cond(\eta)$の
     全てが成立すれば良い．
 
-    引き続き$Q \in X$とする．
-    $P=(p_0: \dots: p_n), Q=(q_0: \dots: q_n)$とすると
-    \[ tP+Q=(tp_0+q_0, \dots, tp_n+q_n). \]
-    なので$p_0=\dots=p_r=0$すなわち$P \in \zerosp(x_0,\dots,x_r)$であれば
+    引き続き$Q \in Y$とする．
+    $P=(p_1, \dots, p_n), Q=(q_1, \dots, q_n)$とすると
+    \[ tP+Q=(tp_1+q_1, \dots, tp_n+q_n). \]
+    なので$p_1=\dots=p_r=0$すなわち
+    $P \in \zerosa(y_1,\dots,y_r) \subseteq \affine^n$であれば
     $\cond(\bar{y}_1),\dots,\cond(\bar{y}_r)$は成立する．
     以下，$P$はこのようにとる．
-
-    $tP+Q \in X$であるような$t$について$\bar{\eta}(tP+Q)$は次のように成る．
-    （分母を払って考えれば$Q \in X \cap \zerosp(x_0)^c$に限る必要はない．）
+    $tP+Q \in X$であるような$t$について$\eta(tP+Q)$は次のように成る．
     \[
-        q_0^d \cdot \eta(tP+Q)
-        =\sum_{i=r+1}^{n} \eta_i(q_0,\dots,q_r) (tp_i+q_i)
-        =\left( \sum_{i=r+1}^{n} \eta_i(q_0,\dots,q_r)p_i \right)t+\left( \sum_{i=r+1}^{n} \eta_i(q_0,\dots,q_r)q_i \right)
+        \eta(tP+Q)
+        =\sum_{i=r+1}^{n} \eta_i(q_1,\dots,q_r) (tp_i+q_i)
+        =\left( \sum_{i=r+1}^{n} \eta_i(q_1,\dots,q_r)p_i \right)t+\left( \sum_{i=r+1}^{n} \eta_i(q_1,\dots,q_r)q_i \right)
     \]
-    この$t$の係数が任意の$Q \in X$について$0$であるような$P$が目標の点である．
-    
-    $X$から$\zerosp(x_{r+1},\dots,x_{n})$へ射影した像を$Z$とする．
-    また$B \subseteq \affine^{r} \times \affine^{n-r}$を次のように置く．
-    \[ B=\zerosa(\eta)^c \cap \pr_1^{-1}(Z). \]
-    これは次のようにも書ける．
-    \[ B=\left\{ (Q,P) \in \affine^{r} \times \affine^{n-r} \middle| \sum_{i=r+1}^{n} \eta_i(q_1,\dots,q_r)p_i \neq 0 \right\} \]
-    したがって$\pr_2(B)$に含まれない点が我々が求める点$P$である．
+    よって$p_{r+1}=\dots=p_{n}=0$であれば$\cond(\eta)$も成立する．
+    結局，$P=(0,\dots,0)$であれば良い．
+    最初に$(0,\dots,0) \not \in Y$としていたから，
+    これは正しくstereographic projectionを定める．
+    このstereographic projectionはもとの射影空間で言うと
+    $P=(1:0:\dots:0) \not \in X$から定まるものに一致する．
+
 \end{document}

@@ -2,6 +2,7 @@
 \usepackage{../math_note, exercise}
 \usepackage[all]{xy}
 
+\newcommand{\bimap}{\xrightarrow{\iso}}
 \newcommand{\mon}{\mbox{ on }}
 \renewcommand{\thesection}{Ex4.\arabic{section}}
 
@@ -53,10 +54,10 @@
     まず，$C$がパラメータ表示$\gamma(t)=(t^2,t^3)$を持つことを言っておく．
     $U=C \setminus \{(0,0)\}$という$C$の開部分集合をとると，
     パラメータ表示から以下はbirationalである．
-    \begin{align*}
-        \phi: U &\bimap \proj^1 \\
-        (x,y) &\mapsto (x:y)=(1:t)
-    \end{align*}
+    \begin{defmap}
+        \phi:& U& \bimap& \proj^1 \\
+        {}& (x,y)& \mapsto& (1:t)
+    \end{defmap}
     明らかにこれは$U$とアフィン開被覆$U_0$の間のisomorphismであるから$C$はbirational．
 
     \subsection{Projection of $Y:y^2 z - x^2 (x + z)=0$.}
@@ -232,72 +233,7 @@
     これは明らかに単射だから$|C| \geq |k|$．
 
 \section{Stereographic projection can induce a birational morphism.} %% Ex4.9
-    $X$::projective variety in $\proj^n$，$n \geq \dim X+2=r+2$とする．
-    localな議論をするので，$Y=X \cap U_{x_0}$::affine open subsetとして
-    $K(Y)$($=K(X)$ by Cor4.5)を考察する．
-    明らかに$Y$はaffine varietyである．
-
-    $\bar{x}_i=x_i+\defsa(Y)$とするとThm3.2より$K(Y)=\Quot(A(Y))=k(\bar{x}_1,\dots,\bar{x}_n)$．
-    Thm3.2とThm4.8より拡大$K(Y)/k$はfinitely and separably generated．
-    Thm4.7より，$\{\bar{x}_i\}_{i=1}^n$はseparating transcendence baseを部分集合として含む．
-    そこで番号を付け替えて，
-    $\{\bar{x}_i\}_i$に含まれるseparating transcendence baseを$\{\bar{x}_i\}_{i=1}^{r}$としよう．
-    baseの濃度が$r(=\dim X)$であることはThm3.2による．
-    そして以下の拡大はfinite generated extensionである．
-    \[ k(\{\bar{x}_i\}_{i=1}^{n})/k(\{\bar{x}_i\}_{i=1}^{r}) \]
-    $J=k(\{\bar{x}_i\}_{i=1}^{r})$としておこう．
-    Thm4.6から，この拡大は以下のようなただ一つの元$\alpha$で生成することが出来る．
-    \[ \alpha=\sum_{i=r+1}^{n}{c_i \bar{x}_i} \mwhere c_i(\bar{x}_1,\dots,\bar{x}_r) \in J \]
-    今述べたように，$K(Y)$は$k$に$r+1$個の元$\bar{x}_1, \dots, \bar{x}_r, \alpha$を添加したものである．
-    $n>r+1$なので少なくとも１つの$\bar{x}_i$は$\bar{x}_1, \dots, \bar{x}_r, \alpha$のいずれとも一致しない．
-    それを$\bar{x}_n$とする．（必要ならば変数を交換する．）
-
-    さて，ここで$\proj^{n-1}=\zerosp(x_n), P=(0:\dots:0:1)$という設定のstereographic projection $\psi$を考える．
-    $\bar{x}_n$が$\{\bar{x}_i\}_{0 \leq i \leq n-1}$の有理関数$\eta$として表すことが出来た時，
-    すなわち$\bar{x}_n=\eta \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$の時，
-    以下のようにbirational mapが構成できる．
-    \begin{defmap}
-        \psi:& X \supset V& \to& U \subset \proj^{n-1} \\ 
-        {}& (1:a_1:\dots:a_{n-1}:a_n)& \mapsto& (1:a_1:\dots:a_{n-1}:0) \\
-        {}& (1:a_1:\dots:a_{n-1}:\eta(a_0,\dots,a_{n-1}))& \mapedfrom& (1:a_1:\dots:a_{n-1}:0)
-    \end{defmap}
-    ただし$V,U$はそれぞれ開集合である．
-    逆に，この逆写像がbirationalとなるのはLemma 3.6より
-    $\bar{x}_n \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$の時．
-
-    任意のstereographic projectionは線形変換によって上の設定に読み替えることが出来る．
-    なので，適切な線形変換をとって$\bar{x}_n \in k[\{\bar{x}_i\}_{0 \leq i \leq n-1}]$とすれば良い．
-    ある$i$について$c_{i}=0$であれば変数交換で$c_{n}=0$とできるので，いずれの$c_{i}$も0でないとしよう．
-    $\alpha$の$\bar{x}_n$の係数$c_n \in J$を0にすることを考えるが，
-    $c_n$は必ずしも$k$の元ではない．
-    なので$k$上の線形変換では必ずしも0に出来ない．
-    そこで$J$上の線形変換を考え，以下のような$J$上の正則行列$M$をとる．
-    \[
-        M=
-        \begin{bmatrix}
-            1 &        &   &   &           \\
-              & \ddots &   &   &           \\
-              &        & 1 &   &           \\
-              &        &   & 1 & -c_{n}  \\
-              &        &   & 0 & c_{n-1}
-        \end{bmatrix}
-    \]
-    この行列で定まる線形変換$\kappa_M$は$\alpha$を次のように写す．
-    \[
-        c_{r+1} \bar{x}_{r+1}+\dots+c_{n-1} \bar{x}_{n-1}+c_{n} \bar{x}_{n}
-        \mapsto
-        c_{r+1} \bar{x}_{r+1}+\dots+c_{n-1} (\bar{x}_{n-1}-c_n\bar{x}_{n})+c_{n} (c_{n-1}\bar{x}_{n})
-        .
-    \]
-    こうして$\bar{x}_{n}$が消える．
-    実際はこのような正則行列であれば$M$は何でも良い．
-    このような$M$がとれることは$n>r+1$，すなわち$M$が$1 \times 1$行列でないことによる．
-    小行列に分割して計算することで直ちに$\det M=c_{n-1}$が分かる．
-    そこで開集合$V_{\#}=(\zerosa(c_{n-1}))^c$を取ろう．
-    今$c_{n-1} \neq 0$であり，しかも$c_{n-1}$は$A(Y)$の元であるから，
-    $V_{\#}$は$Y$上の空でない開集合であり，$M$は$V_{\#}$上で正則．
-    したがってLemma3.6より，$\kappa_M$は$V_{\#}$から$\zerosp(\bar{x}_n)$の部分集合$V$へのisomorphismである．
-    この$V$で$\psi$が働く．
+    別のPDFファイル``exercise4\_9.pdf"に解答を書いた．
 
 \section{Blowing up of $C:y^2-x^3=0$ at $O=(0,0)$．} %% Ex4.10
     $V_0=\affine^2 \times U_0, V_1=\affine^2 \times U_1$とおく．
