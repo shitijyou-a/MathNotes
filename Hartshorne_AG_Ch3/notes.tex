@@ -1,0 +1,221 @@
+\documentclass[]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[]{enumitem}
+\usepackage[all]{xy}
+
+\newcommand{\catMod}{\mathfrak{Mod}}
+\newcommand{\catAb}{\mathfrak{Ab}}
+
+\title{Hartshorne ``Algebraic Geometry" Ch.3 \\のためのノート．}
+\author{七条 彰紀}
+
+\begin{document}
+
+\section{Derived Functors}
+    %% none
+
+\section{Cohomology of Sheaves}
+
+\subsection{Lemma2.4.}
+Lemma2.4(p.207)で次の補題が使われている．
+\begin{Lemma}
+    $(X, \shO_X)$ :: ringed space,
+    $\shM$ :: $\shO_X$-module
+    とする．
+    開集合$U \subseteq X$について次が成立する．
+    \[ \Hom_{\shO_X}(\shO_U, \shM) \iso \shM(U). \]
+    しかもこの同型は$U, \shM$について自然．
+\end{Lemma}
+\begin{proof}
+    次のように写像を定める．
+    \begin{defmap}
+        \Phi:& \Hom_{\shO_X}(\shO_U, \shM)& \to& \shM(U) \\
+        {}& \phi& \mapsto& \phi_U(1) \\
+        {}& [\sect{V}{t} \mapsto \sect{V}{t \cdot (s|_V)}]& \mapedfrom& s
+    \end{defmap}
+\end{proof}
+
+\subsection{Prop2.5.}
+    Prop2.5の証明で
+    long exact sequenceを使っている部分が
+    行間に成っているので説明する．
+    Thm1.11cより次の完全列が得られる．
+    \[
+    \xymatrix@R=20pt
+    {
+        0 \ar[r] & \Gamma(X, \shF) \ar[r]& \Gamma(X, \shI)\ar[r]^-{\phi}& \Gamma(X, \shG) \\
+        \ar[r]^-{\delta^0} & H^1(X, \shF) \ar[r]& 0 \ar[r]& H^1(X, \shG) \\
+        \ar[r]^-{\delta^1} & H^2(X, \shF) \ar[r]& 0 \ar[r]& H^2(X, \shG) \\
+        \ar[r]^-{\delta^2} & \dots
+    }
+    \]
+
+    もともとの完全列から$\phi$ :: surj.
+    また$\Gamma(X, \shG) \xrightarrow{\delta^0} H^1(X, \shF) \to 0$ :: exactから
+    $\delta^0$ :: surjも得られる．
+    完全列はcomplexでもあるから，$\delta^0 \circ \phi=0$．
+    以上より次が分かる．
+    \[ H^1(X, \shF)=\im \delta^0=\delta^0(\phi(\Gamma(X, \shI)))=\im (\delta^0 \circ \phi)=0. \]
+
+    上のlong exact sequenceの一部を取り出す．
+    ここでは$i \geq 1$としている．
+    \[\xymatrix{ 0 \ar[r]& H^i(X, \shG) \ar[r]^-{\delta^i} & H^{i+1}(X, \shF) \ar[r]& 0 }\]
+    これがexactであるから，
+    $H^i(X, \shG) \iso H^{i+1}(X, \shF)$．
+    この同型と$\shG$もflasqueであることを用いると，
+    $H^i(X,-)$の添字$i$についての帰納法でProp2.5の主張が証明される．
+
+\subsection{Prop2.6.}
+    Prop2.6の意味は次の通り．
+    $(X, \shO_X)$ :: ringed space,
+    $\shF \in \catMod(X)$とする．
+    $\shO_X$-moduleの構造を忘却すれば，$\shF \in \catAb(X)$とみなせる．
+    （constant sheaf :: $\Z_X$は$\catMod(X)$のinitial objectだから，
+    $\shF$は$\Z_X$-moduleとみなすことが出来る．
+    そして$\Z_X$-moduleはsheaf of abelian groupに他ならない．
+    Cor2.3の証明も参照せよ．）
+    なので$\shF$のinjective resolutionを
+    $\catMod(X), \catAb(X)$の中でそれぞれ取る．
+    \[
+    \xymatrix{ \shF \ar[r]& \shI^0 \ar[r]& \shI^1 \ar[r]& \dots }
+    \]
+    すなわち$\shI^i$として$\catMod(X)$のobjectまたは$\catAb(X)$のobjectをとる．
+    するとどちらの圏でresolutionをとるかによって，
+    異なる完全列が得られるだろう．
+    しかし得られるcohomology groupは同じである，
+    というのがProp2.6の主張である．
+
+    証明は次の様に行う:
+    $\catMod(X)$における$\shF$のinjective resolution
+    \[
+    \xymatrix{ \shF \ar[r]& \shI^0 \ar[r]& \shI^1 \ar[r]& \dots }
+    \]
+    は，
+    $\shF, \shI^i$が持つ$\shO_X$-moduleの構造を忘却して$\catAb(X)$の完全列とみなせば，
+    $\Gamma(X, -): \catAb(X) \to \catAb$についてのacyclic resolutionである．
+    したがってThm1.2より，
+    このresolutionから得られるcohomology groupは
+    $H^i(X, \shF)$に等しい．
+
+\subsection{Proof of Thm2.7.}
+p.210, proof of 2.7についてコメント．
+証明ではStep $1$と類似の議論が何度も繰り返される．
+この議論を一般化して述べると次のように成る．
+\begin{Lemma}
+    $U \subseteq X$を開集合とすると$Y=X-U$は閉集合．
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item 
+            \[ H^i(X, \shF_Y)=0 \mand H^i(X, \shF_{U})=0 \text{ for } i>n \eqno{(*)} \]
+            が成立するならば，
+            $H^i(X, \shF)=$ for $i>n$も成り立つ．
+        \item
+            $\dim Y < \dim X$ならば
+            $(*)$の一方である$H^i(X, \shF_Y)=0 \ (i>n)$が成立する．
+    \end{enumerate}
+    (i)と(ii)を合わせると，
+    \[ \dim Y < \dim X \mand H^i(X, \shF_U)=0 \ (i>n) \implies H^i(X, \shF)=0 \ (i>n) \]
+    ということになる．
+\end{Lemma}
+\begin{proof}
+    (i)を示すには完全列:
+    \[\xymatrix{ 0 \ar[r]& \shF_U \ar[r]& \shF \ar[r]& \shF_Y \ar[r]& 0. }\]
+    から誘導される長完全列を見れば良い．
+    仮定を用いれば次のように成る．
+    \[
+    \xymatrix@R=10pt
+    {
+        \dots
+        \ar[r]^-{\delta^{n-1}}  & H^{n}(X,   \shF_U)  \ar[r]& H^{n}(X, \shF)   \ar[r]& H^{n}(X,   \shF_Y) \\
+        \ar[r]^-{\delta^{n}}    & 0  \ar[r]& H^{n+1}(X, \shF) \ar[r]& 0 \\
+        \ar[r]^-{\delta^{n+1}}  & 0  \ar[r]& H^{n+2}(X, \shF) \ar[r]& 0 \\
+        \ar[r]^-{\delta^{n+2}}  & \dots
+    }
+    \]
+    よって$H^i(X, \Z_U)=0 \ (i>n)$.
+    (ii)は帰納法の仮定である．
+\end{proof}
+
+Thm2.7の証明のうち，Step $3$が難しい．
+$\alpha \in A$は，$\shF$の有限個のsectionの集合である．
+そこで$\alpha=\{ \sect{U_i}{s_i} \}_{i=1}^r$とする．
+$\shF_{\alpha}$は次のように書ける．
+\[ \shF_{\alpha}=\sum_{i=1}^r (\iota_i)_* (s_i\Z_{U_i}) \]
+ここで$\iota_i$は包含写像$U_i \inclmap X$であり，
+$s_i\Z_{U_i}$は$s_i$で生成されるabelian groupのsheafである．
+$x \in X$でのstalkをとると，
+\[ (\shF_{\alpha})_x=\sum_{i | x \in U_i} (s_i)_x \Z. \]
+右辺は$\{ (s_i)_x \}_{i | x \in U_i}$で生成されるabelian group.
+$A$は包含関係によってdirected setとなり，
+$\{ \shF_{\alpha} \}_{\alpha \in A}$も
+sheafとしての包含関係（subsheafの関係）でdirect systemとなる．
+そして各$\shF_{\alpha}$は$\shF$のsubsheafである．
+したがってdirect limitの定義から，
+次の図式が可換に成るような
+$\varinjlim \shF_* \to \shF$がただひとつ存在する．
+\[
+\xymatrix
+{
+    \varinjlim \shF_* \ar@{-->}[r]^-{\phi}& \shF \\
+    \{\ \shF_{\alpha'} \ar@{_(->}[r] \ar[u]\ar@/_10pt/[ru]& \shF_{\alpha} \ar@/^10pt/[lu]\ar[u] \ \}
+}
+\]
+この図式全体をstalkの関手$(-)_x$で写す．
+direct limit同士は交換できることを用いると次のように成る．
+\[
+\xymatrix
+{
+    \varinjlim (\shF_*)_x \ar[r]^-{\phi_x}& \shF_x \\
+    \{\ (\shF_{\alpha'})_x \ar@{_(->}[r] \ar[u]\ar@/_10pt/[ru]& (\shF_{\alpha})_x \ar@/^10pt/[lu]\ar[u] \ \}
+}
+\]
+$(\shF_{\alpha})_x$は上のとおりのもの．
+なので$\varinjlim (\shF_*)_x=\shF_x$.
+また下の行(direct system)から上の行への射は
+いずれも包含写像だから，
+二つの三角形は同じものである．
+\[
+\xymatrix
+{
+    \varinjlim (\shF_*)_x & {} \\
+    \{\ (\shF_{\alpha'})_x \ar@{_(->}[r] \ar[u]& (\shF_{\alpha})_x \ar@/^10pt/[lu] \ \}
+}
+\quad \raisebox{-20pt}{=} \quad 
+\xymatrix
+{
+    {} & \shF_x \\
+    \{\ (\shF_{\alpha'})_x \ar@{_(->}[r] \ar@/_10pt/[ru]& (\shF_{\alpha})_x \ar[u] \ \}
+}
+\]
+よって$\phi_x$ :: iso.
+II, Prop1.1から$\phi$ :: iso, すなわち$\varinjlim \shF_*=\shF$.
+
+$\alpha' \subseteq \alpha$としよう．
+すると次の完全列が存在する．
+\[\xymatrix{ 0 \ar[r]& \shF_{\alpha'} \ar[r]& \shF_{\alpha} \ar[r]& \shG \ar[r]& 0 }\]
+$x \in X$におけるstalkをとると，
+$\alpha' \subseteq \alpha$ゆえ
+\[
+    \shG_x
+    =(\shF_{\alpha})_x/(\shF_{\alpha'})_x
+    =\sum_{i \Big| \substack{x \in U_i \\ \sect{U_i}{s_i} \in \alpha-\alpha'}} (s_i)_x \Z
+    =(\shF_{\alpha-\alpha'})_x.
+\]
+となる．
+よって$\shG=\shF_{\alpha-\alpha'}$．
+なので$\#\alpha$（$\alpha$の元の個数）について
+帰納的に考えていくと，
+$\alpha$が1元集合の場合のみ考えれば十分だとと分かる．
+\[
+    H^i(X, \shF_{\alpha'})=0 \mand H^i(X, \shF_{\{\sect{U}{s}\}})=0
+    \implies
+    H^i(X, \shF_{\alpha' \cup \{\sect{U}{s}\}})=0.
+\]
+標準的な全射
+$\Z_X \to \shF_{\{\sect{U}{s}\}}=j_*(s \Z_U) \ (j: U \inclmap X$)
+が存在するため，
+この全射の$\ker$を$\shR$とすれば
+$\shF_{\{\sect{U}{s}\}} \iso \Z_X/\shR$．
+
+\section{Cohomology of a Noetherian Affine Scheme}
+
+\end{document}

@@ -1,0 +1,161 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note, exercise}
+\usepackage[all]{xy}
+\renewcommand{\thesection}{Ex2.\arabic{section}}
+
+\begin{document}
+\section{Grothendieck Vanithing Thm is Best Possible.} %% Ex2.1 
+    \subsection{Let $X=\affine^1, U=X-\{P,Q\}$. $H^1(X, \Z_U) \neq 0$.}
+    $k$ :: infinite field,
+    $X=\affine^1_k$,
+    $P, Q \in X$ :: distinct closed points,
+    $Y=\{P,Q\}, U=X-Y$
+    とおく．
+    $\#Y<\#k=\infty$なので$\#U=\infty.$
+    
+    次の完全列が成り立つ．
+    \[\xymatrix{ 0 \ar[r]& \Z_U \ar[r]& \Z_X \ar[r]& \Z_Y \ar[r]& 0. }\]
+    ここから次の長完全列が誘導される．
+    \[
+    \xymatrix
+    {
+        0  \ar[r]& \Gamma(X, \Z_U) \ar[r]& \Gamma(X, \Z_X) \ar[r]& \Gamma(X, \Z_Y) \\
+        {} \ar[r]& H^1(X, \Z_U) \ar[r]& H^1(X, \Z_X) \ar[r]& H^1(X, \Z_Y) \\
+        {} \ar[r]& \dots
+    }
+    \]
+    完全列であるから，
+    $H^1(X, \Z_U)=0$は
+    $\Gamma(X, \Z_X) \to \Gamma(X, \Z_Y)$が全射であることと同値である．
+    一方，$\#U=\infty, \#Y=2$であるから，
+    \[
+        \Gamma(X, \Z_X)=\Z,
+        \qquad
+        \Gamma(X, \Z_Y)=\Gamma(\{P\} \sqcup \{Q\}, \Z_Y)=\Z \oplus \Z.
+    \]
+    （$\sqcup$はdisjoint unionを意味する．）
+    よって全射にはなり得ない．
+    したがって$H^1(X, \Z_U) \neq 0$.
+
+    \subsection{Generalization for $\affine^n$.}
+    $k$ :: infinite field,
+    $X=\affine^n_k$,
+    $H_1,\dots,H_{n+1}$ :: hyperplanes,
+    $Y=\bigcup_{i=1}^{n+1} H_i, U=X-Y$
+    とおく．
+    $H^n(X, \Z_U) \neq 0$を示す．
+    $n=1$の場合については(a)で示したから，
+    $n>1$とする．
+
+    完全列
+    \[\xymatrix{ 0 \ar[r]& \Z_U \ar[r]& \Z_X \ar[r]& \Z_Y \ar[r]& 0 }\]
+    から誘導される長完全列の一部は次の様になる．
+    \[\xymatrix{ H^{n-1}(X, \Z_X) \ar[r]& H^{n-1}(X, \Z_Y) \ar[r]& H^{n}(X, \Z_U) \ar[r]& H^{n}(X, \Z_X). }\]
+    また，$\Z_X$ :: constant sheaf on irreducible spaceなので
+    $\Z_X$ :: flasque (II, Ex1.16a), acyclic (Prop2.5).
+    今$n>1$だから$H^{n-1}(X, \Z_X)=H^{n}(X, \Z_X)=0$.
+    よって$H^{n-1}(X, \Z_Y) \iso H^{n}(X, \Z_U)$が得られる．
+    なので我々は$H^{n-1}(X, \Z_Y) \neq 0$を示すことにする．
+
+%    次元についての帰納法を用いる．
+%    以下の主張が成立していると仮定しよう．
+%    \begin{Claim}
+%        $\affine^{n-1}$から$n$個のhyperplaneを取り除いた空間を$V$とすると，
+%        $H^{n-1}(\affine^{n-1}, \Z_V) \neq 0$.
+%    \end{Claim}
+%    まず$H_{n+1} \iso \affine^{n-1}$に注意する．
+%    $Y_n=\bigcup_{i=1}^{n} H_i$とおくと，
+%    $H_{n+1}-Y_n$は仮定における$V$だとみなせる．
+%    したがって
+%    \[ H^{n-1}(H_{n+1}, \Z_{H_{n+1}-Y_n}) \iso H^{n-1}(X, \Z_{H_{n+1}-Y_n}) \neq 0. \]
+%    次の完全列が成り立つ．
+%    \[\xymatrix{ 0 \ar[r]& \Z_{H_{n+1}-Y_n} \ar[r]& \Z_{H_{n+1}} \ar[r]& \Z_{H_{n+1} \cap Y_n} \ar[r]& 0. }\]
+
+\section{$\shO_{\proj^1_k}$ :: acyclic.} %% Ex2.2 
+
+\section{Cohomology with Supports.} %% Ex2.3 
+    $X$ :: topological space,
+    $Y$ :: closed subset of $X$,
+    $U=X-Y$,
+    $\shF$ :: sheaf of abelian group on $X$
+    とする．
+    この時，$\Gamma_Y(X, \shF)$を以下で定める．
+    \[
+        \Gamma_Y(X, \shF)
+        =\{ s \in \Gamma(X, \shF) \mid \Supp s \subseteq Y \}
+        =\{ s \in \Gamma(X, \shF) \mid s|_{X-Y}=0 \}.
+    \]
+
+    \subsection{$\Gamma_Y(X,-): \catAb(X) \to \catAb$ :: left exact functor.}
+    $\catAb(X)$の完全列を考える．
+    \[\xymatrix{ 0 \ar[r]& \shF' \ar[r]& \shF \ar[r]& \shF''. }\]
+    ここから誘導される以下の列が完全であることはII, Ex1.8で示した．
+    \[\xymatrix{ 0 \ar[r]& \Gamma(X,\shF') \ar[r]^-{f}& \Gamma(X,\shF) \ar[r]^-{g}& \Gamma(X,\shF''). }\]
+    $\Gamma$を$\Gamma_Y$に付け替えても完全列であることを示す．
+
+    \paragraph{Exact at $\Gamma_Y(X,\shF')$.}
+    示すべきことは次のこと．
+    \[ \Forall{s \in \Gamma_Y(X,\shF')} f(s)=0 \implies s=0. \]
+    $f: \Gamma(X,\shF') \to \Gamma(X,\shF)$が単射なので，
+    その制限$f|_{\Gamma_Y(X,\shF')}$も単射．
+    よって主張が示せた．
+
+    \paragraph{Exact at $\Gamma_Y(X,\shF)$.}
+    示すべきは次のこと．
+    \[ \Forall{t \in \Gamma_Y(X,\shF)} g(t)=0 \iff \Exists{u \in \Gamma_Y(X,\shF')} f(u)=t. \]
+    $\impliedby$は$g \circ f=0$から直ちに分かる．
+    $\implies$は次のように示す．
+    元の完全列があるため，$f(u)=t$を満たす$u$が$\Gamma(X,\shF')$からはとれる．
+    今$t \in \Gamma_Y(X,\shF)$から$t$は以下を満たす．
+    \[ \Forall{P \in U} t_P=(f(u))_P=f_P(u_P)=0. \]
+    $f_P$は単射であるから，任意の点$P \in U$について$u_P=0$.
+    よって$u \in \Gamma_Y(X,\shF')$.
+
+    \subsection{$\shF'$ :: flasque then
+        $0 \to \Gamma_Y(X, \shF') \to \Gamma_Y(X, \shF) \to \Gamma_Y(X, \shF'') \to 0$ is exact.}
+    次の完全列は成立する(II, Ex1.16b)．
+    \[\xymatrix{ 0 \ar[r]& \Gamma(X,\shF') \ar[r]^-{f}& \Gamma(X,\shF) \ar[r]^-{g}& \Gamma(X,\shF'') \ar[r]& 0. }\]
+    これらの$\Gamma$を$\Gamma_Y$に取り替えても良いことを示す．
+    (a)で示したことを合わせれば，次のことを示せば良いということになる．
+    \[ \Forall{t \in \Gamma_Y(X,\shF'')} \Exists{u \in \Gamma_Y(X,\shF)} g(u)=t. \]
+    元の完全列から，
+    $g(u)=t$を満たす$u$が$\Gamma(X,\shF)$からはとれる．
+    今$t \in \Gamma_Y(X,\shF'')$から$t$は以下を満たす．
+    \[ t|_U=(g(u))|_U=g|_U(u|_U)=0. \]
+    元の完全列があるため，
+    $f|_{U}(\tilde{s})=u|_{U}$となる$\tilde{s} \in \Gamma(U,\shF')$がとれる．
+    $\shF'$ :: flasqueなので$s|_U=\tilde{s}$となる
+    $s \in \Gamma(X, \shF')$が存在する．
+    構成から
+    \[ f(s)|_U=u|_U \iff \bar{u}:=u-f(s) \in \Gamma_Y(X,\shF). \]
+    $g \circ f=0$なので$g(\bar{u})=g(u-f(s))=g(u)=t$.
+    よって$\bar{u}$が条件を満たす．
+
+    \subsection{injective sheaves are acyclic for $\Gamma_Y(X, -)$.}
+    Prop2.5(injective sheaves are acyclic for $\Gamma(X,-)$)の証明がそのまま使える．
+    この証明では(b)の内容の他にはderived functorの性質しか使わない．
+
+    \subsection{$\shF$ :: flasque then
+        $0 \to \Gamma_Y(X, \shF) \to \Gamma(X, \shF) \to \Gamma(X-Y, \shF) \to 0$ is exact.}
+    引き続き$U:=X-Y$とする．
+    $\res_X^U: \Gamma(X, \shF) \to \Gamma(U, \shF)$は$\shF$ :: flasqueゆえに全射．
+    この写像のkernelは次のような集合である．
+    \[ \ker \res_X^U=\{ s \in \Gamma(X, \shF) \mid s|_U=0 \}. \]
+    これは$\Gamma_Y(X, \shF)$に他ならない．
+
+    \subsection{there is a long exact seq ::
+        $\cdots \to H^i(X,\shF) \to H^i(X, \shF) \to H^i(U, \shF|_U) \to \cdots$. }
+    TODO: injective sheaves are flasqueと(d)を使うと思われる．
+
+    \subsection{$Y \subseteq V$ :: open in $X$ then $H^i_Y(X, \shF) \iso H^i_Y(V, \shF|_V)$.}
+
+\section{Mayer--Vietoris Sequence.} %% Ex2.4 
+
+\section{$H^i_P(X, \shF)=H^i_P(X_P, \shF_P)$.} %% Ex2.5 
+
+\section{$\{\shI_{\alpha} \}$ :: direct system of injective sheaves
+    then $\lim \shI_{\alpha}$ :: injective sheaf.} %% Ex2.6 
+
+\section{$H^1(S^1, \Z_{S^1}) \iso \Z$.} %% Ex2.7 
+
+\end{document}
