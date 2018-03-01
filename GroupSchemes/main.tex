@@ -980,7 +980,7 @@
     \end{Remark}
     
     \subsection{Good and Geometric Quotient.}
-    \begin{Def}[\cite{Hos}]
+    \begin{Def}[\cite{Hos}] \label{def:good_quotient}
         scheme morphism :: $q: X \to Y$が
         $X$の$G$による\textbf{good quotient}であるとは，
         以下の条件が満たされるということ．
@@ -991,11 +991,8 @@
               \footnote{ すなわち，$Y$の任意のaffine open subschemeの$q$による逆像がaffine． }.
         \item $(q_*\shO_X)^G \iso \shO_Y$.
         \item
-            $W$ :: $G$-invariant closed subset of $X$について，
-            $q(W)$ :: closed subset of $Y$．
-        \item
             $W_1, W_2$ :: disjoint $G$-invariant closed subsets of $X$について，
-            $q(W_1), q(W_2)$ :: disjoint closed subsets of $Y$．
+            $\cl_Y(q(W_1)), \cl_Y(q(W_2))$ :: disjoint．
     \end{enumerate}
     \end{Def}
     $q$ :: surjectiveと$q$ :: affineの2条件は，
@@ -1220,7 +1217,7 @@
         $G$の$V$上のrepresentation :: $(V, \rho)$について
         $v \in V$が\textbf{$G$-invariant vector}であるとは，
         任意の$k$-algebra :: $R$に対して
-        $\rho(\func{G}(R), v \otimes_k 1_R)=v \otimes_k R$となること．
+        $\rho(\func{G}(R), v \otimes_k 1_R)=v \otimes_k 1_R$となること．
 
     \item
         $G$の$V$上のrepresentation :: $(V, \rho)$について，
@@ -1334,7 +1331,7 @@
         この時，$Y$もconnected (resp. irreducible, reduced)である．
     \end{Remark}
 
-    \begin{Thm}
+    \begin{Thm}\label{thm:finitetypeGIT}
         $X=\Spec A$ :: affine variety,
         $G$ :: linearly reductive affine group scheme acting on $X$ rationally
         とする．
@@ -1346,18 +1343,33 @@
     \begin{Prop}[\cite{Muk1} Thm4.51, \cite{Hos} Thm4.25 (second part)]
         $G$ :: linearly reductive affine group scheme,
         $S=k[x_1,\dots,x_n]$とする．
-        $G \acton S$がlinear actionであるとき，
-        $S^G$は有限生成．
+        この時$S^G$は有限生成．
     \end{Prop}
     \begin{proof}
-        $S$の部分環$S^G$は次のように次数付けられる．
+        $S$の部分環$S^G$は次のように次数付けられる
+        \footnote
+        {
+            $k$-algebra :: $R$，$g \in \func{G}(R)$を任意に取る．
+            任意の$f \in S^G$について，$f$の全ての斉次成分が$S^G$に属すことを示せば良い．
+            帰納法で示す．
+            $f=f_0 \in S^G \ (f_0 \in S_0)$であるときについては自明．
+            $f=f_0+f_1$であるとき，
+            \[
+                \alpha(g, f_1 \otimes 1_R)
+                =\alpha(g, (f-f_0) \otimes 1_R)
+                =(f-f_0) \otimes 1_R
+                =f_1 \otimes 1_R.
+            \]
+            なので$f_1 \in S^G$．
+            2つめの等号は$f, f_0 \in S^G$と$\alpha(g,-)$ :: $R$-algebra homomorphismを用いた．
+            以下，同様にして任意の$\deg f \geq 0$について主張が示せる．
+        }．
         \[ S^G=\bigoplus_{d \geq 0} \left( S^G \cap S_d \right). \]
         イデアル$J \subset S$を
         $S^G_+=\bigoplus_{d > 0} \left( S^G \cap S_d \right)$で生成されるものとする．
         すると$S$はnoetherian ringであるから，
-        $J$の生成元として有限個の多項式$f_1,\dots,f_N \in S$がとれる．
-        特にこれらの多項式は正次数だと仮定できる
-        （TODO: linear actionだとこのように仮定できる．）．
+        $J$の生成元として有限個の斉次多項式$f_1,\dots,f_N \in S$がとれる．
+        $J \neq (1)=S$なので特にこれらの多項式は正次数だと仮定できる．
 
         次の$S$-module homomorphismは全射である．
         \begin{defmap}
@@ -1394,16 +1406,17 @@
         $h$も$k[\{f_i\}_i]$に属す．
     \end{proof}
 
-    \begin{proof}
-        (TODO: $A=\Sym(V), A_d=\Sym^d(V)$とすれば$A$の次数付が出来，作用もlinear.)
+    \begin{proof}[定理(\ref{thm:finitetypeGIT})の証明]
         $A$ :: finitely generated $k$-algebraかつ
         $G \acton X$ :: rational actionなので，
-        $A$の生成元$r_1, \dots, r_N$でMilneAGSあって，
-        これらが$G$-invariant $k$-vector subspace of $A$
-        (sub-representation of $A$)を張るようなものが存在する．
-        明らかに次の全射が存在する．
-        \[ S=k[x_1,\dots,x_N] \to A \qquad x_i \mapsto r_i. \]
-        これは$r_i$のとり方から$G$-equivariant mapになる（TODO）．
+        $A$の生成元$r_1, \dots, r_N$であって，
+        finite dimentional sub-representation of $A$ :: $V$を張るようなものが存在する．
+        $S:=\Sym(V)$は$S_d=\Sym^d(V)$のように次数づけでき，
+        次数付き環として$S \iso k[x_1\dots,x_N]$(finitely generated $k$-algebra).
+        $G \acton X=\Spec A$から作用$G \acton S$が誘導される．
+        今，明らかに次のsurjective $k$-algebra homomorphismが存在する．
+        \[ S \to A; \qquad \bigotimes_i r_i^{e_i} \mapsto \prod_i r_i^{e_i}. \]
+        これは作り方から$G$-equivariant mapになる．
         $G$ :: linearly reductiveより，
         $S^G \to A^G$は全射．
         $S^G$はfinitely generatedだから，
@@ -1417,24 +1430,100 @@
         the subalgebra $A^G$ of $G$-invariants is finitely generated.
     \end{Thm}
 
-
 \section{Affine GIT Quotient is a Good Quotient}
     この節では，
+    $k$ :: algebraically closed field,
     $X=\Spec A$ :: affine scheme of finite type over a field $k$,
     $G$ :: linearly reductive affine group scheme acting on $X$
     とする．
     前の節と比べて$X, G$の条件が緩いことに注意．
 
-    \begin{Lemma}
+    \begin{Lemma}\label{lemma:orbit_is_separable}
         $W_1, W_2 \subset X$がdisjoint closed subsetであり，
         かつorbitの和集合であるとする．
         すると，$f(W_1)=1, f(W_2)=0$となるような
-        $G$-invariant function :: $f \in A^G$が存在する．
+        $G$-invariant function :: $f \in A^G=\Gamma(\shO_X, X)^G$が存在する．
     \end{Lemma}
+    \begin{proof}
+        証明は\cite{Muk1}から引用する．
+        $W_1, W_2$はclosed subset in $X=\Spec A$なので，
+        $W_1=V(\I{a}_1), W_2=V(\I{a}_2)$なる
+        radical ideal :: $\I{a}_1, \I{a}_2 \subseteq A$が存在する．
+        $W_1 \cap W_2=\emptyset$なので$\I{a}_1+\I{a}_2=(1)$
+        (TODO: $X$ :: affine varietyが必要？)．
+        
+        $W_1, W_2$は$G$の作用で保たれるから
+        $\I{a}_1, \I{a}_2$ :: sub-representation of $A$(TODO).
+        そこで$k$-module homomorphismを考える．
+        \begin{defmap}
+            {}& \I{a}_1 \oplus \I{a}_2& \to& A \\
+            {}& (a_1, a_2)& \mapsto& a_1+a_2
+        \end{defmap}
+        これは$G$-equivariantとなっている．
+        そして$\I{a}_1+\I{a}_2=(1)$よりこれは全射．
+        $G$ :: linearly reductiveより，
+        \begin{defmap}
+            {}& (\I{a}_1 \cap A^G) \oplus (\I{a}_2 \cap A^G)& \to& A^G \\
+            {}& (a_1, a_2)& \mapsto& a_1+a_2
+        \end{defmap}
+        も全射．
+        よって$f_1+f_2=1$であるような
+        $f_j \in \I{a}_j \cap A^G \ (j=1,2)$
+        が存在する．
+        $W_1 \subseteq V(f_1)$なので$f_1(W_1)=0$, 
+        そして$f_1+f_2=1$から$f_1(W_2)=0$.
+%        \footnote
+%        {
+%            ここでは$X, W_1, W_2$のclosed pointsを
+%            $k^{\oplus n}$の部分集合とみなしている．
+%            この同一視によって$f_1, f_2 \in A$を$k^{\oplus n} \to k$の写像としている．
+%            写像$f_1$はschemeの間の射$\phi_1$へと拡張できる(\cite{HarAG} II, Prop2.6).
+%            また，拡張しても$\phi_1(W_1)=0, \phi_1(W_2)=1$は変わらない
+%            (\cite{HarAG} II, Ex3.14 + Prop4.1 + Ex4.2).
+%        }.
+    \end{proof}
+
+    主張を述べる前に，
+    good quotientの定義を再掲する．
+    \begin{Def}[\cite{Hos}, 定義\ref{def:good_quotient}の再掲]
+        scheme morphism :: $q: X \to Y$が
+        $X$の$G$によるgood quotientであるとは，
+        以下の条件が満たされるということ．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item $q$ :: $G$-invariant.
+        \item $q$ :: surjective.
+        \item $q$ :: affine morphism
+              \footnote{ すなわち，$Y$の任意のaffine open subschemeの$q$による逆像がaffine． }.
+        \item $(q_*\shO_X)^G \iso \shO_Y$.
+        \item
+            $W_1, W_2$ :: disjoint $G$-invariant closed subsets of $X$について，
+            $\cl_Y(q(W_1)), \cl_Y(q(W_2))$ :: disjoint．
+    \end{enumerate}
+    \end{Def}
 
     \begin{Thm}[\cite{Hos} Thm4.30]\label{thm:git=good}
-        $X \sslash G=\Spec A^G$ :: good quotient.
+        $X \sslash G=\Spec A^G$と置く．
+        包含写像$i: A^G \inclmap A$から誘導される射を$q: X \to X \sslash G$とおくと，
+        $q$ :: good quotient.
     \end{Thm}
+    \begin{proof}
+        構成の仕方から，
+        (i),(iii),(iv)は明らか．
+        (ii)は任意の極大イデアル$\I{m}_y \subseteq X \sslash G$について
+        拡大イデアル$\I{m}_y^e=i(\I{m}_y)A$が$A$に等しくないことを示せば十分．
+        (v)は補題\ref{lemma:orbit_is_separable}から得られる．
+        詳細は\cite{Hos} Thm4.30を参照せよ．
+    \end{proof}
+
+    なお，$X$ :: normal schemeであるとき$q$はclosed mapとなる．
+    これは$A$ :: integrally closed domainならば
+    $A^G$もintegrally closed domainとなること
+    \footnote
+    {
+        私のノートに証明がある．
+        \url{https://github.com/ShitijyouA/MathNotes/blob/master/JustOne/fixed_subring_in_intclsed_domain.pdf}.
+    }と，
+    Ati-Mac, Ex5.1から得られる．
 
 \begin{thebibliography}{99}
     \bibitem{Muk1}

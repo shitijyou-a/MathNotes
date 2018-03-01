@@ -144,17 +144,254 @@
     これは$\Gamma_Y(X, \shF)$に他ならない．
 
     \subsection{there is a long exact seq ::
-        $\cdots \to H^i(X,\shF) \to H^i(X, \shF) \to H^i(U, \shF|_U) \to \cdots$. }
-    TODO: injective sheaves are flasqueと(d)を使うと思われる．
+        $\cdots \to H_Y^i(X,\shF) \to H^i(X, \shF) \to H^i(U, \shF|_U) \to \cdots$. }
+    $\shF$のinjective resolution :: $0 \to \shF \to \shI^*$をとる．
+    このとき$\shI^*$はflasque resolutionでもある．
+    すると(d)より次の図式が得られる．
+    \[
+    \xymatrix@R=20pt@C=40pt
+    {
+        {} & 0 \ar[d]& 0 \ar[d]& \dots \\
+        0 \ar[r]& \Gamma_Y(X, \shI^0) \ar[r]^-{(d^0_{X})|_{\subseteq Y}}\ar@{^(->}[d]&
+                  \Gamma_Y(X, \shI^1) \ar[r]^-{(d^1_{X})|_{\subseteq Y}}\ar@{^(->}[d]& \dots \\
+        0 \ar[r]& \Gamma(X, \shI^0)   \ar[r]^-{d^0_X}\ar[d]^-{\res_X^U}&
+                  \Gamma(X, \shI^1)   \ar[r]^-{d^1_X}\ar[d]^-{\res_X^U}& \dots \\
+        0 \ar[r]& \Gamma(U, \shI^0)   \ar[r]^-{d^0_U}\ar[d]&
+                  \Gamma(U, \shI^1)   \ar[r]^-{d^1_U}\ar[d]& \dots \\
+        {} & 0 & 0 & \dots \\
+    }
+    \]
+    ここで$\shI^*$の微分射を$d^i: \shI^i \to \shI^{i+1}$とした．
+    また$(d^i_{X})|_{\subseteq Y}=(d^i_{X})|_{\Gamma_Y(X, \shI^i)}$とした．
+    以上の写像の定義から，それぞれの四角形が可換であることが確認できる．
+
+    まとめると，次のexact sequence of complexsが存在する．
+    \[ 0 \to \Gamma_Y(X, \shI^*) \to \Gamma(X, \shI^*) \to \Gamma(X-Y, \shI^*) \to 0. \]
+    よってderived functorの一般論から主張のlong exact sequenceが得られる．
 
     \subsection{$Y \subseteq V$ :: open in $X$ then $H^i_Y(X, \shF) \iso H^i_Y(V, \shF|_V)$.}
+    \begin{Claim}
+        $Y$を$X$の閉集合，$V$を$Y$を含む$X$の開集合とする．
+        任意の$\shF$ :: sheaf on $X$ of abelian groupについて次が成り立つ．
+        \[ \Gamma_Y(X, \shF)  \iso \Gamma_Y(V, \shF|_V). \]
+    \end{Claim}
+    \begin{proof}
+        同型写像を次のように定める．
+        \begin{defmap}
+            \rho:& \Gamma_Y(X, \shF)& \to& \Gamma_Y(V, \shF|_V) \\
+            {}& s& \mapsto& s|_V \\
+            {}& \epsilon& \mapedfrom& t
+        \end{defmap}
+        ただし$\epsilon$は次のようなsectionである:
+        \[
+            \Forall{P \in X}
+            \epsilon_P=
+            \begin{cases}{}
+                t_P & (P \in V) \\
+                0 & (P \in Y^c).
+            \end{cases}
+        \]
+        $V \cap Y^c$において$t_P=0$なのでこれはwell-defined.
+        また，$\epsilon$は
+        $t \in \Gamma(V, \shF)$と$0 \in \Gamma(Y^c, \shF)$の張り合わせであるから，
+        gluability axiomより$\epsilon \in \Gamma(X, \shF)$．
+        よって$\rho$全体もwell-defiend.
+    \end{proof}
+
+    $0 \to \shF \to \shI^*$ :: injective resolution of $\shF$をとる．
+    この時，
+    $0 \to \shF|_V \to \shI^*|_V$はinjective/flasque resolution of $\shF|_V$.
+    主張から$\Gamma_Y(X, \shI^*) \iso \Gamma_Y(V, \shI^*|_V)$なので，
+    求めるcohomology groupの同型が得られる．
 
 \section{Mayer--Vietoris Sequence.} %% Ex2.4 
+    $Y_1, Y_2$ :: closed subset of $X$とする．
+    $\shF$ :: sheaf of abelian group on $X$について
+    次の完全列が存在することを証明する．
+    \[
+    \xymatrix@R=10pt
+    {
+        \dots \ar[r]&
+            H_{Y_1 \cap Y_2}^i(X, \shF) \ar[r]&
+            H_{Y_1}^i(X, \shF) \oplus H_{Y_2}^i(X, \shF) \ar[r]&
+            H_{Y_1 \cup Y_2}^i(X, \shF) \\
+            {} \ar[r]& H_{Y_1 \cap Y_2}^i(X, \shF) \ar[r] & \dots
+    }
+    \]
+
+    \begin{Claim}
+        $\shF$ :: flasque sheaf on $X$について，
+        次の完全列が存在する．
+        \[
+        \xymatrix@R=10pt
+        {
+            0 \ar[r]&
+                \Gamma_{Y_1 \cap Y_2}(X, \shF) \ar[r]&
+                \Gamma_{Y_1}(X, \shF) \oplus \Gamma_{Y_2}(X, \shF) \ar[r]&
+                \Gamma_{Y_1 \cup Y_2}(X, \shF) \ar[r]&
+            0.
+        }
+        \]
+    \end{Claim}
+    \begin{proof}
+        9-Lemmaを用いる．
+        \[
+        \xymatrix
+        {
+            {} & 0 \ar[d]& 0 \ar[d]& 0 \ar[d]& {} \\
+            0 \ar[r]&
+            \Gamma_{Y_1 \cap Y_2}(X, \shF) \ar[r]\ar[d]&
+                \Gamma_{Y_1}(X, \shF) \oplus \Gamma_{Y_2}(X, \shF) \ar[r]\ar[d]&
+                \Gamma_{Y_1 \cup Y_2}(X, \shF) \ar[r]\ar[d]&
+            0 \\
+            0 \ar[r]&
+                \Gamma(X, \shF) \ar[r]\ar[d]&
+                \Gamma(X, \shF) \oplus \Gamma(X, \shF) \ar[r]\ar[d]&
+                \Gamma(X, \shF) \ar[r]\ar[d]&
+            0 \\
+            0 \ar[r]&
+            \Gamma(X-(Y_1 \cap Y_2), \shF) \ar[r]\ar[d]&
+                \Gamma(X-Y_1, \shF) \oplus \Gamma(X-Y_2, \shF) \ar[r]\ar[d]&
+                \Gamma(X-(Y_1 \cup Y_2), \shF) \ar[r]\ar[d]&
+            0 \\
+            {} & 0 & 0 & 0 & {}
+        }
+        \]
+        各列はEx2.3dからexact.
+        真ん中の行は明らかにsplit exact sequenceで，
+        一番下の行は以下の写像でexactになる．
+        よって一番上の行もexact.
+        \[
+        \xymatrix@R=5pt
+        {
+            0 \ar[r]&
+            \Gamma(X-(Y_1 \cap Y_2), \shF) \ar[r]&
+                \Gamma(X-Y_1, \shF) \oplus \Gamma(X-Y_2, \shF) \ar[r]&
+                \Gamma(X-(Y_1 \cup Y_2), \shF) \ar[r]&
+            0 \\
+            {} & a \ar@{|->}[r]& (a|_{X-Y_1},-a|_{X-Y_2})& {} & {} \\
+            {} & {}& (a,b) \ar@{|->}[r]& a|_{X-(Y_1 \cup Y_2)}+b|_{X-(Y_1 \cup Y_2)} & {} \\
+        }
+        \]
+    \end{proof}
+    主張から次のexact sequence of complexsが得られる．
+    \[
+    \xymatrix@R=10pt
+    {
+        0 \ar[r] & 
+        \Gamma_{Y_1 \cap Y_2}(X, \shI^*) \ar[r]&
+            \Gamma_{Y_1}(X, \shI^*) \oplus \Gamma_{Y_2}(X, \shI^*) \ar[r]&
+            \Gamma_{Y_1 \cup Y_2}(X, \shI^*) \ar[r]&
+        0.
+    }
+    \]
+    これからderived functorの一般論によって所望の完全列が得られる．
 
 \section{$H^i_P(X, \shF)=H^i_P(X_P, \shF_P)$.} %% Ex2.5 
 
 \section{$\{\shI_{\alpha} \}$ :: direct system of injective sheaves
     then $\lim \shI_{\alpha}$ :: injective sheaf.} %% Ex2.6 
+    $X$ :: noetherian topological space,
+    $\{ \shI_{\alpha} \}_{\alpha \in A}$ :: direct system of injective sheaves of abelian groups on $X$
+    とする．
+    この時，$\varinjlim_{\alpha \in A} \shI_{\alpha}$ :: injectiveであることを示す．
+
+    \begin{Claim}
+        $\shI$ :: sheaf of abelian groups on $X$とする．
+        $\shI$ :: injectiveと，
+        次の可換図式で，$\bar{f}$が存在することは同値である．
+        \[
+        \xymatrix
+        {
+            {}^{\forall}\shR \ar@{^{(}->}[r] \ar[d]_-{{}^{\forall} f}&
+            \Z_{{}^{\forall}U} \ar[ld]^-{{}^{\exists} \bar{f}} \\
+            \shI
+        }
+        \]
+    \end{Claim}
+    \begin{proof}
+        injectiveならば$\bar{f}$が存在することは
+        injectiveの定義から従う．
+        逆を示そう．
+
+        $\alpha \in A$と$\shF_{\alpha}$をThm2.7の証明のStep 3と同様に定義する．
+        また$\alpha' \subsetneq \alpha$と$f: \shR \to \shI$について，
+        $f_{\alpha'}=f|_{\shR \cap \shF_{\alpha'}}$と置く．
+        $\sum:  \bigoplus_{\alpha' \subsetneq \alpha} \shF_{\alpha'} \to \shF_{\alpha}$を
+        $\sum \left(\bigoplus_{\alpha'} s_{\alpha'}\right)=\sum_{\alpha'} s_{\alpha'}$
+        と定めると，これは全射に成る．
+        (2)において$f_{\alpha'}$の拡張$\overline{f_{\alpha'}}$が存在すれば，
+        $\bar{f}=(\bigoplus_{\alpha'} \overline{f_{\alpha'}}) \circ \sum^{-1}$と置くことで
+        （TODO: この$\bar{f}$はwell-defined?）
+        $f$の拡張が得られる(TODO) ．
+        \[
+        (1)
+        \xymatrix@C=30pt@M=5pt
+        {
+            {}& {} & {} \\
+            \shR \ar@{^{(}->}[rr] \ar[rd]^-{f}& {} & \shF_{\alpha}\\
+            {} & \shI & {}
+        }
+        \qquad
+        \qquad
+        (2)
+        \xymatrix@C=5pt@M=5pt
+        {
+            \bigoplus_{\alpha' \subsetneq \alpha} (\shR \cap \shF_{\alpha'})
+            \ar@{^{(}->}[rr]\ar[d] \ar`ld[dd][rdd]_-{\bigoplus_{\alpha'} f_{\alpha'}}&
+                {} &
+                \bigoplus_{\alpha' \subsetneq \alpha} \shF_{\alpha'} \ar@{->>}[d]^-{\sum}\\
+            \shR \ar@{^{(}->}[rr] \ar[rd]^-{f}& {} & \shF_{\alpha}\\
+            {} & \shI & {}
+        }
+        \]
+        \[
+        (3)
+        \xymatrix@C=5pt@M=5pt
+        {
+            \bigoplus_{\alpha' \subsetneq \alpha} (\shR \cap \shF_{\alpha'})
+                    \ar@{^{(}->}[rr]\ar[d] \ar`ld[dd][rdd]_-{\bigoplus_{\alpha'} f_{\alpha'}}&
+                {} &
+                \bigoplus_{\alpha' \subsetneq \alpha} \shF_{\alpha'}
+                    \ar@{->>}[d]_-{\sum}\ar`rd[dd][ldd]^-{\bigoplus_{\alpha'} \overline{f_{\alpha'}}}\\
+                    \shR \ar@{^{(}->}[rr] \ar[rd]^-{f}& {} & \shF_{\alpha} \ar[ld]_-{\bar{f}}\\
+            {} & \shI & {}
+        }
+        \]
+        $\shF=\varinjlim_{\alpha \in A} \shF_{\alpha}$と
+        $|\alpha|$についての帰納法を用いれば，
+        主張が得られる．
+    \end{proof}
+
+    $U \subseteq X$ :: open subset, 
+    $\shR \subseteq \Z_{U}$ :: subsheafを任意に取る．
+    $U$をirreducible componentに分解し
+    $U=\bigsqcup_i U_i$とする．
+    $X$ :: noetherianゆえ$U_i$は有限個しかない．
+
+    今，$\shR(U_i) \subseteq \Z_U(U_i)=\Z$なので
+    $\shR(U_i)$は$s_i \in \Z$で生成されるabelian groupである．
+    $V$ :: open subset of $U_i$を任意に取った時，
+    $\shR(V)$は$(s_i)|_V$で生成される．
+    実際，$\shR(V) \subseteq \Z_U(V)$の生成元を$g \in \Z_U(V)$とすると，
+    $\Z_{U_i}$ :: flasque (II, Ex1.16a)なので$\bar{g}|_V=g$なる
+    $\bar{g} \in \Z_U(U_i)$が存在する．
+    したがって$\bar{g}=r \cdot s_i$となるが，
+    $(s_i)|_V, r \cdot (s_i)|_V \in \shR(V)$であり，
+    $\shR(V)$の生成元はただひとつなので，結局$r=1$となる．
+    すなわち$(s_i)|_V$が$\shR(V)$の生成元．
+    以上から$\shR$は有限個の元$\{s_i\}_i$で生成される．
+    
+    $f: \shR \to \varinjlim \shI_{\alpha}$を任意に取る．
+    すると全ての$i$について
+    $\Gamma(U_i, f)(s_i) \in \Gamma(U_i, \varinjlim \shI_{\alpha})$なので
+    \[ \Gamma(U_i, f)(s_i) \in \Gamma(U_i, \shI_{\alpha_i}) \]
+    なる$\alpha_i$が存在する．
+    したがって$f|_{U_i}: \shR|_{U_i} \to \shI_{\alpha_i}|_{U_i}$が得られる．
+    これは$\shI_{\alpha_i}$ :: injectiveゆえ拡張できて
+    \[ (f|_{U_i})\sidebar: \Z_{U_i} \to \shI_{\alpha_i}|_{U_i} \to (\varinjlim \shI_{\alpha})|_{U_i} \]
+    が得られる．
+    貼り合わせれば$\bar{f}: \shR \to \varinjlim \shI_{\alpha}$となる．
 
 \section{$H^1(S^1, \Z_{S^1}) \iso \Z$.} %% Ex2.7 
 
