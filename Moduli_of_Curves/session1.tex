@@ -1,0 +1,623 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[dvipdfmx, colorlinks=true]{hyperref}
+\usepackage{pxjahyper}
+\usepackage[]{enumitem}
+\usepackage[all]{xy}
+
+\usepackage{chngcntr}
+\makeatletter
+    \newcounter{c@question}
+    \counterwithin{c@question}{section}
+    \newenvironment{question}[0]%
+    {\stepcounter{c@question}\begin{itembox}[l]{問\arabic{section}.\arabic{c@question}}}%
+    {\end{itembox}}%
+    \newenvironment{question*}[0]%
+    {\stepcounter{c@question}\begin{itembox}[l]{問}}% 
+    {\end{itembox}}%
+\makeatother
+
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\Open}{\mathrm{Open}}
+\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
+\newcommand{\GrpSch}{\mathbf{GrpSch}}
+\newcommand{\famF}{\mathcal{F}}
+\newcommand{\famG}{\mathcal{G}}
+\newcommand{\famU}{\mathcal{U}}
+
+\newcommand{\func}[1]{\underline{#1}}
+\newcommand{\ftorM}{\mathcal{M}}
+\newcommand{\ftorGL}{\mathcal{GL}}
+
+\begin{document}
+\title{ゼミノート \#1 \\ Fine/Coarse Moduli Spaceの非存在}
+\author{七条彰紀}
+\maketitle
+
+\begin{question}
+    Fine/Coarse moduli spaceとは何か？
+\end{question}
+moduli spaceは``moduli functor"の情報を
+可能な限り精密に写したschemeのことである．
+その理解のためにはまず``functor of points"の概念が必要である．
+以下，私が過去に書いたノート``Group Scheme"を引用・加筆する．
+
+\section{Functor of Points}
+    圏論で言う``generalized point"の概念を，
+    名前を変えて用いる．
+
+    \begin{Def}
+    \enumfix
+    \begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item 
+    $X, T \in \Sch/S$に対し，
+    $\func{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
+    $T=\Spec R$と書けるときは$\func{X}(T)$を$\func{X}(R)$と書く．
+    したがって$\func{X}$は$\Sch/S$からのcovariant functorと見ることも，
+    $k$-algebraの圏からのcontravariant functorと見ることも出来る．
+    この関手$\func{X}$はfunctor of pointsと呼ばれる．
+
+    \item
+    体$k$上のscheme :: $X$ ($S=\Spec k, X \in \Sch/S$)と
+    field extension :: $k \subseteq K$について，
+    $\func{X}(K)$を$X$の\textbf{$K$-rational points}と呼ぶ．
+
+    \item
+    morphism :: $h: X \to Y$について
+    自然変換$\func{h}: \func{X} \to \func{Y}$は
+    $\phi \mapsto h \circ \phi$のように射を写す．
+    \end{enumerate}
+    \end{Def}
+
+    \begin{Remark}
+        $\Sch$はlocally small categoryである．
+        すなわち，任意の$X, T \in \Sch$について$\func{X}(T)$は集合である．
+        これを確かめるために，
+        $X, Y \in \Sch$を任意にとり，
+        $\Hom(X,Y)$の濃度がある濃度で抑えられることを見よう．
+        射$X \to Y$の作られ方に沿って考える．
+        \begin{enumerate}[label=(\arabic*), leftmargin=*]
+        \item
+            base spaceの間の写像$f: \basesp X \to \basesp Y$をとる．
+            このような写像全体の濃度は高々$|\basesp Y|^{|\basesp X|}$．
+        \item
+            $|Y|$の開集合$U$をとる．
+            開集合全体の濃度は高々$2^{|\basesp Y|}$．
+        \item
+            写像$f^{\#}_U: \shO_Y(U) \to (f_* \shO_X)(U)$を定める．
+            このような写像全体の濃度は高々$|(f_* \shO_X)(U)|^{|\shO_Y(U)|}$．
+        \end{enumerate}
+        したがって$\Hom(X,Y)$の濃度は高々
+        \[|\basesp Y|^{|\basesp X|} \times \prod_{U \in 2^{\basesp Y}} |(f_* \shO_X)(U)|^{|\shO_Y(U)|} \]
+        となる．
+        濃度の上限が存在する（すなわち，ある集合への単射を持つ）から，
+        $\Hom(X,Y)$は集合である．
+%        presheaf on $Y$の圏は
+%        $Y$の開集合が成す圏(small)から
+%        集合の圏(locally small)の圏への
+%        関手圏である．
+%        これがlocally smallであることを示しても良いと思う．
+    \end{Remark}
+
+    \begin{Remark}
+        上の注意から，Yoneda Lemmaが成立する．
+        したがって自然変換$\func{G} \to \func{H}$と
+        射$G \to H$が一対一対応する．
+        このため，
+        schemeの間の射についての議論と
+        functor of pointsの間の射の議論は
+        （ある程度）互いに翻訳することが出来る．
+    \end{Remark}
+
+    \begin{Remark}
+        $K$-rational pointについては，
+        $\func{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
+        ここで$k(x)$は$x$でのresidue fieldである．
+        しかし\cite{HarAG} Chapter.2 Ex2.7から分かる通り，
+        この二つの定義は翻訳が出来る．
+        すなわち，
+        $k(x) \subseteq K$を満たす$x \in X$と，
+        $\Spec k$-morpsihm :: $\Spec K \to X$は一対一に対応する．
+
+        また$X$ :: finite type /$k$であるとき，
+        closed point :: $x \in X$について，
+        $k(x)$は$k$の有限次代数拡大体である．
+        これはZariski's Lemmaの帰結である．
+        したがって$\func{X}(\bar{k})$は$X$のclosed point全体に対応する．
+        ただし$\bar{k}$は$k$の代数閉包である．
+    \end{Remark}
+
+    \begin{Example}
+
+        $\R$上のaffine scheme $X=\Spec \R[x,y]/(x^2+y^2)$の
+        $\R$-rational pointと$\C$-rational pointを考えよう．
+
+        $\Spec \R \to X$の射は環準同型 $\R[x,y]/(x^2+y^2) \to \R$と一対一に対応する．
+        しかし直ちに分かる通り，
+        このような環準同型は
+        \[ (\bar{x}, \bar{y}) \mapsto (0, 0) \]
+        で定まるものしか存在し得ない．
+        ここで$\bar{x}=x \bmod (x^2+y^2), \bar{y}=y \bmod (x^2+y^2)$と置いた．
+        よって$\func{X}(\R)$は1元集合．
+        また，この環準同型が誘導する$\Spec R \to X$の射は
+        1点空間$\Spec \R$を原点へ写す．
+
+        一方，環準同型 $\R[x]/(x^2+1) \to \C$は
+        \[ (\bar{x}, \bar{y}) \mapsto (a, \pm ia) \]
+        （ここで$i=\sqrt{-1}, a \in \R$）で定まることが分かる．
+        すなわち，$\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に対応して，
+        $\R[x]/(x^2+1) \to \C$の環準同型が定まる．
+        逆の対応も明らか．
+        よって$\func{X}(\C)$の元は
+        $\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に
+        対応している．
+    \end{Example}
+
+    \begin{Example}
+        体$k$上のaffine variety :: 
+        $X \subseteq \affine^n_k$を
+        多項式系 :: $F_1,\dots,F_n \in k[x_1,\dots,x_n]$で定まるものとする．
+        すると$k$上の環$R$に対して，次の集合が考えられる．
+        \[ V_R=\left\{ p=(r_1,\dots,r_n) \in R^{\oplus n} ~\middle|~ F_1(p)=\dots=F_n(p)=0 \right\}. \]
+        この集合の元も$R$-value pointと呼ばれる．
+        (\cite{Muk1}ではこちらのみを$R$-value pointと呼んでいる．
+        実際，こちらのほうが字句``value point"の意味が分かりやすいだろう．)
+        $V_R$の点が$\func{X}(R)$の元と一対一に対応することを見よう．
+
+        $X$のaffine coordinate ringを
+        $A=k[x_1,\dots,x_n]/(F_1,\dots,F_n)$とし，
+        $\bar{x}_i=x_i \bmod (F_1,\dots,F_n) ~(i=1,\dots,n)$とおく．
+        $\phi: A \to R$を考えてみると，
+        これは次のようにして定まる．
+        \[ (\bar{x}_1,\dots,\bar{x}_n) \mapsto (r_1,\dots,r_n) \in V_R. \]
+        すなわち，$V_R$の点に対して$\Hom_{\Ring/k}(A,R)$の元が定まる．
+        逆の対応は明らか．
+        そして，$\Hom_{\Ring/k}(A,R)$が
+        $\Hom_{\Sch/\Spec k}(\Spec R, X)=\func{X}(R)$と一対一対応することはよく知られている．
+    \end{Example}
+
+\section{Moduli Functor and Fine/Corse Moduli Space}
+    $A$を代数幾何学的対象の集合とし，
+    $\sim$を$Z$の中の同値関係とする．
+    ``naive moduli problem"は，
+    $M$の点と$A/\sim$の元（同値類）が一対一対応するような
+    scheme :: $M$を見つけよ，という問題である．
+    更に$A/\sim$の元が「連続的に変化」する様子も
+    「エンコード」しているような$M$を見つけよ，
+    という問題を``extended moduli problem"と呼ぶ
+    （正確な定義は\cite{Hos} \S 2.2）．
+    ``extended moduli problem"を定式化するには，
+    「連続的に変化」と「エンコード」を定式化しなくてはならない．
+    前者の為に``family"が定義され，
+    後者の為に``moduli functor"が定義される．
+    すると「エンコード」は関手の表現であると理解できる．
+
+    \subsection{Families}
+    \begin{Def}
+        $\mathcal{P}$を集合のクラス
+        \footnote
+        {
+            集合$X$を変数とする
+            述語$X \in \mathcal{C}$の意味を
+            「$X$はある条件を満たす対象である」と定義した，
+            と考えて良い．
+            「属す」の意味は集合と同様に定める．
+        }
+        とする．
+        集合$B$について，
+        $B$の構造と整合的な構造を持った集合$\famF$と
+        全射写像$\pi: \famF \to B$の組が
+        $\mathcal{P}$の$B$上の\textbf{family}であるとは，
+        各$b \in B$について集合$\pi^{-1}(b) \subseteq \famF$が
+        $\mathcal{P}$に属すということ．
+%        $B$はfamily $\pi: \mathcal{F} \to B$のbaseと呼ばれる．
+    \end{Def}
+    「$B$の構造と整合的な構造」というのは，
+    例えば，
+    $S$が位相空間であって
+    写像$\famF \to S$を連続にするような位相が$\famF$に入っている，
+    ということである．
+    familyの構造は場合毎に明示されなくてはならない．
+
+    用語``family"を厳密に定義しているものは全くと言っていいほど無いが，
+    ここではRenzoのノート
+    \footnote{ \url{http://www.math.colostate.edu/~renzo/teaching/Topics10/Notes.pdf} }
+    の定義を参考にした．
+%    ただし，Renzoのノートの定義は一般化されすぎている．
+%    Renzoのノートでは$\mathcal{P}$を
+%    ``Let $\mathcal{P}$ define a class of objects in some category $\mathcal{C}$."
+%    としているが，
+%    これでは写像$\mathcal{F} \to B$が定義できるか怪しい．
+%    なので私のこのノートでは$\mathcal{P}$を集合のクラスに限定している．
+    ``family"を上のように解釈して不整合が生じたことは，
+    私の経験の中ではない．
+
+    \begin{Remark}
+        moduli theory以外で``family of $\mathcal{C}$"と言えば，
+        単に$\mathcal{C}$の部分集合であろう．
+        ``family parametrized by $S$"の様に言えば，
+        $S$-indexed family (or set)のことを想像するであろう．
+        しかし$S$-indexed family :: $\famF \subset \mathcal{C}$は
+        $S \to \famF$という写像で定まるから，
+        ここでの``family"とは写像の向きが逆である．
+        
+        上の定義を無心に読めば分かる通り，
+        「$\mathcal{C}$のfamily :: $\famF$」と言った時には，
+        $\mathcal{C}$に属すのは$\famF$の部分集合である．
+        属すのは（一般に）$\famF$の元ではない．
+        また$\famF$は$\mathcal{C}$の元の和集合とみなせる．
+        （正確には$\mathcal{C}$の元を$S$に沿って並べたものである．）
+    \end{Remark}
+
+    \begin{Example}
+        $X, B$ :: scheme,
+        $f: X \to B$ :: morphism of schemesをとる．
+        $X$は$f$によって$B$上のfamilyとなる．
+        射のfibreとして実現される，
+        scheme（例えばsmooth curve）のfamilyは
+        deformation theoryの対象である．
+    \end{Example}
+
+    \begin{Example}\label{example:grassmannian}
+        $k$を体，$S$を適当なschemeとする．
+        $\affine^2_k$の原点を通る直線の$S$上のfamilyとして，
+        line bundle :: $\shL \subset \affine^2 \times_k S$を
+        考えることが出来る．
+        $\shL \to S$は射影写像で与えられる．
+        同様に$\affine^n$の$r$次元線形空間の$S$上のfamilyは
+        $r$次元vector bundle :: $\shE \subset \affine^n \times S$である．
+    \end{Example}
+
+    \begin{Example}
+        $k$を適当な体とし，
+        $\proj^1_k$の点$O_i~(i=1,2,3)$を順に$(0:1), (1:0), (1:1)$とする．
+        この時，$PGL_2(k)$は
+        次の全単射で$\proj^1_k$の自己同型写像の$(\proj^1_k)^{\oplus 3}$上のfamilyになる．
+        \begin{defmap}
+            \pi:& PGL_2(k)& \to& (\proj^1_k)^{\oplus 3} \\
+            {}& \phi& \mapsto& (\phi^{-1}(O_i))_{i=1}^3.
+        \end{defmap}
+    \end{Example}
+
+    \begin{Remark}
+        familyに要請される性質として，
+        特に``flat"がある．
+        projective flat familyは，
+        base schemeに適切な条件をつけると
+        各fiber :: $X_t$のHilbert多項式が$t$に依らない，
+        という特徴がある(\cite{HarAG} III, Thm9.9)．
+        詳細は\cite{HarAG} III, 9を参照せよ．
+    \end{Remark}
+
+    \subsection{Moduli Functor}
+    以下の定義は\cite{HaMo}など，
+    Moduli問題に関する殆どの入門書で述べられている．
+    \begin{Def}
+        \textbf{moduli functor}（またはfunctor of families）とは，
+        各scheme :: $S$に対して，
+        $\ftorM(S)$が代数幾何学的対象の$S$上のfamily達を
+        familyの間の同値関係で割ったもの
+        (``$\{ \text{families over }S \}/\sim_S$" in \cite{Hos})である
+        ような $\ftorM : \Sch \to \Set$のことである．
+        morphism :: $f : S \to T$は，
+        $\ftorM$によってpullbackに写される．
+        すなわち，$\phi: \famF \to T$は$\ftorM(f)$によって
+        $\famF \times_T S \to S$に写される．
+        \[\xymatrix{
+                \famF \times_T S \ar[d]_-{\ftorM(f)(\phi)}\ar[r]& \famF \ar[d]^-{\phi}\\
+            S \ar[r]_-{f}& T
+        }\]
+    \end{Def}
+    moduli functorの定義はあえて曖昧に述べられている．
+    これは「出来る限り多くのものをmoduli theoryの範疇に取り込みたい」
+    という思いがあるからである(\cite{HaMo})．
+
+    \subsection{Fine Moduli Space}
+    \begin{Def}
+        scheme :: $M$が
+        moduli fuctor :: $\ftorM$に対するfine moduli spaceであるとは，
+        $M$が$\ftorM$を表現する(represent)ということである．
+        言い換えれば，
+        関手$\func{M}=\Hom_{\Sch}(-, M)$が$\ftorM$と自然同型，ということである．
+    \end{Def}
+
+    \begin{Remark}
+        moduli functor :: $\ftorM$のfine moduli space :: $M$が存在したとしよう．
+        この時，任意の$X \in \Sch$について$\ftorM(X) \iso \func{M}(X)$．
+        これは
+        $X$上の代数幾何学的対象が成す同値類が
+        $M$の$X$-value pointと一対一に対応していることを意味する．
+        したがって，
+        $\ftorM$が指定する代数幾何学的対象の集合の同値類を
+        $M$が「パラメトライズ」していると考えられる．
+    \end{Remark}
+
+    \begin{Def}
+        moduli fuctor :: $\ftorM$に対する
+        fine moduli spaceを$M$であるとする．
+        また$\Psi: \ftorM \to \func{M}$を自然同型とする．
+        $u=\Psi_M^{-1}(\id[M]): \famU \to M$をuniversal familyと呼ぶ．
+    \end{Def}
+
+    universal familyの名前の由来は次の命題に拠る．
+    \begin{Prop}\label{prop:univfamily}
+        任意のfamily :: $\phi: \famF \to B \in \ftorM(B)$は，
+        $\chi=\Psi(\phi): B \to M$とuniversal family :: $u: \famU \to M$の
+        pullback (fiber product)として得られる．
+    \end{Prop}
+    \begin{proof}
+        $\Psi: \ftorM \to \func{M}$は自然同型であるから，
+        $\chi=\Psi(\phi): B \to M$から次の可換図式が得られる．
+        \[\xymatrix@=30pt{
+                \ftorM(B) \ar[d]_-{\Psi_B}& \ftorM(M) \ar[l]_-{\ftorM(\chi)}\ar[d]^-{\Psi_M}\\
+                \func{M}(B) & \ar[l]^-{\func{M}(\chi)} \func{M}(M) \\
+        }\]
+        $u \in \ftorM(M)$を$\ftorM(\chi)$で写すと$\famU \times_M B \to B$になる．
+        同じ$u$を$\func{M}(B)$まで写すと，$\Psi_M(u) \circ \chi=\chi$になる．
+        これを$\Psi_B^{-1}$で写せば$\phi:\famF \to B$．
+        上の図式は可換図式であったから，
+        $\phi=\famU \times_M B \to B$．
+    \end{proof}
+
+    \begin{Example}[\cite{Hos}, Exercise 2.20]
+        例\ref{example:grassmannian}で述べた
+        $\affine^n$の$r$次元線形空間の$S$上のfamily
+        (vector bundle over $S$)の集合を，
+        vector bundleの同型で割った集合を$\ftorM(S)$とする．
+        $f: T \to S$に対する$\ftorM(f)$は，
+        vector bundleへのpost-compositionで自然に定まる．
+
+        このmoduli functorはfine moduli spaceを持つことが知られている．
+        これがGrassmannian varietyである．
+    \end{Example}
+
+    残念ながら，多くのmoduli functorに対してfine moduli spaceが存在し得ない．
+    （このあたりの議論は\cite{HaMo} p.3や\cite{HarDef} p.150にある．
+    この節の終わりでも理由と例を示す．）
+    そのためMumfordは（おそらくGIT本で）
+    fine moduli spaceの代わりとしてcoarse moduli spaceを提唱した．
+
+    \subsection{Coarse Moduli Space}
+    \begin{Def}
+        moduli functor :: $\ftorM$に対して，
+        以下を満たすscheme :: $M$を$\ftorM$のcoarse moduli spaceと呼ぶ．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+            \item
+                自然変換$\eta: \ftorM \to \func{M}$が存在する．
+            \item
+                $\eta$は自然変換$\ftorM \to \func{\tilde{M}}$の中で最も普遍的である:
+                \[
+                \xymatrix
+                {
+                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\eta}& {} \\
+                    {}^{\forall}\func{\tilde{M}} \ar[rr]_-{{}^{\exists!} \func{f}}& {} & \func{M}
+                }
+                \]
+                この図式で$\tilde{M}$ :: scheme, $f: M \to \tilde{M}$．
+            \item
+                任意の代数閉体 :: $k$について
+                $\eta_{\Spec k}: \ftorM(\Spec k) \to \func{M}(\Spec k)$は全単射である．
+        \end{enumerate}
+    \end{Def}
+
+    \begin{Example}
+        楕円曲線の$j$-不変量．
+        後に示すとおり，これはfineでない．
+    \end{Example}
+
+    \subsection{Properties of Fine / Coarse Moduli Spaces}
+    \begin{Prop}
+        moduli functor :: $\ftorM$に対して
+        coarse moduli spaceは同型を除いて一意である．
+    \end{Prop}
+
+    \begin{Prop}[\cite{HarDef}, Prop23.6]
+        scheme :: $M$が
+        moduli functor :: $\ftorM$に対する
+        fine moduli spaceであるならば，
+        $M$は$\ftorM$のcoarse moduli spaceでもある．
+    \end{Prop}
+    この二つをまとめると次の図式に成る．
+    \[\xymatrix{
+        \text{Fine moduli} \ar@{=>}[r]& \text{Coarse moduli} \ar@{=>}[r]& \text{Universality} \ar@{=>}[d]\\
+        {} & {} & \text{Uniqueness}
+    }\]
+    
+    \begin{Prop}[\cite{HarDef}, Prop23.5]
+        $S$ :: schemeのopen subschemeと包含写像が成す圏を
+        $\OpenSubSch(S)$と書くことにする．
+        これは$\Sch/S$のfull subcategoryである．
+
+        moduli functor :: $\ftorM$が
+        fine moduli spaceをもつならば，
+        任意の$S$ :: schemeについて
+        $\ftorM|_{\OpenSubSch(S)}$は$S$上のsheafである．
+        言い換えれば，
+        $\ftorM$はZariski topology上のsheafである．
+    \end{Prop}
+    \begin{proof}
+        $M$ :: fine moduli scheme for $\ftorM$とし，
+        $S$ :: schemeを固定する．
+        $\shF:=\func{M}|_{\OpenSubSch(S)}$は
+        開集合系からのcontravariant functorだから
+        presheafであることは定義から従う．
+        また$\shF$の元はschemeのmorphismである．
+        このことからsheafの公理Identity AxiomとGluability Axiomを
+        満たすことも簡単に分かる．
+        （一応，\cite{HarAG} II, Thm3.3 Step3を参考に挙げる．）
+    \end{proof}
+
+\section{Pathological behaviour.}
+    \begin{question}
+        Fine/Coarse Moduli Spaceはいつ存在し，いつ存在しないのか？
+    \end{question}
+
+    Moduli問題の対象と一対一に対応するschemeが見つかったからと言って，
+    それがfine moduli spaceであるとは言えない．
+    問題と成るのは，familyの同型である．
+    ここではfine moduli spaceが存在するということから導かれる必要条件を二つ考え，
+    それから例を見る．fine moduli spaceが存在するならば
+    例では特にautomorphismの存在とjump phenomenonが
+    fine moduli spaceが存在するための障害と成ることを見る．
+
+    \subsection{Fine moduli spaceが存在することの必要条件．}
+    $\famF, \famG \to S$をfiber of morphismで実現されるfamilyだとする．
+    （したがって$\famF, \famG$はschemeである．）
+    $\famF, \famG$の同値関係を，schemeとしての同型で定めよう．
+    $M$をfine moduli space, 
+    $\eta$をmoduli functorから$\func{M}$への自然同型だとする．
+
+    $\eta_S(\famF): S \to M$は$\famF$のfiberを$M$の点に対応させる．
+    （添字の$S$は以降略す．）
+    \[
+    \xymatrix@R=10pt
+    {
+        \famF \ar[r]& S \ar[r]^-{\eta(\famF)}& M \\
+        \famF_s \ar@{{|}->}[r]& s \ar@{{|}->}[r]& m
+    }
+    \]
+    $\eta(\famG): S \to M$についても同様である．
+    したがって$\famF, \famG$が
+    fiber毎に同型であれば，$\eta(\famF)=\eta(\famG)$となる．
+
+    それぞれのfiberが互いに同型である
+    (i.e. $\Forall{t,s \in S} \famF_t \iso \famF_s$)ような
+    familyをfiberwise trivial family, 
+    対象$X$（なめらかな曲線など）を用いて
+    $X \times S \to S$の形に書けるfamilyをtrivial familyと呼ぶ．
+    上での議論から，fine moduli spaceが存在するならば，
+    fiberwise trivial familyはtrivial familyである
+    (cf. \cite{HarDef} Remark23.1.1)．
+%    これはfiberwise trivialを自然同型$\eta$で写すと定値写像に成り，
+%    定値写像を$\eta^{-1}$で戻せばtrivial familyになるからである．
+
+    \subsection{\texorpdfstring{$j$}{j}-invariant is not a fine moduli space.}
+    一つ例を見よう．
+
+    $S=\affine^1_k-\{0\}$とする．
+    $S$上の楕円曲線のfamily :: $\famF$を次で定める．
+    \[
+        \famF=\zerosa(y^2-x^3-s) \subseteq \affine^2_k \times_k S
+        \xrightarrow{\pr} S.
+    \]
+    $\eta(\famF)$を$j$不変量を用いて$s \mapsto j(\shF_s)$で定める．
+    $j$不変量がcoarse moduliであることは既に見た．
+    計算すると分かる通り，$\eta(\famF)$は定値写像である．
+    したがって$\famF$のそれぞれのfiberは互いに同型である．
+    一方，$\famF'=\zerosa(y^2-x^3-1) \times S$について
+    同様に$\eta(\famF')$を定めると，
+    これも自明に定値写像である．
+    しかし，$\famF \not \iso \famF'$であることが示せる．
+    よって$j$不変量はfine moduliにならない．
+    fine/coarse moduliの一意性から，
+    楕円曲線はfine moduliを持たない．
+    \begin{proof}[proof of $\famF \not \iso \famF'$]
+        \cite{HarAG} I, Ex6.2を参考にする．
+        我々が調べるのは次の二つの環である．
+        それぞれ$\famF, \famF'$である．
+        \[
+            A=k[x,y, t,t^{-1}]/(y^2-x^3-t),
+            \qquad
+            B=k[x,y]/(y^2-x^3-1) \otimes_k k[t,t^{-1}],
+        \]
+        $A$はUFDであるが$B$はUFDでない(GCD domainでさえない)，
+        ということを示す．
+
+        $A$は$k[x,y]_{y^2-x^3}$(1元での局所化)と同型である．
+        $k[x,y]$はUFDであり，irreducible elementでの局所化でこれは保たれる．
+        すなわち$A$はUFD．
+
+        $B$がUFDでないことを示すために，
+        $\bar{x}=x \bmod (y^2-x^3-1)$がnot primeだがirreducibleであることを示す．
+
+        $\bar{x}$ :: not primeを示すために次の等式を考える．
+        \[ \bar{x}^3=\bar{x} \cdot \bar{x} \cdot \bar{x}=(\bar{y}+1) \cdot (\bar{y}-1). \]
+        $\bar{x}$ :: primeと仮定すると，
+        $\bar{y}+1 \mor \bar{y}-1 \in (\bar{x})$となる．
+        そこで例えば
+        \[ \bar{y}+1=a \bar{x} \]
+        なる$\bar{a} \in B$が存在するとしよう．
+        すると$y+1-a x \in I$が得られる．
+        これは楕円曲線$y^2=x^3+1$が$y+1-a x=0$という曲線に含まれていることを意味する．
+        したがって$x=0$と楕円曲線の交点は，
+        存在しても$(x,y)=(0,-1)$の一つのみ，ということになる．
+        しかし実際は$(0,-1)$もこの楕円曲線に属すので矛盾．
+
+        $\bar{x}$ :: irreducibleを示すために$\sigma$と$N$を準備する．
+        $\sigma: k[x,y] \to k[x,y]$を$y \mapsto -y$で他の元は変化させないものとする．
+        すると$\sigma(I) \subseteq I$なので$\sigma: B \to B$が誘導される．
+        さらに$N(a)=a \cdot \sigma(a)$で$N: B \to k[\bar{x}]$を定める．
+        $N$は積について準同型であることに注意せよ．
+
+        $\bar{x}$がirreducibleでないならば，
+        $\bar{x}=fg \bmod I$なる$f,g \in k[x,y]$が存在する．
+        $f \bmod I, g \bmod I$はどちらも単元でない．
+        両辺を$N$で写すと次のように成る．
+        \[ (x^2-N(f)N(g)) \bmod I=0. \]
+
+        したがって$x^2-N(f)N(g)=a(y^2-x^3-1)$なる$a \in k[x,y]$が存在する．
+        左辺は$k[x]$に属すから，$y$の次数を考えると$a=0$が示される．
+        また$N(f), N(g)$の次数は$2$以上であるから，
+        $N(f), N(g)$のいずれかは$k^{\times}$の元である．
+        しかし$N(f)=f \cdot \sigma(f)$ (resp. $N(g)$)が単元ならば$f$ (resp. $g$)も単元であり，
+        $f,g$についての仮定に反する．
+        よって$\bar{x}$ :: irreducible.
+    \end{proof}
+
+    したがってmoduli functorは必ずしもfine moduli spaceを持たない．
+
+    \subsection{Automorphism is an obstruction to the existence of fine moduli space.}
+    Moduli問題の対象が非自明な自己同型写像をもつなら，
+    多くの場合でfine moduli spaceが存在し得ない．
+
+    例を二つ考える．
+    最初の例はschemeの例ではないが，
+    直観的である．
+    \begin{Example}
+        $k$ :: fieldとし，
+        $\affine^2_k$の原点を通る直線を，\kenten{同型を無視して}分類する．
+        直線は全て同型であるから，これは一つしか無い．
+        したがってこの問題に対するfine moduli spaceが存在すれば，
+        それは一点空間である．
+        したがって任意のscheme :: $B$について，
+        $B$上のfamilyは全てtrivial familyと同型である．
+        
+        $L$を$\affine^2$の原点を通る直線とし，
+        その非自明な自己同型$\sigma: L \to L$をとる．
+        $[0,1]$上のtrivial fiber :: $[0,1] \times L$を，
+        次の同値関係で割って商空間を作る．
+        \[ (t, Q) \sim (s, Q) \iff |t-s|=1 \land P=\sigma(Q) \mwhere s,t \in [0,1], P,Q \in L. \]
+        例えば$\sigma$を$(x,y) \mapsto (-x,-y)$と置くと，
+        これは丁度メビウスの和である．
+        そしてこれは$S^1$上のfamilyとなっている．
+
+        今$S^1$上のfamilyとして，
+        $\sigma$を使って構成したものとtrivial family （斜めになった円筒）がある．
+        これらは明らかに同型ではない．
+    \end{Example}
+
+    次は\cite{HaMo} 2.Aで挙げられている例である．
+    \ref{prop:univfamily}の存在（と，fiber productの普遍性）に対して
+    矛盾が生じるように構成する．
+    構成には(two )pullback lemmaを用いる．
+    （生じる矛盾がわかりやすく述べられていないので，再構成した．）
+    \begin{Example}
+        
+    \end{Example}
+
+    ただし，automorphismが存在するにも関わらずfine moduli spaceが
+    存在することもある．
+    nLab参照．
+
+    \subsection{jump phenomenon.}
+    coarse moduli spaceさえ持ち得ないmoduli functorもある．
+%    あるいはmoduli fuctorが``unbounded"であるときに起きる．
+%    このノートでは深追いしない．
+%    詳しくは\cite{Hos} \S 2.4を参照せよ．
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
