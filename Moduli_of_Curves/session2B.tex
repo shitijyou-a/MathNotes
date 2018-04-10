@@ -1,0 +1,77 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[all]{xy}
+
+\usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{pxjahyper}
+
+\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
+\newcommand{\modM}{\mathcal{M}}
+\newcommand{\modC}{\mathcal{C}}
+\newcommand{\modP}{\mathcal{P}}
+
+\begin{document}
+\title{ゼミノート \#2}
+\author{七条彰紀}
+\maketitle
+    以降は，curveと言えば
+    \begin{center}
+        smooth, complete, reduced and connected scheme of dimension $1$ over $\C$
+    \end{center}
+    のことである．
+    \cite{HarAG} II, 6.7より，以上の意味でのcurveはprojectiveである．
+
+    \cite{HaMo}では``curve"の定義に``curve"を用いているので
+    些か定義を定め難い．
+    このノートでは，通常要求されるirreducibilityは要求しないことにした．
+    これは\cite{HaMo} Exercise 1.7に現れる$xy=0$を除外しないためである．
+
+    また，(geometric) genus of curveは通常$g$で表す．
+
+\section{ Moduli spaces we'll be concerned with }
+    以降で考えていくmoduli spaceを簡単に紹介する．
+
+    \subsection{\tp{$\modM_g$}{Mg}
+        :: the coarse moduli space of curves of genus \tp{$g$}{g}. }
+    これまで議論してきた．
+    まだ存在は示されていない．
+    trivial automorphismしか持たないcurveに対応する$\modM_g$の点全体を
+    $\modM_g^0$と書くことにする．
+    これは$\modM_g$の開集合であることが知られている．
+
+    \subsection{\tp{$\modM_{g,n}$}{Mgn}
+        :: the coarse moduli space of pairs of curve of genus \tp{$g$}{g} and \tp{$n$}{n} distinct points. }
+    $\modC_g=\modM_{g,1}$もここで述べる．
+
+    corve of genus $g$ :: $C$と
+    $C$の$n$個の\kenten{互いに異なる}点 :: $p_1,\dots, p_n$を合わせた\kenten{順序}組
+    $(C, p_1,\dots, p_n)$のmoduli spaceを$\modM_{g,n}$と呼ぶ．
+
+    \cite{HaMo}によれば，
+    圏点をつけた条件（互いに異なる点の順序組）は，
+    $\modM_{d,g}$のcompactificationを考える上で必要である．
+    また，curve :: $C$と，互いに異なるとは限らない点の順序無し組の組
+    $(C, \{p_1,\dots,p_n\})$のcoarse moduli spaceを構成することも出来る．
+
+    $(C, p_1,\dots,p_n)$から$n$点$p_1,\dots,p_n$の情報を忘れると，
+    標準的な射$\modM_{g,n} \to \modM_g$が得られる．
+
+    \subsection{\tp{$\modP_{d,g}$}{Pdg}
+        :: the coarse moduli space of pairs of curve of genus \tp{$g$}{g} and line bundle of degree \tp{$d$}{d}. }
+    $\modP_{d,g}$は，
+    curve of genus $g$とその上のline bundle of degree $d$の組$(C, \shL)$から
+    $\shL$の情報を忘れれば，
+    標準的な射$\phi: \modP_{d,g} \to \modM_g$が得られる．
+
+    \begin{enumerate}[leftmargin=*]
+        \item
+            $[C] \in \modM_g^0$上の$\phi$のfiberは
+            $\Pic^d(C)$のconnected componentになっている．
+
+        \item
+            $\modP_{0,g}$は時々Jacobian bundle over $\modM_g$と呼ばれる．
+    \end{enumerate}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}

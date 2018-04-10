@@ -3,6 +3,7 @@
 \usepackage[dvipdfmx, colorlinks=true]{hyperref}
 \usepackage{pxjahyper}
 \usepackage[]{enumitem}
+\usepackage{listings, color}
 \usepackage[all]{xy}
 
 \usepackage{chngcntr}
@@ -17,20 +18,58 @@
     {\end{itembox}}%
 \makeatother
 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\makeatletter
+    \newcounter{c@problem}
+    \counterwithin*{c@problem}{section}
+    \newenvironment{problem}[0]%
+    {\stepcounter{c@problem}\begin{itembox}[l]{問題\arabic{section}.\arabic{c@problem}}}%
+    {\end{itembox}}%
+    \newenvironment{problem*}[0]%
+    {\stepcounter{c@problem}\begin{itembox}[l]{問題}}% 
+    {\end{itembox}}%
+\makeatother
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
 \newcommand{\Sch}{\mathbf{Sch}}
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Ring}{\mathbf{Ring}}
 \newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\Open}{\mathrm{Open}}
 \newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
 \newcommand{\GrpSch}{\mathbf{GrpSch}}
+
 \newcommand{\famF}{\mathcal{F}}
 \newcommand{\famG}{\mathcal{G}}
 \newcommand{\famU}{\mathcal{U}}
 
-\newcommand{\func}[1]{\underline{#1}}
+\newcommand{\spM}{\mathcal{U}}
+
+\newcommand{\ftor}[1]{\underline{#1}}
 \newcommand{\ftorM}{\mathcal{M}}
 \newcommand{\ftorGL}{\mathcal{GL}}
+
+\newcommand{\mfor}{\text{for }}
 
 \begin{document}
 \title{ゼミノート \#1 \\ Fine/Coarse Moduli Spaceの非存在}
@@ -54,27 +93,27 @@ moduli spaceは``moduli functor"の情報を
     \begin{enumerate}[label=(\roman*),leftmargin=*]
     \item 
     $X, T \in \Sch/S$に対し，
-    $\func{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
-    $T=\Spec R$と書けるときは$\func{X}(T)$を$\func{X}(R)$と書く．
-    したがって$\func{X}$は$\Sch/S$からのcovariant functorと見ることも，
+    $\ftor{X}(T)=\Hom_{\Sch/S}(T,X)$を\textbf{$X$の$T$-valued points}と呼ぶ．
+    $T=\Spec R$と書けるときは$\ftor{X}(T)$を$\ftor{X}(R)$と書く．
+    したがって$\ftor{X}$は$\Sch/S$からのcovariant functorと見ることも，
     $k$-algebraの圏からのcontravariant functorと見ることも出来る．
-    この関手$\func{X}$はfunctor of pointsと呼ばれる．
+    この関手$\ftor{X}$はfunctor of pointsと呼ばれる．
 
     \item
     体$k$上のscheme :: $X$ ($S=\Spec k, X \in \Sch/S$)と
     field extension :: $k \subseteq K$について，
-    $\func{X}(K)$を$X$の\textbf{$K$-rational points}と呼ぶ．
+    $\ftor{X}(K)$を$X$の\textbf{$K$-rational points}と呼ぶ．
 
     \item
     morphism :: $h: X \to Y$について
-    自然変換$\func{h}: \func{X} \to \func{Y}$は
+    自然変換$\ftor{h}: \ftor{X} \to \ftor{Y}$は
     $\phi \mapsto h \circ \phi$のように射を写す．
     \end{enumerate}
     \end{Def}
 
     \begin{Remark}
         $\Sch$はlocally small categoryである．
-        すなわち，任意の$X, T \in \Sch$について$\func{X}(T)$は集合である．
+        すなわち，任意の$X, T \in \Sch$について$\ftor{X}(T)$は集合である．
         これを確かめるために，
         $X, Y \in \Sch$を任意にとり，
         $\Hom(X,Y)$の濃度がある濃度で抑えられることを見よう．
@@ -104,7 +143,7 @@ moduli spaceは``moduli functor"の情報を
 
     \begin{Remark}
         上の注意から，Yoneda Lemmaが成立する．
-        したがって自然変換$\func{G} \to \func{H}$と
+        したがって自然変換$\ftor{G} \to \ftor{H}$と
         射$G \to H$が一対一対応する．
         このため，
         schemeの間の射についての議論と
@@ -112,9 +151,9 @@ moduli spaceは``moduli functor"の情報を
         （ある程度）互いに翻訳することが出来る．
     \end{Remark}
 
-    \begin{Remark}
+    \begin{Remark}\label{remark:closedpoint}
         $K$-rational pointについては，
-        $\func{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
+        $\ftor{X}(K)=\{ x \in X \mid k(x) \subseteq K \}$とおく定義もある．
         ここで$k(x)$は$x$でのresidue fieldである．
         しかし\cite{HarAG} Chapter.2 Ex2.7から分かる通り，
         この二つの定義は翻訳が出来る．
@@ -126,12 +165,11 @@ moduli spaceは``moduli functor"の情報を
         closed point :: $x \in X$について，
         $k(x)$は$k$の有限次代数拡大体である．
         これはZariski's Lemmaの帰結である．
-        したがって$\func{X}(\bar{k})$は$X$のclosed point全体に対応する．
+        したがって$\ftor{X}(\bar{k})$は$X$のclosed point全体に対応する．
         ただし$\bar{k}$は$k$の代数閉包である．
     \end{Remark}
 
     \begin{Example}
-
         $\R$上のaffine scheme $X=\Spec \R[x,y]/(x^2+y^2)$の
         $\R$-rational pointと$\C$-rational pointを考えよう．
 
@@ -141,7 +179,7 @@ moduli spaceは``moduli functor"の情報を
         \[ (\bar{x}, \bar{y}) \mapsto (0, 0) \]
         で定まるものしか存在し得ない．
         ここで$\bar{x}=x \bmod (x^2+y^2), \bar{y}=y \bmod (x^2+y^2)$と置いた．
-        よって$\func{X}(\R)$は1元集合．
+        よって$\ftor{X}(\R)$は1元集合．
         また，この環準同型が誘導する$\Spec R \to X$の射は
         1点空間$\Spec \R$を原点へ写す．
 
@@ -151,7 +189,7 @@ moduli spaceは``moduli functor"の情報を
         すなわち，$\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に対応して，
         $\R[x]/(x^2+1) \to \C$の環準同型が定まる．
         逆の対応も明らか．
-        よって$\func{X}(\C)$の元は
+        よって$\ftor{X}(\C)$の元は
         $\zerosa(x^2+y^2) \subseteq \affine^2_{\C}$の点に
         対応している．
     \end{Example}
@@ -165,7 +203,7 @@ moduli spaceは``moduli functor"の情報を
         この集合の元も$R$-value pointと呼ばれる．
         (\cite{Muk1}ではこちらのみを$R$-value pointと呼んでいる．
         実際，こちらのほうが字句``value point"の意味が分かりやすいだろう．)
-        $V_R$の点が$\func{X}(R)$の元と一対一に対応することを見よう．
+        $V_R$の点が$\ftor{X}(R)$の元と一対一に対応することを見よう．
 
         $X$のaffine coordinate ringを
         $A=k[x_1,\dots,x_n]/(F_1,\dots,F_n)$とし，
@@ -176,7 +214,7 @@ moduli spaceは``moduli functor"の情報を
         すなわち，$V_R$の点に対して$\Hom_{\Ring/k}(A,R)$の元が定まる．
         逆の対応は明らか．
         そして，$\Hom_{\Ring/k}(A,R)$が
-        $\Hom_{\Sch/\Spec k}(\Spec R, X)=\func{X}(R)$と一対一対応することはよく知られている．
+        $\Hom_{\Sch/\Spec k}(\Spec R, X)=\ftor{X}(R)$と一対一対応することはよく知られている．
     \end{Example}
 
 \section{Moduli Functor and Fine/Corse Moduli Space}
@@ -321,12 +359,12 @@ moduli spaceは``moduli functor"の情報を
         moduli fuctor :: $\ftorM$に対するfine moduli spaceであるとは，
         $M$が$\ftorM$を表現する(represent)ということである．
         言い換えれば，
-        関手$\func{M}=\Hom_{\Sch}(-, M)$が$\ftorM$と自然同型，ということである．
+        関手$\ftor{M}=\Hom_{\Sch}(-, M)$が$\ftorM$と自然同型，ということである．
     \end{Def}
 
     \begin{Remark}
         moduli functor :: $\ftorM$のfine moduli space :: $M$が存在したとしよう．
-        この時，任意の$X \in \Sch$について$\ftorM(X) \iso \func{M}(X)$．
+        この時，任意の$X \in \Sch$について$\ftorM(X) \iso \ftor{M}(X)$．
         これは
         $X$上の代数幾何学的対象が成す同値類が
         $M$の$X$-value pointと一対一に対応していることを意味する．
@@ -338,7 +376,7 @@ moduli spaceは``moduli functor"の情報を
     \begin{Def}
         moduli fuctor :: $\ftorM$に対する
         fine moduli spaceを$M$であるとする．
-        また$\Psi: \ftorM \to \func{M}$を自然同型とする．
+        また$\Psi: \ftorM \to \ftor{M}$を自然同型とする．
         $u=\Psi_M^{-1}(\id[M]): \famU \to M$をuniversal familyと呼ぶ．
     \end{Def}
 
@@ -349,14 +387,14 @@ moduli spaceは``moduli functor"の情報を
         pullback (fiber product)として得られる．
     \end{Prop}
     \begin{proof}
-        $\Psi: \ftorM \to \func{M}$は自然同型であるから，
+        $\Psi: \ftorM \to \ftor{M}$は自然同型であるから，
         $\chi=\Psi(\phi): B \to M$から次の可換図式が得られる．
         \[\xymatrix@=30pt{
                 \ftorM(B) \ar[d]_-{\Psi_B}& \ftorM(M) \ar[l]_-{\ftorM(\chi)}\ar[d]^-{\Psi_M}\\
-                \func{M}(B) & \ar[l]^-{\func{M}(\chi)} \func{M}(M) \\
+                \ftor{M}(B) & \ar[l]^-{\ftor{M}(\chi)} \ftor{M}(M) \\
         }\]
         $u \in \ftorM(M)$を$\ftorM(\chi)$で写すと$\famU \times_M B \to B$になる．
-        同じ$u$を$\func{M}(B)$まで写すと，$\Psi_M(u) \circ \chi=\chi$になる．
+        同じ$u$を$\ftor{M}(B)$まで写すと，$\Psi_M(u) \circ \chi=\chi$になる．
         これを$\Psi_B^{-1}$で写せば$\phi:\famF \to B$．
         上の図式は可換図式であったから，
         $\phi=\famU \times_M B \to B$．
@@ -381,31 +419,91 @@ moduli spaceは``moduli functor"の情報を
     fine moduli spaceの代わりとしてcoarse moduli spaceを提唱した．
 
     \subsection{Coarse Moduli Space}
-    \begin{Def}
+    \begin{Def}\label{def:coarse-moduli}
         moduli functor :: $\ftorM$に対して，
         以下を満たすscheme :: $M$を$\ftorM$のcoarse moduli spaceと呼ぶ．
         \begin{enumerate}[label=(\roman*), leftmargin=*]
             \item
-                自然変換$\eta: \ftorM \to \func{M}$が存在する．
+                自然変換$\Psi: \ftorM \to \ftor{M}$が存在する．
             \item
-                $\eta$は自然変換$\ftorM \to \func{\tilde{M}}$の中で最も普遍的である:
+                $\Psi$はfunctor of pointsへの自然変換の中で最も普遍的である:
                 \[
                 \xymatrix
                 {
-                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\eta}& {} \\
-                    {}^{\forall}\func{\tilde{M}} \ar[rr]_-{{}^{\exists!} \func{f}}& {} & \func{M}
+                    {} & \ar[ld]_-{{}^{\forall} \tau}\ftorM \ar[rd]^-{\Psi}& {} \\
+                    {}^{\forall}\ftor{\tilde{M}} & {} & \ar@{-->}[ll]^-{{}^{\exists_1} \ftor{f}} \ftor{M}
                 }
                 \]
                 この図式で$\tilde{M}$ :: scheme, $f: M \to \tilde{M}$．
             \item
                 任意の代数閉体 :: $k$について
-                $\eta_{\Spec k}: \ftorM(\Spec k) \to \func{M}(\Spec k)$は全単射である．
+                $\Psi_{\Spec k}: \ftorM(\Spec k) \to \ftor{M}(\Spec k)$は全単射である．
         \end{enumerate}
     \end{Def}
+    条件(ii)は
+    ``$M$ is the best (possible) approximation of $\ftorM$"だとか，
+    ``$M$ is corepresent of $\ftorM$"と表現される．
+
+    \begin{Remark}
+        条件(ii)において$f$の向きを反転させると，
+        coarse moduli spaceの定義が無意義に成る．
+        実際，$f$の向きを反転させた条件を考えると，
+        $\Sch$のinitial object :: $\emptyset$が条件を満たす．
+        普遍ならば一意なので，
+        任意のmoduli functorに対するcoarse moduli spaceは空集合$\emptyset$しかなくなる．
+        これは条件(iii)を満たさないので，
+        coarse moduli spaceは一切存在しないことに成る．
+    \end{Remark}
+
+    \begin{Remark}
+        条件(iii)で$k$は一般の体でなく代数閉体に限っている．
+        これは注意(\ref{remark:closedpoint})が主な理由である．
+        つまり，$\ftor{M}(k)$の濃度が最も大きくなる
+        （$M$の点を最も精度よく検出できる）のは
+        $k$が代数閉体であるときである．
+    \end{Remark}
 
     \begin{Example}
-        楕円曲線の$j$-不変量．
-        後に示すとおり，これはfineでない．
+        楕円曲線の$j$-invariant．
+        後に示すとおり，これはfineでないcoarse moduli spaceである．
+        自然変換$\Psi$は$j$-invariant（楕円曲線についての関数）を用いて
+        \[ \Psi_S(\famF \to S): S \to \affine^1; \qquad s \mapsto j(\famF_s) \]
+        のように定義できる．
+        条件(iii)は\cite{HarAG} IV, Thm4.1で示されている．
+        以下，条件(ii)を示す．
+
+        ここでは\cite{HarDef} Prop 26.3の証明を参照した．
+        \cite{JTev}では違う方針の証明が述べられている．
+        
+        $B=\Spec k[\lambda, 1/\lambda, 1/(1-\lambda)]$とし，
+        family :: $\phi: \famF \to B$を
+        $\lambda$をパラメータとするfamily :: $y^2=x(x-1)(x-\lambda)$で定める．
+        $j$-invariantは
+        \[ j(\lambda)=\frac{(1-\lambda+\lambda^2)^3}{\lambda^2(1-\lambda)^2} \]
+        で定める．
+        また，$\lambda \in B$を以下の$6$元のいずれかへ写す$6$つの$B$の自己同型群$G$は，
+        $B$に作用する位数$6$の群となる．
+        \[ \lambda, 1-\lambda, 1/\lambda, 1/(1-\lambda), (\lambda-1)/\lambda, \lambda/(\lambda-1). \]
+
+        今，scheme :: $M'$と自然変換$\Psi': \ftorM \to \ftor{M'}$が存在したとしよう．
+        $\phi:\famF \to B$の$\Psi'$による像を$\chi': B \to M'$とする．
+
+        $y^2=x(x-1)(x-\lambda)$と$y^2=x(x-1)(x-(1-\lambda))$は同型であることが知られている．
+        他の$1/\lambda, 1/(1-\lambda), \dots$についても同様である．
+        $\chi'$はfiberの同型類と$M'$の点を（$B$の$6$点を経由して）一対一対応させる．
+        なので，任意の$g \in G$について$\chi' \circ g=\chi'$すなわち，
+        $\chi'$は$G$-invariant mapである．
+
+        $G$-invariant mapは$B$の$G$によるcategorical quotientを介する二つの射に分解される．
+        GIT quotientの理論により，
+        \[ B \sslash G=\Spec (k[\lambda]^G) \]
+        がcategorical quotient（特にgood quotient．\cite{Hos}参照．）．
+        そしてこれは$\affine^1_{j}=\Spec k[j]$に等しい（\cite{HarAG} IV, Thm4.1参照）．
+        なので$\chi': B \to M'$は$B \to \affine^1_{j} \to M'$に分解される．
+        こうして$\psi: \affine^1_{j} \to M'$が得られた．
+
+        この$\psi$によって以下の図式が可換であることを確かめる．
+        (TODO)
     \end{Example}
 
     \subsection{Properties of Fine / Coarse Moduli Spaces}
@@ -441,7 +539,7 @@ moduli spaceは``moduli functor"の情報を
     \begin{proof}
         $M$ :: fine moduli scheme for $\ftorM$とし，
         $S$ :: schemeを固定する．
-        $\shF:=\func{M}|_{\OpenSubSch(S)}$は
+        $\shF:=\ftor{M}|_{\OpenSubSch(S)}$は
         開集合系からのcontravariant functorだから
         presheafであることは定義から従う．
         また$\shF$の元はschemeのmorphismである．
@@ -450,49 +548,50 @@ moduli spaceは``moduli functor"の情報を
         （一応，\cite{HarAG} II, Thm3.3 Step3を参考に挙げる．）
     \end{proof}
 
-\section{Pathological behaviour.}
+    \begin{Remark}\label{remark:trivfamily}
+        それぞれのfiberが互いに同型である
+        (i.e. $\Forall{t,s \in S} \famF_t \iso \famF_s$)ような
+        familyをfiberwise trivial family, 
+        対象$X$（なめらかな曲線など）を用いて
+        $X \times S \to S$の形に書けるfamilyをtrivial familyと呼ぶ．
+
+        fine moduli spaceが存在するならば，
+        fiberwise trivial familyはtrivial familyである
+        (cf. \cite{HarDef} Remark 23.1.1)．
+        実際，任意のfiberが$X$と同型であるようなfamily :: $\famF \to S$
+        から得られる$\Psi_S(\famF \to S): S \to M$は
+        $X$に対応する点へのconstant mapになっている．
+        $\Psi_S(X \times S \to S)$も明らかに同じconstant mapとなるから，
+        $\Psi_S$ :: isomorphismより
+        $X \times S \to S \sim \famF \to S$．
+    \end{Remark}
+
+\section{Non-existence of Fine/Coarse Moduli Space}
     \begin{question}
-        Fine/Coarse Moduli Spaceはいつ存在し，いつ存在しないのか？
+        Fine/Coarse Moduli Spaceはいつ存在するのか？
+    \end{question}
+    十分条件を示すのではなく，
+    \footnote
+    {
+        十分条件については次の命題が有る:
+        \url{ https://stacks.math.columbia.edu/tag/01JJ }.
+        次のページでは，
+        この命題を用いてGrassmannian functorが表現可能であることを示している:
+        \url{ https://stacks.math.columbia.edu/tag/089R }.
+    }．
+    ここでは問を次のように限定する．
+    \begin{question}
+        Fine/Coarse Moduli Spaceはいつ存在しないのか？
     \end{question}
 
     Moduli問題の対象と一対一に対応するschemeが見つかったからと言って，
     それがfine moduli spaceであるとは言えない．
     問題と成るのは，familyの同型である．
-    ここではfine moduli spaceが存在するということから導かれる必要条件を二つ考え，
-    それから例を見る．fine moduli spaceが存在するならば
-    例では特にautomorphismの存在とjump phenomenonが
+    以下では特にautomorphismの存在とjump phenomenonが
     fine moduli spaceが存在するための障害と成ることを見る．
 
-    \subsection{Fine moduli spaceが存在することの必要条件．}
-    $\famF, \famG \to S$をfiber of morphismで実現されるfamilyだとする．
-    （したがって$\famF, \famG$はschemeである．）
-    $\famF, \famG$の同値関係を，schemeとしての同型で定めよう．
-    $M$をfine moduli space, 
-    $\eta$をmoduli functorから$\func{M}$への自然同型だとする．
-
-    $\eta_S(\famF): S \to M$は$\famF$のfiberを$M$の点に対応させる．
-    （添字の$S$は以降略す．）
-    \[
-    \xymatrix@R=10pt
-    {
-        \famF \ar[r]& S \ar[r]^-{\eta(\famF)}& M \\
-        \famF_s \ar@{{|}->}[r]& s \ar@{{|}->}[r]& m
-    }
-    \]
-    $\eta(\famG): S \to M$についても同様である．
-    したがって$\famF, \famG$が
-    fiber毎に同型であれば，$\eta(\famF)=\eta(\famG)$となる．
-
-    それぞれのfiberが互いに同型である
-    (i.e. $\Forall{t,s \in S} \famF_t \iso \famF_s$)ような
-    familyをfiberwise trivial family, 
-    対象$X$（なめらかな曲線など）を用いて
-    $X \times S \to S$の形に書けるfamilyをtrivial familyと呼ぶ．
-    上での議論から，fine moduli spaceが存在するならば，
-    fiberwise trivial familyはtrivial familyである
-    (cf. \cite{HarDef} Remark23.1.1)．
-%    これはfiberwise trivialを自然同型$\eta$で写すと定値写像に成り，
-%    定値写像を$\eta^{-1}$で戻せばtrivial familyになるからである．
+    注意 (\ref{remark:trivfamily})の内容
+    を用いて証明する．
 
     \subsection{\texorpdfstring{$j$}{j}-invariant is not a fine moduli space.}
     一つ例を見よう．
@@ -503,15 +602,15 @@ moduli spaceは``moduli functor"の情報を
         \famF=\zerosa(y^2-x^3-s) \subseteq \affine^2_k \times_k S
         \xrightarrow{\pr} S.
     \]
-    $\eta(\famF)$を$j$不変量を用いて$s \mapsto j(\shF_s)$で定める．
+    $\Psi(\famF)$を$j$不変量を用いて$s \mapsto j(\shF_s)$で定める．
     $j$不変量がcoarse moduliであることは既に見た．
-    計算すると分かる通り，$\eta(\famF)$は定値写像である．
+    計算すると分かる通り，$\Psi(\famF)$は定値写像である．
     したがって$\famF$のそれぞれのfiberは互いに同型である．
     一方，$\famF'=\zerosa(y^2-x^3-1) \times S$について
-    同様に$\eta(\famF')$を定めると，
+    同様に$\Psi(\famF')$を定めると，
     これも自明に定値写像である．
     しかし，$\famF \not \iso \famF'$であることが示せる．
-    よって$j$不変量はfine moduliにならない．
+    よって注意 (\ref{remark:trivfamily})から$j$不変量はfine moduliにならない．
     fine/coarse moduliの一意性から，
     楕円曲線はfine moduliを持たない．
     \begin{proof}[proof of $\famF \not \iso \famF'$]
@@ -574,7 +673,7 @@ moduli spaceは``moduli functor"の情報を
     多くの場合でfine moduli spaceが存在し得ない．
 
     例を二つ考える．
-    最初の例はschemeの例ではないが，
+    最初の例は構成の仕方がschemeaticでないが，
     直観的である．
     \begin{Example}
         $k$ :: fieldとし，
@@ -599,24 +698,325 @@ moduli spaceは``moduli functor"の情報を
         これらは明らかに同型ではない．
     \end{Example}
 
-    次は\cite{HaMo} 2.Aで挙げられている例である．
-    \ref{prop:univfamily}の存在（と，fiber productの普遍性）に対して
-    矛盾が生じるように構成する．
-    構成には(two )pullback lemmaを用いる．
-    （生じる矛盾がわかりやすく述べられていないので，再構成した．）
+    より抽象的な設定で証明しよう．
+    これもfiberwise trivial but non-trivial familyを構成すれば良い．
+    ここでは\cite{IntroFam} \S4.8.2と
+    M.Hoeveのノート``An Introduction to Moduli Spaces of Curves"
+    Example 3.2を参照した．
+    他，
+    D.Eisenbud and J.Harris ``Schemes:The Language of Modern Algebric Geometry"
+    IV.B\ viiにも同様のことが記述されているのを発見した．
     \begin{Example}
-        
+        $X$をscheme over $\Z$に
+        これがnon-trivial automorphism :: $\sigma: X \to X$を持つとする．
+
+        order of $\sigma$を$n$とする．
+        すなわち，$n$を$\sigma^n=\id$となる最小のものとする．
+        $n$は$2$以上の整数または無限大である．
+        $\sigma$で生成される群を$G_{\sigma}$とする．
+        これはcyclic group of order $n$．
+
+        base of familyとなるscheme :: $B$と
+        $B$のnon-trivial isomorphism :: $\tau: B \to B$を定める．
+        これは$n$の値で場合分けすれば具体的に与えることが出来る．
+        \begin{description}
+            \item[$n=2$: ] 
+                $B=\proj^1-\{(\pm 1:1)\}$とし，
+                $\tau$を座標の交換$(x:y) \mapsto (y:x)$とする．
+            
+            \item[$2<n<\infty$: ]
+                $B=\proj_{\C}^1-\{(\pm i:1)\}$とし，
+                $\tau$を$2 \pi/n$回転
+                （アフィン平面の回転から誘導されるもの）とする．
+
+            \item[$n=\infty$: ]
+                $B=\affine_{\C}^1$とし，
+                $\tau$を$z \mapsto z+2 \pi i$とする．
+        \end{description}
+        いずれの場合でも$\tau$で生成される群$G_{\tau}$は
+        cyclic group of order $n$であり，
+        $\psi: \sigma \mapsto \tau$によって
+        $G_{\sigma}$と同型である．
+        さらに$\tau$は固定点をもたず，
+        $B$はsmooth irreducible scheme over $\C$となっている．
+
+        $G_{\sigma}$の$X \times B$への作用を次で定める
+        \footnote
+        {
+            \cite{IntroFam} \S4.8.2ではこの辺りに大きな間違いがある．
+        }．
+        \begin{defmap}
+            \alpha:& G_{\sigma} \times (X \times_{\Z} B)& \to& X \times_{\Z} B \\
+            {}& (g, (x, b))& \mapsto& (g(x), \psi(g)(b))
+        \end{defmap}
+        $B$にも$G_{\sigma}$の自明な作用を与えると，
+        $\phi: (X \times B)/G_{\sigma} \to B/G_{\sigma}$が得られる．
+
+        この時，
+        $\phi: (X \times B)/G_{\sigma} \to B/G_{\sigma}$は
+        fiberwise trivial but non-trivial familyである．
+        \begin{proof}
+            (TODO)
+        \end{proof}
     \end{Example}
 
-    ただし，automorphismが存在するにも関わらずfine moduli spaceが
-    存在することもある．
-    nLab参照．
-
-    \subsection{jump phenomenon.}
+    \subsection{Jump Phenomenon.}
     coarse moduli spaceさえ持ち得ないmoduli functorもある．
+
+    \begin{Prop}[\cite{Hos} Lemma2.27, \cite{HarDef}]
+        moduli functor :: $\ftorM$を考える．
+        さらに$\ftorM$とは無関係に
+        algebraically closed field :: $k$をとる．
+        family :: $\famF \to \affine_k^1 \in \ftorM(\affine_k^1)$が
+        以下の条件を満たすと仮定する．
+        すると$\ftorM$のcoarse moduli spaceは
+        finite type over $k$\kenten{ではない}．
+        この条件とはすなわち:
+        \[
+            \famF_{s} \sim \famF_{t}
+            \ \mand\ 
+            \famF_{0} \not \sim \famF_{s} \quad (\mfor s,t \in \affine^1-\{0\}).
+        \]
+        
+        特にthe best approximation of $\ftorM$ 
+        （定義\ref{def:coarse-moduli}直後）が
+        代数閉体上finite typeなschemeであった場合，
+        $\ftorM$はcoarse moduli spaceを持たない．
+    \end{Prop}
+    命題の条件を満たすfamilyを，
+    jump phenomenonが起きているfamilyと呼ぶ．
+    \begin{proof}
+        代数閉体$k$上finite typeなscheme :: $M$をとり，
+        自然変換$\Psi: \ftorM \to \ftor{M}$が存在したとしよう．
+        主張にあるfamily :: $\famF \to \affine^1$を$\Psi$で写したものを
+        $f: \affine^1 \to M$としよう．
+
+        $\affine^1$のclosed pointsは$M$のclosed pointに写る
+        \footnote
+        {
+            finite type over an algebraically closed fieldという条件は，
+            このことを示すために付いている．
+            実際のところは``$M$ :: Jacobson and $f$ :: locally finite type"
+            という条件が必要十分である．
+            詳細は\url{ https://stacks.math.columbia.edu/tag/01TB }を参照して欲しい．
+            この必要十分条件が成立する典型例が今回の$M,f$の条件である．
+        }．
+        $k$ :: algebraically closed fieldかつ
+        $\affine_k^1, M$共にfinite type over $k$であるから，
+        closed pointsを考えることは$\Spec k$からの射を考えることに等しい．
+        今，functor of pointsの間のnatural transformation :: 
+        \[ \ftor{f}(k): \ftor{\affine^1}(k) \to \ftor{M}(k) \]
+        による$\ftor{\affine^1}(k) \ni s: \Spec k \to \affine^1$の像は，
+        $\ftor{f}(s) \in \ftor{M}(k)$である．
+        このことをclosed pointsの言葉に書きなおせば:
+        closed point :: $s(\Spec k) \in \affine^1$の像は$M$のclosed point.
+        
+        $f$がcoarse moduli spaceならば，
+        $\Psi_k: \ftorM(k) \to \ftor{M}(k)$は全単射である．
+        $s \in \affine^1$に対応する$\Spec k \to \affine^1$を$\bar{s}$と書くことにすると，
+        \[ \ftor{f}(\bar{s})=f \circ \bar{s}=\Psi_k(\famF_s): \Spec k \to M. \]
+        $s \neq 0$ならば，
+        $\famF_s \not \sim \famF_0$なので$\Psi_k(\famF_s) \neq \Psi_k(\famF_0)$．
+        これは$\Spec k$は1点空間だから，これは次と同値．
+        \[ (f \circ \bar{s})(\Spec k)=f(s) \neq f(0)=(f \circ \bar{0})(\Spec k). \]
+        $s, t \neq 0$ならば$\famF_s \sim \famF_t$であるから，
+        合わせて$f^{-1}(f(\{0\}))=\affine^1-\{0\}$となる．
+        これはclosed subsetではない．
+        しかし$f(\{0\}) \subset M$はclosed setであり，
+        かつ$f$は連続であるから，
+        これは有り得ない．
+    \end{proof}
+    \begin{Remark}
+        命題中の$\affine^1$と$0 \in \affine^1$は，
+        より一般に
+        connected scheme of finite type over an algebraically closed fieldと
+        closed pointに置き換えられる．
+        connectedはclosed pointの補集合がclosedにならないために必要である．
+        $M$の条件「finite type over $k$ではない」についても，
+        脚注の通り一般化出来る．
+    \end{Remark}
+
+    \begin{Example}[\cite{HaMo} Exercise (1.7)]
+        moduli functor :: $\ftorM$を，
+        ``flat families of reduced plane curves of degree 2 up to isomorphism"
+        のmoduli functorとして定める．
+        ただし，ここでは$\affine_{\C}^2$の曲線を考える．
+        $\ftorM(\C)$の元，すなわち``reduced plane curves of degree 2"の同型類は
+        2つしかないことに注意する．
+
+        以下，the best approximation of $\ftorM$は$\Spec \C$であることを示す．
+        $t$-line :: $\affine_{\C}^1$上のfamily :: $xy=t$でjump phenomenonが起きるため，
+        $\ftorM$はcoarse moduli spaceを持たない．
+
+        \begin{proof}
+        \paragraph{There exists natural transformations $\ftorM \to \ftor{\C}$.}
+        $\ftorM(B) \ni \phi: \famF \to B$に対し，
+        $\Psi(\phi) \in \ftor{\C}(B)$を次のように定める．
+        $b \in B$について$\famF_b \subseteq \affine^2_{\C}$であることに注意せよ．
+        \[ B \ni b \mapsto \famF_b \xrightarrow{\pr} \affine^1_{\C} \xrightarrow{\pr} \Spec \C \]
+        これは自然変換である．
+        よって$\ftorM \to \ftor{M}$の自然変換が存在する．
+
+        \paragraph{The best approximation of $\ftorM$ is $\Spec \C$.}
+        scheme :: $M'$と自然変換
+        $\Psi': \ftorM \to \ftor{M'}$をとって固定する．
+        $\Psi$は引き続き自然変換$\ftorM \to \ftor{\C}$とする．
+        $\phi: \famF \to B$ :: flat family of smooth conicとする．
+        このfamilyはfiberwise trivial familyだから，
+        $\Psi'_B(\phi): B \to X$は定値写像である．
+        その値を$x \in X$とすると，
+        包含写像$k(x) \inclmap \C$から
+        射$\pi: \Spec \C \to X$が定まる(\cite{HarAG} II, Ex2.7)．
+        これは$\pi(\Spec \C)=\{ x \}$を満たす．
+        この射に依って$\Psi'(\phi)=\pi \circ \Psi(\phi)$となることは明らか
+        (TODO: どうすれば$k(x) \inclmap \C$の存在が保証できる？)．
+        \end{proof}
+    \end{Example}
+
 %    あるいはmoduli fuctorが``unbounded"であるときに起きる．
 %    このノートでは深追いしない．
 %    詳しくは\cite{Hos} \S 2.4を参照せよ．
+
+\section{Dealing with Non-existence of Fine/Coarse Moduli Space.}
+    fine moduli spaceが存在するための障害を
+    回避する方法は幾つかある．
+    
+    以下，moduli問題の対象をobjectと呼ぶ．
+
+    \subsection{Sub-Moduli Functor of ``Objects Without Non-Trivial Automorphism".}
+    考えているmoduli問題を修正し，
+    対象を自明な自己同型しか持たないものに限定する．
+    すると多くの場合でfine moduliが存在しうる．
+    しかし，この修正されたmoduli問題が解けても，
+    元のmoduli問題に関する情報が殆ど出てこないことが多い．
+
+    \subsection{Rigidifying of Moduli Problem.}
+    これは，追加の情報を考慮に入れることで，
+    objectsを予め大雑把に分類しておく，
+    ということである．
+    追加の情報としては以下のようなものが考えられる．
+    \begin{enumerate}
+        \item fixed sub-objects.
+        \item level structure.
+        \item ordered sets of (higher-order) Weierstrass points．
+    \end{enumerate}
+
+    fixed sub-objectsは，
+    例えば幾つかの固定された点を通る曲線のmoduli問題を考えるということである．
+    この場合，十分に固定点の個数を大きくすれば，
+    non-trivial automorphismが存在しなくなる．
+    この修正によって得られるmoduli spaceが
+    どれだけ元の問題のmoduliを反映しているか，
+    というのは不透明である．
+    しかしこの修正はしばしば自然に現れる．
+
+    elliptic curve over $\C$のWeil paring, level structureについては，
+    \cite{DiaShur}に詳しい記述がある．
+    F.Volochによるcourse noteにも整理された記述がある．
+    \footnote{\url{ https://www.ma.utexas.edu/users/voloch/390-10.html }}
+    ここでは簡単な説明をする．
+    level structureはWeil paringという写像を用いて定義される．
+    これはsympletic geometryにおける
+    sympletic form (i.e. non-degenerate alternative bilinear form)のアナロジーである．
+    $X$から定まるJacobian varietyを$J(X)$ \ (see \cite{HarAG} pp.323-326)とすると，
+    $X$のlevel-$n$ data( or $\Gamma(N)$-structure)とは，
+    $J(X)[n]=\{x \in J(X) \mid n \cdot x=0 \}$の$2g$個の点（$g$はgenus of $X$）の順序集合であって，
+    そのWeil paringが特定の値（primitive $n$-th root of $1$）をとるものである．
+    level $n$-structureは，schemeとlevel-$n$ dataの組である．
+    $(X, p_1, \dots, p_{2g})$と$(X', p'_1, \dots, p'_{2g})$の間の射は，
+    射$f:X \to X'$であって，
+    $f$から誘導される$f^*: J(X) \to J(X')$が$p_i \mapsto p'_i$の様に写すものである．
+    level structureを考慮してmoduli問題を修正すると，
+    元の問題のmoduli spaceのfinite coverが得られる．
+    level $n$, genus $g$のcurveのmoduli spaceを$\spM_g^{(n)}$と書く．
+
+    こちらを考えても元の問題のmoduli spaceのfinite coverが得られる
+    修正としては，
+    ordered sets of (higher-order) Weierstrass pointsを考える，
+    というものもある．
+    Weierstrass pointsの定義は\cite{GAC} pp.41-44にある．
+    
+
+    \begin{problem}
+        (\cite{HaMo} Exercise (2.1))
+        \begin{enumerate}[label=\arabic*), leftmargin=*]
+        \item
+            $n \geq 3, g \geq 1$について，
+            level $n$ strcutreを持つcurve of genus $g$ :: $C$は
+            non-trivial automorphismを持たないことを示せ．
+            すなわち，
+            curve of genus $g$ :: $C$とそのnon-trivial automorphism :: $\sigma$であって，
+            $\sigma^*: J(C) \to J(C)$が$n$-torsion pointを移動させないものは
+            存在しないことを示せ．
+
+        \item
+            $n=2$ではこれが偽であることを示せ．
+
+        \item
+            $j: \affine^1_{\lambda} \to \affine^1_{j}$は
+            $\spM_{1}^{(2)} \to \spM_1$の
+            covering map associated to level $2$ structures of curves of genus $1$
+            であることを示せ．
+
+        \item
+            $\affine^1_{\lambda}$
+            :: NOT fine moduli space
+            for curves of genus 1 with level 2 structure.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        (\cite{HaMo} Exercise (2.2))
+        $m$-line :: $\affine^1_{\C, m}$をパラメータ空間とする
+        $\C$上の曲線族$f_m=x^3+y^3+z^3+mxyz$を考える．
+
+        \begin{enumerate}[label=\arabic*), leftmargin=*]
+        \item
+        $f_m$が楕円曲線と成るような$\affine^1_{\C, m}$の集合$U$を求めよ．
+        また，$j$-invariant ($j(m)$)を計算せよ．
+
+        \item
+        $j:U \to \affine^1_{\C, j}$がGalois coveringであり，
+        そのGalois groupが$SL_2(\Z/3\Z)$であることを示せ．
+
+        \item
+        $U$ ::
+            fine moduli space for curves of genus $1$
+            with full level $3$-structure.
+        \end{enumerate}
+    \end{problem}
+    \begin{enumerate}[label=\arabic*), leftmargin=*]
+    \item 
+        sagemathを利用して$j$-invariantを計算する．
+        \lstinputlisting[language=Python]{./excersise2_2a.py}
+        結果を整理すると次のよう．
+        \[ j(m)=-\left( \frac{m(m^3-6^3)}{m^3+3^3} \right)^3. \]
+        したがって$s=m^3+3^3$とおくと，
+        \[
+            U
+            =(\affine^1)_{s}
+            =\affine^1-\{-3, -3\omega, -3\omega^2\}
+            \ \mwhere \omega=e^{2 \pi i/3}.
+        \]
+
+    \item
+        今は$U, \affine^1$共にsommth, irreducibleなので，
+        $j$がGalois coveringであることは，
+        $j$による$k(m)=K(\affine^1)$のpullbackから誘導される体拡大
+        $k(m)/k(j)$がGalois extensionであることと同値．
+
+        $k(j)$上$m$は$12$次の元．
+        なので$k(m)/k(j)$は12次Galois extension．
+    \end{enumerate}
+
+    \subsection{Representation by Algebraic Stacks.}
+    moduli functorをschemeで表現できないのなら
+    もっと「情報量が多い」もので表現しよう，
+    というのが動機である．
+    stackはgroupoid（全ての射がisomorphismである圏），
+    または2-functor（$\Sch^{op}$から圏の圏$\Cat$へのsheaf）として定義される．
+    詳細はTom\'as L. G\'omez ``Algebraic stacks"
+    \footnote{ \url{ https://arxiv.org/abs/math/9911199 }. }．
 
 \bibliographystyle{jplain}
 \bibliography{reference}
