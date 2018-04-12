@@ -6,11 +6,12 @@ MathNotes
 ------
 フォルダ名とその内容の対応は以下の通りです．
 
-* Hartshorne_AG_Ch1 -- Hartshorne "Algebraic Geometry" Chapter Iに関連するノート群．演習問題への解答が主．
+* Hartshorne_AG_Ch1 -- Hartshorne ``Algebraic Geometry" Chapter Iに関連するノート群．演習問題への解答が主．
 * Hartshorne_AG_Ch2 -- 同じくChapter IIに関連するノート群．
+* Moduli_of_Curves -- Harris, Morrison ``Moduli of Curves"のセミナーのためのノート群．
 * SylowTheorem -- Sylowの定理のできるだけself-containedな証明と応用．
-* HilbeltsNullstellensatz -- Hilbertの零点定理の様々な定式化と証明．
-* BernsteinTheorem -- Cantor-Schroder-Bernsteinの定理の極めて丁寧な証明．
+* HilbeltsNullstellensatz -- Hilbertの零点定理の証明．
+* BernsteinTheorem -- 濃度論におけるBernsteinの定理の気が済むまでわかりやすくした証明．
 * FunctionalAnalysis -- 関数解析の定義・定理をまとめたチートシート．
 * JustOne -- そういえば証明したことがないな，とか，知っていると便利な定理とか．
 

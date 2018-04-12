@@ -11,17 +11,7 @@
     この記事では文字$\mathbf{x}$を一貫して不定元を表すために使う．
     $\mathbf{x}=(x_1, \dots, x_d)$とする．
 
-%   TODO: どうせなら使用したNoether normalization theoremと\cite{atimac}, 
-%   Prop5.7の証明も書いてself-containedにしたい．
-%   重要定理だけあって，証明の方針はかなり多い．
-%   Jacobson ringであることを用いる証明，
-%   幾何的なNoether normalization theoremを用いる証明，
-%   Rabinowitsch's Trickを用いる証明，
-%   Artin-Tate Lemmaを用いる証明(\cite{atimac}, Prop7.9)，
-%   valuation ringを用いる証明(\cite{atimac}, Cor5.24)，
-%   Chevalley's theoremを用いる証明，
-%   TaoとEnrique Arrondoによる終結式を用いる証明，
-%   モデル理論的な証明．
+
 
 \section{The Statement}
     \begin{Thm}[Hilbert's Nullstellensatz (weak form)]
@@ -120,6 +110,23 @@
     同様に，$f$は$C$の単元$\frac{f+\I{p}}{1}$へ写り，最終的に単元へ写る．
     つまり$g \in \I{p}$について$\phi(g)=g(\mathbf{a})=0$で，$\phi(f)=f(\mathbf{a})$は単元．
     よって$\mathbf{a} \in \zeros(\I{p}) \subset \zeros(\I{a})$かつ$f(\mathbf{a}) \neq 0$．
+
+\section{TODO}
+    どうせなら使用したNoether normalization theoremと\cite{atimac}, 
+    Prop5.7の証明も書いてself-containedにしたい．
+
+    重要定理だけあって，証明の方針はかなり多い．
+    これらも参考文献を整理したい．
+    \begin{enumerate}
+        \item $k[\mathbf{x}]$がJacobson ringであることを用いる証明，
+        \item 幾何的なNoether normalization theoremを用いる証明，
+        \item Rabinowitsch's Trickを用いる証明，
+        \item Artin-Tate Lemmaを用いる証明(\cite{atimac}, Prop7.9)，
+        \item valuation ringを用いる証明(\cite{atimac}, Cor5.24)，
+        \item Chevalley's theorem about constructable setを用いる証明，
+        \item TaoとEnrique Arrondoによる終結式を用いる証明，
+        \item モデル理論的な証明．
+    \end{enumerate}
 
 \begin{thebibliography}{9}
     \bibitem{atimac}
