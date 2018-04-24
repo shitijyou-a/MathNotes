@@ -1,14 +1,29 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[]{../math_note}
 \usepackage[all]{xy}
+\usepackage{calc}  
+\usepackage[]{enumitem}
 
+%% for hyperref {{{
 \usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
 \usepackage{pxjahyper}
+%% }}}
 
 \newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
-\newcommand{\modM}{\mathcal{M}}
+
+%% moduli spaces
+\newcommand{\modA}{\mathcal{A}}
 \newcommand{\modC}{\mathcal{C}}
+\newcommand{\modH}{\mathcal{H}}
+\newcommand{\modM}{\mathcal{M}}
 \newcommand{\modP}{\mathcal{P}}
+\newcommand{\modT}{\mathcal{T}}
+
+\newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
+
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\newcommand{\inlinematrix}[1]{\begin{bmatrix} #1 \end{bmatrix}}
 
 \begin{document}
 \title{ゼミノート \#2}
@@ -63,14 +78,235 @@
     $\shL$の情報を忘れれば，
     標準的な射$\phi: \modP_{d,g} \to \modM_g$が得られる．
 
-    \begin{enumerate}[leftmargin=*]
-        \item
-            $[C] \in \modM_g^0$上の$\phi$のfiberは
-            $\Pic^d(C)$のconnected componentになっている．
+    \paragraph{}
+    次の同型が存在する．
+    \[
+    \begin{aligned}
+        \modP_{d,g}& &\iso& &\modP_{d+(2g-2), g},&
+        && \quad
+        \modP_{d,g}& &\iso& &\modP_{-d, g}& \\
+        (C, \shL)& &\mapsto& &(C, L \otimes K_C),&
+        && \quad
+        (C, \shL)& &\mapsto& &(C, L^{-1})&.
+    \end{aligned}
+    \]
+    このこととExercise 2.6から，
+    互いに同型にならない$\modP_{d,g}$は，
+    各$g$に対して丁度$g-1$個ある
+    \footnote
+    {
+        $\Z$を$s: d \mapsto d+(2g-2)$と$t: d \mapsto -d$の二つの自己同型で生成される群で割る．
+        $s$が生成する群は$(2g-2)\Z (< \Z)$と同型で，$t$が生成する群は$\Z/2\Z$と同型．
+        よって$\#( \Z/(2g-2)\Z \times (\Z/2\Z)) )=(2g-2)/2=g-1$.
+    }．
+    \[ \modP_{0,g}, \modP_{1,g}, \dots, \modP_{d-1,g}. \]
+    
+\section{Constructions of \tp{$\modM_g$}{Mg}}
 
-        \item
-            $\modP_{0,g}$は時々Jacobian bundle over $\modM_g$と呼ばれる．
+    \subsection{Generally Steps of Construction of Moduli Space.}
+    moduli spaceの構成方法はある程度決まった手順がある．
+    ここではそれを述べる．
+
+    まず，対象$X$と付随する情報(extra data)の組たちを，
+    何らかの大きい空間$W$の点に対応させる．
+    多くの場合で対象の同型類と点の対応は$1:1$ではなく，$1:$多となっている．
+    $1$つの対象の同型類$[X]$に :: 対応する$W$の点たちが成す集合$S_{[X]}$を観察する．
+    この集合$S_{[X]}$を何らかの群$G$の$W$への作用に拠る軌道と考えることが出来れば
+    ($S_{[X]}=Gw$なる$w \in W$が存在すれば)，
+    求めるmoduli spaceは商空間$W/G$として実現できる．
+
+    まとめると，
+    moduli spaceを構成する際には以下の$4$つの要素を中心に考えることに成る．
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+        \item[Extra Data] 分類対象(Object)に付随させる情報．
+        \item[Container Space] 扱いやすい空間．
+        \item[Correspondance] 組(Object, Extra Data)とContainer Spaceの点の対応．
+        \item[Group] Container Spaceに作用し，$1$つのObjectに対応する点の集合が$1$つの軌道である群．
+    \end{description}
+    
+    \begin{Example}（\cite{Muk1}）
+        $k$ :: fieldとし，
+        moduli space of hypersurface of degree $d$ in $\proj_{k}^n$を構成しよう．
+        $H$ :: hypersurface of degree $d$ in $\proj_{k}^n$は，
+        次のような形の$k[x_1,\dots,x_n]$の斉次$d$次多項式で定まる．
+        \[ \sum_{|\alpha|=d} a_{\alpha} x^{\alpha}. \]
+        ただし$\alpha$は多重添字である．
+        そして多項式はその係数$a$で定まる(Correspondance)．
+        
+        $a$は$k^{\oplus N}$($N:=\binom{n+d}{d}$)の元である．
+        したがって$H$は$\affine_k^N$(Container Space)の
+        点$(a_{(d,0,\dots,0)}, \dots, a_{(0,\dots,0,d)})$に対応する．
+        しかし，$a$に正則行列$g \in GL_{n+1}(k)$ (Group)を作用させた$a'$も，
+        $H$と同型なhypersurfaceに対応する
+        （$g$の作用のさせ方はここで述べない）．
+        逆に$H$の同型なhypersurfaceに対応する$\affine^N$の点の全体は，
+        $GL_{n+1}(k)$による$a$の軌道として得られる．
+        よって$\affine_k^N/GL_{n+1}(k)$がもとめるmoduli spaceである．
+    \end{Example}
+
+    以下では$\modM_g$ :: the coarse moduli space of smooth curves of genus $g$
+    の構成方法の概略を述べる．分類対象(Object)に付随させる情報．
+    方法は大きく分けて$3$つある．
+    最初の二つは解析的な方法で，最後のものは完全に代数的である．
+
+    \subsection{The Teichm\tp{\"u}{u}ller approach}
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+        \item[Extra Data]
+            Normalized set of generators for $\pi_1(C)$, \\
+            or Homeomorphism which $\an{C}$ to standard compact orientable surface $X_0$.
+        \item[Container Space] Teichm\"uller space :: $T_g \subseteq \C^{3g-3}$．
+        \item[Group] $\Gamma_G$ :: Group of diffeomorphisms of $X_0$, modulo isotopy.
+    \end{description}
+    この方法で構成された$\modM_g$はanalytic varietyになる．
+
+    この方法の利点は，
+    $\modM_g$の位相を扱いやすいことと，
+    $\modM_g$に自然な計量を入れられることである．
+
+    \subsection{The Hodge theory approach}
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+        \item[Extra Data]
+            \begin{enumerate}[leftmargin=*]
+                \item Symplectic basis of $H_1(C, \Z)$ :: $\{a_1,\dots,a_g, b_1,\dots,b_g\}$,
+                \item Basis of $H^0(C, K_C)$ :: $\{\omega_1,\dots,\omega_g\}$,
+                \item The intersection pairing.
+            \end{enumerate}
+        \item[Container Space] $\mathfrak{c}_g \subseteq \mathfrak{h}_g$.
+        \item[Correspondance] $P=[\int_{b_i} \omega_j ]_{i,j} \in \mathfrak{h}_g$
+        \item[Group] $Sp_{2g}(\Z)$ :: Symplectic group.
+    \end{description}
+    ここで$\mathfrak{h}_g$は次のように定義される．
+    \[
+        \mathfrak{h}_g=
+        \left\{
+            \tau \in M_{g \times g}(\C)
+            ~\middle|~
+            \tau^T=\tau, \Im(\tau)\text{ :: positive difinite.}
+        \right\}
+    \]
+    これはSiegel upper-halfspace of dimension $g$と呼ばれている．
+    $\mathfrak{h}_1$が通常のupper-halfplaneと一致することに注意．
+    $b_1,\dots,b_g$の選び方によって$P=[\int_{b_i} \omega_j ]_{i,j}$は変わるが，
+    これは以下の$Sp_{2g}(\Z)$による作用に対応する．
+    \[
+        Sp_{2g}(\Z)=
+        \left\{
+            \gamma \in GL_{2g}(\Z)
+            ~\middle|~
+            \gamma^T \Omega \gamma=\Omega
+        \right\},
+        \mwhere
+        \Omega=\inlinematrix{ 0 & I_g \\ -I_g & 0 }.
+    \]
+    構成方法から，
+    $\modM_g$は$\modA_g=\mathfrak{h}_g/Sp_{2g}(\Z)$に含まれる．
+    $\modA_g$はcoarse moduli space for abelian varieties of dimension $g$である．
+
+    この方法は$Sp_{2g}(\Z)$が$\Gamma_g$よりも分かりやすいという点で
+    Teichm\"uller approachに優っている．
+    しかし$\mathfrak{c}_g$の方は把握が難しく，
+    「$\mathfrak{c}_g$はどのようなものか」という問はthe Schottky problemと呼ばれている．
+    これについては様々な考察がなされているが，
+    $\mathfrak{c}_g$の具体的な記述は得られていない．
+
+    この方法の別の利点は，
+    compactification of $\modA_g$ :: $\tilde{\modA_g}$
+    \footnote{ $\modA_g$をanalytic open subsetとして含むcompact analytic varietyの事. }
+    が自然に得られるということである．
+    compactification of $\modM_g$ :: $\tilde{\modM_g}$は
+    $\tilde{\modA_g}$での$\modM_g$の閉包として得られる．
+    $\tilde{\modM_g}$を用いた議論によって，
+    $\modM_g$がprojectiveでもaffineでも無いことが分かる
+    （TODO: ここでの$\modM_g$ってschemeではないでのは？）．
+
+    \subsection{The geometric invariant theory (G.I.T.) approach}
+    $n \geq 3$を任意にとって固定する．
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+        \item[Extra Data] (Nothing.)
+        \item[Container Space] $K \subseteq \modH_{2(g-1)n, g, N}$ ($N:=(2n-1)(g-1)-1$).
+        \item[Group] $PGL_{N+1}(\C)$.
+    \end{description}
+    $\modH_{2(g-1)n, g, N}$は
+    subscheme of degree $2(g-1)n$ and genus $g$ in $\proj^N$の
+    Hilbert schemeである．
+
+    この方法の利点は，代数的であることの他に二つある．
+    \begin{enumerate}
+        \item $\modM_g$がquasiprojective algebraic varietyとして得られる．
+        \item compactification of $\modM_g$についての考察が自然に得られる．
     \end{enumerate}
+
+    \subsubsection{Compactification of $\modM_g$ and Stable Curve.}
+    compactification of $\modM_g$（ここでは$\modM_g$を含むprojetive scheme）を得る方法として，
+    $K$の$\modH_{2(g-1)n, g, N}(=:\modH)$での閉包を取って$PGL_{N+1}(\C)$で割る，
+    ということが思いつく．
+    しかしこれで得られるのは$K$のcompactificationでなく，
+    $K$を含む集合$\tilde{K}$の商$\tilde{K}/PGL_{N+1}(\C)$のcompactificationである．
+    これらの包含関係は$K \subset \tilde{K} \subset \cl_{\modH}(K)$となる．
+    
+    この拡張が必要な理由は，次のように説明される:
+    次のような$t \in \affine^1-\{0\}$で
+    パラメトライズされるfamily of smooth curvesを考える．
+    has only nodes as singularities and has only finitely many automor-
+    phisms.
+    \[ C: y^2z=x^3-t^2axz-t^3bz^3 \mwhere a,b,t \in \C, t \neq 0. \]
+    $t \neq 0$ならば$C_t \iso C_1$となる．
+    しかし$C_0$はcuspidal curveとなる．
+    $C \to \affine^1-\{0\}$に対応する$j$-invariant mapを
+    $\chi: \affine^1-\{0\} \to \affine^1$とすると，
+    $t \to 0$で$\chi$の値は$\affine^1_j$の外側の点に収束してしまう．
+    なので$\modM_1=\affine^1_j$をコンパクト化するには，
+    $C_0$に対応する点を$\modM_1$に加えなければならない．
+    なお，この曲線族は$a,b$の値を変えることで任意の楕円曲線を含むものに成る．
+
+    では$\tilde{K}$に含まれる曲線は何だろうか，ということになるが，
+    これは(Deligne-Mumford) stable curveと呼ばれるものである．
+    \begin{Def}
+        stable curveとは，以下を満たす曲線（scheme of dimension $1$ over $\C$）である．
+        \begin{enumerate}
+            \item 完備 (=proper),
+            \item 連結,
+            \item 特異点は高々2重点(node),
+            \item 自己同型群が有限位数．
+        \end{enumerate}
+    \end{Def}
+
+    ここで再び曲線族$C \to \affine^1_t$を考える．
+    これは$C_t \iso C_1 (t \neq 0)$かつ$C_1 \not \iso C_0$となっている．
+    そこで$C_1 \not \sim C_0$とすると，jump phenomenonが起きる．
+    したがって任意の$\C$上の楕円曲線($C_1$)とcuspidal curve ($C_0$) :: $y^2=x^3$は
+    「同値」なものとして扱わなければならない．
+    では楕円曲線とcuspidal curveの関係は何かというと，
+    これがdegenerationである．
+
+    stable $n$-pointed curveも定義できる．
+    \begin{Def}
+        stable $n$-pointed curveとは，
+        以下を満たす曲線$C$（scheme of dimension $1$ over $\C$）
+        \begin{enumerate}
+            \item 完備 (=proper),
+            \item 連結,
+            \item 特異点は高々2重点(node),
+        \end{enumerate}
+        と，$n$個の互いに異なる$C$の点$p_1,\dots,p_n$の組であって，
+        $\sigma(p_i)=p_i$を満たすような自己同型$\sigma: C \to C$が
+        有限個しか存在しないものである．
+    \end{Def}
+    関連してsemi-stable (pointed) curveとunstable (pointed) curveの概念がある．
+
+    なお，\cite{HarAG} II, Thm8.19ではsmooth projective varietyの
+    birational invariantであることのみ証明されているが，
+    stable curveについてもgenusは不変量である
+
+    \begin{Thm}
+        coarse moduli space of stable curves (resp. stable $n$-pointed curves)
+        :: $\bar{\modM}_g, \bar{\modM}_{g,n}$が存在し，
+        これはprojective varietyである．
+    \end{Thm}
+    さらに，
+    Nodeを$\delta$個以上もつstable curveに対応する点の集合は，
+    pure codimention $\delta$であることが知られている.
+    特にこのことから，stable curveは多くとも$3g-3$個のnodeしか持てないことが分かる．
 
 \bibliographystyle{jplain}
 \bibliography{reference}

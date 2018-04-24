@@ -1,4 +1,5 @@
 \documentclass[a4paper]{jsarticle}
+\usepackage[dvipdfmx, hiresbb]{graphicx}
 \usepackage[]{../math_note}
 \usepackage[dvipdfmx, colorlinks=true]{hyperref}
 \usepackage{pxjahyper}
@@ -70,6 +71,7 @@
 \newcommand{\ftorGL}{\mathcal{GL}}
 
 \newcommand{\mfor}{\text{for }}
+\newcommand{\acton}{\curvearrowright}
 
 \begin{document}
 \title{ゼミノート \#1 \\ Fine/Coarse Moduli Spaceの非存在}
@@ -219,9 +221,10 @@ moduli spaceは``moduli functor"の情報を
 
 \section{Moduli Functor and Fine/Corse Moduli Space}
     $A$を代数幾何学的対象の集合とし，
-    $\sim$を$Z$の中の同値関係とする．
+    $\sim$を$A$の中の同値関係とする．
     ``naive moduli problem"は，
-    $M$の点と$A/\sim$の元（同値類）が一対一対応するような
+    $M$の点\footnote{ \cite{GIT}では，特に$M$のgeometric point．定義は後述． }と
+    $A/\sim$の元（同値類）が一対一対応するような
     scheme :: $M$を見つけよ，という問題である．
     更に$A/\sim$の元が「連続的に変化」する様子も
     「エンコード」しているような$M$を見つけよ，
@@ -232,6 +235,9 @@ moduli spaceは``moduli functor"の情報を
     前者の為に``family"が定義され，
     後者の為に``moduli functor"が定義される．
     すると「エンコード」は関手の表現であると理解できる．
+        射のfibreとして実現される，
+        scheme（例えばsmooth curve）のfamilyは
+        deformation theoryの対象である．
 
     \subsection{Families}
     \begin{Def}
@@ -294,9 +300,9 @@ moduli spaceは``moduli functor"の情報を
         $X, B$ :: scheme,
         $f: X \to B$ :: morphism of schemesをとる．
         $X$は$f$によって$B$上のfamilyとなる．
-        射のfibreとして実現される，
-        scheme（例えばsmooth curve）のfamilyは
-        deformation theoryの対象である．
+        $B$の点における$f$のfiberがmoduli問題の対象である．
+        我々が代数幾何学の一分野としてModuli問題を扱う場合，
+        現れるfamilyはこのようなもののみである．
     \end{Example}
 
     \begin{Example}\label{example:grassmannian}
@@ -321,7 +327,7 @@ moduli spaceは``moduli functor"の情報を
     \end{Example}
 
     \begin{Remark}
-        familyに要請される性質として，
+        familyにしばしば要請される性質として，
         特に``flat"がある．
         projective flat familyは，
         base schemeに適切な条件をつけると
@@ -366,8 +372,8 @@ moduli spaceは``moduli functor"の情報を
         moduli functor :: $\ftorM$のfine moduli space :: $M$が存在したとしよう．
         この時，任意の$X \in \Sch$について$\ftorM(X) \iso \ftor{M}(X)$．
         これは
-        $X$上の代数幾何学的対象が成す同値類が
-        $M$の$X$-value pointと一対一に対応していることを意味する．
+        $X$上のfamilyが成す同値類が
+        $M$の$X$-valued pointと一対一に対応していることを意味する．
         したがって，
         $\ftorM$が指定する代数幾何学的対象の集合の同値類を
         $M$が「パラメトライズ」していると考えられる．
@@ -415,8 +421,7 @@ moduli spaceは``moduli functor"の情報を
     残念ながら，多くのmoduli functorに対してfine moduli spaceが存在し得ない．
     （このあたりの議論は\cite{HaMo} p.3や\cite{HarDef} p.150にある．
     この節の終わりでも理由と例を示す．）
-    そのためMumfordは（おそらくGIT本で）
-    fine moduli spaceの代わりとしてcoarse moduli spaceを提唱した．
+    そのためMumfordは\cite{GIT}で
 
     \subsection{Coarse Moduli Space}
     \begin{Def}\label{def:coarse-moduli}
@@ -436,8 +441,8 @@ moduli spaceは``moduli functor"の情報を
                 \]
                 この図式で$\tilde{M}$ :: scheme, $f: M \to \tilde{M}$．
             \item
-                任意の代数閉体 :: $k$について
-                $\Psi_{\Spec k}: \ftorM(\Spec k) \to \ftor{M}(\Spec k)$は全単射である．
+                任意の代数閉体$k$について，
+                $\Psi_{\Spec k}: \ftorM(k) \to \ftor{M}(k)$は全単射である．
         \end{enumerate}
     \end{Def}
     条件(ii)は
@@ -456,11 +461,8 @@ moduli spaceは``moduli functor"の情報を
     \end{Remark}
 
     \begin{Remark}
-        条件(iii)で$k$は一般の体でなく代数閉体に限っている．
-        これは注意(\ref{remark:closedpoint})が主な理由である．
-        つまり，$\ftor{M}(k)$の濃度が最も大きくなる
-        （$M$の点を最も精度よく検出できる）のは
-        $k$が代数閉体であるときである．
+        代数閉体$k$について，
+        $\ftor{M}(k)$の元は``geometric point"と呼ばれる(\cite{GIT}, p.1)．
     \end{Remark}
 
     \begin{Example}
@@ -523,6 +525,27 @@ moduli spaceは``moduli functor"の情報を
         \text{Fine moduli} \ar@{=>}[r]& \text{Coarse moduli} \ar@{=>}[r]& \text{Universality} \ar@{=>}[d]\\
         {} & {} & \text{Uniqueness}
     }\]
+
+    \begin{Prop}
+        $M$をmoduli functor $\ftor{M}$のcoarse moduli spaceとする．
+        また$\Psi: \ftorM \to \ftor{M}$を自然変換とする．
+        $M$がfine moduli spaceであることは次と同値．
+        \begin{enumerate}
+            \item $\Psi(u)=\id[M]$となるfamily :: $u: \famU \to M$が存在する．
+            \item 任意のscheme :: $S$について$\Psi_S: \ftorM(S) \to \ftor{M}(S)$は単射．
+        \end{enumerate}
+    \end{Prop}
+    \begin{proof}
+        $M$がfine moduli spaceである（すなわち$\Psi$が自然同型である）ときに
+        $2$条件が成り立つことは明らか．
+
+        任意のscheme :: $S$について$\Psi_S$が同型(iso)であることを示す．
+        今，$\ftorM(S), \ftor{M}$がどちらも集合であるから，
+        $\Psi_S$は写像である．
+        iso mapはsurj+inj mapと同値であるから，
+        我々は$\Psi_S$ :: surjのみ示せば良い．
+        しかしこのことは命題\ref{prop:univfamily}で証明されている．
+    \end{proof}
     
     \begin{Prop}[\cite{HarDef}, Prop23.5]
         $S$ :: schemeのopen subschemeと包含写像が成す圏を
@@ -690,12 +713,86 @@ moduli spaceは``moduli functor"の情報を
         次の同値関係で割って商空間を作る．
         \[ (t, Q) \sim (s, Q) \iff |t-s|=1 \land P=\sigma(Q) \mwhere s,t \in [0,1], P,Q \in L. \]
         例えば$\sigma$を$(x,y) \mapsto (-x,-y)$と置くと，
-        これは丁度メビウスの和である．
+        これは丁度メビウスの帯である．
         そしてこれは$S^1$上のfamilyとなっている．
 
         今$S^1$上のfamilyとして，
-        $\sigma$を使って構成したものとtrivial family （斜めになった円筒）がある．
+        $\sigma$を使って構成したもの（メビウスの帯）とtrivial family （斜めになった円筒）がある．
         これらは明らかに同型ではない．
+    \end{Example}
+
+    \begin{Example}
+        scheme :: $B$とfamily over $B$ :: $X$を次のように定める．
+        \[
+            B=\Spec \C[\lambda, (\lambda(1-\lambda))^{-1}] =\affine_{\C}^1-\{0,1\},
+            \qquad
+            X=\Proj \frac{\C[x,y,z, \lambda, (\lambda(1-\lambda))^{-1}]}{(y^2z-x(x-z)(x-\lambda z))}
+            \subset \proj^2_{\C} \times_{\C} B.
+        \]
+        任意の$\C$上の楕円曲線と同型なものがfamily :: $\pr: X \to B$に含まれている．
+        そして$j$-invariant :: $A^1_{[j]}$は$B$の次の群$G$による商として得られる
+        （このことは\cite{HarDef} Prop 26.3の証明で示されている）．
+        \[ G=\left\{ \lambda \mapsto \frac{a-b}{c-b} ~\middle|~ \{a,b,c\}=\{0,1,\lambda\} \right\}. \]
+        したがって$\C$上の楕円曲線のuniversal familyは，
+        ``quotient of family" $X/G \to B/G=\affine^1_{[j]}$として得られるはずである．
+        同型なfiberはひとつのfiberにまとめてしまえば，
+        同型類の代表をひとつづつfiberにもつfamilyが作れるであろう，
+        というわけである．
+        \begin{center}
+            \includegraphics[width=9cm,pagebox=cropbox]{./images/quotient_of_family.pdf}
+        \end{center}
+
+        問題は$X/G$である．
+        $X/G$に言及するには$G$の$X$への作用を定める必要が有るが，
+        楕円曲線には非自明な自己同型があるため，
+        奇妙な族を作ることが出来る．
+        これは以降の段落でもう少し具体的に述べる．
+        もし楕円曲線の族のfine moduli spaceが存在するならば，
+        fine moduli spaceも，universal familyも，同型を除いて一意である．
+        なので，$X/G \to B/G$が唯一の候補である．
+        しかし$X/G \to B/G$は楕円曲線の族ではない．
+        したがって楕円曲線のuniversal familyは存在せず，
+        fine moduli spaceも存在しない．
+
+        ここでは$B/G$でなく，
+        $G$の元$\sigma$で生成される$G$の部分群$G'=\{\id, \sigma\}$による商$B/G'$を考える．
+        \[ G \ni \sigma: \lambda \mapsto \frac{\lambda-1}{0-1}=1-\lambda. \]
+        $\sigma$はinvolution(i.e. $\sigma \circ \sigma=\id$)である．
+        対して$X$の自己同型を次のように取る．
+        \[ \tau: (x,y,z, \lambda) \mapsto (x,-y,z,1-\lambda). \]
+        こちらも$\sigma$同様involutionである．
+        そして$\tau$は$\sigma: \affine^1 \to \affine^1$の持ち上げである．
+        すなわち，次の図式は可換である．
+        \[\xymatrix{
+                X \ar[r]^-{\tau}\ar[d]_-{\phi}& X \ar[d]^-{\phi}\\
+                \affine^1 \ar[r]_-{\sigma}& \affine^1
+        }\]
+%        $\tau$は同型なので，これはpullback図式でもある．
+%        なのでpullback lemmaから，
+%        以下の図式の一番外側の四角形もpullback図式である．
+%        \[\xymatrix{
+%                X \ar[r]^-{\tau}\ar[d]_-{\pr}& X \ar[d]_-{\pr} \ar[r]& U \ar[d]^-{\mathbf{1}}\\
+%                \affine^1 \ar[r]_-{\sigma}\ar@/_15pt/[rr]_-{j}& \affine^1 \ar[r]_-{j}& \affine^1_{[j]} \\
+%        }\]
+        
+        今，$H'=\{\id, \tau\}$は明らかに$X$に作用する．
+        そして上の図式が可換であることから，family :: $\phi: X/H' \to B/G'$が得られる．
+        そこでこのfamilyを考えてみると，
+        $\sigma$の不動点$\lambda=1/2$における$\phi$のfiber$\phi^{-1}(1/2)$は，
+        $X_{1/2}$の$\tau_{1/2}:(x,y,z) \mapsto (x,-y,z)$による商となっている．
+        この商は，Riemann-Hurwitzの公式によると，genusが$0$となっている
+        \footnote
+        {
+            楕円曲線はgenusが$1$で，$0,1,\lambda, \infty$の$4$点で分岐しており，
+            この$4$点それぞれの分岐指数は$2$である．
+            $\phi^{-1}(1/2)$は商写像$X_{1/2} \to X/\tau_{1/2}$による2重被覆だから，
+            $\phi^{-1}(1/2)$のgenusを$h$とすると，
+            $2-2 \cdot 1=2h-4 \cdot (2-1)$．
+            故に$h=0$．
+        }．
+        しかし楕円曲線の種数は$1$でないから，
+        $\phi$は楕円曲線の族ではない．
+        同様にして$X/G \to B/G$も楕円曲線ではないように作用$G \acton X$を作れる．
     \end{Example}
 
     より抽象的な設定で証明しよう．
@@ -707,7 +804,7 @@ moduli spaceは``moduli functor"の情報を
     D.Eisenbud and J.Harris ``Schemes:The Language of Modern Algebric Geometry"
     IV.B\ viiにも同様のことが記述されているのを発見した．
     \begin{Example}
-        $X$をscheme over $\Z$に
+        $X$をscheme over $\Z$とし，
         これがnon-trivial automorphism :: $\sigma: X \to X$を持つとする．
 
         order of $\sigma$を$n$とする．
@@ -838,7 +935,7 @@ moduli spaceは``moduli functor"の情報を
 
     \begin{Example}[\cite{HaMo} Exercise (1.7)]
         moduli functor :: $\ftorM$を，
-        ``flat families of reduced plane curves of degree 2 up to isomorphism"
+        ``flat families of reduced plane curves of degree 2 over $\C$, up to isomorphism"
         のmoduli functorとして定める．
         ただし，ここでは$\affine_{\C}^2$の曲線を考える．
         $\ftorM(\C)$の元，すなわち``reduced plane curves of degree 2"の同型類は
@@ -910,22 +1007,21 @@ moduli spaceは``moduli functor"の情報を
     というのは不透明である．
     しかしこの修正はしばしば自然に現れる．
 
-    elliptic curve over $\C$のWeil paring, level structureについては，
+    level structureは様々な定義が存在する．
+    abelian schemeのlevel structureの定義は
+    \cite{GIT} p.129, Definition 7.1にある．
+    これはabelian schemeのmoduli spaceを研究するために用いられている．
+    特にelliptic curve over $\C$のWeil paring, level structureについては，
     \cite{DiaShur}に詳しい記述がある．
     F.Volochによるcourse noteにも整理された記述がある．
     \footnote{\url{ https://www.ma.utexas.edu/users/voloch/390-10.html }}
-    ここでは簡単な説明をする．
-    level structureはWeil paringという写像を用いて定義される．
-    これはsympletic geometryにおける
-    sympletic form (i.e. non-degenerate alternative bilinear form)のアナロジーである．
-    $X$から定まるJacobian varietyを$J(X)$ \ (see \cite{HarAG} pp.323-326)とすると，
-    $X$のlevel-$n$ data( or $\Gamma(N)$-structure)とは，
-    $J(X)[n]=\{x \in J(X) \mid n \cdot x=0 \}$の$2g$個の点（$g$はgenus of $X$）の順序集合であって，
-    そのWeil paringが特定の値（primitive $n$-th root of $1$）をとるものである．
-    level $n$-structureは，schemeとlevel-$n$ dataの組である．
-    $(X, p_1, \dots, p_{2g})$と$(X', p'_1, \dots, p'_{2g})$の間の射は，
-    射$f:X \to X'$であって，
-    $f$から誘導される$f^*: J(X) \to J(X')$が$p_i \mapsto p'_i$の様に写すものである．
+    また，symplectic level structureは\cite{CFMSC}で整理されている．
+    Teichm\"uller structure of level $G$ （$G$は有限群）は
+    \cite{IrrOfMg}で導入されている．
+    これはirreducibility of moduli space of curves of genus $g$を証明する際に用いられた．
+    いずれもabelian schemeに対してのみ定義される．
+    non-abelianの場合
+
     level structureを考慮してmoduli問題を修正すると，
     元の問題のmoduli spaceのfinite coverが得られる．
     level $n$, genus $g$のcurveのmoduli spaceを$\spM_g^{(n)}$と書く．
@@ -935,79 +1031,6 @@ moduli spaceは``moduli functor"の情報を
     ordered sets of (higher-order) Weierstrass pointsを考える，
     というものもある．
     Weierstrass pointsの定義は\cite{GAC} pp.41-44にある．
-    
-
-    \begin{problem}
-        (\cite{HaMo} Exercise (2.1))
-        \begin{enumerate}[label=\arabic*), leftmargin=*]
-        \item
-            $n \geq 3, g \geq 1$について，
-            level $n$ strcutreを持つcurve of genus $g$ :: $C$は
-            non-trivial automorphismを持たないことを示せ．
-            すなわち，
-            curve of genus $g$ :: $C$とそのnon-trivial automorphism :: $\sigma$であって，
-            $\sigma^*: J(C) \to J(C)$が$n$-torsion pointを移動させないものは
-            存在しないことを示せ．
-
-        \item
-            $n=2$ではこれが偽であることを示せ．
-
-        \item
-            $j: \affine^1_{\lambda} \to \affine^1_{j}$は
-            $\spM_{1}^{(2)} \to \spM_1$の
-            covering map associated to level $2$ structures of curves of genus $1$
-            であることを示せ．
-
-        \item
-            $\affine^1_{\lambda}$
-            :: NOT fine moduli space
-            for curves of genus 1 with level 2 structure.
-        \end{enumerate}
-    \end{problem}
-
-    \begin{problem}
-        (\cite{HaMo} Exercise (2.2))
-        $m$-line :: $\affine^1_{\C, m}$をパラメータ空間とする
-        $\C$上の曲線族$f_m=x^3+y^3+z^3+mxyz$を考える．
-
-        \begin{enumerate}[label=\arabic*), leftmargin=*]
-        \item
-        $f_m$が楕円曲線と成るような$\affine^1_{\C, m}$の集合$U$を求めよ．
-        また，$j$-invariant ($j(m)$)を計算せよ．
-
-        \item
-        $j:U \to \affine^1_{\C, j}$がGalois coveringであり，
-        そのGalois groupが$SL_2(\Z/3\Z)$であることを示せ．
-
-        \item
-        $U$ ::
-            fine moduli space for curves of genus $1$
-            with full level $3$-structure.
-        \end{enumerate}
-    \end{problem}
-    \begin{enumerate}[label=\arabic*), leftmargin=*]
-    \item 
-        sagemathを利用して$j$-invariantを計算する．
-        \lstinputlisting[language=Python]{./excersise2_2a.py}
-        結果を整理すると次のよう．
-        \[ j(m)=-\left( \frac{m(m^3-6^3)}{m^3+3^3} \right)^3. \]
-        したがって$s=m^3+3^3$とおくと，
-        \[
-            U
-            =(\affine^1)_{s}
-            =\affine^1-\{-3, -3\omega, -3\omega^2\}
-            \ \mwhere \omega=e^{2 \pi i/3}.
-        \]
-
-    \item
-        今は$U, \affine^1$共にsommth, irreducibleなので，
-        $j$がGalois coveringであることは，
-        $j$による$k(m)=K(\affine^1)$のpullbackから誘導される体拡大
-        $k(m)/k(j)$がGalois extensionであることと同値．
-
-        $k(j)$上$m$は$12$次の元．
-        なので$k(m)/k(j)$は12次Galois extension．
-    \end{enumerate}
 
     \subsection{Representation by Algebraic Stacks.}
     moduli functorをschemeで表現できないのなら
