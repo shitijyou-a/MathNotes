@@ -65,6 +65,7 @@
 \newcommand{\famU}{\mathcal{U}}
 
 \newcommand{\spM}{\mathcal{U}}
+\newcommand{\modM}{\mathcal{M}}
 
 \newcommand{\ftor}[1]{\underline{#1}}
 \newcommand{\ftorM}{\mathcal{M}}
@@ -72,6 +73,8 @@
 
 \newcommand{\mfor}{\text{for }}
 \newcommand{\acton}{\curvearrowright}
+
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 
 \begin{document}
 \title{ゼミノート \#1 \\ Fine/Coarse Moduli Spaceの非存在}
@@ -998,6 +1001,7 @@ moduli spaceは``moduli functor"の情報を
         \item ordered sets of (higher-order) Weierstrass points．
     \end{enumerate}
 
+    \subsubsection{ Fixed Sub-object }
     fixed sub-objectsは，
     例えば幾つかの固定された点を通る曲線のmoduli問題を考えるということである．
     この場合，十分に固定点の個数を大きくすれば，
@@ -1006,6 +1010,12 @@ moduli spaceは``moduli functor"の情報を
     どれだけ元の問題のmoduliを反映しているか，
     というのは不透明である．
     しかしこの修正はしばしば自然に現れる．
+
+    \subsubsection{ Level Structure }
+    level structureはirreducibility of $\modM_g$を証明する際に導入された．
+    level structureを考慮してmoduli問題を修正すると，
+    元の問題のmoduli spaceのfinite coverが得られる．
+    level $n$, genus $g$のcurveのmoduli spaceを$\spM_g^{(n)}$と書く．
 
     level structureは様々な定義が存在する．
     abelian schemeのlevel structureの定義は
@@ -1018,19 +1028,175 @@ moduli spaceは``moduli functor"の情報を
     また，symplectic level structureは\cite{CFMSC}で整理されている．
     Teichm\"uller structure of level $G$ （$G$は有限群）は
     \cite{IrrOfMg}で導入されている．
-    これはirreducibility of moduli space of curves of genus $g$を証明する際に用いられた．
-    いずれもabelian schemeに対してのみ定義される．
-    non-abelianの場合
 
-    level structureを考慮してmoduli問題を修正すると，
-    元の問題のmoduli spaceのfinite coverが得られる．
-    level $n$, genus $g$のcurveのmoduli spaceを$\spM_g^{(n)}$と書く．
+    ここではHesse cubic formを用いて，
+    代数閉体$k$($\fchar k \neq 3$)上の楕円曲線のlevel $3$-structureと，
+    level $3$-structureを持つ楕円曲線のmoduli spaceを解説する．
+    参考文献は二つ:
+    \url{https://arxiv.org/abs/math/0611590}, 
+    \url{http://www.math.chalmers.se/~ulfp/Teaching/AG.html}.
 
+    $k$を$\Z[1/3, \xi]/(\xi^2+\xi+1)$を含む体，
+    すなわち，標数が$3$でなく$1$の原始$3$乗根を持つ体とする．
+    $k$上の楕円曲線$E$を予め埋め込んで射影平面上のものと考える．
+    $E$のlevel $3$-structureとは，
+    $(\Z/3\Z)^2$とgroup of $3$-torsion points in $E$ :: 
+    \[ E[3]=\{ P \in E \mid 3P=O. \} \]
+    の間の同型$\alpha: (\Z/3\Z)^2 \to E[3]$のことである．
+    この同型は$\alpha(0, 1)$と$\alpha(1, 0)$の点を与えれば定まることに注意する．
+
+    この同型$\alpha$が存在することは，以下のように分かる．
+    具体的な考察により，$E[3]$の元は，その$1$点のみで$E$と交わる点，
+    すなわち変曲点であることが分かる．
+    これは$E$が$3$次曲線であることから，これは$9$点存在する．
+    すなわち$E[3]$は位数$9$のアーベル群．
+    アーベル群の構造定理と，$E[3]$の任意の元の位数が高々$3$であることから，
+    $E[3] \iso (\Z/3\Z)^2$が分かる．
+
+    我々がこれから主張することは，
+    \[ B=\affine^1-\{ 1, \xi, \xi^2 \} \]
+    がlevel $3$-structureを持つ$k$上の楕円曲線のfine moduli spaceであることである．
+    まずlevel $3$-structureを持つ$k$上の楕円曲線のfamilyを考える．
+    $S$を$k$上のschemeとして，楕円曲線とその$2$つの$3$-torsion pointのfamilyを取る．
+    
+    $k$上の楕円曲線$E$とlevel $3$-structure :: $\alpha: (\Z/3\Z)^2 \to E[3]$をとる．
+    埋め込み$i: E \to \proj_k^2$の像と$i \circ \alpha$をとれば，
+    最初から$E$は$\proj^2$内の楕円曲線と考えられる．
+    $E$を以下のような写像で写す．
+    \[
+        \alpha(0,0) \mapsto (0:1:-1), \quad
+        \alpha(1,0) \mapsto (0:1:-\xi), \quad
+        \alpha(0,1) \mapsto (-1:0:1), \quad
+        \alpha(1,1) \mapsto (-\xi:0:1).
+    \]
+    このような$\proj^2$の自己同型はただひとつ存在する．
+    そしてこれは$E[3]$の群構造を維持し，
+    像は以下の$9$点を通る．
+    \[ K=\{ (0:1:-\beta) : (-\beta : 0 : 1), (1 : -\beta : 0) \mid \mwhere \beta^3=1 \}. \]
+    $\proj^2$の種数$1$の曲線は$3$次曲線である．
+    そして以上の$9$点を通る非特異曲線は，以下の形の多項式で定義される．
+    \[ x^3+y^3+z^3-3 \mu xyz=0 \]
+    こうして$(E, \alpha)$から$\mu \in B$への写像が定まる．
+    この楕円曲線の$3$-torsion pointsは上の$9$点である．
+    
+    逆に，Hesse pencil
+    $H_{\mu}: x^3+y^3+z^3-3 \mu xyz=0$をとる．
+    これのlevel $3$-structureは
+    \[
+        \alpha(0,0) \mapsto (0:1:-1), \quad
+        \alpha(1,0) \mapsto (0:1:-\xi), \quad
+        \alpha(0,1) \mapsto (-1:0:1).
+    \]
+    で定まる．
+
+    level $3$-structureのとり方には$SL(2, \Z/3\Z)$の自由度がある．
+    より具体的には$M \in SL(2, \Z/3\Z)$について，
+    以下のように変換する．
+    \begin{defmap}
+        \sigma& (\Z/3\Z)^2& \to& (\Z/3\Z)^2 \\
+        {}& (s,t)& \mapsto& (s,t)M
+    \end{defmap}
+    これに伴って，$PGL(3, k)$の元$\alpha \circ \sigma$
+    （正確には$PGL(2, k)$の元であって$E[3]$への制限が$\alpha \circ \sigma$であるもの）
+    が定まる．
+    なお，$\sigma \in GL(2, \Z/3\Z)$を$\det \sigma \neq 1$であるものとすると，
+    $\alpha \circ \sigma$が対称行列でなくなる．
+    これによって$H_{\mu}$の対称性と整合的でなく成る．
+    結果として$\alpha \circ \sigma$による$H_{\mu}[3]$の像は$H_{\mu}[3]$でなくなってしまう．
+    
+    $H_{\mu}$のパラメータ$\mu$は
+    $\mu$は$PSL(2, \Z/3\Z)=SL(2, \Z/3\Z)/\{\pm I\}$の作用を反映する．
+    $-I=\mat{-1 & 0 \\ 0 & -1}$の作用では変化しない．
+    $-I$は$\alpha$と合成すると，$y,z$軸の交換に成る．
+
+    \begin{Prop}
+        同型$f: H_{\mu} \to H_{\mu'}$を，
+        $H_{\mu}, H_{\mu'}$の$3$-torsion points :: $K$を固定するものとする．
+        この時，$f=\id$．
+    \end{Prop}
+    \begin{proof}
+        Iku Nakamura
+        ``Compactification by GIT-stability of the moduli space of abelian varieties"
+        \footnote{ \url{ https://arxiv.org/abs/1406.0174 } }
+        Claim 2.3.2の証明を参照した．
+
+        $f$は$K$の点を固定するから，$K$の$3$点が乗った直線全体も固定する．
+        そのため，$f$は線形変換とみなせる．
+        $f$を行列$A$で書いた時，$A$がスカラー行列であることを示そう．
+
+        $K$は直線$x=0, y=0, z=0$上の$3$点を含むから，
+        $A$はこれら$3$直線を固定する．
+        したがって$A$は対角行列である．
+        さらに$(0:1:-1)$と$(1:-1:0)$を固定することから，
+        $A$はスカラー行列．
+        よって$f=\id$．
+    \end{proof}
+
+    $\C$上の解析的な曲線(compact Riemann surface)については，
+    torsion pointは$\Z/3\Z$係数の$1$-cycleとして理解できる．
+    $\C$上の楕円曲線はトーラスとみなせるが，
+    その上の原点$(0,0)$を固定し，
+    大円を$3$等分した位置に$(0,1)$を，小円を$3$等分した位置に$(1,0)$をとる．
+    そして加法的に$(1,0), (0,1), (-1,0), (0,-1), \dots$をとる．
+    \begin{center}
+        \includegraphics[width=9cm,pagebox=cropbox]{./images/torus_with_3_torsions.pdf}
+    \end{center}
+    そして$(0,0)$から各頂点への辺を$1$-cycleとして考える．
+    こうして考えると，
+    level structureを群構造がないcompact Riemann surfaceにも拡張できる．
+
+    \begin{Def}
+        $C$ :: curve of genus $g$ over $\C$, $n$ :: positive integerとする．
+        $H_1(C^{an}, \Z/n\Z)$を，
+        intersection paringをsymplectic formとする
+        symplectic vector spaceとみなす．
+
+        $C$のlevel $n$-strcutureとは，
+        symplectic isomorphism :: $\alpha: (\Z/n\Z)^{2g} \to H_1(C^{an}, \Z/n\Z)$のことである．
+        ここで$(\Z/n\Z)^{2g}$はstanderd symplectic spaceである．
+
+        curves with level structure :: $(C, \alpha), (C', \alpha')$が同型であることを，
+        以下のように定める:
+        isomorphism :: $\phi: C \to C'$が存在し，
+        $\phi$から誘導される写像$\phi^*: H_1(C'^{an}, \Z/n\Z) \to H_1(C'^{an}, \Z/n\Z)$が
+        $\phi^* \circ \alpha=\alpha'$を満たす．
+    \end{Def}
+
+    以下はより一般の体上のcurveで定義できるlevel structureである．
+    O. Bergvall
+    ``Cohomology of the moduli space of curves of genus three with level two structure" 
+    \footnote{\url{http://www.diva-portal.org/smash/record.jsf?pid=diva2\%3A715000&dswid=5675}}
+    Def2.3.1
+    からとった．
+    \begin{Def}[]
+        $k$ :: algebraically closed field,
+        $C$ :: smooth, irreducible, and projective curve of genus $g$,
+        $n$ :: positive integer with $n \neq \fchar k$とする．
+        $n$-torsion points of Jacobi variety of $C$ :: $J(C)[n]$を，
+        Weil paringをsymplectic formとする
+        symplectic vector spaceとみなす．
+
+        $C$のlevel $n$-structureとは，
+        symplectic isomorphism :: $\alpha: (\Z/n\Z)^{2g} \to J(C)[n]$のことである．
+        ここで$(\Z/n\Z)^{2g}$はstanderd symplectic spaceである．
+
+        morphism :: $\phi: C \to C'$に対して，
+        $\phi^*: J(C') \to J(C)$が誘導される(TODO: HOW?)．
+        そこで，curves with level structure :: $(C, \alpha), (C', \alpha')$が同型であることを，
+        以下のように定める:
+        isomorphism :: $\phi: C \to C'$が存在し，
+        $\phi^*$が$\phi^* \circ \alpha=\alpha'$を満たす．
+    \end{Def}
+
+    \subsubsection{ Weierstrass points }
     こちらを考えても元の問題のmoduli spaceのfinite coverが得られる
     修正としては，
     ordered sets of (higher-order) Weierstrass pointsを考える，
     というものもある．
     Weierstrass pointsの定義は\cite{GAC} pp.41-44にある．
+    C. Shor, T. Shaska ``Weierstrass points of superelliptic curves"
+    \footnote{\url{https://arxiv.org/pdf/1502.06285.pdf}}
+    にも解説がある．
 
     \subsection{Representation by Algebraic Stacks.}
     moduli functorをschemeで表現できないのなら
