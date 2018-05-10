@@ -1,38 +1,17 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[dvipdfmx, hiresbb]{graphicx}
 \usepackage[]{../math_note}
+\usepackage[]{macros}
 \usepackage[dvipdfmx, colorlinks=true]{hyperref}
-\usepackage{pxjahyper}
-\usepackage[]{enumitem}
-\usepackage{listings, color}
 \usepackage[all]{xy}
+\usepackage{pxjahyper}
+\usepackage{enumitem}
+\usepackage{listings, color}
 
-\usepackage{chngcntr}
-\makeatletter
-    \newcounter{c@question}
-    \counterwithin{c@question}{section}
-    \newenvironment{question}[0]%
-    {\stepcounter{c@question}\begin{itembox}[l]{問\arabic{section}.\arabic{c@question}}}%
-    {\end{itembox}}%
-    \newenvironment{question*}[0]%
-    {\stepcounter{c@question}\begin{itembox}[l]{問}}% 
-    {\end{itembox}}%
-\makeatother
-
+%% code highlight {{{
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\makeatletter
-    \newcounter{c@problem}
-    \counterwithin*{c@problem}{section}
-    \newenvironment{problem}[0]%
-    {\stepcounter{c@problem}\begin{itembox}[l]{問題\arabic{section}.\arabic{c@problem}}}%
-    {\end{itembox}}%
-    \newenvironment{problem*}[0]%
-    {\stepcounter{c@problem}\begin{itembox}[l]{問題}}% 
-    {\end{itembox}}%
-\makeatother
 
 \lstset{frame=tb,
   language=Python,
@@ -50,31 +29,7 @@
   breakatwhitespace=true,
   tabsize=3
 }
-
-\newcommand{\Sch}{\mathbf{Sch}}
-\newcommand{\Set}{\mathbf{Set}}
-\newcommand{\Ring}{\mathbf{Ring}}
-\newcommand{\Alg}{\mathbf{Alg}}
-\newcommand{\Cat}{\mathbf{Cat}}
-\newcommand{\Open}{\mathrm{Open}}
-\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
-\newcommand{\GrpSch}{\mathbf{GrpSch}}
-
-\newcommand{\famF}{\mathcal{F}}
-\newcommand{\famG}{\mathcal{G}}
-\newcommand{\famU}{\mathcal{U}}
-
-\newcommand{\spM}{\mathcal{U}}
-\newcommand{\modM}{\mathcal{M}}
-
-\newcommand{\ftor}[1]{\underline{#1}}
-\newcommand{\ftorM}{\mathcal{M}}
-\newcommand{\ftorGL}{\mathcal{GL}}
-
-\newcommand{\mfor}{\text{for }}
-\newcommand{\acton}{\curvearrowright}
-
-\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+%% }}}
 
 \begin{document}
 \title{ゼミノート \#1 \\ Fine/Coarse Moduli Spaceの非存在}
@@ -1029,6 +984,84 @@ moduli spaceは``moduli functor"の情報を
     Teichm\"uller structure of level $G$ （$G$は有限群）は
     \cite{IrrOfMg}で導入されている．
 
+    最初に二つ，事前に定義しておく．
+    \begin{Def}
+        $(\Z/n\Z)^{2g}$をstanderd symplectic spaceと呼ぶ時，
+        $(\Z/n\Z)^{2g}$には，以下のようにsymplectic form :: $\omega$を与える:
+        $\Omega=\mat{0 & -I_{g} \\ I_g & 0}$（$I_g$は$g \times g$単位行列）として，
+        \[ \omega(a, b)={}^t a \Omega b \quad \mfor \quad a,b \in (\Z/n\Z)^{2g} \]
+    \end{Def}
+
+    \begin{Def}[From Jana Sot\'akov\'a ``Weil pairing"]
+        $k$ :: algebraically closed field,
+        $A$ :: abelian variety over $k$,
+        $m$ :: positive integer with $\gcd(m, \fchar k)=1$とする．
+        $A$の$m$-torsion pointsを$A[m]$と表す．
+
+        Weil pairingとは，
+        以下の条件を満たすpairing (bilinear form) 
+        \[ e_m: A[m] \times A[m] \to \mu_m=\{ x \in k \mid x^m=1 \} \]
+        のことである．
+        これは存在する（ここでは証明しない）．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+            \item
+                $e_m(S_1+S_2, T)=e_m(S_1,T) e_m(S_2,T)$.
+            \item
+                $e_m(S, T_1+T_2)=e_m(S,T_1) e_m(S,T_2)$.
+            \item
+                $e_m(T, T)=1$.
+            \item
+                $e_m(S, T)=e_m(T, S)^{-1}$.
+            \item
+                $\Forall{T \in A[m]} \Exists{S \in A[m]} e_m(S, T) \neq 1$.
+        \end{enumerate}
+    \end{Def}
+
+    \begin{Remark}\label{remark:WeilPairingAndSL}
+        $S, T \in A[m]$とし，$a,b,c,d \in \Z/m\Z$とする．
+        定義から次が成り立つ．
+        \[ e_m(a S+ b T, c S+ d T)=e_m(S, T)^{ad-bc}. \]
+        したがって$A[m] \times A[m]$に$M \in GL(2, \Z/m\Z)$を作用させた時，
+        $M$の作用で$e_m$が保たれる必要十分条件は$\det M=1$，
+        すなわち$M \in SL(2, \Z/m\Z)$である．
+    \end{Remark}
+
+    以下は一般の体上のcurveで定義できるlevel structureである．
+    O. Bergvall
+    ``Cohomology of the moduli space of curves of genus three with level two structure" 
+    \footnote{\url{http://www.diva-portal.org/smash/record.jsf?pid=diva2\%3A715000&dswid=5675}}
+    Def2.3.1
+    からとった．
+    \begin{Def}[]
+        $k$ :: algebraically closed field,
+        $C$ :: smooth, irreducible, and projective curve of genus $g$,
+        $n$ :: positive integer with $\gcd(n,\fchar k)=1$とする．
+        $n$-torsion points of Jacobi variety of $C$ :: $J(C)[n]$を，
+        Weil paringをsymplectic formとする
+        symplectic vector spaceとみなす．
+
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+            \item 
+            $C$のlevel $n$-structureとは，
+            symplectic isomorphism :: $\alpha: (\Z/n\Z)^{2g} \to J(C)[n]$のことである．
+            したがって，任意の$a,b \in (\Z/n\Z)^{2g}$について
+            $\omega(a, b)=e_m(\alpha(a), \alpha(b))$が成立する．
+            ここで$(\Z/n\Z)^{2g}$はstanderd symplectic spaceである．
+
+            \item
+            morphism :: $\phi: C \to C'$に対して，
+            $\phi^*: J(C') \to J(C)$が誘導される（line bundleのpullbackで定まる）．
+            そこで，curves with level $n$-structure :: $(C, \alpha), (C', \alpha')$が同型であることを，
+            以下のように定める:
+            isomorphism :: $\phi: C \to C'$が存在し，
+            $\phi^*$が$\phi^* \circ \alpha=\alpha'$を満たす．
+        \end{enumerate}
+    \end{Def}
+    $C$が楕円曲線である場合($g=1$)には，
+    $J(C)=C$(\cite{HarAG} ThmIII.4.11)である．
+    またこの時，
+    $\phi: C \to C'$から誘導される$J(C') \to J(C)$の射は$\phi$に一致する．
+
     ここではHesse cubic formを用いて，
     代数閉体$k$($\fchar k \neq 3$)上の楕円曲線のlevel $3$-structureと，
     level $3$-structureを持つ楕円曲線のmoduli spaceを解説する．
@@ -1100,9 +1133,9 @@ moduli spaceは``moduli functor"の情報を
     （正確には$PGL(2, k)$の元であって$E[3]$への制限が$\alpha \circ \sigma$であるもの）
     が定まる．
     なお，$\sigma \in GL(2, \Z/3\Z)$を$\det \sigma \neq 1$であるものとすると，
-    $\alpha \circ \sigma$が対称行列でなくなる．
-    これによって$H_{\mu}$の対称性と整合的でなく成る．
-    結果として$\alpha \circ \sigma$による$H_{\mu}[3]$の像は$H_{\mu}[3]$でなくなってしまう．
+    Remark \ref{remark:WeilPairingAndSL}より，
+    $\alpha$に課せられた条件
+    $\omega(a, b)=e_m(\alpha(a), \alpha(b))$が成立しない．
     
     $H_{\mu}$のパラメータ$\mu$は
     $\mu$は$PSL(2, \Z/3\Z)=SL(2, \Z/3\Z)/\{\pm I\}$の作用を反映する．
@@ -1143,7 +1176,8 @@ moduli spaceは``moduli functor"の情報を
     \end{center}
     そして$(0,0)$から各頂点への辺を$1$-cycleとして考える．
     こうして考えると，
-    level structureを群構造がないcompact Riemann surfaceにも拡張できる．
+    compact Riemann surfaceのlevel structureは
+    homologyを用いて定義することが出来る．
 
     \begin{Def}
         $C$ :: curve of genus $g$ over $\C$, $n$ :: positive integerとする．
@@ -1151,42 +1185,21 @@ moduli spaceは``moduli functor"の情報を
         intersection paringをsymplectic formとする
         symplectic vector spaceとみなす．
 
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item 
         $C$のlevel $n$-strcutureとは，
         symplectic isomorphism :: $\alpha: (\Z/n\Z)^{2g} \to H_1(C^{an}, \Z/n\Z)$のことである．
         ここで$(\Z/n\Z)^{2g}$はstanderd symplectic spaceである．
 
+        \item
         curves with level structure :: $(C, \alpha), (C', \alpha')$が同型であることを，
         以下のように定める:
         isomorphism :: $\phi: C \to C'$が存在し，
         $\phi$から誘導される写像$\phi^*: H_1(C'^{an}, \Z/n\Z) \to H_1(C'^{an}, \Z/n\Z)$が
         $\phi^* \circ \alpha=\alpha'$を満たす．
+        \end{enumerate}
     \end{Def}
 
-    以下はより一般の体上のcurveで定義できるlevel structureである．
-    O. Bergvall
-    ``Cohomology of the moduli space of curves of genus three with level two structure" 
-    \footnote{\url{http://www.diva-portal.org/smash/record.jsf?pid=diva2\%3A715000&dswid=5675}}
-    Def2.3.1
-    からとった．
-    \begin{Def}[]
-        $k$ :: algebraically closed field,
-        $C$ :: smooth, irreducible, and projective curve of genus $g$,
-        $n$ :: positive integer with $n \neq \fchar k$とする．
-        $n$-torsion points of Jacobi variety of $C$ :: $J(C)[n]$を，
-        Weil paringをsymplectic formとする
-        symplectic vector spaceとみなす．
-
-        $C$のlevel $n$-structureとは，
-        symplectic isomorphism :: $\alpha: (\Z/n\Z)^{2g} \to J(C)[n]$のことである．
-        ここで$(\Z/n\Z)^{2g}$はstanderd symplectic spaceである．
-
-        morphism :: $\phi: C \to C'$に対して，
-        $\phi^*: J(C') \to J(C)$が誘導される(TODO: HOW?)．
-        そこで，curves with level structure :: $(C, \alpha), (C', \alpha')$が同型であることを，
-        以下のように定める:
-        isomorphism :: $\phi: C \to C'$が存在し，
-        $\phi^*$が$\phi^* \circ \alpha=\alpha'$を満たす．
-    \end{Def}
 
     \subsubsection{ Weierstrass points }
     こちらを考えても元の問題のmoduli spaceのfinite coverが得られる
