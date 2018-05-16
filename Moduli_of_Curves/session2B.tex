@@ -3,6 +3,7 @@
 \usepackage[all]{xy}
 \usepackage{calc}  
 \usepackage[]{enumitem}
+\usepackage[]{macros}
 
 %% for hyperref {{{
 \usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
@@ -15,15 +16,11 @@
 \newcommand{\modA}{\mathcal{A}}
 \newcommand{\modC}{\mathcal{C}}
 \newcommand{\modH}{\mathcal{H}}
-\newcommand{\modM}{\mathcal{M}}
 \newcommand{\modP}{\mathcal{P}}
 \newcommand{\modT}{\mathcal{T}}
 
 \newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
-
 \newcommand{\Pic}{\operatorname{Pic}}
-
-\newcommand{\inlinematrix}[1]{\begin{bmatrix} #1 \end{bmatrix}}
 
 \begin{document}
 \title{ゼミノート \#2}
@@ -35,13 +32,7 @@
     \end{center}
     のことである．
     \cite{HarAG} II, 6.7より，以上の意味でのcurveはprojectiveである．
-
-    \cite{HaMo}では``curve"の定義に``curve"を用いているので
-    些か定義を定め難い．
-    このノートでは，通常要求されるirreducibilityは要求しないことにした．
-    これは\cite{HaMo} Exercise 1.7に現れる$xy=0$を除外しないためである．
-
-    また，(geometric) genus of curveは通常$g$で表す．
+    (geometric) genus of curveは通常$g$で表す．
 
 \section{ Moduli spaces we'll be concerned with }
     以降で考えていくmoduli spaceを簡単に紹介する．
@@ -70,6 +61,11 @@
 
     $(C, p_1,\dots,p_n)$から$n$点$p_1,\dots,p_n$の情報を忘れると，
     標準的な射$\modM_{g,n} \to \modM_g$が得られる．
+
+    $\modM_{g,n}$は$\modM_g$に比べて次元が$n$大きく，
+    元の$\modM_g$の情報を得づらいという問題がある．
+    しかし，$\modM_{g,n}$はしばしば自然に現れるので，
+    文脈によっては大きな意味を持つ．
 
     \subsection{\tp{$\modP_{d,g}$}{Pdg}
         :: the coarse moduli space of pairs of curve of genus \tp{$g$}{g} and line bundle of degree \tp{$d$}{d}. }
@@ -100,6 +96,14 @@
         よって$\#( \Z/(2g-2)\Z \times (\Z/2\Z)) )=(2g-2)/2=g-1$.
     }．
     \[ \modP_{0,g}, \modP_{1,g}, \dots, \modP_{d-1,g}. \]
+
+    $\modP_{d,g}$のうち，
+    $\modP_{g-1, g}$は``Theta characteristic"と
+    呼ばれるものを付加構造としたmoduli spaceである．
+    参考文献:
+    Gavril Farkas
+    ``Theta characteristics and their moduli"
+    \footnote{\url{https://arxiv.org/abs/1201.2557}}
     
 \section{Constructions of \tp{$\modM_g$}{Mg}}
 
@@ -108,9 +112,10 @@
     ここではそれを述べる．
 
     まず，対象$X$と付随する情報(extra data)の組たちを，
-    何らかの大きい空間$W$の点に対応させる．
-    多くの場合で対象の同型類と点の対応は$1:1$ではなく，$1:$多となっている．
-    $1$つの対象の同型類$[X]$に :: 対応する$W$の点たちが成す集合$S_{[X]}$を観察する．
+    何らかのparameter space :: $W$の点に対応させる．
+    parameter spaceは対象と付加情報の組そのもの（同値類でなく）が成す空間である．
+    例えば平面上の原点を通る直線のparameter spaceは$\proj^1$である．
+    $1$つの対象の同型類$[X]$に対応する$W$の点たちが成す集合$S_{[X]}$を観察する．
     この集合$S_{[X]}$を何らかの群$G$の$W$への作用に拠る軌道と考えることが出来れば
     ($S_{[X]}=Gw$なる$w \in W$が存在すれば)，
     求めるmoduli spaceは商空間$W/G$として実現できる．
@@ -119,9 +124,8 @@
     moduli spaceを構成する際には以下の$4$つの要素を中心に考えることに成る．
     \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
         \item[Extra Data] 分類対象(Object)に付随させる情報．
-        \item[Container Space] 扱いやすい空間．
-        \item[Correspondance] 組(Object, Extra Data)とContainer Spaceの点の対応．
-        \item[Group] Container Spaceに作用し，$1$つのObjectに対応する点の集合が$1$つの軌道である群．
+        \item[Parameter Space] 組(Object, Extra Data)が成す空間．
+        \item[Group] Parameter Spaceに作用し，$1$つのObjectに対応する点の集合が$1$つの軌道である群．
     \end{description}
     
     \begin{Example}（\cite{Muk1}）
@@ -131,11 +135,11 @@
         次のような形の$k[x_1,\dots,x_n]$の斉次$d$次多項式で定まる．
         \[ \sum_{|\alpha|=d} a_{\alpha} x^{\alpha}. \]
         ただし$\alpha$は多重添字である．
-        そして多項式はその係数$a$で定まる(Correspondance)．
-        
+        そして多項式はその係数$a$で定まる．
         $a$は$k^{\oplus N}$($N:=\binom{n+d}{d}$)の元である．
-        したがって$H$は$\affine_k^N$(Container Space)の
+        したがって$H$は$\affine_k^N$(Parameter Space)の
         点$(a_{(d,0,\dots,0)}, \dots, a_{(0,\dots,0,d)})$に対応する．
+
         しかし，$a$に正則行列$g \in GL_{n+1}(k)$ (Group)を作用させた$a'$も，
         $H$と同型なhypersurfaceに対応する
         （$g$の作用のさせ方はここで述べない）．
@@ -150,11 +154,11 @@
     最初の二つは解析的な方法で，最後のものは完全に代数的である．
 
     \subsection{The Teichm\tp{\"u}{u}ller approach}
-    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Parameter Space}]
         \item[Extra Data]
             Normalized set of generators for $\pi_1(C)$, \\
             or Homeomorphism which $\an{C}$ to standard compact orientable surface $X_0$.
-        \item[Container Space] Teichm\"uller space :: $T_g \subseteq \C^{3g-3}$．
+        \item[Parameter Space] Teichm\"uller space :: $T_g \subseteq \C^{3g-3}$．
         \item[Group] $\Gamma_G$ :: Group of diffeomorphisms of $X_0$, modulo isotopy.
     \end{description}
     この方法で構成された$\modM_g$はanalytic varietyになる．
@@ -163,15 +167,33 @@
     $\modM_g$の位相を扱いやすいことと，
     $\modM_g$に自然な計量を入れられることである．
 
+    Teichm\"uller space :: $T_g$は，open ballであることが知られている．
+    すなわち，contractable spaceとなっている．
+    そこで$T_g$の代わりに扱いやすいcontractable spaceを考え，
+    その$\Gamma_g$による商を考えることで$\modM_g$のcohomologyについて調べることが出来る．
+    主にHarerがこの方法で成果をあげた．
+    この成果についてはこのセミナーでものちに取り上げる．
+
+    $\modM_g$に計量を入れて，
+    それをもちいてprojective varietyへの埋め込みを与える，
+    ということをWolpertが行った．
+    この埋め込み先のprojective varietyは
+    Deligne--Mumford compactificationと共通の良い性質を多く持っている．
+    なお，計量の入れ方は複数存在する．
+    参考文献は
+    Kefeng Liu, Xiaofeng Sun, Shin-Tung Yau
+    ``Geometric Aspects of the Moduli Space of Riemann Surfaces"
+    \footnote{\url{ https://arxiv.org/abs/math/0411247 }}.
+
     \subsection{The Hodge theory approach}
-    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Parameter Space}]
         \item[Extra Data]
             \begin{enumerate}[leftmargin=*]
                 \item Symplectic basis of $H_1(C, \Z)$ :: $\{a_1,\dots,a_g, b_1,\dots,b_g\}$,
                 \item Basis of $H^0(C, K_C)$ :: $\{\omega_1,\dots,\omega_g\}$,
                 \item The intersection pairing.
             \end{enumerate}
-        \item[Container Space] $\mathfrak{c}_g \subseteq \mathfrak{h}_g$.
+        \item[Parameter Space] $\mathfrak{c}_g \subseteq \mathfrak{h}_g$.
         \item[Correspondance] $P=[\int_{b_i} \omega_j ]_{i,j} \in \mathfrak{h}_g$
         \item[Group] $Sp_{2g}(\Z)$ :: Symplectic group.
     \end{description}
@@ -185,8 +207,11 @@
         \right\}
     \]
     これはSiegel upper-halfspace of dimension $g$と呼ばれている．
-    $\mathfrak{h}_1$が通常のupper-halfplaneと一致することに注意．
-    $b_1,\dots,b_g$の選び方によって$P=[\int_{b_i} \omega_j ]_{i,j}$は変わるが，
+    $\mathfrak{h}_1$が通常のupper-half planeと一致することに注意．
+
+    $\{a_1,\dots,a_g\} \subset H_1(C, \Z)$は
+    $[\int_{b_i} \omega_j ]_{i,j}=I_g$（単位行列）であるように選ばれる．
+    $b_1,\dots,b_g$の選び方によって$P=[\int_{b_i} \omega_j ]_{i,j} \in \mathfrak{c}_g$は変わるが，
     これは以下の$Sp_{2g}(\Z)$による作用に対応する．
     \[
         Sp_{2g}(\Z)=
@@ -196,7 +221,7 @@
             \gamma^T \Omega \gamma=\Omega
         \right\},
         \mwhere
-        \Omega=\inlinematrix{ 0 & I_g \\ -I_g & 0 }.
+        \Omega=\mat{ 0 & I_g \\ -I_g & 0 }.
     \]
     構成方法から，
     $\modM_g$は$\modA_g=\mathfrak{h}_g/Sp_{2g}(\Z)$に含まれる．
@@ -214,16 +239,26 @@
     \footnote{ $\modA_g$をanalytic open subsetとして含むcompact analytic varietyの事. }
     が自然に得られるということである．
     compactification of $\modM_g$ :: $\tilde{\modM_g}$は
+    Statake compactificationと呼ばれ．
     $\tilde{\modA_g}$での$\modM_g$の閉包として得られる．
+    
+    しかし，$\tilde{\modM_g}$はいかなるmoduli functorのcoarse moduli spaceでもないため，
+    （以下で述べる例を除いては）$\modM_g$自体の研究には役立てられない．
+    実際，$\tilde{\modM_g}-\modM_g$は種数が$g$より小さいsmooth curveに対応しているため，
+    $\tilde{\modM_g}$上のfamilyを考えるということは出来ない．
+    種数$g$の曲線と種数が$g$未満の曲線の両方をfiberにもつfamilyは，
+    どこかでsingularなfiberを持つからである
+    （種数はhomotopy/birational不変量であったことを想起せよ）．
+
     $\tilde{\modM_g}$を用いた議論によって，
     $\modM_g$がprojectiveでもaffineでも無いことが分かる
     （TODO: ここでの$\modM_g$ってschemeではないでのは？）．
 
     \subsection{The geometric invariant theory (G.I.T.) approach}
     $n \geq 3$を任意にとって固定する．
-    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Container Space}]
+    \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Parameter Space}]
         \item[Extra Data] (Nothing.)
-        \item[Container Space] $K \subseteq \modH_{2(g-1)n, g, N}$ ($N:=(2n-1)(g-1)-1$).
+        \item[Parameter Space] $K \subseteq \modH_{2(g-1)n, g, N}$ ($N:=(2n-1)(g-1)-1$).
         \item[Group] $PGL_{N+1}(\C)$.
     \end{description}
     $\modH_{2(g-1)n, g, N}$は
