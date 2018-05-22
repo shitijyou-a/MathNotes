@@ -18,16 +18,103 @@
 \newcommand{\modH}{\mathcal{H}}
 \newcommand{\modP}{\mathcal{P}}
 \newcommand{\modT}{\mathcal{T}}
-
 \newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
 \newcommand{\Pic}{\operatorname{Pic}}
+
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\barM}{\overline{\mathcal{M}}}
+
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\Sm}{\operatorname{Sm}}
 
 \begin{document}
 \title{ゼミノート \#3}
 \author{七条彰紀}
 \maketitle
-\section{Basic properties of \tp{$\modM_g$}{Mg}.}
-    
+
+以下では主に$g \geq 1$の場合を考える．
+また，考えるのは$\C$上のschemeのみである．
+
+\begin{problem}
+    What properties $\modM_g$ and $\bar{\modM}_g$ does have?
+\end{problem}
+
+\section{Basic Properties}
+    \paragraph{$\dim \modM_g=3g-3$.}
+    $\M_g$はHilbert schemeの開集合の$PGL(N+1, \C)$による作用での商であった．
+    そこで，$\dim \M_g$を用いてHilbert schemeの次元を記述し，
+
+
+    \paragraph{$\modM_g$ :: Irreducible.}
+
+\section{Local Properties.}
+    \subsection{Singular Locus.}
+        singular locus of $\barM_g$を$\Sing \M_g$と書く．
+        smooth locus of $\M_g$を$\Sm \M_g \ (=\M_g-\Sing \M_g)$と書く．
+        \paragraph{$g \geq 4$.}
+            $\Sm \M_g$はnon-trivial automorphismを持たないcurveのlocusに一致する．
+
+        \paragraph{$g=2$.}
+        
+        \paragraph{$g=3$.}
+
+    \subsection{Local Looks.}
+    $[C] \in \Sing \M_g$の解析的近傍は，
+    $\C^{3g-3}$の開集合を有限群の線形作用で割ったようなものに成る．
+
+    \subsection{\tp{$\Delta=\barM_g-\M_g$}{D=barMg-Mg}.}
+        nodeを$\delta$個持つstable curveが成すlocusを考える．
+        \begin{Claim}
+            nodeを$\delta$個持つstable curveが成すlocusを
+            $N_{\delta} \subset \bar{\modM}_g$とする．
+            この時，
+            \[ \dim N_{\delta}=3g-3-\delta \quad (\implies \codim N_{\delta}=\delta). \]
+            また，$\cl_{\bar{\modM}_g}(N_{\delta})$は
+            nodeを$\delta$個以上持つstable curveが成すlocusに一致する．
+        \end{Claim}
+        このことは\cite{HaMo} Thm3.150直後の段落でも触れられている．
+
+        nodeを$1$個以上持つcurveのlocus :: $\Delta=\barM_g-\M_g$は，
+        $\M_g$が$\barM_g$の開集合であるから，これはclosed in $\barM_g$．
+        上の主張から，$\Delta$はnodeを丁度$1$つ持つcurveのlocusのclosureである．
+        そこで$\Delta_0$と$\Delta_i \ (i=1,\dots,\lfloor g/2\rfloor)$を次のように定める．
+        \begin{itemize}
+            \item $\Delta_0=\cl_{\barM_g}(\{ [C] \in \barM_g \mid
+                    C \text{ :: irreducible curve with $1$ node } \}).$
+            \item $\Delta_0=\cl_{\barM_g}(\{ [C] \in \barM_g \mid
+                    C \text{ :: union of two smooth curves of genus $i$ and $g-i$, meeting at $1$ pt } \})$
+                    for $i=1,\dots,\lfloor g/2\rfloor.$
+        \end{itemize}
+        （TODO: なぜ$\Delta_0$はsmooth curvesの和でないのか？）
+
+        $\Delta_0,\dots,\Delta_{\lfloor g/2 \rfloor}$はirreducibleである．
+        これは以下のように証明する．
+        まず$\Delta_0$を考える．
+        $C$ :: irreducible curve with $1$ nodeとする．
+        これのnormalizationを$\tilde{C}$とすると，$C$のnodeは$\tilde{C}$の$2$点に対応する．
+        そこで$\tilde{C}$とこの$2$点を組にして$\M_{g-1,2}$の点とする．
+        こうして$\phi_0: \M_{g-1, 2} \to \Delta_0$が得られる．
+        $\Delta_i (i>0)$の場合，
+        $C$のnormalizationはgenus $i$, genus $g-i$のcomponentからなる．
+        交点に対応する点をそれぞれ一つずつ持つから，
+        これをdistinguished pointとして
+        $\phi_i: \M_{i, 1} \times_k \M_{g-i, 1} \to \Delta_i$が得られる．
+        こうして得られる$\Delta_0,\dots,\Delta_{\lfloor g/2 \rfloor}$は連続である(FACT)．
+        
+        $\barM_{g,n}$はirreducibleである(Thm2.15)．
+        したがってその開集合$\M_{g,n}$もirreducibleである（$\Delta$ :: closedより）．
+        $\M_{g,n}$は代数閉体上のscheme（実際にはvariety, Thm2.15）なので，
+        これらのfiber productもirreducible．
+        連続写像で写す操作と閉包をとる操作でirreducibilityが保たれるので，
+        $\Delta_i=\cl(\im \phi_i) \ (i=0,\dots,\lfloor g/2 \rfloor)$はirreducibleである．
+        
+\section{How Close is \tp{$\modM_g$}{Mg} to Projective ?}
+
+\section{Cohomology of \tp{$\modM_g$}{Mg}.}
+
+\section{Cohomology of \tp{$\modC_g:=\modM_{g, 1}$}{Cg=Mg,1}.}
+
 \bibliographystyle{jplain}
 \bibliography{reference}
 \end{document}
