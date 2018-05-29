@@ -1,0 +1,155 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{../math_note}
+\usepackage[all]{xy}
+
+\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
+
+%% moduli spaces
+\newcommand{\modA}{\mathcal{A}}
+\newcommand{\modC}{\mathcal{C}}
+\newcommand{\modH}{\mathcal{H}}
+\newcommand{\modP}{\mathcal{P}}
+\newcommand{\modT}{\mathcal{T}}
+
+\newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\barM}{\overline{\mathcal{M}}}
+
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\Sm}{\operatorname{Sm}}
+
+\begin{document}
+\title{ゼミノート \#3 \\ Stable Curves}
+\author{七条彰紀}
+\maketitle
+
+\cite{HaMo} 2.C,Dを中心にstable curveについて記述する．
+以下で曲線は全て\textbf{arithmetic genusが$2$以上}であるものとする．
+これは特異曲線を扱うためにarithmetic genusを用い，
+自己同型群が有限であるために$\geq 2$とする．
+
+\section{Motivation: To Get Modular Compactification of $\M_g$.}
+    G.I.T.によって$\M_g$を得る方法では，
+    Hilbert scheme $\modH_{2(g-1)n, g, N}$\footnote{$N=(2n-1)(g-1)-1$.}の開集合$K$を用いて
+    $\M_g=K/PGL(N+1, \C)$
+    として$\M_g$を得た．
+
+    そこでcompactification of $\M_g$
+    （ここでは$\M_g$を開集合として含むprojetive scheme over $\Z$）を得る方法として，
+    $K$の$\modH_{2(g-1)n, g, N}$での閉包を取って$PGL_{N+1}(\C)$で割る，
+    ということが思いつく．
+    しかしこれではmoduli spaceが得られない．
+    moduli spaceを得るためには，
+    $K$を含む集合$\tilde{K}$の商$\tilde{K}/PGL_{N+1}(\C)$をとらなくてはならない．
+    これらの包含関係は$K \subset \tilde{K} \subset \cl_{\modH}(K)$となる．
+
+    $\bar{K}$でなく$\tilde{K}$，という制限が必要な理由は次のように説明される:
+    次のような$(s:t) \in \proj_{\C}^1-\{(0:1), (1:0)\}=:B$で
+    パラメトライズされるfamily of smooth curvesを考える．
+    \[
+        C_{(a,b)}: s^3y^2z=s^3 x^3-st^2axz-t^3bz^3
+        \mwhere
+        a,b \in \C, (s:t) \neq (0:1), (1:0)
+    \]
+    $j$-invariantを計算すると，
+    これはfiberwise trivial family（session1A2A参照）になっている．
+    また，この曲線族$C_{(a,b)}$は$a,b$の値を変えることで
+    任意の楕円曲線を含むものに成る．
+    今family :: $C_{(a,b)} \to B$があるから，
+    coarse moduli spaceの定義より，morphism :: $\phi \colon B \to \barM_g$が存在する．
+    今，$\barM_g$はprojective (over $\Z$)であるから，proper (\cite{HarAG} Thm II.4.9)．
+    なので$B=\proj_{\C}^1-\{(0:1), (1:0)\} \to \barM_g$は
+    $\bar{\phi}: \proj^1 \to \barM_g$へ拡張される
+    \footnote
+    {
+        証明の概略:
+        criterion of propernessを用いて
+        $\Spec \shO_{\affine^1, \zeta} \to \barM_g$を
+        $\Spec \shO_{\affine^1, t} \to \barM_g$に拡張し，
+        これらが$\phi$と貼り合わせられることを射の一意性から述べる．
+        \url{ https://math.stackexchange.com/questions/1540201 },
+        \url{ http://lovelylittlelemmas.rjprojects.net/properness-and-completeness-of-curves/ }
+        を参照のこと．
+    }．
+    そこで$\bar{\phi}$の$t=0$におけるfiberを考えると，
+    明らかにこれはcuspidal curve :: $y^2z=x^3$である．
+    これはrational curveであり，他のfiberと同型でない．
+    他のfiberは全て同型であったから，
+    このfamilyではjamp phenomenonが発生している．
+    したがってmoduli spaceを得るためには，
+    cuspidal curveに対応する点を$K$に（そして$\M_g$に）付け加えてはならない．
+    この意味でcuspidal curveは楕円曲線の``bad degeneration"と呼べる．
+
+    ではjump phenomenonが発生しないような``good degeneration"は何か，
+    というと，これがstable curveである．
+    DeligneとMumfordがstable curveを定義し，研究した．
+
+    3A, 4A
+
+\section{Definition.}
+    \begin{Def}[Stable Curve]
+        stable curveとは，以下を満たす曲線（scheme of dimension $1$ over $\C$）である．
+        \begin{enumerate}
+            \item 完備 ($=$proper),
+            \item 連結,
+            \item （存在すれば）特異点は2重点(node)のみ,
+            \item 自己同型群が有限位数．
+        \end{enumerate}
+    \end{Def}
+    \begin{Remark}
+    Hurwitz's automorphisms theoremから，
+    connected proper smooth curve of genus $g \geq 2$は
+    全てstable curveである．
+    \end{Remark}
+
+    まったく同様にstable $n$-pointed curveも定義できる．
+    \begin{Def}
+        stable $n$-pointed curveとは，
+        以下を満たす曲線$C$（scheme of dimension $1$ over $\C$）
+        \begin{enumerate}
+            \item 完備 (=proper),
+            \item 連結,
+            \item （存在すれば）特異点は2重点(node)のみ,
+        \end{enumerate}
+        と，$n$個の互いに異なる$C$の点$p_1,\dots,p_n$の組$(C, p_1,\dots,p_n)$であって，
+        $\sigma(p_i)=p_i$を満たすような自己同型$\sigma: C \to C$が
+        成す群が有限群であるものである．
+    \end{Def}
+    関連してsemi-stable (pointed) curveとunstable (pointed) curveの概念がある．
+    これは「自己同型群が有限群」であるという条件をゆるめたもので，
+    「自己同型群が簡約群(reductive group)」とする．
+    reductive groupはG.I.T.の文脈で現れる概念である．
+
+    %% smooth rational (irreducible) componentについての条件で言い換えることも出来る．
+
+\section{Example}
+    \begin{Example}
+        次の$\affine^1$上のfamilyを考える．
+        \[ C_t: y^2z=x(x-1)(x-t) \mwhere t \in \affine^1. \]
+        $t \neq 0,1$の時，$C_t$は楕円曲線である．
+        また，任意の$\C$上の楕円曲線はこのfamilyのいずれかのfiberと同型である．
+        すなわち，fiberwise trivial familyではない．
+        そして$t=0,1$の時$C_t$はstable curveとなっている．
+
+        実際，(TODO: 証明)
+    \end{Example}
+
+\section{$\Delta=\barM_g-\M_g$}
+    \begin{Thm}
+        coarse moduli space of stable curves (resp. stable $n$-pointed curves)
+        :: $\barM_g$ (resp. $\barM_{g,n}$)が存在し，
+        これはprojective varietyである．
+    \end{Thm}
+    さらに，
+    Nodeを$\delta$個以上もつstable curveに対応する点の集合は，
+    pure codimention $\delta$であることが知られている.
+    特にこのことから，stable curveは多くとも$3g-3$個のnodeしか持てないことが分かる．
+
+\section{(Semi-)Stable Reduction.}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
