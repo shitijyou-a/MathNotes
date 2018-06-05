@@ -1,25 +1,11 @@
 \documentclass[a4paper]{jsarticle}
-\usepackage[]{../math_note}
+\usepackage[]{../math_note, macros}
 \usepackage[all]{xy}
 
-\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
-
-%% moduli spaces
-\newcommand{\modA}{\mathcal{A}}
-\newcommand{\modC}{\mathcal{C}}
-\newcommand{\modH}{\mathcal{H}}
-\newcommand{\modP}{\mathcal{P}}
-\newcommand{\modT}{\mathcal{T}}
-
-\newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
-\newcommand{\Pic}{\operatorname{Pic}}
-
-\newcommand{\M}{\mathcal{M}}
-\newcommand{\K}{\mathcal{K}}
-\newcommand{\barM}{\overline{\mathcal{M}}}
-
-\newcommand{\Sing}{\operatorname{Sing}}
-\newcommand{\Sm}{\operatorname{Sm}}
+%% for hyperref {{{
+\usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{pxjahyper}
+%% }}}
 
 \begin{document}
 \title{ゼミノート \#3 \\ Stable Curves}
@@ -31,7 +17,7 @@
 これは特異曲線を扱うためにarithmetic genusを用い，
 自己同型群が有限であるために$\geq 2$とする．
 
-\section{Motivation: To Get Modular Compactification of $\M_g$.}
+\section{Motivation: To Get Modular Compactification of \tp{$\M_g$}{Mg}.}
     G.I.T.によって$\M_g$を得る方法では，
     Hilbert scheme $\modH_{2(g-1)n, g, N}$\footnote{$N=(2n-1)(g-1)-1$.}の開集合$K$を用いて
     $\M_g=K/PGL(N+1, \C)$
@@ -74,7 +60,7 @@
         \url{ http://lovelylittlelemmas.rjprojects.net/properness-and-completeness-of-curves/ }
         を参照のこと．
     }．
-    そこで$\bar{\phi}$の$t=0$におけるfiberを考えると，
+    そこで$\bar{\phi}$の$(s:t)=(1:0)$におけるfiberを考えると，
     明らかにこれはcuspidal curve :: $y^2z=x^3$である．
     これはrational curveであり，他のfiberと同型でない．
     他のfiberは全て同型であったから，
@@ -95,7 +81,8 @@
         \begin{enumerate}
             \item 完備 ($=$proper),
             \item 連結,
-            \item （存在すれば）特異点は2重点(node)のみ,
+            \item （存在すれば）特異点は通常2重点(node)のみ
+                   \footnote{ nodeとは，$(x-y)(x+y)=0$の原点とanalytically isomorphicである点． },
             \item 自己同型群が有限位数．
         \end{enumerate}
     \end{Def}
@@ -112,7 +99,7 @@
         \begin{enumerate}
             \item 完備 (=proper),
             \item 連結,
-            \item （存在すれば）特異点は2重点(node)のみ,
+            \item （存在すれば）特異点は通常2重点(node)のみ,
         \end{enumerate}
         と，$n$個の互いに異なる$C$の点$p_1,\dots,p_n$の組$(C, p_1,\dots,p_n)$であって，
         $\sigma(p_i)=p_i$を満たすような自己同型$\sigma: C \to C$が
@@ -123,7 +110,45 @@
     「自己同型群が簡約群(reductive group)」とする．
     reductive groupはG.I.T.の文脈で現れる概念である．
 
-    %% smooth rational (irreducible) componentについての条件で言い換えることも出来る．
+    自己同型に関する条件は以下のように言い換えることが出来る．
+    \begin{Prop}\label{prop:finauto}
+        $C$ :: proper, connected curve that has nodal point at worst,
+        とする．
+        この時，自己同型群$\Aut(C)$が有限位数であることと，以下は同値である:
+        $E$を$C$のsmooth rational irreducible componentとする．
+        この時，$E$と$E$以外の部分($=\cl_C(C-E)=:R$)の交点は$3$つ以上．
+    \end{Prop}
+    \begin{proof}
+        参考: \url{ https://math.stackexchange.com/questions/248722 }.
+
+        $r=\# (R \cap E)$とし，
+        最初に$\proj^1$の自己同型のうち互いに異なる$r$点を固定するものを考える．
+        これは$PGL(2, \C)$の元のうち，
+        対応する点を固有ベクトルにもつものである．
+        このようなものは$r<3$の時無数に存在し，
+        $r=3$なら有限個，$r>3$なら単位写像しか存在しない．
+
+        $E$は$\proj^1$とbirational equivalentだから，
+        ある開集合$U \subseteq E, V \subseteq \proj^1$について，
+        isomorphism :: $\phi: U \to V$が存在する．
+        $\phi((E \cap R) \cap U)$を固定する$\proj^1$の自己同型をとって$\alpha$とする．
+        （TODO: $(E \cap R) \cap U=E \cap R$でないと
+            $\proj^1-\{\text{$r$点}\}$の自己同型の数$=$$E \cap R$を固定する$E$の自己同型の数にならないのでは？）
+        これらを用いて$\psi=\phi^{-1} \circ (\alpha|_V) \circ \phi: U \to U$とする．
+        $E$はsmooth and properであるから，
+        $\psi$は$\cl_{E}(U)=E$の自己同型$\bar{\psi}$に持ち上げられる．
+        よって$\proj^1$の$r$点を固定する自己同型$\alpha$から
+        $E \cap R$を固定する$E$の自己同型$\bar{\psi}$が得られる．
+
+        $E \cap R$を固定する$E$の自己同型は，
+        $E$の各点を$\bar{\psi}$で写し，
+        $R$の各点を固定するものとして$C$全体へ拡張できる．
+        こうして$\proj^1$の互いに異なる$r$点を固定する自己同型から，
+        $C$の自己同型が作れた．
+        したがって$C$の自己同型は$r<3$の時かつその時のみ無数に存在する．
+    \end{proof}
+
+    semi-stableは「交点が$2$つ以上」と書き換えたものと同値である．
 
 \section{Example}
     \begin{Example}
@@ -133,22 +158,84 @@
         また，任意の$\C$上の楕円曲線はこのfamilyのいずれかのfiberと同型である．
         すなわち，fiberwise trivial familyではない．
         そして$t=0,1$の時$C_t$はstable curveとなっている．
-
-        実際，(TODO: 証明)
+        （plotするときは$y \mapsto iy$と線形変換したほうがnodeが見やすい．）
     \end{Example}
 
-\section{$\Delta=\barM_g-\M_g$}
-    \begin{Thm}
-        coarse moduli space of stable curves (resp. stable $n$-pointed curves)
-        :: $\barM_g$ (resp. $\barM_{g,n}$)が存在し，
-        これはprojective varietyである．
-    \end{Thm}
-    さらに，
-    Nodeを$\delta$個以上もつstable curveに対応する点の集合は，
-    pure codimention $\delta$であることが知られている.
-    特にこのことから，stable curveは多くとも$3g-3$個のnodeしか持てないことが分かる．
+\section{\tp{$\Delta=\barM_g-\M_g$}{Delta=barMg-Mg}}
+%    \begin{Thm}
+%        coarse moduli space of stable curves (resp. stable $n$-pointed curves)
+%        :: $\barM_g$ (resp. $\barM_{g,n}$)が存在し，
+%        これはprojective varietyである．
+%    \end{Thm}
+%    さらに，
+%    Nodeを$\delta$個以上もつstable curveに対応する点の集合は，
+%    pure codimention $\delta$であることが知られている.
+%    特にこのことから，stable curveは多くとも$3g-3$個のnodeしか持てないことが分かる．
+
+    nodeを$\delta$個持つstable curveが成すlocusを考える．
+    \begin{Claim}
+        nodeを$\delta$個持つstable curveが成すlocusを
+        $N_{\delta} \subset \bar{\modM}_g$とする．
+        この時，
+        \[ \dim N_{\delta}=3g-3-\delta \quad (\implies \codim N_{\delta}=\delta). \]
+        また，$\cl_{\bar{\modM}_g}(N_{\delta})$は
+        nodeを$\delta$個以上持つstable curveが成すlocusに一致する．
+    \end{Claim}
+    このことは\cite{HaMo} Thm3.150直後の段落でも触れられている．
+
+    nodeを$1$個以上持つcurveのlocus :: $\Delta=\barM_g-\M_g$は，
+    $\M_g$が$\barM_g$の開集合であるから，これはclosed in $\barM_g$．
+    上の主張から，$\Delta$はnodeを丁度$1$つ持つcurveのlocusのclosureである．
+    そこで$\Delta_0$と$\Delta_i \ (i=1,\dots,\lfloor g/2\rfloor)$を次のように定める．
+    \begin{itemize}
+        \item $\Delta_0=\cl_{\barM_g}(\{ [C] \in \barM_g \mid
+                C \text{ :: irreducible curve with $1$ node } \}).$
+        \item $\Delta_0=\cl_{\barM_g}(\{ [C] \in \barM_g \mid
+                C \text{ :: union of two smooth curves of genus $i$ and $g-i$, meeting at $1$ pt } \})$
+                for $i=1,\dots,\lfloor g/2\rfloor.$
+    \end{itemize}
+    \begin{Remark}
+        命題(\ref{prop:finauto})から，
+        ``union of two smooth curves of genus $0$ and $g$, meeting at $1$ pt"は
+        stable curveではない．
+        なので$\Delta_0$はsmooth rational irreducible componentを持たず，
+        nodeをただひとつ持つ曲線に対応する点の集合の閉包として定義されている．
+    \end{Remark}
+
+    $\Delta_0,\dots,\Delta_{\lfloor g/2 \rfloor}$はirreducibleである．
+    これは以下のように証明する．
+    まず$\Delta_0$を考える．
+    $C$ :: irreducible curve with $1$ nodeとする．
+    これのnormalizationを$\tilde{C}$とすると，$C$のnodeは$\tilde{C}$の$2$点に対応する．
+    そこで$\tilde{C}$とこの$2$点を組にして$\M_{g-1,2}$の点とする．
+    こうして$\phi_0: \M_{g-1, 2} \to \Delta_0$が得られる．
+    $\Delta_i \ (i>0)$の場合，
+    $C$のnormalizationはgenus $i$, genus $g-i$のcomponentからなる．
+    交点に対応する点をそれぞれ一つずつ持つから，
+    これをdistinguished pointとして
+    $\phi_i: \M_{i, 1} \times_k \M_{g-i, 1} \to \Delta_i$が得られる．
+    こうして得られる$\phi_0,\dots,\phi_{\lfloor g/2 \rfloor}$は連続である(FACT)．
+    
+    $\barM_{g,n}$はirreducibleである(Thm2.15)．
+    したがってその開集合$\M_{g,n}$もirreducibleである（$\Delta$ :: closedより）．
+    $\M_{g,n}$は代数閉体上のscheme（実際にはvariety, Thm2.15）なので，
+    これらのfiber productもirreducible．
+    連続写像で写す操作と閉包をとる操作でirreducibilityが保たれるので，
+    $\Delta_i=\cl(\im \phi_i) \ (i=0,\dots,\lfloor g/2 \rfloor)$はirreducibleである．
 
 \section{(Semi-)Stable Reduction.}
+    これは\cite{HaMo} 3.Cで詳しく扱う．
+
+\begin{Thm}[Deligne--Mumford Stable Reduction \cite{IrrOfMg}]
+    $B$ :: smooth curve, $0 \in B$ :: closed point, $B^*:=B-\{0\}$とする．
+    さらに$X \to B^*$ :: flat family of stable (resp.semi-stable) curves of arithmetic genus $g \geq 2$
+    とする.
+    この時，branched cover which totally ramified over $0$ :: $B' \to B$が存在し，
+    $X \times_{B^*} B'$をstable family :: $X' \to B'$へ拡張することが出来る．
+    この拡張で得られる$X'_{0}$は$B' \to B$と$X \times B'$の拡張に依らず，
+    同型を除いて一意である．
+\end{Thm}
+    参考文献として他に\cite{TourStableRed}を挙げる．
 
 \bibliographystyle{jplain}
 \bibliography{reference}

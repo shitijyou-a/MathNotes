@@ -1,0 +1,38 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note}
+
+\title{射影空間内の超曲面の間にある同型}
+\begin{document}
+\maketitle
+
+参考: \url{https://math.stackexchange.com/questions/2657197}.
+\begin{Thm}
+    $n,d > 1$とし，$k$を任意の体とする．
+    $H, H' \subseteq \proj^n$をsmooth hypersurface of degree $d$とすると，
+    $2$つの例外$(n,d)=(2,3), (3,4)$の場合を除き，
+    isomorphism $H \to H'$は$\proj^n$全体の自己同型($=PGL(n, k)$)の制限から得られる．
+\end{Thm}
+別の言い方をすれば，
+isomorphism $H \to H'$は
+$n,d>1, (n,d) \neq (2,3), (3,4)$ならば
+isomorphism $\proj^n \to \proj^n$に持ち上げられる．
+
+$f^* \shO_{X'}(1)=\shO_X(1)$が成立するためには，
+$\omega_X=\shO_{X}(d-(n+1)) \neq \shO_X$または
+$n>3$が十分．
+そして$(n,d)=(2,3), (3,4)$で反例が作れる．
+
+$\shO_X(1)$は$X$のhyperplane sectionに対応する．
+$f^*:X \cap H \mapsto X' \cap H'$なら$H \mapsto H'$として$f$を拡張できる．
+（$H, X'$の法線ベクトルを写す．）
+
+$\shO_X(1) \iso \shO_{\proj^n}(1)$は$d$-uple embeddingで$X$をhyperplaneとすれば分かる．
+
+最後に，
+$X, X'$ :: smooth hypersurface in projective spaceのcanonical divisorに関して
+$K_X \sim dH$となっている．
+$K_{X'} \sim f^* K_{X}+R$という関係があって，
+$f$がisomorphismなら$R \sim 0$.
+なので$|H \cap X|$の生成元が$|H \cap X'|$に写る．
+\url{https://mathoverflow.net/questions/80288/pullback-of-the-canonical-divisor-between-smooth-varieties}
+\end{document}
