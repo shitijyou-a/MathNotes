@@ -1,11 +1,15 @@
 \documentclass[a4paper]{jsarticle}
-\usepackage[]{../math_note, macros}
+\usepackage[]{../math_note, macros, enumitem}
 \usepackage[all]{xy}
 
 %% for hyperref {{{
 \usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
 \usepackage{pxjahyper}
 %% }}}
+
+\newcommand{\dualsh}{\omega^{\circ}}
+\newcommand{\dersh}{\Omega}
+\newcommand{\dermod}{\Omega}
 
 \begin{document}
 \title{ゼミノート \#3 \\ Stable Curves}
@@ -77,13 +81,15 @@
 
 \section{Definition.}
     \begin{Def}[Stable Curve]
-        stable curveとは，以下を満たす曲線（scheme of dimension $1$ over $\C$）である．
+        stable curve of genus $g$とは，
+        以下を満たす曲線（reduced scheme of pure dimension $1$ of finite type over $\C$）である．
         \begin{enumerate}
             \item 完備 ($=$proper),
             \item 連結,
             \item （存在すれば）特異点は通常2重点(node)のみ
-                   \footnote{ nodeとは，$(x-y)(x+y)=0$の原点とanalytically isomorphicである点． },
+                   \footnote{ nodeとは，$xy=0$の原点とanalytically isomorphicである点． },
             \item 自己同型群が有限位数．
+            \item arithmetic genusが$g$．
         \end{enumerate}
     \end{Def}
     \begin{Remark}
@@ -95,15 +101,17 @@
     まったく同様にstable $n$-pointed curveも定義できる．
     \begin{Def}
         stable $n$-pointed curveとは，
-        以下を満たす曲線$C$（scheme of dimension $1$ over $\C$）
+        以下を満たす曲線$C$（reduced scheme of pure dimension $1$ of finite type over $\C$）と，
+        $C$のなめらかな$n$点$p_1,\dots,p_n$の組$(C, p_1,\dots,p_n)$のことである．
         \begin{enumerate}
             \item 完備 (=proper),
             \item 連結,
             \item （存在すれば）特異点は通常2重点(node)のみ,
+            \item 自己同型群が有限位数,
+            \item arithmetic genusが$g$．
         \end{enumerate}
-        と，$n$個の互いに異なる$C$の点$p_1,\dots,p_n$の組$(C, p_1,\dots,p_n)$であって，
-        $\sigma(p_i)=p_i$を満たすような自己同型$\sigma: C \to C$が
-        成す群が有限群であるものである．
+        ただし$(C, p_1,\dots,p_n)$の自己同型とは，
+        $\sigma(p_i)=p_i$を満たすような自己同型$\sigma: C \to C$のことである．
     \end{Def}
     関連してsemi-stable (pointed) curveとunstable (pointed) curveの概念がある．
     これは「自己同型群が有限群」であるという条件をゆるめたもので，
@@ -112,40 +120,79 @@
 
     自己同型に関する条件は以下のように言い換えることが出来る．
     \begin{Prop}\label{prop:finauto}
-        $C$ :: proper, connected curve that has nodal point at worst,
-        とする．
-        この時，自己同型群$\Aut(C)$が有限位数であることと，以下は同値である:
+        stable curveの定義は，
+        「自己同型群が有限位数．」を以下のように書き換えたものと同値:
         $E$を$C$のsmooth rational irreducible componentとする．
         この時，$E$と$E$以外の部分($=\cl_C(C-E)=:R$)の交点は$3$つ以上．
     \end{Prop}
+    
+    参考: \url{ https://math.stackexchange.com/questions/248722 },
+    \cite{HarDef} Thm27.4.
+
+    証明は3つの命題に分けられる．
+
+    \begin{Claim}
+        $C$ :: stable curve of genus $g \geq 2$とする．
+        $\Aut(C)$の部分群$G$を，
+        $C$のsingular pointを固定し，$C$の各irreducible componentを集合として保つ元が成すものとする．
+        $G$が有限群であるならば$\Aut(C)$は有限群である．
+    \end{Claim}
     \begin{proof}
-        参考: \url{ https://math.stackexchange.com/questions/248722 }.
+        正規部分群の定義から，$G$は$\Aut(C)$の正規部分群である(TODO: 詳細に)．
+        $\Aut(C)/G$は，$G$の定義から
+        singular point同士，irreducible component同士を交換する群である．
+        $C$はNoetherianだからirreducible componentは有限個しか無い．
+        singular point全体も曲線の閉集合(\cite{HarAG} Cor II.8.16)であるから有限個．
+        よって仮定から$G, \Aut(C)/G$は有限群なので$\Aut(C)$も有限群．
+    \end{proof}
+
+    \begin{Claim}
+        genus formulaを考えると，
+        stable curve of genus $g \geq 2$のirreducible componentの種類は以下の他は
+        smooth rational curveのみである．
+        \begin{enumerate}[label=(\arabic*)]
+            \item curve at worst nordal of genus $g \geq 2$.
+            \item curve of genus $1$ minus one point.
+            \item nordal curve of genus $0$ minus one point.
+        \end{enumerate}
+        $C$をこのリストのいずれかとする．
+        この時$\# \Aut(C) < \infty$.
+    \end{Claim}
+    \begin{proof}
+        (1)についてはHurwitz's automorphism theoremとして知られている．
+    \end{proof}
+
+    \begin{proof}[(命題(\ref{prop:finauto})の証明)]
+        $E$はsmooth proper curveであって
+        $\proj^1$とbirational equivalentであるもの．
+        なので$\proj^1$と同型である(\cite{HarAG} Thm6.9)．
 
         $r=\# (R \cap E)$とし，
-        最初に$\proj^1$の自己同型のうち互いに異なる$r$点を固定するものを考える．
+        $\proj^1$の自己同型のうち互いに異なる$r$点を固定するものを考える．
         これは$PGL(2, \C)$の元のうち，
         対応する点を固有ベクトルにもつものである．
         このようなものは$r<3$の時無数に存在し，
-        $r=3$なら有限個，$r>3$なら単位写像しか存在しない．
-
-        $E$は$\proj^1$とbirational equivalentだから，
-        ある開集合$U \subseteq E, V \subseteq \proj^1$について，
-        isomorphism :: $\phi: U \to V$が存在する．
-        $\phi((E \cap R) \cap U)$を固定する$\proj^1$の自己同型をとって$\alpha$とする．
-        （TODO: $(E \cap R) \cap U=E \cap R$でないと
-            $\proj^1-\{\text{$r$点}\}$の自己同型の数$=$$E \cap R$を固定する$E$の自己同型の数にならないのでは？）
-        これらを用いて$\psi=\phi^{-1} \circ (\alpha|_V) \circ \phi: U \to U$とする．
-        $E$はsmooth and properであるから，
-        $\psi$は$\cl_{E}(U)=E$の自己同型$\bar{\psi}$に持ち上げられる．
-        よって$\proj^1$の$r$点を固定する自己同型$\alpha$から
-        $E \cap R$を固定する$E$の自己同型$\bar{\psi}$が得られる．
-
+        $r \geq 3$ならば有限個しか存在しない．
+        
+        $r<3$とする．
         $E \cap R$を固定する$E$の自己同型は，
-        $E$の各点を$\bar{\psi}$で写し，
-        $R$の各点を固定するものとして$C$全体へ拡張できる．
+        $\id[R]$と貼り合わせることで$C$全体の自己同型へ拡張できる．
         こうして$\proj^1$の互いに異なる$r$点を固定する自己同型から，
         $C$の自己同型が作れた．
-        したがって$C$の自己同型は$r<3$の時かつその時のみ無数に存在する．
+        したがって$C$の自己同型は$r<3$の時，無数に存在する．
+
+        $r \geq 3$であるとする．
+        $C$のirreducible componentは$C$ :: Noetherianゆえに有限個であり，
+        前の主張と上での議論から，
+        各componentは有限個の自己同型しか持たない．
+        $C$全体の自己同型は高々これら部分ごとの自己同型の貼り合わせであるから
+        \footnote
+        {
+            部分ごとの自己同型の全ての組み合わせが貼り合わせられるわけではないので，
+            $C$全体の自己同型の個数は，
+            部分ごとの自己同型の個数の積($=\prod \#\Aut(C_i)$)よりも少ない．
+        }，
+        有限個しかない．
     \end{proof}
 
     semi-stableは「交点が$2$つ以上」と書き換えたものと同値である．
@@ -225,6 +272,9 @@
 
 \section{(Semi-)Stable Reduction.}
     これは\cite{HaMo} 3.Cで詳しく扱う．
+    個人的な意見で有るが，
+    moduli問題においてstable curveの最も重要な特徴は，
+    次の定理が成立することである．
 
 \begin{Thm}[Deligne--Mumford Stable Reduction \cite{IrrOfMg}]
     $B$ :: smooth curve, $0 \in B$ :: closed point, $B^*:=B-\{0\}$とする．
@@ -236,6 +286,273 @@
     同型を除いて一意である．
 \end{Thm}
     参考文献として他に\cite{TourStableRed}を挙げる．
+
+\section{ Genus Formula }
+    \begin{Prop}
+        $C$ :: connected nordal curve of genus $g$とし，以下のように置く．
+        \begin{itemize}
+            \item $P_1,\dots,P_{\delta} \in C$ :: nodes of $C$,
+            \item $C_1,\dots,C_{\nu}$ :: irreducible components of $C$,
+            \item $g_i$ :: genus of $C_i$ for $i=1,\dots,\nu$.
+        \end{itemize}
+        この時，以下の等式が成立する．
+        \[ g=\sum_{i=1}^{\nu} g_i-\nu+\delta+1=\sum_{i=1}^{\nu}(g_i-1)+\delta+1. \]
+    \end{Prop}
+    \begin{proof}
+        $C, C_1,\dots, C_{\nu}$のnormalizationを
+        それぞれ$\tilde{C}, \tilde{C}_1,\dots,\tilde{C}_i$とする．
+        このとき$\shO_{\tilde{C}}=\sum_i \shO_{\tilde{C}_i}$.
+        また，$\pi: \tilde{C} \to C$を自然な射影とする．
+        $\pi$の定義から，
+        $\pi^{\#}: \shO_{C} \to \pi_* \shO_{\tilde{C}}$は単射かつfinite
+        \footnote
+        {
+            $C$のaffine open subset毎に包含写像から
+            誘導される射$\Spec \tilde{A} \to \Spec A$が存在するので，
+            $\pi$はこれらの射の張り合わせとして定義されている．
+            finite morphismであることはfiniteness of integral closureから来る．
+            ref. \cite{HarAG} Ex II.3.8.
+        }．
+        よって次のSESが存在する．
+        \[\xymatrix{
+                0 \ar[r]& \shO_{C} \ar[r]^-{\pi^{\#}}& \pi_* \shO_{\tilde{C}} \ar[r]&
+                (\pi_* \shO_{\tilde{C}})/\shO_{C} \ar[r]& 0.
+        }\]
+
+        点$P$での$\C$のskyscraper sheafを$\C_P$と書くことにする．
+        $(\pi_* \shO_{\tilde{C}})/\shO_{C} \iso \prod_{i=1}^{\delta} \C_{P_i}$
+        を認めると，以下のLESが得られる．
+        \[\xymatrix{
+            0 \ar[r] & H^0(\shO_{C}) \ar[r]& H^0(\pi_* \shO_{\tilde{C}}) \ar[r]& H^0(\sum \C_{P_i}) \\
+            {}\ar[r] & H^1(\shO_{C}) \ar[r]& H^1(\pi_* \shO_{\tilde{C}}) \ar[r]& H^1(\sum \C_{P_i}) \ar[r]& 0.
+        }\]
+        $H^j(C, \shF)$は$H^j(\shF)$と略した．
+        $\dim_{\C}$がadditive functionであることから，
+        次が得られる．
+        \[
+            h^0(\shO_{C})+h^0(\sum \C_{P_i})+h^1(\pi_* \shO_{\tilde{C}})
+            =h^0(\pi_* \shO_{\tilde{C}})+h^1(\shO_{C})+h^1(\sum \C_{P_i})
+        \]
+        $\pi$ :: finite morphismであるから，
+        \cite{HarAG} Ex III.4.1より$H^i(C, \pi_*\shO_{\tilde{C}}) \iso H^i(\tilde{C}, \shO_{\tilde{C}})$．
+        $\tilde{C}$のconnected componentは$C$のirreducible componentと
+        birational equivalentであるから，
+        $h^0(\shO_{\tilde{C}})=\nu$.
+        まとめて次のように成る．
+        \begin{align*}
+            h^0(\shO_{C})+h^0(\prod \C_{P_i})+h^1(\pi_* \shO_{\tilde{C}})
+            =&h^0(\pi_* \shO_{\tilde{C}})+h^1(\shO_{C})+h^1(\prod \C_{P_i}) \\
+            h^0(\shO_{C})+\prod h^0(\C_{P_i})+h^1(\shO_{\tilde{C}})
+            =&h^0(\shO_{\tilde{C}})+h^1(\shO_{C})+h^1(\prod \C_{P_i}) \\
+            1+\delta+\sum g_i
+            =&\nu+g+0
+        \end{align*}
+        $X, Y$ :: disjoint schemesならば
+        $H^i(X \sqcup Y) \iso H^i(X) \oplus H^i(Y)$であることに注意．
+
+        最後に
+        $(\pi_* \shO_{\tilde{C}})/\shO_{C} \iso \prod_{i=1}^{\delta} \C_{P_i}$
+        を示す．
+        各点$P \in C$における$(\pi_* \shO_{\tilde{C}})/\shO_{C}$のstalkを見る．
+        私のノート Hartshorne\_AG\_Ch2/section6\_ex.pdf
+        \footnote{\url{ https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section6_ex.pdf }}
+        にあるEx6.9(a)の解答から，
+        stalkは$\tilde{\shO}_{C, P}/\shO_{C, P}$．
+        よって$\Supp (\pi_* \shO_{\tilde{C}})/\shO_{C}=\Sing C$であり，
+        これは曲線の閉集合なので有限集合．
+        したがって
+        \footnote
+        {
+            射を$\sect{U}{s} \mapsto (s_x)_{x \in U}$で作り，
+            これのstalkがisomorphismであることから
+            同型を示す(\cite{HarAG} PropII.1.1)．
+        }
+        \[
+            (\pi_* \shO_{\tilde{C}})/\shO_{C}
+            \iso
+            \prod_{i=1}^{\delta} \tilde{\shO}_{C, P_i}/\shO_{C, P_i}.
+        \]
+        $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})$は
+        analytic isomorphicについての不変量だから(TODO, cf. \cite{HarAG} Ex IV.1.8c)，
+        $\Spec \C[x,y]/(xy)$の原点について計算することで，
+        $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})=1$を得る．
+        よって所望の同型を得る．
+    \end{proof}
+
+\section{ Dualizing Sheaf }
+    \subsection{Definitions}    
+    \begin{Def}[Dualizing Sheaf of Curve, implicit]
+        $X$ :: proper scheme of dimension $n$ over a field $k$とする．
+        $\dualsh_X$ :: dualizing sheaf for $X$とは，
+        以下の条件を満たす
+        trace morphism :: $t_X: H^n(X, \dualsh_X) \to k$を備える
+        sheaf on $X$のことである:
+        任意のcoherent sheaf $\shF$について，以下は同型である．
+        \begin{defmap}
+            (t_X \circ):& \Hom_{\shO_X}(F, \dualsh_X)& \to& H^n(X, \shF) \\
+            {}& \phi& \mapsto& t_X \circ \phi
+        \end{defmap}
+    \end{Def}
+
+    \begin{Remark}
+        定義の仕方から，$\dualsh_X$は次のようにも定義できる．
+        すなわち，$\dualsh_X$は$\shF \mapsto H^n(X, \shF)^*$という関手の
+        representationである．
+    \end{Remark}
+
+    \begin{Def}[Dualizing Sheaf of Curve, explicit, \cite{SerreSAC}]
+        $C$ :: stable curve (over $\C$),
+        $L$ :: function field of $C$,
+        $\dermod_{K/\C}$ :: the module of differentioals of $C$ over $\C$.
+        $v: \tilde{C} \to C$をnormalizationとする．
+        
+        $\dualsh_C$とは，
+        $C$の開集合$U$に対して次のように定められるsheaf on $C$である．
+        \[
+            \dualsh_C(U)=
+            \left\{
+                \omega \in \dermod_{L/\C}
+                \ \middle|\ 
+                \Forall{x \in U} \Forall{f \in \shO_{C, x}} \res_x(v^{\#}_x(f) \cdot \omega)=0.
+            \right\}
+        \]
+        ここで$\res_x=\sum_{y \in v^{-1}(x)} \res_y$とおいた．
+        $C$ :: at-worst-nordal curveであるから，
+        $v^{-1}(P)$は高々$2$点集合である．
+    \end{Def}
+    \begin{Remark}
+        \cite{HaMo} 3.Aにおいては$\dualsh_C(U)$は以下のように定義されている．
+        \[
+            \dualsh_C(U)=
+            \left\{
+                \eta \in (v_*\dersh_{C/\C})
+                \ \middle|\ 
+                \Forall{x \in U \cap \Sing C} \res_x(\eta)=0.
+            \right\}
+        \]
+        $\res_x$の定義は上と同じである．
+
+        $\dualsh_X$の明示的な定義は次を参照しても良い:
+        Matthew Morrow
+        ``An explicit approach to residues on and dualizing sheaves of arithmetic surfaces"
+        \footnote{\url{ https://arxiv.org/abs/0911.0590v2 }}
+    \end{Remark}
+
+    \begin{Def}[Divisor of Singular Curve, and $\deg D, l(D)$] \label{def:DivOfSingCurve}
+        $C$ :: projective (abstruct) variety of dimention $1$
+        over an algebraically closed field $\C$とする．
+        $C$のregular point全体を$\Reg C$とする．
+        （$\Reg C$はCor II.8.16 (or Thm I.5.3)からopen dense subset.）
+
+        $C$のdivisorとは，$\Reg C$のWeil divisor
+        \[ \sum_{i=1}^{r} n_i P_i \qquad (n_i \in \Z, P_i \in \Reg C) \]
+        のこと．
+        divisor :: $D=\sum_{i=1}^{r} n_i P_i$に対して，
+        $\deg D, l(D)$は通常のdivisorと同様に定める．
+        \[ \deg D=\sum_i n_i, \qquad l(D)=h^0(C, \shL(D)). \]
+        $\dim_{\C} H^i(-,-)$は$h^i(-,-)$と略した．
+    \end{Def}
+
+    \begin{Def}[Canonical Divisor of Singular Curves]
+        $C$を定義(\ref{def:DivOfSingCurve})と同様にする．
+        この時\cite{HarAG} III.7.11より$\dualsh_C$ :: invertible sheafなので，
+        $\dualsh_C$に対応するdivisor（参考: \cite{HarAG} II.6）が存在する．
+        これを$K$ (or $K_C$)と書き，$C$のcanonical divisorと呼ぶ．
+    \end{Def}
+
+    \subsection{Key Propositions}
+    \begin{Thm} \label{thm:Hi_iso_Hn-i}
+        $X$ :: projective Cohen-Macaulay (in paticular, locally complete intersection)
+        scheme of equidimention $n$
+        over an algebraically closed field $k$とする．
+        この時，lcally free sheaf :: $\shF$について次が成立する．
+        \[ H^i(X, \shF) \iso H^{n-i}(X, \shF \sidecheck \otimes_{\shO_X} \dualsh_X). \]
+    \end{Thm}
+
+    \begin{Thm}[Riemann-Roch for Singular Curves, \cite{HarAG} Ex IV.1.9] \label{thm:RRforSingCurve}
+        $C$ :: integral projective scheme of dimension $1$
+        over a algebraically closed field $\C$
+        (特にirreducible stable curve)とする．
+        $C$のdivisor :: $C$について，次の等式が成立する．
+        \[ l(D)-l(K-D)=\deg D+1-g. \]
+        $g$は$C$のarithmetic genusである．
+    \end{Thm}
+    証明はしばらく後で示す．
+
+    \begin{Lemma}
+        $C$ :: stable curve （より一般にnordal curve）とする．
+        この時$C$はlocally complete intersectionである．
+    \end{Lemma}
+    \begin{proof}
+        locally complete intersectionであるとは，
+        各点$P \in C$について$\shO_{C, P}$がcomplete intersection ringであること．
+        $P$ :: smooth pointならば$\shO_{C, P}$ :: regular local ringであり，
+        したがってcomplete intersection ringなので，
+        $P$はnodeとする．
+
+        今，$C$ :: finite type over $\C$であるから，
+        $\shO_{C, P}$はnoetherian local ring.
+        なのでこの条件は完備化$(\shO_{C, P})\sidehat$が
+        complete intersection ringであることと同値
+        (\cite{Mat} Thm21.2 (i))．
+        $P$はnodeとしたから，
+        \[ (\shO_{C, P})\sidehat \iso \C[[x,y]]/(xy). \]
+        $xy$は$k[[x,y]]$-regular (i.e. not zero-divisor in $k[[x,y]]$)であるから，
+        右辺はcomplete intersection ring (\cite{Mat} Thm21.2 (ii))．
+        よって主張が示された．
+    \end{proof}
+
+    \begin{Prop}
+        $C$ :: stable curve, $\dualsh_C$ :: dual sheaf of $C$とする．
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+            \item $\dualsh_C$ :: invertible sheaf.
+            \item $h^0(C, \dualsh_C)=g$.
+            \item $\deg \dualsh_C=2g-2$.
+            \item For $g \geq 2, n \geq 2$, $H^0(C, (\dualsh_C)^{\otimes n})=(2n-1)(g-1)$.
+            \item For $g \geq 2, n \geq 3$, $(\dualsh_C)^{\otimes n}$ :: very ample.
+        \end{enumerate}
+    \end{Prop}
+    \begin{proof}
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item
+        canonical divisorの定義で触れた．
+        \cite{HarAG} III.7.11に証明がある．
+
+        \item
+        The Serre duality (\ref{thm:Hi_iso_Hn-i})から
+        $h^0(C, \dualsh_C)=h^1(C, \shO_C)=g$.
+
+        \item
+        (\ref{thm:RRforSingCurve})において$D=K$とし，
+        $l(0)=1, l(K)=h^0(C, \dualsh_C)=g$を用いれば良い．
+
+        \item
+        $D=nK$とすると，
+        これはnon-special (ref. \cite{HarAG} Example IV.1.3.4)，
+        すなわち$l(K-D)=0$．
+        (\ref{thm:RRforSingCurve})においてこのことと$\deg (nK)=n \deg K$を用いれば良い．
+        また，(\ref{thm:Hi_iso_Hn-i})より
+        \[ H^1(C, (\dualsh_C)^{\otimes n}) \iso H^0(C, (\dualsh_C)^{\otimes 1-n}) \]
+        なので，$n \geq 2$の時$H^1(C, (\dualsh_C)^{\otimes n})=0$も成立する．
+
+        \item
+        \cite{HarAG} Cor IV.3.2
+        \footnote
+        {
+            定理はnonsingular curveを仮定しているが，
+            証明では\cite{HarAG} II.7の結果と(\ref{thm:RRforSingCurve})の等式しか使っていない．
+            なのでこの仮定はstable curveに弱められる．
+        }
+        から，$nK$ :: very ampleは$\deg nK \geq 2g+1$と同値．
+        $g \geq 2, n \geq 3$なので成立する．
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{Proof of Thm (\ref{thm:RRforSingCurve})}
+    \begin{proof}
+    \end{proof}
+
+    proof of \cite{HarAG} Ex IV.1.8c
 
 \bibliographystyle{jplain}
 \bibliography{reference}
