@@ -373,7 +373,8 @@
             \prod_{i=1}^{\delta} \tilde{\shO}_{C, P_i}/\shO_{C, P_i}.
         \]
         $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})$は
-        analytic isomorphicについての不変量だから(TODO, cf. \cite{HarAG} Ex IV.1.8c)，
+        analytic isomorphicについての不変量だから
+        (TODO, cf. \cite{HarAG} Ex IV.1.8c, \url{https://stacks.math.columbia.edu/tag/02M1})，
         $\Spec \C[x,y]/(xy)$の原点について計算することで，
         $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})=1$を得る．
         よって所望の同型を得る．
@@ -382,7 +383,7 @@
 \section{ Dualizing Sheaf }
     \subsection{Definitions}    
     \begin{Def}[Dualizing Sheaf of Curve, implicit]
-        $X$ :: proper scheme of dimension $n$ over a field $k$とする．
+        $X$ :: proper scheme of pure dimension $n$ over a field $k$とする．
         $\dualsh_X$ :: dualizing sheaf for $X$とは，
         以下の条件を満たす
         trace morphism :: $t_X: H^n(X, \dualsh_X) \to k$を備える
@@ -552,7 +553,36 @@
     \begin{proof}
     \end{proof}
 
-    proof of \cite{HarAG} Ex IV.1.8c
+\section{ Relative Dualizing Sheaf }
+    \subsection{ Definitions }
+    \begin{Def}[Relative Dualizing Sheaf of Curve, implicit]
+        $f: X \to S$ :: morphism of proper schemes of pure dimension $n$ over a field $k$とする．
+        relative dualizing sheaf of $f$ :: $\dualsh_{X/S}$とは，
+        次の関手の表現対象のこと．
+        \begin{defmap}
+            {}& \text{(Coh Sheaves on $X$)}& \to& \text{($\shO_X$-Mod)} \\
+            {}& \shF& \mapsto& (R^n f_*(\shF))^*
+        \end{defmap}
+    \end{Def}
+
+    \begin{Def}[Relative Dualizing Sheaf of Curve, explicit]
+        $C \to B$ :: flat family of stable curvesとする．
+        relative dualizing sheaf of $\pi$ :: $\dualsh_{C/B}$とは，
+        $C$の開集合$U$を次のように写すsheaf on $C$．
+        \[
+            \dualsh_C(U)=
+            \left\{
+                \eta \in (v_*\dersh_{C/B})
+                \ \middle|\ 
+                \Forall{x \in U \cap \Sing C} \res_x(\eta)=0.
+            \right\}
+        \]
+        ただし$v: \tilde{C} \to C$はnormalization.
+    \end{Def}
+
+    \subsection{Key Propositions}
+    extend
+    base exchange
 
 \bibliographystyle{jplain}
 \bibliography{reference}
