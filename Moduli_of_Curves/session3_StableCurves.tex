@@ -1,15 +1,5 @@
 \documentclass[a4paper]{jsarticle}
-\usepackage[]{../math_note, macros, enumitem}
-\usepackage[all]{xy}
-
-%% for hyperref {{{
-\usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
-\usepackage{pxjahyper}
-%% }}}
-
-\newcommand{\dualsh}{\omega^{\circ}}
-\newcommand{\dersh}{\Omega}
-\newcommand{\dermod}{\Omega}
+\usepackage{macros}
 
 \begin{document}
 \title{ゼミノート \#3 \\ Stable Curves}
@@ -374,7 +364,16 @@
         \]
         $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})$は
         analytic isomorphicについての不変量だから
-        (TODO, cf. \cite{HarAG} Ex IV.1.8c, \url{https://stacks.math.columbia.edu/tag/02M1})，
+        \footnote
+        {
+            cf. \cite{HarAG} Ex IV.1.8c.
+%            証明は
+%            \url{https://stacks.math.columbia.edu/tag/02M1}
+%            の命題に於いて$A=\shO_{C, P}$とし，
+%            flat local homomorphism :: $\rho: A \to \hat{A}$と
+%            $A$-module :: $M=(\pi_* \shO_{\tilde{C}})/\shO_{C}$を考える．
+%            すると$\length_A(M) \length_{\hat{A}}(\hat{A}/\I{m}_A \hat{A})=\length_{\hat{A}}(\hat{M})$.
+        }
         $\Spec \C[x,y]/(xy)$の原点について計算することで，
         $\dim_{\C} (\tilde{\shO}_{P_i}/\shO_{P_i})=1$を得る．
         よって所望の同型を得る．
@@ -382,7 +381,7 @@
 
 \section{ Dualizing Sheaf }
     \subsection{Definitions}    
-    \begin{Def}[Dualizing Sheaf of Curve, implicit]
+    \begin{Def}[Dualizing Sheaf of Curve, implicit, \cite{HarAG} III.7]
         $X$ :: proper scheme of pure dimension $n$ over a field $k$とする．
         $\dualsh_X$ :: dualizing sheaf for $X$とは，
         以下の条件を満たす
@@ -397,13 +396,13 @@
 
     \begin{Remark}
         定義の仕方から，$\dualsh_X$は次のようにも定義できる．
-        すなわち，$\dualsh_X$は$\shF \mapsto H^n(X, \shF)^*$という関手の
-        representationである．
+        すなわち，$\dualsh_X$は$\shF \mapsto H^n(X, \shF)^*$
+        という関手の表現対象である．
     \end{Remark}
 
     \begin{Def}[Dualizing Sheaf of Curve, explicit, \cite{SerreSAC}]
         $C$ :: stable curve (over $\C$),
-        $L$ :: function field of $C$,
+        $K(C)$ :: function field of $C$,
         $\dermod_{K/\C}$ :: the module of differentioals of $C$ over $\C$.
         $v: \tilde{C} \to C$をnormalizationとする．
         
@@ -412,7 +411,7 @@
         \[
             \dualsh_C(U)=
             \left\{
-                \omega \in \dermod_{L/\C}
+                \omega \in \dermod_{K(C)/\C}
                 \ \middle|\ 
                 \Forall{x \in U} \Forall{f \in \shO_{C, x}} \res_x(v^{\#}_x(f) \cdot \omega)=0.
             \right\}
@@ -422,17 +421,6 @@
         $v^{-1}(P)$は高々$2$点集合である．
     \end{Def}
     \begin{Remark}
-        \cite{HaMo} 3.Aにおいては$\dualsh_C(U)$は以下のように定義されている．
-        \[
-            \dualsh_C(U)=
-            \left\{
-                \eta \in (v_*\dersh_{C/\C})
-                \ \middle|\ 
-                \Forall{x \in U \cap \Sing C} \res_x(\eta)=0.
-            \right\}
-        \]
-        $\res_x$の定義は上と同じである．
-
         $\dualsh_X$の明示的な定義は次を参照しても良い:
         Matthew Morrow
         ``An explicit approach to residues on and dualizing sheaves of arithmetic surfaces"
@@ -558,11 +546,7 @@
     \begin{Def}[Relative Dualizing Sheaf of Curve, implicit]
         $f: X \to S$ :: morphism of proper schemes of pure dimension $n$ over a field $k$とする．
         relative dualizing sheaf of $f$ :: $\dualsh_{X/S}$とは，
-        次の関手の表現対象のこと．
-        \begin{defmap}
-            {}& \text{(Coh Sheaves on $X$)}& \to& \text{($\shO_X$-Mod)} \\
-            {}& \shF& \mapsto& (R^n f_*(\shF))^*
-        \end{defmap}
+        $\shF \mapsto (R^n f_*(\shF))^*$という関手の表現対象のこと．
     \end{Def}
 
     \begin{Def}[Relative Dualizing Sheaf of Curve, explicit]
@@ -572,7 +556,7 @@
         \[
             \dualsh_C(U)=
             \left\{
-                \eta \in (v_*\dersh_{C/B})
+                \eta \in \dermod_{K(C)/K(B)}
                 \ \middle|\ 
                 \Forall{x \in U \cap \Sing C} \res_x(\eta)=0.
             \right\}
@@ -580,9 +564,27 @@
         ただし$v: \tilde{C} \to C$はnormalization.
     \end{Def}
 
+    ref. \cite{Liu} 6.4
+
     \subsection{Key Propositions}
-    extend
-    base exchange
+    \begin{Prop}[Extending of Relative Derivative Sheaf on Nordal Family.]
+        family of nordal curves :: $\phi: C \to B$を，
+        殆どのfiberがsmoothなものとする．
+        すなわち，$B$の空でない開集合$B^*$が存在し，
+        $\phi': C^*=C \times_B B^* \to B^*$が
+        family of smooth curvesになっているとする．
+        この時，
+        \[ (\dualsh_{C/B})|_{C^*} \iso \dersh_{C^*/B^*}. \]
+    \end{Prop}
+
+    \begin{Prop}
+        次のpullback diagramを考える．
+        \[\xymatrix{
+            C \times_B B' \ar[d]\ar[r]^-{\pi}& C \ar[d]\\
+            B' \ar[r]& B
+        }\]
+        この時，$\dualsh_{C \times B'/B'} =\pi^*(\dualsh_{C/B})$.
+    \end{Prop}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
