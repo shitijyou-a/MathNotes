@@ -1,0 +1,113 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage[]{macros}
+
+\newcommand{\Isom}{\operatorname{Isom}}
+\newcommand{\ftorIsom}{\mathcal{I}\!som}
+\newcommand{\hilb}{\mathcal{H}}
+\newcommand{\dualnum}{\mathbb{I}}
+\newcommand{\shDer}{\Omega}
+
+\begin{document}
+\title{ゼミノート \#4 \\ Deformation Theory}
+\author{七条彰紀}
+\maketitle
+
+\section{Automorphism Group of Stable Curve}
+    \cite{HaMo} 3.A, \cite{IrrOfMg} \S 1を参照する．
+
+    $C, D$ :: stable curves of genus $g$ over a scheme $S$の間の
+    isomorphism groupのschemeとしての構造を与える．
+    このschemeを$\Isom(C, D)$と書く．
+    そして$\Aut(C)=\Isom(C,C)$と定義し，
+    これのschemeとしての特徴を調べる．
+    
+    $\Isom(C, D)$の特徴付けをするため，次の関手を考える．
+    \begin{defmap}
+        \ftorIsom_S(C, D):& \text{(Scheme over $\C$)}& \to& \text{(Set)} \\
+        {}& S'& \mapsto& \{ \ C \times_{\C} S' \to D \times_{\C} S' \text{ :: $S'$-isomorphism} \}
+    \end{defmap}
+    $\iota \in \ftorIsom(C, D)(S')$から得られる$\iota^*$は
+    $\dualsh_{C \times S'/S'}=\iota^*(\dualsh_{D \times S'/S'})$を満たす．
+    また$\otimes$と交換する
+    （すなわちPicard群の間の準同型である．\cite{HarAG} Ex II.6.8）．
+    このことから$\Isom(C, D)$が適当な$r$をとると
+    $PGL(r+1)$の部分群として書けることが分かる．
+
+    もう少し詳しく$\Isom(C, D)$を書く．
+    $n \geq 3$を整数とする．次のように$r,d$をとる．
+    \[
+        r+1=h^0((\dualsh_{C/\C})^{\otimes n})=(2n-1)(g-1),
+        \qquad
+        d=\deg (\dualsh_{C/\C})^{\otimes n}=2n(g-1).
+    \]
+    すると\cite{HarAG} II.7より，
+    $C, D$は$\proj_{\C}^r$の次数$d$, arithmetic genus $g$のclosed curveとみなせる
+    （$\proj^r$に埋め込める）．
+    なのでHildert scheme :: $\hilb=\hilb_{d,g,r}$の点として扱うことが出来る．
+    ここで次のように射を定める．
+    \begin{defmap}
+        \mu:& PGL(r+1)& \to& \hilb \times \hilb \\
+        {}& \alpha& \mapsto& (\alpha \cdot [C], [D])
+    \end{defmap}
+    すると，$\ftorIsom(C, D)$は$\mu^{-1}(\Delta)$によって表現される
+    \footnote
+    {
+        $\Delta$は$\hilb \times \hilb$のdiagonal set.
+        $\mu^{-1}(\Delta)$は
+        \[ \Delta \cap \im \mu=\{ (\alpha \cdot [C], [D]) \mid \alpha \cdot [C]=[D] \} \]
+        の$PGL(r+1)$への逆像なので，
+        この点と$C, D$の間の同型と対応することが分かるだろう．
+    }．
+    これをgroup scheme over $\C$ :: $\Isom(C, D)$とする．
+
+    scheme over $\C$ :: $X$について少々一般の理論を述べる．
+    $\dualnum=\Spec \C[\epsilon]/(\epsilon^2)$とおく(ref. \cite{HaMo} 1)．
+    \cite{HarAG} Ex II.2.8より，
+    $t \in \ftor{X}(\dualnum)$は$X$の$\C$-rational point :: $x$と
+    $T_x(X)=\I{m}_x/\I{m}_x^2=\shT_x$の元に対応する．
+    ここで$\shT$はtangent sheaf :: $\shT=\shHom_{\shO_X}(\shDer_X, \shO_X)$のことである．
+    \cite{HaMo}でいうregular vector fieldとは$\shT$のsectionのこと（と思われる）．
+
+    \begin{Thm}
+        $C$ :: stable curve of genus $g \geq 2$について，
+        \[ \operatorname{Ext}^0(\shDer_C, \shO_C)=\shT(C)=0. \]
+    \end{Thm}
+    \begin{proof}
+        \cite{IrrOfMg} \S1.
+
+        $\pi: \tilde{C} \to C$をnormalization of $C$とする．
+        $D \in \shT_C(C)$は$\pi^*$によって
+        $\tilde{D} \in \shT_{\tilde{C}}(\tilde{C})$に対応する．
+        $D$は$C$のdouble point :: $P$で$0$になるから，
+        $\tilde{D}$は$\pi^{-1}(P)$で$0$になる．
+
+        そしてsmooth curve上のtangent sheaf :: 
+        $\shT_{\tilde{C}}=\shHom(\shDer_{\tilde{C}}, \shO_{\tilde{C}})$のsupportを考える．
+        $\shT_{\tilde{C}}$はcoherent sheafだから，
+        $\Supp \shT_{\tilde{C}}$はclosed in $\tilde{C}$(\cite{HarAG} ExII.5.6)．
+        したがって$(\shT_{\tilde{C}})_{Q} \neq 0$となる点は有限個しか無い．
+        （TODO: $(\shT_{\tilde{C}})_{Q}=0$なる点が存在するなら$\shT_{\tilde{C}}(U)=0$を示したいのだが．）
+    \end{proof}
+
+    \begin{Prop}
+        $\Aut(C)$ :: reduced scheme.
+    \end{Prop}
+    \begin{proof}
+        $X=\Aut(C)$はgroup schemeであるから，
+        $X$のある点でのlocalな性質は
+        transitionを用いて単位元$I$での性質と言い換えられる．
+        reducedはlocalな性質であるから，
+        $X$がreducedであることを示すには$\shO_{X, I}$ :: reduced ringを示せば良い．
+
+        $\shO_{X, I}$がnon-reducedであると仮定すると，
+        non-zero section :: $t \in \shT_C(C)$がとれ，
+        これは$C$のregular vector field :: $v \in \shT(C)$に対応する(TODO).
+        したがって定理から$X$ :: reduced.
+    \end{proof}
+
+\section{}
+    \cite{HarAG} Example III.9.13.1
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
