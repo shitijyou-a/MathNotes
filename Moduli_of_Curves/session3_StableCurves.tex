@@ -383,20 +383,20 @@
     \subsection{Definitions}    
     \begin{Def}[Dualizing Sheaf of Curve, implicit, \cite{HarAG} III.7]
         $X$ :: proper scheme of pure dimension $n$ over a field $k$とする．
-        $\dualsh_X$ :: dualizing sheaf for $X$とは，
+        $\shDual_X$ :: dualizing sheaf for $X$とは，
         以下の条件を満たす
-        trace morphism :: $t_X: H^n(X, \dualsh_X) \to k$を備える
+        trace morphism :: $t_X: H^n(X, \shDual_X) \to k$を備える
         sheaf on $X$のことである:
         任意のcoherent sheaf $\shF$について，以下は同型である．
         \begin{defmap}
-            (t_X \circ):& \Hom_{\shO_X}(F, \dualsh_X)& \to& H^n(X, \shF) \\
+            (t_X \circ):& \Hom_{\shO_X}(F, \shDual_X)& \to& H^n(X, \shF) \\
             {}& \phi& \mapsto& t_X \circ \phi
         \end{defmap}
     \end{Def}
 
     \begin{Remark}
-        定義の仕方から，$\dualsh_X$は次のようにも定義できる．
-        すなわち，$\dualsh_X$は$\shF \mapsto H^n(X, \shF)^*$
+        定義の仕方から，$\shDual_X$は次のようにも定義できる．
+        すなわち，$\shDual_X$は$\shF \mapsto H^n(X, \shF)^*$
         という関手の表現対象である．
     \end{Remark}
 
@@ -406,22 +406,23 @@
         $\dermod_{K/\C}$ :: the module of differentioals of $C$ over $\C$.
         $v: \tilde{C} \to C$をnormalizationとする．
         
-        $\dualsh_C$とは，
+        $\shDual_C$とは，
         $C$の開集合$U$に対して次のように定められるsheaf on $C$である．
         \[
-            \dualsh_C(U)=
+            \shDual_C(U)=
             \left\{
-                \omega \in \dermod_{K(C)/\C}
+                \omega \in (\pi_*(\shDer_{C} \otimes \shK_{C}))(U)
                 \ \middle|\ 
                 \Forall{x \in U} \Forall{f \in \shO_{C, x}} \res_x(v^{\#}_x(f) \cdot \omega)=0.
             \right\}
         \]
+        $\shK_C$はthe sheaf of total quotient ring of $\shO_C$ (\cite{HarAG} II.6)である．
         ここで$\res_x=\sum_{y \in v^{-1}(x)} \res_y$とおいた．
         $C$ :: at-worst-nordal curveであるから，
         $v^{-1}(P)$は高々$2$点集合である．
     \end{Def}
     \begin{Remark}
-        $\dualsh_X$の明示的な定義は次を参照しても良い:
+        $\shDual_X$の明示的な定義は次を参照しても良い:
         Matthew Morrow
         ``An explicit approach to residues on and dualizing sheaves of arithmetic surfaces"
         \footnote{\url{ https://arxiv.org/abs/0911.0590v2 }}
@@ -444,8 +445,8 @@
 
     \begin{Def}[Canonical Divisor of Singular Curves]
         $C$を定義(\ref{def:DivOfSingCurve})と同様にする．
-        この時\cite{HarAG} III.7.11より$\dualsh_C$ :: invertible sheafなので，
-        $\dualsh_C$に対応するdivisor（参考: \cite{HarAG} II.6）が存在する．
+        この時\cite{HarAG} III.7.11より$\shDual_C$ :: invertible sheafなので，
+        $\shDual_C$に対応するdivisor（参考: \cite{HarAG} II.6）が存在する．
         これを$K$ (or $K_C$)と書き，$C$のcanonical divisorと呼ぶ．
     \end{Def}
 
@@ -455,7 +456,7 @@
         scheme of equidimention $n$
         over an algebraically closed field $k$とする．
         この時，lcally free sheaf :: $\shF$について次が成立する．
-        \[ H^i(X, \shF) \iso H^{n-i}(X, \shF \sidecheck \otimes_{\shO_X} \dualsh_X). \]
+        \[ H^i(X, \shF) \iso H^{n-i}(X, \shF \sidecheck \otimes_{\shO_X} \shDual_X). \]
     \end{Thm}
 
     \begin{Thm}[Riemann-Roch for Singular Curves, \cite{HarAG} Ex IV.1.9] \label{thm:RRforSingCurve}
@@ -492,13 +493,13 @@
     \end{proof}
 
     \begin{Prop}
-        $C$ :: stable curve, $\dualsh_C$ :: dual sheaf of $C$とする．
+        $C$ :: stable curve, $\shDual_C$ :: dual sheaf of $C$とする．
         \begin{enumerate}[label=(\roman*), leftmargin=*]
-            \item $\dualsh_C$ :: invertible sheaf.
-            \item $h^0(C, \dualsh_C)=g$.
-            \item $\deg \dualsh_C=2g-2$.
-            \item For $g \geq 2, n \geq 2$, $H^0(C, (\dualsh_C)^{\otimes n})=(2n-1)(g-1)$.
-            \item For $g \geq 2, n \geq 3$, $(\dualsh_C)^{\otimes n}$ :: very ample.
+            \item $\shDual_C$ :: invertible sheaf.
+            \item $h^0(C, \shDual_C)=g$.
+            \item $\deg \shDual_C=2g-2$.
+            \item For $g \geq 2, n \geq 2$, $H^0(C, (\shDual_C)^{\otimes n})=(2n-1)(g-1)$.
+            \item For $g \geq 2, n \geq 3$, $(\shDual_C)^{\otimes n}$ :: very ample.
         \end{enumerate}
     \end{Prop}
     \begin{proof}
@@ -509,11 +510,11 @@
 
         \item
         The Serre duality (\ref{thm:Hi_iso_Hn-i})から
-        $h^0(C, \dualsh_C)=h^1(C, \shO_C)=g$.
+        $h^0(C, \shDual_C)=h^1(C, \shO_C)=g$.
 
         \item
         (\ref{thm:RRforSingCurve})において$D=K$とし，
-        $l(0)=1, l(K)=h^0(C, \dualsh_C)=g$を用いれば良い．
+        $l(0)=1, l(K)=h^0(C, \shDual_C)=g$を用いれば良い．
 
         \item
         $D=nK$とすると，
@@ -521,8 +522,8 @@
         すなわち$l(K-D)=0$．
         (\ref{thm:RRforSingCurve})においてこのことと$\deg (nK)=n \deg K$を用いれば良い．
         また，(\ref{thm:Hi_iso_Hn-i})より
-        \[ H^1(C, (\dualsh_C)^{\otimes n}) \iso H^0(C, (\dualsh_C)^{\otimes 1-n}) \]
-        なので，$n \geq 2$の時$H^1(C, (\dualsh_C)^{\otimes n})=0$も成立する．
+        \[ H^1(C, (\shDual_C)^{\otimes n}) \iso H^0(C, (\shDual_C)^{\otimes 1-n}) \]
+        なので，$n \geq 2$の時$H^1(C, (\shDual_C)^{\otimes n})=0$も成立する．
 
         \item
         \cite{HarAG} Cor IV.3.2
@@ -545,16 +546,16 @@
     \subsection{ Definitions }
     \begin{Def}[Relative Dualizing Sheaf of Curve, implicit]
         $f: X \to S$ :: morphism of proper schemes of pure dimension $n$ over a field $k$とする．
-        relative dualizing sheaf of $f$ :: $\dualsh_{X/S}$とは，
+        relative dualizing sheaf of $f$ :: $\shDual_{X/S}$とは，
         $\shF \mapsto (R^n f_*(\shF))^*$という関手の表現対象のこと．
     \end{Def}
 
     \begin{Def}[Relative Dualizing Sheaf of Curve, explicit]
         $C \to B$ :: flat family of stable curvesとする．
-        relative dualizing sheaf of $\pi$ :: $\dualsh_{C/B}$とは，
+        relative dualizing sheaf of $\pi$ :: $\shDual_{C/B}$とは，
         $C$の開集合$U$を次のように写すsheaf on $C$．
         \[
-            \dualsh_C(U)=
+            \shDual_C(U)=
             \left\{
                 \eta \in \dermod_{K(C)/K(B)}
                 \ \middle|\ 
@@ -574,7 +575,7 @@
         $\phi': C^*=C \times_B B^* \to B^*$が
         family of smooth curvesになっているとする．
         この時，
-        \[ (\dualsh_{C/B})|_{C^*} \iso \dersh_{C^*/B^*}. \]
+        \[ (\shDual_{C/B})|_{C^*} \iso \shDer_{C^*/B^*}. \]
     \end{Prop}
 
     \begin{Prop}
@@ -583,7 +584,7 @@
             C \times_B B' \ar[d]\ar[r]^-{\pi}& C \ar[d]\\
             B' \ar[r]& B
         }\]
-        この時，$\dualsh_{C \times B'/B'} =\pi^*(\dualsh_{C/B})$.
+        この時，$\shDual_{C \times B'/B'} =\pi^*(\shDual_{C/B})$.
     \end{Prop}
 
 \bibliographystyle{jplain}
