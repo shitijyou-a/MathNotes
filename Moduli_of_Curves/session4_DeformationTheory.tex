@@ -5,7 +5,11 @@
 \newcommand{\ftorIsom}{\mathcal{I}\!som}
 \newcommand{\hilb}{\mathcal{H}}
 \newcommand{\dualnum}{\mathbb{I}}
-\newcommand{\shDer}{\Omega}
+\newcommand{\famX}{\mathcal{X}}
+\newcommand{\famY}{\mathcal{Y}}
+\newcommand{\cvU}{\mathfrak{U}}
+\newcommand{\der}{\mathrm{d}}
+\newcommand{\Der}{\mathrm{Der}}
 
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
@@ -27,7 +31,7 @@
         {}& S'& \mapsto& \{ \ C \times_{\C} S' \to D \times_{\C} S' \text{ :: $S'$-isomorphism} \}
     \end{defmap}
     $\iota \in \ftorIsom(C, D)(S')$から得られる$\iota^*$は
-    $\dualsh_{C \times S'/S'}=\iota^*(\dualsh_{D \times S'/S'})$を満たす．
+    $\shDual_{C \times S'/S'}=\iota^*(\shDual_{D \times S'/S'})$を満たす．
     また$\otimes$と交換する
     （すなわちPicard群の間の準同型である．\cite{HarAG} Ex II.6.8）．
     このことから$\Isom(C, D)$が適当な$r$をとると
@@ -36,9 +40,9 @@
     もう少し詳しく$\Isom(C, D)$を書く．
     $n \geq 3$を整数とする．次のように$r,d$をとる．
     \[
-        r+1=h^0((\dualsh_{C/\C})^{\otimes n})=(2n-1)(g-1),
+        r+1=h^0((\shDual_{C/\C})^{\otimes n})=(2n-1)(g-1),
         \qquad
-        d=\deg (\dualsh_{C/\C})^{\otimes n}=2n(g-1).
+        d=\deg (\shDual_{C/\C})^{\otimes n}=2n(g-1).
     \]
     すると\cite{HarAG} II.7より，
     $C, D$は$\proj_{\C}^r$の次数$d$, arithmetic genus $g$のclosed curveとみなせる
@@ -70,23 +74,78 @@
 
     \begin{Thm}
         $C$ :: stable curve of genus $g \geq 2$について，
-        \[ \operatorname{Ext}^0(\shDer_C, \shO_C)=\shT(C)=0. \]
+        \[ \operatorname{Ext}^0(\shDer_C, \shO_C)=\shT_C(C)=0. \]
     \end{Thm}
     \begin{proof}
         \cite{IrrOfMg} \S1.
 
         $\pi: \tilde{C} \to C$をnormalization of $C$とする．
-        $D \in \shT_C(C)$は$\pi^*$によって
-        $\tilde{D} \in \shT_{\tilde{C}}(\tilde{C})$に対応する．
-        $D$は$C$のdouble point :: $P$で$0$になるから，
-        $\tilde{D}$は$\pi^{-1}(P)$で$0$になる．
+        また$\tilde{C}$のconnected componentの
+        個数を$\nu$，それぞれのgenusを$g_i \ (i=1,\dots,\nu)$とする．
+        
+        今，
+        $D \in \shT_C(C)$は
+        pullback :: $\pi^*: \shT_{\tilde{C}} \to \shT_{C}$によって
+        \footnote
+        {
+            $R$ :: ring, $A, B$ :: ring over $R$とする．
+            一般に，$k$-homomorphism :: $\phi: A \to B$があるとき，
+            $D \in \Der_{R}(B)$は$\phi^*: D \mapsto D \circ \phi$によって
+            $\Der_R(A)$へ写すことが出来る．
+        }．
+        $\tilde{D} \in \shT_{\tilde{C}}(\tilde{C})$
+        $C$のdouble pointに$\pi$で対応する点
+        (point laying over double point, plodp)で$0$になるような
+        regular vector field :: $\tilde{D} \in \shT_{\tilde{C}}(\tilde{C})$
+        に対応する(TODO)．
+        このような$\tilde{D}$は$0$しかないことを確かめれば，
+        $\shT_C(C)=0$がわかる．
 
-        そしてsmooth curve上のtangent sheaf :: 
-        $\shT_{\tilde{C}}=\shHom(\shDer_{\tilde{C}}, \shO_{\tilde{C}})$のsupportを考える．
-        $\shT_{\tilde{C}}$はcoherent sheafだから，
-        $\Supp \shT_{\tilde{C}}$はclosed in $\tilde{C}$(\cite{HarAG} ExII.5.6)．
-        したがって$(\shT_{\tilde{C}})_{Q} \neq 0$となる点は有限個しか無い．
-        （TODO: $(\shT_{\tilde{C}})_{Q}=0$なる点が存在するなら$\shT_{\tilde{C}}(U)=0$を示したいのだが．）
+        \begin{Claim}
+            $1$点$P \in \tilde{C}$で$\tilde{D}_P=0$ならば，
+            $\tilde{D}=0$である．
+        \end{Claim}
+        \begin{proof}
+            $C$　:: reduced connected schemeに注意する．
+            $P \in C$において$\tilde{D} \in \shT_C(C)$が$\tilde{D}_P=0$を満たすとしよう．
+            $C$のirreducible affine open cover :: $\cvU$をとり，
+            $P \in U$なる$U=\Spec A \in \cvU$をとって固定する．
+            すると$C$ :: reducedより$A$ :: integral domain.
+            $\tilde{D}|_U \in \shT_C(U)$が$P \in U$で$0$になるのだから，
+            次が成立する．
+            \[ \Exists{u \in A-\I{p}_P} u \cdot (\tilde{D}|_U)=0. \]
+            $A$ :: integralより，これは$\tilde{D}|_U=0$を意味する．
+            $U$と交わるirreducible affine open subset of $C$ :: $V \in \cvU$についても，
+            $\tilde{D}|_{U \cap V}=0$なので$\tilde{D}|_{V}=0$．
+            $C$ :: connectedなので，このように$V$を取り続けることで，
+            全ての$V \in \cvU$について$\tilde{D}|_V=0$であることがわかる．
+            sheafのIdentity Axiomから，$C$全体で$t=0$．
+        \end{proof}
+
+        したがって我々は
+        $\tilde{C}$の各componentは少なくとも一つずつ
+        plodpをもつこと示せば良い．
+
+        $\shT_{\tilde{C}}=\shHom(\shDer_{\tilde{C}/\C}, \shO_{\tilde{C}})$なので，
+        $\shT_{\tilde{C}}$に対応するdivisorは$K_{\tilde{C}}$．
+        $\deg K_{\tilde{C}}=2\tilde{g}-2$なので，
+        $\tilde{g}>1$ならば$\deg (-K_{\tilde{C}})<0$．
+        したがって\cite{HarAG} Lemma IV.1.2から$\dim_{\C} H^0(\tilde{C}, \shT_{\tilde{C}})=0$．
+        すなわち$\shT_{\tilde{C}}(\tilde{C})=0$．
+        なので以下では$\tilde{g}_i=0,1$とする．
+
+        $\tilde{g}_i=0,1$であるとき，
+        $\tilde{C}$の各connected componentは必ずplodpをもつ．
+        実際，genus formulaで$\delta=0$とすると
+        \[ g=\sum_{i}(\tilde{g}_i-1)+1 \geq 2 \]
+        したがって$\sum_{i}(\tilde{g}_i-1)>0$ということになる．
+        しかし仮定から$\tilde{g}_i-1 \leq 0$なので，$\delta>0$．
+        すなわち$C$は必ずnodeをもつ．
+        $\tilde{C}$の各componentはsmoothであることと
+        $C$がconnectedであることも踏まえて考えると，
+        $\tilde{C}$の各componentは少なくとも一つずつ
+        plodpをもつことが分かる．
+        （この辺りは\cite{IrrOfMg} Lemma1.4で詳しく述べられている）．
     \end{proof}
 
     \begin{Prop}
@@ -99,14 +158,175 @@
         reducedはlocalな性質であるから，
         $X$がreducedであることを示すには$\shO_{X, I}$ :: reduced ringを示せば良い．
 
-        $\shO_{X, I}$がnon-reducedであると仮定すると，
-        non-zero section :: $t \in \shT_C(C)$がとれ，
-        これは$C$のregular vector field :: $v \in \shT(C)$に対応する(TODO).
-        したがって定理から$X$ :: reduced.
+        $\shO_{X, I}$がnon-reducedであると仮定する．
+        この時，非自明な(nonzero)射$\Spec D \to X=\Aut(C)$がとれる(TODO)．
+        $\Aut(C)$の定義から，この射は$C \times D$の自己同型に対応する（後述）．
+        これは$\shT_C(C)$の非自明な元($\neq 0$)に対応する．
+        よって定理から$X$ :: reducedが分かる．
     \end{proof}
 
-\section{}
-    \cite{HarAG} Example III.9.13.1
+\section{Definitions of Deformations and Versal Deformation.}
+    \begin{Def}[Deformation of Scheme \cite{HaMo} 3.B, \cite{DefLCI} 6.1]
+        $X$ :: scheme over $k$,
+        $(Y, y_0)$ :: pointed scheme over $k$とする．
+        deformation of $X$とは，次の二つから成る組 $(\famX, Y)$．
+        \begin{itemize}
+            \item flat family :: $\phi: \famX \to (Y, y_0)$.
+            \item morphism :: $\psi: X \to \famX$.
+        \end{itemize}
+        これらは次の条件を満たす:
+        以下の図式がfiber productであり，
+        $\psi$から$X \iso \famX \times_{Y} \Spec k(y_0)$が誘導される．
+        \[\vcenter{\xymatrix{
+            X \ar[r]^-{\psi} \ar[d]& \famX \ar[d]^-{\phi} \\
+            k(y_0) \ar[r]& Y
+            \ar@{}[lu]|{\ulcorner}
+        }}\]
+        ここで$\Spec (\shO_{Y, y_0}/\I{m}_{Y, y_0})$を$k(y_0)$と書いている．
+
+        deformations of $X$ :: $(\famX, Y), (\famX', Y')$が
+        equivalentであるとは，
+        可換図式が成立する同型$\eta: \famX' \to \famX$が存在すること．
+        \[\xymatrix{
+            X \ar@{=}[d]\ar[r]^-{\psi'}& \famX' \ar[d]^-{\eta}\\
+            X \ar[r]_-{\psi}& \famX
+        }\]
+    \end{Def}
+
+    \begin{Def}[Universal Deformation, \cite{HaMo} 3.B, \cite{HarDef} \S15]
+        universal deformation for $X$とは，
+        次の性質を満たすdeformation of $X$ ::
+        $\phi: \famX \to (S, s_0) \& \psi: X \to \famX$のこと:
+        任意のdeformation of $X$ ::
+        $\phi': \famX' \to (S', s'_0) \& \psi': X \to \famX'$に対して
+        射$f: S' \to S$が一意に存在し，
+        $f$と$\phi, \psi$のpullbackで生じるdeformationが
+        誘導されるdeformationが$\phi' \& \psi'$とequivalent．
+    \end{Def}
+
+    \begin{Def}[Versal Deformation, \cite{GACII} \S 11 p.188, p.192]
+        $f: X \to Y$がanalitically isomorphismであるとは，
+        任意の$x \in X$について，
+        $f$のstalkの完備化により得られる準同型
+        \[ (f^{\#}_x)\sidehat: (\shO_{Y, f(x)})\sidehat \to (\shO_{X, x})\sidehat \]
+        が同型であるということ(\cite{HarAG} \S I.5)．
+
+        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
+        （versality propertyをもつ）とは，
+        次の性質を持つということである:
+        任意のdeformation of $X$ :: $\xi: \famY \to (T, t_0)$と
+        任意の点$t \in T$に対して，
+        $t$の開近傍$U \subseteq T$と射$f: U \to S$が存在し，
+        射影$(\famY \times_T U=)\xi^{-1}(U)$と$\famX \times_S U$の間に
+        analitically isomorphismが存在するということ．
+        \[\vcenter{\xymatrix{
+            \xi^{-1}(U) \ar[d]\ar@{~>}[r]& \famX \times_S U \ar[r]\ar[d]& \famX \ar[d]^-{\phi}\\
+            U \ar@{=}[r]& U \ar[r]_-{f}& S
+            \ar@{}[lu]|{\ulcorner}
+        }}\]
+    \end{Def}
+
+    \begin{Remark}
+        開集合$U$を``any sufficiently small connected neighborhood of $t_0$"に限定することも
+        あるようである(\cite{GACII} \S11, p.188)．
+    \end{Remark}
+
+    \begin{Def}[First Order Deformation]
+        $D=\C[x]/(x^2), \epsilon=x \bmod (x^2)$とする．
+        $\dualnum=\Spec D$の唯一の閉点を$0$で表す．
+        $(\dualnum, 0)$上のdeformationを，
+        first order deformation (or infinitesimal deformation)と呼ぶ．
+    \end{Def}
+    これは``formal deformation"の最も簡単な場合である．
+    $D$ :: local atrinian ringであり，
+    したがってcomplete ringでもある．
+
+    \begin{Def}[Homomorphism of Deformations for First Order Deformation, \cite{DefLCI} 7.2]
+        homomorphism of deformations of $X$ ::
+        $(\alpha, f): (\famX, \dualnum) \to (\famY, \dualnum)$とは
+        homomohpsim $f: \dualnum \to \dualnum$と，
+        $\alpha: f_*\famX \iso \famY$の組のことである．
+        ここで$f_* \famX$は$f$と$\famX \to \dualnum$のfiber productで得られるdeformationである．
+    \end{Def}
+
+    \begin{Def}[Versal Deformation for First Order Deformation, \cite{DefLCI} 7.2]
+        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
+        （versality propertyをもつ）とは，
+        次の性質を持つということである:
+        \[\xymatrix{
+            {} & (X, \C) \ar@{->>}[d]^-{\forall} \\
+            (\famX, S) \ar@{-->}[ru]^-{\exists} \ar[r]^-{\forall}& (\famY, T)
+        }\]
+    \end{Def}
+
+    通常の場合，versal deformationはほとんど存在しない．
+
+
+\section{First Order Deformation of Nonsingular Scheme Of Finite Type.}
+    \begin{Lemma}[\cite{Eisen} Cor6.2]
+        $D$-module :: $M$がflatであることは，
+        $M/\epsilon M \xrightarrow{\times \epsilon} \epsilon M$
+        が同型であることと同値．
+    \end{Lemma}
+
+    \begin{Lemma}[\cite{GlimpseDefTh} Prop5.1]
+        $X$ :: affine, nonsingular, finite type scheme over a field $k$とする．
+        この時，$X$のfirst order deformationは
+        自明なdeformation :: $X \times_k \Spec D$しか存在しない．
+    \end{Lemma}
+    \begin{proof}
+        $\phi: \famX \to \dualnum, \psi: X \to \famX$を
+        $X$のfirst order deformationとする．
+        $\phi$ :: flatと上の補題を用いると，
+        $X \isomap \famX \times_{D} \Spec \C$から
+        $\psi^{\#}: \shO_{\famX}/\epsilon \shO_{\famX} \to \shO_X$が
+        同型であることが得られる．
+        逆にこの同型が存在する時$\famX \to \dualnum$がflatであることが言える．
+        したがって$X$のfirst order deformationは
+        infinitesimal extension of $X$ by $\shO_X$ (\cite{HarAG} Ex II.8.7)に対応する．
+        しかし\cite{HarAG} Ex II.8.7より，これは自明なものしか存在しない．
+    \end{proof}
+
+    \begin{Lemma}[\cite{GlimpseDefTh} Prop5.2]
+        $X$ :: nonsingular scheme of finite type over $k$とする．
+        この時，次のsheafを考える．
+        \[ X \supseteq U \mapsto \{ \text{$\dualnum$-automorphisms of $D \times_k \dualnum$} \}. \]
+        するとこのsheafはtangent sheaf of $X$ :: $\shT_X$と同型である．
+    \end{Lemma}
+
+    \begin{Thm}[\cite{GlimpseDefTh} p.7]
+        $X$ :: separated nonsingular scheme of finite type over $k$とする．
+        特に，$X$ :: nonsingular (abstruct) variety over $K$であればよい．
+        この時，first oder deformation of $X$の同値類は
+        $H^1(X, \shT_X)$の元と一対一に対応する．
+    \end{Thm}
+    \begin{proof}
+        
+    \end{proof}
+
+\section{Several Other Deformation Theory}
+    ここではfirst order deformation of a nonsingular varietyの変種として，
+    様々な``deformation of something"の問題と
+    その``space of first order deformation"を列挙する．
+
+    ここでの``curve"は私のノート``session2\_ApproachesToConstructionOfMg"同様に
+    smooth complete (abstruct) variety of dimention $1$ over $\C$を意味する．
+
+    \subsection{Deformation of a nonsingular curve}
+    \subsection{Deformation of a nonsingular pointed curve}
+    \subsection{Deformation of a curve with line bundle.}
+    \subsection{Deformation of a map \tp{$f: X \to Y$}{f: X to Y} with \tp{$X, Y$}{X, Y} both fixed.}
+    \subsection{Deformation of a map \tp{$f: X \to Y$}{F: X to Y} with only \tp{$Y$}{Y} fixed.}
+    \subsection{Deformation of a singular point of plane curve.}
+    \subsection{Deformation of a singular variety.}
+
+\section{Formal Deformation}
+    \begin{Def}
+        
+    \end{Def}
+
+%    \cite{HarAG} Example III.9.13.1
+%    Lectures on Moduli of Curves(D_Gieseker).pdf
 
 \bibliographystyle{jplain}
 \bibliography{reference}
