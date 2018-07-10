@@ -11,6 +11,9 @@
 \newcommand{\der}{\mathrm{d}}
 \newcommand{\Der}{\mathrm{Der}}
 
+\newcommand{\Art}{\mathbf{Art}_{\C}}
+\newcommand{\cArt}{\hat{\mathbf{Art}}_{\C}}
+
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
 \author{七条彰紀}
@@ -72,9 +75,9 @@
     ここで$\shT$はtangent sheaf :: $\shT=\shHom_{\shO_X}(\shDer_X, \shO_X)$のことである．
     \cite{HaMo}でいうregular vector fieldとは$\shT$のsectionのこと（と思われる）．
 
-    \begin{Thm}
+    \begin{Thm}\label{thm:TC(C)=0}
         $C$ :: stable curve of genus $g \geq 2$について，
-        \[ \operatorname{Ext}^0(\shDer_C, \shO_C)=\shT_C(C)=0. \]
+        \[ \operatorname{Ext}^0(\shDer_C, \shO_C)=H^0(C, \shT_C)=\shT_C(C)=0. \]
     \end{Thm}
     \begin{proof}
         \cite{IrrOfMg} \S1.
@@ -85,7 +88,7 @@
         
         今，
         $D \in \shT_C(C)$は
-        pullback :: $\pi^*: \shT_{\tilde{C}} \to \shT_{C}$によって
+        pullback :: $\pi^*: \shT_{\tilde{C}} \to \pi^* \shT_{C}$によって
         \footnote
         {
             $R$ :: ring, $A, B$ :: ring over $R$とする．
@@ -149,99 +152,153 @@
     \end{proof}
 
     \begin{Prop}
-        $\Aut(C)$ :: reduced scheme.
+        任意の閉点$P \in \Aut(C)$について，
+        $\shO_{\Aut(C), P} \iso \C$．
+        特に$\Aut(C)$ :: reduced scheme.
     \end{Prop}
     \begin{proof}
-        $X=\Aut(C)$はgroup schemeであるから，
+        $X=\Aut(C)$はgroup scheme over $\C$であるから，
         $X$のある点でのlocalな性質は
-        transitionを用いて単位元$I$での性質と言い換えられる．
-        reducedはlocalな性質であるから，
-        $X$がreducedであることを示すには$\shO_{X, I}$ :: reduced ringを示せば良い．
+        transitionを用いて単位元$e$での性質と言い換えられる．
+        なので$A:=\shO_{X, e}$のみを考える．
+        $X$ :: group scheme over $\C$より
+        $e$ :: $\C$-rational pointなので，
+        $A$が体ならばそれは$\C(=A/\I{m}_A)$と同型である．
+        よって我々は$A$が体であることのみ示せば良い．
 
-        $\shO_{X, I}$がnon-reducedであると仮定する．
-        この時，非自明な(nonzero)射$\Spec D \to X=\Aut(C)$がとれる(TODO)．
-        $\Aut(C)$の定義から，この射は$C \times D$の自己同型に対応する（後述）．
-        これは$\shT_C(C)$の非自明な元($\neq 0$)に対応する．
-        よって定理から$X$ :: reducedが分かる．
+        上記の定理(\ref{thm:TC(C)=0})から，$\shT_C(C)=0$．
+        これは$C \times \dualnum$の$\dualnum$-automorphismは
+        自明なものしか無いことを意味する（後述）．
+        さらに$\Aut(C)$の定義から，
+        これは射$\dualnum \to \Aut(C)$としては自明なものしか存在しないことを意味する．
+        さらに\cite{HarAG} Ex II.2.8より，
+        これは$\I{m}_A/\I{m}_A^2=0$を意味する．
+        中山の補題から$\I{m}_A=0$．
+        よって$A$は体である．
     \end{proof}
 
 \section{Definitions of Deformations and Versal Deformation.}
-    \begin{Def}[Deformation of Scheme \cite{HaMo} 3.B, \cite{DefLCI} 6.1]
-        $X$ :: scheme over $k$,
-        $(Y, y_0)$ :: pointed scheme over $k$とする．
-        deformation of $X$とは，次の二つから成る組 $(\famX, Y)$．
-        \begin{itemize}
-            \item flat family :: $\phi: \famX \to (Y, y_0)$.
-            \item morphism :: $\psi: X \to \famX$.
-        \end{itemize}
-        これらは次の条件を満たす:
-        以下の図式がfiber productであり，
-        $\psi$から$X \iso \famX \times_{Y} \Spec k(y_0)$が誘導される．
-        \[\vcenter{\xymatrix{
-            X \ar[r]^-{\psi} \ar[d]& \famX \ar[d]^-{\phi} \\
-            k(y_0) \ar[r]& Y
-            \ar@{}[lu]|{\ulcorner}
-        }}\]
-        ここで$\Spec (\shO_{Y, y_0}/\I{m}_{Y, y_0})$を$k(y_0)$と書いている．
+\begin{Def}[$\C$-pointed scheme \cite{DefAS} \S 1.2.1]
+    scheme :: $Y$と
+    $\C$-rational point :: $y_0 \in Y$の組を
+    $\C$-pointed schemeを呼び，$(Y, y_0)$と書く．
 
-        deformations of $X$ :: $(\famX, Y), (\famX', Y')$が
-        equivalentであるとは，
-        可換図式が成立する同型$\eta: \famX' \to \famX$が存在すること．
+    morphism of $\C$-pointed schemes :: $(S, s_0) \to (T, t_0)$とは，
+    moephism of schemes :: $\phi: S \to T$であって，
+    $\phi(s_0)=t_0$を満たすもののこと．
+\end{Def}
+
+\begin{Def}[Deformation of Scheme \cite{DefAS} \S 1.2.1, \cite{HaMo} \S 3.B]
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item 
+        deformation of $X$とは，以下のようなpullback diagramのことである．
+        $\psi$から$X \iso \famX \times_{Y} \C$が誘導される．
+        \[
+            \xi:
+        \vcenter{\xymatrix{
+            X \ar[r] \ar[d]& \famX \ar[d]^-{\text{flat, surj.}} \\
+            \C \ar[r]_-{s}& Y
+            \ar@{}[lu]|{\ulcorner}
+        }}
+        \]
+        $S$のことを$\xi$のparameter space,
+        $\famX$を$\xi$のtotal spaceと呼ぶ．
+
+        \item
+        任意のscheme :: $X$と$\C$-pointed scheme :: $(S, s_0)$に対して，
+        $S$がparameter spaceであるようなdeformation of $X$が存在する:
         \[\xymatrix{
-            X \ar@{=}[d]\ar[r]^-{\psi'}& \famX' \ar[d]^-{\eta}\\
-            X \ar[r]_-{\psi}& \famX
+                X \ar[r]\ar[d]& X \times_{\C} S \ar[d]\\
+                \C \ar[r]_-{s}& S
         }\]
+        これをproduct familyまたはtrivial familyと呼ぶ．
+
+        \item
+        morphism of $\C$-pointed schemes :: $(T, t_0) \to (S, s_0)$は，
+        parameter spaceが$S$であるdeformation :: $\xi$から
+        base changeによって次のdeformationを誘導する．
+        \[\xymatrix{
+            X \ar[r]\ar[d]& \famX \times_S T \ar[d]\\
+            \C \ar[r]& T
+        }\]
+        これを元のdeformationの$f: (T, t_0) \to (S, s_0)$による
+        pullbackと呼び，$f^* \xi$と書く（このノート独自？）．
+
+        \item
+        isomorphism of deformations of $X$ :: $\xi \to \eta$とは，
+        以下の可換図式が成立する同型$\famX \iso \famY, S \iso T$のこと．
+        \[\xymatrix@R=8pt{
+                {} & {} & \famY \ar[dd]\\
+            X \ar[r]\ar[dd]\ar[rru]& \famX \ar[dd]\ar[ru]_-{\iso}& {} \\
+            {} & {} & T \\
+            \C \ar[r]\ar[rru]& S \ar[ru]_-{\iso}& {}
+        }\]
+        isomorphism of parameter spaces :: $(S, s_0) \to (T, t_0)$と
+        deformationから誘導されるdeformationは
+        元のdeformationと同型である．
+    \end{enumerate}
     \end{Def}
 
     \begin{Def}[Universal Deformation, \cite{HaMo} 3.B, \cite{HarDef} \S15]
         universal deformation for $X$とは，
-        次の性質を満たすdeformation of $X$ ::
-        $\phi: \famX \to (S, s_0) \& \psi: X \to \famX$のこと:
-        任意のdeformation of $X$ ::
-        $\phi': \famX' \to (S', s'_0) \& \psi': X \to \famX'$に対して
-        射$f: S' \to S$が一意に存在し，
-        $f$と$\phi, \psi$のpullbackで生じるdeformationが
-        誘導されるdeformationが$\phi' \& \psi'$とequivalent．
+        次の性質を満たすdeformation of $X$ :: $\xi$ (parameter space :: $S$):
+        任意のdeformation of $X$ ::$\eta$ (parameter space :: $T$)にたいし，
+        morphism of pointed schemes :: $f: T \to S$が一意に存在し，
+        $f^* \xi \iso \eta$となる．
+    \end{Def}
+    Universal Deformationは，
+    次の関手の表現対象であると言える．
+    \[ \Sch/\C \ni S \mapsto \{ \text{Deformation of $X$} \}. \]
+    したがって全てのDeformationはuniversal deformationから得られる．
+    しかし，当然ながらというべきか，
+    universal deformationは殆どの場合で存在しない．
+    そこでuniversal deformationへの要求を
+    \begin{itemize}
+        \item $S' \to S$をlocally about $S'$にとるものとし，
+        \item $U \to S$の一意性は要求しない
+    \end{itemize}
+    と弱める．
+    一意(uni-)ではないので，これをversal deformationと呼ぶ．
+
+    \begin{Def}[Versal Deformation]
+%        $f: X \to Y$がanalitically isomorphismであるとは，
+%        任意の$x \in X$について，
+%        $f$のstalkの完備化により得られる準同型
+%        \[ (f^{\#}_x)\sidehat: (\shO_{Y, f(x)})\sidehat \to (\shO_{X, x})\sidehat \]
+%        が同型であるということ(\cite{HarAG} \S I.5)．
+
+%        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
+%        （versality propertyをもつ）とは，
+%        次の性質を持つということである:
+%        任意のdeformation of $X$ :: $\xi: \famY \to (T, t_0)$と
+%        任意の点$t \in T$に対して，
+%        $t$の開近傍$U \subseteq T$と射$f: U \to S$が存在し，
+%        射影$(\famY \times_T U=)\xi^{-1}(U)$と$\famX \times_S U$の間に
+%        analitically isomorphismが存在するということ．
+%        \[\vcenter{\xymatrix{
+%            \xi^{-1}(U) \ar[d]\ar@{~>}[r]& \famX \times_S U \ar[r]\ar[d]& \famX \ar[d]^-{\phi}\\
+%            U \ar@{=}[r]& U \ar[r]_-{f}& S
+%            \ar@{}[lu]|{\ulcorner}
+%        }}\]
+        （
+        versal deformationの定式化が見つからないので保留．
+        見つけた限りではversal deformation for schemeは
+        次で意義するformal derormationでのみ定義されている．
+        \cite{GACII}ではversal deformation for (complex) manifoldが定義されているのみである．
+        ）
     \end{Def}
 
-    \begin{Def}[Versal Deformation, \cite{GACII} \S 11 p.188, p.192]
-        $f: X \to Y$がanalitically isomorphismであるとは，
-        任意の$x \in X$について，
-        $f$のstalkの完備化により得られる準同型
-        \[ (f^{\#}_x)\sidehat: (\shO_{Y, f(x)})\sidehat \to (\shO_{X, x})\sidehat \]
-        が同型であるということ(\cite{HarAG} \S I.5)．
+\section{Formal Deformation / Abstruct Lifting}
+    以下では$\Art, \cArt$を次の圏とする．
+    \begin{description}
+        \item[$\Art$] the category of local artinian $\C$-algebras with residue field $\C$
+        \item[$\cArt$]the category of complete local noetherian $\C$-algebras with residue field $\C$
+    \end{description}
 
-        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
-        （versality propertyをもつ）とは，
-        次の性質を持つということである:
-        任意のdeformation of $X$ :: $\xi: \famY \to (T, t_0)$と
-        任意の点$t \in T$に対して，
-        $t$の開近傍$U \subseteq T$と射$f: U \to S$が存在し，
-        射影$(\famY \times_T U=)\xi^{-1}(U)$と$\famX \times_S U$の間に
-        analitically isomorphismが存在するということ．
-        \[\vcenter{\xymatrix{
-            \xi^{-1}(U) \ar[d]\ar@{~>}[r]& \famX \times_S U \ar[r]\ar[d]& \famX \ar[d]^-{\phi}\\
-            U \ar@{=}[r]& U \ar[r]_-{f}& S
-            \ar@{}[lu]|{\ulcorner}
-        }}\]
+    \begin{Def}[Formal Deformation, \cite{DefLCI} 7.2]
     \end{Def}
 
-    \begin{Remark}
-        開集合$U$を``any sufficiently small connected neighborhood of $t_0$"に限定することも
-        あるようである(\cite{GACII} \S11, p.188)．
-    \end{Remark}
-
-    \begin{Def}[First Order Deformation]
-        $D=\C[x]/(x^2), \epsilon=x \bmod (x^2)$とする．
-        $\dualnum=\Spec D$の唯一の閉点を$0$で表す．
-        $(\dualnum, 0)$上のdeformationを，
-        first order deformation (or infinitesimal deformation)と呼ぶ．
-    \end{Def}
-    これは``formal deformation"の最も簡単な場合である．
-    $D$ :: local atrinian ringであり，
-    したがってcomplete ringでもある．
-
-    \begin{Def}[Homomorphism of Deformations for First Order Deformation, \cite{DefLCI} 7.2]
+    \begin{Def}[Homomorphism of Formal Deformations, \cite{DefLCI} 7.2]
         homomorphism of deformations of $X$ ::
         $(\alpha, f): (\famX, \dualnum) \to (\famY, \dualnum)$とは
         homomohpsim $f: \dualnum \to \dualnum$と，
@@ -249,7 +306,7 @@
         ここで$f_* \famX$は$f$と$\famX \to \dualnum$のfiber productで得られるdeformationである．
     \end{Def}
 
-    \begin{Def}[Versal Deformation for First Order Deformation, \cite{DefLCI} 7.2]
+    \begin{Def}[Versal Deformation for Formal Deformation, \cite{DefLCI} 7.2]
         deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
         （versality propertyをもつ）とは，
         次の性質を持つということである:
@@ -259,10 +316,17 @@
         }\]
     \end{Def}
 
-    通常の場合，versal deformationはほとんど存在しない．
+    \begin{Def}[First Order Deformation]
+        $D=\C[x]/(x^2), \epsilon=x \bmod (x^2)$とする．
+        $\dualnum=\Spec D$の唯一の閉点を$0$で表す．
+        $(\dualnum, 0)$上のdeformationを，
+        first order deformation (or infinitesimal deformation)と呼ぶ．
+    \end{Def}
 
+\section{First Order Deformation of a Nonsingular Pre-Variety.}
+    union of varietyをprevarietyとよぶ．
+    これはすなわち，varietyの定義からirreducibilityを除いたものである．
 
-\section{First Order Deformation of Nonsingular Scheme Of Finite Type.}
     \begin{Lemma}[\cite{Eisen} Cor6.2]
         $D$-module :: $M$がflatであることは，
         $M/\epsilon M \xrightarrow{\times \epsilon} \epsilon M$
@@ -293,6 +357,8 @@
         \[ X \supseteq U \mapsto \{ \text{$\dualnum$-automorphisms of $D \times_k \dualnum$} \}. \]
         するとこのsheafはtangent sheaf of $X$ :: $\shT_X$と同型である．
     \end{Lemma}
+    \begin{proof}
+    \end{proof}
 
     \begin{Thm}[\cite{GlimpseDefTh} p.7]
         $X$ :: separated nonsingular scheme of finite type over $k$とする．
@@ -301,29 +367,26 @@
         $H^1(X, \shT_X)$の元と一対一に対応する．
     \end{Thm}
     \begin{proof}
-        
     \end{proof}
 
-\section{Several Other Deformation Theory}
-    ここではfirst order deformation of a nonsingular varietyの変種として，
-    様々な``deformation of something"の問題と
-    その``space of first order deformation"を列挙する．
+\section{First Order Deformation of a Locally Complete Intersection.}
 
-    ここでの``curve"は私のノート``session2\_ApproachesToConstructionOfMg"同様に
-    smooth complete (abstruct) variety of dimention $1$ over $\C$を意味する．
+%\section{Several Other Deformation Theory}
+%    ここではfirst order deformation of a nonsingular varietyの変種として，
+%    様々な``deformation of something"の問題と
+%    その``space of first order deformation"を列挙する．
 
-    \subsection{Deformation of a nonsingular curve}
-    \subsection{Deformation of a nonsingular pointed curve}
-    \subsection{Deformation of a curve with line bundle.}
-    \subsection{Deformation of a map \tp{$f: X \to Y$}{f: X to Y} with \tp{$X, Y$}{X, Y} both fixed.}
-    \subsection{Deformation of a map \tp{$f: X \to Y$}{F: X to Y} with only \tp{$Y$}{Y} fixed.}
-    \subsection{Deformation of a singular point of plane curve.}
-    \subsection{Deformation of a singular variety.}
+%    ここでの``curve"は私のノート``session2\_ApproachesToConstructionOfMg"同様に
+%    smooth complete (abstruct) variety of dimention $1$ over $\C$を意味する．
 
-\section{Formal Deformation}
-    \begin{Def}
-        
-    \end{Def}
+%    \subsection{Deformation of a nonsingular curve}
+%    \subsection{Deformation of a nonsingular pointed curve}
+%    \subsection{Deformation of a curve with line bundle.}
+%    \subsection{Deformation of a map \tp{$f: X \to Y$}{f: X to Y} with \tp{$X, Y$}{X, Y} both fixed.}
+%    \subsection{Deformation of a map \tp{$f: X \to Y$}{F: X to Y} with only \tp{$Y$}{Y} fixed.}
+%    \subsection{Deformation of a singular point of plane curve.}
+%    \subsection{Deformation of a singular variety.}
+
 
 %    \cite{HarAG} Example III.9.13.1
 %    Lectures on Moduli of Curves(D_Gieseker).pdf
