@@ -11,9 +11,6 @@
 \newcommand{\der}{\mathrm{d}}
 \newcommand{\Der}{\mathrm{Der}}
 
-\newcommand{\Art}{\mathbf{Art}_{\C}}
-\newcommand{\cArt}{\hat{\mathbf{Art}}_{\C}}
-
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
 \author{七条彰紀}
@@ -190,7 +187,7 @@
 
 \begin{Def}[Deformation of Scheme \cite{DefAS} \S 1.2.1, \cite{HaMo} \S 3.B]
     \begin{enumerate}[label=(\roman*), leftmargin=*]
-        \item 
+    \item 
         deformation of $X$とは，以下のようなpullback diagramのことである．
         $\psi$から$X \iso \famX \times_{Y} \C$が誘導される．
         \[
@@ -201,10 +198,16 @@
             \ar@{}[lu]|{\ulcorner}
         }}
         \]
+        $A'$ :: local artinian ring with $A'/\Nil(A') \iso \C$
+        を用いて$Y=\Spec A'$と書ける場合，
+        これはabstruct lifting of $X$ to $A'$とも呼ばれる(\cite{DefLCI} 4.2)．
+
+    \item
+        上のdeformation of $X$ :: $\xi$について，
         $S$のことを$\xi$のparameter space,
         $\famX$を$\xi$のtotal spaceと呼ぶ．
 
-        \item
+    \item
         任意のscheme :: $X$と$\C$-pointed scheme :: $(S, s_0)$に対して，
         $S$がparameter spaceであるようなdeformation of $X$が存在する:
         \[\xymatrix{
@@ -213,7 +216,7 @@
         }\]
         これをproduct familyまたはtrivial familyと呼ぶ．
 
-        \item
+    \item
         morphism of $\C$-pointed schemes :: $(T, t_0) \to (S, s_0)$は，
         parameter spaceが$S$であるdeformation :: $\xi$から
         base changeによって次のdeformationを誘導する．
@@ -224,7 +227,7 @@
         これを元のdeformationの$f: (T, t_0) \to (S, s_0)$による
         pullbackと呼び，$f^* \xi$と書く（このノート独自？）．
 
-        \item
+    \item
         isomorphism of deformations of $X$ :: $\xi \to \eta$とは，
         以下の可換図式が成立する同型$\famX \iso \famY, S \iso T$のこと．
         \[\xymatrix@R=8pt{
@@ -261,59 +264,12 @@
     一意(uni-)ではないので，これをversal deformationと呼ぶ．
 
     \begin{Def}[Versal Deformation]
-%        $f: X \to Y$がanalitically isomorphismであるとは，
-%        任意の$x \in X$について，
-%        $f$のstalkの完備化により得られる準同型
-%        \[ (f^{\#}_x)\sidehat: (\shO_{Y, f(x)})\sidehat \to (\shO_{X, x})\sidehat \]
-%        が同型であるということ(\cite{HarAG} \S I.5)．
-
-%        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
-%        （versality propertyをもつ）とは，
-%        次の性質を持つということである:
-%        任意のdeformation of $X$ :: $\xi: \famY \to (T, t_0)$と
-%        任意の点$t \in T$に対して，
-%        $t$の開近傍$U \subseteq T$と射$f: U \to S$が存在し，
-%        射影$(\famY \times_T U=)\xi^{-1}(U)$と$\famX \times_S U$の間に
-%        analitically isomorphismが存在するということ．
-%        \[\vcenter{\xymatrix{
-%            \xi^{-1}(U) \ar[d]\ar@{~>}[r]& \famX \times_S U \ar[r]\ar[d]& \famX \ar[d]^-{\phi}\\
-%            U \ar@{=}[r]& U \ar[r]_-{f}& S
-%            \ar@{}[lu]|{\ulcorner}
-%        }}\]
         （
         versal deformationの定式化が見つからないので保留．
         見つけた限りではversal deformation for schemeは
         次で意義するformal derormationでのみ定義されている．
         \cite{GACII}ではversal deformation for (complex) manifoldが定義されているのみである．
         ）
-    \end{Def}
-
-\section{Formal Deformation / Abstruct Lifting}
-    以下では$\Art, \cArt$を次の圏とする．
-    \begin{description}
-        \item[$\Art$] the category of local artinian $\C$-algebras with residue field $\C$
-        \item[$\cArt$]the category of complete local noetherian $\C$-algebras with residue field $\C$
-    \end{description}
-
-    \begin{Def}[Formal Deformation, \cite{DefLCI} 7.2]
-    \end{Def}
-
-    \begin{Def}[Homomorphism of Formal Deformations, \cite{DefLCI} 7.2]
-        homomorphism of deformations of $X$ ::
-        $(\alpha, f): (\famX, \dualnum) \to (\famY, \dualnum)$とは
-        homomohpsim $f: \dualnum \to \dualnum$と，
-        $\alpha: f_*\famX \iso \famY$の組のことである．
-        ここで$f_* \famX$は$f$と$\famX \to \dualnum$のfiber productで得られるdeformationである．
-    \end{Def}
-
-    \begin{Def}[Versal Deformation for Formal Deformation, \cite{DefLCI} 7.2]
-        deformation of $X$ :: $\phi: \famX \to (S, s_0)$がversal deformationである
-        （versality propertyをもつ）とは，
-        次の性質を持つということである:
-        \[\xymatrix{
-            {} & (X, \C) \ar@{->>}[d]^-{\forall} \\
-            (\famX, S) \ar@{-->}[ru]^-{\exists} \ar[r]^-{\forall}& (\famY, T)
-        }\]
     \end{Def}
 
     \begin{Def}[First Order Deformation]
@@ -323,10 +279,27 @@
         first order deformation (or infinitesimal deformation)と呼ぶ．
     \end{Def}
 
-\section{First Order Deformation of a Nonsingular Pre-Variety.}
-    union of varietyをprevarietyとよぶ．
-    これはすなわち，varietyの定義からirreducibilityを除いたものである．
+    \begin{Lemma}
+        次のfirst order deformation of $X$を考える．
+        \[\vcenter{\xymatrix{
+            X \ar[r]^-{\psi} \ar[d]& \famX \ar[d] \\
+            \C \ar[r]_-{s}& Y
+            \ar@{}[lu]|{\ulcorner}
+        }}\]
+        この時，$\psi$は同相写像である．
+    \end{Lemma}
+    \begin{proof}
+        (TODO)
+    \end{proof}
 
+    \begin{Def}[Restriction of First Order Deformation]
+        上の命題にあるfirst order deformation of $X$について，
+        $U$ :: open subset of $X$をとる．
+        locally ringed space :: $(\psi(U), \shO_{\famX}|_{\psi(U)})$を
+        $\famX|_U$と書く．
+    \end{Def}
+
+\section{First Order Deformation of a Nonsingular Variety.}
     \begin{Lemma}[\cite{Eisen} Cor6.2]
         $D$-module :: $M$がflatであることは，
         $M/\epsilon M \xrightarrow{\times \epsilon} \epsilon M$
@@ -369,27 +342,315 @@
     \begin{proof}
     \end{proof}
 
-\section{First Order Deformation of a Locally Complete Intersection.}
+\section{Extension of Sheaves}
+    \begin{Def}[Extension of Sheaves]
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item
+            $\shF, \shG$ :: $\shO_X$-module on ringed space $X$とする．
+            extension of $\shF$ by $\shG$とは，次のような完全列のこと．
+            \[
+            (\shE, \iota, \kappa):
+                \xymatrix{
+                    0 \ar[r]& \shG \ar[r]^-{\iota}& \shE \ar[r]^-{\kappa}& \shF \ar[r]& 0
+            }\]
 
-%\section{Several Other Deformation Theory}
-%    ここではfirst order deformation of a nonsingular varietyの変種として，
-%    様々な``deformation of something"の問題と
-%    その``space of first order deformation"を列挙する．
+        \item
+            $(\shE, \iota, \kappa) \to (\shE', \iota', \kappa')$
+            :: homomorphism of extensions of $\shF$ by $\shG$とは，
+            次の図式を可換にする
+            homomorphism of sheaves :: $\phi: \shE \to \shE'$のこと．
+            \[\xymatrix@R=10pt{
+                    {}& {}& \shE \ar[dd]^-{\phi} \ar[rd]^-{\kappa}& {}& {} \\
+                    0 \ar[r]& \shG \ar[ru]^-{\iota}\ar[rd]_-{\iota'}& {} & \shF \ar[r]& 0 \\
+                    {}& {}& \shE' \ar[ru]_-{\kappa'}& {}& {}
+            }\]
+        
+        \item
+            $g: \shG \to \shG'$と
+            $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
+            $g_* \shE$ :: pushfoward of $\shF$ by $\shG$を次で定める．
+            これがextension of $\shF$ by $\shG'$になっていることは簡単に確かめられる．
 
-%    ここでの``curve"は私のノート``session2\_ApproachesToConstructionOfMg"同様に
-%    smooth complete (abstruct) variety of dimention $1$ over $\C$を意味する．
+            まず，sheafとしては$g_* \shE$は次の準同型のcokernelである．
+            \[
+                \shG \to \shG' \oplus \shE;
+                \qquad
+                \sect{U}{y} \mapsto \sect{U}{g_U(y)} \oplus \sect{U}{-\iota_U(y)}.
+            \]
+            $\iota_{g_*\shE}, \kappa_{g_*\shE}$は次で定める．
+            \begin{align*}
+                \iota_{g_*\shE}:& \shG' \to g_*\shE; && y' \mapsto [y', 0] \\
+                \kappa_{g_*\shE}:& g_*\shE \to \shF; && [y', e] \mapsto \kappa_{\shE}(e)
+            \end{align*}
+    \end{enumerate}
+    \end{Def}
 
-%    \subsection{Deformation of a nonsingular curve}
-%    \subsection{Deformation of a nonsingular pointed curve}
-%    \subsection{Deformation of a curve with line bundle.}
-%    \subsection{Deformation of a map \tp{$f: X \to Y$}{f: X to Y} with \tp{$X, Y$}{X, Y} both fixed.}
-%    \subsection{Deformation of a map \tp{$f: X \to Y$}{F: X to Y} with only \tp{$Y$}{Y} fixed.}
-%    \subsection{Deformation of a singular point of plane curve.}
-%    \subsection{Deformation of a singular variety.}
+    extension of $\shF$ by $\shG$が成す集合を$E(\shF, \shG)$と書く．
+    \begin{Thm}\label{thm:ExtAndExt1}
+        $\shF, \shG$
+        :: $\shO_X$-modules on ringed scheme :: $X$とする．
+        この時，
+        全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$が存在する．
+    \end{Thm}
+    これは有名な結果なので証明を書かない．
+    例えば\cite{HarAG} ExIII.6.1に証明の方針が述べられているし，
+    加群の場合の類似の結果としては\cite{Shiho} pp.259-264に詳しい証明がある．
 
+    \begin{Def}
+        \begin{enumerate}[label=(\arabic*), leftmargin=*]
+        \item
+            split extesion of $\shF$ by $\shG$を$0_{\shF, \shG}$あるいは単に$0$と書く．
+            \[
+            0_{\shF, \shG}:
+                \xymatrix{
+                    0 \ar[r]& \shG \ar[r]& \shF \oplus \shG \ar[r]& \shF \ar[r]& 0
+            }\]
+            
+        \item
+            $(\shE, \iota, \kappa)$ :: extension of sheavesについて，
+            $-\shE:=(\shE, -\iota, \kappa)$と定める．
 
-%    \cite{HarAG} Example III.9.13.1
-%    Lectures on Moduli of Curves(D_Gieseker).pdf
+        \item
+            (The Baer sum)
+            $(\shE, \iota, \kappa), (\shE', \iota', \kappa')$
+            :: extensions of $\shF$ by $\shG$に対し，
+            $\shE+\shE'$を以下のように定める．
+            まずsheafとしては，次のよう．
+            \[
+                \shE+\shE'
+                =\frac
+                {\{(e, e') \in \shE \oplus \shE \mid \kappa(e)=\kappa'(e') \in \shG\}}
+                {\{ (\iota(f), 0)-(0, \iota'(f)) \mid f \in \shF \}}.
+            \]
+            $\iota_{\shE+\shE'}, \kappa_{\shE+\shE'}$は次のように定める．
+            \begin{align*}
+                \iota_{\shE+\shE'}:& \shG \to \shE+\shE'; && y \mapsto [\iota(y), 0]=[0, \iota'(y)] \\
+                \kappa_{\shE+\shE'}:& \shE+\shE' \to \shF; && [e, e'] \mapsto \kappa(e)=\kappa'(e')
+            \end{align*}
+    \end{enumerate}
+    \end{Def}
+    
+    \begin{Lemma}
+        $\shF, \shG$ :: $\shO_X$-modules on ringed scheme :: $X$とする．
+        この時，$E(\shF, \shG)$には加法群の構造が定まる．
+    \end{Lemma}
+
+    \begin{Lemma}\label{lemma:PshiIsIso}
+        全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$は
+        加法群の間の同型である．
+    \end{Lemma}
+
+\section{First Order Deformation of a Local Complete Intersection.}
+    この節は\ref{thm:SpaceOf1stOrdDefOfLCI}を
+    証明するための必要最低限の定義と命題のまとめである．
+    元の命題と比較して，このノートでは$X$を$\C$上のものに限定し，
+    defoemationも一般のlocal artinian ringではなく$D=\C[\epsilon]$に限定している．
+    したがって
+    formal deformation(\cite{DefLCI} 6.1),
+    abstruct lifting(\cite{DefLCI} 4.2), 
+    first order deformationが一致している．
+
+    以下，この節では$X$を以下のようなものとする(\cite{DefLCI} Hypotheses4.1)．
+    \begin{screen}
+    \begin{itemize}
+        \item flat,
+        \item generically smooth,
+        \item local complete intersection,
+        \item finite type
+    \end{itemize}
+        scheme over $\C$．
+    \end{screen}
+    特にstable curve over $\C$はこれらの条件を満たす．
+
+    ``local complete intersection"の定義を改めて書き下しておく．
+    \begin{Def}[(local) complete intersection \cite{DefLCI} p.21, \cite{HarAG} p.185]
+        $X$ :: scheme of finite type over $\C$が
+        complete intersectionであるとは次が成立すること:
+        $X$は$P$ :: smooth scheme over $\C$ (\cite{HarAG} III.10)に埋め込まれ，
+        さらにideal sheaf :: $\ker(X \inclmap P)$が
+        $\codim(P, X)$個のglobal sectionで生成されること(\cite{HarAG} p.121)．
+
+        $X$ :: scheme of finite type over $\C$が
+        locally complete intersectionであるとは
+        $\cvU$ :: open covering of $X$が存在し，
+        任意の$U \in \cvU$がcomplete intersectionであること．
+    \end{Def}
+    
+    議論は，
+    $\nu(\famX_1, \famX_2)$，$\shE(\famX_1, \famX_2)$，$e(\famX_1, \famX_2)$の対応の連鎖である．
+    これらはいずれもfirst order deformations :: $\famX_1, \famX_2$の
+    「差」を表現する量である．
+    ここでの「差」の意味を理解するには，
+    最初に命題(\ref{prop:key1}), (\ref{prop:key2})のステートメントを見るのが良い．
+    そして自明なfirst order deformation of $X$ :: $X \times D$と
+    与えられたfirst order deformationの「差」である$e(\famX, X \times D)$によって
+    first order deformation of $X$を分類する（定義\ref{def:KSclass-map}）．
+
+    \subsection{\tp{$\nu(\famX_1, \famX_2)$}{v(X1,X2)}}
+    \begin{Def}
+        $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
+        これのideal sheafを$\shI \subseteq \shO_P$とする．
+        $\famX_1, \famX_2$ :: first order deformation of $X$とすると，
+        $\famX_1, \famX_1$ :: embedded in $P$となる．
+        そこでideal sheafをそれぞれ$\shI_1, \shI_2 \subseteq \shO_P$とする．
+        first order deformation of $X$の定義から，
+        $\shI_i/\epsilon \shI_i \iso \shI \ (i=1,2)$．
+
+        写像$\shI \to (\epsilon D) \otimes_{\C} \shO_X$を
+        以下のように定める．
+        まず，$\sect{U, f} \in \shI$に対し，
+        \[ \sect{U}{\tilde{f}_i} \bmod \epsilon \shI_i=\sect{U}{f} \ (i=1,2) \]
+        となる$\sect{U}{\tilde{f}_i}$が存在する．
+        そこで
+        \[
+            \sect{U}{f}
+            \mapsto
+            \sect{U}{\tilde{f}_1-\tilde{f}_2} \bmod (\epsilon D) \otimes_{\C} \shI
+            \in (\epsilon D) \otimes_{\C} (\shO_P/\shI)=(\epsilon D) \otimes_{\C} \shO_X
+        \]
+        と写す．
+        これは$\tilde{f}_i$のとり方に依らず，well-defined．
+        この写像を$\nu(\famX_1, \famX_1)$と書く．
+
+        以下の$\C$-moduleとしての同型があるため，
+        $\nu(\famX_1, \famX_2)$を以下のいずれの集合の元ともみなす．
+        \begin{align*}
+            {}&   \Hom_{\shO_P}(\shI, (\epsilon D) \otimes_{\C} \shO_X) \\
+            \iso& \Hom_{\shO_P}(\shI/\shI^2, (\epsilon D) \otimes_{\C} \shO_X) \\
+            \iso& H^0(X, (\epsilon D) \otimes_{\C} (\shI/\shI^2)\sidehat) \\
+            \iso& (\epsilon D) \otimes_{\C} H^0(X, (\shI/\shI^2)\sidehat) \\
+            \iso& H^0(X, (\shI/\shI^2)\sidehat)
+        \end{align*}
+    \end{Def}
+
+    \begin{Prop}[\cite{DefLCI} Prop2.8a,b,c,d,e]
+        $X$ :: \textbf{complete intersection} embedded in $P$とする．
+        \begin{enumerate}[label=(\alph*), leftmargin=*]
+            \item $\nu(\famX_1, \famX_2)=0 \iff \famX_1=\famX_2$．
+
+            \item $\nu(\famX_1, \famX_2)+\nu(\famX_2, \famX_3)=\nu(\famX_1, \famX_3)$．
+
+            \item $\nu(\famX_2, \famX_1)=-\nu(\famX_1, \famX_2)$．
+
+            \item
+                任意の$\famX$ :: first order deformation of $X$, 
+                任意の$\nu \in H^0(X, (\shI/\shI^2)\sidehat)$に対し，
+                $\famY$ :: first order deformation of $X$が存在して，
+                $\nu=\nu(\famX, \famY)$となる．
+
+            \item
+                $U$ :: open subset of $X$について，
+                $\nu(\famX_1|_U, \famX_2|_U)=\nu(\famX_1, \famX_2)|_U:
+                (\shI/\shI^2)|_U \to (\epsilon D) \otimes_{\C} \shO_U$．
+        \end{enumerate}
+    \end{Prop}
+    \begin{proof}
+        (d)のみ証明する．他は自明であろう．
+    \end{proof}
+
+    \subsection{\tp{$\shE(\famX_1, \famX_2)$}{E(X1,X2)}}
+    \begin{Lemma}[First Fundamental Exact Sequence]
+        $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とし，
+        ideal sheafは$\shI \subseteq \shO_P$であるとする．
+        この時，以下はexact．
+        \[\xymatrix{
+            0 \ar[r]& \shI/\shI^2 \ar[r]& (\shDer_{P/\C})|_{X} \ar[r]& \shDer_{X/\C} \ar[r]& 0
+        }\]
+        すなわち，
+        $(\shDer_{P/\C})|_{X}$ :: extension of $\shDer_{X/\C}$ by $\shI/\shI^2$．
+    \end{Lemma}
+    \begin{proof}
+        (TODO)
+        よく知られている通り，
+        最初の射が単射であることを示しさえすれば良い．
+    \end{proof}
+
+    \begin{Def}
+        $U \subseteq X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
+        $\famX_1, \famX_2$ :: first order deformation of $X$について，
+        \[ \shE(\famX_1|_U, \famX_2|_U):=\nu(\famX_1|_U, \famX_2|_U)_*((\shDer_{P/\C})|_{X}) \]
+        をextension of $\shDer_{U/\C}$ by $(\epsilon) \otimes_{\C} \shO_{U}$として定める．
+    \end{Def}
+    （TODO: 張り合わせが出来ることに言及．）
+    貼りあわせによって$\shE(\famX_1, \famX_2)$を定める．
+
+    \begin{Prop}[\cite{DefLCI} Prop4.9a,b,c,f]\label{prop:key1}
+        $\famX_1, \famX_2$ :: first order deformations of $X$とする．
+        \begin{enumerate}[label=(\alph*), leftmargin=*]
+        \item
+            $\shE(\famX, \famX) \iso 0_{\shDer_{X/ \C}, (\epsilon D) \otimes \shO_X}$．
+        \item
+            $\shE(\famX_2, \famX_1)=-\shE(\famX_1, \famX_2)$．
+        \item 
+            $\shE(\famX_1, \famX_2)+\shE(\famX_2, \famX_3) \iso \shE(\famX_1, \famX_3)$．
+
+        \item
+            任意の$\shE$ :: extension of $\shDer_{X/\C}$ by $(\epsilon) \otimes_{\C} \shO_{X}$と
+            任意の$\famX$ :: first order deformation of $X$に対し，
+            \[ \shE \iso \shE(\famX, \famY) \]
+            なる$\famY$ :: first order deformation of $X$が存在する．
+        \end{enumerate}
+    \end{Prop}
+    \begin{proof}
+        (TODO)
+    \end{proof}
+
+    \begin{Prop}[\cite{DefLCI} Prop4.10]\label{prop:key2}
+        $\famX_1, \famX_2$ :: first order deformations of $X$とする．
+        この時，以下は同値．
+        \begin{enumerate}
+            \item $\famX_1$と$\famX_2$は同型．
+            \item $\shE(\famX_1, \famX_2)$ :: split extension.
+        \end{enumerate}
+    \end{Prop}
+    \cite{DefLCI} pp.22-23では更に詳しく，
+    同型$\famX_1 \isomap \famX_2$が
+    $\Hom_{\shO_X}(\shDer_{X/\C}, \shO_X)$の元に一対一対応することが述べられている．
+    この集合は$\Ext^1_{\shO_X}(\shDer_{X/\C}, \shO_X)$の中で$0$に潰れていることに注意．
+    \begin{proof}
+        (TODO)
+    \end{proof}
+
+    \subsection{\tp{$e(\famX_1, \famX_2)$}{e(X1,X2)}}
+    \begin{Def}
+        $T^i(X)=\Ext^i_{\shO_X}(\shDer_{X/\C}, \shO_X)$とおく．
+        $\famX$ :: first order deformation of $X$に対し，
+        \[
+            e(\famX_1, \famX_2)
+                \in
+                \Ext^1(\shDer_{X/\C}, (\epsilon D) \otimes_{\C} \shO_X)
+                \iso (\epsilon D) \otimes T^1(X)
+                \iso T^1(X)
+                \iso \Hom((\epsilon D)^*, T^1(X))
+        \]
+        を，$\shE(\famX, X \times D)$に対応する元とする(\ref{thm:ExtAndExt1})．
+    \end{Def}
+    補題(\ref{lemma:PshiIsIso})より，
+    命題(\ref{prop:key1}), (\ref{prop:key2})と同様の命題が
+    $e(\famX_1, \famX_2)$についても性質する．
+
+    \begin{Def}[Kodaira-Spencer class/map, \cite{DefLCI}]\label{def:KSclass-map}
+        $T^i(X)=\Ext^i_{\shO_X}(\shDer_{X/\C}, \shO_X)$とおく．
+        $\famX$ :: first order deformation of $X$に対し，
+        \[
+            k_{\famX}=e(\famX, X \times D)
+                \in T^1(X) \iso \Hom((\epsilon D)^*, T^1(X))
+        \]
+        とおく．
+        この$k_{\famX}$をKodaira-Spencer class of $\famX$と呼ぶ．
+        対応する写像$K_{\famX}: (\epsilon D)^*, T^1(X)$を
+        Kodaira-Spencer map of $\famX$と呼ぶ．
+    \end{Def}
+    
+    \begin{Thm}\label{thm:SpaceOf1stOrdDefOfLCI}
+        First order deformation of $X$の同値類と
+        $\Ext^1_{\shO_X}(\shDer_{X/\C}, \shO_X)$の元は一対一に対応する．
+        (cf. \cite{DefLCI} Prop 6.12)
+    \end{Thm}
+    \begin{proof}
+        命題(\ref{prop:key1}), (\ref{prop:key2})より，
+        $\famX \mapsto k_{\famX}$がこの対応を与えることは明らか．
+    \end{proof}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
