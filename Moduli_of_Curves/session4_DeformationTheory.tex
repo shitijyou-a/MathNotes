@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage[]{macros}
+\usepackage{graphics}
 
 \newcommand{\Isom}{\operatorname{Isom}}
 \newcommand{\ftorIsom}{\mathcal{I}\!som}
@@ -10,6 +11,11 @@
 \newcommand{\cvU}{\mathfrak{U}}
 \newcommand{\der}{\mathrm{d}}
 \newcommand{\Der}{\mathrm{Der}}
+\newcommand{\viso}{\rotatebox{-90}{$\iso$}}
+
+\newcommand{\LA}{\mathrm{(LA)}}
+\newcommand{\LN}{\mathrm{(LN)}}
+\newcommand{\CLN}{\mathrm{(CLN)}}
 
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
@@ -147,6 +153,7 @@
         plodpをもつことが分かる．
         （この辺りは\cite{IrrOfMg} Lemma1.4で詳しく述べられている）．
     \end{proof}
+    別証明として\cite{HarDef} Prop27.4がある．
 
     \begin{Prop}
         任意の閉点$P \in \Aut(C)$について，
@@ -174,7 +181,7 @@
         よって$A$は体である．
     \end{proof}
 
-\section{Definitions of Deformations and Versal Deformation.}
+    \section{Definitions of Deformations and (Uni-)Versal Deformation.}
 \begin{Def}[$\C$-pointed scheme \cite{DefAS} \S 1.2.1]
     scheme :: $Y$と
     $\C$-rational point :: $y_0 \in Y$の組を
@@ -279,17 +286,57 @@
         first order deformation (or infinitesimal deformation)と呼ぶ．
     \end{Def}
 
-    \begin{Lemma}
+    \begin{Remark}
+        $X$ :: stable curve of genus $g$とする．
+        first order deformation :: $\famX \to \dualnum$は，
+        moduli spaceの定義から，
+        $0 \in \dualnum$を$[X]=[\famX_0] \in \barM_g$へ写す$\dualnum \to \barM_g$に対応する．
+        そしてこの射は，
+        既に知られている通りZariski tangent space at $[X]$ :: $T_{[X]}$の元に対応する．
+        よって$X$のfirst order deformationから$T_{[X]}$の元への対応がある．
+        この対応は一対一であろうか？
+    \end{Remark}
+
+    \begin{Lemma}\label{lemma:psi_is_imm_homeo}
         次のfirst order deformation of $X$を考える．
         \[\vcenter{\xymatrix{
             X \ar[r]^-{\psi} \ar[d]& \famX \ar[d] \\
-            \C \ar[r]_-{s}& Y
+            \C \ar[r]_-{0}& \dualnum
             \ar@{}[lu]|{\ulcorner}
         }}\]
-        この時，$\psi$は同相写像である．
+        この時，$\psi$はclosed imm.かつ同相写像である．
     \end{Lemma}
     \begin{proof}
-        (TODO)
+        主張はlocal on codomain(target)なもの
+        \footnote{ local on codomainに考えれば，特に全単射性が示せる． }なので，
+        $\famX$ :: affineと仮定して証明すれば十分．
+        まず$\C \to \dualnum$がclosed imm.であり，
+        closed imm.がstable under base extensionであることから，
+        $\psi$もclosed imm.
+        またclosed imm.ならばfiniteである(\cite{HarAG} Ex II.5.5b)．
+
+        以上から，
+        $\famX=\Spec A, X=\Spec R$,
+        $R$ :: $A$-algebra, finitely generated as module
+        と仮定して良い．
+        また，$\psi$ :: closed imm.であるから，
+        $A \iso R/I$なる$I$ :: ideal of $R$が存在する．
+        また仮定から$R \otimes_D \C \iso A$かつ$R$ :: flat $D$-module．
+        そこで以下の$D$-module 完全列に$\otimes_D R$とする．
+        \[\xymatrix{
+            0 \ar[r]& \epsilon D \ar[r]& D \ar[r]& \C \ar[r]& 0
+        }\]
+        すると次のように成る．
+        \[\xymatrix@R=10pt{
+            0 \ar[r]& (\epsilon D)\otimes_D R \ar[r]& D \otimes_D R \ar[r]& \C \otimes_D R \ar[r]& 0 \\
+            0 \ar[r]& I \ar@<5pt>@{}[u]_-{\viso} \ar[r]& R \ar@<5pt>@{}[u]_-{\viso}\ar[r]& A \ar@<5pt>@{}[u]_-{\viso}\ar[r]& 0 \\
+        }\]
+        よって$(\epsilon D)\otimes_D R$同様$I$はnilpotent ideal (i.e.$I^2=0$)．
+
+        $X=\Spec R$の閉集合として
+        \[ \famX=\Spec A=V(I)=V(I^2)=V((0))=X \]
+        なので$\im \psi=X$．
+        $\psi$ :: closed imm.なので，これで$\psi$ :: homeoが証明できた．
     \end{proof}
 
     \begin{Def}[Restriction of First Order Deformation]
@@ -300,46 +347,181 @@
     \end{Def}
 
 \section{First Order Deformation of a Nonsingular Variety.}
-    \begin{Lemma}[\cite{Eisen} Cor6.2]
-        $D$-module :: $M$がflatであることは，
-        $M/\epsilon M \xrightarrow{\times \epsilon} \epsilon M$
-        が同型であることと同値．
+    \begin{Lemma}
+        $A$ :: ring, $X=\Spec A$とする．
+        この時，first order deformation of $X$ :: $\famX$も
+        affine schemeである．
     \end{Lemma}
+    \begin{proof}
+        \cite{HarAG} Ex II.3.1への回答でもある．
+        
+        $\shI=\ker(X \inclmap \famX)$とし，
+        $\shF$ :: quasi-coherent sheaf on $X$とする．
+        今，補題(\ref{lemma:psi_is_imm_homeo})の証明から$\shI^2=0$が得られる．
+        また，明らかに$\shO_{\famX}/\shI \iso \shO_{X}$．
+        したがって次のSES(short exact sequence)が存在する．
+        \[\xymatrix{
+            0 \ar[r]& \shI^{d+1} \shF \ar[r]& \shI^{d} \shF \ar[r]&
+                \shI^{d}\shF \otimes_{\shO_{\famX}} \shO_X \ar[r]& 0
+        }\]
+        次のLESが誘導される．
+        \[\xymatrix{
+            0 \ar[r]& H^0(\famX, \shI^{d+1} \shF) \ar[r]& H^0(\famX, \shI^{d} \shF) \ar[r]& H^0(\famX, \shI^{d}\shF \otimes \shO_X) \\
+            {}\ar[r]& H^1(\famX, \shI^{d+1} \shF) \ar[r]& H^1(\famX, \shI^{d} \shF) \ar[r]& H^1(\famX, \shI^{d}\shF \otimes \shO_X) \\
+            \dots
+        }\]
+        
+        sheaf cohomologyはabelian groupのcohomologyとして構成されており，
+        module structureとは無関係に定まっている．
+        そして$X$と$\famX$はhomeo．
+        したがって
+        \[ H^i(\famX, \shI^{d}\shF \otimes \shO_X)=H^i(X, \shI^{d}\shF \otimes \shO_X)=0. \]
+        最後の等号は$\shI^{d}\shF \otimes \shO_X$ :: quasi-coherent $\shO_X$-moduleと
+        \cite{HarAG} Thm III.3.7から得られる．
+        
+        $d=1 (\implies \shI^{d+1}=0)$からはじめて$d$についての帰納法により
+        \[ H^i(\famX, \shI^{d+1} \shF)=H^i(\famX, \shI^{d}\shF \otimes \shO_X)=0 \ (i>0). \]
+        よってLESから$H^i(\famX, \shI^{d} \shF)=0 (i>0)$．
+        \cite{HarAG} Thm III.3.7から$\famX$ :: affine.
+    \end{proof}
 
-    \begin{Lemma}[\cite{GlimpseDefTh} Prop5.1]
+    \begin{Lemma}[\cite{DefAS} Thm1.2.4]\label{thm:aff_is_rigid}
         $X$ :: affine, nonsingular, finite type scheme over a field $k$とする．
         この時，$X$のfirst order deformationは
         自明なdeformation :: $X \times_k \Spec D$しか存在しない．
     \end{Lemma}
     \begin{proof}
-        $\phi: \famX \to \dualnum, \psi: X \to \famX$を
-        $X$のfirst order deformationとする．
-        $\phi$ :: flatと上の補題を用いると，
-        $X \isomap \famX \times_{D} \Spec \C$から
-        $\psi^{\#}: \shO_{\famX}/\epsilon \shO_{\famX} \to \shO_X$が
-        同型であることが得られる．
-        逆にこの同型が存在する時$\famX \to \dualnum$がflatであることが言える．
-        したがって$X$のfirst order deformationは
-        infinitesimal extension of $X$ by $\shO_X$ (\cite{HarAG} Ex II.8.7)に対応する．
-        しかし\cite{HarAG} Ex II.8.7より，これは自明なものしか存在しない．
+        上の補題から，deformation of $X=\Spec A$はaffine．
+        そこで$\famX=\Spec B$とする．
+        \[\vcenter{\xymatrix{
+            B \ar@{->>}[r]& A \\
+            D \ar@{->>}[r] \ar[u]^-{f}& k \ar[u]
+            \ar@{}[lu]|{\ulcorner}
+        }}\]
+        $f$ :: flatと，$f$の唯一のfiber :: $X=\Spec A$がsmoothであることから，
+        \cite{HarAG} Thm III.10.2より$f$ :: smooth.
+
+        次のcommutative diagramを考える．
+        \[\vcenter{\xymatrix{
+            B \ar@{->>}[r]& A \\
+            D \ar@{->}[r] \ar[u]^-{f}& A \otimes_{k} D \ar[u]
+            \ar@{}[lu]|{\circlearrowleft}
+        }}\]
+        $f$ :: ($\epsilon D$-)smooth over $D$なので，
+        図式を可換にする射$\phi: B \to A \otimes D$が存在する．
+        以下の主張から$\phi$ :: isoなので，
+        任意のdeformation of $X$ :: $\Spec B$は
+        自明なdeformation :: $\Spec A \otimes D=X \times \dualnum$と同型である．
     \end{proof}
 
-    \begin{Lemma}[\cite{GlimpseDefTh} Prop5.2]
-        $X$ :: nonsingular scheme of finite type over $k$とする．
-        この時，次のsheafを考える．
-        \[ X \supseteq U \mapsto \{ \text{$\dualnum$-automorphisms of $D \times_k \dualnum$} \}. \]
-        するとこのsheafはtangent sheaf of $X$ :: $\shT_X$と同型である．
+    \begin{Claim}[\cite{DefAS} Lemma A.4]
+        $R$ :: ring,
+        $I$ :: ideal of $R$,
+        $F, G$ :: $R$-module, $G$ :: flat,
+        $f: F \to G$ :: homomorphism of $R$-modules.
+
+        $I$ :: nilponentとし，
+        誘導されるhomomorphism
+        $f \otimes_{R} 1_{R/I}: F/IF \to G/IF$が同型であるとする．
+        この時，$f$ :: iso.
+    \end{Claim}
+    \begin{proof}
+        $C=\coker f$とする．
+        完全列$F \to G \to C \to 0$に$\otimes_{R} (R/I)$を作用させる．
+        \[\xymatrix{
+            F/IF \ar[r]& G/IG \ar[r]& C/IC \ar[r]& 0
+        }\]
+        仮定から$C/IC=0$．
+        今$I$ :: nilponentなので$I \subset \Jac(R)$．
+        したがって中山の補題から$C=0$．
+        すなわち$f$ :: surj.
+
+        $K=\ker f$とする．
+        完全列$0 \to K \to F \to G \to 0$に$\otimes_{R} (R/I)$を作用させる．
+        \[\xymatrix{
+                0 \ar[r]& K/IK \ar[r]& F/IF \ar[r]& G/IG \ar[r]& 0
+        }\]
+        再び仮定と中山の補題から$K=0$．
+        よって$f$ :: inj.
+    \end{proof}
+
+    \begin{Lemma}[\cite{DefAS} Lemma1.2.6] \label{lemma:inf_auto_and_Der}
+        任意の$k$-algebra :: $A$について，次の群同型がある．
+        \[
+            \left\{\parbox{4.4cm}{
+                $D$-automorphism of $A \otimes_k D$ \\
+                inducing identity on $A$
+            }\right\}
+            \iso
+            \Der_{k}(A).
+        \]
+        $D$-automorphism of $A \otimes_k D$のことを
+        infinitesimal automorphismと呼ぶ．
     \end{Lemma}
     \begin{proof}
+        仮定からautomorphism of $A \otimes_k D=A[\epsilon]$は
+        $D$-module homomorphismで，
+        $\bmod \epsilon A \otimes (\epsilon D)$を合成するとidentityになる．
+        したがって次のように書ける．
+        \[ \theta(x)=x+\epsilon D(x). \]
+        $\theta$が積を保つことと$D$-module homo.であることから，
+        $D: A \otimes D \to A$ :: $D$-derivation.
+
+        $\modDer_{A \otimes_{k} D/D} \iso \modDer_{A/k} \otimes_{k} D$に注意すると，
+        $\theta$と$\Der_{k}(A)$の対応が分かる．
+        この対応が群準同型であることは明らか．
     \end{proof}
 
-    \begin{Thm}[\cite{GlimpseDefTh} p.7]
+    \begin{Thm}[\cite{DefAS} Prop1.2.9]
         $X$ :: separated nonsingular scheme of finite type over $k$とする．
         特に，$X$ :: nonsingular (abstruct) variety over $K$であればよい．
         この時，first oder deformation of $X$の同値類は
         $H^1(X, \shT_X)$の元と一対一に対応する．
     \end{Thm}
     \begin{proof}
+        $\famX$ :: first oder deformation of $X$を任意の取る．
+        そしてaffine open cover of $X$:: $\{U_i\}_{i \in I}$を任意に取る．
+%        ただし添字集合$I$は有限である．
+        このcoverについての\v{C}ech cohomologyを考えていく．
+
+        今，$\famX|_{U_i}$ :: first order deformation of $U_i$．
+        定理(\ref{thm:aff_is_rigid})より，
+        $\theta_{i}: U_i \times_{k} \dualnum \to \famX|_{U_i}$が得られる．
+        これを用いて，各$i,j \in I$について
+        \[ \theta_{ij}=\theta_{i}^{-1} \circ \theta_{j}:U_{ij} \times \dualnum \to U_{ij} \times \dualnum \]
+        が得られる．
+        ただし$U_{ij}=U_i \cap U_j$（以降の$U_{ijk}$なども同様）．
+        補題(\ref{lemma:inf_auto_and_Der})から，
+        これは$d_{ij} \in \Gamma(U_{ij}, \shT_{X})$に対応する．
+        
+        $\theta_{ij}$は貼り合わせることが出来るのだから，
+        Gluing Lemmaを参照すれば
+        $\theta_{ij} \theta_{jk} \theta_{ik}^{-1}=\id[U_{ijk} \times \dualnum]$が得られる．
+        補題(\ref{lemma:inf_auto_and_Der})の準同型で写せば，
+        \[ d_{ij}+d_{jk}-d_{ik}=0 \]
+        すなわち\v{C}eck $1$-cocycle conditionが得られる．
+
+        first order deformation of $X$が$2$つあり，
+        その間に同型があるとしよう: $\Psi: \famX \to \famX'$．
+        $\famX'$について$\theta'_{ij}, d'_{ij}$を$\famX$同様に定める．
+        次のinfiniterimal automorphismを考える．
+        \[
+            \alpha_{i}=\theta'_{i} \circ \Psi|_{U_i} \circ \theta_{i}:
+            U_i \times \dualnum \to \famX|_{U_i} \to \famX'|_{U_i} \to U_i \times \dualnum.
+        \]
+        計算すると$\alpha_{i}^{-1} \theta'_{ij} \alpha_{j}=\theta_{ij}$が得られる．
+        すなわち，
+        \[ d'_{ij}-d_{ij}=\alpha_{i}-\alpha_{j}. \]
+        よって$\{d_{ij}\}$の同値類と$\{d'_{ij}\}$の同値類は
+        $\check{H}^1(X, \shT_X)$の中で等しい．
+
+        以上より，$\famX$から$\check{H}^1(X, \shT_X)$の元への対応は単射的である．
+        逆に$\{d_{ij}\}$から$\{\theta_{ij}\}$の対応，
+        $\theta_{ij}$による$U_{i} \times \dualnum$の貼り合わせへと手順を遡れば，
+        $\check{H}^1(X, \shT_X)$の元とfirst order deformation of $X$への対応が全射だと分かる．
+
+        最後に，\cite{HarAG} Thm III.4.5から
+        $\check{H}^1(X, \shT_X) \iso H^1(X, \shT_X)$．
     \end{proof}
 
 \section{Extension of Sheaves}
@@ -438,6 +620,15 @@
     \begin{Lemma}\label{lemma:PshiIsIso}
         全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$は
         加法群の間の同型である．
+    \end{Lemma}
+
+    \begin{Lemma}
+        $g, g': \shG \to \shG'$と，
+        extension of $\shF$ by $\shG$をとる．
+        \[\xymatrix{
+                0 \ar[r]& \shG \ar[r]& \shE \ar[r]& \shF \ar[r]& 0
+        }\]
+        この時，$g_*\shE+g'_*\shE=(g+g')_*\shE$．
     \end{Lemma}
 
 \section{First Order Deformation of a Local Complete Intersection.}
@@ -549,6 +740,37 @@
     \end{proof}
 
     \subsection{\tp{$\shE(\famX_1, \famX_2)$}{E(X1,X2)}}
+    \begin{Lemma}
+        $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とし，
+        ideal sheafは$\shI \subseteq \shO_P$であるとする．
+        この時，$\shI/\shI^2$ :: locally free sheaf of rank $n:=\dim X$．
+    \end{Lemma}
+    \begin{proof}
+        localな問題なので，
+        $x \in X \subset P$での$\shI/\shI^2$のstalkがfree moduleであることを示す．
+        $A:=\shO_{P, x}$とし，
+        $I:=\shI_x$を生成するregular sequenceを$x_1, \dots, x_r$とする．
+        
+        次の写像を考える．
+        \begin{defmap}
+            \phi:& (A/I)^{\oplus n}& \to& I/I^2 \\
+            {}& (\bar{a}_1,\dots,\bar{a}_r)& \mapsto& \sum \bar{a}_i x_i
+        \end{defmap}
+        $\phi$ :: surjectiveは明らかなのでinjectiveであることを示す．
+        
+        $A^{\oplus n} \to (A/I)^{\oplus n}$と$\phi$の合成で$0$になる元を
+        $(a_1,\dots,a_r) \in A^{\oplus n}$とする．
+        各$i=1,\dots,r$について$a_i \in I$を示す．
+        今，$\sum a_i x_i \in I^2$なので(TODO)
+        \[ a_r x_r=0 \text{ in } A/(x_1,\dots,x_{r-1}). \]
+        $x_1,\dots,x_r$ :: regular sequenceより，
+        $x_r$は$A/(x_1,\dots,x_{r-1})$においてnon-zerodivisorなので，
+        $a_r=0$ in $A/(x_1,\dots,x_{r-1})$．
+        よって$a_r \in (x_1,\dots,x_{r-1}) \subseteq I$．
+        \cite{Mat} p.127より，
+        各$a_1, \dots, a_{r-1}$についても同様の議論が出来る．
+    \end{proof}
+
     \begin{Lemma}[First Fundamental Exact Sequence]
         $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とし，
         ideal sheafは$\shI \subseteq \shO_P$であるとする．
@@ -642,6 +864,7 @@
         Kodaira-Spencer map of $\famX$と呼ぶ．
     \end{Def}
     
+\subsection{Complete Classification.}
     \begin{Thm}\label{thm:SpaceOf1stOrdDefOfLCI}
         First order deformation of $X$の同値類と
         $\Ext^1_{\shO_X}(\shDer_{X/\C}, \shO_X)$の元は一対一に対応する．
@@ -651,6 +874,123 @@
         命題(\ref{prop:key1}), (\ref{prop:key2})より，
         $\famX \mapsto k_{\famX}$がこの対応を与えることは明らか．
     \end{proof}
+
+    \begin{Cor} \label{cor:nonsing-fod}
+        $X$ :: nonsingular and have finite dimentionならば，
+        First order deformation of $X$の同値類と
+        $H^1(X, \shT_X)$の元は一対一に対応する．
+    \end{Cor}
+    \begin{proof}
+        仮定より，
+        $\shDer_{X/\C}$ :: locally free sehaf of finite rank．
+        したがって\cite{HarAG} PropIII.6.7, Prop II.6.3から次の同型が成立する．
+        \[
+            \Ext^1_{\shO_X}(\shO_X \otimes \shDer_{X/\C}, \shO_X)
+            \iso \Ext^1_{\shO_X}(\shO_X, \shT_X \otimes \shO_X)
+            \iso H^1(X, \shT_X)
+        \]
+    \end{proof}
+
+\section{Two Examples of Other Deformation Theories}
+    deformation theoryの対象はschemeの他にもある．
+    例えば，次の二つがある．
+
+    \begin{itembox}[l]{Deformation of a coherent sheaf :: $F$ on a scheme $X$, over a fixed scheme}
+        $\famX$ :: deformation of $X$ over $(S, s_0)$とする．
+        deformation of $F$ over $X$とは，
+        $\shF$ :: flat coherent sheaf on $\famX$と
+        homomorphism :: $\phi: \shF \to F$の組であって，
+        誘導される射
+        \[ \phi \otimes_{\shO_{\famX}} 1_{\shO_{X}}: \shF \otimes_{\shO_{\famX}} \shO_{X} \to F \]
+        が同型であるもの．
+        (ref. \cite{HarDef} \S 7, p.53)
+    \end{itembox}
+
+    \begin{itembox}[l]{Deformation of a map $f: X \to Y$ with both $X$ and $Y$ fixed}
+        $X, Y$ :: scheme,
+        $(S, s_0)$ :: $\C$-pointed scheme,
+        $f: X \to Y$ :: morphismとする．
+        Deformation of a map $f: X \to Y$ with both $X$ and $Y$ fixedとは
+        morphism :: $\bar{f} : X \times S \to Y \times S$であって，
+        $\bar{f}|_{X \times \{s_0\}}=f$であるもの．
+        (ref. \cite{HaMo}p.93)
+    \end{itembox}
+
+    それぞれ，first order deformationが成す空間が分かっている．
+    \begin{Thm}[\cite{HarDef} Thm2.7]
+        $X$ :: scheme over $\C$,
+        $F$ :: coherent sheaf on $X$とする.
+        この時，$F$のfirst order deformationとは，
+        $\shF$ :: cohenrent sheaf on $\famX=X \times_{\C} D$と
+        homomorphism :: $\phi: F \to \shF$の組であって
+        誘導される射$\phi \otimes_{D} 1_{\C}: \shF \otimes \C \to F$が同型であるものとする．
+
+        この時，
+        first order deformation of $F$ over $\shX$の同型類と
+        $\Ext^1_{\shO_X}(F, F)$の元とが，一対一対応する．
+    \end{Thm}
+
+    \begin{Cor}[\cite{HarDef} Prop2.6]
+        上の定理で$F$をinvertible sheafに限定すると，
+        first order deformation of $F$ over $\shX=X \times D$の同型類は
+        $H^1(X, \shO_X)$の元と一対一対応する．
+    \end{Cor}
+    \begin{proof}
+        系(\ref{cor:nonsing-fod})の証明と全く同様．
+    \end{proof}
+    
+    \begin{Thm}
+        $X, Y$ :: fiexed scheme, 
+        $f: X \to Y$をとる．
+        この時，
+        first order deformation of a map $f$ with both $X$ and $Y$ fixedの同型類と，
+        $H^0(X, f^*\shT_Y)$の元とが一対一対応する．
+    \end{Thm}
+    こちらについては詳しい文献が見つかっていない．
+    しかし，``Deformation of a map $f: X \to Y$ with only $Y$ fixed"については，
+    解析的な場合について\cite{GACII} \S 8で述べられている．
+
+\section{Functor of Artin Rings - Abstruct Deformation Theory}
+    $3$つの圏を次のように定める．
+    $L$ :: local noetherian $\C$-algebras with residue field $\C$とする．
+    \begin{description}[labelindent=1cm]
+        \item[$\LA_{L}$:]  the category of local artinian $L$-algebras with residue field $\C$.
+        \item[$\CLN_{L}$:] the category of complete local noetherian $L$-algebras with residue field $\C$.
+        \item[$\LN_{L}$:]  the category of local noetherian $L$-algebras with residue field $\C$.
+    \end{description}
+    $L=\C$の時は添字を略す．
+    (ref. \cite{DefAS} p.1)
+
+    $\LA_L \subset \CLN_L \subset \LN_L$という包含関係があることに注意．
+
+    \begin{Def}[\cite{DefAS} \S2.2]
+        以下のようなfunctorをfunctor of artin ringsと呼ぶ．
+        \[ F: \LA_L \to \mathrm{(Sets)}. \]
+        ここで$L \in \CLN$．
+
+        $F(\C)$が$1$元集合(singleton)ならば，
+        $F$は特にpredeformation functorと呼ばれる．
+
+        $F$がfunctor
+        \[ \Hom_{\CLN_L}(R, -) \qquad R \in \CLN_L \]
+        と同型である時，$F$ :: prorepresentableと言う．
+
+    \end{Def}
+
+    \begin{Def}[\cite{DefAS} \S2.2]
+        formal element
+        semiuniversal formal element
+        universal formal element
+    \end{Def}
+
+    predeformation functor :: $F$が
+    (semi)universal formal elementを持つか，
+    ということについては，以下の定理が大変有用である．
+    逆に以下の定理がpredeformation functorを考える重要性を示している．
+
+    \begin{Thm}[\cite{DefAS} Thm 2.3.2, p.56]
+    \end{Thm}
+%    M. Schlessinger, ``Functors of Artin rings"
 
 \bibliographystyle{jplain}
 \bibliography{reference}
