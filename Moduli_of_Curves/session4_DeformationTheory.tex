@@ -17,6 +17,12 @@
 \newcommand{\LN}{\mathrm{(LN)}}
 \newcommand{\CLN}{\mathrm{(CLN)}}
 
+\newcommand{\centerpb}{\ar@{}[lu]|{\text{p.b.}}}
+\newcommand{\centerpo}{\ar@{}[lu]|{\text{p.o.}}}
+
+\newcommand{\diag}{\Delta}
+\newcommand{\codiag}{\nabla}
+
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
 \author{七条彰紀}
@@ -202,7 +208,7 @@
         \vcenter{\xymatrix{
             X \ar[r] \ar[d]& \famX \ar[d]^-{\text{flat, surj.}} \\
             \C \ar[r]_-{s}& Y
-            \ar@{}[lu]|{\ulcorner}
+            \centerpb
         }}
         \]
         $A'$ :: local artinian ring with $A'/\Nil(A') \iso \C$
@@ -302,26 +308,26 @@
         \[\vcenter{\xymatrix{
             X \ar[r]^-{\psi} \ar[d]& \famX \ar[d] \\
             \C \ar[r]_-{0}& \dualnum
-            \ar@{}[lu]|{\ulcorner}
+            \centerpb
         }}\]
         この時，$\psi$はclosed imm.かつ同相写像である．
     \end{Lemma}
     \begin{proof}
-        主張はlocal on codomain(target)なもの
-        \footnote{ local on codomainに考えれば，特に全単射性が示せる． }なので，
-        $\famX$ :: affineと仮定して証明すれば十分．
         まず$\C \to \dualnum$がclosed imm.であり，
         closed imm.がstable under base extensionであることから，
         $\psi$もclosed imm.
         またclosed imm.ならばfiniteである(\cite{HarAG} Ex II.5.5b)．
-
+        $\psi$がhomeomorphismであることはlocal on codomain(target)なもの
+        \footnote{ local on codomainに考えれば，特に全単射性が示せる． }なので，
+        $\famX$ :: affineと仮定して証明すれば十分．
+        
         以上から，
         $\famX=\Spec A, X=\Spec R$,
         $R$ :: $A$-algebra, finitely generated as module
         と仮定して良い．
         また，$\psi$ :: closed imm.であるから，
         $A \iso R/I$なる$I$ :: ideal of $R$が存在する．
-        また仮定から$R \otimes_D \C \iso A$かつ$R$ :: flat $D$-module．
+        また仮定から$A \otimes_D \C \iso R$かつ$A$ :: flat $D$-module．
         そこで以下の$D$-module 完全列に$\otimes_D R$とする．
         \[\xymatrix{
             0 \ar[r]& \epsilon D \ar[r]& D \ar[r]& \C \ar[r]& 0
@@ -335,7 +341,7 @@
 
         $X=\Spec R$の閉集合として
         \[ \famX=\Spec A=V(I)=V(I^2)=V((0))=X \]
-        なので$\im \psi=X$．
+        なので$\im \psi=\famX$．
         $\psi$ :: closed imm.なので，これで$\psi$ :: homeoが証明できた．
     \end{proof}
 
@@ -396,7 +402,7 @@
         \[\vcenter{\xymatrix{
             B \ar@{->>}[r]& A \\
             D \ar@{->>}[r] \ar[u]^-{f}& k \ar[u]
-            \ar@{}[lu]|{\ulcorner}
+            \centerpb
         }}\]
         $f$ :: flatと，$f$の唯一のfiber :: $X=\Spec A$がsmoothであることから，
         \cite{HarAG} Thm III.10.2より$f$ :: smooth.
@@ -404,7 +410,7 @@
         次のcommutative diagramを考える．
         \[\vcenter{\xymatrix{
             B \ar@{->>}[r]& A \\
-            D \ar@{->}[r] \ar[u]^-{f}& A \otimes_{k} D \ar[u]
+            D \ar@{->}[r] \ar[u]^-{f}& A \otimes_{k} D \ar[u]_-{\bmod \epsilon A}
             \ar@{}[lu]|{\circlearrowleft}
         }}\]
         $f$ :: ($\epsilon D$-)smooth over $D$なので，
@@ -422,7 +428,7 @@
 
         $I$ :: nilponentとし，
         誘導されるhomomorphism
-        $f \otimes_{R} 1_{R/I}: F/IF \to G/IF$が同型であるとする．
+        $f \otimes_{R} \id[R/I]: F/IF \to G/IF$が同型であるとする．
         この時，$f$ :: iso.
     \end{Claim}
     \begin{proof}
@@ -441,7 +447,10 @@
         \[\xymatrix{
                 0 \ar[r]& K/IK \ar[r]& F/IF \ar[r]& G/IG \ar[r]& 0
         }\]
-        再び仮定と中山の補題から$K=0$．
+        今，$G$ :: flatから$\Tor_{R}(G, R/I)=0$．
+        なのでこのSESから誘導される$\Tor_{R}(-, R/I)$のLESを考えると，
+        $K \otimes(R/I) \iso K/IK=0$が得られる．
+        再び中山の補題から$K=0$．
         よって$f$ :: inj.
     \end{proof}
 
@@ -509,9 +518,11 @@
             \alpha_{i}=\theta'_{i} \circ \Psi|_{U_i} \circ \theta_{i}:
             U_i \times \dualnum \to \famX|_{U_i} \to \famX'|_{U_i} \to U_i \times \dualnum.
         \]
-        計算すると$\alpha_{i}^{-1} \theta'_{ij} \alpha_{j}=\theta_{ij}$が得られる．
+        $\alpha_i$に$a_i \in \Gamma(U_i, \shT_X)$が対応しているとする．
+        計算すると
+        $(\alpha_{i}|_{U_{ij}})^{-1} \theta'_{ij} (\alpha_{j}|_{U_{ij}})=\theta_{ij}$が得られる．
         すなわち，
-        \[ d'_{ij}-d_{ij}=\alpha_{i}-\alpha_{j}. \]
+        \[ d'_{ij}-d_{ij}=a_{i}-a_{j}. \]
         よって$\{d_{ij}\}$の同値類と$\{d'_{ij}\}$の同値類は
         $\check{H}^1(X, \shT_X)$の中で等しい．
 
@@ -548,22 +559,28 @@
             }\]
         
         \item
+            $f: \shF' \to \shF$と
+            $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
+            $f^* \shE$ :: pullback of $\shE$ by $f$を，
+            $f$と$\kappa: \shE \to \shF$のpullbackとする．
+            \[\vcenter{\xymatrix{
+                0 \ar[r]& \shG \ar@{=}[d]\ar[r]& f^*\shE \ar[d]\ar[r]& \shF' \ar[d]^-{f}\ar[r]& 0 \\
+                0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]\centerpb& 0
+            }}\]
+            $f^* \shE \subseteq \shE \oplus \shG'$とすると，
+            $\shG \to f^*\shE$は$g \mapsto (\iota(g), 0)$と書ける．
+
+        \item
             $g: \shG \to \shG'$と
             $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-            $g_* \shE$ :: pushfoward of $\shF$ by $\shG$を次で定める．
-            これがextension of $\shF$ by $\shG'$になっていることは簡単に確かめられる．
-
-            まず，sheafとしては$g_* \shE$は次の準同型のcokernelである．
-            \[
-                \shG \to \shG' \oplus \shE;
-                \qquad
-                \sect{U}{y} \mapsto \sect{U}{g_U(y)} \oplus \sect{U}{-\iota_U(y)}.
-            \]
-            $\iota_{g_*\shE}, \kappa_{g_*\shE}$は次で定める．
-            \begin{align*}
-                \iota_{g_*\shE}:& \shG' \to g_*\shE; && y' \mapsto [y', 0] \\
-                \kappa_{g_*\shE}:& g_*\shE \to \shF; && [y', e] \mapsto \kappa_{\shE}(e)
-            \end{align*}
+            $g_* \shE$ :: pushfoward of $\shE$ by $g$を，
+            $g$と$\iota: \shG \to \shE$のpushoutとする．
+            \[\vcenter{\xymatrix{
+                0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
+                0 \ar[r]& \shG \ar[r]& g_*\shE \ar[r]\centerpo& \shF \ar[r]& 0
+            }}\]
+            $g_* \shE \subseteq (\shE \oplus \shG')/\shS$とすると，
+            $g_*\shE \to \shF$は$[e, g'] \mapsto \kappa(e)$と書ける．
     \end{enumerate}
     \end{Def}
 
@@ -597,27 +614,79 @@
             $(\shE, \iota, \kappa), (\shE', \iota', \kappa')$
             :: extensions of $\shF$ by $\shG$に対し，
             $\shE+\shE'$を以下のように定める．
-            まずsheafとしては，次のよう．
-            \[
-                \shE+\shE'
-                =\frac
-                {\{(e, e') \in \shE \oplus \shE \mid \kappa(e)=\kappa'(e') \in \shG\}}
-                {\{ (\iota(f), 0)-(0, \iota'(f)) \mid f \in \shF \}}.
-            \]
-            $\iota_{\shE+\shE'}, \kappa_{\shE+\shE'}$は次のように定める．
-            \begin{align*}
-                \iota_{\shE+\shE'}:& \shG \to \shE+\shE'; && y \mapsto [\iota(y), 0]=[0, \iota'(y)] \\
-                \kappa_{\shE+\shE'}:& \shE+\shE' \to \shF; && [e, e'] \mapsto \kappa(e)=\kappa'(e')
-            \end{align*}
+            \[\vcenter{\xymatrix{
+                0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota'}\ar[d]_-{\codiag}& \shE \oplus \shE' \ar[r]^-{\kappa \oplus \kappa'}\ar[d]& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
+                0 \ar[r]& \shG \ar[r]& \shM \ar[r]\centerpo& \shF \oplus \shF\ar[r]& 0\\
+                0 \ar[r]& \shG \ar[r]\ar@{=}[u]& \shE+\shE' \ar[r]\ar[u]& \shF \ar[r]\ar[u]_-{\diag}\centerpb& 0 \\
+            }}\]
+            ただし$\diag: a \mapsto (a,a), \codiag: (a,b) \mapsto a+b$．
     \end{enumerate}
     \end{Def}
     
+    \begin{Lemma}\label{lemma:two_exact_seq_raise_pb}
+        以下の図式が可換であり，各行は完全であるとする．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar@{=}[d]\ar[r]& \shP \ar[d]\ar[r]& \shF' \ar[d]^-{f}\ar[r]& 0 \\
+            0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]& 0
+        }}\]
+        この時，$\shP$はpullback of $f$ and $\kappa$.
+        双対により，pushbackについても同様の命題が成り立つ．
+    \end{Lemma}
+    \begin{proof}
+        以下，$x \in \shX$と書いたら，
+        $x$は適当な開集合$U$上の$\shX$のsection :: $x \in \shX(U)$を意味する．
+        各射に次のように名前を付ける．
+        \[\vcenter{\xymatrix{
+            {} & \shX \ar@/^10pt/[rrd]^(.2){\alpha}\ar@/_5pt/[rdd]_(.2){\beta}& {} & {} & {} \\
+            0 \ar[r]& \shG \ar@{=}[d]\ar[r]^-{\bar{\iota}}& \shP \ar[d]^-{\bar{f}}\ar[r]^-{\bar{\kappa}}& \shF' \ar[d]^-{f}\ar[r]& 0 \\
+            0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]& 0
+        }}\]
+
+        \paragraph{$\phi: \shX \to \shP$の構成．}
+        任意の$x \in \shX$をとり，これに対して$y \in \shP$を以下のように定める．
+        \begin{enumerate}[labelindent=1cm, leftmargin=*]
+            \item $x'$を$\kappa(x')=\alpha(x)$なるものとする．\mbox{} \\
+                  $\kappa$ :: surjゆえ$x'$が存在することに注意．
+              \item $t'$を$\iota(t')=\beta(x)-\bar{f}(x')$なるものとする． \mbox{} \\
+                  $\beta(x)-\bar{f}(x')\in \ker \kappa=\im \iota$ゆえ$t'$が存在することに注意．
+            \item $p=x'+\bar{\iota}(t')$とする．
+        \end{enumerate}
+        こうして得られる写像$x \mapsto p$が$\phi: \shX \to \shP$を与える．
+
+        可換性を確認しよう．
+        \begin{align*}
+            \bar{\kappa}(\psi(x))&=\bar{\kappa}(x')+\bar{\kappa}(\bar{\iota}(t'))=\bar{\kappa}(x')=\beta(x), \\
+            \bar{f}(\psi(x))&=\bar{f}(x')+\bar{f}(\bar{\iota}(t'))
+                =\bar{f}(x')+\iota(t')=\bar{f}(x')+\alpha(x)-\bar{f}(x')=\alpha(x).
+        \end{align*}
+
+        \paragraph{$\shX \to \shP$の一意性．}
+        最後に$\phi, \phi': \shZ \to \shE f^*$が
+        同じ可換性を持つと仮定して$\psi=\phi-\phi'=0$を示す．
+        仮定から$\bar{\kappa} \psi=0, \bar{f}\psi=0$が成立する．
+        まず前者から
+        \[ \im \psi \subseteq \ker \bar{\kappa}=\im \bar{\iota} \]
+        なので任意の$x \in \shX$に対して$g \in \shG$が存在し，
+        $\bar{\iota}(g)=\psi(x)$となる．
+        図式の可換性から次が成立する．
+        \[ \iota(g)=\bar{f}\bar{\iota}(g)=\bar{f}\psi(x)=0. \]
+        行の完全性から$\iota$は単射なので$g=0$．
+        任意の$x$に対して$\psi(x)=\bar{\iota}(g)=\bar{\iota}(0)=0$．
+        すなわち$\psi=0$．
+    \end{proof}
+
     \begin{Lemma}
         $\shF, \shG$ :: $\shO_X$-modules on ringed scheme :: $X$とする．
         この時，$E(\shF, \shG)$には加法群の構造が定まる．
     \end{Lemma}
+    \begin{proof}
+        $0_{\shF, \shG}$がBear sumについての単位元であること，
+        $-\shE$が逆元であること，
+        結合律が成り立つこと，
+        可換性を確かめる．
+    \end{proof}
 
-    \begin{Lemma}\label{lemma:PshiIsIso}
+    \begin{Lemma}\label{lemma:PhiIsIso}
         全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$は
         加法群の間の同型である．
     \end{Lemma}
@@ -630,6 +699,38 @@
         }\]
         この時，$g_*\shE+g'_*\shE=(g+g')_*\shE$．
     \end{Lemma}
+    \begin{proof}
+        $g_*\shE+g'_* \shE$は以下のpullback/pushout diagramに収まる(fit)．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota'}\ar[d]_-{g \oplus g'}& \shE \oplus \shE \ar[r]^-{\kappa \oplus \kappa'}\ar[d]& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
+            0 \ar[r]& \shG \oplus \shG \ar[r]\ar[d]_-{\codiag}& g_*\shE \oplus g'_*\shE \ar[r]\ar[d]\centerpo& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
+            0 \ar[r]& \shG \ar[r]& \shM \ar[r]\centerpo& \shF \oplus \shF\ar[r]& 0\\
+            0 \ar[r]& \shG \ar[r]\ar@{=}[u]& g_*\shE+g'_*\shE' \ar[r]\ar[u]& \shF \ar[r]\ar[u]_-{\diag}\centerpb& 0 \\
+        }}\]
+        一行増やして次の図式を考える．
+        \[\vcenter{\xymatrix{
+                    0 \ar[r]& \shG \ar[r]^-{\iota}\ar[d]_-{\diag}& \shE \ar[r]^-{\kappa}\ar[d]_-{\diag}& \shF \ar[r]\ar[d]_-{\diag}& 0\\
+            0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota}\ar[d]_-{g \oplus g'}& \shE \oplus \shE \ar[r]^-{\kappa \oplus \kappa}\ar[d]& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
+            0 \ar[r]& \shG \oplus \shG \ar[r]\ar[d]_-{\codiag}& g_*\shE \oplus g'_*\shE \ar[r]\ar[d]\centerpo& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
+            0 \ar[r]& \shG \ar[r]& \shM \ar[r]\centerpo& \shF \oplus \shF\ar[r]\ar@<5pt>[d]^-{\pr}& 0\\
+            0 \ar[r]& \shG \ar[r]\ar@{=}[u]& g_*\shE+g'_*\shE' \ar[r]\ar[u]& \shF \ar[r]\ar[u]^-{\diag}\centerpb& 0 \\
+        }}\]
+        左端の縦の射$\diag \circ ( g \oplus g') \circ \codiag$は$g+g'$に等しい
+        \footnote{ この等式を元に考えて一行増やした． }．
+        また，右端の縦の射$\diag \circ \pr$は$\id[\shF]$に等しい．
+        さらに中央最上部の$\shE$から$\shM$への射と，
+        同じ$\shE$から右下の$\shE \oplus \shF$への射を見ると，
+        pullbackの普遍性から所望の射$\shE \to g_*\shE+g'_*\shE$の存在が言える．
+        
+        まとめて，以下の可換図式が得られた．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar[d]_-{g+g'}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
+            0 \ar[r]& \shG \ar[r]& g_*\shE+g'_*\shE \ar[r]& \shF \ar[r]& 0
+        }}\]
+        補題(\ref{lemma:two_exact_seq_raise_pb})から左の四角形はpushout diagramであり，
+        pushoutの普遍性から$g_*\shE+g'_*\shE \iso (g+g')_* \shE$．
+    \end{proof}
+    $g_*(-\shE)=-g_*\shE, $
 
 \section{First Order Deformation of a Local Complete Intersection.}
     この節は\ref{thm:SpaceOf1stOrdDefOfLCI}を
@@ -791,7 +892,7 @@
         $U \subseteq X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
         $\famX_1, \famX_2$ :: first order deformation of $X$について，
         \[ \shE(\famX_1|_U, \famX_2|_U):=\nu(\famX_1|_U, \famX_2|_U)_*((\shDer_{P/\C})|_{X}) \]
-        をextension of $\shDer_{U/\C}$ by $(\epsilon) \otimes_{\C} \shO_{U}$として定める．
+        をextension of $\shDer_{U/\C}$ by $(\epsilon D) \otimes_{\C} \shO_{U}$として定める．
     \end{Def}
     （TODO: 張り合わせが出来ることに言及．）
     貼りあわせによって$\shE(\famX_1, \famX_2)$を定める．
@@ -847,7 +948,7 @@
         \]
         を，$\shE(\famX, X \times D)$に対応する元とする(\ref{thm:ExtAndExt1})．
     \end{Def}
-    補題(\ref{lemma:PshiIsIso})より，
+    補題(\ref{lemma:PhiIsIso})より，
     命題(\ref{prop:key1}), (\ref{prop:key2})と同様の命題が
     $e(\famX_1, \famX_2)$についても性質する．
 
