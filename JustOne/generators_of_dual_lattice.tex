@@ -1,0 +1,81 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{../math_note}
+\usepackage[]{enumitem}
+
+\newcommand{\form}[2]{\langle #1,#2 \rangle}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\prop}[1]{\subsubsection*{\underline{#1}}}
+
+\begin{document}
+\title{双対格子(Dual Lattice)の生成元}
+\author{七条 彰紀}
+\maketitle
+    一般の格子$L$について
+    双対格子$L^*=\Hom(L, \Z)$の格子としての生成元集合を求める．
+    $L$は適当なisotopyで移して$L \iso \Z^r$とする．
+    すなわち，双線形形式$\form{-}{-}_L$とは独立に，
+    $L$の元と行列との積や$L$上の標準的内積を定める．
+    
+    まず$L$は自由$\Z$加群であるから，
+    $L^*=\Hom_{\Z}(L, \Z)$は$L$と階数が同じ$\Z$自由加群である．
+    したがって$L^*$は$L$と同じく$L \otimes \Q \iso \Q^r$の部分アーベル群である．
+    標準的な方法で双線形形式$\form{-}{-}_{L}$の
+    拡張$\form{-}{-}_{L \otimes \Q}$が定まる．
+    $L^*$の元を$L \otimes \Q$の部分アーベル群として特定する．
+
+    \begin{Claim}
+        $L^*=\Hom(L, \Z)$の元は
+        \[ M=\{ x \in L \otimes \Q \mid \Forall{y \in L} \form{x}{y}_{L \otimes \Q} \in \Z \} \]
+        という集合と一対一に対応し，
+        この集合$M$は格子の構造を持つ．
+    \end{Claim}
+    \begin{proof}
+        $x \in M$ならば明らかに$\form{x}{-}_{L} \in L^*$．
+        この対応は準同型であり，$\form{-}{-}_L$が非退化であるから単射である．
+
+        準同型$x \mapsto \form{x}{-}_L$が全射であることを示す．
+        逆に$\phi \in L^*$に対して
+        $0 \neq u_0 \in (\ker \phi)^{\perp} \subseteq L \otimes \Q$
+        を適当にとり，$x=\frac{\phi(u_0)}{u_0^2}u_0 \in L \otimes \Q$とおく．
+        任意の元$u \in L \otimes \Q=(\ker \phi) \oplus (\ker \phi)^{\perp}$は
+        \[ u=u'+\frac{\form{u}{u_0}}{u_0^2} u_0 \ (u' \in \ker \phi) \]
+        と書ける（両辺の$\form{u_0}{-}$での値を見れば良い）ので，
+        \[ \phi(u)=\frac{\form{u}{u_0}}{u_0^2} \phi(u_0)=\form{u}{x}.  \]
+
+        以上から$L^*$と$M$はアーベル群として同型である．
+        さらに$M$上には$\form{-}{-}_{L \otimes \Q}$の制限に依って
+        双線形形式が定まる．
+        あわせて，$M$は格子である．
+    \end{proof}
+    以下，$L^*$を$\Hom(L, \Z)$ではなく格子$M$を表すものとする．
+
+    $r=\rank L$とし，$L$の生成元集合$G=\{g_i\}_{i=1}^r$をとる．
+    $r$次正方行列$A$を$\mat{ \form{g_i}{g_j} }_{i,j=1}^r$とする．
+    これらを用いて，$\form{x}{y}={}^t x A y$を書ける．
+    （$x, y$は基底$G$について行ベクトルの形に書く．）
+
+    $L^*$の生成元を特定する．
+    $x \in L \otimes \Q$が$L^*$に入っている必要十分条件は，
+    $L^*(=M)$の定義から次のように書ける．
+    \[ Ax \in \bigoplus_{i=1}^r g_i \Z \]
+    すなわち$x \in \bigoplus_{i=1}^r (A^{-1}g_i)\Z$なので，
+    $L^*$の基底は$G^*=\{ A^{-1}g_i \}_i$である．
+    $g^*_i=A^{-1}g_i$と書く．
+
+    最後に，$L^*/L \iso \bigoplus (\Z/n_k\Z)$となる
+    $\{ n_k \}$を求める．
+    $g^*_i \mapsto e_i$ ($e_i$は$\Z^n$の標準基底)という対応で
+    $L$の生成元$g_i \in L^*$は$Ae_i$に写される．
+    こうして生成元集合$\{Ae_i\}$で$\Z$加群として生成される
+    $\Z^n$の部分加群は，$\{ n_i e_i \} (n_i \in \Z)$の形の生成元集合をもつ．
+    実際，この$n_i$はその定義から$A$の単因子に一致している．
+    まとめて，次の主張を得る．
+    \begin{Claim}
+        行列$A \in M_r(\Z)$の単因子を$\{ n_i \}_{i=1}^r$とする．
+        すると$L^*/L$は$\Z$自由加群として
+        \[ \bigoplus_{i=1}^r (\Z/n_i \Z) \]
+        と同型である．
+    \end{Claim}
+    特に，積$\prod n_i$は$d(L)=|\det A|$と一致するから，
+    $[L^*:L]=d(L)$．
+\end{document}
