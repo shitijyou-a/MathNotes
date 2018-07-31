@@ -6,8 +6,6 @@
 \newcommand{\ftorIsom}{\mathcal{I}\!som}
 \newcommand{\hilb}{\mathcal{H}}
 \newcommand{\dualnum}{\mathbb{I}}
-\newcommand{\famX}{\mathcal{X}}
-\newcommand{\famY}{\mathcal{Y}}
 \newcommand{\cvU}{\mathfrak{U}}
 \newcommand{\der}{\mathrm{d}}
 \newcommand{\Der}{\mathrm{Der}}
@@ -22,6 +20,11 @@
 
 \newcommand{\diag}{\Delta}
 \newcommand{\codiag}{\nabla}
+
+\newcommand{\defX}{\mathcal{X}}
+\newcommand{\defY}{\mathcal{Y}}
+\newcommand{\defU}{\mathcal{U}}
+\newcommand{\defP}{\mathcal{P}}
 
 \begin{document}
 \title{ゼミノート \#4 \\ Deformation Theory}
@@ -202,11 +205,11 @@
     \begin{enumerate}[label=(\roman*), leftmargin=*]
     \item 
         deformation of $X$とは，以下のようなpullback diagramのことである．
-        $\psi$から$X \iso \famX \times_{Y} \C$が誘導される．
+        $\psi$から$X \iso \defX \times_{Y} \C$が誘導される．
         \[
             \xi:
         \vcenter{\xymatrix{
-            X \ar[r] \ar[d]& \famX \ar[d]^-{\text{flat, surj.}} \\
+            X \ar[r] \ar[d]& \defX \ar[d]^-{\text{flat, surj.}} \\
             \C \ar[r]_-{s}& Y
             \centerpb
         }}
@@ -218,7 +221,7 @@
     \item
         上のdeformation of $X$ :: $\xi$について，
         $S$のことを$\xi$のparameter space,
-        $\famX$を$\xi$のtotal spaceと呼ぶ．
+        $\defX$を$\xi$のtotal spaceと呼ぶ．
 
     \item
         任意のscheme :: $X$と$\C$-pointed scheme :: $(S, s_0)$に対して，
@@ -234,7 +237,7 @@
         parameter spaceが$S$であるdeformation :: $\xi$から
         base changeによって次のdeformationを誘導する．
         \[\xymatrix{
-            X \ar[r]\ar[d]& \famX \times_S T \ar[d]\\
+            X \ar[r]\ar[d]& \defX \times_S T \ar[d]\\
             \C \ar[r]& T
         }\]
         これを元のdeformationの$f: (T, t_0) \to (S, s_0)$による
@@ -242,10 +245,10 @@
 
     \item
         isomorphism of deformations of $X$ :: $\xi \to \eta$とは，
-        以下の可換図式が成立する同型$\famX \iso \famY, S \iso T$のこと．
+        以下の可換図式が成立する同型$\defX \iso \defY, S \iso T$のこと．
         \[\xymatrix@R=8pt{
-                {} & {} & \famY \ar[dd]\\
-            X \ar[r]\ar[dd]\ar[rru]& \famX \ar[dd]\ar[ru]_-{\iso}& {} \\
+                {} & {} & \defY \ar[dd]\\
+            X \ar[r]\ar[dd]\ar[rru]& \defX \ar[dd]\ar[ru]_-{\iso}& {} \\
             {} & {} & T \\
             \C \ar[r]\ar[rru]& S \ar[ru]_-{\iso}& {}
         }\]
@@ -294,9 +297,9 @@
 
     \begin{Remark}
         $X$ :: stable curve of genus $g$とする．
-        first order deformation :: $\famX \to \dualnum$は，
+        first order deformation :: $\defX \to \dualnum$は，
         moduli spaceの定義から，
-        $0 \in \dualnum$を$[X]=[\famX_0] \in \barM_g$へ写す$\dualnum \to \barM_g$に対応する．
+        $0 \in \dualnum$を$[X]=[\defX_0] \in \barM_g$へ写す$\dualnum \to \barM_g$に対応する．
         そしてこの射は，
         既に知られている通りZariski tangent space at $[X]$ :: $T_{[X]}$の元に対応する．
         よって$X$のfirst order deformationから$T_{[X]}$の元への対応がある．
@@ -306,7 +309,7 @@
     \begin{Lemma}\label{lemma:psi_is_imm_homeo}
         次のfirst order deformation of $X$を考える．
         \[\vcenter{\xymatrix{
-            X \ar[r]^-{\psi} \ar[d]& \famX \ar[d] \\
+            X \ar[r]^-{\psi} \ar[d]& \defX \ar[d] \\
             \C \ar[r]_-{0}& \dualnum
             \centerpb
         }}\]
@@ -319,10 +322,10 @@
         またclosed imm.ならばfiniteである(\cite{HarAG} Ex II.5.5b)．
         $\psi$がhomeomorphismであることはlocal on codomain(target)なもの
         \footnote{ local on codomainに考えれば，特に全単射性が示せる． }なので，
-        $\famX$ :: affineと仮定して証明すれば十分．
+        $\defX$ :: affineと仮定して証明すれば十分．
         
         以上から，
-        $\famX=\Spec A, X=\Spec R$,
+        $\defX=\Spec A, X=\Spec R$,
         $R$ :: $A$-algebra, finitely generated as module
         と仮定して良い．
         また，$\psi$ :: closed imm.であるから，
@@ -340,55 +343,55 @@
         よって$(\epsilon D)\otimes_D R$同様$I$はnilpotent ideal (i.e.$I^2=0$)．
 
         $X=\Spec R$の閉集合として
-        \[ \famX=\Spec A=V(I)=V(I^2)=V((0))=X \]
-        なので$\im \psi=\famX$．
+        \[ \defX=\Spec A=V(I)=V(I^2)=V((0))=X \]
+        なので$\im \psi=\defX$．
         $\psi$ :: closed imm.なので，これで$\psi$ :: homeoが証明できた．
     \end{proof}
 
     \begin{Def}[Restriction of First Order Deformation]
         上の命題にあるfirst order deformation of $X$について，
         $U$ :: open subset of $X$をとる．
-        locally ringed space :: $(\psi(U), \shO_{\famX}|_{\psi(U)})$を
-        $\famX|_U$と書く．
+        locally ringed space :: $(\psi(U), \shO_{\defX}|_{\psi(U)})$を
+        $\defX|_U$と書く．
     \end{Def}
 
 \section{First Order Deformation of a Nonsingular Variety.}
-    \begin{Lemma}
+    \begin{Lemma}\label{lemma:def_of_affine_is_affine}
         $A$ :: ring, $X=\Spec A$とする．
-        この時，first order deformation of $X$ :: $\famX$も
+        この時，first order deformation of $X$ :: $\defX$も
         affine schemeである．
     \end{Lemma}
     \begin{proof}
         \cite{HarAG} Ex II.3.1への回答でもある．
         
-        $\shI=\ker(X \inclmap \famX)$とし，
+        $\shI=\ker(X \inclmap \defX)$とし，
         $\shF$ :: quasi-coherent sheaf on $X$とする．
         今，補題(\ref{lemma:psi_is_imm_homeo})の証明から$\shI^2=0$が得られる．
-        また，明らかに$\shO_{\famX}/\shI \iso \shO_{X}$．
+        また，明らかに$\shO_{\defX}/\shI \iso \shO_{X}$．
         したがって次のSES(short exact sequence)が存在する．
         \[\xymatrix{
             0 \ar[r]& \shI^{d+1} \shF \ar[r]& \shI^{d} \shF \ar[r]&
-                \shI^{d}\shF \otimes_{\shO_{\famX}} \shO_X \ar[r]& 0
+                \shI^{d}\shF \otimes_{\shO_{\defX}} \shO_X \ar[r]& 0
         }\]
         次のLESが誘導される．
         \[\xymatrix{
-            0 \ar[r]& H^0(\famX, \shI^{d+1} \shF) \ar[r]& H^0(\famX, \shI^{d} \shF) \ar[r]& H^0(\famX, \shI^{d}\shF \otimes \shO_X) \\
-            {}\ar[r]& H^1(\famX, \shI^{d+1} \shF) \ar[r]& H^1(\famX, \shI^{d} \shF) \ar[r]& H^1(\famX, \shI^{d}\shF \otimes \shO_X) \\
+            0 \ar[r]& H^0(\defX, \shI^{d+1} \shF) \ar[r]& H^0(\defX, \shI^{d} \shF) \ar[r]& H^0(\defX, \shI^{d}\shF \otimes \shO_X) \\
+            {}\ar[r]& H^1(\defX, \shI^{d+1} \shF) \ar[r]& H^1(\defX, \shI^{d} \shF) \ar[r]& H^1(\defX, \shI^{d}\shF \otimes \shO_X) \\
             \dots
         }\]
         
         sheaf cohomologyはabelian groupのcohomologyとして構成されており，
         module structureとは無関係に定まっている．
-        そして$X$と$\famX$はhomeo．
+        そして$X$と$\defX$はhomeo．
         したがって
-        \[ H^i(\famX, \shI^{d}\shF \otimes \shO_X)=H^i(X, \shI^{d}\shF \otimes \shO_X)=0. \]
+        \[ H^i(\defX, \shI^{d}\shF \otimes \shO_X)=H^i(X, \shI^{d}\shF \otimes \shO_X)=0. \]
         最後の等号は$\shI^{d}\shF \otimes \shO_X$ :: quasi-coherent $\shO_X$-moduleと
         \cite{HarAG} Thm III.3.7から得られる．
         
         $d=1 (\implies \shI^{d+1}=0)$からはじめて$d$についての帰納法により
-        \[ H^i(\famX, \shI^{d+1} \shF)=H^i(\famX, \shI^{d}\shF \otimes \shO_X)=0 \ (i>0). \]
-        よってLESから$H^i(\famX, \shI^{d} \shF)=0 (i>0)$．
-        \cite{HarAG} Thm III.3.7から$\famX$ :: affine.
+        \[ H^i(\defX, \shI^{d+1} \shF)=H^i(\defX, \shI^{d}\shF \otimes \shO_X)=0 \ (i>0). \]
+        よってLESから$H^i(\defX, \shI^{d} \shF)=0 (i>0)$．
+        \cite{HarAG} Thm III.3.7から$\defX$ :: affine.
     \end{proof}
 
     \begin{Lemma}[\cite{DefAS} Thm1.2.4]\label{thm:aff_is_rigid}
@@ -398,7 +401,7 @@
     \end{Lemma}
     \begin{proof}
         上の補題から，deformation of $X=\Spec A$はaffine．
-        そこで$\famX=\Spec B$とする．
+        そこで$\defX=\Spec B$とする．
         \[\vcenter{\xymatrix{
             B \ar@{->>}[r]& A \\
             D \ar@{->>}[r] \ar[u]^-{f}& k \ar[u]
@@ -488,14 +491,14 @@
         $H^1(X, \shT_X)$の元と一対一に対応する．
     \end{Thm}
     \begin{proof}
-        $\famX$ :: first oder deformation of $X$を任意の取る．
+        $\defX$ :: first oder deformation of $X$を任意の取る．
         そしてaffine open cover of $X$:: $\{U_i\}_{i \in I}$を任意に取る．
 %        ただし添字集合$I$は有限である．
         このcoverについての\v{C}ech cohomologyを考えていく．
 
-        今，$\famX|_{U_i}$ :: first order deformation of $U_i$．
+        今，$\defX|_{U_i}$ :: first order deformation of $U_i$．
         定理(\ref{thm:aff_is_rigid})より，
-        $\theta_{i}: U_i \times_{k} \dualnum \to \famX|_{U_i}$が得られる．
+        $\theta_{i}: U_i \times_{k} \dualnum \to \defX|_{U_i}$が得られる．
         これを用いて，各$i,j \in I$について
         \[ \theta_{ij}=\theta_{i}^{-1} \circ \theta_{j}:U_{ij} \times \dualnum \to U_{ij} \times \dualnum \]
         が得られる．
@@ -511,12 +514,12 @@
         すなわち\v{C}eck $1$-cocycle conditionが得られる．
 
         first order deformation of $X$が$2$つあり，
-        その間に同型があるとしよう: $\Psi: \famX \to \famX'$．
-        $\famX'$について$\theta'_{ij}, d'_{ij}$を$\famX$同様に定める．
+        その間に同型があるとしよう: $\Psi: \defX \to \defX'$．
+        $\defX'$について$\theta'_{ij}, d'_{ij}$を$\defX$同様に定める．
         次のinfiniterimal automorphismを考える．
         \[
             \alpha_{i}=\theta'_{i} \circ \Psi|_{U_i} \circ \theta_{i}:
-            U_i \times \dualnum \to \famX|_{U_i} \to \famX'|_{U_i} \to U_i \times \dualnum.
+            U_i \times \dualnum \to \defX|_{U_i} \to \defX'|_{U_i} \to U_i \times \dualnum.
         \]
         $\alpha_i$に$a_i \in \Gamma(U_i, \shT_X)$が対応しているとする．
         計算すると
@@ -526,7 +529,7 @@
         よって$\{d_{ij}\}$の同値類と$\{d'_{ij}\}$の同値類は
         $\check{H}^1(X, \shT_X)$の中で等しい．
 
-        以上より，$\famX$から$\check{H}^1(X, \shT_X)$の元への対応は単射的である．
+        以上より，$\defX$から$\check{H}^1(X, \shT_X)$の元への対応は単射的である．
         逆に$\{d_{ij}\}$から$\{\theta_{ij}\}$の対応，
         $\theta_{ij}$による$U_{i} \times \dualnum$の貼り合わせへと手順を遡れば，
         $\check{H}^1(X, \shT_X)$の元とfirst order deformation of $X$への対応が全射だと分かる．
@@ -536,6 +539,7 @@
     \end{proof}
 
 \section{Extension of Sheaves}
+    \subsection{Definitions}
     \begin{Def}[Extension of Sheaves]
         \begin{enumerate}[label=(\roman*), leftmargin=*]
         \item
@@ -561,37 +565,73 @@
         \item
             $f: \shF' \to \shF$と
             $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-            $f^* \shE$ :: pullback of $\shE$ by $f$を，
-            $f$と$\kappa: \shE \to \shF$のpullbackとする．
+            $\shE f^*$を$f$と$\kappa: \shE \to \shF$のpullbackとする．
+            すると次の図式で上の行は完全である（定義の直後で示す）．
             \[\vcenter{\xymatrix{
                 0 \ar[r]& \shG \ar@{=}[d]\ar[r]& f^*\shE \ar[d]\ar[r]& \shF' \ar[d]^-{f}\ar[r]& 0 \\
                 0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]\centerpb& 0
             }}\]
-            $f^* \shE \subseteq \shE \oplus \shG'$とすると，
-            $\shG \to f^*\shE$は$g \mapsto (\iota(g), 0)$と書ける．
+            そこで新しく出来たextension of $\shF'$ by $\shG$を
+            pullback of $\shE$ by $f$と呼ぶ．
 
         \item
+%            $g: \shG \to \shG'$と
+%            $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
+%            $g_* \shE$を$g$と$\iota: \shG \to \shE$のpushoutとする．
+%            すると次の図式で下の行は完全である（pullbackの場合の双対）．
+%            \[\vcenter{\xymatrix{
+%                0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
+%                0 \ar[r]& \shG \ar[r]& g_*\shE \ar[r]\centerpo& \shF \ar[r]& 0
+%            }}\]
+%            そこで新しく出来たextension of $\shF$ by $\shG'$を
+%            pushout of $\shE$ by $g$と呼ぶ．
             $g: \shG \to \shG'$と
             $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-            $g_* \shE$ :: pushfoward of $\shE$ by $g$を，
-            $g$と$\iota: \shG \to \shE$のpushoutとする．
-            \[\vcenter{\xymatrix{
-                0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
-                0 \ar[r]& \shG \ar[r]& g_*\shE \ar[r]\centerpo& \shF \ar[r]& 0
-            }}\]
-            $g_* \shE \subseteq (\shE \oplus \shG')/\shS$とすると，
-            $g_*\shE \to \shF$は$[e, g'] \mapsto \kappa(e)$と書ける．
+            $g_* \shE$ :: pushfoward of $\shF$ by $\shG$を次で定める．
+            これがextension of $\shF$ by $\shG'$になっていることは簡単に確かめられる．
+            まず，sheafとしては$g_* \shE$は次の準同型のcokernelである．
+            \[
+                \shG \to \shG' \oplus \shE;
+                \qquad
+                \sect{U}{y} \mapsto \sect{U}{g_U(y)} \oplus \sect{U}{-\iota_U(y)}.
+            \]
+            $\iota_{g_*\shE}, \kappa_{g_*\shE}$は次で定める．
+            \begin{align*}
+                \iota_{g_*\shE}:& \shG' \to g_*\shE; && y' \mapsto [y', 0] \\
+                \kappa_{g_*\shE}:& g_*\shE \to \shF; && [y', e] \mapsto \kappa_{\shE}(e)
+            \end{align*}
     \end{enumerate}
     \end{Def}
+
+%    \begin{Claim}
+%        以下の図式を考える．
+%        \[\vcenter{\xymatrix{
+%            {} & {} & f^*\shE \ar[d]_-{\bar{f}}\ar[r]^-{\bar{\kappa}}& \shF' \ar[d]^-{f}& {} \\
+%            0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]\centerpb& 0
+%        }}\]
+%        この時，$\bar{\kappa}$ :: surjかつ$\ker \bar{\kappa} \iso \shG$．
+%    \end{Claim}
+%    \begin{proof}
+%        (TODO: epi$\implies$epiは出来ない．
+%        $\bar{\kappa}$ :: surjと，任意の$\shX \to \shF'$が$\bar{\kappa}$を通して分解することが
+%        同値であることを示し，利用するしかなさそう．
+%        $\ker \bar{\kappa} \iso \shG$は$\shG$が$\ker \bar{\kappa}$の普遍性を持つことを示せば良い．)
+%    \end{proof}
 
     extension of $\shF$ by $\shG$が成す集合を$E(\shF, \shG)$と書く．
     \begin{Thm}\label{thm:ExtAndExt1}
         $\shF, \shG$
         :: $\shO_X$-modules on ringed scheme :: $X$とする．
-        この時，
-        全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$が存在する．
+        この時，extension of $\shF$ by $\shG$
+            :: $\shE: 0 \to \shG \to \shE \to \shF \to 0$から誘導される
+        doundary map
+        \[ d_{\shE}: \Hom_{\shO_X}(\shG, \shG') \to \Ext^1(\shF, \shG') \]
+        は，$g \in \Hom_{\shO_X}(\shG, \shG')$を$g_*\shE$の同型類に写す．
+        特に，
+        \[ \Phi: E(\shF, \shG) \ni \shE \mapsto d_{\shE}(\id[\shG]) \in \Ext^1_{\shO_X}(\shE, \shG) \]
+        は全単射である．
     \end{Thm}
-    これは有名な結果なので証明を書かない．
+    「特に」以降は特に有名で，
     例えば\cite{HarAG} ExIII.6.1に証明の方針が述べられているし，
     加群の場合の類似の結果としては\cite{Shiho} pp.259-264に詳しい証明がある．
 
@@ -623,6 +663,8 @@
     \end{enumerate}
     \end{Def}
     
+    \subsection{Propositions.}
+    %% {{{
     \begin{Lemma}\label{lemma:two_exact_seq_raise_pb}
         以下の図式が可換であり，各行は完全であるとする．
         \[\vcenter{\xymatrix{
@@ -630,7 +672,6 @@
             0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]& 0
         }}\]
         この時，$\shP$はpullback of $f$ and $\kappa$.
-        双対により，pushbackについても同様の命題が成り立つ．
     \end{Lemma}
     \begin{proof}
         以下，$x \in \shX$と書いたら，
@@ -645,9 +686,9 @@
         \paragraph{$\phi: \shX \to \shP$の構成．}
         任意の$x \in \shX$をとり，これに対して$y \in \shP$を以下のように定める．
         \begin{enumerate}[labelindent=1cm, leftmargin=*]
-            \item $x'$を$\kappa(x')=\alpha(x)$なるものとする．\mbox{} \\
-                  $\kappa$ :: surjゆえ$x'$が存在することに注意．
-              \item $t'$を$\iota(t')=\beta(x)-\bar{f}(x')$なるものとする． \mbox{} \\
+            \item $x' \in \shP$を$\bar{\kappa}(x')=\alpha(x)$なるものとする．\mbox{} \\
+                  $\bar{\kappa}$ :: surjゆえ$x'$が存在することに注意．
+            \item $t' \in \shG$を$\iota(t')=\beta(x)-\bar{f}(x')$なるものとする． \mbox{} \\
                   $\beta(x)-\bar{f}(x')\in \ker \kappa=\im \iota$ゆえ$t'$が存在することに注意．
             \item $p=x'+\bar{\iota}(t')$とする．
         \end{enumerate}
@@ -655,10 +696,20 @@
 
         可換性を確認しよう．
         \begin{align*}
-            \bar{\kappa}(\psi(x))&=\bar{\kappa}(x')+\bar{\kappa}(\bar{\iota}(t'))=\bar{\kappa}(x')=\beta(x), \\
+            \bar{\kappa}(\psi(x))&=\bar{\kappa}(x')+\bar{\kappa}(\bar{\iota}(t'))=\bar{\kappa}(x')=\alpha(x), \\
             \bar{f}(\psi(x))&=\bar{f}(x')+\bar{f}(\bar{\iota}(t'))
-                =\bar{f}(x')+\iota(t')=\bar{f}(x')+\alpha(x)-\bar{f}(x')=\alpha(x).
+                =\bar{f}(x')+\iota(t')=\bar{f}(x')+\beta(x)-\bar{f}(x')=\beta(x).
         \end{align*}
+
+        \paragraph{$\phi$ :: well-defined.}
+        $x=0$の時$\phi(x)=0$であることを見れば十分．
+        $x=0$ならば$\bar{\kappa}(x')=0$すなわち
+        $x' \in \ker \bar{\kappa}=\im \bar{\iota}$．
+        なので，$\bar{\iota}(h)=x'$となる$h \in \shG$がとれる．
+        \[ \iota(t')=\beta(0)-\bar{f}(x')=-\bar{f}\bar{\iota}(h)=\iota(-h). \]
+        $\iota$ :: inj.より$t'=-h$.
+        したがって
+        \[ p=x'+\bar{\iota}(t')=\bar{\iota}(h)+\bar{\iota}(-h)=0. \]
 
         \paragraph{$\shX \to \shP$の一意性．}
         最後に$\phi, \phi': \shZ \to \shE f^*$が
@@ -675,62 +726,171 @@
         すなわち$\psi=0$．
     \end{proof}
 
+    \begin{Lemma}\label{lemma:two_exact_seq_raise_po}
+        以下の図式が可換であり，各行は完全であるとする．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
+            0 \ar[r]& \shG' \ar[r]& \shP \ar[r]& \shF \ar[r]& 0
+        }}\]
+        この時，$\shP$はpushout of $g$ and $\iota$.
+    \end{Lemma}
+    \begin{proof}
+        各射に次のように名前を付ける．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE
+            \ar[d]^-{\bar{g}}\ar[r]^-{\kappa}\ar@/^10pt/[rdd]^(.8){\alpha}& \shF \ar@{=}[d]\ar[r]& 0 \\
+            0 \ar[r]& \shG' \ar[r]_-{\bar{\iota}}\ar@/_5pt/[rrd]_-{\beta}& \shP \ar[r]_-{\bar{\kappa}}& \shF \ar[r]& 0 \\
+            {} & {} & {} & \shX
+        }}\]
+
+        \paragraph{$\shP=\bar{g}(\shE)+\bar{\iota}(\shG')$.}
+        $p \in \shP$を任意に取る．
+        \begin{enumerate}
+            \item
+                $\kappa(e)=\bar{\kappa}(p)$となる$e \in \shE$をとる． 
+                $\kappa$ :: surj.ゆえ$e$が存在することに注意．
+            \item
+                $\bar{\iota}(g')=p-\bar{g}(e)$となる$g' \in \shG'$をとる． 
+                $p-\bar{g}(e) \in \ker \bar{\kappa}=\im \bar{\iota}$ゆえ
+                $g'$が存在することに注意．
+        \end{enumerate}
+        すると$p=\bar{g}(e)+\bar{\iota}(g')$となる．
+        実際，
+        \[ \bar{g}(e)+\bar{\iota}(g')=\bar{g}(e)+(p-\bar{g}(e))=p. \]
+
+        \paragraph{$\phi: \shP \to \shX$の構成．}
+        $p \in \shP$に対して，
+        $p=\bar{g}(e)+\bar{\iota}(g')$となる$e \in \shE, g' \in \shG'$をとる．
+        これを元に$\phi(p)=\alpha(e)+\beta(g')$とする．
+        すると明らかに
+        $\phi \circ \bar{g}=\alpha, \phi \circ \bar{\iota}=\beta$が成立する．
+        $\phi$がwell-definedならmodule homomorphismになることは明らか．
+        
+        \paragraph{$\phi$ :: well-defined.}
+        $(p=)\bar{g}(e)+\bar{\iota}(g')=0$となる$e \in \shE, g'\in \shG'$をとる．
+        $\alpha(e)+\beta(g')=0$となることを示せば良い．
+        まず，$0=\bar{\kappa}(\bar{g}(e)+\bar{\iota}(g'))=\kappa(e)$．
+        したがって$e \in \ker \kappa=\im \iota$であり，
+        $\iota(h)=e$を満たす$h \in \shG$が存在する．
+        \[ 0=\bar{g}(e)+\bar{\iota}(g')=\bar{g}\iota(h)+\bar{\iota}(g')=\bar{\iota}(g(h)+g'). \]
+        $\bar{\iota}$ :: injより$g(h)+g'=0$.
+        よって
+        \[ \alpha(e)+\beta(g')=\alpha \iota(h)+\beta(-g(h))=0. \]
+
+        \paragraph{$\phi$ :: unique.}
+        $\phi':\shP \to \shX$も$\phi$と同様の条件を満たすとする．
+        $P=\bar{\iota}(\shG')+\bar{g}(\shE)$なので，
+        \[ \phi'(p)=\phi'(\bar{g}(e)+\bar{\iota}(g'))=\alpha(e)+\beta(g')=\phi(p). \]
+    \end{proof}
+    %% }}}
+    \begin{Lemma} \label{lemma:peoperties_of_pushout_of_ext}
+        $g, g': \shG \to \shG'$と，
+        extension of $\shF$ by $\shG$をとる．
+        \[\xymatrix{
+            0 \ar[r]& \shG \ar[r]& \shE \ar[r]& \shF \ar[r]& 0
+        }\]
+        以下が成り立つ．
+        \begin{enumerate}[label=(\alph*), leftmargin=*, labelindent=1cm]
+            \item $0_*\shE=0_{\shF, \shG'}$,
+            \item $g_*(-\shE)=-g_*\shE$,
+            \item $g_*\shE+g'_*\shE=(g+g')_*\shE$．
+        \end{enumerate}
+    \end{Lemma}
+    \begin{proof}
+        \paragraph{proof of (a).}
+        以下の図式は可換である．
+        \[\xymatrix{
+            0 \ar[r] & \shG \ar[d]_-{0}\ar[r]^{\iota}&
+                    \shE \ar[r]^-{\kappa}\ar[d]^-{i_2 \circ \kappa}& \shF \ar[r]\ar@{=}[d]& 0 \\ 
+            0 \ar[r]& \shG' \ar[r]_-{i_1}& \shG' \oplus \shF \ar[r]^-{\pr_2}& \shF \ar[r]& 0
+        }\]
+        よってpushoutの一意性から$0_*\shE \iso \shG' \oplus \shF=0_{\shF, \shG'}$．
+
+        \paragraph{proof of (b).}
+        以下の可換図式を見よ．
+        \[\xymatrix{
+            0 \ar[r]& \shG \ar[r]^{(-1)}\ar[d]_-{g}& \shG \ar[r]^{\iota}& \shE \ar[r]^-{\kappa}\ar[d]& \shF \ar[r]\ar@{=}[d]& 0 \\ 
+            0 \ar[r]& \shG' \ar@{=}[r]& \shG' \ar[r]& g_*(-\shE) \ar[r]& \shF \ar[r]& 0 \\ 
+        }\]
+        $(-1)$は同型であることと，
+        $g \circ (-1)=(-1) \circ g$から，以下も可換図式．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar@{=}[r]\ar[d]_-{g}& \shG \ar[r]^{\iota}& \shE \ar[r]^-{\kappa}\ar[d]& \shF \ar[r]\ar@{=}[d]& 0 \\ 
+            0 \ar[r]& \shG' \ar[r]_-{(-1)}& \shG' \ar[r]& g_*(-\shE) \centerpo\ar[r]& \shF \ar[r]& 0 \\ 
+        }}\]
+        よってpushoutの一意性から$g_*(-\shE) \iso -g_*\shE$．
+        また$g_*(\shE) \iso (-g)_* \shE$も分かる．
+
+        \paragraph{proof of (c).}
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar[r]^-{\iota}\ar[d]_-{\diag}& \shE \ar[r]^-{\kappa}\ar[d]_-{\diag}& \shF \ar[r]\ar[d]_-{\diag}& 0\\
+            0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota}&
+                      \shE \oplus \shE \ar[r]^-{\kappa \oplus \kappa}& \shF \oplus \shF\ar[r]\ar@<5pt>[d]^-{\pr_1}& 0\\
+            0 \ar[r]& \shG \oplus \shG\ar[r]\ar@{=}[u]& (\shE \oplus \shE)\diag^* \ar[r]\ar[u]& \shF \ar[r]\ar[u]^-{\diag}\centerpb& 0 \\
+        }}\]
+        今，この図式は可換であり，各行は完全列である．
+        $(\kappa \oplus \kappa) \circ \diag=\diag \circ \kappa$なので，
+        pullback $(\shE \oplus \shE)\diag^*$の普遍性から，
+        図式を可換に保つ$\phi=\langle \diag, \kappa \rangle: \shE \to (\shE \oplus \shE)\diag^*$が存在する．
+        \[\vcenter{\xymatrix{
+            0 \ar[r]& \shG \ar[r]^-{\iota}\ar[d]_-{\diag}& \shE \ar[r]^-{\kappa}\ar[dd]_-{\phi}& \shF \ar[r]\ar[d]_-{\diag}& 0\\
+            & \shG \oplus \shG&{}& \shF \oplus \shF \ar[d]^-{\pr_1}&\\
+            0 \ar[r]& \shG \oplus \shG\ar[r]\ar@{=}[u]& (\shE \oplus \shE)\diag^* \ar[r]& \shF \ar[r]& 0 \\
+        }}\]
+        右の縦の射は合成すると恒等射．
+        したがって左の四角形はpushout diagram.
+        pushoutの一意性から一意性から$(\shE \oplus \shE)\diag^* \iso \diag^* \shE$．
+
+        このことから求める同型が得られる．
+        \begin{align*}
+            g_*\shE+g'_*\shE
+            =&  \codiag_*(g_*\shE \oplus g'_*\shE)\diag^*         \\
+            =&  \codiag_*(g \oplus g')_*(\shE \oplus \shE)\diag^* \\
+            =&  (\codiag_*(g \oplus g')_*\diag_*)\shE             \\
+            =&  (\codiag \circ (g \oplus g') \circ \diag)_*\shE   \\
+            =&  (g+g')_*\shE.
+        \end{align*}
+        （2つめの等号は自明．）
+    \end{proof}
+    
     \begin{Lemma}
         $\shF, \shG$ :: $\shO_X$-modules on ringed scheme :: $X$とする．
         この時，$E(\shF, \shG)$には加法群の構造が定まる．
     \end{Lemma}
     \begin{proof}
         $0_{\shF, \shG}$がBear sumについての単位元であること，
+        \[ \shE+0=\id[*]\shE+0_*\shE=(\id+0)_*\shE=\id[*]\shE=\shE. \]
+
         $-\shE$が逆元であること，
+        \[ \shE+(-\shE)=\id[*]\shE+(-\id)_*\shE=(\id-\id)_*\shE=0_*\shE=0. \]
+
+        可換性．
+        \[ \shE+\shE'=\codiag_*(\shE \oplus \shE')\diag^*=\codiag_*(\shE' \oplus \shE)\diag^*=\shE'+\shE. \]
+
         結合律が成り立つこと，
-        可換性を確かめる．
+        \begin{align*}
+            {}& (\shE_1+\shE_2)+\shE_3 \\
+            =&  \codiag_*((\shE_1+\shE_2) \oplus \shE_3) \diag^* \\
+            =&  \codiag_*((\codiag_*(\shE_1 \oplus \shE_2)\diag^*) \oplus \shE_3) \diag^*
+        \end{align*}
+        (TODO)
     \end{proof}
 
     \begin{Lemma}\label{lemma:PhiIsIso}
         全単射$\Phi: E(\shF, \shG) \to \Ext^1_{\shO_X}(\shE, \shG)$は
         加法群の間の同型である．
     \end{Lemma}
-
-    \begin{Lemma}
-        $g, g': \shG \to \shG'$と，
-        extension of $\shF$ by $\shG$をとる．
-        \[\xymatrix{
-                0 \ar[r]& \shG \ar[r]& \shE \ar[r]& \shF \ar[r]& 0
-        }\]
-        この時，$g_*\shE+g'_*\shE=(g+g')_*\shE$．
-    \end{Lemma}
     \begin{proof}
-        $g_*\shE+g'_* \shE$は以下のpullback/pushout diagramに収まる(fit)．
-        \[\vcenter{\xymatrix{
-            0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota'}\ar[d]_-{g \oplus g'}& \shE \oplus \shE \ar[r]^-{\kappa \oplus \kappa'}\ar[d]& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
-            0 \ar[r]& \shG \oplus \shG \ar[r]\ar[d]_-{\codiag}& g_*\shE \oplus g'_*\shE \ar[r]\ar[d]\centerpo& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
-            0 \ar[r]& \shG \ar[r]& \shM \ar[r]\centerpo& \shF \oplus \shF\ar[r]& 0\\
-            0 \ar[r]& \shG \ar[r]\ar@{=}[u]& g_*\shE+g'_*\shE' \ar[r]\ar[u]& \shF \ar[r]\ar[u]_-{\diag}\centerpb& 0 \\
-        }}\]
-        一行増やして次の図式を考える．
-        \[\vcenter{\xymatrix{
-                    0 \ar[r]& \shG \ar[r]^-{\iota}\ar[d]_-{\diag}& \shE \ar[r]^-{\kappa}\ar[d]_-{\diag}& \shF \ar[r]\ar[d]_-{\diag}& 0\\
-            0 \ar[r]& \shG \oplus \shG \ar[r]^-{\iota \oplus \iota}\ar[d]_-{g \oplus g'}& \shE \oplus \shE \ar[r]^-{\kappa \oplus \kappa}\ar[d]& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
-            0 \ar[r]& \shG \oplus \shG \ar[r]\ar[d]_-{\codiag}& g_*\shE \oplus g'_*\shE \ar[r]\ar[d]\centerpo& \shF \oplus \shF \ar[r]\ar@{=}[d]& 0\\
-            0 \ar[r]& \shG \ar[r]& \shM \ar[r]\centerpo& \shF \oplus \shF\ar[r]\ar@<5pt>[d]^-{\pr}& 0\\
-            0 \ar[r]& \shG \ar[r]\ar@{=}[u]& g_*\shE+g'_*\shE' \ar[r]\ar[u]& \shF \ar[r]\ar[u]^-{\diag}\centerpb& 0 \\
-        }}\]
-        左端の縦の射$\diag \circ ( g \oplus g') \circ \codiag$は$g+g'$に等しい
-        \footnote{ この等式を元に考えて一行増やした． }．
-        また，右端の縦の射$\diag \circ \pr$は$\id[\shF]$に等しい．
-        さらに中央最上部の$\shE$から$\shM$への射と，
-        同じ$\shE$から右下の$\shE \oplus \shF$への射を見ると，
-        pullbackの普遍性から所望の射$\shE \to g_*\shE+g'_*\shE$の存在が言える．
-        
-        まとめて，以下の可換図式が得られた．
-        \[\vcenter{\xymatrix{
-            0 \ar[r]& \shG \ar[d]_-{g+g'}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
-            0 \ar[r]& \shG \ar[r]& g_*\shE+g'_*\shE \ar[r]& \shF \ar[r]& 0
-        }}\]
-        補題(\ref{lemma:two_exact_seq_raise_pb})から左の四角形はpushout diagramであり，
-        pushoutの普遍性から$g_*\shE+g'_*\shE \iso (g+g')_* \shE$．
+        最初に次のことに注意する: 
+        $f+f'=\codiag \circ (f \oplus f') \circ \diag$．
+        したがって$\Hom(\shF, \shG)$の加法は次のように定まる．
+        \[
+            +: \Hom(\shF, \shG)^{\oplus 2}=\Hom(\shF^{\oplus 2}, \shG^{\oplus 2}) \xrightarrow{(\circ \diag)}
+            \Hom(\shF^{\oplus 2}, \shG) \xrightarrow{(\codiag \circ)}
+            \Hom(\shF, \shG)
+        \]
+        (TODO)
     \end{proof}
-    $g_*(-\shE)=-g_*\shE, $
 
 \section{First Order Deformation of a Local Complete Intersection.}
     この節は\ref{thm:SpaceOf1stOrdDefOfLCI}を
@@ -769,21 +929,21 @@
     \end{Def}
     
     議論は，
-    $\nu(\famX_1, \famX_2)$，$\shE(\famX_1, \famX_2)$，$e(\famX_1, \famX_2)$の対応の連鎖である．
-    これらはいずれもfirst order deformations :: $\famX_1, \famX_2$の
+    $\nu(\defX_1, \defX_2)$，$\shE(\defX_1, \defX_2)$，$e(\defX_1, \defX_2)$の対応の連鎖である．
+    これらはいずれもfirst order deformations :: $\defX_1, \defX_2$の
     「差」を表現する量である．
     ここでの「差」の意味を理解するには，
     最初に命題(\ref{prop:key1}), (\ref{prop:key2})のステートメントを見るのが良い．
     そして自明なfirst order deformation of $X$ :: $X \times D$と
-    与えられたfirst order deformationの「差」である$e(\famX, X \times D)$によって
+    与えられたfirst order deformationの「差」である$e(\defX, X \times D)$によって
     first order deformation of $X$を分類する（定義\ref{def:KSclass-map}）．
 
-    \subsection{\tp{$\nu(\famX_1, \famX_2)$}{v(X1,X2)}}
+    \subsection{\tp{$\nu(\defX_1, \defX_2)$}{v(X1,X2)}}
     \begin{Def}
         $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
         これのideal sheafを$\shI \subseteq \shO_P$とする．
-        $\famX_1, \famX_2$ :: first order deformation of $X$とすると，
-        $\famX_1, \famX_1$ :: embedded in $P$となる．
+        $\defX_1, \defX_2$ :: first order deformation of $X$とすると，
+        $\defX_1, \defX_1$ :: embedded in $P$となる．
         そこでideal sheafをそれぞれ$\shI_1, \shI_2 \subseteq \shO_P$とする．
         first order deformation of $X$の定義から，
         $\shI_i/\epsilon \shI_i \iso \shI \ (i=1,2)$．
@@ -802,10 +962,10 @@
         \]
         と写す．
         これは$\tilde{f}_i$のとり方に依らず，well-defined．
-        この写像を$\nu(\famX_1, \famX_1)$と書く．
+        この写像を$\nu(\defX_1, \defX_1)$と書く．
 
         以下の$\C$-moduleとしての同型があるため，
-        $\nu(\famX_1, \famX_2)$を以下のいずれの集合の元ともみなす．
+        $\nu(\defX_1, \defX_2)$を以下のいずれの集合の元ともみなす．
         \begin{align*}
             {}&   \Hom_{\shO_P}(\shI, (\epsilon D) \otimes_{\C} \shO_X) \\
             \iso& \Hom_{\shO_P}(\shI/\shI^2, (\epsilon D) \otimes_{\C} \shO_X) \\
@@ -815,32 +975,48 @@
         \end{align*}
     \end{Def}
 
-    \begin{Prop}[\cite{DefLCI} Prop2.8a,b,c,d,e]
+    \begin{Prop}[\cite{DefLCI} Prop2.8a,b,c,d,e] \label{prop:properties_of_nu}
         $X$ :: \textbf{complete intersection} embedded in $P$とする．
         \begin{enumerate}[label=(\alph*), leftmargin=*]
-            \item $\nu(\famX_1, \famX_2)=0 \iff \famX_1=\famX_2$．
+            \item $\nu(\defX_1, \defX_2)=0 \iff \defX_1=\defX_2$．
 
-            \item $\nu(\famX_1, \famX_2)+\nu(\famX_2, \famX_3)=\nu(\famX_1, \famX_3)$．
+            \item $\nu(\defX_1, \defX_2)+\nu(\defX_2, \defX_3)=\nu(\defX_1, \defX_3)$．
 
-            \item $\nu(\famX_2, \famX_1)=-\nu(\famX_1, \famX_2)$．
+            \item $\nu(\defX_2, \defX_1)=-\nu(\defX_1, \defX_2)$．
 
             \item
-                任意の$\famX$ :: first order deformation of $X$, 
+                任意の$\defX$ :: first order deformation of $X$, 
                 任意の$\nu \in H^0(X, (\shI/\shI^2)\sidehat)$に対し，
-                $\famY$ :: first order deformation of $X$が存在して，
-                $\nu=\nu(\famX, \famY)$となる．
+                $\defY$ :: first order deformation of $X$が存在して，
+                $\nu=\nu(\defX, \defY)$となる．
 
             \item
                 $U$ :: open subset of $X$について，
-                $\nu(\famX_1|_U, \famX_2|_U)=\nu(\famX_1, \famX_2)|_U:
+                $\nu(\defX_1|_U, \defX_2|_U)=\nu(\defX_1, \defX_2)|_U:
                 (\shI/\shI^2)|_U \to (\epsilon D) \otimes_{\C} \shO_U$．
         \end{enumerate}
     \end{Prop}
     \begin{proof}
         (d)のみ証明する．他は自明であろう．
+        
+        $\shI$ :: ideal sheaf of $X$,
+        $\shI'$ :: ideal sheaf of $\defX$とし，
+        sheaf of ideal :: $\shJ \subseteq \shO_{P}$を次のように定める．
+        （これがsheaf of idealであることは自明．）
+        \[
+            \shJ(U)=\{ \tilde{f}' \in \shO_{P}(U) \mid
+                \Exists{f' \in \shI'(U)}
+            (f'-\tilde{f}') \bmod \epsilon \shI(U)
+                =v_U(\tilde{f}' \bmod \epsilon \shO_P(U)) \}
+        \]
+
+        $\shJ$で定まる$P$のsubscheme :: $\defY$が$X$のdeformationであることを示す．
+        これは自然な全射$\shJ/\epsilon \shJ \to \shJ$が
+        単射（したがって同型）であることを示せば良い(\cite{DefLCI} Lemma 2.6)．
+        (TODO)
     \end{proof}
 
-    \subsection{\tp{$\shE(\famX_1, \famX_2)$}{E(X1,X2)}}
+    \subsection{\tp{$\shE(\defX_1, \defX_2)$}{E(X1,X2)}}
     \begin{Lemma}
         $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とし，
         ideal sheafは$\shI \subseteq \shO_P$であるとする．
@@ -851,25 +1027,9 @@
         $x \in X \subset P$での$\shI/\shI^2$のstalkがfree moduleであることを示す．
         $A:=\shO_{P, x}$とし，
         $I:=\shI_x$を生成するregular sequenceを$x_1, \dots, x_r$とする．
-        
-        次の写像を考える．
-        \begin{defmap}
-            \phi:& (A/I)^{\oplus n}& \to& I/I^2 \\
-            {}& (\bar{a}_1,\dots,\bar{a}_r)& \mapsto& \sum \bar{a}_i x_i
-        \end{defmap}
-        $\phi$ :: surjectiveは明らかなのでinjectiveであることを示す．
-        
-        $A^{\oplus n} \to (A/I)^{\oplus n}$と$\phi$の合成で$0$になる元を
-        $(a_1,\dots,a_r) \in A^{\oplus n}$とする．
-        各$i=1,\dots,r$について$a_i \in I$を示す．
-        今，$\sum a_i x_i \in I^2$なので(TODO)
-        \[ a_r x_r=0 \text{ in } A/(x_1,\dots,x_{r-1}). \]
-        $x_1,\dots,x_r$ :: regular sequenceより，
-        $x_r$は$A/(x_1,\dots,x_{r-1})$においてnon-zerodivisorなので，
-        $a_r=0$ in $A/(x_1,\dots,x_{r-1})$．
-        よって$a_r \in (x_1,\dots,x_{r-1}) \subseteq I$．
-        \cite{Mat} p.127より，
-        各$a_1, \dots, a_{r-1}$についても同様の議論が出来る．
+        \cite{IntTh} Lemma A.6.1より（この文献の証明は同値な命題\cite{Mat} Thm16.2のものより美しい），
+        graded ringとして$(A/I)[t_1,\dots,t_r] \iso \bigoplus_{d \geq 0}(I^{d}/I^{d+1})$．
+        $1$次成分の同型から$(A/I)^{\oplus r} \iso I/I^2$．
     \end{proof}
 
     \begin{Lemma}[First Fundamental Exact Sequence]
@@ -877,92 +1037,196 @@
         ideal sheafは$\shI \subseteq \shO_P$であるとする．
         この時，以下はexact．
         \[\xymatrix{
-            0 \ar[r]& \shI/\shI^2 \ar[r]& (\shDer_{P/\C})|_{X} \ar[r]& \shDer_{X/\C} \ar[r]& 0
+                0 \ar[r]& \shI/\shI^2 \ar[r]^-{d}& (\shDer_{P/\C})|_{X} \ar[r]& \shDer_{X/\C} \ar[r]& 0
         }\]
         すなわち，
         $(\shDer_{P/\C})|_{X}$ :: extension of $\shDer_{X/\C}$ by $\shI/\shI^2$．
     \end{Lemma}
     \begin{proof}
-        (TODO)
         よく知られている通り，
         最初の射が単射であることを示しさえすれば良い．
+        
+        $\shK=\ker d$とすると，$\shK \subseteq \shI/\shI^2$．
+        したがって$\shI/\shI^2$同様$\shK$もlocally free.
+        一方，\cite{HarAG} ThmII.8.17(2)の証明より
+        $d$はirreducible pointの近傍でinjective．
+        したがって$\Supp \shK$ :: support of $\shK$は
+        $\Sing X$ :: $X$のsingular pointsである．
+        $X$についての仮定からこれは離散集合で，すなわち開集合を含まない．
+        もし$\shK_x \neq 0$ならば，
+        $\shK$はtrivialization open coverを持たないので，
+        $\shK$ :: locally freeに反する．
+        よって$\shK=\ker d=0$．
     \end{proof}
 
     \begin{Def}
         $U \subseteq X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
-        $\famX_1, \famX_2$ :: first order deformation of $X$について，
-        \[ \shE(\famX_1|_U, \famX_2|_U):=\nu(\famX_1|_U, \famX_2|_U)_*((\shDer_{P/\C})|_{X}) \]
+        $\defX_1, \defX_2$ :: first order deformation of $X$について，
+        \[
+            \shE(\defX_1|_U, \defX_2|_U)
+            :=\nu(\defX_1|_U, \defX_2|_U)_*((\shDer_{P/\C})|_{U})
+            =(\nu(\defX_1, \defX_2)|_U)_*((\shDer_{P/\C})|_{U})
+        \]
         をextension of $\shDer_{U/\C}$ by $(\epsilon D) \otimes_{\C} \shO_{U}$として定める．
     \end{Def}
-    （TODO: 張り合わせが出来ることに言及．）
-    貼りあわせによって$\shE(\famX_1, \famX_2)$を定める．
+
+    \begin{Lemma}
+        $U \subseteq X$ :: \textbf{affine complete intersection} over $\C$ embedded in $P$とする．
+        この時$X$ :: finite type over $\C$なので
+        $U \inclmap \affine^n_{\C}$ :: closed embeddingが存在する．
+        $\defU$ :: first order deformation of $U$ 
+        \footnote{ 補題(\ref{lemma:def_of_affine_is_affine})よりこれもaffine． }
+        について，$U \inclmap \affine^{n}_{\C}$の
+        拡張$\defU \inclmap \affine^{n}_{D}$が存在する．
+    \end{Lemma}
+    \begin{proof}
+        \cite{DefLCI} Lemma 4.8.
+    \end{proof}
+
+    \begin{Lemma}
+        $U \subseteq X$ :: \textbf{affine complete intersection} over $\C$ embedded in $P$とする．
+        $P_1, P_2, P_3$ :: nonsingular affine scheme over $\C$と
+        $U \inclmap P_i$が与えられているとする．
+        $\defP_i=P_i \times_{\C} D$への
+        $U$のlifting (first order deformation) :: $\defU_i \to \defP_i$
+        を任意にとり，
+        対応するextension of $\shDer_{U/\C}$ by $(\epsilon D) \otimes_{\C} \shO_{U}$を
+        $\shE_i$とする．
+        
+        この時同型$\alpha_{j, i}: \shE_i \isomap \shE_j$が存在し，
+        cocycle condition :: $\alpha_{1,3}=\alpha_{1,2} \circ \alpha_{2,3}$が成立する．
+    \end{Lemma}
+    \begin{proof}
+        \cite{DefLCI} p.24.
+    \end{proof}
+
+    したがって$\{U_i\}$ :: open affine, complete intersection covering of $X$について，
+    $\shE(\defX_1|_{U_i}, \defX_2|_{U_i})$の貼り合わせることが出来
+    \footnote
+    {
+        次のことに注意して上の二つの補題を使う:
+        restriction of sheaves to open subsetはleft adjoint functorであるから，
+        pushout of extensions (colimit)を保つ，
+        よって$V \subseteq U$について
+        \[
+            \shE(\defX_1|_U, \defX_2|_U)|_V
+            \iso (\nu(\defX_1, \defX_2)|_V)_*(\shDer_{P/\C}|_{V})
+            \iso \nu(\defX_1|_V, \defX_2|_V)_*(\shDer_{P/\C}|_{V}).
+        \]
+    }，
+    こうして$\shE(\defX_1, \defX_2)$を得る．
+
 
     \begin{Prop}[\cite{DefLCI} Prop4.9a,b,c,f]\label{prop:key1}
-        $\famX_1, \famX_2$ :: first order deformations of $X$とする．
+        $\defX_1, \defX_2$ :: first order deformations of $X$とする．
         \begin{enumerate}[label=(\alph*), leftmargin=*]
         \item
-            $\shE(\famX, \famX) \iso 0_{\shDer_{X/ \C}, (\epsilon D) \otimes \shO_X}$．
+            $\shE(\defX, \defX) \iso 0_{\shDer_{X/ \C}, (\epsilon D) \otimes \shO_X}$．
         \item
-            $\shE(\famX_2, \famX_1)=-\shE(\famX_1, \famX_2)$．
+            $\shE(\defX_2, \defX_1)=-\shE(\defX_1, \defX_2)$．
         \item 
-            $\shE(\famX_1, \famX_2)+\shE(\famX_2, \famX_3) \iso \shE(\famX_1, \famX_3)$．
+            $\shE(\defX_1, \defX_2)+\shE(\defX_2, \defX_3) \iso \shE(\defX_1, \defX_3)$．
 
         \item
-            任意の$\shE$ :: extension of $\shDer_{X/\C}$ by $(\epsilon) \otimes_{\C} \shO_{X}$と
-            任意の$\famX$ :: first order deformation of $X$に対し，
-            \[ \shE \iso \shE(\famX, \famY) \]
-            なる$\famY$ :: first order deformation of $X$が存在する．
+            任意の$\shE$ :: extension of $\shDer_{X/\C}$ by $(\epsilon D) \otimes_{\C} \shO_{X}$と
+            任意の$\defX$ :: first order deformation of $X$に対し，
+            \[ \shE \iso \shE(\defX, \defY) \]
+            なる$\defY$ :: first order deformation of $X$が存在する．
         \end{enumerate}
     \end{Prop}
-    \begin{proof}
+    (d)を命題(\ref{prop:splittings_and_isos})の後に証明する．
+    他は命題(\ref{prop:properties_of_nu})の対応する命題と
+    補題(\ref{lemma:peoperties_of_pushout_of_ext})から得られる．
+
+    \begin{Prop}[\cite{DefLCI} Prop3.9, Prop4.10] \label{prop:splittings_and_isos} \label{prop:key2}
+    \begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item 
+        $\defX_1, \defX_2$ :: first order deformation of $X$とする．
+        この時，splittings of $\shE(\defX_1, \defX_2)$と
+        isomorphisms :: $\defX_1 \iso \defX_2$の間に一対一対応がある．
+        さらにこの対応を通して，extensionsの加法と同型の合成が対応する
+        \footnote
+        {
+            すなわち$\phi_1: \defX_1 \iso \defX_2, \phi_2: \defX_2 \iso \defX_3$について，
+            $\phi_2 \phi_1: \defX_1 \iso \defX_3$は$\shE(\defX_1, \defX_3)$に対応する．
+        }．
+
+    \item
+        また，$\shE_1, \shE_2$ :: extension of sheavesとする．
+        この時splittings of $\shE_1-\shE_2$とisomorphisms :: $\shE_1 \iso \shE_2$の間に
+        一対一対応がある．
+    \end{enumerate}
+    \end{Prop}
+
+    \begin{proof}[命題(\ref{prop:key1})(d)の証明]
+        まず$\{X_{\alpha}\}_{\alpha}$を$X$のaffine open coverとし，
+        $\defX_{\alpha}=\defX|_{X_{\alpha}}$とおく．
+        $\defX$ :: finite type over $\C$なので，
+        うまくcoverを取れば$\defX_{\alpha} \inclmap \affine^{n}_{\C}$が存在するように出来る．
+        このembeddingに対応するconormal bundle of $X_{\alpha}$を$\shC_{\alpha}$とする．
+        すると以下のSESが存在する．
+        \[
+            E:
+        \xymatrix{
+            0 \ar[r]& \shC_{\alpha} \ar[r]& \shDer_{\affine^{n_{\alpha}}}|_{X_{\alpha}} \ar[r]& 
+            \shDer_{X_{\alpha}} \ar[r]& 0
+        }\]
+        このextensionを$E:=\shDer_{\affine^{n_{\alpha}}}|_{X_{\alpha}}$と略す．
+        ここから$\Ext$のLESが誘導される．
+        \[\xymatrix{
+            \Hom_{\shO_{X_{\alpha}}}(\shC_{\alpha}, (\epsilon D) \otimes \shO_{X_{\alpha}})
+            \ar[r]^-{d_{E}}&
+            \Ext^1_{\shO_{X_{\alpha}}}(\shDer_{X_{\alpha}}, (\epsilon D) \otimes \shO_{X_{\alpha}})
+            \ar[r]&
+            \Ext^1_{\shO_{X_{\alpha}}}(\shDer_{\affine^{n_{\alpha}}}|_{X_{\alpha}},
+                (\epsilon D) \otimes \shO_{X_{\alpha}})
+            =0
+        }\]
+        右の$=0$は\cite{HarAG} Prop III.6.7, Prop III.6.3, Thm III.3.7から得られる．
+        したがって$d_{E}$ :: surj.
+        
+        なので定理(\ref{thm:ExtAndExt1})より，
+        $f_{\alpha}: \shC_{\alpha} \to (\epsilon D) \otimes \shO_{X_{\alpha}}$と
+        同型$(f_{\alpha})_*E \iso \shE|_{X_{\alpha}}$が存在する．
+        一方命題(\ref{prop:properties_of_nu})より，
+        $f_{\alpha}=\nu(\tilde{\defX}_{\alpha}, \defX_{\alpha})$を満たす
+        first order deformation of $X_{\alpha}$
+        :: $\tilde{\defX}_{\alpha} \subseteq \affine^{n_{\alpha}}_D$が存在する．
+        
+        こうして得られる$\{\defX_{\alpha}\}_{\alpha}$を貼り合わせる．
+        命題(\ref{prop:splittings_and_isos})
         (TODO)
     \end{proof}
 
-    \begin{Prop}[\cite{DefLCI} Prop4.10]\label{prop:key2}
-        $\famX_1, \famX_2$ :: first order deformations of $X$とする．
-        この時，以下は同値．
-        \begin{enumerate}
-            \item $\famX_1$と$\famX_2$は同型．
-            \item $\shE(\famX_1, \famX_2)$ :: split extension.
-        \end{enumerate}
-    \end{Prop}
-    \cite{DefLCI} pp.22-23では更に詳しく，
-    同型$\famX_1 \isomap \famX_2$が
-    $\Hom_{\shO_X}(\shDer_{X/\C}, \shO_X)$の元に一対一対応することが述べられている．
-    この集合は$\Ext^1_{\shO_X}(\shDer_{X/\C}, \shO_X)$の中で$0$に潰れていることに注意．
-    \begin{proof}
-        (TODO)
-    \end{proof}
-
-    \subsection{\tp{$e(\famX_1, \famX_2)$}{e(X1,X2)}}
+    \subsection{\tp{$e(\defX_1, \defX_2)$}{e(X1,X2)}}
     \begin{Def}
         $T^i(X)=\Ext^i_{\shO_X}(\shDer_{X/\C}, \shO_X)$とおく．
-        $\famX$ :: first order deformation of $X$に対し，
+        $\defX$ :: first order deformation of $X$に対し，
         \[
-            e(\famX_1, \famX_2)
+            e(\defX_1, \defX_2)
                 \in
                 \Ext^1(\shDer_{X/\C}, (\epsilon D) \otimes_{\C} \shO_X)
                 \iso (\epsilon D) \otimes T^1(X)
                 \iso T^1(X)
                 \iso \Hom((\epsilon D)^*, T^1(X))
         \]
-        を，$\shE(\famX, X \times D)$に対応する元とする(\ref{thm:ExtAndExt1})．
+        を，$\shE(\defX, X \times D)$に対応する元とする(\ref{thm:ExtAndExt1})．
     \end{Def}
     補題(\ref{lemma:PhiIsIso})より，
     命題(\ref{prop:key1}), (\ref{prop:key2})と同様の命題が
-    $e(\famX_1, \famX_2)$についても性質する．
+    $e(\defX_1, \defX_2)$についても性質する．
 
     \begin{Def}[Kodaira-Spencer class/map, \cite{DefLCI}]\label{def:KSclass-map}
         $T^i(X)=\Ext^i_{\shO_X}(\shDer_{X/\C}, \shO_X)$とおく．
-        $\famX$ :: first order deformation of $X$に対し，
+        $\defX$ :: first order deformation of $X$に対し，
         \[
-            k_{\famX}=e(\famX, X \times D)
+            k_{\defX}=e(\defX, X \times D)
                 \in T^1(X) \iso \Hom((\epsilon D)^*, T^1(X))
         \]
         とおく．
-        この$k_{\famX}$をKodaira-Spencer class of $\famX$と呼ぶ．
-        対応する写像$K_{\famX}: (\epsilon D)^*, T^1(X)$を
-        Kodaira-Spencer map of $\famX$と呼ぶ．
+        この$k_{\defX}$をKodaira-Spencer class of $\defX$と呼ぶ．
+        対応する写像$K_{\defX}: (\epsilon D)^*, T^1(X)$を
+        Kodaira-Spencer map of $\defX$と呼ぶ．
     \end{Def}
     
 \subsection{Complete Classification.}
@@ -973,7 +1237,7 @@
     \end{Thm}
     \begin{proof}
         命題(\ref{prop:key1}), (\ref{prop:key2})より，
-        $\famX \mapsto k_{\famX}$がこの対応を与えることは明らか．
+        $\defX \mapsto k_{\defX}$がこの対応を与えることは明らか．
     \end{proof}
 
     \begin{Cor} \label{cor:nonsing-fod}
@@ -997,12 +1261,12 @@
     例えば，次の二つがある．
 
     \begin{itembox}[l]{Deformation of a coherent sheaf :: $F$ on a scheme $X$, over a fixed scheme}
-        $\famX$ :: deformation of $X$ over $(S, s_0)$とする．
+        $\defX$ :: deformation of $X$ over $(S, s_0)$とする．
         deformation of $F$ over $X$とは，
-        $\shF$ :: flat coherent sheaf on $\famX$と
+        $\shF$ :: flat coherent sheaf on $\defX$と
         homomorphism :: $\phi: \shF \to F$の組であって，
         誘導される射
-        \[ \phi \otimes_{\shO_{\famX}} 1_{\shO_{X}}: \shF \otimes_{\shO_{\famX}} \shO_{X} \to F \]
+        \[ \phi \otimes_{\shO_{\defX}} 1_{\shO_{X}}: \shF \otimes_{\shO_{\defX}} \shO_{X} \to F \]
         が同型であるもの．
         (ref. \cite{HarDef} \S 7, p.53)
     \end{itembox}
@@ -1022,7 +1286,7 @@
         $X$ :: scheme over $\C$,
         $F$ :: coherent sheaf on $X$とする.
         この時，$F$のfirst order deformationとは，
-        $\shF$ :: cohenrent sheaf on $\famX=X \times_{\C} D$と
+        $\shF$ :: cohenrent sheaf on $\defX=X \times_{\C} D$と
         homomorphism :: $\phi: F \to \shF$の組であって
         誘導される射$\phi \otimes_{D} 1_{\C}: \shF \otimes \C \to F$が同型であるものとする．
 
