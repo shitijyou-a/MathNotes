@@ -565,58 +565,35 @@
         \item
             $f: \shF' \to \shF$と
             $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-            $\shE f^*$を$f$と$\kappa: \shE \to \shF$のpullbackとする．
-            すると次の図式で上の行は完全である（定義の直後で示す）．
-            \[\vcenter{\xymatrix{
-                0 \ar[r]& \shG \ar@{=}[d]\ar[r]& f^*\shE \ar[d]\ar[r]& \shF' \ar[d]^-{f}\ar[r]& 0 \\
-                0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]\centerpb& 0
-            }}\]
-            そこで新しく出来たextension of $\shF'$ by $\shG$を
-            pullback of $\shE$ by $f$と呼ぶ．
-
+            $\shE f^*$ :: pullback of $\shF$ by $\shG$を次で定める．
+            これがextension of $\shF'$ by $\shG$になっていることは簡単に確かめられる．
+            まず，sheafとしては$\shE f^*$は
+            \[ \shE f^*=\{ \sect{U}{e \oplus x'} \in \shE \oplus \shF' \mid \kappa_U(e)=f_U(x') \}. \]
+            $\iota_{\shE f^*}, \kappa_{\shE f^*}$は次で定める．
+            \begin{align*}
+                \iota_{\shE f^*}:&  \shG \to \shE f^*; \qquad \sect{U}{y} \mapsto \sect{U}{\iota(y) \oplus 0} \\
+                \kappa_{\shE f^*}:& \shE f^* \to \shF'; \qquad \sect{U}{e \oplus x'} \mapsto \sect{U}{y'}
+            \end{align*}
+            定義を終えた後に，$\shE f^*$が実際にpullback of $f$ and $\kappa$であることを示す．
         \item
-%            $g: \shG \to \shG'$と
-%            $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-%            $g_* \shE$を$g$と$\iota: \shG \to \shE$のpushoutとする．
-%            すると次の図式で下の行は完全である（pullbackの場合の双対）．
-%            \[\vcenter{\xymatrix{
-%                0 \ar[r]& \shG \ar[d]_-{g}\ar[r]^-{\iota}& \shE \ar[d]\ar[r]^-{\kappa}& \shF \ar@{=}[d]\ar[r]& 0 \\
-%                0 \ar[r]& \shG \ar[r]& g_*\shE \ar[r]\centerpo& \shF \ar[r]& 0
-%            }}\]
-%            そこで新しく出来たextension of $\shF$ by $\shG'$を
-%            pushout of $\shE$ by $g$と呼ぶ．
             $g: \shG \to \shG'$と
             $(\shE, \iota, \kappa)$ :: extension of $\shF$ by $\shG$について，
-            $g_* \shE$ :: pushfoward of $\shF$ by $\shG$を次で定める．
+            $g_* \shE$ :: pushout of $\shF$ by $\shG$を次で定める．
             これがextension of $\shF$ by $\shG'$になっていることは簡単に確かめられる．
             まず，sheafとしては$g_* \shE$は次の準同型のcokernelである．
             \[
                 \shG \to \shG' \oplus \shE;
                 \qquad
-                \sect{U}{y} \mapsto \sect{U}{g_U(y)} \oplus \sect{U}{-\iota_U(y)}.
+                \sect{U}{y} \mapsto \sect{U}{g_U(y) \oplus (-\iota_U(y))}.
             \]
             $\iota_{g_*\shE}, \kappa_{g_*\shE}$は次で定める．
             \begin{align*}
-                \iota_{g_*\shE}:& \shG' \to g_*\shE; && y' \mapsto [y', 0] \\
-                \kappa_{g_*\shE}:& g_*\shE \to \shF; && [y', e] \mapsto \kappa_{\shE}(e)
+                \iota_{g_*\shE}:&   \shG' \to g_*\shE; \qquad \sect{U}{y'} \mapsto \sect{U}{[y', 0]} \\
+                \kappa_{g_*\shE}:&  g_*\shE \to \shF;  \qquad \sect{U}{[y', e]} \mapsto \kappa_U(e)
             \end{align*}
+            定義を終えた後に，$g_*\shE$が実際にpushout of $g$ and $\iota$であることを示す．
     \end{enumerate}
     \end{Def}
-
-%    \begin{Claim}
-%        以下の図式を考える．
-%        \[\vcenter{\xymatrix{
-%            {} & {} & f^*\shE \ar[d]_-{\bar{f}}\ar[r]^-{\bar{\kappa}}& \shF' \ar[d]^-{f}& {} \\
-%            0 \ar[r]& \shG \ar[r]_-{\iota}& \shE \ar[r]_-{\kappa}& \shF \ar[r]\centerpb& 0
-%        }}\]
-%        この時，$\bar{\kappa}$ :: surjかつ$\ker \bar{\kappa} \iso \shG$．
-%    \end{Claim}
-%    \begin{proof}
-%        (TODO: epi$\implies$epiは出来ない．
-%        $\bar{\kappa}$ :: surjと，任意の$\shX \to \shF'$が$\bar{\kappa}$を通して分解することが
-%        同値であることを示し，利用するしかなさそう．
-%        $\ker \bar{\kappa} \iso \shG$は$\shG$が$\ker \bar{\kappa}$の普遍性を持つことを示せば良い．)
-%    \end{proof}
 
     extension of $\shF$ by $\shG$が成す集合を$E(\shF, \shG)$と書く．
     \begin{Thm}\label{thm:ExtAndExt1}
@@ -903,6 +880,7 @@
     first order deformationが一致している．
 
     以下，この節では$X$を以下のようなものとする(\cite{DefLCI} Hypotheses4.1)．
+    この条件を($\dagger$)と呼ぶ．
     \begin{screen}
     \begin{itemize}
         \item flat,
@@ -938,6 +916,15 @@
     与えられたfirst order deformationの「差」である$e(\defX, X \times D)$によって
     first order deformation of $X$を分類する（定義\ref{def:KSclass-map}）．
 
+    \begin{Thm}
+        $M'$ :: flat scheme of finite type over $D$とし，
+        $M=M'_{0}$ (fiber of $M' \to \Spec D$ at $0$)とする．
+
+        $X \subseteq M$が($\dagger$)を満たす時，
+        $\defX \subseteq M'$ :: first order deformation of $X$も
+        local complete intersectionである．
+    \end{Thm}
+
     \subsection{\tp{$\nu(\defX_1, \defX_2)$}{v(X1,X2)}}
     \begin{Def}
         $X$ :: \textbf{complete intersection} over $\C$ embedded in $P$とする．
@@ -950,7 +937,7 @@
 
         写像$\shI \to (\epsilon D) \otimes_{\C} \shO_X$を
         以下のように定める．
-        まず，$\sect{U, f} \in \shI$に対し，
+        まず，$\sect{U}{f} \in \shI$に対し，
         \[ \sect{U}{\tilde{f}_i} \bmod \epsilon \shI_i=\sect{U}{f} \ (i=1,2) \]
         となる$\sect{U}{\tilde{f}_i}$が存在する．
         そこで
@@ -976,6 +963,7 @@
     \end{Def}
 
     \begin{Prop}[\cite{DefLCI} Prop2.8a,b,c,d,e] \label{prop:properties_of_nu}
+        $P'$ :: flat scheme of finite type over $D$, $P=P'_{0}$, 
         $X$ :: \textbf{complete intersection} embedded in $P$とする．
         \begin{enumerate}[label=(\alph*), leftmargin=*]
             \item $\nu(\defX_1, \defX_2)=0 \iff \defX_1=\defX_2$．
@@ -1001,17 +989,19 @@
         
         $\shI$ :: ideal sheaf of $X$,
         $\shI'$ :: ideal sheaf of $\defX$とし，
-        sheaf of ideal :: $\shJ \subseteq \shO_{P}$を次のように定める．
+        sheaf of ideal :: $\shJ \subseteq \shO_{P'}$を次のように定める．
+        ただし$\shI_P=\ker (P \inclmap P')$．
+        sheafのsectionは全てopen subset in $P'$ :: $U$上のものである．
         （これがsheaf of idealであることは自明．）
         \[
-            \shJ(U)=\{ \tilde{f}' \in \shO_{P}(U) \mid
-                \Exists{f' \in \shI'(U)}
-            (f'-\tilde{f}') \bmod \epsilon \shI(U)
-                =v_U(\tilde{f}' \bmod \epsilon \shO_P(U)) \}
+            \shJ=\{ \tilde{f}' \in \shO_{P'} \mid
+                \tilde{f}' \bmod \epsilon \shI_{P}=:f \in \shI \mand 
+                \Exists{f' \in \shI'}
+                (f'-\tilde{f}') \bmod \epsilon \shI=v_U(f) \}
         \]
 
         $\shJ$で定まる$P$のsubscheme :: $\defY$が$X$のdeformationであることを示す．
-        これは自然な全射$\shJ/\epsilon \shJ \to \shJ$が
+        これは自然な全射$(\times \epsilon): \shJ/\epsilon \shJ \to \epsilon \shJ$が
         単射（したがって同型）であることを示せば良い(\cite{DefLCI} Lemma 2.6)．
         (TODO)
     \end{proof}
@@ -1210,7 +1200,7 @@
                 \iso T^1(X)
                 \iso \Hom((\epsilon D)^*, T^1(X))
         \]
-        を，$\shE(\defX, X \times D)$に対応する元とする(\ref{thm:ExtAndExt1})．
+        を，$\shE(\defX_1, \defX_2)$に対応する元とする(\ref{thm:ExtAndExt1})．
     \end{Def}
     補題(\ref{lemma:PhiIsIso})より，
     命題(\ref{prop:key1}), (\ref{prop:key2})と同様の命題が
