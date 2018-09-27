@@ -1,0 +1,79 @@
+\usepackage[]{../math_note, enumitem}
+\usepackage{xcolor}
+\usepackage[pdf, all]{xy}
+%% for hyperref {{{
+\usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{pxjahyper}
+%% }}}
+
+%% environment: question/problem {{{
+\usepackage{chngcntr}
+\makeatletter
+    \newcounter{c@question}
+    \counterwithin{c@question}{section}
+    \newenvironment{question}[0]%
+    {\stepcounter{c@question}\begin{itembox}[l]{問\arabic{section}.\arabic{c@question}}}%
+    {\end{itembox}}%
+    \newenvironment{question*}[0]%
+    {\stepcounter{c@question}\begin{itembox}[l]{問}}% 
+    {\end{itembox}}%
+\makeatother
+
+\makeatletter
+    \newcounter{c@problem}
+    \counterwithin*{c@problem}{section}
+    \newenvironment{problem}[0]%
+    {\stepcounter{c@problem}\begin{itembox}[l]{問題\arabic{section}.\arabic{c@problem}}}%
+    {\end{itembox}}%
+    \newenvironment{problem*}[0]%
+    {\stepcounter{c@problem}\begin{itembox}[l]{問題}}% 
+    {\end{itembox}}%
+\makeatother
+%% }}}
+
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\Cat}{\mathbf{Cat}}
+%\newcommand{\Open}{\mathrm{Open}}
+%\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
+%\newcommand{\GrpSch}{\mathbf{GrpSch}}
+
+%\newcommand{\famF}{\mathcal{F}}
+%\newcommand{\famG}{\mathcal{G}}
+%\newcommand{\famU}{\mathcal{U}}
+
+% moduli spaces
+%\newcommand{\modA}{\mathcal{A}}
+%\newcommand{\modC}{\mathcal{C}}
+%\newcommand{\modH}{\mathcal{H}}
+%\newcommand{\modP}{\mathcal{P}}
+%\newcommand{\modT}{\mathcal{T}}
+%\newcommand{\spM}{\mathcal{U}}
+%\newcommand{\modM}{\mathcal{M}}
+
+%\newcommand{\ftor}[1]{\underline{#1}}
+%\newcommand{\ftorM}{\mathcal{M}}
+%\newcommand{\ftorGL}{\mathcal{GL}}
+
+%\newcommand{\mfor}{\text{for }}
+%\newcommand{\acton}{\curvearrowright}
+
+%\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
+
+%\newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
+%\newcommand{\Pic}{\operatorname{Pic}}
+
+%\newcommand{\M}{\mathcal{M}}
+%\newcommand{\K}{\mathcal{K}}
+%\newcommand{\barM}{\overline{\mathcal{M}}}
+
+%\newcommand{\Sing}{\operatorname{Sing}}
+%\newcommand{\Sm}{\operatorname{Sm}}
+%\newcommand{\Reg}{\operatorname{Reg}}
+
+%\newcommand{\shDual}{\omega^{\circ}}
+\newcommand{\shDer}{\Omega}
+\newcommand{\modDer}{\Omega}
+\newcommand{\Der}{\mathrm{Der}}
