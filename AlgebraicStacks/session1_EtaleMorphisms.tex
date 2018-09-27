@@ -1,0 +1,323 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros, enumitem}
+%\setlist[description]{style=nextline}
+\newcommand{\diag}{\Delta}
+
+\begin{document}
+\title{ゼミノート \#1 \\ Etale Morphisms}
+\author{七条彰紀}
+\maketitle
+\cite{HaMo}
+\section{定義}
+\begin{Def}[Infinitesimal Thickening, Formally Smooth/Unramified/Etale]
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+    \item
+    $i \colon Y_0' \inclmap Y'$ :: closed embeddingについて，
+    defining ideal :: $\ker i^{\#}$がnilpotent \footnote{i.e. $\Exists{n > 0} (\ker i^{\#})^n=0$}であるとき，
+    $Y_0'$を$Y'$のinfinitesimal thickening（無限小肥大？）と呼ぶ．
+    あるいは$i$をinfinitesimal thickeningと呼ぶ．
+
+    \item
+    $Y'$ :: affine $Y$-scheme, $Y_0' (\inclmap Y')$ :: infinitesimal thickening of $Y'$とする．
+    $f \colon X \to Y$について，以下の図式を見よ．
+    \[\xymatrix{
+        Y_0' \ar@{_{(}->}[d]_-{\text{inf. thi.}} \ar@[red][r]& X \ar[d]^-{f} \\
+        Y' \ar[r] \ar@[blue][ru]& Y
+    }\]
+    この時，次の写像が定まる．
+    \begin{defmap}
+        {}& \Hom_Y(Y', X)& \to& \Hom_Y(Y_0', X) \\
+        {}& {\color{blue}\to}& \mapsto& {\color{red}\to}
+    \end{defmap}
+    この写像がsurjective injective，bijectiveであるとき，
+    それぞれformally smooth, formally unramified, formally etaleという．
+\end{enumerate}
+\end{Def}
+
+\begin{Def}[(Locally) Of Finite Presented Module/Algebra/Sheaf/Morphism]
+    \begin{enumerate}[label=(\roman*), leftmargin=*] \hfill \vspace{-0.5cm}
+    \item
+        $R$-module :: $M$がfinitely presented moduleであるとは，
+        次の完全列が存在すること．
+        \[\xymatrix{
+            A^{\oplus r} \ar[r]& A^{\oplus s} \ar[r]& M \ar[r]& 0
+        }\]
+
+    \item
+        surjective ring homomorphism :: $\phi \colon R[x_1, \dots, x_s] \to A$が存在し，
+        $\ker \phi$がfinitely generated idealであるとき，
+        $A$ :: finitely presented $R$-algebra (of finite presentation over $R$)という．
+
+    \item
+        $\shF$ :: quasi-coherent sheaf on a scheme $X$とする．
+        $\shF$ :: locally finitely presentedとは，
+        任意のaffine open subscheme of $X$ :: $\Spec A \subseteq X$について，
+        $\Gamma(\Spec B, \shF)$がfinitely presented $B$-\underline{module}であること．
+
+    \item
+        $f \colon X \to Y$ :: locally of finite presentationであるとは，
+        任意の$\Spec B \subseteq Y$と$\Spec A \subseteq f^{-1}(\Spec B)$について，
+        $A$ :: finitely presented $B$-algebraであるということ．
+        あるいは（同値な条件として），
+        affine open cover of $Y$ :: $Y=\bigcup_i \Spec B_i$が存在して，
+        任意の$\Spec A_{ij} \subseteq f^{-1}(\Spec B_i)$について，
+        $A_{ij}$ :: finitely presented $B_{i}$-algebraであるということ．
+
+    \item
+        $f \colon X \to Y$がquasi-compactであるとは，
+        任意のaffine open subset of $X$ :: $\Spec A$について$f^{-1}(\Spec A)$ :: quasi-compactであること．
+        あるいは（同値な条件として），
+        affine open cover of $Y$ :: $Y=\bigcup_i \Spec B_i$が存在して，
+        $f^{-1}(\Spec B_i)$ :: quasi-compactであること．
+        
+    \item
+        $f \colon X \to Y$がquasi-separatedであるとは．
+        またdiagonal morphism :: $\Delta \colon X \to X \times_{Y} X$
+        \footnote
+        {
+            $\Delta$は以下のようにpullbackの普遍性から得られる射である．
+            \[\xymatrix{
+                    X \ar@/^5mm/[rr]\ar[rd]\ar@{-->}[r]^-{\Delta}& X \times X \ar[d]\ar[r] & X\ar[d]^-{f} \\
+                {}& X\ar[r]_-{f} & Y \ar@{}[lu]|{\text{p.b.}}
+            }\]
+        }
+        がquasi-compactであること．
+
+    \item
+        $f \colon X \to Y$がlocally of finite presentationかつquasi-compactかつquasi-separatedである時，
+        $f$ :: finitely presentedという．
+\end{enumerate}
+\end{Def}
+環$R$やscheme :: $Y$をnoetherianとすれば，
+(locally) of finite presentationと(locally) of finite typeは同値に成る．
+一般に(locally) of finite presentationの方が強い条件である（例を参照せよ）．
+
+\begin{Def}[Smooth/Unramified/Etale]
+    morphism :: $f \colon X \to Y$は，
+    formally smooth / unramified / etaleかつfinitely presentedならば
+    smooth / unramified / etaleという．
+\end{Def}
+unramifiedについては，finite typeのみ要求する定義もある．
+finitely presentedを要求するのはEGAからのもので，
+我々が主に参照している\cite{ASS}もこの定義を取っている．
+
+\section{定義に対する例}
+
+\begin{Example}\label{example:not_qsep}
+    locally of finite presentationかつquasi-compactだがNOT quasi-separatedである例を挙げる．
+
+    以下のように設定する．
+    \begin{itemize}
+        \item $k$ :: field,
+        \item $Y=\Spec k[x_1,x_2,\dots]$,
+        \item $z=(x_1, x_2, \dots) \in Y$,
+        \item $U=Y-\{z\}$.
+    \end{itemize}
+    この時，$U$はquasi-compactでない．
+    これは$U$ :: quasi-compact $\iff$ $z$ :: finitely generatedからわかる
+    \footnote
+        {
+            私のノート: \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section2_ex.pdf}
+            補題 Ex2.13.2 (II)に証明がある．
+        }．
+
+    $X$を，二つの$Y$のコピーを$U$で貼り合わせたものとし，
+    $X_1, X_2 \subseteq X$をその$Y$のコピーとする．
+    すなわち$X_1, X_2 \iso Y$．
+    この同型を$\phi_i \colon X_i \to Y$と名付ける．
+    このとき，$f \colon X \to Y$を$\phi_1, \phi_2$の$U$に沿った貼り合わせとする．
+    こうすると$f|_{X_i}=\phi_i$となる．
+
+    \paragraph{$f$ :: locally of finite presentation.}
+    $Y$ :: affine schemeで，$f^{-1}(Y)=X_1 \cup X_2$であり，
+    $X_1, X_2 \iso Y$であった．
+    なので$f$ :: locally of finite presentation.
+
+    \paragraph{$f$ :: quasi-compact.}
+    同じく，$X_1, X_2$ :: quasi-compactなので$f^{-1}(Y)=X_1 \cup X_2$がquasi-compact．
+
+    \paragraph{$f$ :: NOT quasi-separated.}
+    $\basesp (X \times_Y X)$と$\diag \colon X \to X \times_Y X$を考えると次のように成る．
+    \[ \diag \colon x \mapsto (\phi_1^{-1}(x), \phi_2^{-1}(x)). \]
+    一方，$X_1 \times_{Y} X_2 (\subset X \times X)$は，$X_1, X_2 (\iso Y)$がaffineなのでaffine.
+    そこで逆像$\diag^{-1}(X_1 \times_{Y} X_2)$を取ると，これは$U$である．
+    既に述べたとおり，これはNOT quasi-compact.
+\end{Example}
+
+\begin{Example}
+    \paragraph{Smooth (BUT NOT Etale) Morphism.}
+    次のように定める．
+    \begin{defmap}
+        f\colon& \Spec k[x,y]& \to& \Spec k[t] \\
+        {}& (x,y)& \mapsto& x^2+y^2
+    \end{defmap}
+    これはaffine schemeの間の射なのでquasi-separated．
+    $f^{-1}(\Spec k[t])=\Spec k[x, y]$がnoetherian schemeなのでfinitely presented．
+    あとはformally smoothであることを示せば良い．
+    
+    \paragraph{Unramified (BUT NOT Etale) Morphism.}
+    次のように定める:
+    \begin{alignat*}{2}
+        g \colon \Spec \Q[x] \sqcup \Spec \Q[y]& \to \Spec \Q[t] \\
+        x& \mapsto t && \text{ on } \Spec \Q[x]\\
+        y& \mapsto t && \text{ on } \Spec \Q[y]
+    \end{alignat*}
+    $f$の場合と同様に，formally unramifiedだけ示せば良い．
+
+    \paragraph{Etale Morphism.}
+    \begin{defmap}
+        h\colon& \Spec \Q[u, u^{-1}, y]/(y^d-u)& \to& \Spec \Q[t, t^{-1}] \\
+        {}& (u, y)& \mapsto& u
+    \end{defmap}
+    $A=\Q[t, t^{-1}], B=\Q[u, u^{-1}, y]/(y^d-u)$とおくと．
+    $h$に対応する環準同型は$h^{\#} \colon A \to B; t \mapsto ua \bmod (y^d-u)$．
+    $f$の場合と同様に，formally etaleだけ示せば良い．
+    
+    以下の図式を考える．
+    \[\xymatrix{
+            B \ar@[red][r]^-{\alpha}\ar@[blue][rd]^-{\beta}& R/I \\
+            A \ar[u]^-{h^{\#}} \ar[r]_-{\phi}& R \ar[u]_-{\pi}
+    }\]
+    ここで$I \subseteq R$はイデアルで，$I^N=0$となる整数$N>0$が存在する．
+    与えられた$\alpha$から図式を可換にする$\beta$を構成し，
+    このような$\beta$が$\alpha$に対し唯一つであることを示す．
+    まず$\beta$は$t \in B$の像のみで定まることに注意する．
+    図式が可換であることと，次が成立することは同値．
+    \[ \beta h^{\#}(t)=\beta(u)=\phi(t), \qquad \pi \beta(u)=\alpha(u) \]
+    よって$\beta(u)=\phi(t)$で$\beta$を定めれば良い．
+    このように定めれば後者も成立する．
+    また，この構成から明らかに$\beta$はただ一つ．
+
+    \paragraph{Formally Etale BUT NOT Etale Morphism.}
+    例(\ref{example:not_qsep})のmorphism :: $f \colon X \to Y$がそうである．
+    このことを示すには，Formally etaleであることだけ確かめれば十分．
+
+\end{Example}
+
+\section{命題}
+
+\begin{Prop}[\cite{ASS} Prop1.3.6 (i)]
+    $f \colon X \to Y$をmorphism of schemesとする．
+    この時$\shDer_{X/Y}$は次のように成る．
+\begin{enumerate}[label=(\roman*)]
+    \item $f$ :: smooth \quad \ \,$\implies \shDer_{X/Y}$ :: locally free sheaf of finite rank.
+    \item $f$ :: unramified $\iff \shDer_{X/Y}=0$.
+    \item $f$ :: etale $\implies \shDer_{X/Y}=0$.
+\end{enumerate}
+\end{Prop}
+\begin{proof}
+    証明は\cite{Mat} \S 25の内容を一部使う．
+    特に\S 25始めからThm25.1の直前までがわかっていれば良い．
+
+    主張はlocalなものだから，$X=\Spec B, Y=\Spec A$と仮定して良い．
+    $f$ :: smoothより$B$ :: finitely presented $A$-algebra.
+    $f$に対応する準同型を$\phi \colon A \to B$とする．
+
+    (i)を示すために，$\modDer_{B/A}$ :: projective $B$-moduleを示す
+    （projectiveならばlocally freeであることは\cite{StacksProj} section 10.84に証明がある）．
+    これはすなわち，$B$-moduleの以下の図式に対し，
+    図式を可換にする$\tilde{D} \colon \modDer_{B/A} \to M$が存在するということである．
+    \[\xymatrix{
+        {} & \modDer_{B/A} \ar[d]^-{D}\\
+        M \ar@{->>}[r]^-{t}& N
+    }\]
+    ここで$t$ :: surj.
+    
+    次の図式を考える．
+    \[\xymatrix{
+        B \ar[r]^-{f_D}& B[N] \\
+        A \ar[r]\ar[u]^-{\phi}& B[M]\ar@{->>}[u]
+    }\]
+    ここで$B[M]$は\cite{Mat} \S 25でいう$B \ast M$である
+    \footnote
+    {
+        これらは$B$-algebraで，加群としては$B \oplus M$で，
+        乗法は$(b, m) \cdot (b', m')=(bb', bm'+b'm)$で定まる．
+        重要な特性として，$\pi_M: B[M] \to B; (b, m) \mapsto b$のkernelはsquare-zeroで，
+        $\pi_M$の$A$-algebra section (section which is $A$-albgebra morphism)と
+        $A$-derivation $B \to M$が一対一に対応する．
+    }．
+    $B[N]$も同様．
+    $f_D$は$A$-derivation :: $D$に対応する射$b \mapsto (b, D(b))$である．
+    $B[M] \to B[N]$は$(b, m) \mapsto (b, t(m))$で与えられる射で，
+    したがって全射であり核は$0 \oplus (\ker t)$．
+    これはsquare-zero idealである．
+    そして$\phi$ :: formally smoothであるから，
+    図式を可換にする$B \to B[M]$が存在する．
+    これに対応する$A$-derivationが所望の$\tilde{D}$である．
+
+    (ii)を示す．
+    $R$ :: ring, $I \subseteq R$ :: idealを$I^2=0$を満たすものとする．
+    以下が可換図式だったとしよう．
+    \[\xymatrix{
+        B \ar[r]^-{\theta} \ar[rd]_-{\lambda}& R/I \\
+        A \ar[r]\ar[u]^-{\phi}& R\ar[u]_-{\pi}
+    }\]
+    この時，$\lambda$をlifting of $\theta$と呼ぶ．
+    \cite{Mat} \S 25より
+    \footnote
+    {
+        あるいは私のノート
+        \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section8_ex.pdf}
+        のEx8.6(a)の解答より．
+    }，
+    \[
+        \Hom_A(\modDer_{B/A}, I)
+        =\Der_{A} (B, I)
+        =\{\lambda−\lambda′ | \lambda, \lambda' \text{ :: lifting of $\theta$} \}
+    \]
+    となっている．
+    $\phi$ :: formally unramifiedなので，lifting of $\theta$は一つしか無い．
+    よって$\Hom_A(\modDer_{B/A}, I)=0$．
+    任意の$R, I$についてこれが成立するので，これは$\modDer_{B/A}=0$と同値．
+
+    formally etale $\implies$ formally unramifiedなので(ii)$\implies$(iii)は明らか．
+\end{proof}
+
+\begin{Prop}[\cite{ASS} Prop1.3.6 (iii)]
+    exact seq
+\end{Prop}
+
+\begin{Prop}
+    $f \colon X \to Y$を，
+    locally of finite presentationとする．
+    $f$ :: smoothと次の条件は同値である:
+    
+    任意の点$x \in X$について，
+    $x$と$y=f(x) \in Y$の間にaffine neighborhood
+    \[
+        x \in \Spec A \subset X, \qquad y=f(x) \in \Spec B \subseteq Y
+        \qquad (\text{with  }f(\Spec B) \subseteq \Spec A)
+    \]
+    が存在し，ある$n, s$と$f_1, \dots, f_s, g \in A[x_1, \dots, x_n]$について
+    \[ B \iso \left( \frac{A[x_1, \dots, x_n]}{(f_1, \dots, f_s)} \right)[1/g]. \]
+    さらに，Jacobian matrix ($n \times (n-r)$-matrix)
+    \[ \mat{ \frac{\partial f_i}{\partial x_j} }_{i, j} \]
+    の部分$(n-r)$正方行列は，いずれも可逆（行列式が$B$のunit element）．
+
+    さらに，$f$ :: etaleと，この条件で$n=r$であることは同値である．
+\end{Prop}
+
+\begin{Prop}[\cite{StacksProj}, Tag 02G7] \label{prop:unram_qfinite}
+    $f \colon X \to Y$がunramified morphismならば，
+    任意の$y \in Y$について，fiber of $f$ :: $X_y$は
+    disjoint union of spectra of finite separable field extensions of $k(y)$.
+\end{Prop}
+
+\begin{Prop}[\cite{StacksProj}, Tag 04HM]
+    $f \colon X \to Y$をseparated etale morphismとする．
+    $y \in Y$に対し$f^{-1}(s)=\{x_1,\dots,x_n \}$とする
+    （点が有限個であることは命題(\ref{prop:unram_qfinite})による）．
+    étale neighbourhood :: $\nu: (U, u) \to (Y, y)$が存在し，
+    $X_U=X \times_{Y} U$のdisjoint union decomposition
+    \[ X_U=\bigsqcup V_{i, j} \]
+    について$V_{i, j} \iso U$．
+\end{Prop}
+
+\section{命題に対する例}
+
+\section{演習問題}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
