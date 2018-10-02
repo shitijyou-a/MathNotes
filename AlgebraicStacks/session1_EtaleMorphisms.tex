@@ -3,12 +3,12 @@
 %\setlist[description]{style=nextline}
 \newcommand{\diag}{\Delta}
 \newcommand{\Et}{\mathrm{Et}}
+\newcommand{\nl}{\hfill \vspace{-0.5cm}}
 
 \begin{document}
 \title{ゼミノート \#1 \\ Etale Morphisms}
 \author{七条彰紀}
 \maketitle
-\cite{HaMo}
 \section{定義}
 \begin{Def}[Infinitesimal Thickening, Formally Smooth/Unramified/Etale]
     \begin{enumerate}[label=(\roman*), leftmargin=*]
@@ -145,27 +145,30 @@ finitely presentedを要求するのはEGAからのもので，
     既に述べたとおり，これはNOT quasi-compact.
 \end{Example}
 
-\begin{Example}
-    \paragraph{Smooth (BUT NOT Etale) Morphism.}
+\begin{Example}[Smooth (BUT NOT Etale) Morphism.]
     次のように定める．
     \begin{defmap}
         f\colon& \Spec k[x,y]& \to& \Spec k[t] \\
-        {}& (x,y)& \mapsto& x^2+y^2
+        {}& (x,y)& \mapsto& x+y
     \end{defmap}
     これはaffine schemeの間の射なのでquasi-separated．
     $f^{-1}(\Spec k[t])=\Spec k[x, y]$がnoetherian schemeなのでfinitely presented．
     あとはformally smoothであることを示せば良い．
+    （TODO）
+\end{Example}
     
-    \paragraph{Unramified (BUT NOT Etale) Morphism.}
+\begin{Example}[Unramified (BUT NOT Etale) Morphism.]
     次のように定める:
-    \begin{alignat*}{2}
-        g \colon \Spec \Q[x] \sqcup \Spec \Q[y]& \to \Spec \Q[t] \\
-        x& \mapsto t && \text{ on } \Spec \Q[x]\\
-        y& \mapsto t && \text{ on } \Spec \Q[y]
-    \end{alignat*}
+    \begin{defmap}
+        h\colon& \Spec \frac{\C[x,y]}{(x^2-y^3)}& \to& \Spec \C[x] \\
+        {}& (x, y)& \mapsto& x
+    \end{defmap}
     $f$の場合と同様に，formally unramifiedだけ示せば良い．
+    （TODO）
+\end{Example}
 
-    \paragraph{Etale Morphism.}
+\begin{Example}[Etale Morphism.]
+    次のように定める:
     \begin{defmap}
         h\colon& \Spec \Q[u, u^{-1}, y]/(y^d-u)& \to& \Spec \Q[t, t^{-1}] \\
         {}& (u, y)& \mapsto& u
@@ -188,18 +191,18 @@ finitely presentedを要求するのはEGAからのもので，
     よって$\beta(u)=\phi(t)$で$\beta$を定めれば良い．
     このように定めれば後者も成立する．
     また，この構成から明らかに$\beta$はただ一つ．
+\end{Example}
 
-    \paragraph{Formally Etale BUT NOT Etale Morphism.}
+\begin{Example}[Formally Etale BUT NOT Etale Morphism.]
     例(\ref{example:not_qsep})のmorphism :: $f \colon X \to Y$がそうである．
     このことを示すには，Formally etaleであることだけ確かめれば十分．
-
 \end{Example}
 
 \section{命題}
 %%% {{{
 \begin{Prop} \label{prop:stable_property}
 %    $f \colon X \to Y, g \colon Y \to Z$の両方が以下のいずれかの性質$P$を持つとする．
-    以下に列挙する性質は，stable under base excangeかつstable under composition．
+    以下に列挙する性質は，stable under base exchangeかつstable under composition．
     \begin{enumerate}[label=(\arabic*)]
         \item locally of finite presentation,
         \item quasi-compact,
@@ -231,7 +234,7 @@ finitely presentedを要求するのはEGAからのもので，
     \end{enumerate}
 \end{Def}
 
-\begin{Thm} \label{thm:etale_equiv}
+\begin{Thm}[\cite{HarAG} Ex.III.10.3] \label{thm:etale_equiv}
     morphism :: $f \colon X \to Y$について以下は同値．
     \begin{enumerate}
         \item $f$ :: etale,
@@ -502,7 +505,7 @@ finitely presentedを要求するのはEGAからのもので，
 
 \begin{Prop}[\cite{StacksProj}, Tag 04HM]
     $f \colon X \to Y$をseparated etale morphismとする．
-    $y \in Y$に対し$f^{-1}(s)=\{x_1,\dots,x_n \}$とする
+    $y \in Y$に対し$f^{-1}(y)=\{x_1,\dots,x_n \}$とする
     （点が有限個であることは命題(\ref{prop:unram_qfinite})による）．
     etale neighbourhood :: $\nu: (U, u) \to (Y, y)$が存在し，
     $X_U=X \times_{Y} U$のdisjoint union decomposition :
