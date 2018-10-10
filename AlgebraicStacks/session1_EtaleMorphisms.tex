@@ -218,7 +218,7 @@ finitely presentedを要求するのはEGAからのもので，
 \end{Prop}
 \begin{proof}
     証明が必要なのは(1), (2), (3)と(5), (6), (7)である．
-    (TODO: 体力だけ必要．)
+    いずれも簡単なのでここでは証明しない．
 \end{proof}
 
 \begin{Def}[smooth of relative dimension $0$]
@@ -245,18 +245,25 @@ finitely presentedを要求するのはEGAからのもので，
 \begin{proof}
     (TODO)
 \end{proof}
+
+\begin{Prop}
+    formally smooth/unramified/etaleはlocally on codomainな性質である．
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
 %% }}}
 
-%% {{{
-\begin{Prop}[\cite{ASS} Prop1.3.6 (i)]
-    $f \colon X \to Y$をmorphism of schemesとする．
+\begin{Prop}[\cite{ASS} Prop1.3.6 (i)] \label{prop:dermod}
+    $f \colon X \to Y$をfinite presentation, quasi-separated morphismとする．
     この時$\shDer_{X/Y}$は次のように成る．
 \begin{enumerate}[label=(\roman*)]
-    \item $f$ :: smooth \quad \ \,$\implies \shDer_{X/Y}$ :: locally free sheaf of finite rank.
+    \item $f$ :: smooth \quad \ \,$\implies \,\shDer_{X/Y}$ :: locally free sheaf of finite rank.
     \item $f$ :: unramified $\iff \shDer_{X/Y}=0$.
-    \item $f$ :: etale $\implies \shDer_{X/Y}=0$.
+    \item $f$ :: etale \qquad \ \ $\implies \, \shDer_{X/Y}=0$.
 \end{enumerate}
 \end{Prop}
+%% {{{
 \begin{proof}
     証明は\cite{Mat} \S 25の内容を一部使う．
     特に\S 25始めからThm25.1の直前までがわかっていれば良い．
@@ -325,11 +332,11 @@ finitely presentedを要求するのはEGAからのもので，
 
     formally etale $\implies$ formally unramifiedなので(ii)$\implies$(iii)は明らか．
 \end{proof}
-
-\begin{Prop}[\cite{ASS} Prop1.3.6 (iii)] \hfill \vspace{-7mm}
+%% }}}
+\begin{Prop}[\cite{ASS} Prop1.3.6 (iii)] \label{prop:smooth_exact}\hfill \vspace{-7mm}
     \begin{itemize}
         \item $g \colon X \to Y$をsmooth morphism，
-        \item $i \colon Z \to X$をlocally finitely presented closed embedding
+        \item $i \colon Z \to X$をlocally of finite presented closed embedding
     \end{itemize}
     とする．
     この時，$f=i \circ g \colon Z \to Y$がsmoothであることと，
@@ -339,6 +346,7 @@ finitely presentedを要求するのはEGAからのもので，
     }\]
     ただし$\shI_Z=\ker i^{\#}$．
 \end{Prop}
+%% {{{
 \begin{proof}
     問題はlocalなものであるから，
     $X=\Spec B, Y=\Spec A, Z=\Spec R=\Spec B/I$とする．
@@ -466,11 +474,16 @@ finitely presentedを要求するのはEGAからのもので，
 %% }}}
 
 \begin{Prop}[\cite{StacksProj}, Tag 02G7] \label{prop:unram_qfinite}
-    $f \colon X \to Y$がunramified morphismならば，
+    $f \colon X \to Y$ :: finitely presentation and quasi-separatedが
+    unramified morphismであることと，以下の条件 (*)は同値:
+    (*)
     任意の$y \in Y$について，fiber of $f$ at $y$ :: $X_y$は
     disjoint union of spectra of finite separable field extensions of $k(y)$.
 \end{Prop}
+%% {{{
 \begin{proof}
+    \paragraph{(*) $\implies$ $f$ :: unramified.}
+    最初は$f$ :: unramifiedであることを仮定する．
     unramifiedはstable under base excange（命題\ref{prop:stable_property}）なので，
     $Y=\Spec k$の場合を示せば良い．
 
@@ -501,43 +514,132 @@ finitely presentedを要求するのはEGAからのもので，
     Zariski's Lemmaにより，$A_i/k$ :: finite algebraic extension．
     $A_i$ :: separable field over $k$なので，
     定義より$A_i$ :: finite separable extension.
-\end{proof}
 
-\begin{Prop}[\cite{StacksProj}, Tag 04HM]
+    \paragraph{$f$ :: unramified $\implies$ (*).}
+    次に命題の条件を仮定する．
+
+    まず$K/k$がfinite separable field extensionであるとする．
+    するとprimitive element theoremより，
+    $\alpha \in K$を用いて$K=k(\alpha)$と書ける．
+    $f \in k[x]$を$\alpha$の最小多項式とすると，
+    以下が成り立つ．
+    \[ 0=d(f(\alpha))=f'(\alpha) \cdot d(\alpha) \in \modDer_{K/k}. \]
+    $K/k$ :: separableより，
+    $f(\alpha)=0$かつ$f'(\alpha) \neq 0$となる．
+    したがって$f'(\alpha)$ :: unit in $\modDer_{K/k}$なので$d(\alpha)=0$．
+    よって$\modDer_{K/k}=K \cdot d(\alpha)=0$．
+
+    $k$-algebra :: $A=\bigoplus_i K_i$を
+    $K_i$ :: finite separable field extension of $k$の直和とする．
+    $\I{p}_i$を第$i$成分以外は$0$である元からなる素イデアルとすると，
+    \[ (\modDer_{A/k})_{\I{p}_i}=\modDer_{A_{\I{p}_i}/k}=\modDer_{K_i/k}=0. \]
+    $\basesp \Spec A=\{ \I{p}_i \}_i$なので，これで$\modDer_{A/k}=0$が示せた．
+
+    最後に，一般のschemeで考える．
+    証明は命題(\ref{prop:dermod})を利用する．
+    $\Spec A \subseteq Y$と$\Spec B \subseteq f^{-1}(\Spec A)$をとり，
+    $\I{p} \in \Spec A$における$f$のfiberを考える．
+    仮定(*)より
+    $B \otimes_{A} k(\I{p})$ :: direct sum of finite separable field extensions of $k$.
+    ここで，上述のことから
+    \[ \modDer_{B \otimes_{A} k(\I{p})/k(\I{p})}=\modDer_{B/A} \otimes_{B} k(\I{p})=0. \]
+    $\I{q} \in \Spec (B \otimes_A k(\I{p})) \homeo f^{-1}(\I{p})$を任意に取ると，
+    \[
+        ( \modDer_{B/A} \otimes_{B} k(\I{p}) )_{\I{q}}
+        =(\modDer_{B/A})_{\I{q}} \otimes_{B} k(\I{p})
+        =(\modDer_{B/A})_{\I{q}}/\I{q}(\modDer_{B/A})_{\I{q}}
+        =0.
+    \]
+    これは局所環$B_{\I{q}} \otimes_A k(\I{p})$上の加群であるから，
+    Nakayama's Lemmaより，$(\modDer_{B/A})_{\I{q}}=0$．
+    $\I{q} \in \Spec (B \otimes_A k(\I{p}))$は任意に取っていたから，
+    これは$\modDer_{B/A}=0$を意味する．
+    命題(\ref{prop:dermod})より，これは$f$ :: unramifiedと同値．
+\end{proof}
+%% }}}
+
+\begin{Thm}[\cite{StacksProj}, Tag 04HM] \label{thm:impfunc}
     $f \colon X \to Y$をseparated etale morphismとする．
     $y \in Y$に対し$f^{-1}(y)=\{x_1,\dots,x_n \}$とする
     （点が有限個であることは命題(\ref{prop:unram_qfinite})による）．
     etale neighbourhood :: $\nu: (U, u) \to (Y, y)$が存在し，
-    $X_U=X \times_{Y} U$のdisjoint union decomposition :
+    $X_U=X \times_{\nu, Y, f} U$のdisjoint union decomposition :
     \[ X_U=\bigsqcup_{i, j} V_{i, j} \]
     について$V_{i, j} \iso U$．
-\end{Prop}
-\begin{proof}
-    (TODO)
-\end{proof}
+\end{Thm}
 
-\begin{Prop}
-    $f \colon X \to Y$を，
-    locally of finite presentationとする．
-    $f$ :: smoothと次の条件は同値である:
+\begin{Remark}
+この定理は代数幾何学版の陰関数定理とも呼べる定理である．
+この現象を根拠にしたスローガン「etale morphismは代数幾何学版locally homeomorphism」がある．
+証明は，この定理だけのために必要な命題が幾つかあるため，
+後の節に行う．
+\end{Remark}
+
+\begin{Prop}(Jacobian criterian) \label{prop:jac_cri}
+    $f \colon X \to Y$を，locally of finite presentationとする．
+    $f$ :: smoothと次の条件(+)は同値である:
     
     任意の点$x \in X$について，
     $x$と$y=f(x) \in Y$の間にaffine neighborhood
     \[
-        x \in \Spec A \subset X, \qquad y=f(x) \in \Spec B \subseteq Y
+        x \in \Spec B \subset X, \qquad y=f(x) \in \Spec A \subseteq Y
         \qquad (\text{with  }f(\Spec B) \subseteq \Spec A)
     \]
-    が存在し，ある$n, s\ (s \leq n)$と$f_1, \dots, f_s, g \in A[x_1, \dots, x_n]$について
-    \[ B \iso \left( \frac{A[x_1, \dots, x_n]}{(f_1, \dots, f_s)} \right)[1/g]. \]
+    が存在し，ある$n, s\ (s \leq n)$と$f_1, \dots, f_s \in A[x_1, \dots, x_n]$について
+    \[ B \iso \frac{A[x_1, \dots, x_n]}{(f_1, \dots, f_s)}. \]
     さらに，Jacobian matrix ($n \times s$-matrix)
-    \[ \mat{ \frac{\partial f_i}{\partial x_j} }_{i, j} \]
-    の部分$s$正方行列は，いずれも可逆（行列式が$B$のunit element）．
+    \[ J=\mat{ \frac{\partial f_i}{\partial x_j} }_{i, j} \]
+    は，右逆行列をもつ(i.e. $\Exists{J'} JJ'=I$)．
+    同値な条件として，
+    regular(i.e.行列式がunit element of $B$)な部分$s$正方行列を$J$は持つ．
 
     さらに，$f$ :: etaleと，この条件で$n=s$であることは同値である．
 \end{Prop}
+%% {{{
 \begin{proof}
-    (TODO)
+    まずは$(f(x) \in) \Spec A$なる$\Spec A$と
+    $f(\Spec B) \subseteq \Spec A$かつ$x \in \Spec B$なる$\Spec B$を適当に取る．
+    $f$ :: locally of finite presentationから，
+    surjective homomorphism
+    \[ A[x_1, \dots, x_n] \to B \]
+    であってkernel :: $I$が有限生成であると仮定できる．
+
+    命題(\ref{prop:smooth_exact})を
+    $\Spec B \to \Spec A[x_1,\dots,x_n]=\affine^n_A \to \Spec A$に適用すれば，
+    $f$ :: smoothと以下がsplit exact sequenceであることが同値だと分かる.
+    \[\xymatrix{
+        0 \ar[r]& I/I^2 \ar[r]^-{\delta}& \modDer_{A[x_1,\dots,x_n]/A} \otimes_A B \ar[r]& \modDer_{B/A} \ar[r]& 0.
+    }\]
+    特に$\delta$ :: split injectiveが同値である．
+
+    \paragraph{$f$ :: smooth $\implies$ (+).}
+    $\{ f_i \}_{i=1}^s$を$I$の生成元とする．
+    この時，$\delta$は次のように作用する．
+    \[ \mat{\delta(\bar{f}_1) \\ \vdots \\ \delta(f_s)}
+    =\mat{\frac{\partial f_i}{\partial x_j}}_{i,j} \mat{dx_1 \\ \vdots \\ dx_n} \]
+    ここで現れた行列は主張にあるJacobian matrixである．
+    今，命題(\ref{prop:dermod}) (i) と，
+    このexact sequenceの存在から$I/I^2$ :: free moduleである．
+    そしてこのとき$\{ \bar{f}_i \}_i \ (\bar{f}_i=f_i \bmod I^2)$は$I/I^2$の基底と成る．
+    したがって$\{\bar{f}_i\}_i$と$\{dx_j\}_j$はそれぞれの自由加群の基底であるから，
+    $\delta$がsplit injectiveであることは，主張にあるJacobian matrixの条件と同値である．
+
+    \paragraph{$f$ :: smooth $\impliedby$ (+).}
+    $J$がright inverseを持つならば，明らかに$\delta$がsectionを持つ．
+    よって$\delta$ :: split injective.
+    
+    \paragraph{$f$ :: etale $\iff$ (+) and $n=s$.}
+    最初に述べたexact sequenceから，
+    $\modDer_{B/A}$の階数は以下のように成る．
+    \[
+        \rank \modDer_{B/A}
+        =\rank (\modDer_{A[x_1,\dots,x_n]/A} \otimes_A B)-\rank (I/I^2)
+        =n-s.
+    \]
+    したがって$n=s \iff \modDer_{B/A}=0 \iff f$ :: formally unramified.
+    etale$=$smooth and formally etaleなので，証明できた．
 \end{proof}
+%% }}}
 
 \begin{Thm}
     scheme :: $S$について，
@@ -556,9 +658,21 @@ finitely presentedを要求するのはEGAからのもので，
     このとき，$F$は圏同値である．
 \end{Thm}
 
-\section{命題に対する例}
-
-\section{演習問題}
+\section{定理(\ref{thm:impfunc})の証明．}
+\begin{Lemma}
+    $R$ :: ring, $f \in R[x]$とする．
+    以下のring homomorphismから誘導される$\Spec$間の射は
+    etaleである．
+    \begin{defmap}
+        \phi\colon & R& \to& R[x, 1/f']/(f) \\
+        {}& r& \mapsto& r \cdot f'
+    \end{defmap}
+\end{Lemma}
+\begin{proof}
+    命題(\ref{prop:jac_cri}) (Jacobian criterion)を利用する．
+    この場合，Jacobian :: $\det \mat{f'}=f'$がunit in $R[x, 1/f'](f)$であるから，
+    この補題が成り立つ．
+\end{proof}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
