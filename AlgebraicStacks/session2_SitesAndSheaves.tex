@@ -117,10 +117,11 @@ $\Cov$の元には大抵，以下の条件が課される．
     $\Cov$は以下のように定める．
     \[
         \left\{
+        \vcenter{
         \xymatrix@R=8pt{
             X'_i \ar[d]\ar[r]^-{f_i^{\flat}}& X \ar[d]\\
-            F(\delta_i) \ar[r]_-{f_i}& F(\delta)
-        }
+            F(\delta_i) \ar[r]_-{F(f_i)}& F(\delta)
+        }}
         \right\} \in \Cov([X \to F(\delta)])
         \implies
         f_i \colon \delta \to \delta_i \text{ :: iso. and }
@@ -129,8 +130,7 @@ $\Cov$の元には大抵，以下の条件が課される．
 \end{Def}
 
 \begin{Def}[Continuous Functor.]
-    $\cat{C}, \cat{C}'$ :: sites, 
-    $T (T')$ :: topos associated $\cat{C} (\cat{C}')$とする．
+    $\cat{C}, \cat{C}'$ :: sitesとする．
     $f \colon \cat{C} \to \cat{C}'$ :: functorがcontinuousとは，
     以下の$2$つが成立すること:
     \begin{enumerate}
@@ -145,14 +145,6 @@ $\Cov$の元には大抵，以下の条件が課される．
     \end{enumerate}
 \end{Def}
 
-\begin{Remark}    
-    $X, X'$ :: topological spaceについて，
-    $O(X), O(X')$ :: classical site,
-    $f \colon X \to X'$ ::continuous mapとする．
-    この時，$f^{-1} \colon O(X') \to O(X)$ :: continuous functor.
-    2つめの条件は$f^{-1}$が$\cap$と交換することと対応する．
-\end{Remark}
-
 \begin{Remark}
     後に示すように，
     continuous functorはよくあるケースでcategory of sheaves on siteの間の関手を誘導する．
@@ -162,7 +154,6 @@ $\Cov$の元には大抵，以下の条件が課される．
 \end{Remark}
 
 \section{Examples : Sites.}
-
 \subsection{Site.}
 \begin{Example}[Classical topology.]
     $X$ :: topological spaceとし，
@@ -286,11 +277,17 @@ flat\& locally of finite presentationならば実際にこのように成る．
         (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
         (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
         \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
-        \ar "k";"U1" \ar "k";"U2" \ar "k";"X"
+        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
     \end{xy}
     \end{equation*}
 \end{myenum}
 \end{Def}
+
+\begin{Remark}
+    geometric pointの定義に
+    separabely closed fieldでなくalgebraically closed fieldを用いることもある．
+
+\end{Remark}
 
 \begin{Remark}
     より一般的なpoint of siteの定義が存在する（\cite{StacksProj} Tag 04JU）．
@@ -302,11 +299,44 @@ flat\& locally of finite presentationならば実際にこのように成る．
 
 \subsection{Continuous Functor.}
 \begin{Example}
-    inclusion $\mathrm{Zar}(X) \inclmap \mathrm{Et}(X) \inclmap \mathrm{Fppf}(X)$
+    $X, X'$ :: topological spaceについて，
+    $O(X), O(X')$ :: classical site,
+    $f \colon X \to X'$ ::continuous mapとする．
+    この時，$f^{-1} \colon O(X') \to O(X)$ :: continuous functor.
+    （$f$は必ずしもcontinuous functorでないことに注意．）
 \end{Example}
+
+\begin{Remark}
+    $f \colon \cat{C} \to \cat{C}'$ :: functor between sitesが
+    continuousであるための条件を再掲する．
+    \begin{enumerate}
+        \item 
+        任意の$X \in \cat{C}$と$\{U_i \to X\}_i \in \Cov_{\cat{C}}(X)$について，
+        \[ \{ f(U_i) \to f(X) \}_i \in \Cov_{\cat{C}'}(f(X)) \]となる．
+
+        \item
+        $\cat{C}$の任意の射$X_1 \to Y, X_2 \to Y$について，
+        fiber product :: $X_1 \times_Y X_2$が$\cat{C}$に存在するならば，
+        \[ f(X_1 \times_Y X_2) \iso f(X_1) \times_{f(Y)} f(X_2). \]
+    \end{enumerate}
+    
+    例と照らし合わせると，
+    $1$つめの条件は$f^{-1}$が開集合を開集合に写すことに対応し，
+    $2$つめの条件は$f^{-1}$が$\cap$と交換することと対応する．
+\end{Remark}
+
+\begin{Example}
+    従属関係
+    \[ \text{open immersion} \implies \text{etale} \implies \text{fppf} \]
+    があるから，
+    inclusion map :: $\mathrm{Zar}(X) \inclmap \mathrm{ET}(X) \inclmap \mathrm{Fppf}(X)$
+    はそれぞれcontinuous.
+\end{Example}
+
 \begin{Example}
     flat morphism :: $f \colon X \to Y$をとり，
     $f$によるpullback functorを$P_{f}$とする．
+    （TODO: 要確認．）
 \end{Example}
 
 \section{Definitions : Sheaves.}
@@ -399,11 +429,15 @@ flat\& locally of finite presentationならば実際にこのように成る．
     $\ftor{X}(-)=\Hom_{\cat{C}}(-, X)$で
     functor :: $\ftor{X} \colon \cat{C} \to \Sets$を定める．
     この時，$\ftor{X}$ :: presheaf on $\cat{C}$．
-    特にsmall/big Zariski site, small/big etale siteではsheafである．
+    特に，後に示すとおり，fppf toplogyより細かい位相でsheafとなる．
 \end{Example}
 
-\begin{Example}
-    constant (pre)sheaf
+\begin{Example}[Constant (Pre)sheaf.]
+    $\cat{C}$ :: siteとし，
+    以下のようにpresheaf on $\cat{C}$ :: $\shF$を定める．
+    \[ \shF \colon \emptyset \neq U \mapsto \R, \qquad \emptyset \mapsto \{0\}.  \]
+    constant presheaf on a schemeはsheafでないのと全く同じ理由で，
+    これはsheafでない（TODO）．
 \end{Example}
 
 \section{Propositions : Sheaves.}
@@ -417,22 +451,26 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \]
     はleft adjoint functor :: $\ftorSh$を持つ．
 \end{Thm}
+\begin{proof}
+    (TODO)
+\end{proof}
 
 \begin{Prop}
-\cite{ASS} 1.4.9
-$\ftor{X}$ :: sheaf.
+    $X$ :: schemeとする．
+    representable sheaf :: $\ftor{X}$はfppf topologyを備えるsite上でsheafである．
 \end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
 
-\section{Definitions : Morphism of Shaves.}
-\begin{Def}[Injective, Surjective]
-\end{Def}
-
-\section{Examples : Morphism of Shaves.}
-
-\section{Propositions : Morphism of Shaves.}
 \begin{Prop}
-    inj/surj/iso at stalk.
+    任意のpresheafはcolimit of representable sheavesとして表現できる
+    （Kan拡張に関連して得られる．）．
 \end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+
 \bibliographystyle{jplain}
 \bibliography{reference}
 \end{document}
