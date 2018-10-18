@@ -31,11 +31,34 @@
 \makeatother
 %% }}}
 
+\newenvironment{myenum}[1]
+{\hfill \vspace{-0.8cm}\begin{enumerate}[label=(#1), labelindent=1cm]}
+{\end{enumerate}}
+
+%% category
 \newcommand{\Sch}{\mathbf{Sch}}
 \newcommand{\Sets}{\mathbf{Sets}}
 \newcommand{\Ring}{\mathbf{Ring}}
 \newcommand{\Alg}{\mathbf{Alg}}
 \newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Sh}{\mathbf{Sh}}
+\newcommand{\PSh}{\mathbf{PSh}}
+
+%% derivation
+\newcommand{\shDer}{\Omega}
+\newcommand{\modDer}{\Omega}
+\newcommand{\Der}{\mathrm{Der}}
+
+%% functor
+\newcommand{\ftor}[1]{\underline{#1}}
+\newcommand{\ftorSh}{\mathit{Sh}}
+\newcommand{\ftorFgt}{\mathit{Fgt}}
+
+%% sites
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Et}{\mathrm{Et}}
+\newcommand{\ET}{\mathrm{ET}}
+
 %\newcommand{\Open}{\mathrm{Open}}
 %\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
 %\newcommand{\GrpSch}{\mathbf{GrpSch}}
@@ -52,8 +75,6 @@
 %\newcommand{\modT}{\mathcal{T}}
 %\newcommand{\spM}{\mathcal{U}}
 %\newcommand{\modM}{\mathcal{M}}
-
-\newcommand{\ftor}[1]{\underline{#1}}
 %\newcommand{\ftorM}{\mathcal{M}}
 %\newcommand{\ftorGL}{\mathcal{GL}}
 
@@ -74,10 +95,4 @@
 %\newcommand{\Reg}{\operatorname{Reg}}
 
 %\newcommand{\shDual}{\omega^{\circ}}
-\newcommand{\shDer}{\Omega}
-\newcommand{\modDer}{\Omega}
-\newcommand{\Der}{\mathrm{Der}}
 
-\newenvironment{myenum}[1]
-{\hfill \vspace{-0.8cm}\begin{enumerate}[label=(#1), labelindent=1cm]}
-{\end{enumerate}}

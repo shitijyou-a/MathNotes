@@ -3,12 +3,6 @@
 \usepackage{booktabs}
 \usepackage{macros}
 
-\newcommand{\Sh}{\mathbf{Sh}}
-\newcommand{\PSh}{\mathbf{PSh}}
-\newcommand{\ftorSh}{\mathit{Sh}}
-\newcommand{\ftorFgt}{\mathit{Fgt}}
-\newcommand{\Cov}{\operatorname{Cov}}
-
 \begin{document}
 \title{ゼミノート \#2 \\ Sites and Sheaves}
 \author{七条彰紀}
@@ -53,7 +47,8 @@ $X$ :: toplological spaceとし，sheaf on $X$の定義を見なおしてみよ�
     $\cat{C}$ :: cateogoryについて，
     $\cat{C}$上のGrohendieck topologyは
     任意の$X \in \cat{C}$に
-    $\cat{C}$の射の集まり(collection)$\{X_i \to X\}_{i \in I}$を対応させる$\Cov$で構成される．
+    $\cat{C}$の射の集まり$\{X_i \to X\}_{i \in I}$の集まり(collection of collections)を
+    対応させる$\Cov$で構成される．
     さらに，$\Cov$は以下を満たすように要請される．
     \begin{enumerate}[label=(\alph*)]
         \item
@@ -68,9 +63,27 @@ $X$ :: toplological spaceとし，sheaf on $X$の定義を見なおしてみよ�
     \end{enumerate}
 \end{Def}
 
-\begin{Remark}\label{rem:grotop_stablecond}
-    $\Cov$の条件のうち，
-    (b), (c)はそれぞれstable under base change, stable under compositionに対応する．
+\begin{Remark}
+    ここで「集合」ではなく「集まり」という言葉を用いたのは，
+    これらが集合ではない可能性があるからである．
+    この問題（圏論でもしばしば現れる）を取り扱うためには，
+    $2$つの解決策がある．
+    $1$つ目はGrothendieckの宇宙公理UをZFC公理系に加えたZFCU公理系で議論を行うことである．
+    もう$1$つは真のクラスを扱えるNBG公理系で議論を行うことである．
+    
+    後者の方針を採用する場合は，
+    Grothendieck topologyの定義で現れた「集まりの集まり」という言葉に注意が必要である．
+    というのも，たとえNBG公理系でも，
+    真のクラスを要素に持つ真のクラスは許されていないからである．
+    この問題を解決するには以下のように$\Cov$を定義すれば良い
+    （以下のように書き換えれば良いという事がわかれば十分なので，
+    実際に以下の定義を採用することはない）:
+
+        全ての$U \in \cat{C}$について$\Cov(U)$はcodomainが$U$である射のクラスである．
+        任意の要素$[ V \to U ] \in \Cov(U)$について
+        この要素を含む$\Cov(U)$の部分クラス$\{U_i \to U\}_i \subset \Cov(U)$が存在し，
+        以下が成立する．
+        （以下略）．
 \end{Remark}
 
 $\Cov$の元には大抵，以下の条件が課される．
@@ -81,11 +94,6 @@ $\Cov$の元には大抵，以下の条件が課される．
     $\im (U_i \to U)$のset-theoritic unionが$U$に等しい時，）
     この集まり$\{U_i \to U\}$を(jointly) surjective familyという．
 \end{Def}
-
-\begin{Remark}
-    ここで「集合」ではなく「集まり」という言葉を用いたのは，
-    これらが集合ではない可能性があるからである．
-\end{Remark}
 
 \begin{Def}[Site]
     圏$\cat{C}$と$\cat{C}$上のGrothendieck topology :: $\Cov$の組をsiteと呼ぶ．
@@ -195,7 +203,7 @@ Grothendieck topology ($\Cov$)からなるから，
     以上の$\cat{C}$と$\Cov$からなるsiteを $***$ site of $X$と呼ぶ．
 \end{Def}
 
-注意(\ref{rem:grotop_stablecond})で触れたとおり，
+Grothendieck topologyの定義から分かるとおり，
 性質(b)がstable under base change \& compositionであれば，
 以上のテンプレートはsiteの定義文と成る．
 
@@ -249,53 +257,6 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \cite{StacksProj}ではbig Zariski site of $X$を$(\Sch/X)_{Zariski}$などと書く．
 \end{Def}
 
-\subsection{Point.}
-以下はsmall/big etale siteのみで使われるものである．
-\begin{Def}[Geometric Point, Etale Neighborhood, \cite{ASS} 1.3.15.]
-\begin{myenum}{\roman*}
-    \item 
-    $X$ :: schemeに対し，
-    $k$ :: separabely closed fieldを用いて
-    $\bar{x} \colon \Spec k \to X$と表される射をgeometric pointと呼ぶ．
-
-    \item
-    geometric point :: $\bar{x} \colon \Spec k \to X$について，
-    $\bar{x}$のetale neighborhoodとは
-    $U \to X$がetaleであるような以下の可換図式のことである．
-    \[\xymatrix{
-        {} & U \ar[d]\\
-        \Spec k \ar[r]_-{\bar{x}} \ar[ru]& X
-    }\]
-
-    \item
-    geometric point :: $\bar{x} \colon \Spec k \to X$について，
-    $\bar{x}$の$2$つのetale neighborhood :: $U_1, U_2$を考える．
-    この時，$U_1$と$U_2$の間の射とは，
-    以下の図式を可換にするmorphism of schemes :: $\eta \colon U_1 \to U_2$のことである．
-    \begin{equation*}
-    \begin{xy}
-        (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
-        (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
-        \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
-        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
-    \end{xy}
-    \end{equation*}
-\end{myenum}
-\end{Def}
-
-\begin{Remark}
-    geometric pointの定義に
-    separabely closed fieldでなくalgebraically closed fieldを用いることもある．
-
-\end{Remark}
-
-\begin{Remark}
-    より一般的なpoint of siteの定義が存在する（\cite{StacksProj} Tag 04JU）．
-    これはetaleか否かに依らず採用できる．
-    しかしこの一般的な定義は複雑であるし，
-    我々はsmall/big etale siteしか扱わないので，
-    我々は以上の定義のみ用いる．
-\end{Remark}
 
 \subsection{Continuous Functor.}
 \begin{Example}
@@ -416,12 +377,6 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \end{myenum}
 \end{Def}
 
-\begin{Def}[Stalk, \cite{ASS} 1.3.15.]
-    $U \in I_{\bar{x}}$について，$\shF(U)$から$\shF_{\bar{x}}$への標準的射がある．
-    この射による$s \in \shF(U)$の像を$s_{\bar{x}}$と表し，
-    germ of $s$ at $\bar{x}$と呼ぶ．
-\end{Def}
-
 \section{Examples : Sheaves.}
 \begin{Example}
     $X$ :: schemeと，
@@ -429,47 +384,21 @@ flat\& locally of finite presentationならば実際にこのように成る．
     $\ftor{X}(-)=\Hom_{\cat{C}}(-, X)$で
     functor :: $\ftor{X} \colon \cat{C} \to \Sets$を定める．
     この時，$\ftor{X}$ :: presheaf on $\cat{C}$．
-    特に，後に示すとおり，fppf toplogyより細かい位相でsheafとなる．
+    特に，後に示すとおり，
+    fppf toplogyより荒い位相(e.g. Zariski, smooth, etale, ...)でsheafとなる．
 \end{Example}
 
 \begin{Example}[Constant (Pre)sheaf.]
     $\cat{C}$ :: siteとし，
     以下のようにpresheaf on $\cat{C}$ :: $\shF$を定める．
     \[ \shF \colon \emptyset \neq U \mapsto \R, \qquad \emptyset \mapsto \{0\}.  \]
-    constant presheaf on a schemeはsheafでないのと全く同じ理由で，
-    これはsheafでない（TODO）．
+    constant presheaf on a schemeがsheafでないのと全く同じ理由で，
+    この$\shF$はsheafでない．
+    具体的には$U \in \cat{C}$が連結でないschemeならば，
+    $U_1 \sqcup U_2=U$なるcoveringを取ると，
+    定義にあるdiagramがequalizer diagramにならない．
 \end{Example}
 
-\section{Propositions : Sheaves.}
-\begin{Thm}
-    $\cat{C}$ :: siteとする．
-    忘却関手
-    \[
-        \ftorFgt \colon
-        \text{(Category of Sheaves on $\cat{C}$)}
-            \to \text{(Category of Presheaves on $\cat{C}$)}.
-    \]
-    はleft adjoint functor :: $\ftorSh$を持つ．
-\end{Thm}
-\begin{proof}
-    (TODO)
-\end{proof}
-
-\begin{Prop}
-    $X$ :: schemeとする．
-    representable sheaf :: $\ftor{X}$はfppf topologyを備えるsite上でsheafである．
-\end{Prop}
-\begin{proof}
-    (TODO)
-\end{proof}
-
-\begin{Prop}
-    任意のpresheafはcolimit of representable sheavesとして表現できる
-    （Kan拡張に関連して得られる．）．
-\end{Prop}
-\begin{proof}
-    (TODO)
-\end{proof}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
