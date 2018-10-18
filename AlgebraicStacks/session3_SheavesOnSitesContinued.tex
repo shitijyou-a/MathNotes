@@ -1,0 +1,124 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros}
+
+\begin{document}
+\title{ゼミノート \#3 \\ Sheaves on Sites, continued.}
+\author{七条彰紀}
+\maketitle
+
+\section{Propositions : Sheaves.}
+\begin{Thm}
+    $\cat{C}$ :: siteとする．
+    忘却関手
+    \[
+        \ftorFgt \colon
+        \text{(Category of Sheaves on $\cat{C}$)}
+            \to \text{(Category of Presheaves on $\cat{C}$)}.
+    \]
+    はleft adjoint functor :: $\ftorSh$を持つ．
+\end{Thm}
+\begin{proof}
+\end{proof}
+
+\begin{Prop}
+    $X$ :: schemeとする．
+    representable sheaf :: $\ftor{X}$はfppf topologyを備えるsite上でsheafである．
+\end{Prop}
+\begin{proof}
+\end{proof}
+
+\begin{Thm}
+    
+\end{Thm}
+
+\begin{Prop}
+    任意のpresheafはcolimit of representable sheavesとして表現できる
+    （Kan拡張に関連して得られる．）．
+\end{Prop}
+\begin{proof}
+\end{proof}
+
+\section{Definitions : Points and Stalks.}
+以下はsmall/big etale siteのみで使われるものである．
+\begin{Def}[Geometric Point, Etale Neighborhood, \cite{ASS} 1.3.15.]
+\begin{myenum}{\roman*}
+    \item 
+    $X$ :: schemeに対し，
+    $k$ :: separabely closed fieldを用いて
+    $\bar{x} \colon \Spec k \to X$と表される射をgeometric pointと呼ぶ．
+
+    \item
+    geometric point :: $\bar{x} \colon \Spec k \to X$について，
+    $\bar{x}$のetale neighborhoodとは
+    $U \to X$がetaleであるような以下の可換図式のことである．
+    \[\xymatrix{
+        {} & U \ar[d]\\
+        \Spec k \ar[r]_-{\bar{x}} \ar[ru]& X
+    }\]
+
+    \item
+    geometric point :: $\bar{x} \colon \Spec k \to X$について，
+    $\bar{x}$の$2$つのetale neighborhood :: $U_1, U_2$を考える．
+    この時，$U_1$と$U_2$の間の射とは，
+    以下の図式を可換にするmorphism of schemes :: $\eta \colon U_1 \to U_2$のことである．
+    \begin{equation*}
+    \begin{xy}
+        (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
+        (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
+        \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
+        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
+    \end{xy}
+    \end{equation*}
+\end{myenum}
+\end{Def}
+
+\begin{Remark}
+    geometric pointの定義に
+    separabely closed fieldでなくalgebraically closed fieldを用いることもある．
+
+\end{Remark}
+
+\begin{Remark}
+    より一般的なpoint of siteの定義が存在する（\cite{StacksProj} Tag 04JU）．
+    これはetaleか否かに依らず採用できる．
+    しかしこの一般的な定義は複雑であるし，
+    我々はsmall/big etale siteしか扱わないので，
+    我々は以上の定義のみ用いる．
+\end{Remark}
+
+\begin{Def}[Stalk, \cite{ASS} 1.3.15.]
+    $X$ :: scheme,
+    $\shF \in \Et(X)$あるいは$\shF \in \ET(X)$とする．
+    さらに$\bar{x} \colon \Spec k \to X$ :: geometric pointとする．
+    $\bar{x}$に対して$\bar{x}$のetale neighborhoodが成す圏を$I_{\bar{x}}$とする，
+
+    \begin{enumerate}[label=(\roman*)]
+        \item 
+        $I_{\bar{x}}$を用いてstalk of $\shF$ at $\bar{x}$を
+        \[ \shF_{\bar{x}}:=\varinjlim_{U \in I_{\bar{x}}} \shF(U) \]
+        と定義する．
+
+        \item
+        $U \in I_{\bar{x}}$について，$\shF(U)$から$\shF_{\bar{x}}$への標準的射がある．
+        この射による$s \in \shF(U)$の像を$s_{\bar{x}}$と表し，
+        germ of $s$ at $\bar{x}$と呼ぶ．
+    \end{enumerate}
+\end{Def}
+
+\section{Definitions : Morphism of Shaves.}
+\begin{Def}[Injective, Surjective]
+\end{Def}
+
+\begin{Def}[Representable Morphism.]
+\end{Def}
+
+\section{Examples : Morphism of Shaves.}
+
+\section{Propositions : Morphism of Shaves.}
+\begin{Prop}
+    inj/surj/iso at stalk.
+\end{Prop}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
