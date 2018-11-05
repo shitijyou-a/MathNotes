@@ -1,0 +1,569 @@
+\documentclass[a4paper, dvipdfmx]{jsarticle}
+\usepackage{tikz-cd}
+\usepackage{graphics}
+\usepackage{macros}
+
+\newcommand{\covU}{\mathcal{U}}
+\newcommand{\covV}{\mathcal{V}}
+\newcommand{\covW}{\mathcal{W}}
+\newcommand{\exto}{\xrightarrow{\exists}}
+\newcommand{\Comma}[2]{#1{\downarrow}#2}
+\newcommand{\step}[1]{\paragraph{\bf #1}}
+
+\begin{document}
+\title{ゼミノート \#3 \\ Sheaves on a Site, continued.}
+\author{七条彰紀}
+\maketitle
+
+\section{Propositions : Sheaves.}
+\begin{Thm}\label{thm:Shff}
+    $\cat{C}$ :: siteとする．
+    忘却関手
+    \[ \ftorFgt \colon \Sh(\cat{C}) \to \PSh(\cat{C}). \]
+    はleft adjoint functor :: $\ftorSh$を持つ．
+\end{Thm}
+%% {{{
+\begin{Remark}
+    以下で述べる$\ftorSh$の構成は``plus construction"と呼ばれる．
+    Kay Werndli ``Sheaves From Scratch" \S3.5ではetale bundleという物を用いた構成をしている．
+\end{Remark}
+
+証明のために幾つか定義しておく．
+
+\begin{Def}[\cite{StacksProj}, Tag 00W1]
+    $\shF \in \PSh(\cat{C})$と，
+    $X \in \cat{C}$のcover :: $\covU=\{U_i \to X\} \in \Cov(X)$に対し，
+    \[ H^0(\covU, \shF)=\text{equalizer of }\left[
+        \vcenter{\xymatrix{
+        \prod_{i \in I} \shF(U_i)
+        \ar@<1mm>[r]^-{} \ar@<-1mm>[r]_-{}&
+        \prod_{(i,j) \in I \times I} \shF(U_i \times_X U_j)
+    }} \right] \]
+    ここで二つの並行射は
+    それぞれ$\res_{U_i}^{U_i \times U_j}, \res_{U_j}^{U_i \times U_j}$である．
+    すなわち，ここにある並行射はsheafの定義にあるものである．
+    このdiagramは圏$\Sets$の中のものなので，
+    \textbf{index :: $I$が集合ならば}このequalizerは常に存在する．
+    （$H^0$という記号は，これが$\shF$の$0$次\v{C}ech cohomologyであることによる．）
+    
+    直ちに分かるとおり，$\Cov(X)$は細分を射として圏を成し，
+    $H^0(-, \shF)$は圏$\Cov(X)$から$\Sets$への反変関手である．
+    $\shF^+$は
+    \[ \shF^+(X)=\Colim_{\covU \in \Cov(X)} H^0(\covU, \shF)=\Colim(\Cov(X) \to^{H^0(-,\shF)} \Sets). \]
+    と定義される
+    \footnote
+    {
+        定義から，$s,t \in \shF^+(X)$が等しいとは，以下が成り立つこと:
+        $s, t$へそれぞれ写る
+        $(\tilde{s}_U)_{U \in \covU} \in H^0(\covU, \shF),
+            (\tilde{t}_{V})_{V \in \covV} \in H^0(\covV, \shF)$
+        が存在し，
+        $\covU, \covV$の共通のある細分$\covW$において
+        \[ (\tilde{s}_U|_{W})_{\covW \ni W \subseteq U \in \covU}
+            =(\tilde{t}_{V}|_{W})_{\covW \ni W \subseteq V \in \covV} \]
+        となる．
+    }．
+    任意の$\covU \in \Cov(X)$について，
+    常に標準的全射$\iota_{\covU} \colon H^0(\covU, \shF) \to \shF^+(X)$が存在する．
+
+    $H^0(\{\id[X] \colon X \to X\}, \shF)=\shF(X)$であり，
+    しかも任意のcover of $X$は$\id[X]$の細分であるから，
+    $X$毎に標準的な射$\theta \colon \shF(X) \to \shF^+(X)$が存在する．
+    \[\begin{tikzcd}
+            {} & \shF(X) \ar[r, dashed, "\theta"]\ar[rd, bend left=20] \ar[d]& \shF^+(X) \\
+        \shF(X) \ar[r, phantom, "\in"]&
+            \Big\{H^0(\covU, \shF) \ar[r]\ar[ru, bend right=10]&
+            H^0(\covU', \shF) \Big\}_{\covU, \covU'}\ar[u]
+    \end{tikzcd}\]
+\end{Def}
+
+\begin{Def}
+    presheaf :: $\shP \in \PSh(\cat{C})$は以下を満たす時separatedであるという．
+    \[ \Forall{X \in \cat{C}} \Forall{\{U_i \to X\}_i \in \Cov(X)}
+        \shP(X) \to \prod_{i \in I} \shP(U_i)\text{ :: inj.} \]
+\end{Def}
+
+\begin{Lemma}[A]
+    site :: $\cat{C}$, presheaf :: $\shF \in \PSh(\cat{C})$を考える．
+    任意の$X \in \cat{C}, \covU \in \Cov(X), U_0 \in \covU$について，
+    以下の図式は可換である．
+    \[\begin{tikzcd}
+        \shF^+(X) \ar[r, "\res_X^{U_0}"]& \shF^+(U_0) \\
+        H^0(\covU, \shF) \ar[r, "\pr_{U_0}"']\ar[u, "\iota_{\covU}"]& \shF(U_0)\ar[u, "\theta"'] \\
+        \prod_{U \in \covU} \shF(U) \ar[u, phantom, "\text{\rotatebox{-90}{$\subseteq$}}"]
+    \end{tikzcd}\]
+\end{Lemma}
+\begin{proof}
+    適当に$(\tilde{s}_U)_{U \in \covU} \in H^0(\covU, \shF)$をとり，
+    $s=\iota_{\covU}\big((\tilde{s}_U)_{U \in \covU}\big) \in \shF^+(X)$とする．
+    \[
+    \xymatrix
+    {
+        s \ar[r]^-{\res_{X}^{U_0}}& s|_{U_0} \\
+        (\tilde{s}_U)_{U \in \covU}
+        \ar[u]\ar[r]^-{\prod \res_{U}^{U \times U_0}}\ar@/_5mm/[rd]_-{\pr_{U_0}}
+        &(\tilde{s}_U|_{U \times U_0})_{U \in \covU} \ar[u]\\
+            & \tilde{s}_{U_0}\ar@/_15mm/[uu]_-{\theta} \ar[u]^-{\prod \res_{U_0}^{U \times U_0}} 
+    }
+    \qquad \qquad
+    \xymatrix
+    {
+        \shF^+(U) \ar[r]& \shF^+(U_0) \\
+        H^0(\covU, \shF) \ar@{>->}[u]\ar[r]\ar@/_5mm/[rd]
+            & H^0(\covU \times U_0, \shF) \ar@{>->}[u]\\
+            & \shF(U_0) \ar@/_15mm/[uu]_-{\theta} \ar[u] 
+    }
+    \]
+    $(\tilde{s}_U)_{U \in \covU}$から$(\tilde{s}_U|_{U \times U_0})_{U \in \covU}$への$2$本の射が
+    一致するのは，$H^0(\covU, \shF)$の定義から従う
+    \[ \tilde{s}_{U}|_{U \times U_0}=\tilde{s}_{U_0}|_{U \times U_0} \]
+    が理由である．
+\end{proof}
+
+\begin{Lemma}[B]
+    任意の$X \in \cat{C}$と$\covU, \covV \in \Cov(X)$に対し，
+    $\covU, \covV$の共通の細分が存在する．
+\end{Lemma}
+\begin{proof}
+    具体的に
+    \[
+        \covU \times \covV
+        =\{ U \times V \to U \to X \mid U \in \covU, \covV \in \covV\}
+        =\{ U \times V \to V \to X \mid U \in \covU, \covV \in \covV\}
+    \]
+    と取れば良い．
+\end{proof}
+
+\begin{Lemma}
+    site :: $\cat{C}$, presheaf :: $\shF \in \PSh(\cat{C})$について
+    以下が成り立つ．
+    \begin{enumerate}[label=(\alph*)]
+        \item $\shF^+$ :: separated. 
+        \item $\shF^+$ :: sheaf if $\shF$ :: separated.
+        \item $\theta \colon \shF \to \shF^+$ :: iso if $\shF$ :: sheaf.
+        \item $\theta \colon \shF \to \shF^+$ :: universal,
+    \end{enumerate}
+\end{Lemma}
+\begin{proof}
+    \step{$\shF^+$ :: separated.}
+    $X \in \cat{C}$をとり，$s, t \in \shF^+(X)$をとる．
+    あるcover of $X$ :: $\covU \in \Cov(X)$について
+    \[ \Forall{U \in \covU} s|_{U}=t|_{U} \]
+    が成り立つと仮定して$s=t$を示す．
+ 
+    まず，
+    $\iota_{\covU'}\big( (\tilde{s}_{U'})_{U' \in \covU'} \big)=s$となる様に
+    $\covU' \in \Cov(X)$と$(\tilde{s}_{U'}) \in H^0(\covU', \shF)$をとる．
+    $\covU'$を必要に応じて更に細かくとれば，
+    $t$についても同様の$(\tilde{t}_{U'}) \in H^0(\covU', \shF)$が存在するように出来る．
+    さらに，$\covU'$を$\covU$の細分とする．
+    
+    この時，補題Aと$\covU'$が$\covU$の細分であることと仮定から
+    \[ s|_{U'}=\theta(\tilde{s}_{U'})=\theta(\tilde{t}_{U'})=s|_{U'} \ (\in \shF^+(U')). \]
+    したがって$\shF^+(U')$の定義から，
+    各$U'$について以下のような条件を満たす$\covV_{U'} \in \covV(U')$が存在する:
+    $(\tilde{s}'_{V})_{V \in \covV_{U'}},
+        (\tilde{s}'_{V})_{V \in \covV_{U'}} \in H^0(\covV_{U'}, \shF)$であって
+    \[
+        \iota\big( (\tilde{s}'_{V})_{V \in \covV_{U'}} \big)=s|_{U'},\quad
+        \iota\big( (\tilde{t}'_{V})_{V \in \covV_{U'}} \big)=t|_{U'}
+    \]
+    となるならば
+    $(\tilde{s}'_{V})_{V \in \covV_{U'}}=(\tilde{t}'_{V})_{V \in \covV_{U'}}$
+    となる．
+    これら$\covV_{U'}$達を束ねて
+    $\covU'$の細分$\covV=\{V \to U' \to U \to X\} \in \Cov(X)$を得る．
+    $(\tilde{s}_{U'}), (\tilde{t}_{U'})$も細分して
+    \[
+        \tilde{s}=(\tilde{s}_{U'}|_{V})_{\covV \ni V \subseteq U' \in \covU'},\ 
+        \tilde{t}=(\tilde{t}_{U'}|_{V})_{\covV \ni V \subseteq U' \in \covU'}
+        \in H^0(\covU^2, \shF)
+    \]
+    を得る．
+    
+    以上の議論から，各$U'$について
+    \[
+        \Forall{ U' \in \covU' } \Forall{ V \in \covV }
+        V \subseteq U' \implies
+        \tilde{s}'_{V}=\tilde{t}'_{V} \in H^0(\covV, \shF).
+    \]
+    $\covV$は$\covU'$の細分だから，
+    これは結局$\tilde{s}=\tilde{t}$ということである．
+    さらに，$\tilde{s}, \tilde{t}$は
+    $(\tilde{s}_{U'})_{U' \in \covU'}, (\tilde{t}_{U'})_{U' \in \covU'}$の細分
+    \footnote{ 被覆の細分に合わせた呼び方である．多分，$H^0(-, \shF)$の元に用いるのは独自の用法． }であり，
+    したがって$\iota_{\covV}(\tilde{s})=s, \iota_{\covV}(\tilde{t})=t$．
+    以上より，$s=t$.
+
+    \step{$\shF^+$ :: sheaf if $\shF$ :: separated.}
+    $\shF$ :: separated故に
+    $\shF(X) \to H^0(\covU, \shF)$ :: injなので$\theta$ :: inj.
+
+    cover of $X$ :: $\covU=\{U_i \to X\}_{i \in I} \in \Cov(X)$と，
+    以下を満たす元$(s_i)_{i \in I} \in \prod_{i \in I} \shF^+(U_i)$をとる:
+    \[ \Forall{i, i' \in I} s_i|_{U_{i} \times U_{i'}}=s_{i'}|_{U_{i} \times U_{i'}} \eqno{(*)} \]
+    すると補題Aより，
+    \[ \theta(\tilde{s}_{i,j})=s_i|_{U_{i,j}} \]
+    となる$\{ U_{i,j} \to U_i \} \in \Cov(U_i)$と$\tilde{s}_{i,j} \in \shF(U_{i,j})$がとれる．
+    各被覆の包含関係は以下の通り．
+    \[\xymatrix{
+            U_{i,j} \times_X U_{i',j'} \ar[r]\ar[rd]& U_{i,j} \ar[r]& U_i \ar[r]& X \\
+            {} & U_i \times_X U_j \ar[ru]
+    }\]
+    $(*)$から，
+    \[
+        \theta(\tilde{s}_{i,j}|_{U_{i,j} \times U_{i',j'}})
+        =s_i|_{U_{i,j} \times U_{i',j'}}
+        =s_{i'}|_{U_{i,j} \times U_{i',j'}}
+        =\theta(\tilde{s}_{i',j'}|_{U_{i,j} \times U_{i',j'}}).
+    \]
+    $\theta$ :: injより，
+    $\tilde{s}_{i,j}|_{U_{i,j} \times U_{i',j'}}=\tilde{s}_{i',j'}|_{U_{i,j} \times U_{i',j'}}$．
+    したがって$(\tilde{s}_{i,j}) \in H^0(\{U_{i,j} \to U\}, \shF)$であり，
+    ここから$s \in \shF^+(X)$が得られる．
+    最後に，各$i$について
+    \[ \Forall{j} \theta(s_{i,j})=s|_{U_{i,j}}=(s|_{U_i})|_{U_{i,j}}=s_i|_{U_{i,j}} \]なので，
+    $\shF$ :: separatedより，$s|_{U_i}=s_i$．
+    
+    \step{$\theta \colon \shF \to \shF^+$ :: iso if $\shF$ :: sheaf.}
+    $\shF$ :: sheafであるとき，
+    定義から任意の$\covU \in \Cov(X)$について$H^0(\covU, \shF) \iso \shF(X)$．
+    なので$\theta$ :: iso.
+
+    \step{$\theta \colon \shF \to \shF^+$ :: universal.}
+    $\ftorSh(-)=((-)^+)^+$とすると，これがsheafification functorとなる．
+    そのUMPを見よう．
+    $\shF \in \PSh(\cat{C}), \shG \in \Sh(\cat{C})$とする．
+    $\theta \colon \id[\Sh(X)] \to \ftorSh$のnaturalityから，次の可換図式が得られる．
+    \[\xymatrix{
+        \shF \ar[r] \ar[d]& \ftorSh \shF \ar[d]\\
+        \shG \ar[r]^-{\sim}& \ftorSh \shG
+    }\]
+    $\theta_{\shG}\colon \shG \to \ftorSh \shG$ :: isoだから，
+    $\shF \to \shG$から$\ftorSh \shF \to \shG$が得られた．
+    次に，以下で示す可換図式(1)が与えられたとしよう．
+    全体を$\ftorSh$で写し，$\ftorSh|_{\Sh(X)} \cong \id[\Sh(X)]$を用いて可換図式(2)が得られる．
+    \[
+    (1)
+    \xymatrix{
+        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
+        \shF \ar[u]^-{\alpha_{\shF}} \ar[ur]_-{\phi} & {}
+    }
+    \qquad\qquad
+    (2)
+    \xymatrix{
+        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
+        \ftorSh \shF \ar@{=}[u] \ar[ur]_-{\ftorSh \phi} & {}
+    }
+    \]
+    したがって$f=g$．
+    以上でexistence \& uniquenessが示せた．
+\end{proof}
+
+\begin{proof}[proof of Thm(\ref{thm:Shff})]
+    私のノート
+    \footnote{\cite{HarAG} ch.I sec.1の演習問題への解答: 
+        \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section1_ex.pdf}}
+    のEx1.12で$\theta$のUMP(universal map property, \cite{Awodey})から
+    left adjointnessを証明している．
+\end{proof}
+%% }}}
+
+\begin{Prop}
+    topos has small limits and small cocomplete.
+\end{Prop}
+\begin{proof}
+    前半はsmall productとequalizerを構成すればよい．
+    後半は$\ftorSh \colon \PSh(\cat{C}) \to \Sh(\Cat{C})$が
+    left adjoint functor故にcolimitと交換することを用いれば良い．
+\end{proof}
+
+以下の$2$つはセミナー内で将来証明を扱う．
+\begin{Thm}[\cite{ASS} 4.1.2]
+    $X \to Y$ :: morphism of schemesとする．
+    representable sheaf :: $\ftor{X}$は$\mathrm{Fppf}(Y)$上のsheafである．
+    したがってfppf topologyより荒い位相を持つsite，
+    特にbig etale site :: $\ET(Y)$でもsheafである．
+\end{Thm}
+
+\begin{Prop}
+    任意のpresheafはcolimit of representable sheavesとして表現できる
+\end{Prop}
+\begin{proof}
+    証明は（各点）左Kan拡張を用いて，
+    \[ \shP=(\Lan_{y}y)(\shP)=\Colim(\Comma{y}{\shP} \to^{\pi_1} \cat{C} \to^{y} \PSh(\cat{C})). \]
+    ここで$y \colon \cat{C} \to \PSh(\cat{C})$は米田埋め込みである．
+    （\cite{Awodey} Prop8.10でも同じ命題が証明されている．）
+\end{proof}
+
+\begin{Remark}
+    Kan拡張についての資料をメモしておく．
+    alg-d氏の公開しているノートが日本語で読める上丁寧で，おすすめ．
+    英語で書かれたWebにある資料では，
+    Jan Pavl\'ik ``Kan Extensions in Context of Concreteness"
+    \footnote{ \url{http://arxiv.org/abs/1104.3542v1} }もある．
+\end{Remark}
+
+以下はセミナー内でこれ以上現れないが，Topos theoryの重要な定理である．
+\begin{Thm}[Giraud's theorem]
+    category :: $\cat{T}$について，
+    $\cat{T}$がtoposであることと$\cat{T}$が以下のような圏であることは同値．
+    \begin{enumerate}[label=(G\arabic*)]
+        \item a locally small category with a small generating set,
+        \item with all finite limits,
+        \item with all small coproducts, which are disjoint, and pullback-stable,
+        \item where all congruences have effective quotient objects, which are also pullback-stable.
+    \end{enumerate}
+    参考: \url{https://ncatlab.org/nlab/show/Grothendieck+topos#Giraud}.
+\end{Thm}
+
+\section{Definitions : Points and Stalks.}
+以下はsmall/big etale siteのみで使われるものである．
+\begin{Def}[Geometric Point, Etale Neighborhood, \cite{ASS} 1.3.15.]
+\begin{myenum}{\roman*}
+    \item 
+    $X$ :: schemeに対し，
+    $k$ :: separabely closed fieldを用いて
+    $\bar{x} \colon \Spec k \to X$と表される射をgeometric pointと呼ぶ．
+
+    \item
+    geometric point :: $\bar{x} \colon \Spec k \to X$について，
+    $\bar{x}$のetale neighborhoodとは
+    $U \to X$がetaleであるような以下の可換図式のことである．
+    \[\xymatrix{
+        {} & U \ar[d]\\
+        \Spec k \ar[r]_-{\bar{x}} \ar[ru]& X
+    }\]
+
+    \item
+    geometric point :: $\bar{x} \colon \Spec k \to X$について，
+    $\bar{x}$の$2$つのetale neighborhood :: $U_1, U_2$を考える．
+    この時，$U_1$と$U_2$の間の射とは，
+    以下の図式を可換にするmorphism of schemes :: $\eta \colon U_1 \to U_2$のことである．
+    \begin{equation*}
+    \begin{xy}
+        (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
+        (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
+        \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
+        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
+    \end{xy}
+    \end{equation*}
+\end{myenum}
+\end{Def}
+
+\begin{Remark}
+    geometric pointの定義に
+    separabely closed fieldでなくalgebraically closed fieldを用いることもある．
+\end{Remark}
+
+\begin{Remark}
+    より一般的なpoint of siteの定義が存在する（\cite{StacksProj} Tag 04JU）．
+    これはetaleか否かに依らず採用できる．
+    しかしこの一般的な定義は複雑であるし，
+    我々はsmall/big etale siteしか扱わないので，
+    我々は以上の定義のみ用いる．
+\end{Remark}
+
+\begin{Def}[Stalk, \cite{ASS} 1.3.15.]
+    $X$ :: scheme,
+    $\shF \in \Et(X)$あるいは$\shF \in \ET(X)$とする．
+    さらに$\bar{x} \colon \Spec k \to X$ :: geometric pointとする．
+    $\bar{x}$に対して$\bar{x}$のetale neighborhoodが成す圏を$I_{\bar{x}}$とする，
+
+    \begin{enumerate}[label=(\roman*)]
+        \item 
+        $I_{\bar{x}}$を用いてstalk of $\shF$ at $\bar{x}$を
+        \[ \shF_{\bar{x}}:=\varinjlim_{U \in I_{\bar{x}}} \shF(U) \]
+        と定義する．
+
+        \item
+        $U \in I_{\bar{x}}$について，$\shF(U)$から$\shF_{\bar{x}}$への標準的射がある．
+        この射による$s \in \shF(U)$の像を$s_{\bar{x}}$と表し，
+        germ of $s$ at $\bar{x}$と呼ぶ．
+    \end{enumerate}
+\end{Def}
+
+\section{Definitions : Morphism of Shaves.}
+\begin{Def}[Injective, Surjective]
+    （同値な条件を列挙したいので，命題(\ref{prop:inj}, \ref{prop:surj})を参照せよ．）
+\end{Def}
+
+\section{Examples : Morphism of Shaves.}
+（良い例を見つけていない．）
+
+\section{Propositions : Morphism of Shaves.}
+\begin{Def}[Kernel, Image.]
+    （$\im \phi$のcategoricalな定義は\url{https://www.wikiwand.com/en/Image_(category_theory)}等にもある．）
+\end{Def}
+
+\begin{Prop} \label{prop:inj}
+    site :: $\cat{C}$上のsheaf of sets :: $\shF, \shG$の間のmorphism
+    $\phi \colon \shF \to \shG$をとる．
+    $\phi$について以下の$3$つは同値．
+    \begin{enumerate}
+        \item $\Forall{U \in \cat{C}} \phi_{U} \colon \shF(U) \to \shG(U)$ :: inj,
+        \item $\Forall{x \text{ :: geometric point}} \phi_{x} \colon \shF_x \to \shG_x$ :: inj,
+        \item $\phi$ :: mono.
+    \end{enumerate}
+    この同値な条件を満たす射$\phi$はinjectiveであるという．
+\end{Prop}
+\begin{proof}
+    morphism between sheaves on a schemeの場合と全く同じである．
+\end{proof}
+
+\begin{Prop}\label{prop:surj}
+    $\cat{C}, \shF, \shG, \phi \colon \shF \to \shG$を前の命題と同様にとる．
+    $\phi$について以下の$4$つは同値．
+    \begin{enumerate}
+        \item $\Forall{U \in \cat{C}} \Forall{s \in \shG(U)} \Exists{\{U_i \to U\} \in \Cov(U)}
+                \Exists{t_i \in \shF(U_i)} \phi_{U_i}(t_i)=s|_{U_i}$.
+        \item $\Forall{x \text{ :: geometric point}} \phi_{x} \colon \shF_x \to \shG_x$ :: surj,
+        \item $\phi$ :: epi.
+    \end{enumerate}
+    この同値な条件を満たす射$\phi$はsurjectiveであるという．
+\end{Prop}
+\begin{proof}
+    こちらも，morphism between sheaves on a schemeの場合と全く同じである．
+    一つだけ証明しよう．
+
+    \step{$\phi$ :: surj $\implies$ $\phi$ :: epi.}
+    以下の図式を考える．
+    \[\xymatrix{
+        \shF \ar[r]^-{\phi}& \shG \ar@<1mm>[r]^-{\alpha} \ar@<-1mm>[r]_-{\beta}& \shH
+    }\]
+    さらに，$\alpha \circ \phi=\beta \circ \phi$であると仮定する．
+    示したいのは$\alpha=\beta$である．
+    したがって任意の$U \in \cat{C}$上の
+    section :: $t \in \shG(U)$について$\alpha_U(t)=\beta_U(t)$を示せば良い．
+    仮定$\phi$ :: surjより，$t$に対し，
+    以下を満たす$\{U_i \to U\} \in \Cov(U)$と$s_i \in \shF(U_i)$がとれる．
+    \[ \phi_{U_i}(s_i)=t|_{U_i} \in \shG(U_i). \]
+    ここで$t|_{U_i}$は射$\shG(U_i \to U) \colon \shG(U) \to \shG(U_i)$による$t$の像である．
+    仮定より，
+    \[
+        \alpha_{U_i} \circ \phi_{U_i}(s_i)
+        =\alpha_{U_i}(t|_{U_i})=\beta_{U_i}(t|_{U_i})
+        =\beta_{U_i} \circ \phi_{U_i}(s_i).
+    \]
+    したがって$(\alpha_U(t))|_{U_i}=(\beta_U(t))|_{U_i}$を得る．
+    $\shH$ :: sheaf，特に$\shH$ :: separated presheafなので$\alpha_U(t)=\beta_U(t)$．
+\end{proof}
+
+\begin{Prop}
+    $\cat{C}, \shF, \shG, \phi \colon \shF \to \shG$を前の命題と同様にとる．
+    $\phi$ :: iso(=inj+surj)と$\phi$ :: epi+monoは同値．
+\end{Prop}
+\begin{proof}
+    inj $\iff$ mono, surj $\iff$ epiは上のとおりなので，これらを単に合わせただけである．
+\end{proof}
+
+\section{Definitions : Morphism of Topoi.}
+定義を$2$つ再掲する．
+\begin{Def}
+    $T, T'$ :: topoiとする．
+    morphism of topoi :: $f \colon T \to T'$とは，
+    以下の$3$つの射($2$ functor and $1$ isomorphism.)からなる．
+    \[
+        f_* \colon T \to T', \quad f^* \colon T' \to T,
+        \quad \phi \colon \Hom_{T}(f^*(-), -) \isomap \Hom_{T'}(-. f_*(-)).
+    \]
+\end{Def}
+
+\begin{Def}
+    $f \colon \cat{C} \to \cat{C}'$をfunctor of sitesとする．
+    この時，$F \in \PSh(\cat{C})$について
+    \[ f_*F(-):=F(f(-)) \]
+    とおくと，$f_* F \in \PSh(\cat{C}')$が得られる．
+    $f$ :: continuous functorならば，
+    $\shF \in \Sh(\cat{C})$に対し
+    同様にして$f_*\shF \in \Sh(\cat{C}')$が得られる．
+\end{Def}
+
+これを用いた別のstalkの定義の仕方がある．
+\begin{Def}[Stalk, another definition]
+    1点からなる空間には一意に位相が入る．
+    そこで一点空間上のsheafが成す圏を$pt$と書く．
+    \begin{enumerate}[label=(\roman*)]
+        \item
+            point of topos $\cat{T}$とは，
+            morphism of topoi $x \colon pt \to \cat{T}$のことである．
+        \item
+            $\shF \in \cat{T}$とpoint :: $x \colon pt \to \cat{T}$について，
+            $\shF_x := x^*\shF$をstalk of $\shF$ at $x$と呼ぶ．
+        \item
+            morphism of sheaves :: $f \colon \shF \to \shG$がisomorphismであることと
+            $x^* f \colon x^* \shF \to x^* \shG$がisomorphismであることが同値
+            （特に$x^*f$ :: isoならば$f$ :: iso）であるとき，
+            $\cat{T}$ :: having enough pointsという．
+    \end{enumerate}
+\end{Def}
+
+\section{Propositions : Topoi.}
+\begin{Prop}
+    $\cat{C}, \cat{C}$ :: siteとする．
+    $\cat{C}, \cat{C}'$はsmall categoryであると仮定する．
+    \begin{enumerate}[label=(\roman*)]
+    \item
+    $f \colon \cat{C} \to \cat{C}'$をfunctor of sitesとする．
+    この時，functor :: $f_* \colon \PSh(\cat{C}) \to \PSh(\cat{C}')$は
+    left adjoint functorを持つ．
+    
+    \item
+    $f \colon \cat{C} \to \cat{C}'$をcontinuous functorとする．
+    この時，functor :: $f_* \colon \Sh(\cat{C}) \to \Sh(\cat{C}')$は
+    left adjoint functorを持つ．
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+    (ii)は(i)から従う．
+    実際，
+    $f_* \colon \PSh(\cat{C}) \to \PSh(\cat{C}')$のleft adjoint functorを$f^p$とすると，
+    $f^*=\ftorSh f^p$と置けば
+    これが$f_* \colon \Sh(\cat{C}) \to \Sh(\cat{C}')$のleft adjoint functorとなる．
+    証明は$\ftorSh$ :: left adjointを用いて直接行えば良い．
+    なので(i)のみ示す．
+
+    $f \colon \cat{C} \to \cat{C}'$と$\shF \in \PSh(\cat{C})$について，
+    $f_* \shF$はKan拡張の言葉（記号は\cite{CWM}のもの）を用いて$(f^{op})^{-1} \shF$と書ける．
+    ここで$f^{op} \colon \cat{C}^{op} \to (\cat{C}')^{op}$は射の反転で得られる関手である．
+    したがって，$f_*$の左随伴は左Kan拡張$\Lan_{f^{op}}$である．
+    各点左Kan拡張を計算すると，
+    \[ (\Lan_{f^{op}}\shF)(U)=\Colim\left(\xymatrix{
+        (\Comma{U}{f})^{op}=\Comma{f^{op}}{U} \ar[r]^-{\pi_1}& \cat{C}^{op} \ar[r]^-{\shF}& \Sets
+    }\right). \]
+    ここで$U \downarrow f^{op}$はComma圏で，$\pi_1$は射影$[f(V) \to U] \mapsto V$である．
+    $f^{op} \downarrow U$は$\cat{C}^{op}$の部分圏だから，特にこれはsmall colimit.
+    $\Sets$ :: cocompleteなのでこのcolimitは存在する．
+\end{proof}
+
+\begin{Cor}
+    $f_*$はlimitと交換し，$f^*$はcolimitと交換する．
+\end{Cor}
+
+%\begin{Remark}
+%    通常はこの各点左Kan拡張のindex categoryを$f^{op} \downarrow U$とするが，
+%    この変更は結果に影響を与えない．
+%    しかし通常は（つまりKan拡張を使わない定義では）上記のように定義するので，
+%    それに合わせた．
+%    こうして定義された$f^p$がleft adjoint to $f_*$であることを確かめる必要がないのが，
+%    今回Kan拡張を利用する利点である．
+%\end{Remark}
+
+\begin{Remark}
+    実際にsmallとなる有用なsiteとなると，おそらく殆ど無い．
+    実際，$\ET(X), \Et(X)$はlargeである．
+    しかし$\Et(X)$ :: essentially small (i.e. equivalent to small category)なので，
+    適当に$\Et(X)$の部分圏を取って，
+    その上のcategory of presheavesが一致するように出来るかも知れない．
+    なお，$\Sch/X$はessentially smallでさえ無い．
+
+    しかし，smallでないと我々の議論は立ち行かなくなる．
+    なのでtechnicalではあるが，
+    Grothendieck宇宙の存在を仮定する（宇宙公理を仮定することと同値）などして
+    任意の圏をsmallとする．
+\end{Remark}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}

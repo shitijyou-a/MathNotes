@@ -308,20 +308,22 @@ flat\& locally of finite presentationならば実際にこのように成る．
     functor :: $\shF \colon S^{op} \to \Sets$のことである．
 
     \item
+    射影$U \times_B V \to U$をpresheaf :: $\shF$で写した射を$\res_{U}^{U \times_B V}$と書く．
+
+    \item
     presheaf on $S$ :: $\shF$がsheafであるとは，
     以下の図式がequalizer diagramであるということ．
     \[\xymatrix{
         \shF(U) \ar[r]& \prod_{i \in I} \shF(U_i)
-            \ar@<1mm>[r]\ar@<-1mm>[r]& \prod_{(i,j) \in I \times I} \shF(U_i \times_U T_j)
+            \ar@<1mm>[r]\ar@<-1mm>[r]& \prod_{(i,j) \in I \times I} \shF(U_i \times_U U_j)
     }\]
-    ここで右の並行射は
-    それぞれ射影$\pr_1(, \pr_2) \colon U_i \times U_j \to U_i(, U_j)$から
-    $\shF$により誘導される射である．
+    ここで右の並行射は$\res_{U_i}^{U_i \times U_j}, \res_{U_j}^{U_i \times U_j}$である．
 
     \item
     Site :: $S$上の，
     圏$\cat{C}(=\Sets, \mathrm{Rings}, \mathrm{AbGrp}, \dots)$への
     presheafの圏を$\PSh(S, \cat{C})$，sheafの圏を$\Sh(S, \cat{C})$と書く．
+    $\cat{C}=\Sets$の場合は略して$\Sh(S), \PSh(S)$と書く．
 
     \item
     morphism of shaeves :: $\shF \to \shF'$とは，
@@ -362,6 +364,16 @@ flat\& locally of finite presentationならば実際にこのように成る．
     toposにsiteより簡単な記号を与えるのは理解できることである．
 \end{Remark}
 
+\begin{Def}[Direct Image Functor.]
+    $f \colon \cat{C} \to \cat{C}'$をfunctor of sitesとする．
+    この時，$F \in \PSh(\cat{C})$について
+    \[ f_*F(-):=F(f(-)) \]
+    とおくと，$f_* F \in \PSh(\cat{C}')$が得られる．
+    $f$ :: continuous functorならば，
+    $\shF \in \Sh(\cat{C})$に対し
+    同様にして$f_*\shF \in \Sh(\cat{C}')$が得られる．
+\end{Def}
+
 \begin{Def}[Ringed Topos.]
 \begin{myenum}{\roman*}
     \item
@@ -399,6 +411,13 @@ flat\& locally of finite presentationならば実際にこのように成る．
     定義にあるdiagramがequalizer diagramにならない．
 \end{Example}
 
+\begin{Example}
+    $S$ :: schemeについて，
+    $\Sch/S$上のpresheafを
+    \[ \shO_S \colon [X \to S] \mapsto \Gamma(X, \shO_X) \]
+    で定める．
+    このsheafは``structure sheaf of $S$"と呼ばれ，$\ftor{\affine^1_S}$と同型．
+\end{Example}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
