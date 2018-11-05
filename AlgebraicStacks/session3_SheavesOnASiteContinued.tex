@@ -1,11 +1,14 @@
 \documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage{tikz-cd}
+\usepackage{graphics}
 \usepackage{macros}
 
 \newcommand{\covU}{\mathcal{U}}
 \newcommand{\covV}{\mathcal{V}}
+\newcommand{\covW}{\mathcal{W}}
 \newcommand{\exto}{\xrightarrow{\exists}}
 \newcommand{\Comma}[2]{#1{\downarrow}#2}
+\newcommand{\step}[1]{\paragraph{\bf #1}}
 
 \begin{document}
 \title{ゼミノート \#3 \\ Sheaves on a Site, continued.}
@@ -22,7 +25,6 @@
 %% {{{
 \begin{Remark}
     以下で述べる$\ftorSh$の構成は``plus construction"と呼ばれる．
-    少し異なる方法が$\cite{ASS}$で述べられているし，
     Kay Werndli ``Sheaves From Scratch" \S3.5ではetale bundleという物を用いた構成をしている．
 \end{Remark}
 
@@ -30,31 +32,46 @@
 
 \begin{Def}[\cite{StacksProj}, Tag 00W1]
     $\shF \in \PSh(\cat{C})$と，
-    $U \in \cat{C}$のcover :: $\covU=\{U_i \to U\} \in \Cov(U)$に対し，
+    $X \in \cat{C}$のcover :: $\covU=\{U_i \to X\} \in \Cov(X)$に対し，
     \[ H^0(\covU, \shF)=\text{equalizer of }\left[
         \vcenter{\xymatrix{
         \prod_{i \in I} \shF(U_i)
         \ar@<1mm>[r]^-{} \ar@<-1mm>[r]_-{}&
-        \prod_{(i,j) \in I \times I} \shF(U_i \times_U U_j)
+        \prod_{(i,j) \in I \times I} \shF(U_i \times_X U_j)
     }} \right] \]
     ここで二つの並行射は
     それぞれ$\res_{U_i}^{U_i \times U_j}, \res_{U_j}^{U_i \times U_j}$である．
     すなわち，ここにある並行射はsheafの定義にあるものである．
     このdiagramは圏$\Sets$の中のものなので，
     \textbf{index :: $I$が集合ならば}このequalizerは常に存在する．
+    （$H^0$という記号は，これが$\shF$の$0$次\v{C}ech cohomologyであることによる．）
     
-    直ちに分かるとおり，$\Cov(U)$は細分を射として圏を成し，
-    $H^0(-, \shF)$は圏$\Cov(U)$から$\Sets$への反変関手である．
+    直ちに分かるとおり，$\Cov(X)$は細分を射として圏を成し，
+    $H^0(-, \shF)$は圏$\Cov(X)$から$\Sets$への反変関手である．
     $\shF^+$は
-    \[ \shF^+(U)=\Colim_{\covU \in \Cov(U)} H^0(\covU, \shF)=\Colim(\Cov(U) \to^{H^0(-,\shF)} \Sets). \]
-    と定義される．
+    \[ \shF^+(X)=\Colim_{\covU \in \Cov(X)} H^0(\covU, \shF)=\Colim(\Cov(X) \to^{H^0(-,\shF)} \Sets). \]
+    と定義される
+    \footnote
+    {
+        定義から，$s,t \in \shF^+(X)$が等しいとは，以下が成り立つこと:
+        $s, t$へそれぞれ写る
+        $(\tilde{s}_U)_{U \in \covU} \in H^0(\covU, \shF),
+            (\tilde{t}_{V})_{V \in \covV} \in H^0(\covV, \shF)$
+        が存在し，
+        $\covU, \covV$の共通のある細分$\covW$において
+        \[ (\tilde{s}_U|_{W})_{\covW \ni W \subseteq U \in \covU}
+            =(\tilde{t}_{V}|_{W})_{\covW \ni W \subseteq V \in \covV} \]
+        となる．
+    }．
+    任意の$\covU \in \Cov(X)$について，
+    常に標準的全射$\iota_{\covU} \colon H^0(\covU, \shF) \to \shF^+(X)$が存在する．
 
-    $H^0(\{\id[U] \colon U \to U\}, \shF)=\shF(U)$であり，
-    しかも任意のcover of $U$は$\id[U]$の細分であるから，
-    $U$毎に標準的な射$\theta \colon \shF(U) \to \shF^+(U)$が存在する．
+    $H^0(\{\id[X] \colon X \to X\}, \shF)=\shF(X)$であり，
+    しかも任意のcover of $X$は$\id[X]$の細分であるから，
+    $X$毎に標準的な射$\theta \colon \shF(X) \to \shF^+(X)$が存在する．
     \[\begin{tikzcd}
-            {} & \shF(U) \ar[r, dashed, "\theta"]\ar[rd, bend left=20] \ar[d]& \shF^+(U) \\
-        \shF(U) \ar[r, phantom, "\in"]&
+            {} & \shF(X) \ar[r, dashed, "\theta"]\ar[rd, bend left=20] \ar[d]& \shF^+(X) \\
+        \shF(X) \ar[r, phantom, "\in"]&
             \Big\{H^0(\covU, \shF) \ar[r]\ar[ru, bend right=10]&
             H^0(\covU', \shF) \Big\}_{\covU, \covU'}\ar[u]
     \end{tikzcd}\]
@@ -62,37 +79,38 @@
 
 \begin{Def}
     presheaf :: $\shP \in \PSh(\cat{C})$は以下を満たす時separatedであるという．
-    \[ \Forall{U \in \cat{C}} \Forall{\{U_i \to U\}_i \in \Cov(U)}
-        \shP(U) \to \prod_{i \in I} \shP(U_i)\text{ :: inj.} \]
+    \[ \Forall{X \in \cat{C}} \Forall{\{U_i \to X\}_i \in \Cov(X)}
+        \shP(X) \to \prod_{i \in I} \shP(U_i)\text{ :: inj.} \]
 \end{Def}
 
 \begin{Lemma}[A]
     site :: $\cat{C}$, presheaf :: $\shF \in \PSh(\cat{C})$を考える．
-    さらに$U \in \cat{C}$をとる．
-    任意の$s \in \shF^+(U)$に対して以下が成り立つ．
-    \[
-        \Forall{s \in \shF^+(U)} \Exists{\{U_i \to U\}_i \in \Cov(U)}
-        \Forall{i}
-        \Exists{\tilde{s}_i \in \shF(U_i)}
-        \theta(\tilde{s}_i|_{U_i})=s|_{U_i}
-    \]
+    任意の$X \in \cat{C}, \covU \in \Cov(X), U_0 \in \covU$について，
+    以下の図式は可換である．
+    \[\begin{tikzcd}
+        \shF^+(X) \ar[r, "\res_X^{U_0}"]& \shF^+(U_0) \\
+        H^0(\covU, \shF) \ar[r, "\pr_{U_0}"']\ar[u, "\iota_{\covU}"]& \shF(U_0)\ar[u, "\theta"'] \\
+        \prod_{U \in \covU} \shF(U) \ar[u, phantom, "\text{\rotatebox{-90}{$\subseteq$}}"]
+    \end{tikzcd}\]
 \end{Lemma}
 \begin{proof}
+    適当に$(\tilde{s}_U)_{U \in \covU} \in H^0(\covU, \shF)$をとり，
+    $s=\iota_{\covU}\big((\tilde{s}_U)_{U \in \covU}\big) \in \shF^+(X)$とする．
     \[
-    \Forall{s \in \shF^+(U)} \Exists{\covU \in \Cov(U)}
     \xymatrix
     {
-        \forall s \ar[r]^-{\res_{U}^{U_0}}& s|_{U_0} \\
-        \exists (\tilde{s}_U)_{U \in \covU} \ar[u]\ar[r]^-{\prod \res_{U}^{U \times U_0}}\ar@/_5mm/[rd]_-{\pr_{U_0}}
-            &(\tilde{s}_U|_{U \times U_0})_{U \in \covU} \ar[u]\\
+        s \ar[r]^-{\res_{X}^{U_0}}& s|_{U_0} \\
+        (\tilde{s}_U)_{U \in \covU}
+        \ar[u]\ar[r]^-{\prod \res_{U}^{U \times U_0}}\ar@/_5mm/[rd]_-{\pr_{U_0}}
+        &(\tilde{s}_U|_{U \times U_0})_{U \in \covU} \ar[u]\\
             & \tilde{s}_{U_0}\ar@/_15mm/[uu]_-{\theta} \ar[u]^-{\prod \res_{U_0}^{U \times U_0}} 
     }
-    \qquad
+    \qquad \qquad
     \xymatrix
     {
         \shF^+(U) \ar[r]& \shF^+(U_0) \\
-        H^0(\covU, \shF) \ar[u]\ar[r]\ar@/_5mm/[rd]
-            & H^0(\covU \times U_0, \shF) \ar[u]\\
+        H^0(\covU, \shF) \ar@{>->}[u]\ar[r]\ar@/_5mm/[rd]
+            & H^0(\covU \times U_0, \shF) \ar@{>->}[u]\\
             & \shF(U_0) \ar@/_15mm/[uu]_-{\theta} \ar[u] 
     }
     \]
@@ -100,48 +118,20 @@
     一致するのは，$H^0(\covU, \shF)$の定義から従う
     \[ \tilde{s}_{U}|_{U \times U_0}=\tilde{s}_{U_0}|_{U \times U_0} \]
     が理由である．
-%    標準的な射$H^0(\covU, \shF) \to \shF^+(U)$を$\iota_{\covU}$と書くことにする．
-%    以下は直ちに分かる．
-%    \[
-%        \Forall{s \in \shF^+(U)} \Exists{\covU=\{U_i \to U\}_i \in \Cov(U)}
-%        \Exists{(\hat{s}_i)_i \in H^0(\covU, \shF)}
-%        \iota_{\covU}((\hat{s}_i)_i)=s
-%    \]
 \end{proof}
 
 \begin{Lemma}[B]
-    site :: $\cat{C}$, presheaf :: $\shF \in \PSh(\cat{C})$を考える．
-    さらに$U \in \cat{C}$をとる．
-    $s, s' \in \shF^+(U)$が一致するとは，次が成立するということである．
-    \[
-        \Exists{ \{U_i \to U\}_i \in \Cov(U) }
-        \Forall{i}
-        \Exists{ \tilde{s}_i, \tilde{s}'_i \in \shF(U_i) }
-        \theta(\tilde{s}_i)=s|_{U_i} \mand
-        \theta(\tilde{s}'_i)=s'|_{U_i} \mand
-        \underline{\theta(\tilde{s}_i)=\theta(\tilde{s}'_i) \text{ in } \shF(U_i)}.
-    \]
+    任意の$X \in \cat{C}$と$\covU, \covV \in \Cov(X)$に対し，
+    $\covU, \covV$の共通の細分が存在する．
 \end{Lemma}
 \begin{proof}
-    下線部以外は前の補題により成り立つことに注意．
-    下線部が成り立つ時，
-    以下の図式から，
-    各$i$について
-    \[ (\tilde{s}_i|_{V})_{V \in \covV_i}=(\tilde{s}'_i|_{V})_{V \in \covV_i} \]となる
-    $\covV_i \in \Cov(U_i)$が存在し，
-    これらは同じ$s|_{U_i}=s'|_{U_i} \in \shF^+(U_i)$に写る．
-    \[\begin{tikzcd}
-            \shF(U) \ar[rr, "\theta"] \ar[dr, "\prod_{V \in \covV} \res_{U}^{V}"']&&
-            \shF^+(U) \\
-                                                                                  &
-            \Big\{H^0(\covV, \shF) \Big\} \ar[ur]
-            &
-    \end{tikzcd}\]
-    そこで$\covV_i$と$\covU$を合わせて
-    \[ \bar{\covU}=\{ V \to U_i \to U \mid V \in \covV_i \} \]
-    とすれば，
-    $\prod_{i} (\tilde{s}_i|_{V}), (=)\prod_{i} (\tilde{s}'_i|_{V}) \in H^0(\bar{\covU}, \shF)$が得られる．
-    これらの$\shF^+(U)$での像がそれぞれ$s, s'$となるから，$s=s'$.
+    具体的に
+    \[
+        \covU \times \covV
+        =\{ U \times V \to U \to X \mid U \in \covU, \covV \in \covV\}
+        =\{ U \times V \to V \to X \mid U \in \covU, \covV \in \covV\}
+    \]
+    と取れば良い．
 \end{proof}
 
 \begin{Lemma}
@@ -155,23 +145,61 @@
     \end{enumerate}
 \end{Lemma}
 \begin{proof}
-    \paragraph{$\shF^+$ :: separated.}
-    $U \in \cat{C}$をとり，$s, s' \in \shF^+(U)$をとる．
-    あるcover of $U$ :: $\{U_i \to U\}_{i \in I} \in \Cov(U)$について
-    \[ \Forall{i \in I} s|_{U_i}=s'|_{U_i} \]
-    が成り立つと仮定して$s=s'$を示す．
+    \step{$\shF^+$ :: separated.}
+    $X \in \cat{C}$をとり，$s, t \in \shF^+(X)$をとる．
+    あるcover of $X$ :: $\covU \in \Cov(X)$について
+    \[ \Forall{U \in \covU} s|_{U}=t|_{U} \]
+    が成り立つと仮定して$s=t$を示す．
+ 
+    まず，
+    $\iota_{\covU'}\big( (\tilde{s}_{U'})_{U' \in \covU'} \big)=s$となる様に
+    $\covU' \in \Cov(X)$と$(\tilde{s}_{U'}) \in H^0(\covU', \shF)$をとる．
+    $\covU'$を必要に応じて更に細かくとれば，
+    $t$についても同様の$(\tilde{t}_{U'}) \in H^0(\covU', \shF)$が存在するように出来る．
+    さらに，$\covU'$を$\covU$の細分とする．
     
-    今，$s|_{U_i}=s'|_{U_i} \in \shF^+(U_i)$なので，
-    補題Aより，cover of $U_i$ :: $\covU_i=\{U_{i,j} \to U_i\}_{j \in J_i} \in \Cov(U_i)$が存在し，
-    \[ \theta(\tilde{s}_{i,j})=s|_{U_{i,j}}=s'|_{U_{i,j}}=\theta(\tilde{s}'_{i,j}) \]を満たす
-    $( \tilde{s}_{i,j} )_j, ( \tilde{s}'_{i,j} )_j \in H^0(\covU_i, \shF)$が存在する．
-    よって補題Bから$s=s'$.
+    この時，補題Aと$\covU'$が$\covU$の細分であることと仮定から
+    \[ s|_{U'}=\theta(\tilde{s}_{U'})=\theta(\tilde{t}_{U'})=s|_{U'} \ (\in \shF^+(U')). \]
+    したがって$\shF^+(U')$の定義から，
+    各$U'$について以下のような条件を満たす$\covV_{U'} \in \covV(U')$が存在する:
+    $(\tilde{s}'_{V})_{V \in \covV_{U'}},
+        (\tilde{s}'_{V})_{V \in \covV_{U'}} \in H^0(\covV_{U'}, \shF)$であって
+    \[
+        \iota\big( (\tilde{s}'_{V})_{V \in \covV_{U'}} \big)=s|_{U'},\quad
+        \iota\big( (\tilde{t}'_{V})_{V \in \covV_{U'}} \big)=t|_{U'}
+    \]
+    となるならば
+    $(\tilde{s}'_{V})_{V \in \covV_{U'}}=(\tilde{t}'_{V})_{V \in \covV_{U'}}$
+    となる．
+    これら$\covV_{U'}$達を束ねて
+    $\covU'$の細分$\covV=\{V \to U' \to U \to X\} \in \Cov(X)$を得る．
+    $(\tilde{s}_{U'}), (\tilde{t}_{U'})$も細分して
+    \[
+        \tilde{s}=(\tilde{s}_{U'}|_{V})_{\covV \ni V \subseteq U' \in \covU'},\ 
+        \tilde{t}=(\tilde{t}_{U'}|_{V})_{\covV \ni V \subseteq U' \in \covU'}
+        \in H^0(\covU^2, \shF)
+    \]
+    を得る．
+    
+    以上の議論から，各$U'$について
+    \[
+        \Forall{ U' \in \covU' } \Forall{ V \in \covV }
+        V \subseteq U' \implies
+        \tilde{s}'_{V}=\tilde{t}'_{V} \in H^0(\covV, \shF).
+    \]
+    $\covV$は$\covU'$の細分だから，
+    これは結局$\tilde{s}=\tilde{t}$ということである．
+    さらに，$\tilde{s}, \tilde{t}$は
+    $(\tilde{s}_{U'})_{U' \in \covU'}, (\tilde{t}_{U'})_{U' \in \covU'}$の細分
+    \footnote{ 被覆の細分に合わせた呼び方である．多分，$H^0(-, \shF)$の元に用いるのは独自の用法． }であり，
+    したがって$\iota_{\covV}(\tilde{s})=s, \iota_{\covV}(\tilde{t})=t$．
+    以上より，$s=t$.
 
-    \paragraph{$\shF^+$ :: sheaf if $\shF$ :: separated.}
+    \step{$\shF^+$ :: sheaf if $\shF$ :: separated.}
     $\shF$ :: separated故に
-    $\shF(U) \to H^0(\covU, \shF)$ :: injなので$\theta$ :: inj.
+    $\shF(X) \to H^0(\covU, \shF)$ :: injなので$\theta$ :: inj.
 
-    cover of $U$ :: $\covU=\{U_i \to U\}_{i \in I} \in \Cov(U)$と，
+    cover of $X$ :: $\covU=\{U_i \to X\}_{i \in I} \in \Cov(X)$と，
     以下を満たす元$(s_i)_{i \in I} \in \prod_{i \in I} \shF^+(U_i)$をとる:
     \[ \Forall{i, i' \in I} s_i|_{U_{i} \times U_{i'}}=s_{i'}|_{U_{i} \times U_{i'}} \eqno{(*)} \]
     すると補題Aより，
@@ -179,8 +207,8 @@
     となる$\{ U_{i,j} \to U_i \} \in \Cov(U_i)$と$\tilde{s}_{i,j} \in \shF(U_{i,j})$がとれる．
     各被覆の包含関係は以下の通り．
     \[\xymatrix{
-            U_{i,j} \times_U U_{i',j'} \ar[r]\ar[rd]& U_{i,j} \ar[r]& U_i \ar[r]& U \\
-            {} & U_i \times_U U_j \ar[ru]
+            U_{i,j} \times_X U_{i',j'} \ar[r]\ar[rd]& U_{i,j} \ar[r]& U_i \ar[r]& X \\
+            {} & U_i \times_X U_j \ar[ru]
     }\]
     $(*)$から，
     \[
@@ -192,17 +220,17 @@
     $\theta$ :: injより，
     $\tilde{s}_{i,j}|_{U_{i,j} \times U_{i',j'}}=\tilde{s}_{i',j'}|_{U_{i,j} \times U_{i',j'}}$．
     したがって$(\tilde{s}_{i,j}) \in H^0(\{U_{i,j} \to U\}, \shF)$であり，
-    ここから$s \in \shF^+(U)$が得られる．
+    ここから$s \in \shF^+(X)$が得られる．
     最後に，各$i$について
     \[ \Forall{j} \theta(s_{i,j})=s|_{U_{i,j}}=(s|_{U_i})|_{U_{i,j}}=s_i|_{U_{i,j}} \]なので，
     $\shF$ :: separatedより，$s|_{U_i}=s_i$．
     
-    \paragraph{$\theta \colon \shF \to \shF^+$ :: iso if $\shF$ :: sheaf.}
+    \step{$\theta \colon \shF \to \shF^+$ :: iso if $\shF$ :: sheaf.}
     $\shF$ :: sheafであるとき，
-    定義から任意の$\covU \in \Cov(U)$について$H^0(\shF) \iso \shF(U)$．
+    定義から任意の$\covU \in \Cov(X)$について$H^0(\covU, \shF) \iso \shF(X)$．
     なので$\theta$ :: iso.
 
-    \paragraph{$\theta \colon \shF \to \shF^+$ :: universal.}
+    \step{$\theta \colon \shF \to \shF^+$ :: universal.}
     $\ftorSh(-)=((-)^+)^+$とすると，これがsheafification functorとなる．
     そのUMPを見よう．
     $\shF \in \PSh(\cat{C}), \shG \in \Sh(\cat{C})$とする．
@@ -263,10 +291,18 @@
 \end{Prop}
 \begin{proof}
     証明は（各点）左Kan拡張を用いて，
-    \[ \shP=y^{\dagger}y(\shP)=\Colim(\Comma{y}{\shP} \to^{\pi_1} \cat{C} \to^{y} \PSh(\cat{C})). \]
+    \[ \shP=(\Lan_{y}y)(\shP)=\Colim(\Comma{y}{\shP} \to^{\pi_1} \cat{C} \to^{y} \PSh(\cat{C})). \]
     ここで$y \colon \cat{C} \to \PSh(\cat{C})$は米田埋め込みである．
     （\cite{Awodey} Prop8.10でも同じ命題が証明されている．）
 \end{proof}
+
+\begin{Remark}
+    Kan拡張についての資料をメモしておく．
+    alg-d氏の公開しているノートが日本語で読める上丁寧で，おすすめ．
+    英語で書かれたWebにある資料では，
+    Jan Pavl\'ik ``Kan Extensions in Context of Concreteness"
+    \footnote{ \url{http://arxiv.org/abs/1104.3542v1} }もある．
+\end{Remark}
 
 以下はセミナー内でこれ以上現れないが，Topos theoryの重要な定理である．
 \begin{Thm}[Giraud's theorem]
@@ -277,7 +313,8 @@
         \item with all finite limits,
         \item with all small coproducts, which are disjoint, and pullback-stable,
         \item where all congruences have effective quotient objects, which are also pullback-stable.
-\end{enumerate}
+    \end{enumerate}
+    参考: \url{https://ncatlab.org/nlab/show/Grothendieck+topos#Giraud}.
 \end{Thm}
 
 \section{Definitions : Points and Stalks.}
@@ -351,13 +388,8 @@
     （同値な条件を列挙したいので，命題(\ref{prop:inj}, \ref{prop:surj})を参照せよ．）
 \end{Def}
 
-\begin{Def}[Representable Morphism.]
-\end{Def}
-
-\begin{Def}[Algebraic Space.]
-\end{Def}
-
 \section{Examples : Morphism of Shaves.}
+（良い例を見つけていない．）
 
 \section{Propositions : Morphism of Shaves.}
 \begin{Def}[Kernel, Image.]
@@ -386,26 +418,15 @@
         \item $\Forall{U \in \cat{C}} \Forall{s \in \shG(U)} \Exists{\{U_i \to U\} \in \Cov(U)}
                 \Exists{t_i \in \shF(U_i)} \phi_{U_i}(t_i)=s|_{U_i}$.
         \item $\Forall{x \text{ :: geometric point}} \phi_{x} \colon \shF_x \to \shG_x$ :: surj,
-        \item $\im \phi=\shG$,
         \item $\phi$ :: epi.
     \end{enumerate}
     この同値な条件を満たす射$\phi$はsurjectiveであるという．
 \end{Prop}
 \begin{proof}
     こちらも，morphism between sheaves on a schemeの場合と全く同じである．
-    二つだけ証明しよう．
+    一つだけ証明しよう．
 
-    \paragraph{$\im \phi=\shG \implies \phi$ :: surj.}
-    仮定$\im \phi=\shG$は以下の可換図式を意味する．
-    \[\xymatrix{
-            \shF \ar@<1mm>[rr]^-{\phi}\ar[rd]_-{\forall}& {} & \shG \ar@{-->}@<-1.5mm>[ld]_-{\exists_1}\\
-            & \forall \shH \ar@{>->}[ru]_-{\forall}&
-    }\]
-    (TODO)
-%    $\shH=\shF$とし，$\shF \to \shH=\shF$を$\id[\shF]$とすれば，
-%    $\phi$ :: split surj.を意味する．
-
-    \paragraph{$\phi$ :: surj $\implies$ $\phi$ :: epi.}
+    \step{$\phi$ :: surj $\implies$ $\phi$ :: epi.}
     以下の図式を考える．
     \[\xymatrix{
         \shF \ar[r]^-{\phi}& \shG \ar@<1mm>[r]^-{\alpha} \ar@<-1mm>[r]_-{\beta}& \shH
