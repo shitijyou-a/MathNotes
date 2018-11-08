@@ -31,9 +31,11 @@
 \makeatother
 %% }}}
 
-\newenvironment{myenum}[1]
+\newenvironment{myenum}[1][\roman*]
 {\hfill \vspace{-0.8cm}\begin{enumerate}[label=(#1), labelindent=1cm]}
 {\end{enumerate}}
+
+\newcommand{\step}[1]{\paragraph{\bf #1}}
 
 %% category
 \newcommand{\Sch}{\mathbf{Sch}}
@@ -44,6 +46,7 @@
 \newcommand{\Sh}{\mathbf{Sh}}
 \newcommand{\PSh}{\mathbf{PSh}}
 
+\newcommand{\Comma}[2]{#1{\downarrow}#2}
 \newcommand{\Lim}{\operatorname{lim}}
 \newcommand{\Colim}{\operatorname{colim}}
 
@@ -61,6 +64,11 @@
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Et}{\mathrm{Et}}
 \newcommand{\ET}{\mathrm{ET}}
+
+%% covers
+\newcommand{\covU}{\mathcal{U}}
+\newcommand{\covV}{\mathcal{V}}
+\newcommand{\covW}{\mathcal{W}}
 
 %\newcommand{\Open}{\mathrm{Open}}
 %\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
