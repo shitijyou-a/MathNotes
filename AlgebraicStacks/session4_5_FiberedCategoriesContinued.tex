@@ -1,0 +1,92 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros}
+
+\begin{document}
+\title{ゼミノート \#4.5 \\ Fibered Categories, continued}
+\author{七条彰紀}
+\maketitle
+
+\section{Grothendieck Construction} \label{sec:gro_const}
+    今，fibered categoryからfiberとしてpsuedo-functorを構成した．
+    実はこの逆が出来る．
+    \begin{Def}[Grothendieck Construction]
+        psuedo-functor :: $P \colon \cat{B} \to \Cat/\cat{B}$について，
+        以下のように圏$\int P$を定義する．
+        \begin{description}[labelindent=1cm]
+            \item[Object.] $b \in \cat{B}$と$x \in P(b)$の組$(b, x)$.
+            \item[Arrow.] $\phi \colon b \to b'$と$\Phi \colon P(\phi)(x) \to x'$の組$(\phi, \Phi)$．
+        \end{description}
+        射の合成は$(\psi, \Psi) \circ (\phi, \Phi)=(\psi \circ \phi, \Phi \circ P(\psi)(\Phi))$で与えられる．
+        
+        この圏によって以下の関手が定まる．
+        \begin{defmap}
+            \int \colon & \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\}&
+                \to& \Fib{B} \\
+            {}& P& \mapsto& \int P
+        \end{defmap}
+    \end{Def}
+
+    \begin{Example}
+        $\ftor{S}$は$\Sch/S$に対応する．
+        $F \colon \cat{C} \to \Sets$は$\bigsqcup_{c \in \cat{C}} F(c)$に対応する．
+    \end{Example}
+
+    \begin{Remark}
+        David I. Spivak ``Category theory for scientists"によると，
+        Grothendieck Constructionを最初に構成したのはGrothendieckではない．
+        例えばMacLaneが以前から扱っている．
+    \end{Remark}
+
+    \begin{Thm}[Grothendieck Construction give Category Equivalence]
+        Grothendieck Construction
+        \[
+            \int \colon  \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\}
+                \to \Fib{B}
+        \]
+        は圏同値である．
+    \end{Thm}
+    \begin{proof}
+        P. T. Johnstone
+            ``Sketches of an Elephant: A Topos Theory Compendium vol.1 (Oxford Logic Guides 43)"
+        に証明がある
+        （この文献で言うcloven fibered categoryが我々の定義するfibered categoryである）．
+    \end{proof}
+
+
+\section{Category Fibered in Groupoids/Sets}
+\subsection{Motivation}
+
+\subsection{Definition}
+    \begin{Def}[Groupoid, Category fibered in groupoids/sets]
+    \end{Def}
+
+    \begin{Def}[Category fibered in groupoid (Another Definition)]
+    \end{Def}
+
+\subsection{Propositions}
+    \begin{Prop}
+        $\Hom$がgroupoid.
+    \end{Prop}
+
+    \begin{Thm}[$2$-Yoneda Lemma]
+    \end{Thm}
+
+\section{Splittings of fibered categories}
+    \begin{Def}
+        
+    \end{Def}
+
+\section{Fiber Product of Category Fibered in Sets/Groupoids}
+\subsection{Definition}
+
+\subsection{Propositions}
+
+\section{Equivalences of Fibered Categories}
+\subsection{Definition}
+    Equivalence, Fully Faithful.
+
+\subsection{Propositions}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
