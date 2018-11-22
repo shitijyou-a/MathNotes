@@ -124,6 +124,7 @@
 \item
     任意の$y \in \cat{X}$と$u \to \pi(y) \in \cat{B}$に対してcartesian liftingが存在する
     $\pi \colon \cat{X} \to \cat{B}$をfibered categoryという．
+    fibered category over $\cat{B}$が成す圏を$\Fib{B}$とする．
 
 \item
     二つのfibered category :: 
@@ -134,32 +135,6 @@
     cartesian arrowをcartesian arrowに写すもの．
 
 \item
-    二つのfibered category :: 
-    $\pi \colon \cat{X} \to \cat{B}, \pi' \colon \cat{X}' \to \cat{B}$の間の$2$つの射
-    $g,g' \colon \cat{X} \to \cat{X}'$と
-    natural transformation :: $\alpha \colon g \to g'$を考える．
-    \begin{center}
-    \begin{tikzcd}[column sep=3cm]
-        \cat{X} \ar[rd, "\pi"]\ar[dd, shift right=3mm, "g"'{name=g}] \ar[dd, shift left=3mm, "g'"{name=gg}]& {} \\
-        {} & \cat{B} \\
-        \cat{X}' \ar[ru, "\pi'"']& {}
-        \ar[Rightarrow, from=g, to=gg, "\alpha"]
-    \end{tikzcd}
-    \end{center}
-    任意の$x \in \cat{X}$について，
-    $\pi'(\alpha_x) \colon \pi'(g(x)) \to \pi'(g'(x))$が恒等射になるとき，
-    $\alpha$をbase-preserving natural transformationという．
-\end{myenum}
-\end{Def}
-
-\begin{Def}[Fibered Category]
-\begin{myenum}
-\item
-    fibered category over $\cat{B}$が成す圏を$\Fib{B}$とする．
-\item
-    $\Fib{B}$の部分圏で，
-    natural transformationがbase-preserving natural transformationに限られる圏を
-    $\FibBP{B}$と書く．
 \end{myenum}
 \end{Def}
 
@@ -173,7 +148,7 @@
     \begin{center}
     \begin{tabular}{l|l|l}
         \hline
-        arrow& arrow in a fibered category & (i) Cartesian Arrow, (ii) Cartesian Lifting \\ \hline
+        arrow& arrow in a fibered category & (i) Cartesian Arrow, (ii) Cartesian Lifting \\ \hline\hline
         $0$-cell& fibered category & (iii) Existence of Cartesian Lifting \\ \hline
         $1$-cell& functor between fibered categories & (iii) Morphism of Fibered Category \\ \hline
         $2$-cell& nat. trans. between functors & (iv) Base-Preserving Natural Transformation \\
@@ -186,46 +161,76 @@
     \begin{center}
         \begin{tabular}{lccl}
             iso. & $x \iso y$& $\iff$ &
-                $2$つの\ \ morphism $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
-                $\psi \circ \phi=\id[x], \phi \circ \psi=\id[y]$．\\ \hline
+                $2$つのarrow $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
+                $\psi \circ \phi=\id[x], \phi \circ \psi=\id[y]$．\\ \hline\hline
             $1$-iso. & $x \kiso[1] y$& $\iff$ &
-                $2$つの$1$-cell $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
+                $2$つの$1$-cell \,$\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
                 $\psi \circ \phi=\id[x], \phi \circ \psi=\id[y]$．\\
-            $1$-equiv. & $x \kequiv y$& $\iff$ &
-                $2$つの$1$-cell $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
+            $1$-equiv. & $x \kequiv[1] y$& $\iff$ &
+                $2$つの$1$-cell \,$\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
                 $\psi \circ \phi \kiso \id[x], \phi \circ \psi \kiso \id[y]$．\\ \hline
             $2$-iso. & $x \kiso[2] y$& $\iff$ &
-                $2$つの$2$-cell $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
+                $2$つの$2$-cell \,$\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
                 $\psi \circ \phi=\id[x], \phi \circ \psi=\id[y]$．\\
             $2$-equiv. & $x \kequiv[2] y$& $\iff$ &
-                $2$つの$2$-cell $\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
+                $2$つの$2$-cell \,$\phi \colon x \rightleftarrows y \colon \psi$が存在し， 
                 $\psi \circ \phi \kiso[1] \id[x], \phi \circ \psi \kiso[1] \id[y]$．\\
         \end{tabular}
     \end{center}
 \end{Remark}
 
 \begin{Remark}
-    $\Fib{B}, \FibBP{B}$は$2$-categoryである．
+    $\Fib{B}$は$2$-categoryである．
     $2$-categoryは$2$-morphism ($\Fib{B}$ではnatural transformation)に
     ``vertical composition"と``horizontal composition"の二種類の合成が定まる圏である．
     詳しくはこのノートでは触れない．
 \end{Remark}
 
-\begin{Def}[Equivalence, $\HOM$]
+\begin{Def}[Base-Preserving Natural Transformation, $\HOM$, Equivalence]
 \begin{myenum}
 \item
-    $\FibBP{B}$における$2$-equivalenceを単に
-    equivalence of morphism of fibered categories over $\cat{B}$と呼ぶ．
+    二つのfibered category :: 
+    $\pi \colon \cat{X} \to \cat{B}, \pi' \colon \cat{X}' \to \cat{B}$の間の$2$つの射
+    $g,g' \colon \cat{X} \to \cat{X}'$と
+    natural transformation :: $\alpha \colon g \to g'$を考える．
+    \begin{center}
+    \begin{tikzcd}[column sep=3cm]
+        \cat{X} \ar[rd, "\pi"]\ar[dd, shift right=3mm, "g"'{name=g}] \ar[dd, shift left=3mm, "g'"{name=gg}]& {} \\
+        {} & \cat{B} \\
+        \cat{X}' \ar[ru, "\pi'"']& {}
+        \ar[Rightarrow, from=g, to=gg, shorten >=2pt, shorten <=2pt, "\alpha"]
+    \end{tikzcd}
+    \end{center}
+    任意の$x \in \cat{X}$について，
+    $\pi'(\alpha_x) \colon \pi'(g(x)) \to \pi'(g'(x))$が恒等射になるとき，
+    $\alpha$をbase-preserving natural transformationという．
+    
 \item
-    $\cat{X}, \cat{Y} \in \Fib{B}$について
-    \[ \HOM_{\cat{B}}(\cat{X}, \cat{Y}):=\Hom_{\FibBP{B}}(\cat{X}, \cat{Y}) \]
-    と略す．
+    $\cat{X}, \cat{X}' \in \Fib{B}$について，
+    $\HOM_{\cat{B}}(\cat{X}, \cat{X}')$を次の圏とする．
+    \begin{description}
+        \item[Object.] morphism of fibered category $\cat{X} \to \cat{X}'$.
+        \item[Arrows.] base-preserving natural transformation.
+    \end{description}
+
+\item
+    morphism of fibered category :: $g \colon \cat{X} \to \cat{X}'$が
+    equivalence of fibered categoryであるとは，
+    別のmorphism $h \colon \cat{X}' \to \cat{X}$が存在し，
+    $h \circ g$と$\id[\cat{X}]$，$g \circ h$と$\id[\cat{X}']$の間に
+    base-preserving isomorphismが存在すること
+    \footnote{ 基本的にはcategory of equivalenceの定義と同じである． }．
+    \[ h \circ g \kiso[2] \id[\cat{X}], g \circ h \kiso[2] \id[\cat{X}']. \]
+    二つのfibrered categoryがequivalentであるとは，
+    二つの間にequivalence of fibered categoryが存在するということである．
 \end{myenum}
 \end{Def}
 
 \begin{Remark}
-    $\HOM_{\cat{B}}(\cat{X}, \cat{Y})$は
-    関手を対象とし，自然変換を射とする圏である．
+    $2$-morphism ($2$-cell)をbase-preserving natural transformationに制限した
+    fibered categoryの圏を$\FibBP{B}$とすると，
+    $\HOM$は$\Hom_{\FibBP{B}}$であるし，
+    equivalence of fibered categoryは$\FibBP{B}$での$2$-isoである．
 \end{Remark}
 
 \section{Examples : Fibered Categories}
@@ -251,6 +256,20 @@
     pullback of $f$を選択公理無しに扱う枠組を与えている．
 \end{Example}
 
+\begin{Example}
+    category :: $\cat{C}$について，
+    arrow category :: $\cat{C}^{\to}$を以下で定める．
+    \begin{description}
+        \item[Object.] $\cat{C}$の射（$[x \to u]$の様に表記する）．
+        \item[Arrow.]
+            射$[x \to u] \to [y \to v]$は
+            次の図式を可換にする$x \to y, u \to v$の組: 
+            $\vcenter{\xymatrix{ x \ar@{-->}[r]\ar[d]& y \ar[d]\\ u \ar@{-->}[r]& v }}$
+    \end{description}
+    するとCartesian Liftingは$\cat{C}$がpullbackを持つことを意味し，
+    Triangle Liftingはpullbackの普遍性を意味する．
+\end{Example}
+
 \begin{Example}\label{exm:representable}
     以下の関手はfibrationである．
     \begin{defmap}
@@ -270,6 +289,7 @@
 \end{myenum}
 \end{Prop}
 \begin{proof}
+    Triangle Liftingのみを用いて証明できる．
     簡単なので証明は省略する．
 \end{proof}
 
@@ -427,6 +447,7 @@ contravariant functorに成ることが予想される．
 正確には，fibered categoryのfiberは一般にpsuedo-functorとなる．
 このことは後に証明する．
 \begin{Def}[Psuedo-functor (weak 2-functor)] \label{def:psuedofunctor}
+    （以下のURLを参照せよ: \url{https://stacks.math.columbia.edu/tag/003G}.）
     $2$-圏$\cat{C}$から$2$-圏$\cat{D}$への
     psuedo-functor :: $F \colon \cat{C} \to \cat{D}$とは，
     $\cat{C}$のobjectを$\cat{D}$のobjectへ，
@@ -434,11 +455,35 @@ contravariant functorに成ることが予想される．
     以下を満たす．
     
     \begin{enumerate}[label=(\alph*)]
-        \item 任意の$c \in \cat{C}$について$F(\id[c]) \kiso[2] \id[F(c)]$.
-        \item 任意の$c \to d, d \to e \in \cat{C}$について
-            $F([c \to d] \circ [d \to e]) \kiso[2] F([c \to d]) \circ F([d \to e])$.
         \item
-            (TODO: 上記の$2$つのisoについて可換性の条件がさらに課される．)
+            任意の$c \in \cat{C}$について
+            $2$-isomorphism $\alpha_{c} \colon F(\id[c]) \to \id[F(c)]$が存在する.
+        \item 任意の$f \colon c \to d, g \colon d \to e \in \cat{C}$について
+            $2$-isomorphism $\alpha_{g, f} \colon F(g \circ f) \to F(g) \circ F(f)$が存在する.
+        \item
+            $f \colon x \to y, g \colon y \to z, h \colon z \to w$について
+            以下の等式が成り立つ．
+            \begin{center}
+            \begin{tikzcd}[column sep=huge]
+                F(x) \ar[r, bend left, "F(f)", ""{name=Fful}] \ar[r, bend right, "F(f)"', ""{name=Ffdl}]&
+                F(y) \ar[r, bend left, "\id", ""{name=id}] \ar[r, bend right, "F(\id)"', ""{name=Fid}]&
+                F(y)
+                
+                \arrow[Rightarrow, from=Fful, to=Ffdl, "\mathrm{id}_{F(f)}", shorten <=2pt]
+                \arrow[Rightarrow, from=id,   to=Fid,  "\alpha_{y}", shorten <=2pt]
+            \end{tikzcd}
+            =
+            \begin{tikzcd}[column sep=huge]
+                F(x) \ar[r, bend left, "F(f)", ""{name=Ffur}]\ar[r, bend right, "F(f)"', ""{name=Ffdr}]& F(y)
+                \arrow[Rightarrow, from=Ffur, to=Ffdr, "\alpha_{\mathrm{id}_y, f}", shorten <=2pt]
+            \end{tikzcd}
+            \end{center}
+            
+            \begin{center}
+            \begin{tikzcd}
+                F(x) \ar[r] \ar[r, bend left] \ar[rrr, bend left=40pt]& F(y) \ar[r] \ar[rr, bend left]& F(z) \ar[r]& F(w)
+            \end{tikzcd}
+            \end{center}
     \end{enumerate}
 \end{Def}
 
@@ -508,80 +553,6 @@ contravariant functorに成ることが予想される．
     圏同値$U, V \in \cat{B}$について$Y(U) \simeq Y(V)$と$U \iso V$は同値．
 \end{Cor}
 
-\section{Grothendieck Construction} \label{sec:gro_const}
-    今，fibered categoryからfiberとしてpsuedo-functorを構成した．
-    実はこの逆が出来る．
-\begin{Def}[Grothendieck Construction]
-    psuedo-functor :: $P \colon \cat{B} \to \Cat/\cat{B}$について，
-    以下のように圏$\int P$を定義する．
-    \begin{description}[labelindent=1cm]
-        \item[Object.] $b \in \cat{B}$と$x \in P(b)$の組$(b, x)$.
-        \item[Arrow.] $\phi \colon b \to b'$と$\Phi \colon P(\phi)(x) \to x'$の組$(\phi, \Phi)$．
-    \end{description}
-    射の合成は$(\psi, \Psi) \circ (\phi, \Phi)=(\psi \circ \phi, \Phi \circ P(\psi)(\Phi))$で与えられる．
-    
-    この圏によって以下の関手が定まる．
-    \begin{defmap}
-        \int \colon & \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\}&
-            \to& \Fib{B} \\
-        {}& P& \mapsto& \int P
-    \end{defmap}
-\end{Def}
-
-\begin{Example}
-    $\ftor{S}$は$\Sch/S$に対応する．
-    $F \colon \cat{C} \to \Sets$は$\bigsqcup_{c \in \cat{C}} F(c)$に対応する．
-\end{Example}
-
-\begin{Remark}
-    David I. Spivak ``Category theory for scientists"によると，
-    Grothendieck Constructionを最初に構成したのはGrothendieckではない．
-    例えばMacLaneが以前から扱っている．
-\end{Remark}
-
-\begin{Thm}[Grothendieck Construction give Category Equivalence.]
-    Grothendieck Construction
-    \[
-        \int \colon  \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\}
-            \to \Fib{B}
-    \]
-    は圏同値である．
-\end{Thm}
-\begin{proof}
-    P. T. Johnstone
-        ``Sketches of an Elephant: A Topos Theory Compendium vol.1 (Oxford Logic Guides 43)"
-    に証明がある
-    （この文献で言うcloven fibered categoryが我々の定義するfibered categoryである）．
-\end{proof}
-
-\section{Splittings of fibered categories.}
-\begin{Def}
-    
-\end{Def}
-
-\section{Category Fibered in Groupoids/Sets}
-\subsection{Motivation}
-
-\subsection{Definition}
-\begin{Def}[Groupoid, Category fibered in groupoids/sets]
-\end{Def}
-
-\begin{Def}[Category fibered in groupoid (Another Definition)]
-\end{Def}
-
-\subsection{Propositions}
-\begin{Prop}
-    $\Hom$がgroupoid.
-\end{Prop}
-
-\begin{Thm}[$2$-Yoneda Lemma]
-\end{Thm}
-
 \bibliographystyle{jplain}
 \bibliography{reference}
-
-\section{Fiber Product of Category Fibered in Groupoids.}
-
-\subsection{Propositions}
-
 \end{document}
