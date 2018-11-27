@@ -17,10 +17,6 @@
 \author{七条彰紀}
 \maketitle
 
-%\subsection{Motivation}
-%\subsection{Definition}
-%\subsection{Propositions}
-
 \section{Motivation : Fibered Categories}
     ``family"あるいは``object on/over a base space"
     （例えばschemes over a schemeやsheaves on a schemeなど）の
@@ -505,6 +501,39 @@ contravariant functorに成ることが予想される．
     このとき，fiber of $\pi$はpsuedo-functorである.
 \end{Lemma}
 \begin{proof}
+    $b \in \cat{B}$について，$\cat{X}(b)$は既に既に定義した．
+    $\cat{B}$の射$\phi \colon b' \to b$について，
+    関手$\cat{X}(\phi) \colon \cat{X}(b) \to \cat{X}(b')$は次のように定められる．
+    まず$u \in \cat{X}(b)$について，
+    $\cat{X}(\phi)(u)$は
+    $\phi$による$u$のpullback :: $\phi^* u$ (cartesian lifting of $\phi$)である．
+    次に$\cat{X}(b)$の射$\lambda \colon u \to v$
+    （$\cat{X}(b)$の定義から$\pi(\lambda)=\id$を満たす）について，
+    下の図式にtriangle liftingを用いて$\phi^*u \to \phi^*v$を得る．
+    %% {{{
+    \begin{center}
+    \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
+    \node[mybox] (X) at (0,3){%
+        \begin{tikzcd}
+            \phi^*u \ar[r]\ar[rd, blue, bend left=35pt]& u \ar[d, "\lambda"]\\
+            \phi^*v \ar[r] & v
+        \end{tikzcd}
+    };
+    \node[mybox] (B) at (0,0){%
+        \begin{tikzcd}
+            b' \ar[r, "\phi"] \ar[d, "\id"']\ar[rd, blue, bend left=35pt]& b \ar[d, "\id"]\\
+            b' \ar[r, "\phi"'] & b
+        \end{tikzcd}
+    };
+
+    \node [above=5pt of X] {in $\cat{X}$};
+    \node [below=5pt of B] {in $\cat{B}$};
+    \draw [->, line width=1.5pt] (X) edge (B);
+    \node at (0.3,1.55) {$\pi$};
+    \end{tikzpicture}
+    \end{center}
+    %% }}}
+
     定義(\ref{def:psuedofunctor})にある条件(a)については，
     各$b \in \cat{B}$について，
     命題(\ref{prop:iso_over_iso})を用いれば同型の存在が分かる．
@@ -514,18 +543,7 @@ contravariant functorに成ることが予想される．
     $\cat{X}(g \circ f)(b) \iso \cat{X}(f) \circ \cat{B}(g)(b)$が得られる．
     あとはこの同型が自然である（すなわち自然変換を定める）ことを確かめれば良い．
 \end{proof}
-この事実は次の節(\ref{sec:gro_const})で用いる．
-
-%\begin{Prop}[\cite{ASS} Lemma 3.1.8, 3.1.10]
-%    $g \colon \cat{X} \to \cat{Y}$ :: morphism of fibered categories over $\cat{B}$.
-%    関手の性質$P$をfully faithfulあるいはequivalenceとする．
-
-%    $g$が性質$P$を持つことと，
-%    任意の$B \in \cat{B}$について$g_U \colon \cat{X}_U \to \cat{Y}_U$が性質$P$を持つことは同値．
-%\end{Prop}
-%\begin{proof}
-%    (TODO)
-%\end{proof}
+この事実は次のセミナーで用いる．
 
 \begin{Thm}[$2$-Yoneda Lemma]
     $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする.

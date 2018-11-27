@@ -1,23 +1,184 @@
 \documentclass[a4paper]{jsarticle}
 \usepackage{macros}
 
+\newcommand{\mnewline}{\mbox{}\newline}
 \begin{document}
 \title{ゼミノート \#5 \\ Categorical Part of Descent Theory, and Stacks}
 \author{七条彰紀}
 \maketitle
 
+今回のノートで一貫して用いる記号と記法を定める．
+
+$\cat{C}$ :: site, 
+$\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える
+\footnote{ ほとんどfiber of $\pi$しか扱わないので，psuedo-functor $\cat{C} \to \Cat$をとっても構わない． }．
+
+記法を定める．
+$U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\}_{i \in I} \in \Cov(U)$について，
+\[ U_{ij}:=U_i \times_U U_j, \quad U_{ijk}:=U_i \times_U U_j \times_U U_k \ \ (i,j,k \in I) \]
+と書くことにする．
+また，添字$a,b=i \mor j \mor k$について，
+fiber productからの射影を
+\[ \pr_{a} \colon U_{ij} (\mor U_{ijk}) \to U_{a}, \qquad \pr_{a,b} \colon U_{ijk} \to U_{ab} \]
+とする．
+さらに$\pr_{i} \colon U_{ij} \to U_{i}$によるpullbackを$(-)|_{U_{ij}}$などと書く．
+
 \section{The Category of Descent Data}
 \subsection{Definition}
+\begin{Def}[$\shF(\covU)$, \cite{ASS} 4.2.4, \cite{NoteGroTop} Def4.2]
+    圏$\shF(\covU)$を次のように定める．
+    \begin{description}
+        \item[Object.] \hfill \vspace{-0.2cm}
+            \begin{itemize}
+                \item $\xi_i \in \shF(U_i)$なる対象のclass $\{\xi_i\}_{i \in I}$と，
+                \item
+                    $\shF(U_{ij})$中の同型$\sigma_{ij} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}}$の
+                    class $\{\sigma_{ij}\}_{i,j \in I}$
+            \end{itemize}
+            の組$(\{\xi_i\}, \{\sigma_{ij}\})$であって，
+            以下で述べるcocycle conditionを満たすもの．
+            このような組をobject with descent dataと呼ぶ
+            \footnote{ 同型のclass $\{\sigma_{ij}\}$がdescent dataと呼ばれる． }．
+
+        \item[Arrow.] \mnewline
+            射$\{\alpha_i\} \colon (\{\xi_i\}, \{\sigma_{ij}\}) \to (\{\eta_i\}, \{\tau_{ij}\})$とは，
+            $\shF(U_i)$の射$\alpha_i \colon \xi_i \to \eta_i$のclassであって，\mnewline
+            $\sigma_{ij}, \tau_{ij}$と整合的であるもの．
+            すなわち，任意の$i, j \in I$について以下の図式が可換であるもの．
+            \[\xymatrix{
+                \ar[d]_-{\sigma_{ij}} \xi_j|_{U_{ij}} \ar[r]^-{\alpha_j|_{U_{ij}}}&
+                \eta_j|_{U_{ij}} \ar[d]^-{\tau_{ij}}\\
+                 \xi_i|_{U_{ij}} \ar[r]_-{\alpha_i|_{U_{ij}}}& \eta_i|_{U_{ij}}
+            }\]
+    \end{description}
+
+    \step{cocycle condition}
+    組$(\{\xi_i\}, \{\sigma_{ij}\})$がcocycle conditionを満たすとは，
+    任意の$i,j,k \in I$について以下が成り立つということ．
+    \[ \sigma_{ik}|_{U_{ijk}}=(\sigma_{ij}|_{U_{ijk}}) \circ (\sigma_{jk}|_{U_{ijk}}). \]
+    図式でかけば，圏$\shF(U_{ijk})$における以下の図式が可換であることと同値．
+    \[\xymatrix@R=70pt{
+         \xi_k|_{U_{ijk}} \ar[rd]_-{\sigma_{ik}|_{U_{ijk}}} \ar[rr]^-{\sigma_{jk}|_{U_{ijk}}}
+            & {}
+            & \xi_j|_{U_{ijk}} \ar[ld]^-{\sigma_{ij}|_{U_{ijk}}} \\
+        {} & \xi_i|_{U_{ijk}} & {}
+    }\]
+\end{Def}
+
+\begin{Remark}
+    この定義に於いてfiber products :: $U_{ij}, U_{ijk}$を暗黙のうちに選択している．
+    たが，どのように選択しても得られる圏は同型に成る．
+    $U_{ij}, U_{ijk}$の選択も込めて
+    $(\{\xi_i\}, \{\xi_{ij}\}, \{\xi_{ijk}\})$を$\shF(\covU)$の対象とする
+    定義の仕方も有るが，ここでは述べない．
+    詳細は\cite{NoteGroTop} Remark 4.3にある.
+\end{Remark}
+
+\begin{Def}[\cite{NoteGroTop} p.72] \label{def:epsilon}
+    $\xi \in \shF(U), \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$について，
+    $\shF(\covU)$の元を以下のデータに対応させる:
+    \begin{itemize}
+        \item $\xi_i:=\phi_i^*\xi$のclass $\{\xi_i\}_{i \in I}$.
+        \item
+            $\xi_i|_{U_{ij}}$と$\xi_j|_{U_{ij}}$が，
+            いずれも
+            \[ \phi_i \circ \pr_i=\phi_j \circ \pr_j \colon U_{ij} \to U \]による$\xi$のpullback
+            であることから得られる
+            標準的同型のclass $\{ \sigma_{ji} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}} \}_{i,j}$.
+    \end{itemize}
+    このデータをまとめて$(\{\phi_i^*\xi\}, \mathrm{cano})$などと書く．
+    この対応を$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$と書く．
+    $\shF(U)$の射$\xi \to \eta$から，
+    $\phi_i$に沿ったpullbackによって$(\{\phi_i^*\xi\}, \mathrm{cano}) \to (\{\phi_i^*\eta\}, \mathrm{cano})$
+    が得られるので，
+    対応$\epsilon_{\covU}$は関手である．
+\end{Def}
+
 \subsection{Example}
+\begin{Example}[\cite{ASS}, 4.2.1]
+    一つの射から成るcover :: $\covU=\{f \colon V \to U\}$について$\shF(\covU)$を考えてみる．
+    この圏の対象は，
+    \begin{itemize}
+        \item 対象$E \in \shF(V)$
+        \item $\shF(V \times_U V)$の中の同型射$\sigma \colon \pr_1^*E \to \pr_2^*E$
+    \end{itemize}
+    の組である．
+\end{Example}
+
+\begin{Example}
+        
+\end{Example}
 
 \section{Stack / Prestack}
 \subsection{Definition}
+\begin{Def}[Prestack, Stack]
+    関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$を用いて以下のように定義する．
+    \begin{enumerate}[label=(\roman*)]
+    \item
+        任意の$U \in \cat{C}, \covU \in \Cov(U)$について$\epsilon_{\covU}$ :: fully faithfullである時，
+        $\shF \colon \cat{C} \to \Cat$はprestackである，という．
+    \item
+        任意の$U \in \cat{C}, \covU \in \Cov(U)$について$\epsilon_{\covU}$ :: equivalenceである時，
+        $\shF \colon \cat{C} \to \Cat$はstackである，という．
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}
+    関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$を用いて以下のように定義する．
+    \begin{enumerate}[label=(\roman*)]
+        \item
+            $\epsilon_{\covU}$ :: equivalenceとなる$\covU$をof effective descent for $\shF$と呼ぶ．
+        \item
+            $\epsilon_{\covU}$の像と同型である$\shF(\covU)$の対象を，effectiveという．
+    \end{enumerate}
+\end{Def}
+
+\begin{Remark}
+    prestackの定義は以下のように言い換えられる:
+    任意の$U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$をとる．
+    descent data $(\{\xi_i\}, \{\sigma_{ij}\}), (\{\eta_i\}, \{\tau_{ij}\}) \in \shF(\covU)$について，
+    $\xi_i \iso \phi_i^*\xi, \eta_i \iso \phi_i^*\eta$となる$\xi, \eta \in \shF(U)$が存在すると仮定する．
+    $\{\alpha_i\} \colon (\{\xi_i\}, \{\sigma_{ij}\}) \to (\{\eta_i\}, \{\tau_{ij}\})$
+    （すなわち条件を満たす射のclass $\{\alpha_i \colon \xi_i \to \eta_i\}$）について，
+    $\shF(U)$の射$\alpha \colon \xi \to \eta$が\underline{一意に存在し}，
+    $\alpha_i=\phi^*\alpha$となる．
+
+    標語的に言えば「射の貼り合わせが一意に存在するpsuedo-functor」となる．
+\end{Remark}
+
 \subsection{Example}
+
 \subsection{Proposition}
 \begin{Prop}[\cite{NoteGroTop} Prop4.9]
-    separated sheaf is a prestack.
-    sheaf is a stack.
+    \begin{myenum}
+        \item separated sheaf of sets is a prestack.
+        \item sheaf of sets is a stack.
+    \end{myenum}
 \end{Prop}
+\begin{proof}
+    $\cat{C}$ :: site, $\shF \colon \cat{C}^{op} \to \Sets$ :: presheafとする．
+    $U \in \cat{C}, \covU=\{U_i \to U\} \in \Cov(U)$を任意に取る．
+
+    今，圏$\shF(U), \shF(\covU)$は集合（離散圏）である．
+    なので関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$は\underline{写像}である．
+    さらに射$\sigma_{ij}$も恒等射しかないから，
+    $\shF(\covU)$の対象は，
+    任意の$i,j$について$\xi_i|_{U_{ij}}=\xi_j|_{U_{ij}}$を満たす
+    $\xi_i \in \shF(U_i)$の族$\{\xi_i\}_i$であると考えて良い．
+    このセミナーノートのsession3の記号を用いれば，
+    $\shF(\covU)=H^0(\covU, \shF)$ということに成る．
+
+    二つのデータ$\{\xi_i\}, \{\eta_i\}$の間の射もやはり恒等射しかないから，
+    「関手$\epsilon_{\covU}$がfully faithfulである」という仮定は
+    「写像$\epsilon_{\covU}$が単射である」と言い換えられる．
+    これはすなわち，$\shF$がseparated presheafであるということである．
+
+    「関手$\epsilon_{\covU}$がessentially surjectiveである」という仮定は
+    「写像$\epsilon_{\covU}$が全射である」と言い換えられるから．
+    $\epsilon_{\covU}$がequivalenceであることは
+    $\shF(\covU)=H^0(\covU, \shF)$と$\shF(U)$の間に全単射が存在するということである．
+    これはすなわち，$\shF(U)$がsheafであるということである．
+\end{proof}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
