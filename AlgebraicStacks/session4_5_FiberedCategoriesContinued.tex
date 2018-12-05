@@ -6,7 +6,10 @@
 \usetikzlibrary{cd, positioning, arrows}
 
 \newcommand{\Fib}[1]{\cat{Fib}(\cat{#1})}
+\newcommand{\cFib}[1]{\cat{cFib}(\cat{#1})}
+\newcommand{\sFib}[1]{\cat{sFib}(\cat{#1})}
 \newcommand{\FibBP}[1]{\cat{Fib}^{\mathrm{bp}}(\cat{#1})}
+
 \newcommand{\kiso}[1][{}]{\overset{#1}{\iso}}
 \newcommand{\kequiv}[1][{}]{\overset{#1}{\simeq}}
 \newcommand{\HOM}{\operatorname{HOM}}
@@ -16,6 +19,116 @@
 \title{ゼミノート \#4.5 \\ Fibered Categories, continued}
 \author{七条彰紀}
 \maketitle
+
+\section{Cleavage}
+    Cartesian liftingは普遍性(Triangle Lifting)で特徴づけられている．
+    なので同型を除いて一意であるが，厳密な意味で一意であるというものではない．
+    どのCartesian liftingを用いるか選んだものがCleavage（分裂，劈開）．
+    これはFibered category :: $\cat{X}$のCartesian arrowのclassを成す．
+    Cleavageとfibration (resp. Fibered category)を併せたものを
+    Cloven fibration (resp. Cloven fibered category)と呼ぶ．
+    選択公理によって，我々は常にFibrationをCloven fibrationにできる．
+
+\subsection{ Split Fibration }
+    CleavageはCartesian arrowのclassであると書いたが，
+    このclassが圏を成すと綺麗である．
+    そのようなCleavageを選べるFibrationをSplit fibrationと呼ぶ．
+
+    \begin{Def}[\cite{ASS}]
+        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
+        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \cat{X}$のことである．
+        \begin{enumerate}
+            \item
+                $\cat{S}$は$\cat{X}$の任意の対象を持つ．
+            \item
+                $\cat{S}$の任意の射はcartesian．
+            \item
+                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \cat{X}$について，
+                $f$上の射$u \to v$がただ一つ存在する．
+                （すなわち，cartesian liftingが一意に存在する．）
+        \end{enumerate}
+        この時，組$(\cat{X}, \cat{S})$をsplit fibered categoryと呼ぶ．
+    \end{Def}
+
+    任意のFibrationはSplit fibrationとは限らないが，Split fibrationと圏同値である．
+
+    \begin{Thm}
+        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
+        この時，split fibered category over $\cat{B}$ :: $(\tilde{\cat{X}}, \cat{S})$が存在し，
+        圏同値$\tilde{\cat{X}} \kequiv \cat{X}$が成立する．
+    \end{Thm}
+
+    \begin{proof}
+        ここでは
+        圏と部分圏$(\tilde{\cat{X}}, \cat{S})$及び
+        関手$\Phi \colon \tilde{\cat{X}} \to \cat{X}$を構成するにとどめる．
+        （TODO: 
+        これらがそれぞれsplit fibered category over $\cat{B}$とequivalenceであることは
+        ここでは確認しない．）
+
+        以下のように$\tilde{\cat{X}}$を構成する．
+        \begin{description}[labelindent=1cm]
+            \item[Objects.]
+                object :: $U \in \cat{B}$と
+                morphism of fibered category :: $u \colon \cat{B}/U \to \cat{X}$の組$(U, u)$.
+
+            \item[Arrows.]
+                射$(V, v) \to (U, u)$は
+                $\cat{B}$の射$g \colon V \to U$と
+                base-preserving isomorphism :: $\alpha \colon v \to u \circ g$の組$(g, \alpha)$.
+                \begin{center}
+                \begin{tikzcd}
+                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
+                    & \cat{B}/U \ar[Rightarrow, from=v, "\alpha"]\ar[r, "u"]
+                    & \cat{X}
+                \end{tikzcd}
+                \end{center}
+        \end{description}
+
+        まずprojection functorが以下のように定まる．
+        \begin{defmap}
+            \tilde{\pi} \colon & \tilde{\cat{X}}& \to& \cat{B} \\
+            {}& (U, u)& \mapsto& U
+        \end{defmap}
+        この関手によってfibered categoryの構造が入る．
+
+        さらに次の関手によってequivalenceが与えられる．
+        \begin{defmap}
+            \Phi\colon & \tilde{\cat{X}}& \to& \cat{X} \\
+            {}& (U, u)& \mapsto& u(\id[U])
+        \end{defmap}
+        これがequivalenceであることは$2$-Yoneda Lemmaによる．
+
+        最後に，splitting of $\tilde{\pi}$ :: $\cat{S}$が次で定められる．
+        \begin{description}[labelindent=1cm]
+            \item[Objects.]
+                $\tilde{\cat{X}}$と同じ．
+
+            \item[Arrows.]
+                $\tilde{\cat{X}}$の射で，$(g, \id)$と表されるもの．
+                すなわち，
+                射$(V, v) \to (U, u)$は$\cat{B}$の射$g \colon V \to U$であって
+                $v=u \circ g$であるもの．
+                \begin{center}
+                \begin{tikzcd}
+                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
+                    & \cat{B}/U \ar[equal, from=v]\ar[r, "u"]
+                    & \cat{X}
+                \end{tikzcd}
+                \end{center}
+        \end{description}
+    \end{proof}
+
+    \begin{Def}
+        圏$\cat{B}$に対し，
+        \begin{itemize}
+            \item Cloven fibration over $\cat{B}$の圏を$\cFib{B}$,
+            \item Split fibration over $\cat{B}$の圏を$\sFib{B}$
+        \end{itemize}
+        と書く．
+        ぞれぞれ忘却関手$\sFib{B} \to \cFib{B}, \cFib{B} \to \Fib{B}$をもつ．
+    \end{Def}
+
 \section{Grothendieck Construction} \label{sec:gro_const}
     今，fibered categoryからfiberとしてpsuedo-functorを構成した．
     実はこの逆が出来る．
@@ -31,7 +144,7 @@
         この圏によって以下の関手が定まる．
         \begin{defmap}
             \int \colon & \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\}&
-                \to& \Fib{B} \\
+                \to& \sFib{B} \\
             {}& P& \mapsto& \int P
         \end{defmap}
     \end{Def}
@@ -52,20 +165,66 @@
         例えばMacLaneが以前から扱っている．
     \end{Remark}
 
+    \begin{Def}[weak/strict $2$-equivalence]
+        関手$F \colon \cat{C} \rightarrow \cat{D}$が
+        weak $2$-equivalenceであるとは，以下が成り立つこと:
+        逆向きの関手$\cat{C} \leftarrow \cat{D} \colon G$と
+        二つの自然変換$\alpha \colon GF \to \id[\cat{C}], \beta \colon FG \to \id[\cat{D}]$が存在し，
+        \begin{itemize}
+            \item 各$c \in \cat{C}, d \in \cat{D}$について$\alpha_{c}, \beta_{d}$は同型であり，
+            \item 射$\phi \in \Arr(\cat{C}), \psi \in \Arr(\cat{D})$について$\alpha_{\phi}, \beta_{\psi}$も同型．
+        \end{itemize}
+        $\alpha_{\phi}, \beta_{\psi}$が恒等射であるときはstrict $2$-equivalenceという．
+    \end{Def}
+
     \begin{Thm}[Grothendieck Construction give Category Equivalence]
         Grothendieck Construction
         \[
             \int \colon
-            \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\} \to \Fib{B}
+            \left\{ \parbox{2.3cm}{psuedo-functor \\ \quad \ $\cat{B} \to \Cat$} \right\} \to \cFib{B}
         \]
-        は圏同値である．
+        はstrict $2$-equivalenceである．
+        また，このあとに忘却関手$\cFib{B} \to \Fib{B}$を続けると，
+        weak $2$-equivalenceとなる．
     \end{Thm}
     \begin{proof}
+        \cite{NoteGroTop} \S 3.1.3に詳しい証明がある．
+        あるいは，
         P. T. Johnstone
             ``Sketches of an Elephant: A Topos Theory Compendium vol.1 (Oxford Logic Guides 43)"
-        に証明がある
-        （この文献で言うcloven fibered categoryが我々の定義するfibered categoryである）．
+        に証明がある．
     \end{proof}
+    
+    \begin{Remark}
+        $\Fib{B}$と``anafunctor"の圏がstrict $2$-equivalenceである，
+        という述べ方もあるようだが，
+        ``anafunctor"を用いる理由が特に無いので，このノートでは導入しない．
+    \end{Remark}
+
+    \begin{Remark}
+        この定理から，
+        psuedo-functorの理論とfibered categoryの理論は殆ど同じ，と言える．
+        また，今後現れるstackなどはpsuedo-functorに対して定義され，
+        一見，fibered categoryの理論は扱う必要性がなくなる．
+        
+        しかし実際には，fibered categoryの方がpsuedo-functorより構成しやすい，
+        あるいは全体の性質を理解しやすいという面がある．
+        また技術的な有利としては，
+        fibered categoryはcleavage（例えばpullback, fiber product等）を選択する必要がなく，
+        例えば，pullbackの貼り合わせ（貼り合わせの際には同型での変形が必要に成る）を自然に扱うことが出来る
+        \footnote
+        {
+            もう少し具体的な例としては，
+            trivial familyの貼り合わせで出来るlocally trivial familyも扱える．
+            詳しい例は私のDeformation Theoryに関するノートを読んで欲しい．
+        }．
+        
+        また，直観としては，fibered categoryはfamilyである．
+        ここから得られるfiberは正にfiber of familyである．
+        そのためfibered categoryは大域的，psuedo-functorは局所的だと考えられる．
+
+        (TODO: あとで分かったらもっと追記する．)
+    \end{Remark}
 
 \section{Category Fibered in Groupoids/Sets}
 \subsection{Motivation}
@@ -181,91 +340,6 @@
     \end{Def}
 
 
-\section{Splittings of fibered categories}
-    （ここで扱おうと思ったが，今は扱うモチベーションがないので後回しにする．）
-%    \begin{Def}[\cite{ASS}]
-%        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
-%        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \cat{X}$のことである．
-%        \begin{enumerate}
-%            \item
-%                $\cat{S}$は$\cat{X}$の任意の対象を持つ．
-%            \item
-%                $\cat{S}$の任意の射はcartesian．
-%            \item
-%                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \cat{X}$について，
-%                $f$上の射$u \to v$がただ一つ存在する．
-%                （すなわち，cartesian liftingが一意に存在する．）
-%        \end{enumerate}
-%        この時，組$(\cat{X}, \cat{S})$をsplit fibered categoryと呼ぶ．
-%    \end{Def}
-
-%    \begin{Thm}
-%        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
-%        この時，split fibered category over $\cat{B}$ :: $(\tilde{\cat{X}}, \cat{S})$が存在し，
-%        圏同値$\tilde{\cat{X}} \kequiv \cat{X}$が成立する．
-%    \end{Thm}
-
-%    \begin{proof}
-%        ここでは
-%        圏と部分圏$(\tilde{\cat{X}}, \cat{S})$及び
-%        関手$\Phi \colon \tilde{\cat{X}} \to \cat{X}$を構成するにとどめる．
-%        （TODO: 
-%        これらがそれぞれsplit fibered category over $\cat{B}$とequivalenceであることは
-%        ここでは確認しない．）
-
-%        以下のように$\tilde{\cat{X}}$を構成する．
-%        \begin{description}[labelindent=1cm]
-%            \item[Objects.]
-%                object :: $U \in \cat{B}$と
-%                morphism of fibered category :: $u \colon \cat{B}/U \to \cat{X}$の組$(U, u)$.
-
-%            \item[Arrows.]
-%                射$(V, v) \to (U, u)$は
-%                $\cat{B}$の射$g \colon V \to U$と
-%                base-preserving isomorphism :: $\alpha \colon v \to u \circ g$の組$(g, \alpha)$.
-%                \begin{center}
-%                \begin{tikzcd}
-%                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
-%                    & \cat{B}/U \ar[Rightarrow, from=v, "\alpha"]\ar[r, "u"]
-%                    & \cat{X}
-%                \end{tikzcd}
-%                \end{center}
-%        \end{description}
-
-%        まずprojection functorが以下のように定まる．
-%        \begin{defmap}
-%            \tilde{\pi} \colon & \tilde{\cat{X}}& \to& \cat{B} \\
-%            {}& (U, u)& \mapsto& U
-%        \end{defmap}
-%        この関手によってfibered categoryの構造が入る．
-
-%        さらに次の関手によってequivalenceが与えられる．
-%        \begin{defmap}
-%            \Phi\colon & \tilde{\cat{X}}& \to& \cat{X} \\
-%            {}& (U, u)& \mapsto& u(\id[U])
-%        \end{defmap}
-%        これがequivalenceであることは$2$-Yoneda Lemmaによる．
-
-%        最後に，splitting of $\tilde{\pi}$ :: $\cat{S}$が次で定められる．
-%        \begin{description}[labelindent=1cm]
-%            \item[Objects.]
-%                $\tilde{\cat{X}}$と同じ．
-
-%            \item[Arrows.]
-%                $\tilde{\cat{X}}$の射で，$(g, \id)$と表されるもの．
-%                すなわち，
-%                射$(V, v) \to (U, u)$は$\cat{B}$の射$g \colon V \to U$であって
-%                $v=u \circ g$であるもの．
-%                \begin{center}
-%                \begin{tikzcd}
-%                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
-%                    & \cat{B}/U \ar[equal, from=v]\ar[r, "u"]
-%                    & \cat{X}
-%                \end{tikzcd}
-%                \end{center}
-%        \end{description}
-%    \end{proof}
-
 \section{Fiber Product of Category Fibered in Groupoids}
     （ここで扱おうと思ったが，今は扱うモチベーションがないので後回しにする．）
 %    \begin{Thm}
@@ -333,7 +407,24 @@
     \end{enumerate}
     \end{Prop}
     \begin{proof}
-        (TODO)
+        いずれも$\implies$は自明なので$\impliedby$を示す．
+
+        (i)の証明の概略は以下の通り．
+        まず$\Hom_{\cat{C}}(c, c'), \Hom_{\cat{D}}(F(c), F(c'))$を
+        \begin{align*}
+            \Hom_{\cat{C}}(c, c')
+            =&\bigsqcup_{h \in \Hom_{\cat{B}}(\pi(c), \pi(c'))}
+            \left\{\parbox{2.85cm}{morphisms $c \to c'$, \\ \qquad\ \ over $h$}\right\}, \\
+            \Hom_{\cat{D}}(F(c), F(c'))
+            =&\bigsqcup_{h \in \Hom_{\cat{B}}(\pi(c), \pi(c'))}
+            \left\{\parbox{4cm}{morphisms $F(c) \to F(c')$, \\ \qquad\qquad\ over $h$}\right\}
+        \end{align*}
+        と分解する．
+        そして各$h$についてsession 4の命題4.2
+        （射はcartesian arrowと$\id$に写る射の合成に分解できる）を用いる．
+        すると各成分について全単射を構成できる．
+
+        (TODO: proof of (ii))
     \end{proof}
 
 \bibliographystyle{jplain}
