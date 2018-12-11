@@ -1,6 +1,9 @@
 \usepackage[]{../math_note, enumitem}
 \usepackage{xcolor}
+\usepackage{graphics}
 \usepackage[all, pdf, 2cell, cmtip]{xy}
+\usepackage{tikz}
+\usetikzlibrary{cd, positioning, arrows}
 %% for hyperref {{{
 \usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
 \usepackage{pxjahyper}
@@ -46,9 +49,17 @@
 \newcommand{\Sh}{\mathbf{Sh}}
 \newcommand{\PSh}{\mathbf{PSh}}
 
+\newcommand{\Fib}[1]{\cat{Fib}(\cat{#1})}
+\newcommand{\cFib}[1]{\cat{cFib}(\cat{#1})}
+\newcommand{\sFib}[1]{\cat{sFib}(\cat{#1})}
+\newcommand{\FibBP}[1]{\cat{Fib}^{\mathrm{bp}}(\cat{#1})}
+
 \newcommand{\Comma}[2]{#1{\downarrow}#2}
 \newcommand{\Lim}{\operatorname{lim}}
 \newcommand{\Colim}{\operatorname{colim}}
+
+\newcommand{\kiso}[1][{}]{\overset{#1}{\iso}}
+\newcommand{\kequiv}[1][{}]{\overset{#1}{\simeq}}
 
 %% derivation
 \newcommand{\shDer}{\Omega}
@@ -69,6 +80,9 @@
 \newcommand{\covU}{\mathcal{U}}
 \newcommand{\covV}{\mathcal{V}}
 \newcommand{\covW}{\mathcal{W}}
+
+\newcommand{\mnewline}{\mbox{}\newline}
+\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
 
 %\newcommand{\Open}{\mathrm{Open}}
 %\newcommand{\OpenSubSch}{\mathbf{OpenSubSch}}
@@ -92,7 +106,6 @@
 %\newcommand{\mfor}{\text{for }}
 %\newcommand{\acton}{\curvearrowright}
 
-%\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
 
 %\newcommand{\an}[1]{{#1}^{\,\mathrm{an}}}
 %\newcommand{\Pic}{\operatorname{Pic}}
