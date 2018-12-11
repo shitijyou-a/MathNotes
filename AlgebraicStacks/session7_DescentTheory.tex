@@ -1,0 +1,50 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros}
+
+\begin{document}
+\title{ゼミノート \#7 \\ Descent Theory}
+\author{七条彰紀}
+\maketitle
+
+\section{Motivation}
+    (TODO)
+
+\section{Definition}
+\begin{Def}
+    関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$を用いて以下のように定義する．
+    \begin{enumerate}[label=(\roman*)]
+        \item
+            $\epsilon_{\covU}$ :: equivalenceとなる$\covU$をof effective descent for $\shF$と呼ぶ．
+        \item
+            $\epsilon_{\covU}$の像と同型である$\shF(\covU)$の対象を，effective dataという．
+    \end{enumerate}
+\end{Def}
+
+\section{Criterion for fpqc Stacks}
+\begin{Lemma}[\cite{ASS} Lemma 4.25]
+    $S$ :: scheme,
+    $\shF \to (\Sch/S)$ :: fibrationとする．
+    以下が成り立つとする．
+    \begin{enumerate}[label=(\alph*)]
+        \item $\shF$はZariski topologyでのstackである．
+        \item
+            任意のflat surjective morphism of affine $S$-scheme :: $V \to U$について，\mnewline
+            $\epsilon_{\{V \to U\}} \colon \shF(U) \to \shF(\{V \to U\})$は圏同値．
+    \end{enumerate}
+    この時，$\shF$はfpqc topologyでのstackである．
+\end{Lemma}
+
+証明のために段階を踏む．
+\subsection{Step 1 / \tp{$\shF$}{F} :: fpqc prestack.}
+
+\subsection{Step 2 / single morphism coverの場合に帰着させる．}
+
+\subsection{Step 3 / affine schemeへのquasi-compact morphismの場合．}
+
+\subsection{Step 4 / affine schemeへのflat surjective morphismの場合．}
+
+\subsection{Step 5 / 一般の場合．}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}

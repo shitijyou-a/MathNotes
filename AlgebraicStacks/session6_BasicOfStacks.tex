@@ -5,7 +5,7 @@
 \newcommand{\inj}{\mathrm{inj}}
 
 \begin{document}
-\title{ゼミノート \#6 \\ Stacks \& Descent Theory}
+\title{ゼミノート \#6 \\ Basic of Stacks}
 \author{七条彰紀}
 \maketitle
 \tableofcontents
@@ -381,46 +381,6 @@ $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
     \end{description}
     ただし$U \in \Sch/S$は任意．
 \end{Example}
-
-\section{Descent Theory on fpqc Site}
-\subsection{Motivation}
-    (TODO)
-
-\subsection{Definition}
-\begin{Def}
-    関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$を用いて以下のように定義する．
-    \begin{enumerate}[label=(\roman*)]
-        \item
-            $\epsilon_{\covU}$ :: equivalenceとなる$\covU$をof effective descent for $\shF$と呼ぶ．
-        \item
-            $\epsilon_{\covU}$の像と同型である$\shF(\covU)$の対象を，effective dataという．
-    \end{enumerate}
-\end{Def}
-
-\subsection{Criterion for fpqc Stacks}
-\begin{Lemma}[\cite{ASS} Lemma 4.25]
-    $S$ :: scheme,
-    $\shF \to (\Sch/S)$ :: fibrationとする．
-    以下が成り立つとする．
-    \begin{enumerate}[label=(\alph*)]
-        \item $\shF$はZariski topologyでのstackである．
-        \item
-            任意のflat surjective morphism of affine $S$-scheme :: $V \to U$について，\mnewline
-            $\epsilon_{\{V \to U\}} \colon \shF(U) \to \shF(\{V \to U\})$は圏同値．
-    \end{enumerate}
-    この時，$\shF$はfpqc topologyでのstackである．
-\end{Lemma}
-
-証明のために段階を踏む．
-\subsubsection{Step 1 / \tp{$\shF$}{F} :: fpqc prestack.}
-
-\subsubsection{Step 2 / single morphism coverの場合に帰着させる．}
-
-\subsubsection{Step 3 / affine schemeへのquasi-compact morphismの場合．}
-
-\subsubsection{Step 4 / affine schemeへのflat surjective morphismの場合．}
-
-\subsubsection{Step 5 / 一般の場合．}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
