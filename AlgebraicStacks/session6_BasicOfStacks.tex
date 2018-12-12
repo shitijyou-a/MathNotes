@@ -14,7 +14,7 @@
 $\cat{C}$ :: site, 
 $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
 
-\section{Definition : Stack / Prestack}
+\section{Definition : Prestack / Stack }
 \begin{Def}[Prestack, Stack]
     関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$を用いて以下のように定義する．
     \begin{enumerate}[label=(\roman*)]
@@ -32,9 +32,15 @@ $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
 \begin{Remark}
     prestackの定義は以下のように言い換えられる:
     任意の$U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$をとる．
-    さらに$\xi, \eta \in \shF(U)$をとり，$\epsilon_{\covU}$による像
-    \[ (\{\xi_i\}, \{\sigma_{ij}\}), (\{\eta_i\}, \{\tau_{ij}\}) \in \shF(\covU) \]を考える．
-    $\{\alpha_i\} \colon \epsilon_{\covU}(\xi) \to \epsilon_{\covU}(\xi)$について，
+    さらに$\xi, \eta \in \shF(U)$をとり，$\epsilon_{\covU}$による像を
+    \[
+        \epsilon_{\covU}(\xi)=(\{\xi_i\}, \{\sigma_{ij}\}),\quad
+        \epsilon_{\covU}(\eta)=(\{\eta_i\}, \{\tau_{ij}\})
+            \in \shF(\covU) 
+    \]とする．
+    この時，任意の射
+    $\{\alpha_i\} \colon \epsilon_{\covU}(\xi) \to \epsilon_{\covU}(\xi)$
+    （射$\alpha_i \colon \xi_i \to \eta_i$の集合）について，
     $\shF(U)$の射$\alpha \colon \xi \to \eta$が\underline{一意に存在し}，
     $\alpha_i=(\phi_i)^*\alpha (\iff \{\alpha_i\}=\epsilon_{\covU}(\alpha))$となる．
 
@@ -234,7 +240,7 @@ $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
     空集合のcoverとして空集合を持つ($\emptyset \in \Cov(\emptyset)$)ものとする．
     $\pi \colon \shF \to \cat{C}$ :: stackについて，以下の圏同値が成立する．
     \[ \shF( \emptyset ) \simeq \cat{1}. \]
-    特に，$\shF(\emptyset)$の対象は全て同型であり，射は同型射しかない．
+    特に，$\shF(\emptyset)$の任意の二つの対象の間には，ただ一つの同型射が存在する．
 \end{Lemma}
 \begin{proof}
     category of descent data :: $\shF(\covU)$の対象を考える．
@@ -320,39 +326,58 @@ $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
     $\{U_i \to V\}$の添字について，
     $i \neq j$ならば$U_i \neq U_j$である，と仮定して一般性を失わない．
 
-    仮定の状況では，
+    $\covU=\{ \inj_i \colon U_i \to V \}(\in \Cov(V))$と置く．
+    次の関手が圏同値であることを示す．
+    \begin{defmap}
+        E \colon& \im \epsilon_{\covU}& \to& \prod_i \shF(U_i) \\
+        \mathbf{Objects}\colon&
+            (\{(\inj_i)^*\xi\}_i, \{\sigma_{ij}\}_{i, j})& \mapsto& ((\inj_i)^*\xi)_i\\
+        \mathbf{Arrows}\colon& \{\alpha_i\}_i& \mapsto& (\alpha_i)_i
+    \end{defmap}
+    $\xi_i:=(\inj_i)^*$とおく．
+    これが示せれば，$\shF$ :: stackなので主張も得られる．
+
+    まず，仮定の状況では，
     injection map (coprojection) :: $U_i \to V$についてのfiber productは
     次のように成る．
     \[
         U_{ij}
         =U_i \times_V U_j =
         \begin{cases}{}
-            U_{ii}(\iso U_i) & (U_i=U_j) \\
+            U_i & (U_i=U_j) \\
             \emptyset & (U_i \neq U_j).
         \end{cases}
     \]
     
-    そこで$\covU=\{ \inj_i \colon U_i \to V \}(\in \Cov(V))$と置くと，
-    $\xi \in \shF(V)$の$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$による像は
-    \[ \epsilon_{\covU}(\xi)=(\{ (\inj_i)^*\xi \}_{i}, \{\id[U_{ij}]\}_{i,j}) \]
-    となる．
-    
+    \step{$E$ :: essentially surjective.}
     $i \neq j$の時，
-    $\sigma_{ij}$は自己同型であるから$\id[\emptyset]$である．
-    さらに$i=j$の時は，
+    $\sigma_{ij}$は$\shF(U_{ij})=\shF(\emptyset)$の射であるから，
+    $\xi_i|_{\emptyset}$と$\xi_j|_{\emptyset}$の間に存在するただ一つの射である．
+    一方，$i=j$の時は，
     $(\pr_i)^*(\inj_i)^*\xi$と$(\pr_j)^*(\inj_j)^*\xi$が完全に等しいので，
-    $\sigma_{ij}=\id[(\inj_i)^*\xi]$．
-    また，射$\{\alpha_i\}$に課された条件は，
-    各$\alpha_i$は$(\inj_i)^*\xi \to (\inj_i)^*\xi$の形の任意の射の組み合わせについて成立する．
-    
-    以上より，以下の関手は圏同値である．
+    $\sigma_{ij}=\id[\xi_i]$．
+    以上より，対象同士の次の対応は$\mathrm{Ob}(E)$の逆対応と成る．
     \begin{defmap}
-        {} & \prod_i \shF(U_i)& \to& \im \epsilon_{\covU} \ (\subseteq \shF(\{U_i \to V\})) \\
-        \mathbf{Objects}\colon& ((\inj_i)^*\xi)_i& \mapsto&
-            (\{(\inj_i)^*\xi\}_i, \{\id[(\inj_i)^*\xi]\}_{i \neq j} \cup \{\id[U_{ii}]\}_{i}) \\
-        \mathbf{Arrows}\colon& (\alpha_i)_i& \mapsto& \{\alpha_i\}_i
+        {} & \mathrm{Ob}\left( \prod_i \shF(U_i) \right)& \to&
+            \mathrm{Ob}\left( \im \epsilon_{\covU} \right) \\
+        {}& (\xi_i)_i& \mapsto&
+            (\{\xi_i\}_i, \{\sigma_{ij}\}_{i \neq j} \cup \{\id[\xi_i]\}_{i}) \\
     \end{defmap}
-    $\shF$ :: stackなので主張にある圏同値が示せた．
+    これは$E$ :: essentially surjectiveを意味する．
+
+    \step{$E$ :: fully-faithfull.}
+    また，上で述べたことから，
+    射$\{\alpha_i\} \colon \epsilon_{\covU}(\xi) \to \epsilon_{\covU}(\eta)$に課された条件が，
+    任意の射の組み合わせ$(\alpha_i \colon \xi_i \to \eta_i)_i$について成立することも分かる
+    （$i \neq j$と$i=j$の場合で証明は異なる）．
+    なので全単射
+    \[
+        \Hom(\epsilon_{\covU}(\xi), \epsilon_{\covU}(\eta))
+        =\Hom((\xi_i)_i, (\eta_i)_i)
+        =\Hom(E(\epsilon_{\covU}(\xi)), E(\epsilon_{\covU}(\eta)))
+    \]
+    が得られる．
+    これは$E$ :: fully-faithfullを意味する．
 \end{proof}
 
 \begin{Thm}[Stackification of category fibered by groupoids.]
@@ -364,6 +389,9 @@ $\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える．
     \[ (-) \circ \theta \colon \HOM_{\cat{C}}(\bar{\shF}, -) \to \HOM_{\cat{C}}(\shF, -) \]
     が圏同値となる．
 \end{Thm}
+（TODO: これは\cite{ASS} Thm4.6.5からとった．
+しかし，\url{https://stacks.math.columbia.edu/tag/02ZM}に一般の場合が書かれている．
+出来ればこちらを理解したい）
 
 \begin{Example}
     presheafのstackificationはsheafificationと一致する．
