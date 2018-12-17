@@ -1,10 +1,12 @@
-\documentclass[a4paper]{jsarticle}
+\documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage{macros}
-
 \begin{document}
 \title{ゼミノート \#7 \\ Descent Theory}
 \author{七条彰紀}
 \maketitle
+
+\newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\vsim}{\text{\rotatebox{-90}{$\sim$}}}
 
 \section{Motivation}
     (TODO)
@@ -35,15 +37,172 @@
 \end{Lemma}
 
 証明のために段階を踏む．
-\subsection{Step 1 / \tp{$\shF$}{F} :: fpqc prestack.}
+\subsection{Step 1 / \tp{$\epsilon_{\covU}$} :: faithfull.}
+    (TODO: いらないかも)
 
 \subsection{Step 2 / single morphism coverの場合に帰着させる．}
+    次を示す．
+    \begin{Lemma}[\cite{NoteGroTop} p.87]
+        $\covU=\{\phi_i \colon V_i \to U\}, V'=\bigsqcup V_i$とする．
+        さらに，$f \colon V' \to U$を$\covU$から誘導される射とする．
+
+        このとき，圏同値 $E \colon \shF(U' \to U) \to \shF(\covU)$が存在し，
+        合成
+        \[\xymatrix{
+            \shF(U) \ar[r]^-{\epsilon_{\{f\}}}& \shF(V' \to U) \ar[r]^-{E}& \shF(\covU)
+        }\]
+        が関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$と同型と成る．
+    \end{Lemma}
+
+    \begin{proof}
+        まず関手$E$を構成し，
+        その後$E$が圏同値であること，補題の性質を満たすことを確認する．
+    \end{proof}
+
+    \begin{Remark}
+        ここで，各$\phi_i$がquasi-compact（特にfpqc）であったとしても，
+        誘導される射$f \colon V' \to U$が必ずしもquasi-compactでないことに注意する．
+        例えば$\{\Spec k[x_i] \to \bigsqcup_i \Spec k[x_i]\}_{i \in \N}$を考えれば分かる．
+
+        以上のことに注意すると，我々は次のことを証明することに成る:
+        \begin{Lemma}
+            条件(a), (b)が成り立つならば，
+            以下の条件$(*)$を満たす任意のflat surjective morphism :: $f \colon V \to U$について，
+            $\epsilon_{\{f\}} \colon \shF(U) \to \shF(f \colon V \to U)$ :: equivalence.
+            \begin{description}
+                \item[$(*)$]
+                    affine Zariski cover :: $U=\bigcup_i U_i$と，
+                    各$i$について$f^{-1}(U_i)$のaffine Zariski cover :: $f^{-1}(U_i)=\bigcup_i V_{ij}$が存在し，
+                    $V_{ij}$ :: quasi-compactかつ$f(V_{ij})=U_i$となる．
+            \end{description}
+        \end{Lemma}
+        条件$(*)$は$U, V$ :: locally noetherianであるような
+        任意のfppf morphismについて成立する(\cite{ASS} Cor1.1.6)．
+    \end{Remark}
+
+    \begin{Remark}
+        以下，$\shF$ :: split fibered categoryとする．
+        session 4.5 定理1.2より，このように仮定しても一般性を失わない．
+    \end{Remark}
 
 \subsection{Step 3 / affine schemeへのquasi-compact morphismの場合．}
+    $f \colon V \to U$を$U$ :: affineであるquasi-compact morphismとする．
+    $\{ V_i \}_i$を$V$のopen affine coverとし，$V'=\bigsqcup_i V_i$とおく．
+    $V'$ :: affineなので，
+    仮定(b)から圏同値$\shF(U) \simeq \shF(V' \to U)$が存在する．
 
-\subsection{Step 4 / affine schemeへのflat surjective morphismの場合．}
+    以下の図式$(1)$を考える．
+    $\leftrightarrow$は圏同値を意味する．
+    \[
+    \begin{tikzcd}[row sep=1cm]
+        \shF(U) \ar[r, "\epsilon_{f}"]\ar[d, leftrightarrow, "\epsilon_{\{V_i \to U\}}"']&
+        \shF(f \colon V \to U) \ar[ld, "E"]\\
+        \shF(\{V_i \to U\}) & \\
+        \shF(V' \to U) \ar[u, leftrightarrow]
+        \ar[uu, leftrightarrow, shift left=2mm, bend left=90, rounded corners, ]
+    \end{tikzcd}
+    \eqno{(1)}
+    \]
+    ここで関手$\epsilon_{f}, E$は次で与えられる．
+    ただし$\pr_k \colon V \times_U V \to V$は第$k$成分への射影である．
+    \begin{defmap}
+        \epsilon_{f}\colon & \shF(U)& \to& \shF(f \colon V \to U) \\
+        \mathbf{Objects:}& \xi& \mapsto& (f^*\xi, \sigma)\\
+        \mathbf{Arrows:}& \alpha& \mapsto& f^*\alpha
+    \end{defmap}
+    ここで$\sigma \colon \pr_2^*f^*\xi \to \pr_1^*f^*\xi \in \Arr(\shF(V \times_U V))$は
+    $\pr_2^*f^*\xi,\pr_1^*f^*\xi$が
+    いずれも$f \circ \pr_2=f \circ \pr_1$による$\xi$のpullbackであることから得られる同型射である．
+    \begin{defmap}
+        E\colon & \shF(f \colon V \to U)& \to& \shF(\{V_i \to U\}) \\
+        \mathbf{Objects:}& (\eta, \sigma)& \mapsto& (\{\eta|_{V_i}\}_i, \{(\gamma_{ij})^*\sigma\}) \\
+        \mathbf{Arrows:}& \beta& \mapsto& \{\beta|_{V_i}\}
+    \end{defmap}
+    ここで$\gamma_{ij}$は以下の可換図式のように，
+    fiber productの一意性から得られる射である．
+    \begin{center}
+        \begin{tikzcd}[row sep=1.2cm, column sep=0.7cm]
+            V_i \times_U V_j \ar[rr, "\pr_1"]\ar[dd, "\pr_2"']\ar[rd, "\gamma_{ij}"]& & V_i \ar[d, hookrightarrow]\\
+                                       & V \times_U V \ar[r, "\pr_1"]\ar[d, "\pr_2"']& V \ar[d, "f"]\\
+        V_j \ar[r, hookrightarrow]& V \ar[r, "f"']& U
+    \end{tikzcd}
+    \end{center}
+
+    この図式の可換性から，
+    関手の同型$E \circ \epsilon_{f} \iso \epsilon_{\{V_i \to U\}}$が得られる
+    （$\shF$ :: split fibered categoryを利用する）．
+    （よって上の図式$(1)$は可換である．）
+    したがって$\epsilon_{f}$のpsuedo-inverse functor ::
+    $(\epsilon_{\{V_i \to U\}})^{-1} \circ E$が得られた．
+
+\subsection{Step 4 / 条件\tp{$(*)$}{(*)}を満たすaffine schemeへの射の場合．}
+    (\cite{NoteGroTop} p.88)
+    仮定$(*)$より，
+    Zariski cover :: $\{\iota_i \colon V_i \to V\}$が存在し，$V_i$ :: quasi-compact．
+    \begin{Remark}
+        前段の議論のうち，図式$(1)$の$\shF(U) \to \shF(V' \to U)$が圏同値でない．
+        なので新しい議論が必要である．
+    \end{Remark}
+
+    \[
+    (2)
+    \begin{tikzcd}[row sep=10mm]
+        \shF(U) \ar[r]\ar[d]& \shF(f \colon V \to U) \ar[ld]\\
+        \shF(V_i \to U)
+    \end{tikzcd}
+    \qquad
+    (3)
+    \begin{tikzcd}[row sep=10mm]
+        \shF(U) \ar[r]\ar[d]& \shF(V_i \cup V_j \to U) \ar[ld]\\
+        \shF(V_i \to U)
+    \end{tikzcd}
+    \]
 
 \subsection{Step 5 / 一般の場合．}
+    条件$(*)$を満たす任意の射$f \colon V \to U$をとり，
+    affine Zarisiki cover :: $\{U_i \to U\}$をとる．
+    さらに$V_i:=f^{-1}(U_i)$とおき，$\phi_i=f|_{V_i}$とおく．
+
+    今，
+    \[ \Phi_i=\epsilon_{V_i \to U_i} \colon \shF(U_i) \to \shF(V_i \to U_i) \]と置く．
+    同様に$\Phi_{ij}=\epsilon_{V_{ij} \to U_{ij}}, \Phi_{ijk}=\epsilon_{V_{ijk} \to U_{ijk}}$と置く．
+    この時，以下は厳密な可換図式である．
+    \[
+    \begin{tikzcd}
+        \shF(U_i) \ar[r, "\res"]\ar[d, "\Phi_{i}"']&
+            \shF(U_{ij}) \ar[d, "\Phi_{ij}"]\ar[r, "\res"] & \shF(U_{ijk}) \ar[d, "\Phi_{ijk}"]\\
+        \shF(V_i \to U_i) \ar[r, "\res"']& \shF(V_{ij} \to U_{ij}) \ar[r, "\res"']& \shF(V_{ijk} \to U_{ijk})
+    \end{tikzcd}
+    \eqno{(4)}
+    \]
+    ここで，各$\Phi_{*}$はいずれもStep 4から圏同値である．
+
+    次の関手を考える．
+    \begin{defmap}
+        P_{i}\colon & \shF(f \colon V \to U)& \to& \shF(V_i \to U_i) \\
+        \mathbf{Objects}& (\eta, \sigma)& \mapsto& (\eta|_{V_i}, (\gamma_{ii})^*\sigma) \\
+        \mathbf{Arrows}& \alpha& \mapsto& \alpha|_{V_i} \\
+    \end{defmap}
+    同様に$P_{ij} \colon \shF(f) \to \shF(V_{ij} \to U_{ij})$を定義する．
+    するとstep 4の結果から$\shF(U_i) \simeq \shF(V_i \to U_i)$なので，
+    $\xi_i \in \shF(U_i)$と同型
+    \[ \alpha_i \colon \Phi_i(\xi_i) \isomap P_i((\eta, \sigma)) \]
+    が得られる．
+    上の図式(4)が可換であることから，
+    \[
+        \alpha_i|_{V_{ij}} \colon
+        \Phi_{ij}(\xi_i|_{V_{ij}})=(\Phi_i(\xi_i))|_{V_{ij}} \isomap P_{ij}((\eta, \sigma))
+    \]
+    すると，
+    \[ \alpha_i^{-1}\alpha_j \colon \Phi_{ij}(\xi_j|_{V_{ij}}) \to \Phi_{ij}(\xi_i|_{V_{ij}}) \]
+    $\Phi_{ij}$ :: equivalenceなので，
+    この同型射の逆像として$\sigma_{ij} \colon \xi_j|_{V_{ij}} \to \xi_i|_{V_{ij}}$が得られる．
+    
+    以上で得られる$(\{\xi_i\}, \{\sigma_{ij}\})$はcocycle conditionを満たすため，
+    $\shF(\{U_i \to U\})$のobjectである．
+    これは$\shF(U)$と圏同値なので，$\xi$が得られる．
+
+\section{Application : \tp{$\QCoh/S \to \Sch/S$}{QCoh/S -> Sch/S} is a fpqc stack.}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
