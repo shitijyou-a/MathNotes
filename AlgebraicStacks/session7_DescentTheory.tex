@@ -6,6 +6,7 @@
 \maketitle
 
 \newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\Mod}{\mathbf{Mod}}
 \newcommand{\vsim}{\text{\rotatebox{-90}{$\sim$}}}
 
 \section{Motivation}
@@ -35,6 +36,10 @@
     \end{enumerate}
     この時，$\shF$はfpqc topologyでのstackである．
 \end{Lemma}
+
+\begin{Remark}
+    ``flat"という条件は以下の証明では利用されない．
+\end{Remark}
 
 証明のために段階を踏む．
 \subsection{Step 1 / \tp{$\epsilon_{\covU}$} :: faithfull.}
@@ -144,19 +149,45 @@
         なので新しい議論が必要である．
     \end{Remark}
 
+    以下の可換図式を考える．
+    $\shF$ :: splitとしているので，以下は厳密に可換である．
     \[
-    (2)
     \begin{tikzcd}[row sep=10mm]
-        \shF(U) \ar[r]\ar[d]& \shF(f \colon V \to U) \ar[ld]\\
+        \shF(U) \ar[r, "\epsilon_{f}"]\ar[d, leftrightarrow, "\text{equiv.}"']&
+        \shF(f \colon V \to U) \ar[ld, "\text{ess. surj., full}"]\\
         \shF(V_i \to U)
     \end{tikzcd}
-    \qquad
-    (3)
+    \eqno{(2)}
+    \]
+    左にある縦の射はStep 3から圏同値である．
+    したがって$\shF(V \to U) \to \shF(V_i \to U)$（定義はおおよそ関手$E$と同様に与えられる）は
+    essentially surjectiveかつfullである．
+    なのでこの関手が更にfaithfullであることが証明できれば，
+    図式の可換性から$\epsilon_{f}$が圏同値であることが証明できる．
+
+    $\shF(V \to U)$の射$\beta, \beta'$が，$\beta|_{V_i}=\beta'|_{V_i}$を満たすとする．
+    この時，$\beta=\beta'$を証明すれば良い．
+    まず，以下の（厳密な）可換図式から，
+    任意の添字$j$について圏同値$\shF(V_i \to U) \simeq \shF(V_i \cup V_j \to U)$が得られる．
+    \[
     \begin{tikzcd}[row sep=10mm]
-        \shF(U) \ar[r]\ar[d]& \shF(V_i \cup V_j \to U) \ar[ld]\\
+        \shF(U) \ar[r, leftrightarrow]\ar[d, leftrightarrow]& \shF(V_i \cup V_j \to U) \ar[ld]\\
+        \shF(V_i \to U)
+    \end{tikzcd}
+    \eqno{(3)}
+    \]
+    したがって別の可換図式と$\beta|_{V_i}=\beta'|_{V_i}$から，
+    $\beta|_{V_i \cup V_j}=\beta'|_{V_i \cup V_j}$が得られる．
+    \[
+    \begin{tikzcd}[row sep=10mm]
+        \shF(V \to U) \ar[r]\ar[d]& \shF(V_i \cup V_j \to U) \ar[ld, leftrightarrow]\\
         \shF(V_i \to U)
     \end{tikzcd}
     \]
+    よって任意の$j$について
+    \[ \beta|_{V_j}=(\beta|_{V_i \cup V_j}|_{V_j}=(\beta'|_{V_i \cup V_j})|_{V_j}=\beta'|_{V_j} \]
+    が得られる．
+    $\shF$ :: Zariski stackなので，$\beta=\beta'$．
 
 \subsection{Step 5 / 一般の場合．}
     条件$(*)$を満たす任意の射$f \colon V \to U$をとり，
@@ -203,6 +234,57 @@
     これは$\shF(U)$と圏同値なので，$\xi$が得られる．
 
 \section{Application : \tp{$\QCoh/S \to \Sch/S$}{QCoh/S -> Sch/S} is a fpqc stack.}
+
+    \begin{Def}
+    $S \in \Sch$に対し，圏$\QCoh/S$を以下のように定める．
+    \begin{description}
+        \item[Objects.] \mnewline
+            $\mathrm{Fpqc}(S)$
+            \footnote{圏$\Sch/S$にfpqc topologyを備えたもの．}の対象 :: $U$と，
+            $U$上のquasi-coherent sheaf (on fpqc topology):: $\shU$の組．
+        \item[Arrows.] \mnewline
+            射$(U, \shU) \to (V, \shV)$は，
+            $\Sch/S$の射$f \colon U \to V$と，
+            morphism of sheaves on $V$ :: $f^{\#} \colon \shV \to f_*\shU$の組．
+    \end{description}
+    この時，$\QCoh/S \to \Sch/S; \ (U, \shU) \mapsto U$はfibrationである．
+    \end{Def}
+
+%    \begin{Def}
+%        $\phi \colon A \to B$を環準同型とする．
+%        $A$-module :: $M$について，
+%        \[
+%            c_M \colon M \otimes_A B \to B \otimes M;\ m \otimes b \mapsto b \otimes m,\qquad 
+%            p_M \colon M \to B \otimes M;\ m \mapsto 1_B \otimes m
+%        \]
+%        と定義する．
+
+%        この時，$\Mod_{\phi}$を以下のように定義する．
+%        \begin{description}
+%            \item[Objects.] $A$-module :: $N$と同型$\psi \colon N \otimes B \to B \otimes N$であって，
+%            \item[Arrows.]
+%        \end{description}
+%        さらに，$\Mod_A \to \Mod_{\phi}$を以下のように定義する．
+%        \begin{defmap}
+%            \epsilon_{\phi}\colon & & \to&  \\
+%            \mathbf{Objects}& & \mapsto& \\
+%            \mathbf{Arrows}& & \mapsto& 
+%        \end{defmap}
+%    \end{Def}
+    
+    $\Mod_A, \Mod_{\phi}, \Mod_A \to \Mod_{\phi}$の定義は
+    \cite{NoteGroTop} \S4.2.1を参照せよ．
+
+    $f \colon V \to U$をflat surjective morphism of $S$-schemesとし，
+    $\phi \colon A \to B$を$f$に対応するfaithfully flatな環準同型とする．
+    この時，$\QCoh(U) \simeq \Mod_A$はよく知られている
+    \footnote{この命題は\cite{HarAG} Cor5.5で詳しく述べられている}．
+    \begin{Claim}
+        $\QCoh(f \colon V \to U) \simeq \Mod_{\phi}$．
+    \end{Claim}
+    したがって$\epsilon_{f} \colon \QCoh(U) \to \QCoh(f \colon V \to U)$は
+    関手$\Mod_A \to \Mod_{\phi}$に対応する．
+    この関手は，可換環論によって圏同値であることが証明される．
 
 \bibliographystyle{jplain}
 \bibliography{reference}
