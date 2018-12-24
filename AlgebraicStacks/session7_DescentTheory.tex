@@ -24,7 +24,7 @@
 \end{Def}
 
 \section{Criterion for fpqc Stacks}
-\begin{Lemma}[\cite{ASS} Lemma 4.25]
+\begin{Thm}[\cite{ASS} Lemma 4.25]\label{thm:fpqccriterion}
     $S$ :: scheme,
     $\shF \to (\Sch/S)$ :: fibrationとする．
     以下が成り立つとする．
@@ -35,33 +35,147 @@
             $\epsilon_{\{V \to U\}} \colon \shF(U) \to \shF(\{V \to U\})$は圏同値．
     \end{enumerate}
     この時，$\shF$はfpqc topologyでのstackである．
-\end{Lemma}
+\end{Thm}
 
 \begin{Remark}
     ``flat"という条件は以下の証明では利用されない．
 \end{Remark}
 
-証明のために段階を踏む．
-\subsection{Step 1 / \tp{$\epsilon_{\covU}$} :: faithfull.}
-    (TODO: いらないかも)
+\subsection{Step 1 / 準備}
+以前示した命題から，
+$\shF$ :: split fibered categoryと仮定しても一般性を失わないので，
+以下そのように仮定する．
+
+\begin{Lemma}\label{lemma:key}
+    $\shF \to \cat{C}$を\underline{split} fibrationとする．
+    さらに$U \in \cat{C}$，$\covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$と
+    $\covU$の細分
+    \footnote
+    {
+        細分の定義を確認しておく:
+        任意の$\covV$の元$V_{ij} \to U$に対して$\covU$の元$U_i \to U$が存在し，
+        $V_{ij} \to U$が$U_i \to U$を通して$V_{ij} \to U_i \to U$と分解する．
+        特に射$V_{ij} \to U_{i}$が存在する．
+    }
+    $\covV=\{\psi_{ij} \colon V_{ij} \to U\}$をとる．
+
+    この時，関手$R_{\covU}^{\covV} \colon \shF(\covU) \to \shF(\covV)$が存在し，
+    以下は厳密な可換図式である。
+    \[
+        \begin{tikzcd}
+        \shF(U) \ar[r, "\epsilon_{\covU}"] \ar[d, "\epsilon_{\covV}"']&
+        \shF(\covU) \ar[ld, "R_{\covU}^{\covV}"] \\
+        \shF(\covV)
+    \end{tikzcd}
+    \]
+\end{Lemma}
+%% {{{
+\begin{proof}
+    \step{関手$\shF(\covU) \to \shF(\covV)$の構成．}
+    細分の定義から，各$i,k$について以下が可換に成る射$\iota_{ik} \colon V_{ik} \to V_{i}$が存在する．
+    \[
+    \begin{tikzcd}
+        V_{ik} \ar[r, "\iota_{ik}"'] \ar[rr, bend left, "\psi_{ik}"]& V_{i} \ar[r, "\phi_i"']& U
+    \end{tikzcd}
+    \]
+    この射$\iota_{ik}$を用いて，
+    関手$R_{\covU}^{\covV}$を次のように定義する。
+    \begin{defmap}
+        R_{\covU}^{\covV} \colon& \shF(\covU)& \to& \shF(\covV) \\
+        \mathbf{Objects}& (\{\eta_i\}, \{\sigma_{ij}\})& \mapsto&
+            \left(\{(\iota_{ik})^*\eta_i\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}\right\}\right) \\
+        \mathbf{Arrows}& \{\alpha_i\}& \mapsto& \{(\iota_{ik})^*\alpha_i\}
+    \end{defmap}
+    ここで$\iota_{ik}^{jl}$は，
+    以下の可換図式のようにfiber productの一意性から得られる射である．
+    \begin{center}
+    \begin{tikzcd}[row sep=1.4cm, column sep=0.7cm]
+        V_{ik} \times_U V_{jl}
+        \ar[rr, "\pr_1"]\ar[dd, "\pr_2"']\ar[rd, red, "\iota_{ik}^{jl}"]&&
+        V_{ik} \ar[d, "\iota_{ik}"'] \ar[dd, bend left, "\psi_{ik}"]\\
+        {}& V_i \times_U V_j \ar[r, "\pr_1"]\ar[d, "\pr_2"']& V_i \ar[d, "\phi_i"']\\
+        V_{jl} \ar[r, "\iota_{jl}"]\ar[rr, bend right, "\psi_{jl}"']& V_{j} \ar[r, "\phi_j"]& U
+    \end{tikzcd}
+    \end{center}
+    $\{\sigma_{ij}\}$がcocycle conditionを満たすので，
+    $\left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}\right\}$もcocycle conditionを満たす
+    \footnote
+    {
+        証明はfiber productの普遍性から得られる
+        射$V_{il} \times V_{jm} \times V_{kn} \to V_{i} \times V_{j} \times V_{k}$を用いれば良い．
+    }．
+    同様に$\{(\iota_{ik})^*\alpha_i\}$が$\shF(\covV)$の射であることも確認できる．
+
+    \step{対象について$R_{\covU}^{\covV}\epsilon_{\covU}=\epsilon_{\covV}.$}
+
+    $R_{\covU}^{\covV}\epsilon_{\covU}$を計算する．
+    まず$\xi \in \shF(U)$をとり，$R_{\covU}^{\covV}\epsilon_{\covU}(\xi)$を計算しよう．
+    \begin{align*}
+        R_{\covU}^{\covV}\epsilon_{\covU}(\xi)
+        =&  R_{\covU}^{\covV}\Big( (\{\phi_i^*\xi\}, \{\sigma_{ij}\}) \Big) \\
+        =&  \left(\{(\iota_{ik})^*\phi_i^*\xi\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij} \right\}\right) \\
+        =&  \left(\{(\psi_{ik})^*\xi\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij} \right\}\right)
+    \end{align*}
+    今，$\shF$ :: split fibered categoryとしているので，
+    \[ \pr_2^*\phi_j^* \xi=(\phi_j \circ \pr_2)^*\xi=(\phi_i \circ \pr_1)^*\xi=\pr_1^*\phi_i^* \xi. \]
+    $\sigma_{ij}$はfiber productの普遍性から得られる
+    $\pr_2^*\phi_j^* \xi$から$\pr_1^*\phi_i^* \xi$への同型であるから，
+    $\sigma_{ij}=\id$．
+    このことと$\shF$ :: splitから$\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}=\id$も分かる．
+    まとめると，
+    $R_{\covU}^{\covV}\epsilon_{\covU}(\xi)=\left(\{(\psi_{ik})^*\xi\}, \{\id[(\psi_{ik})^*\xi]\}\right)$．
+
+    一方，
+    \[
+        \left(\iota_{ik}^{jl}\right)^*\pr_2^*\phi_j^* \xi
+        =(\psi_{jl} \circ \pr_2)^*\xi
+        =\pr_2^*(\psi_{jl})^*\xi
+        =\pr_1^*(\psi_{ik})^*\xi
+        =(\psi_{ik} \circ \pr_1)^*\xi
+        =\left(\iota_{ik}^{jl}\right)^*\pr_1^*\phi_i^* \xi.
+    \]
+    なので，fiber productの普遍性から得られる
+    $\pr_2^*(\psi_{jl})^*\xi$から$\pr_1^*(\psi_{ik})^*\xi$への同型は$\id$である．
+    したがって
+    $\epsilon_{\covV}(\xi)=\left(\{(\psi_{ik})^*\xi\}, \{\id[(\psi_{ik})^*\xi]\}\right)$となり，
+    $R_{\covU}^{\covV}\epsilon_{\covU}(\xi)=\epsilon_{\covV}(\xi)$．
+    
+    \step{射について$R_{\covU}^{\covV}\epsilon_{\covU}=\epsilon_{\covV}.$}
+    $\shF(U)$の射$\alpha \colon \xi_1 \to \xi_2$をとる．
+    すると$\shF$ :: splitなので
+    \[
+        R_{\covU}^{\covV}\epsilon_{\covU}(\alpha)
+        =\{(\iota_{ik})^*\phi_i^*\alpha\}=\{(\phi_i \circ \iota_{ik})^*\alpha\}=\{\psi_{ik}^*\alpha\}
+        =\epsilon_{\covV}(\alpha).
+    \]
+\end{proof}
+%% }}}
+\begin{Remark}
+    $\shF$ :: splitを仮定しない場合，
+    可換図式が厳密であることを主張できないのは明白であろう．
+    実はさらに，$2$圏の意味でも図式が可換にならない．
+    なぜなら自然変換$\pr_1^* \phi_i^* \to (\phi_i \circ \pr_1)^*$などが
+    存在する保証がないからである．
+    同型$\pr_1^* \phi_i^*\xi \to (\phi_i \circ \pr_1)^*\xi$は$\xi$毎に存在が保証されているのみで，
+    それらが自然であることは保証されない．
+\end{Remark}
 
 \subsection{Step 2 / single morphism coverの場合に帰着させる．}
-    次を示す．
-    \begin{Lemma}[\cite{NoteGroTop} p.87]
+    \begin{Cor}[\cite{NoteGroTop} p.87]
+        $\cat{C}, \shF$等を補題(\ref{lemma:key})の様にとる．
         $\covU=\{\phi_i \colon V_i \to U\}, V'=\bigsqcup V_i$とする．
         さらに，$f \colon V' \to U$を$\covU$から誘導される射とする．
 
-        このとき，圏同値 $E \colon \shF(U' \to U) \to \shF(\covU)$が存在し，
+        このとき，圏同値 $R_{V' \to U}^{\covU} \colon \shF(V' \to U) \to \shF(\covU)$が存在し，
         合成
         \[\xymatrix{
             \shF(U) \ar[r]^-{\epsilon_{\{f\}}}& \shF(V' \to U) \ar[r]^-{E}& \shF(\covU)
         }\]
-        が関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$と同型と成る．
-    \end{Lemma}
-
+        が関手$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$と厳密に一致する．
+    \end{Cor}
     \begin{proof}
-        まず関手$E$を構成し，
-        その後$E$が圏同値であること，補題の性質を満たすことを確認する．
+        $\covU$は$\{U' \to U\} \in \Cov(U)$の細分であるから，
+        補題(\ref{lemma:key})から明らか．
     \end{proof}
 
     \begin{Remark}
@@ -70,7 +184,7 @@
         例えば$\{\Spec k[x_i] \to \bigsqcup_i \Spec k[x_i]\}_{i \in \N}$を考えれば分かる．
 
         以上のことに注意すると，我々は次のことを証明することに成る:
-        \begin{Lemma}
+        \begin{Claim}
             条件(a), (b)が成り立つならば，
             以下の条件$(*)$を満たす任意のflat surjective morphism :: $f \colon V \to U$について，
             $\epsilon_{\{f\}} \colon \shF(U) \to \shF(f \colon V \to U)$ :: equivalence.
@@ -80,7 +194,7 @@
                     各$i$について$f^{-1}(U_i)$のaffine Zariski cover :: $f^{-1}(U_i)=\bigcup_i V_{ij}$が存在し，
                     $V_{ij}$ :: quasi-compactかつ$f(V_{ij})=U_i$となる．
             \end{description}
-        \end{Lemma}
+        \end{Claim}
         条件$(*)$は$U, V$ :: locally noetherianであるような
         任意のfppf morphismについて成立する(\cite{ASS} Cor1.1.6)．
     \end{Remark}
@@ -101,14 +215,14 @@
     \[
     \begin{tikzcd}[row sep=1cm]
         \shF(U) \ar[r, "\epsilon_{f}"]\ar[d, leftrightarrow, "\epsilon_{\{V_i \to U\}}"']&
-        \shF(f \colon V \to U) \ar[ld, "E"]\\
+        \shF(f \colon V \to U) \ar[ld, "R_{f}^{V_i \to U}"]\\
         \shF(\{V_i \to U\}) & \\
-        \shF(V' \to U) \ar[u, leftrightarrow]
-        \ar[uu, leftrightarrow, shift left=2mm, bend left=90, rounded corners, ]
+        \shF(V' \to U) \ar[u, leftrightarrow, "R_{V' \to U}^{\{V_i \to U\}}"']
+        \ar[uu, leftrightarrow, shift left=2mm, bend left=90, rounded corners, "\epsilon_{V' \to U}"]
     \end{tikzcd}
     \eqno{(1)}
     \]
-    ここで関手$\epsilon_{f}, E$は次で与えられる．
+    ここで関手$\epsilon_{f}$は次で与えられる．
     ただし$\pr_k \colon V \times_U V \to V$は第$k$成分への射影である．
     \begin{defmap}
         \epsilon_{f}\colon & \shF(U)& \to& \shF(f \colon V \to U) \\
@@ -118,27 +232,13 @@
     ここで$\sigma \colon \pr_2^*f^*\xi \to \pr_1^*f^*\xi \in \Arr(\shF(V \times_U V))$は
     $\pr_2^*f^*\xi,\pr_1^*f^*\xi$が
     いずれも$f \circ \pr_2=f \circ \pr_1$による$\xi$のpullbackであることから得られる同型射である．
-    \begin{defmap}
-        E\colon & \shF(f \colon V \to U)& \to& \shF(\{V_i \to U\}) \\
-        \mathbf{Objects:}& (\eta, \sigma)& \mapsto& (\{\eta|_{V_i}\}_i, \{(\gamma_{ij})^*\sigma\}) \\
-        \mathbf{Arrows:}& \beta& \mapsto& \{\beta|_{V_i}\}
-    \end{defmap}
-    ここで$\gamma_{ij}$は以下の可換図式のように，
-    fiber productの一意性から得られる射である．
-    \begin{center}
-        \begin{tikzcd}[row sep=1.2cm, column sep=0.7cm]
-            V_i \times_U V_j \ar[rr, "\pr_1"]\ar[dd, "\pr_2"']\ar[rd, "\gamma_{ij}"]& & V_i \ar[d, hookrightarrow]\\
-                                       & V \times_U V \ar[r, "\pr_1"]\ar[d, "\pr_2"']& V \ar[d, "f"]\\
-        V_j \ar[r, hookrightarrow]& V \ar[r, "f"']& U
-    \end{tikzcd}
-    \end{center}
 
     この図式の可換性から，
-    関手の同型$E \circ \epsilon_{f} \iso \epsilon_{\{V_i \to U\}}$が得られる
+    関手の同型$(R_{f}^{V_i \to U}) \circ \epsilon_{f}=\epsilon_{\{V_i \to U\}}$が得られる
     （$\shF$ :: split fibered categoryを利用する）．
     （よって上の図式$(1)$は可換である．）
     したがって$\epsilon_{f}$のpsuedo-inverse functor ::
-    $(\epsilon_{\{V_i \to U\}})^{-1} \circ E$が得られた．
+    $(\epsilon_{\{V_i \to U\}})^{-1} \circ (R_{f}^{V_i \to U})$が得られた．
 
 \subsection{Step 4 / 条件\tp{$(*)$}{(*)}を満たすaffine schemeへの射の場合．}
     (\cite{NoteGroTop} p.88)
