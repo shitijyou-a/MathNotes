@@ -47,6 +47,7 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
 以下そのように仮定する．
 
 \begin{Lemma}\label{lemma:key}
+    $\cat{C}$をsiteとし，
     $\shF \to \cat{C}$を\underline{split} fibrationとする．
     さらに$U \in \cat{C}$，$\covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$と
     $\covU$の細分
@@ -72,10 +73,10 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
 %% {{{
 \begin{proof}
     \step{関手$\shF(\covU) \to \shF(\covV)$の構成．}
-    細分の定義から，各$i,k$について以下が可換に成る射$\iota_{ik} \colon V_{ik} \to V_{i}$が存在する．
+    細分の定義から，各$i,k$について以下が可換に成る射$\iota_{ik} \colon V_{ik} \to U_{i}$が存在する．
     \[
     \begin{tikzcd}
-        V_{ik} \ar[r, "\iota_{ik}"'] \ar[rr, bend left, "\psi_{ik}"]& V_{i} \ar[r, "\phi_i"']& U
+        V_{ik} \ar[r, "\iota_{ik}"'] \ar[rr, bend left, "\psi_{ik}"]& U_{i} \ar[r, "\phi_i"']& U
     \end{tikzcd}
     \]
     この射$\iota_{ik}$を用いて，
@@ -93,8 +94,8 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
         V_{ik} \times_U V_{jl}
         \ar[rr, "\pr_1"]\ar[dd, "\pr_2"']\ar[rd, red, "\iota_{ik}^{jl}"]&&
         V_{ik} \ar[d, "\iota_{ik}"'] \ar[dd, bend left, "\psi_{ik}"]\\
-        {}& V_i \times_U V_j \ar[r, "\pr_1"]\ar[d, "\pr_2"']& V_i \ar[d, "\phi_i"']\\
-        V_{jl} \ar[r, "\iota_{jl}"]\ar[rr, bend right, "\psi_{jl}"']& V_{j} \ar[r, "\phi_j"]& U
+        {}& U_{i} \times_U U_{j} \ar[r, "\pr_1"]\ar[d, "\pr_2"']& U_{i} \ar[d, "\phi_i"']\\
+        V_{jl} \ar[r, "\iota_{jl}"]\ar[rr, bend right, "\psi_{jl}"']& U_{j} \ar[r, "\phi_j"]& U
     \end{tikzcd}
     \end{center}
     $\{\sigma_{ij}\}$がcocycle conditionを満たすので，
@@ -102,12 +103,11 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
     \footnote
     {
         証明はfiber productの普遍性から得られる
-        射$V_{il} \times V_{jm} \times V_{kn} \to V_{i} \times V_{j} \times V_{k}$を用いれば良い．
+        射$V_{il} \times V_{jm} \times V_{kn} \to U_{i} \times U_{j} \times U_{k}$を用いれば良い．
     }．
     同様に$\{(\iota_{ik})^*\alpha_i\}$が$\shF(\covV)$の射であることも確認できる．
 
     \step{対象について$R_{\covU}^{\covV}\epsilon_{\covU}=\epsilon_{\covV}.$}
-
     $R_{\covU}^{\covV}\epsilon_{\covU}$を計算する．
     まず$\xi \in \shF(U)$をとり，$R_{\covU}^{\covV}\epsilon_{\covU}(\xi)$を計算しよう．
     \begin{align*}
@@ -159,6 +159,18 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
     同型$\pr_1^* \phi_i^*\xi \to (\phi_i \circ \pr_1)^*\xi$は$\xi$毎に存在が保証されているのみで，
     それらが自然であることは保証されない．
 \end{Remark}
+
+%\begin{Lemma}
+%    $\cat{C}, \shF$等を上の補題のようにする．
+%    $U \in \cat{C}$をとり，$\covU \in \Cov(U)$とする．
+%    さらに$\covV$を$\covU$の細分，$\covW$を$\covV$の細分とする
+%    （したがって$\covW$は$\covU$の細分である）．
+%    この時，次が成立する．
+%    \[ R_{\covV}^{\covW} \circ R_{\covU}^{\covV}=R_{\covU}^{\covW}. \]
+%\end{Lemma}
+%\begin{proof}
+%    明らかなので証明は略す．
+%\end{proof}
 
 \subsection{Step 2 / single morphism coverの場合に帰着させる．}
     \begin{Cor}[\cite{NoteGroTop} p.87]
@@ -229,9 +241,12 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
         \mathbf{Objects:}& \xi& \mapsto& (f^*\xi, \sigma)\\
         \mathbf{Arrows:}& \alpha& \mapsto& f^*\alpha
     \end{defmap}
-    ここで$\sigma \colon \pr_2^*f^*\xi \to \pr_1^*f^*\xi \in \Arr(\shF(V \times_U V))$は
+    ここで$\sigma \colon \pr_2^*f^*\xi \to \pr_1^*f^*\xi \in \Arr(\shF(V \times_U V))$は，
+    恒等射$\id[\pr_2^*f^*\xi]$である．
+    これは
     $\pr_2^*f^*\xi,\pr_1^*f^*\xi$が
-    いずれも$f \circ \pr_2=f \circ \pr_1$による$\xi$のpullbackであることから得られる同型射である．
+    いずれも$f \circ \pr_2=f \circ \pr_1$による$\xi$のpullbackであることと，
+    $\shF$ :: splitから得られる
 
     この図式の可換性から，
     関手の同型$(R_{f}^{V_i \to U}) \circ \epsilon_{f}=\epsilon_{\{V_i \to U\}}$が得られる
@@ -249,12 +264,13 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
         なので新しい議論が必要である．
     \end{Remark}
 
-    以下の可換図式を考える．
-    $\shF$ :: splitとしているので，以下は厳密に可換である．
+    補題(\ref{lemma:key})から得られる以下の可換図式を考える．
     \[
     \begin{tikzcd}[row sep=10mm]
-        \shF(U) \ar[r, "\epsilon_{f}"]\ar[d, leftrightarrow, "\text{equiv.}"']&
-        \shF(f \colon V \to U) \ar[ld, "\text{ess. surj., full}"]\\
+        \shF(U) \ar[r, "\epsilon_{f}"]
+        \ar[d, leftrightarrow, "\substack{\epsilon_{V_i \to U} \\ \text{\color{red}equivalence}}"']&
+        \shF(f \colon V \to U)
+        \ar[ld, "\substack{R_{f}^{V_i \to U} \\ \text{\color{red}essentially surjective \& full}}"]\\
         \shF(V_i \to U)
     \end{tikzcd}
     \eqno{(2)}
@@ -267,25 +283,32 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
 
     $\shF(V \to U)$の射$\beta, \beta'$が，$\beta|_{V_i}=\beta'|_{V_i}$を満たすとする．
     この時，$\beta=\beta'$を証明すれば良い．
-    まず，以下の（厳密な）可換図式から，
-    任意の添字$j$について圏同値$\shF(V_i \to U) \simeq \shF(V_i \cup V_j \to U)$が得られる．
+    まず，以下の厳密な可換図式から，
+    任意の添字$j$について
+    $R_{V_i \cup V_j \to U}^{V_i \to U} \colon \shF(V_i \to U) \to \shF(V_i \cup V_j \to U)$が圏同値だと分かる．
     \[
     \begin{tikzcd}[row sep=10mm]
-        \shF(U) \ar[r, leftrightarrow]\ar[d, leftrightarrow]& \shF(V_i \cup V_j \to U) \ar[ld]\\
+        \shF(U)
+        \ar[r, leftrightarrow, "\epsilon_{V_i \cup V_j \to U}"]
+        \ar[d, leftrightarrow, "\epsilon_{V_i \to U}"']& 
+        \shF(V_i \cup V_j \to U) \ar[ld, red, "R_{V_i \cup V_j \to U}^{V_i \to U}"]\\
         \shF(V_i \to U)
     \end{tikzcd}
     \eqno{(3)}
     \]
-    したがって別の可換図式と$\beta|_{V_i}=\beta'|_{V_i}$から，
-    $\beta|_{V_i \cup V_j}=\beta'|_{V_i \cup V_j}$が得られる．
+    したがって以下が得られる．
     \[
-    \begin{tikzcd}[row sep=10mm]
-        \shF(V \to U) \ar[r]\ar[d]& \shF(V_i \cup V_j \to U) \ar[ld, leftrightarrow]\\
-        \shF(V_i \to U)
+    \begin{tikzcd}[column sep=20mm]
+        \shF(V \to U) \ar[r, "R_{V \to U}^{V_i \to U}"]&
+        \shF(V_i \to U) \ar[r, "\left(R_{V_i \cup V_j \to U}^{V_i \to U}\right)^{-1}"]&
+        \shF(V_i \cup V_j \to U) \ar[r, "R_{V_i \cup V_j \to U}^{V_j \to U}"]&
+        \shF(V_j \to U) 
     \end{tikzcd}
     \]
+    $\beta|_{V_i}=\beta'|_{V_i}$から，
+    $\beta|_{V_i \cup V_j}=\beta'|_{V_i \cup V_j}$が得られる．
     よって任意の$j$について
-    \[ \beta|_{V_j}=(\beta|_{V_i \cup V_j}|_{V_j}=(\beta'|_{V_i \cup V_j})|_{V_j}=\beta'|_{V_j} \]
+    \[ \beta|_{V_j}=(\beta|_{V_i \cup V_j})|_{V_j}=(\beta'|_{V_i \cup V_j})|_{V_j}=\beta'|_{V_j} \]
     が得られる．
     $\shF$ :: Zariski stackなので，$\beta=\beta'$．
 
@@ -329,9 +352,11 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
     $\Phi_{ij}$ :: equivalenceなので，
     この同型射の逆像として$\sigma_{ij} \colon \xi_j|_{V_{ij}} \to \xi_i|_{V_{ij}}$が得られる．
     
-    以上で得られる$(\{\xi_i\}, \{\sigma_{ij}\})$はcocycle conditionを満たすため，
+    以上で得られる$(\{\xi_i\}, \{\sigma_{ij}\})$はcocycle conditionを満たすため（TODO），
     $\shF(\{U_i \to U\})$のobjectである．
-    これは$\shF(U)$と圏同値なので，$\xi$が得られる．
+    $\shF$ :: Zariski stackなので，これは$\shF(U)$と圏同値．
+    よって$\xi$が得られる．
+    （TODO: 射についても）
 
 \section{Application : \tp{$\QCoh/S \to \Sch/S$}{QCoh/S -> Sch/S} is a fpqc stack.}
 
