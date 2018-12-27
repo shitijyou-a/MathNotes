@@ -273,7 +273,6 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
         \ar[ld, "\substack{R_{f}^{V_i \to U} \\ \text{\color{red}essentially surjective \& full}}"]\\
         \shF(V_i \to U)
     \end{tikzcd}
-    \eqno{(2)}
     \]
     左にある縦の射はStep 3から圏同値である．
     したがって$\shF(V \to U) \to \shF(V_i \to U)$（定義はおおよそ関手$E$と同様に与えられる）は
@@ -286,30 +285,35 @@ $\shF$ :: split fibered categoryと仮定しても一般性を失わないので
     まず，以下の厳密な可換図式から，
     任意の添字$j$について
     $R_{V_i \cup V_j \to U}^{V_i \to U} \colon \shF(V_i \to U) \to \shF(V_i \cup V_j \to U)$が圏同値だと分かる．
+    この関手を略して$R$を書くことにする．
     \[
     \begin{tikzcd}[row sep=10mm]
         \shF(U)
         \ar[r, leftrightarrow, "\epsilon_{V_i \cup V_j \to U}"]
         \ar[d, leftrightarrow, "\epsilon_{V_i \to U}"']& 
-        \shF(V_i \cup V_j \to U) \ar[ld, red, "R_{V_i \cup V_j \to U}^{V_i \to U}"]\\
+        \shF(V_i \cup V_j \to U) \ar[ld, red, "R\,:=R_{V_i \cup V_j \to U}^{V_i \to U}"]\\
         \shF(V_i \to U)
     \end{tikzcd}
-    \eqno{(3)}
     \]
-    したがって以下が得られる．
+    したがって$R^{-1}$が存在する．
+    関手$R$は
+    $\shF(V_i \cup V_j \to U)$の射$\beta|_{V_i \cup V_j}$を$\beta|_{V_i}$に一対一に写すのだから，
+    $R^{-1}$は$\beta|_{V_i}$を$\beta|_{V_i \cup V_j}$に一対一に写す．
+
+    さて，以下の関手の合成で$\beta, \beta'$を写す．
     \[
     \begin{tikzcd}[column sep=20mm]
         \shF(V \to U) \ar[r, "R_{V \to U}^{V_i \to U}"]&
-        \shF(V_i \to U) \ar[r, "\left(R_{V_i \cup V_j \to U}^{V_i \to U}\right)^{-1}"]&
+        \shF(V_i \to U) \ar[r, "R^{-1}"]&
         \shF(V_i \cup V_j \to U) \ar[r, "R_{V_i \cup V_j \to U}^{V_j \to U}"]&
         \shF(V_j \to U) 
     \end{tikzcd}
     \]
-    $\beta|_{V_i}=\beta'|_{V_i}$から，
+    $\beta|_{V_i}=\beta'|_{V_i}$を$R^{-1}$で写して
     $\beta|_{V_i \cup V_j}=\beta'|_{V_i \cup V_j}$が得られる．
-    よって任意の$j$について
+    よって，任意の$j$について
     \[ \beta|_{V_j}=(\beta|_{V_i \cup V_j})|_{V_j}=(\beta'|_{V_i \cup V_j})|_{V_j}=\beta'|_{V_j} \]
-    が得られる．
+    が成立する．
     $\shF$ :: Zariski stackなので，$\beta=\beta'$．
 
 \subsection{Step 5 / 一般の場合．}
