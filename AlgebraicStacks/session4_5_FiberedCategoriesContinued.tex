@@ -1,17 +1,6 @@
 \documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage{macros}
 
-\usepackage{graphics}
-\usepackage{tikz}
-\usetikzlibrary{cd, positioning, arrows}
-
-\newcommand{\Fib}[1]{\cat{Fib}(\cat{#1})}
-\newcommand{\cFib}[1]{\cat{cFib}(\cat{#1})}
-\newcommand{\sFib}[1]{\cat{sFib}(\cat{#1})}
-\newcommand{\FibBP}[1]{\cat{Fib}^{\mathrm{bp}}(\cat{#1})}
-
-\newcommand{\kiso}[1][{}]{\overset{#1}{\iso}}
-\newcommand{\kequiv}[1][{}]{\overset{#1}{\simeq}}
 \newcommand{\HOM}{\operatorname{HOM}}
 \newcommand{\centerpb}{\ar@{}[lu]|{\text{p.b.}}}
 
@@ -24,7 +13,7 @@
     Cartesian liftingは普遍性(Triangle Lifting)で特徴づけられている．
     なので同型を除いて一意であるが，厳密な意味で一意であるというものではない．
     どのCartesian liftingを用いるか選んだものがCleavage（分裂，劈開）．
-    これはFibered category :: $\cat{X}$のCartesian arrowのclassを成す．
+    これはFibered category :: $\fibX$のCartesian arrowのclassを成す．
     Cleavageとfibration (resp. Fibered category)を併せたものを
     Cloven fibration (resp. Cloven fibered category)と呼ぶ．
     選択公理によって，我々は常にFibrationをCloven fibrationにできる．
@@ -35,42 +24,42 @@
     そのようなCleavageを選べるFibrationをSplit fibrationと呼ぶ．
 
     \begin{Def}[\cite{ASS}]
-        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
-        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \cat{X}$のことである．
+        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
+        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \fibX$のことである．
         \begin{enumerate}
             \item
-                $\cat{S}$は$\cat{X}$の任意の対象を持つ．
+                $\cat{S}$は$\fibX$の任意の対象を持つ．
             \item
                 $\cat{S}$の任意の射はcartesian．
             \item
-                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \cat{X}$について，
+                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \fibX$について，
                 $f$上の射$u \to v$がただ一つ存在する．
                 （すなわち，cartesian liftingが一意に存在する．）
         \end{enumerate}
-        この時，組$(\cat{X}, \cat{S})$をsplit fibered categoryと呼ぶ．
+        この時，組$(\fibX, \cat{S})$をsplit fibered categoryと呼ぶ．
     \end{Def}
 
     任意のFibrationはSplit fibrationとは限らないが，Split fibrationと圏同値である．
 
     \begin{Thm}
-        $\pi \colon \cat{X} \to \cat{B}$ :: fibered categoryとする．
-        この時，split fibered category over $\cat{B}$ :: $(\tilde{\cat{X}}, \cat{S})$が存在し，
-        圏同値$\tilde{\cat{X}} \kequiv \cat{X}$が成立する．
+        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
+        この時，split fibered category over $\cat{B}$ :: $(\tilde{\fibX}, \cat{S})$が存在し，
+        圏同値$\tilde{\fibX} \kequiv \fibX$が成立する．
     \end{Thm}
 
     \begin{proof}
         ここでは
-        圏と部分圏$(\tilde{\cat{X}}, \cat{S})$及び
-        関手$\Phi \colon \tilde{\cat{X}} \to \cat{X}$を構成するにとどめる．
+        圏と部分圏$(\tilde{\fibX}, \cat{S})$及び
+        関手$\Phi \colon \tilde{\fibX} \to \fibX$を構成するにとどめる．
         （TODO: 
         これらがそれぞれsplit fibered category over $\cat{B}$とequivalenceであることは
         ここでは確認しない．）
 
-        以下のように$\tilde{\cat{X}}$を構成する．
+        以下のように$\tilde{\fibX}$を構成する．
         \begin{description}[labelindent=1cm]
             \item[Objects.]
                 object :: $U \in \cat{B}$と
-                morphism of fibered category :: $u \colon \cat{B}/U \to \cat{X}$の組$(U, u)$.
+                morphism of fibered category :: $u \colon \cat{B}/U \to \fibX$の組$(U, u)$.
 
             \item[Arrows.]
                 射$(V, v) \to (U, u)$は
@@ -80,21 +69,21 @@
                 \begin{tikzcd}
                     \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
                     & \cat{B}/U \ar[Rightarrow, from=v, "\alpha"]\ar[r, "u"]
-                    & \cat{X}
+                    & \fibX
                 \end{tikzcd}
                 \end{center}
         \end{description}
 
         まずprojection functorが以下のように定まる．
         \begin{defmap}
-            \tilde{\pi} \colon & \tilde{\cat{X}}& \to& \cat{B} \\
+            \tilde{\pi} \colon & \tilde{\fibX}& \to& \cat{B} \\
             {}& (U, u)& \mapsto& U
         \end{defmap}
         この関手によってfibered categoryの構造が入る．
 
         さらに次の関手によってequivalenceが与えられる．
         \begin{defmap}
-            \Phi\colon & \tilde{\cat{X}}& \to& \cat{X} \\
+            \Phi\colon & \tilde{\fibX}& \to& \fibX \\
             {}& (U, u)& \mapsto& u(\id[U])
         \end{defmap}
         これがequivalenceであることは$2$-Yoneda Lemmaによる．
@@ -102,10 +91,10 @@
         最後に，splitting of $\tilde{\pi}$ :: $\cat{S}$が次で定められる．
         \begin{description}[labelindent=1cm]
             \item[Objects.]
-                $\tilde{\cat{X}}$と同じ．
+                $\tilde{\fibX}$と同じ．
 
             \item[Arrows.]
-                $\tilde{\cat{X}}$の射で，$(g, \id)$と表されるもの．
+                $\tilde{\fibX}$の射で，$(g, \id)$と表されるもの．
                 すなわち，
                 射$(V, v) \to (U, u)$は$\cat{B}$の射$g \colon V \to U$であって
                 $v=u \circ g$であるもの．
@@ -113,7 +102,7 @@
                 \begin{tikzcd}
                     \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
                     & \cat{B}/U \ar[equal, from=v]\ar[r, "u"]
-                    & \cat{X}
+                    & \fibX
                 \end{tikzcd}
                 \end{center}
         \end{description}
@@ -247,17 +236,17 @@
     \end{Remark}
 
     \begin{Def}[Category fibered in groupoids/sets]
-        $\pi \colon \cat{X} \to \cat{B}$をfibered categoryとする．
+        $\pi \colon \fibX \to \cat{B}$をfibered categoryとする．
         任意の$b \in \cat{B}$について，
-        $\pi$の$b$におけるfiber$\cat{X}(b)$がgroupoid (set)であるとき，
-        $\cat{X}$をcategory fibered in groupoids (sets)と呼ぶ．
+        $\pi$の$b$におけるfiber$\fibX(b)$がgroupoid (set)であるとき，
+        $\fibX$をcategory fibered in groupoids (sets)と呼ぶ．
     \end{Def}
     category fibered in groupoidsは次のように定義しても同値である．
 
     \begin{Def}[Category fibered in groupoid (Another Definition)]
         任意の射がcartesianであるfibered categoryをcategory fibered in groupoidsと呼ぶ．
         すなわち，
-        以下の$2$条件が成立する圏$\cat{X}$と関手$\pi \colon \cat{X} \to \cat{B}$を
+        以下の$2$条件が成立する圏$\fibX$と関手$\pi \colon \fibX \to \cat{B}$を
         category fibered in groupoidsと呼ぶ．
         \begin{enumerate}[label=(\roman*)]
         \item
@@ -281,7 +270,7 @@
                 \end{tikzcd}
             };
 
-            \node [above=5pt of X] {in $\cat{X}$};
+            \node [above=5pt of X] {in $\fibX$};
             \node [below=5pt of B] {in $\cat{B}$};
             \draw [->, line width=1.5pt] (X) edge (B);
             \node at (0.3,1.55) {$\pi$};
@@ -303,7 +292,7 @@
                 \end{tikzcd}
             };
 
-            \node [above=5pt of X] {in $\cat{X}$};
+            \node [above=5pt of X] {in $\fibX$};
             \node [below=5pt of B] {in $\cat{B}$};
             \draw [->, line width=1.5pt] (X) edge (B);
             \node at (0.3,1.55) {$\pi$};
@@ -313,10 +302,10 @@
             %% }}}
 
         \item
-            $y \in \cat{X}, u \to \pi(y) \in \cat{B}$に対し，
+            $y \in \fibX, u \to \pi(y) \in \cat{B}$に対し，
             以下の図式を満たす
             \footnote{すなわち，$\pi(x)=u, \pi(x \to y)=u \to \pi(y)$を満たす．}
-            \underline{$x \in \cat{X}$と射$x \to y \in \cat{X}$}が存在する．
+            \underline{$x \in \fibX$と射$x \to y \in \fibX$}が存在する．
             \begin{center}
             \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
             \node[mybox] (X) at (0,2){%
@@ -330,7 +319,7 @@
             \end{tikzcd}
             };
 
-            \node [above=5pt of X] {in $\cat{X}$};
+            \node [above=5pt of X] {in $\fibX$};
             \node [below=5pt of B] {in $\cat{B}$};
             \draw [->, line width=1.5pt] (X) edge (B);
             \node at (0.3,1) {$\pi$};
@@ -358,17 +347,17 @@
     この直後に扱うことと成るEquivalenceを扱う．
     
     この節では
-    fibered categories :: $\pi \colon \cat{X} \to \cat{B}, \pi' \colon \cat{X}' \to \cat{B}$と，
-    これらの間の射$g \colon \cat{X} \to \cat{X}'$を考える．
+    fibered categories :: $\pi \colon \fibX \to \cat{B}, \pi' \colon \fibX' \to \cat{B}$と，
+    これらの間の射$g \colon \fibX \to \fibX'$を考える．
 
 \subsection{Definition}
     \begin{Def}[Equivalence]
         $g$がequivalence of fibered categoriesであるとは，
-        別の射$h \colon \cat{X}' \to \cat{X}$が存在し，
+        別の射$h \colon \fibX' \to \fibX$が存在し，
         $g \circ h, h \circ g$が
         それぞれ恒等関手とbase-preserving isomorphicであるということである．
 
-        この時，$\cat{X} \simeq \cat{X}'$と書き，
+        この時，$\fibX \simeq \fibX'$と書き，
         $h$はpsuedo-inverse of $g$と呼ばれる．
     \end{Def}
     \begin{Remark}
@@ -397,7 +386,7 @@
 
     \begin{Prop}[\cite{ASS} Prop3.1.18, 3.1.10]
         $b \in \cat{B}$について，
-        $g$を$\cat{X}(b)$に制限して得られる関手を$g_b \colon \cat{X}(b) \to \cat{X}'(b)$とする．
+        $g$を$\fibX(b)$に制限して得られる関手を$g_b \colon \fibX(b) \to \fibX'(b)$とする．
         \begin{enumerate}[label=(\alph*)]
         \item $g$ :: fully faithful
                 $\iff$ 任意の$b \in \cat{B}$について，$g_{b}$ :: fully faithful.

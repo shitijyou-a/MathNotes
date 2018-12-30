@@ -9,7 +9,7 @@
 今回のノートで一貫して用いる記号と記法を定める．
 
 $\cat{C}$ :: site, 
-$\pi \colon \shF \to \cat{C}$ :: fibered categoryを考える
+$\pi \colon \fibF \to \cat{C}$ :: fibered categoryを考える
 \footnote{ ほとんどfiber of $\pi$しか扱わないので，psuedo-functor $\cat{C} \to \Cat$をとっても構わない． }．
 
 記法を定める．
@@ -24,14 +24,14 @@ fiber productからの射影を
 
 \section{The Category of Descent Data}
 \subsection{Definition}
-\begin{Def}[$\shF(\covU)$, \cite{ASS} 4.2.4, \cite{NoteGroTop} Def4.2]
-    圏$\shF(\covU)$を次のように定める．
+\begin{Def}[$\fibF(\covU)$, \cite{ASS} 4.2.4, \cite{NoteGroTop} Def4.2]
+    圏$\fibF(\covU)$を次のように定める．
     \begin{description}
         \item[Object.] \hfill \vspace{-0.2cm}
             \begin{itemize}
-                \item $\xi_i \in \shF(U_i)$なる対象のclass $\{\xi_i\}_{i \in I}$と，
+                \item $\xi_i \in \fibF(U_i)$なる対象のclass $\{\xi_i\}_{i \in I}$と，
                 \item
-                    $\shF(U_{ij})$中の同型$\sigma_{ij} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}}$の
+                    $\fibF(U_{ij})$中の同型$\sigma_{ij} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}}$の
                     class $\{\sigma_{ij}\}_{i,j \in I}$
             \end{itemize}
             の組$(\{\xi_i\}, \{\sigma_{ij}\})$であって，
@@ -41,7 +41,7 @@ fiber productからの射影を
 
         \item[Arrow.] \mnewline
             射$\{\alpha_i\} \colon (\{\xi_i\}, \{\sigma_{ij}\}) \to (\{\eta_i\}, \{\tau_{ij}\})$とは，
-            $\shF(U_i)$の射$\alpha_i \colon \xi_i \to \eta_i$のclassであって，\mnewline
+            $\fibF(U_i)$の射$\alpha_i \colon \xi_i \to \eta_i$のclassであって，\mnewline
             $\sigma_{ij}, \tau_{ij}$と整合的であるもの．
             すなわち，任意の$i, j \in I$について以下の図式が可換であるもの．
             \[\xymatrix{
@@ -55,7 +55,7 @@ fiber productからの射影を
     組$(\{\xi_i\}, \{\sigma_{ij}\})$がcocycle conditionを満たすとは，
     任意の$i,j,k \in I$について以下が成り立つということ．
     \[ \sigma_{ik}|_{U_{ijk}}=(\sigma_{ij}|_{U_{ijk}}) \circ (\sigma_{jk}|_{U_{ijk}}). \]
-    図式でかけば，圏$\shF(U_{ijk})$における以下の図式が可換であることと同値．
+    図式でかけば，圏$\fibF(U_{ijk})$における以下の図式が可換であることと同値．
     \[\xymatrix@R=70pt{
          \xi_k|_{U_{ijk}} \ar[rd]_-{\sigma_{ik}|_{U_{ijk}}} \ar[rr]^-{\sigma_{jk}|_{U_{ijk}}}
             & {}
@@ -68,14 +68,14 @@ fiber productからの射影を
     この定義に於いてfiber products :: $U_{ij}, U_{ijk}$を暗黙のうちに選択している．
     たが，どのように選択しても得られる圏は同型に成る．
     $U_{ij}, U_{ijk}$の選択も込めて
-    $(\{\xi_i\}, \{\xi_{ij}\}, \{\xi_{ijk}\})$を$\shF(\covU)$の対象とする
+    $(\{\xi_i\}, \{\xi_{ij}\}, \{\xi_{ijk}\})$を$\fibF(\covU)$の対象とする
     定義の仕方も有るが，ここでは述べない．
     詳細は\cite{NoteGroTop} Remark 4.3にある.
 \end{Remark}
 
 \begin{Def}[\cite{NoteGroTop} p.72] \label{def:epsilon}
-    $\xi \in \shF(U), \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$について，
-    $\shF(\covU)$の元を以下のデータに対応させる:
+    $\xi \in \fibF(U), \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$について，
+    $\fibF(\covU)$の元を以下のデータに対応させる:
     \begin{itemize}
         \item $\xi_i:=\phi_i^*\xi$のclass $\{\xi_i\}_{i \in I}$.
         \item
@@ -86,8 +86,8 @@ fiber productからの射影を
             標準的同型のclass $\{ \sigma_{ji} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}} \}_{i,j}$.
     \end{itemize}
     このデータをまとめて$(\{\phi_i^*\xi\}, \mathrm{cano})$などと書く．
-    この対応を$\epsilon_{\covU} \colon \shF(U) \to \shF(\covU)$と書く．
-    $\shF(U)$の射$\xi \to \eta$から，
+    この対応を$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$と書く．
+    $\fibF(U)$の射$\xi \to \eta$から，
     $\phi_i$に沿ったpullbackによって$(\{\phi_i^*\xi\}, \mathrm{cano}) \to (\{\phi_i^*\eta\}, \mathrm{cano})$
     が得られるので，
     対応$\epsilon_{\covU}$は関手である．
@@ -95,11 +95,11 @@ fiber productからの射影を
 
 \subsection{Example}
 \begin{Example}[\cite{ASS}, 4.2.1]
-    一つの射から成るcover :: $\covU=\{f \colon V \to U\}$について$\shF(\covU)$を考えてみる．
+    一つの射から成るcover :: $\covU=\{f \colon V \to U\}$について$\fibF(\covU)$を考えてみる．
     この圏の対象は，
     \begin{itemize}
-        \item 対象$E \in \shF(V)$
-        \item $\shF(V \times_U V)$の中の同型射$\sigma \colon \pr_1^*E \to \pr_2^*E$
+        \item 対象$E \in \fibF(V)$
+        \item $\fibF(V \times_U V)$の中の同型射$\sigma \colon \pr_1^*E \to \pr_2^*E$
     \end{itemize}
     の組である．
 \end{Example}
