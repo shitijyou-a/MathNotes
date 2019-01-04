@@ -1,10 +1,230 @@
-\documentclass[a4paper]{jsarticle}
+\documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage{macros}
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
 
+\newcommand{\Diag}{\Delta}
+\newcommand{\CFG}[1]{\cat{CFG}(\cat{#1})}
 \begin{document}
-\title{ゼミノート \#}
+\title{ゼミノート \#8 \\ Algebraic-ness of Spaces and Stacks}
 \author{七条彰紀}
 \maketitle
+affine scheme, scheme. algebraic space, algebraic stackという貼り合わせの連なりを意識した定義をした後，
+algebraic stackがschemeの貼り合わせとして定義できることを示す．
+algebraic spaceとalgebraic stackの定義は全く平行に行われる．
+そのことが分かりやすい記述を志向する．
+
+\section{Fiber Product of Fibered Categories}
+    $\cat{B}$ :: categoryとする．
+    この時，$\FibBP{B}$は以下のような圏であった．
+    \begin{description}[labelindent=1cm]
+        \item[Objects:] fibered categories over $\cat{B}$.
+        \item[Arrows:]  base-preserving natural transtormation.
+    \end{description}
+    新たに圏$\CFG{B}$を以下のように定義する．
+    \begin{description}[labelindent=1cm]
+        \item[Objects:] categories fibered in groupoids over $\cat{B}$.
+        \item[Arrows:] base-preserving natural transtormation.
+    \end{description}
+
+重要なのは次の存在命題である．
+\begin{Prop}[\cite{Gomez} p.10]
+    $\FibBP{B}$と$\CFG{B}$はfibered productを持つ．
+\end{Prop}
+%% {{{
+\begin{proof}
+    $\FibBP{B}$の射$F \colon \fibX \to \fibZ$と$F \colon \fibY \to \fibZ$をとり，
+    $F, G$のfiber productを実際に構成する．
+
+    \step{圏$\cat{P}$の構成}
+    圏$\cat{P}$を以下のように定義する．
+    \begin{description}
+        \item[Objects:]
+            以下の$4$つ組
+            \begin{enumerate}
+                \item $b \in \cat{B}$,
+                \item $x \in \fibX(b)$,
+                \item $y \in \fibY(b)$,
+                \item $\fibZ$の恒等射上の同型射$\alpha \colon Fx \to Gy$.
+            \end{enumerate}
+        
+        \item[Arrows:] \mnewline
+            射$(b, x, y, \alpha) \to (b', x', y', \alpha')$は，
+            二つの射$\phi_{\fibX} \colon x \to x', \phi_{\fibY} \colon y \to y'$であって以下を満たすもの:
+            $\phi_{\fibX}, \phi_{\fibY}$は同じ射$b' \to b$上の射で，
+            以下の可換図式を満たすもの．
+            \[
+            \begin{tikzcd}
+                Fx \ar[d, red, "F\phi_{\fibX}"']\ar[r, "\alpha"]& Gy \ar[d, red, "G\phi_{\fibY}"]\\
+                Fx' \ar[r, "\alpha'"']& Gy'
+            \end{tikzcd}
+            \]
+    \end{description}
+
+    \step{$\cat{P}$はfibered category / category fibered by groupoids.}
+    この圏は$(b,x,y,\alpha) \mapsto b$によってfibered categoryと成る．
+    特に$\fibX, \fibY, \fibZ$がCFGならば$\cat{P}$もC.F.Gとなる．
+    このことは次のことから分かる:
+    $\phi_{\fibX} \colon x \to x'$と$\phi_{\fibY} \colon y \to y'$の両方がcartesianならば
+    $(\phi_{\fibX}, \phi_{\fibY}) \colon (b, x, y, \alpha) \to (b', x', y', \alpha')$はcartesianである．
+
+    \step{$\cat{P}$からの射影写像．}
+    定義から明らかに$\pr_1 \colon \cat{P} \to \fibX, \pr_2 \colon \cat{P} \to \fibY$が定義できる．
+    射の定義にある可換図式は，
+    以下の$A$がnatural transformationであることを意味している．
+    \begin{defmap}
+        A \colon & F\pr_1& \to& G\pr_2 \\
+        {}& (F\pr_1)((b, x, y, \alpha))=Fx& \mapsto& \alpha(Fx)=\alpha((F\pr_1)((b, x, y, \alpha)))
+    \end{defmap}
+    $A$がbase-preservingであることは$\alpha$が恒等射上のもの(i.e. $\pi_{\fibZ}(\alpha)=\id$)であることから，
+    isomorphismであることは$\alpha$が同型であることから示される．
+
+    \step{$\cat{P}$ :: fiber product.}
+    今，
+    $\fibW \in \CFG{B}$と
+    射$S \colon \fibW \to \fibX, T \colon \fibW \to \fibY$及び
+    base-preserving isomorphism :: $\delta \colon FS \to GT$をとる．
+    base-preservingなので，任意の$w \in \fibW$について$\pi_{\fibZ}(FS(w))=\pi_{\fibZ}(GT(w))$．
+    そこで次のように関手が定義できる．
+    \begin{defmap}
+        H\colon & \fibW& \to& \cat{P} \\
+        \mathbf{Object}& w& \mapsto& (\pi_{\fibZ}(FS(w)), Sw, Tw, \delta_{w}) \\
+        \mathbf{Arrow}& [\phi \colon w \to w']& \mapsto& (S\phi \colon Sw \to Sw', T\phi \colon Tw \to Tw')
+    \end{defmap}
+    このように置くと，$S=\pr_1 H, T=\pr_2 H$となる．
+    逆に$S \iso \pr_1 H', T \iso \pr_2 H'$となる
+    関手$H' \colon \fibW \to \cat{P}$は$H$と同型に成ることが直ちに分かる．
+\end{proof}
+%% }}}
+\begin{Remark}
+    session4 命題4.5より，CFGの恒等射上の射は同型射である．
+    したがって$\alpha \colon Fx \to Gy$に課せられた条件は，
+    $\fibZ$がCFGならば一つしか無い．
+\end{Remark}
+
+\begin{Example}
+    representable fibered categoryのfiber product.
+\end{Example}
+
+我々が扱うのはstackであるから，
+stackという性質がfiber productで保たれていて欲しいが，果たしてそうなる．
+\begin{Prop}[\cite{ASS} Prop 4.6.4]
+    $\fibX, \fibY, \fibZ$ :: stack over $\cat{C}$とし，
+    morphism of stacks :: $F \colon \fibX \to \fibZ, G \colon \fibY \to \fibZ$をとる．
+    この時，$F, G$についてのfiber product :: $\fibX \times_{\fibZ} \fibY$はstackである．
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+
+\section{Representable Morphism}
+\begin{Remark}
+    以下，$S$ :: schemeとし，$\Sch/S$上のsiteを$\cat{C}$と書く
+    （$(\Sch/S)_{\tau}$といった表記も見かける）．
+    また，stackといえばstack in groupoidに限る．
+\end{Remark}
+
+\begin{Def}[Representability of Morphism of Spaces/Stacks]
+    \enumfix
+\begin{enumerate}
+\item
+    morphism of spaces :: $f \colon \shX \to \shY$がrepresentable( by scheme)であるとは，
+    任意の$S$-scheme :: $U$と射$U \to \shY$について，
+    fiber product :: $U \times_{\shY} \shX$（これはspace）がrepresentable by schemeであるということ．
+
+\item
+    morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentable( by space)であるとは，
+    任意の$S$-space :: $U$と射$U \to \fibY$について，
+    fiber product :: $U \times_{\fibY} \fibX$（これはstack）がrepresentable by spaceであるということ．
+\end{enumerate}
+\end{Def}
+
+\begin{Lemma}
+    morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentable by spaceであることは，
+    任意の$S$-scheme :: $U$と射$U \to \fibY$について，
+    fiber product :: $U \times_{\fibY} \fibX$
+    （これはstack）がrepresentable by spaceであることと同値．
+\end{Lemma}
+
+\section{Diagonal Map}
+\begin{Def}[Diagonal Map]
+    $\fibX/S$（すなわち射$\fibX \to S$）のdiagonal map :: $\Diag$とは，
+    以下の可換図式に収まる射のことである．
+    \[\begin{tikzcd}
+            \fibX \ar[rrd, bend left, "\id"]\ar[rdd, bend right, "\id"']\ar[rd, "\Diag"]&
+                                                            & \\
+                                                            &
+        \fibX \times \fibX \ar[r]\ar[d]\ar[rd, phantom, "\text{p.b.}"]& \fibX \ar[d]\\
+          &\fibX \ar[r]& S
+    \end{tikzcd}\]
+\end{Def}
+
+\begin{Prop}
+    $\fibF$ :: stack on $\tau(S)$
+    以下は同値である．
+    \begin{enumerate}[label=(\roman*)]
+        \item $\Diag \colon \fibX \to \fibX \to \fibX$ :: representable.
+        \item 任意のscheme :: $U$について，$U \to \fibX$ :: representable.
+        \item 任意のscheme :: $U, V$と射$U \to \fibX, V \to \fibX$について$U \times_{\fibX} V$ :: representable.
+    \end{enumerate}
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+
+\section{Property of Representable Space/Stack/Morphism}
+\begin{Def}
+    まずspaceとmorphism of spacesについて定義する．
+\begin{enumerate}
+\item
+    $\mathcal{P}$をschemeの性質とする．
+    この時，representable space :: $\shX$が性質$\mathcal{P}$を持つとは，
+    $\shX$をrepresentするschemeが性質$\mathcal{P}$を持つということである．
+
+\item
+    $\mathcal{P}$をmorphism of algebraic schemesの性質とする．
+    この時，representable morphism of spaces :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
+    任意の$U \in \cat{C}$と射$U \to \fibY$について，
+    $\pr \colon \fibX \times_{\fibY} \fibX \to U$
+    （に対応するmorphism of algebraic schemes）が性質$\mathcal{P}$を持つということである．
+\end{enumerate}
+
+    次にstackとmorphism of stacksについて定義する．
+    これらは上の定義を殆ど機械的に置換すれば得られる．
+\begin{enumerate}
+\item
+    $\mathcal{P}$をspace (resp. scheme)の性質とする．
+    この時，representable stack :: $\shX$が性質$\mathcal{P}$を持つとは，
+    $\shX$をrepresentするspace(resp. scheme)が性質$\mathcal{P}$を持つということである．
+
+\item
+    $\mathcal{P}$をmorphism of algebraic spacesの性質とする．
+    この時，representable morphism of stacks :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
+    任意の$U \in \cat{C}$と射$U \to \fibY$について，
+    $\pr \colon \fibX \times_{\fibY} \fibX \to U$
+    （に対応するmorphism of algebraic spaces）が性質$\mathcal{P}$を持つということである．
+\end{enumerate}
+\end{Def}
+
+\section{Algebraic-ness}
+\subsection{Definition}
+\begin{Def}[Algebraic Space]
+    \enumfix
+\begin{enumerate}
+    \item diagonal morphism :: $\Diag \colon \shX \to \shX \times_{S} \shX$がrepresentableである．
+    \item schemeからのetale surjective morphism :: $U \to \shX$が存在する．
+\end{enumerate}
+\end{Def}
+
+\begin{Def}[Deligne-Mumford / Artin Stack]
+    \enumfix
+\begin{enumerate}
+    \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
+    \item algebraic spaceからのetale surjective morphism :: $U \to \fibX$が存在する．
+\end{enumerate}
+    以上の定義はDeligne-Mumford stackと呼ばれる．
+    \textbf{algebraic stackと言えばこちらを指す．}
+    etaleでなくsmoothを要求するものに弱めたものはArtin stackと呼ばれる．
+\end{Def}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
