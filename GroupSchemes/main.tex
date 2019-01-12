@@ -225,7 +225,7 @@
 
 \section{Moduli Functor and Fine/Corse Moduli Space}
     $A$を代数幾何学的対象の集合とし，
-    $\sim$を$Z$の中の同値関係とする．
+    $\sim$を$A$の中の同値関係とする．
     ``naive moduli problem"は，
     $M$の点と$A/\sim$の元（同値類）が一対一対応するような
     scheme :: $M$を見つけよ，という問題である．
@@ -1088,13 +1088,13 @@
     categorical/good/geometric quotientであることを示す．
     （実はより弱い``reductive"で十分なのだが，
     これを定義するだけでも骨が折れるので，
-    このノートでは扱わない，）
+    このノートでは扱わない．）
     このセクションでは``linearly reductive"を定義し，
     調べていく．
 
     \subsection{Representation} 
     group schemeのrepresentationとして最も一般的なものは次のものである．
-    \begin{Def}[\cite{MilneiAG} 4,a]
+    \begin{Def}[\cite{MilneAG} 4,a]
         $V$ :: vector space over $k$に対し，
         $k$代数の圏から群の圏への関手$\ftorGL_V$を
         \[ R \mapsto \Aut_R(V \otimes_k R) \]
@@ -1121,7 +1121,7 @@
         また，この時$\rho$はhomomorphism of group schemeである．
     \end{Remark}
 
-    \begin{Def}[\cite{MilneiAG} 4,aにある別の定義]
+    \begin{Def}[\cite{MilneAG} 4,aにある別の定義]
         $V$ :: vector space over $k$に対し，
         $k$-algebraの圏からmoduleの圏への関手$\func{V}$を
         \[ R \mapsto V \otimes_k R \]
@@ -1525,56 +1525,7 @@
     }と，
     Ati-Mac, Ex5.1から得られる．
 
-\begin{thebibliography}{99}
-    \bibitem{Muk1}
-    向井茂(2008)『モジュライ理論 I』岩波書店
-    
-    \bibitem{Hos}
-    Victoria Hoskins (2016)
-    ``Moduli Problems and Geometric Invariant Theory"
-    \url{https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf}
 
-    \bibitem{AV}
-    Gerard van der Geer, Ben Moonen
-    ``Abelian Varieties"
-    \url{https://www.math.ru.nl/~bmoonen/research.html}
-    （Preliminary Version. 2017/12/31参照）
-
-    \bibitem{HarAG}
-    Robin Hartshorne(1977)
-    ``Algebraic Geometry"
-    Springer
-
-    \bibitem{HarDef}
-    Robin Hartshorne
-    ``Deformation Theory"
-    Springer
-
-    \bibitem{Eisen}
-    David Eisenbud(1999)
-    ``Commutative Algebra: with a View Toward Algebraic Geometry"
-    Springer
-    
-    \bibitem{MilneAGS}
-    J. Milne, ``The basic theory of affine group schemes", 
-    \url{http://www.jmilne.org/math/CourseNotes/AGS.pdf}
-    
-    \bibitem{MilneiAG}
-    J. Milne, ``Algebraic Groups", 
-    \url{http://www.jmilne.org/math/CourseNotes/iAG200.pdf}
-
-    \bibitem{HaMo}
-    J. Harris,I. Morrison ``Moduli of Curves"
-
-    \bibitem{GIT}
-    D.Mumford,J.Forgarty ``Geometric Invariant Theory"
-
-    \bibitem{Awodey}
-    S.Awodey ``Category Theory" 2nd ed.
-
-    \bibitem{Ses}
-    C.S. Seshadri (1972)
-    ``Quotient spaces modulo reductive algebraic groups"
-
-\end{thebibliography}
+\bibliographystyle{jplain}
+\bibliography{reference}
 \end{document}
