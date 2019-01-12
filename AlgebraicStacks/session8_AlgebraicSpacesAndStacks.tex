@@ -275,19 +275,20 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                 \item $P$は，任意の$\cat{C}$の射によるbase changeで保たれる．
                 \item local on the target.
             \end{itemize}
+
         \item
-            (\cite{Gomez} 2.5)
+            (\cite{ChAlg} p.33, \cite{Gomez} p.16)
             $P$をschemeの射の性質とする．
             以下が全て成り立つ時，$P$はlocal on the source and targetであると呼ばれる．:
-            任意の以下の可換図式について，$f$が$P$であることは$f'$が$P$であることと同値．
+            $X' \to Y' \times X, Y' \to Y$がcoverであるような，
+            次の形の任意の可換図式をとる．
             \[
             \begin{tikzcd}
                 X' \ar[r] \ar[rd, "f'"']& Y' \times X \ar[r]\ar[d]& X \ar[d, "f"]\\
                 {} & Y' \ar[r]& Y \ar[lu, phantom, "\text{p.b.}"]
             \end{tikzcd}
             \]
-            ただし$X' \to Y' \times X, Y' \to Y$は，Artin (resp. DM) stackを考えているならば
-            smooth (resp. etale) and surjectiveである．
+            この時，$f$が$P$であることは$f'$が$P$であることと同値．
     \end{enumerate}
 \end{Def}
 
@@ -331,7 +332,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \]
             ただし$X' \to X, Y' \to Y$はcoverである．
             この時，射$f$が$P$であることと，射$f'$が$P$であることは同値．
-            \cite{StacksProj} Tag 04R4や
+            \cite{StacksProj} Tag 04R4でDeligne-Mumfordの定義として参照されている．
         
         \item[ST] \mnewline
             local on the sourceかつlocal on the target．
