@@ -4,30 +4,51 @@
 
 \newcommand{\Diag}{\Delta}
 \newcommand{\CFG}[1]{\cat{CFG}(\cat{#1})}
+\newcommand{\Shv}[1]{\cat{Shv}(\cat{#1})}
+\newcommand{\rest}{\vspace{5pt}}
+\newcommand{\rep}{{\color{blue}\#}}
+
+\newcommand{\arpb}{\ar[lu, phantom, "\text{p.b.}"]}
+
 \begin{document}
 \title{ゼミノート \#8 \\ Algebraic-ness of Spaces and Stacks}
 \author{七条彰紀}
 \maketitle
+\tableofcontents
+
+\vspace{10pt}
+
 affine scheme, scheme. algebraic space, algebraic stackという貼り合わせの連なりを意識した定義をした後，
 algebraic stackがschemeの貼り合わせとして定義できることを示す．
 algebraic spaceとalgebraic stackの定義は全く平行に行われる．
 そのことが分かりやすい記述を志向する．
 
-\section{Fiber Product of Fibered Categories}
-    $\cat{B}$ :: categoryとする．
-    この時，$\FibBP{B}$は以下のような圏であった．
-    \begin{description}[labelindent=1cm]
-        \item[Objects:] fibered categories over $\cat{B}$.
-        \item[Arrows:]  base-preserving natural transtormation.
-    \end{description}
-    新たに圏$\CFG{B}$を以下のように定義する．
-    \begin{description}[labelindent=1cm]
-        \item[Objects:] categories fibered in groupoids(CFG) over $\cat{B}$.
-        \item[Arrows:] base-preserving natural transtormation.
-    \end{description}
+\section{Fiber Product}
+\begin{Prop}
+    任意のsite :: $\cat{C}$について，
+    $\cat{C}$上のsheafの圏$\Shv{C}$はfiber poductを持つ．
+\end{Prop}
+\begin{proof}
+    二つの射$\shF \to \shH, \shG \to \shH$をとる．
+    \[ \cat{C} \ni U \mapsto \shF(U) \times_{\shH(U)} \shG(U) \]
+    とすれば，これはfiber productとなる．
+\end{proof}
+
+$\cat{B}$ :: categoryとする．
+この時，$\FibBP{B}$は以下のような圏であった．
+\begin{description}[labelindent=1cm]
+    \item[Objects:] fibered categories over $\cat{B}$.
+    \item[Arrows:]  base-preserving natural transtormation.
+\end{description}
+新たに圏$\CFG{B}$を以下のように定義する．
+\begin{description}[labelindent=1cm]
+    \item[Objects:] categories fibered in groupoids(CFG) over $\cat{B}$.
+    \item[Arrows:] base-preserving natural transtormation.
+\end{description}
 
 重要なのは次の存在命題である．
 \begin{Prop}[\cite{Gomez} p.10]
+    任意の圏$\cat{C}$について，
     $\FibBP{B}$と$\CFG{B}$はfibered productを持つ．
 \end{Prop}
 %% {{{
@@ -123,7 +144,7 @@ algebraic spaceとalgebraic stackの定義は全く平行に行われる．
 
     \step{$\cat{P}$ :: fiber product.}
     今，
-    $\fibW \in \CFG{B}$と
+    $\fibW \in \FibBP{B}$と
     射$S \colon \fibW \to \fibX, T \colon \fibW \to \fibY$及び
     base-preserving isomorphism :: $\delta \colon FS \to GT$をとる．
     base-preservingなので，任意の$w \in \fibW$について$\pi_{\fibZ}(FS(w))=\pi_{\fibZ}(GT(w))$．
@@ -146,6 +167,15 @@ algebraic spaceとalgebraic stackの定義は全く平行に行われる．
 
 \begin{Example}
     representable fibered categoryのfiber product.
+    
+    sheafに対応するfibered categoryの
+    fiber product $\int \shF \times_{\int \shH} \int \shG$に対応するsheafは，
+    sheafのfiber productに対応する．
+    \[
+        \left( \int \shF \times_{\int \shH} \int \shG \right)(-)
+        =\shF \times_{\shH} \shG
+        \quad \in \Shv{C}
+    \]
 \end{Example}
 
 我々が扱うのはstackであるから，
@@ -155,6 +185,9 @@ stackという性質がfiber productで保たれていて欲しいが，果た�
     morphism of stacks :: $F \colon \fibX \to \fibZ, G \colon \fibY \to \fibZ$をとる．
     この時，$F, G$についてのfiber product :: $\fibX \times_{\fibZ} \fibY$はstackである．
 \end{Prop}
+したがって結局$\FibBP{B}, \CFG{B}$と，
+stackの圏及びstack in groupoidsの圏はfiber productを持つ．
+我々が実際に扱うのはstack in groupoidsである．
 %% {{{
 \begin{proof}
     $\fibP=\fibX \times_{\fibZ} \fibY$とおく．
@@ -196,90 +229,16 @@ stackという性質がfiber productで保たれていて欲しいが，果た�
 
 \end{proof}
 %% }}}
-\section{Representable Morphism}
-\begin{Remark}
-    以下，$S$ :: schemeとし，$\Sch/S$上のsiteを$\cat{C}$と書く
-    （$(\Sch/S)_{\tau}$といった表記も見かける）．
-    また，stackといえばstack in groupoidに限る．
-\end{Remark}
-
-\begin{Remark}
-    scheme :: $S$は$\Sch/S$によってstackとみなす．
-    また，sheaf:: $\shF$はGrothendiek construction :: $\int \shF$によってstackとみなす．
-\end{Remark}
-
-\begin{Def}[Representable by Scheme/Space]
-    stack :: $\fibX$がrepresentable by scheme (resp. algebraic space)であるとは，
-    あるscheme :: $X$ (resp. space $\shX$)が存在し，
-    $\fibX \iso X=\Sch/X$ (resp. $\fibX \iso \shX=\int \shX$)であるということ．
-\end{Def}
-
-\begin{Def}[Representability of Morphism of Spaces/Stacks]
-    \enumfix
-\begin{enumerate}
-\item
-    morphism of spaces :: $f \colon \shX \to \shY$がrepresentable( by scheme)であるとは，
-    任意の$S$-scheme :: $U$と$\cat{C}$の射$U \to \shY$について，
-    fiber product :: $U \times_{\shY} \shX$（これはspace）がrepresentable by schemeであるということ．
-
-\item
-    morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentable( by algebraic space)であるとは，
-    任意の$S$-space :: $U$と$\cat{C}$の射$U \to \fibY$について，
-    fiber product :: $U \times_{\fibY} \fibX$
-    （これはstack）がrepresentable by algebraic spaceであるということ．
-\end{enumerate}
-\end{Def}
-
-\begin{Lemma}
-    morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentable by algebraic spaceであることは，
-    任意の\underline{$S$-scheme} :: $U$と射$U \to \fibY$について，
-    fiber product :: $U \times_{\fibY} \fibX$
-    （これはstack）がrepresentable by algebraic spaceであることと同値．
-\end{Lemma}
-（TODO: algebraic space定義の前に現れている．）
-
-\section{Property of Representable Space/Stack/Morphism}
-
-\begin{Def}
-%    まずspaceとmorphism of spacesについて定義する．
-%\begin{enumerate}
-%\item
-%    $\mathcal{P}$をschemeの性質とする．
-%    この時，representable space :: $\shX$が性質$\mathcal{P}$を持つとは，
-%    $\shX$をrepresentするschemeが性質$\mathcal{P}$を持つということである．
-
-%\item
-%    $\mathcal{P}$をmorphism of schemesの性質とする．
-%    この時，representable morphism of spaces :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
-%    任意の$U \in \cat{C}$と射$U \to \fibY$について，
-%    $\pr \colon \fibX \times_{\fibY} U \to U$
-%    （に対応するmorphism of algebraic schemes）が性質$\mathcal{P}$を持つということである．
-%\end{enumerate}
-
-%    次にstackとmorphism of stacksについて定義する．
-%    これらは上の定義を殆ど機械的に置換すれば得られる．
-    \enumfix
-\begin{enumerate}
-\item
-    $\mathcal{P}$をschemeの性質であって，local for etale topologyであるものとする．
-    この時，\underline{representable} stack :: $\shX$が性質$\mathcal{P}$を持つとは，
-    $\shX$をrepresentするalgebraic space (resp. scheme)が性質$\mathcal{P}$を持つということである．
-
-\item
-    $\mathcal{P}$をmorphism of schemeの性質であって，
-    local on the targetかつstable under base changeであるものとする
-    （ここの部分は\cite{ASS}と\cite{Gomez}\&\cite{IrrOfMg}で異なる）．
-    この時，\underline{representable morphism of algebraic stacks} :: $f \colon \fibX \to \fibY$が
-    性質$\mathcal{P}$を持つとは，
-    任意の$U \in \cat{C}$と射$U \to \fibY$について，
-    $\pr \colon \fibX \times_{\fibY} U \to U$
-    （に対応するmorphism of algebraic spaces）が性質$\mathcal{P}$を持つということである．
-\end{enumerate}
-\end{Def}
-
 \section{Diagonal Map}
+\begin{Remark}
+    以降は$S$ :: schemeをとり，
+    $\cat{C}=\ET(S)$ :: big etale site over $S$上の
+    sheafあるいはstack in groupoidsのみを考える．
+\end{Remark}
+
 \begin{Def}[Diagonal Map]
-    $\fibX/S$（すなわち射$\fibX \to S$）のdiagonal map :: $\Diag$とは，
+    sheafあるいはstack in groupoids over $S$:: $\fibX/S$（すなわち射$\fibX \to S$）
+    のdiagonal map :: $\Diag$とは，
     以下の可換図式に収まる射のことである．
     \[\begin{tikzcd}
             \fibX \ar[rrd, bend left, "\id"]\ar[rdd, bend right, "\id"']\ar[rd, "\Diag"]&
@@ -290,57 +249,7 @@ stackという性質がfiber productで保たれていて欲しいが，果た�
     \end{tikzcd}\]
 \end{Def}
 
-\begin{Prop}
-    $\fibF$ :: stack on $\tau(S)$
-    以下は同値である．
-    \begin{enumerate}[label=(\roman*)]
-        \item $\Diag \colon \fibX \to \fibX \to \fibX$ :: representable.
-        \item 任意のscheme :: $U$について，$U \to \fibX$ :: representable.
-        \item 任意のscheme :: $U, V$と射$U \to \fibX, V \to \fibX$について$U \times_{\fibX} V$ :: representable.
-    \end{enumerate}
-\end{Prop}
-\begin{proof}
-    (TODO)
-\end{proof}
-
-\section{Algebraic-ness}
-\subsection{Definition}
-\begin{Def}[Algebraic Space]
-    $S$ :: schemeとし，$\shX$をspace over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
-    $\shX$がalgebraicであるとは，次が成り立つということである．
-\begin{enumerate}
-    \item diagonal morphism :: $\Diag \colon \shX \to \shX \times_{S} \shX$がrepresentableである．
-    \item scheme :: $U$からのetale surjective morphism :: $U \to \shX$が存在する．
-\end{enumerate}
-\end{Def}
-
-\begin{Def}[Algebraic Stack][\cite{ASS}, \cite{IrrOfMg}]
-    $S$ :: scheme, $\fibX$をstack in groupoid over $S$
-    （すなわちbig etale site $\Et(S)$上のstack in groupoid）とする．
-    $\fibX$がalgebraicであるとは，次が成り立つということである．
-\begin{enumerate}
-    \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
-    \item algebraic space :: $U$からのetale surjective morphism :: $U \to \fibX$が存在する．
-\end{enumerate}
-    ここに現れる$U \to \fibX$は$\fibX$のatlasと呼ばれる．
-\end{Def}
-
-\begin{Remark}
-    以上で定義したものはいわゆる``Deligne-Mumford stack"の直接の一般化である．
-    通常は上記に加えて$\Diag$にquasi-compact, separatedという条件を課す．
-    （ただし，実際にDeligneとMumfordがDM stackを導入したとされる\cite{IrrOfMg}での定義は上と全く同じである．）
-    $\Diag$ :: quasi-compact, separatedかつ$U \to \fibX$にsmoothのみ要求するものは
-    ``Artin stack"と呼ばれる．
-\end{Remark}
-
-\begin{Remark}
-    stack :: $\fibX$へのalgebraic spaceからの射$U \to \fibX$が存在すれば，
-    algebraic spaceの定義より，schemeから$\fibX$への射が存在する．
-    surjective, etale, smoothなどの性質は合成について安定なので，
-    algebraic stackの定義の二つ目の条件は「scheme :: $U$からの……」と書き換えられる．
-\end{Remark}
-
-\section{Property of Space/Stack/Morphism of Them}
+\section{Local Property of Scheme/Morphism of Them}
 \begin{Def}[\cite{IrrOfMg} p.100, Local Property for the topology.]
     $S$ :: schemeとし，$(\Sch/S)$上のsite :: $\cat{C}$を考える．
     $X, Y$ :: schemeとし，
@@ -386,55 +295,6 @@ stackという性質がfiber productで保たれていて欲しいが，果た�
     \end{enumerate}
 \end{Def}
 
-\begin{Remark}
-    local on the source and targetは，
-    $\ET(S)$を考えているならば次と同値:
-    任意の以下の可換図式について，$f$が$P$であることは$f'$が$P$であることと同値．
-    \[
-    \begin{tikzcd}
-        X' \ar[r]\ar[d, "f'"']&  X \ar[d, "f"]\\
-        Y' \ar[r]& Y
-    \end{tikzcd}
-    \]
-    ただし$X' \to Y' \times X, Y' \to Y$はetale, surjective morphismである．
-\end{Remark}
-\begin{Lemma}
-    あるatlas :: $U$がlocal for etale topologyな性質を持つならば，
-    任意のaltasがその性質を持つ．
-\end{Lemma}
-
-\begin{Def}[Property of Algebraic Stacks]
-    \enumfix
-\begin{enumerate}
-\item
-    $\mathcal{P}$をschemeの性質であって，
-    local for etale topologyであるものとする．
-    この時，algebraic stack :: $\fibX$が性質$\mathcal{P}$を持つとは，
-    $\fibX$のatlasが性質$\mathcal{P}$を持つということである．
-
-\item
-    algebraic stack :: $\fibX$がquasi-compact
-    \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
-    $\fibX$のatlasが性質$\mathcal{P}$を持つということである．
-
-\item
-    $\mathcal{P}$をmorphism of schemeの性質であって，
-    local on the source and targetであるものとする．
-    この時，\underline{morphism of algebraic stacks} :: $f \colon \fibX \to \fibY$が
-    性質$\mathcal{P}$を持つとは，
-    以下の可換図式にある$f'$（に対応するmorphism of algebraic spaces）が
-    性質$\mathcal{P}$を持つということである．
-    \[
-    \begin{tikzcd}
-        X' \ar[r] \ar[rd, "f'"']& Y' \times \fibX \ar[r]\ar[d]& \fibX \ar[d, "f"]\\
-        {} & Y' \ar[r]& \fibY \ar[lu, phantom, "\text{p.b.}"]
-    \end{tikzcd}
-    \]
-    ただし$X' \to Y' \times \fibX, Y' \to \fibY$は，Artin (resp. DM) stackを考えているならば
-    smooth (resp. etale) and surjectiveである．
-\end{enumerate}
-\end{Def}
-
 \begin{Example}
     \begin{enumerate}
         \item local on the source and targetである性質の例:
@@ -442,6 +302,503 @@ stackという性質がfiber productで保たれていて欲しいが，果た�
             locally of finite type, locally of finite presentation.
     \end{enumerate}
 \end{Example}
+
+\begin{Remark}
+    ``local on the source and target"は，
+    algebraic space, algebraic stackの射について性質を定めるときに必要に成る．
+    この定義は文献に寄って数種類ある．
+    私が知る限りのものを以下に列挙する．
+    \begin{description}
+        \item[SP] \mnewline
+            \cite{StacksProj} Tag 04QZ.
+
+        \item[DM] \mnewline
+            $X, Y$をschemeとし，
+            $\{\phi_i \colon X_i \to X\} \in \Cov(X), \{\psi_i \colon Y_i \to Y\} \in \Cov(Y)$を任意のcoverとする．
+            $\{ f_i \colon X_i \to Y_i \}$を以下の可換図式を満たす射の族とする．
+            \[
+            \begin{tikzcd}
+                X_i \ar[r, "\phi_i"]\ar[d, "f_i"']&  X \ar[d, "f"]\\
+                Y_i \ar[r, "\psi_i"']& Y
+            \end{tikzcd}
+            \]
+            この時，射$f$が$P$であることと，全ての射$f_i$が$P$であることは同値．
+            \cite{IrrOfMg}, p.100より．
+        
+        \item[DM'] \mnewline
+            以下のschemeの可換図式が成立しているとする．
+            \[
+            \begin{tikzcd}
+                X' \ar[r]\ar[d, "f'"']&  X \ar[d, "f"]\\
+                Y' \ar[r]& Y
+            \end{tikzcd}
+            \]
+            ただし$X' \to X, Y' \to Y$はcoverである．
+            この時，射$f$が$P$であることと，射$f'$が$P$であることは同値．
+            \cite{StacksProj} Tag 04R4や
+        
+        \item[ST] \mnewline
+            local on the sourceかつlocal on the target．
+
+        \item[ST+] \mnewline
+            次の5条件を合わせたもの．
+            \begin{itemize}
+                \item 同型について成立する，
+                \item stable under composition,
+                \item stable under base change,
+                \item local on the source,
+                \item local on the target．
+            \end{itemize}
+            \cite{ASS} Def 5.1.3, 5.4.11で採用されている．
+
+        \item[La] \mnewline
+            $X, Y$ :: schemeとし，射$Y' \to Y, X' \to Y' \times X$をcoverとする．
+            この時，$f \colon X \to Y$と合わせると次の可換図式が得られる．
+            \[
+            \begin{tikzcd}
+                X' \ar[r] \ar[rd, "f'"']& Y' \times X \ar[r]\ar[d]& X \ar[d, "f"]\\
+                {} & Y' \ar[r]& Y \ar[lu, phantom, "\text{p.b.}"]
+            \end{tikzcd}
+            \]
+            この時，$f$が$P$であることは$f'$が$P$であることと同値．
+            \cite{ChAlg} p.33, \cite{Gomez} p.16で採用されている．
+        
+        \item[La'] \mnewline
+            $X, Y$ :: schemeとし，射$Y' \to Y, X' \to X$をcoverとする．
+            この時，$f \colon X \to Y$と合わせると次の可換図式が得られる．
+            \[
+            \begin{tikzcd}[row sep=30pt]
+                X' \times_Y Y' \ar[rr]\ar[d, "f'"']& {} & Y' \ar[d]\\
+                X' \ar[r]& X \ar[r, "f"']& Y \ar[llu, phantom, "\text{p.b.}"]
+            \end{tikzcd}
+            \]
+            この時，$f$が$P$であることは$f'$が$P$であることと同値．
+    \end{description}
+    
+    強弱関係は次の通り．
+    \[
+    \begin{tikzcd}[every arrow=Rightarrow]
+        ST+ \ar[r, Rightarrow]& SP \ar[r, Rightarrow]&
+        DM \ar[r, Rightarrow]\ar[rd, Rightarrow]& DM' \ar[r, Rightarrow]& La \ar[r, Rightarrow]& La' \\
+                                                & & & ST \ar[u, Rightarrow]& &
+    \end{tikzcd}
+    \]
+    SP$\implies$DM$\implies$STは\cite{StacksProj} Tag 04R4による．
+    SP$\implies$DM$\implies$ST, DM'$\implies$La$\implies$La'の
+    それぞれの$\implies$は逆が成り立たないことも分かっている．
+    また，DM'とlocal on the targetを合わせたものはDMと同値である．
+    
+    我々としては，「便利な性質」をもち，かつ弱い定義を取りたい．
+    後に示すとおり，Laを仮定すれば十分「便利」である．
+\end{Remark}
+
+\section{Algebraic Space}
+\subsection{Representable Ones.}
+    \begin{Def}[Representable Space]
+        stack :: $\fibX$がrepresentable (by scheme)であるとは，
+        あるscheme :: $X$が存在し，$\fibX \iso X=\Sch/X$であるということ．
+    \end{Def}
+
+    \begin{Def}[Representable Morphism of Spaces]
+        morphism of spaces :: $f \colon \shX \to \shY$がrepresentable (by scheme)であるとは，
+        任意の$S$-scheme :: $U$と$\cat{C}$の射$U \to \shY$について，
+        fiber product :: $U \times_{\shY} \shX$がrepresentable (by scheme)であるということ．
+    \end{Def}
+
+    \begin{Prop}[Representable Diagonal Morphism]
+        $\fibF$ :: stack on $\tau(S)$
+        以下は同値である．
+        \begin{enumerate}[label=(\roman*)]
+            \item
+                $\Diag \colon \shX \to \shX \times_S \shX$は表現可能．
+            \item
+                任意のscheme :: $U$と射$U \to \shX$について，
+                $U \to \fibX$ :: representable.
+            \item
+                任意のscheme :: $U, V$と射$u \colon U \to \shX, v \colon V \to \shX$について
+                $U \times_{\shX} V$ :: representable.
+        \end{enumerate}
+    \end{Prop}
+    \begin{proof}
+        (ii)$\iff$(iii)はrepresentable morphismの定義から直ちに分かる．
+        (i)$\iff$(iii)は以下がpullback diagramであることから分かる．
+        \[
+            \begin{tikzcd}[sep=30pt]
+            U \times_{\shX} V \ar[r]\ar[d]& U \times_{S} V \ar[d, "u \times v"]\\
+            \shX \ar[r, "\Diag"']& \shX \times_{S} \shX \ar[lu, phantom, "\text{p.b.}"]
+        \end{tikzcd}
+        \]
+        (TODO: もう少し詳しく．)
+    \end{proof}
+
+    \begin{Def}[Property of Representable Spaces/Morphism of Them]
+        \enumfix
+    \begin{enumerate}
+    \item
+        $\mathcal{P}$をschemeの性質でlocal for etale topologyであるものとする．
+        この時，representable space :: $\shX$が性質$\mathcal{P}$を持つとは，
+        $\shX$をrepresentするschemeが性質$\mathcal{P}$を持つということである．
+
+    \item
+        $\mathcal{P}$をmorphism of schemesの性質で
+        local on the targetかつstable under base changeであるものとする．
+        この時，representable morphism of spaces :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
+        任意の$U \in \cat{C}$と射$U \to \fibY$について，
+        $\pr \colon \fibX \times_{\fibY} U \to U$
+        （に対応するmorphism of algebraic schemes）が性質$\mathcal{P}$を持つということである．
+    \end{enumerate}
+    \end{Def}
+
+\subsection{Definition of Algebraic Space}
+    \begin{Def}[Algebraic Space]
+        $S$ :: schemeとし，$\shX$をspace over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $\shX$がalgebraicであるとは，次が成り立つということである．
+    \begin{enumerate}
+        \item diagonal morphism :: $\Diag \colon \shX \to \shX \times_{S} \shX$がrepresentableである．
+        \item scheme :: $U$からのetale surjective morphism :: $U \to \shX$が存在する．
+    \end{enumerate}
+        Algebraic spaceの射はspaceとしてのものである．
+    \end{Def}
+    
+以下ではschemeの性質とschemeの射の性質をalgebraic spaceへ拡張する．
+
+\subsection{Properties of Algebraic Space/Morphism of Algebraic Spaces}
+    \begin{Def}[Property of Algebraic Spaces]
+        \enumfix
+    \begin{enumerate}
+    \item
+        $\mathcal{P}$をschemeの性質であって，
+        local for etale topologyであるものとする．
+        この時，algebraic stack :: $\shX$が性質$\mathcal{P}$を持つとは，
+        $\shX$のあるatlasが性質$\mathcal{P}$を持つということである．
+
+    \item
+        algebraic stack :: $\shX$がquasi-compact
+        \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
+        $\shX$のあるatlasが性質$\mathcal{P}$を持つということである．
+    \end{enumerate}
+    \end{Def}
+
+    \begin{Def}[Property of Morphism of Algebraic Spaces]
+        $\mathcal{P}$をmorphism of schemeの性質であって，
+        local on the source and targetであるものとする．
+        以下の可換図式で，$V \to \shY, U \to V \times \shX$はcoverであるとする．
+        \[
+        \begin{tikzcd}
+            U \ar[r] \ar[rd, "f'"']& V \times \shX \ar[r]\ar[d]& \shX \ar[d, "f"]\\
+            {} & V \ar[r]& \shY \arpb
+        \end{tikzcd}
+        \eqno{(PM)}
+        \]
+        この時，\underline{morphism of algebraic spaces} :: $f \colon \shX \to \shY$が
+        性質$\mathcal{P}$を持つとは，
+        この可換図式にある$f'$（に対応するmorphism of scheme）が
+        性質$\mathcal{P}$を持つということである．
+    \end{Def}
+
+    \begin{Lemma}
+    \enumfix
+    \begin{enumerate}[label=(\alph*)]
+        \item
+        $\shX$をrepresentable spaceとし，
+        $P$をalgebraic spaceの性質とする．
+        $f$がalgebraic spaceとして性質$P$を持つことと，
+        representable spaceとして性質$P$を持つことは同値．
+
+        \item 
+        $f \colon \shX \to \shY$をrepresentable morphismとし，
+        $P$をalgebraic spaceの射の性質とする．
+        $f$がalgebraic spaceの射として性質$P$を持つことと，
+        representable morphismとして性質$P$を持つことは同値．
+    \end{enumerate}
+    \end{Lemma}
+    \begin{proof}
+        $\shX$がscheme :: $X$で表現されるならば
+        $X \to \Sch/X \iso \shX$がatlasなので(a)が成立する．
+
+        以下の図式で$\id \colon V \to V$がetale surjectiveなので
+        $U \to V \times \shX$もetale surjectiveである．
+        またrepresentable morphismの性質は，
+        schemeの射の性質としてlocal on the targetであるものに限っていた．
+        したがって(b)が成立する．
+        \[
+        \begin{tikzcd}
+            U \ar[r] \ar[d, "f''"']& V \times \shX \ar[r]\ar[d, "f'"]& \shX \ar[d, "f"]\\
+            V \ar[r, "\id"']& V \ar[r]\arpb& \shY \arpb
+        \end{tikzcd}
+        \]
+    \end{proof}
+
+    \begin{Lemma}
+        \enumfix
+        \begin{enumerate}[label=(\alph*)]
+        \item
+            $P$をschemeの性質でlocal for etale topologyなものとする．\mnewline
+            一つのetale surjective morphism :: $U \to \shX$について$U$が性質$P$を持つならば，\mnewline
+            任意のetale surjective morphism :: $U \to \shX$について$U$が性質$P$を持つ．
+        \item
+            $P$をmorphism of schemeの性質であって，
+            local on the source and targetであるものとする．\mnewline
+            一つの$V \to \shY, U \to U \times \shX$の組み合わせについて
+                図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
+            任意の$V \to \shY, U \to U \times \shX$の組み合わせについて
+                図式$(PM)$の$f'$が性質$P$を持つ．
+    \end{enumerate}
+    \end{Lemma}
+    \begin{proof}
+        \cite{StacksProj} Tag 06FM
+    \end{proof}
+
+    \begin{Lemma}
+            $P$をalgebraic spaceの射の性質とする．
+            \begin{enumerate}[label=(\alph*)]
+        \item
+            $P$がschemeの射の性質としてstable under base changeならば，
+            algebraic spaceの射の性質としてもstable under base change.
+        \item
+            $P$がschemeの射の性質としてstable under compositionならば，
+            algebraic spaceの射の性質としてもstable under composition.
+    \end{enumerate}
+    \end{Lemma}
+    %% {{{
+    \begin{proof}
+        (a)は\cite{StacksProj} Tag 0CIIを参考にすれば良い．
+        
+        (b)を示す．準備として次を示す．
+        \begin{Claim}
+            $U$ :: schemeとする．
+            $f \colon U \to \shX, g \colon \shX \to \shY$がetale, surjectiveならば，
+            合成$g \circ f \colon U \to \shX \to \shY$もetale, surjectiveである．
+        \end{Claim}
+        \begin{proof}
+            etale, surjectiveはschemeの射の性質として
+            stable under base changeかつstable under compositionであることに注意する．
+            
+            $V \to \shY, W \to V \times_{\shY} \shX$をschemeからのetale surjective (e.s.)射とする．
+            この時fiber productを組み合わせて以下の可換図式が得られる．
+            （pullback lemmaを暗黙のうちに用いている．）
+            \[
+            \begin{tikzcd}
+                W \times_{\shX} U \ar[r]\ar[d]& V \times_{\shX} U \ar[r]\ar[d]& U \ar[d, "f"]\\
+                W \ar[r]\ar[dr]& V \times_{\shY} \shX \ar[r]\ar[d]\arpb&
+                    \shX \ar[d, "g"]\arpb\\
+                {} & V \ar[r]& \shY \arpb
+            \end{tikzcd}
+            \]
+            この時，
+            以下のように$W \times U \to W \to V$と$W \times U \to V \times U$がe.s.であることが示せる．
+            \begin{itemize}
+                \item $f \colon U \to \shX$ :: e.s.かつrepresentable $\implies$ $W \times U \to W$ :: e.s.
+                \item $\shX \to \shY$ :: e.s. $\implies$ $W \to V$ :: e.s.
+                \item $W \times U \to W, W \to V$ :: e.s. $\implies$ $W \times U \to W \to V$ :: e.s.
+                \item $W \to V \times \shX$ :: e.s.かつrepresentable
+                            $\implies$ $W \times U=W \times (V \times U) \to V \times U$ :: e.s.
+            \end{itemize}
+            etaleはlocal on the sourceな性質なので$V \times U \to V \times X \to V$もetale.
+            またsurjectiveの圏論的な性質からsurjectiveであることも分かる．
+            この二つから，representable morphism :: $g \circ f \colon U \to \shX \to \shY$はe.s.である．
+        \end{proof}
+        この主張を用いて(b)を示す．
+
+        etale surjective射 :: $W \to \shZ, V \to W \times \shY, U \to V \times \shX$から次の可換図式が得られる．
+        \[
+        \begin{tikzcd}
+            U \ar[r]\ar[rd, "f'"']& V \times_{\shY} \shX \ar[r]\ar[d]&
+                W \times_{\shZ} \shX \ar[r]\ar[d]& \shX \ar[d, "f"]\\
+            {} & V \ar[r]\ar[rd, "g'"']& W \times_{\shZ} \shY \ar[r]\ar[d]\arpb& \shY \ar[d, "g"]\arpb\\
+            {} & {} & W \ar[r]& \shZ \arpb
+        \end{tikzcd}
+        \]
+        定義から$g$が$P$であることと$g'$が$P$であることは同値．
+        また，主張から$W \to W \times \shY \to \shY$はetale surjective射である．
+        したがって再び定義から，
+        $f$が$P$であることと$f'$が$P$であることは同値．
+        最後に，$U \to V \times \shX \to W \times \shX$もetale surjectiveであるから，
+        $g \circ f$が$P$であることと$g' \circ f'$が$P$であることは同値である．
+    \end{proof}
+    %% }}}
+
+\section{Algebraic Stack}
+節\ref{sec:def-algst}以外はalgebraic spaceの節にある定義文を
+\begin{itemize}
+    \item ``Space" $\to$ ``Stack",
+    \item ``Scheme" $\to$ ``Algebraic Space"
+\end{itemize}
+と置換しただけで得られるので読み飛ばして構わない．
+
+\subsection{Representable Ones}
+    \begin{Def}[\rep Representable Stack]
+        stack :: $\fibX$がrepresentableであるとは，
+        あるalgebraic space :: $\shX$が存在し，$\fibX \iso \shX=\int \shX$であるということ．
+    \end{Def}
+
+    \begin{Def}[\rep Representable Morphism of Stacks]
+        morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentableであるとは，
+        任意の$S$-algebraic space :: $U$と$\cat{C}$の射$U \to \fibY$について，
+        fiber product :: $U \times_{\fibY} \fibX$がrepresentableであるということ．
+    \end{Def}
+
+    \begin{Lemma}[\rep]\label{lem:repdiag_stack}
+        $\fibX$ :: stack in groupoids on $\cat{C}$とする．
+        以下は同値である．
+        \begin{enumerate}[label=(\roman*)]
+            \item
+                $\Diag \colon \fibX \to \fibX \times_S \fibX$は表現可能．
+            \item
+                任意のalgebraic space :: $U$と射$U \to \fibX$について，
+                $U \to \fibX$ :: representable.
+            \item
+                任意のalgebraic space :: $U, V$と射$U \to \fibX, V \to \fibX$について
+                $U \times_{\fibX} V$ :: representable.
+        \end{enumerate}
+    \end{Lemma}
+
+    \begin{Def}[\rep Property of Representable Stacks/Morphism of Them]
+        \enumfix
+    \begin{enumerate}
+    \item
+        $\mathcal{P}$をschemeの性質でlocal for etale topologyであるものとする．
+        この時，representable stack :: $\fibX$が性質$\mathcal{P}$を持つとは，
+        $\fibX$をrepresentするalgebraic spaceが性質$\mathcal{P}$を持つということである．
+
+    \item
+        $\mathcal{P}$をmorphism of schemeの性質で
+        local on the targetかつstable under base changeであるものとする．
+        この時，representable morphism of stacks :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
+        任意の$U \in \cat{C}$と射$U \to \fibY$について，
+        $\pr \colon \fibX \times_{\fibY} U \to U$
+        （に対応するmorphism of algebraic algebraic spaces）が性質$\mathcal{P}$を持つということである．
+    \end{enumerate}
+    \end{Def}
+
+    \subsection{Definition of Algebraic Stack}\label{sec:def-algst}
+    \begin{Def}[Algebraic Stack (Artin Stack)]
+        $S$ :: algebraic spaceとし，
+        $\fibX$をstack over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $\fibX$がalgebraicであるとは，次が成り立つということである．
+    \begin{enumerate}[label=(\alph*)]
+        \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
+        \item algebraic space :: $U$からの\underline{smooth} surjective morphism :: $U \to \fibX$が存在する．
+    \end{enumerate}
+        射はstack in groupoidsとしての射である．    
+    \end{Def}
+    補題(\ref{lem:repdiag_stack})から，二つの条件は意味を成す．
+
+    \begin{Def}[\rep Deligne-Mumford(DM) Stack]
+        $S$ :: algebraic spaceとし，
+        $\fibX$をstack over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $\fibX$がalgebraicであるとは，次が成り立つということである．
+    \begin{enumerate}[label=(\alph*)]
+        \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
+        \item algebraic space :: $U$からの\underline{etale} surjective morphism :: $U \to \fibX$が存在する．
+    \end{enumerate}
+        射はstack in groupoidsとしての射である．    
+    \end{Def}
+
+    \rest
+    以下，Algebraic Stackと言った時はDMかArtinかを限定しない．
+    \begin{Remark}
+        我々が採用するalgebraic stackの定義は，しばしばArtin stackの定義として参照される．
+
+        歴史的には，DM stackの方が先に定義された．
+        これは1969年の論文\cite{IrrOfMg}でのことである．
+        動機はalgebraic stack $\bar{\mathscr{M}}_g$を通して，
+        coarse moduli schemeの性質を調べることだった．
+        しばしばDM stackの定義として
+        $\Diag \colon \fibX \to \fibX \times \fibX$はquasi-compactかつseparatedであるものとする．
+        しかしこれは\cite{IrrOfMg}では要求されて居ない．
+
+        一方，Artin stackは1974年の論文\cite{VerDefAlgSt}でDM stackの一般化として定義された．
+        我々が扱うAlgebraic stackの定義（したがって多くの文献での``Artin stack"の定義）は，
+        原論文のものとは異なる．
+    \end{Remark}
+    \rest
+
+\subsection{Properties of Algebraic Stack/Morphism of Algebraic Stacks}
+以下ではschemeの性質とschemeの射の性質をalgebraic stackへ拡張する．
+
+\begin{Def}[\rep Property of Algebraic Stack]
+    \enumfix
+\begin{enumerate}
+\item
+    $\mathcal{P}$をschemeの性質であって，
+    local for etale topologyであるものとする．
+    この時，algebraic stack :: $\fibX$が性質$\mathcal{P}$を持つとは，
+    $\fibX$のあるatlasが性質$\mathcal{P}$を持つということである．
+
+\item
+    algebraic stack :: $\fibX$がquasi-compact
+    \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
+    $\fibX$のあるatlasが性質$\mathcal{P}$を持つということである．
+\end{enumerate}
+\end{Def}
+
+\begin{Def}[\rep Property of Morphism of Algebraic Stack]
+    $\mathcal{P}$をmorphism of schemeの性質であって，
+    local on the source and targetであるものとする．
+    以下の可換図式で，$V \to \fibY, U \to V \times \fibX$はcoverであるとする．
+    \[
+    \begin{tikzcd}
+        U \ar[r] \ar[rd, "f'"']& V \times \fibX \ar[r]\ar[d]& \fibX \ar[d, "f"]\\
+        {} & V \ar[r]& \fibY \ar[lu, phantom, "\text{p.b.}"]
+    \end{tikzcd}
+    \eqno{(PM)}
+    \]
+    この時，\underline{morphism of algebraic spaces} :: $f \colon \fibX \to \fibY$が
+    性質$\mathcal{P}$を持つとは，
+    この可換図式にある$f'$（に対応するmorphism of scheme）が
+    性質$\mathcal{P}$を持つということである．
+\end{Def}
+
+\begin{Lemma}[\rep]
+\enumfix
+\begin{enumerate}
+    \item
+    $\shX$をrepresentable stackとし，
+    $P$をalgebraic stackの性質とする．
+    $f$がalgebraic stackとして性質$P$を持つことと，
+    representable stackとして性質$P$を持つことは同値．
+
+    \item 
+    $f \colon \shX \to \shY$をrepresentable morphismとし，
+    $P$をalgebraic stackの射の性質とする．
+    $f$がalgebraic stackの射として性質$P$を持つことと，
+    representable morphismとして性質$P$を持つことは同値．
+\end{enumerate}
+\end{Lemma}
+
+\begin{Lemma}[\rep]
+    \enumfix
+\begin{enumerate}
+    \item
+        $P$をschemeの性質でlocal for etale topologyなものとする．\mnewline
+        一つのetale surjective morphism :: $U \to \fibX$について$U$が性質$P$を持つならば，\mnewline
+        任意のetale surjective morphism :: $U \to \fibX$について$U$が性質$P$を持つ．
+    \item
+        $P$をmorphism of schemeの性質であって，
+        local on the source and targetであるものとする．\mnewline
+        一つの$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
+        任意の$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つ．
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+    \cite{StacksProj} Tag 06FM
+\end{proof}
+
+\begin{Lemma}[\rep]
+        $P$をalgebraic stackの射の性質とする．
+\begin{enumerate}
+    \item
+        $P$がschemeの射の性質としてstable under base changeならば，
+        algebraic stackの射の性質としてもstable under base change.
+    \item
+        $P$がschemeの射の性質としてstable under compositionならば，
+        algebraic stackの射の性質としてもstable under composition.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+    algebraic spaceの場合の繰り返しである．
+\end{proof}
 
 \bibliographystyle{jplain}
 \bibliography{reference}
