@@ -257,12 +257,12 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             $X$が$P$であることは，全ての$U_i$が$P$であることと同値．
         \item
             $P$をschemeの射の性質とする．
-            $P$がlocal on the sourceであるとは，以下が成り立つということ:\mnewline
+            $P$がlocal on sourceであるとは，以下が成り立つということ:\mnewline
             $f \colon X \to Y$が$P$であることは，
                 全ての$f \circ \phi_i$が$P$であることと同値．
         \item
             $P$をschemeの射の性質とする．
-            $P$がlocal on the targetであるとは，以下が成り立つということ:\mnewline
+            $P$がlocal on targetであるとは，以下が成り立つということ:\mnewline
             $f \colon X \to Y$が$P$であることは，
                 全ての$\pr_2 \colon X \times_Y Y_i \to Y_i$が$P$であることと同値．
         \item
@@ -273,14 +273,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                 \item 任意の同型は$P$．
                 \item $P$は，射の合成で保たれる．
                 \item $P$は，任意の$\cat{C}$の射によるbase changeで保たれる．
-                \item local on the target.
+                \item local on target.
             \end{itemize}
 
         \item
             (\cite{ChAlg} p.33, \cite{Gomez} p.16)
             $P$をschemeの射の性質とする．
-            以下が全て成り立つ時，$P$はlocal on the source and targetであると呼ばれる．:
-            $X' \to Y' \times X, Y' \to Y$がcoverであるような，
+            以下が全て成り立つ時，
+            $P$はsmooth (resp. etale) local on source and targetであると呼ばれる．:
+            $X' \to Y' \times X, Y' \to Y$がsmooth (resp. etale) surjectiveであるような，
             次の形の任意の可換図式をとる．
             \[
             \begin{tikzcd}
@@ -298,23 +299,23 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \item[local for the topologyである性質の例] \mnewline
         locally Noetherian, reduced, normal, regular.
 
-    \item[local on the sourceである性質の例] \mnewline
+    \item[local on sourceである性質の例] \mnewline
         flat, locally of finite presentation, locally of finite type, open,
         smooth, etale, unramified, locally quasi-finite.
 
-    \item[local on the targetである性質の例] \mnewline
+    \item[local on targetである性質の例] \mnewline
         quasi-compact, quasi-separated, universally closed, separated, surjective,
         locally of finite type, locally of finite presentation,
         proper, smooth, etale, unramified, flat.
 
-    \item[local on the source and targetである性質の例] \mnewline
+    \item[local on source and targetである性質の例] \mnewline
         flat, locally of finite presentation, locally finite type,
         smooth, etale, unramified...
     \end{description}
 \end{Example}
 
 \begin{Remark}
-    ``local on the source and target"は，
+    ``local on source and target"は，
     algebraic space, algebraic stackの射について性質を定めるときに必要に成る．
     この定義は文献に寄って数種類ある．
     私が知る限りのものを以下に列挙する．
@@ -348,7 +349,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \cite{StacksProj} Tag 04R4でDeligne-Mumfordの定義として参照されている．
         
         \item[ST] \mnewline
-            local on the sourceかつlocal on the target．
+            local on sourceかつlocal on target．
 
         \item[ST+] \mnewline
             次の5条件を合わせたもの．
@@ -356,8 +357,8 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                 \item 同型について成立する，
                 \item stable under composition,
                 \item stable under base change,
-                \item local on the source,
-                \item local on the target．
+                \item local on source,
+                \item local on target．
             \end{itemize}
             \cite{ASS} Def 5.1.3, 5.4.11で採用されている．
 
@@ -396,7 +397,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     SP$\implies$DM$\implies$STは\cite{StacksProj} Tag 04R4による．
     SP$\implies$DM$\implies$ST, DM'$\implies$La$\implies$La'の
     それぞれの$\implies$は逆が成り立たないことも分かっている．
-    また，DM'とlocal on the targetを合わせたものはDMと同値である．
+    また，DM'とlocal on targetを合わせたものはDMと同値である．
     
     我々としては，「便利な性質」をもち，かつ弱い定義を取りたい．
     後に示すとおり，Laを仮定すれば十分「便利」である．
@@ -451,7 +452,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \item
         $\mathcal{P}$をmorphism of schemesの性質で
-        local on the targetかつstable under base changeであるものとする．
+        local on targetかつstable under base changeであるものとする．
         この時，representable morphism of spaces :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
         任意の$U \in \cat{C}$と射$U \to \fibY$について，
         $\pr \colon \fibX \times_{\fibY} U \to U$
@@ -491,7 +492,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \begin{Def}[Property of Morphism of Algebraic Spaces]
         $\mathcal{P}$をmorphism of schemeの性質であって，
-        local on the source and targetであるものとする．
+        local on source and targetであるものとする．
         以下の可換図式で，$V \to \shY, U \to V \times \shX$はcoverであるとする．
         \[
         \begin{tikzcd}
@@ -529,7 +530,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         以下の図式で$\id \colon V \to V$がetale surjectiveなので
         $U \to V \times \shX$もetale surjectiveである．
         またrepresentable morphismの性質は，
-        schemeの射の性質としてlocal on the targetであるものに限っていた．
+        schemeの射の性質としてlocal on targetであるものに限っていた．
         したがって(b)が成立する．
         \[
         \begin{tikzcd}
@@ -548,7 +549,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             任意のetale surjective morphism :: $U \to \shX$について$U$が性質$P$を持つ．
         \item
             $P$をmorphism of schemeの性質であって，
-            local on the source and targetであるものとする．\mnewline
+            local on source and targetであるものとする．\mnewline
             一つの$V \to \shY, U \to U \times \shX$の組み合わせについて
                 図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
             任意の$V \to \shY, U \to U \times \shX$の組み合わせについて
@@ -604,7 +605,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                 \item $W \to V \times \shX$ :: e.s.かつrepresentable
                             $\implies$ $W \times U=W \times (V \times U) \to V \times U$ :: e.s.
             \end{itemize}
-            etaleはlocal on the sourceな性質なので$V \times U \to V \times X \to V$もetale.
+            etaleはlocal on sourceな性質なので$V \times U \to V \times X \to V$もetale.
             またsurjectiveの圏論的な性質からsurjectiveであることも分かる．
             この二つから，representable morphism :: $g \circ f \colon U \to \shX \to \shY$はe.s.である．
         \end{proof}
@@ -673,7 +674,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \item
         $\mathcal{P}$をmorphism of schemeの性質で
-        local on the targetかつstable under base changeであるものとする．
+        local on targetかつstable under base changeであるものとする．
         この時，representable morphism of stacks :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
         任意の$U \in \cat{C}$と射$U \to \fibY$について，
         $\pr \colon \fibX \times_{\fibY} U \to U$
@@ -683,8 +684,8 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \subsection{Definition of Algebraic Stack}\label{sec:def-algst}
     \begin{Def}[Algebraic Stack (Artin Stack)]
-        $S$ :: algebraic spaceとし，
-        $\fibX$をstack over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $S$ :: schemeとし，
+        $\fibX$をstack on $\ET(S)$とする．
         $\fibX$がalgebraicであるとは，次が成り立つということである．
     \begin{enumerate}[label=(\alph*)]
         \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
@@ -695,8 +696,8 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     補題(\ref{lem:repdiag_stack})から，二つの条件は意味を成す．
 
     \begin{Def}[\rep Deligne-Mumford(DM) Stack]
-        $S$ :: algebraic spaceとし，
-        $\fibX$をstack over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $S$ :: schemeとし，
+        $\fibX$をstack on $\ET(S)$とする．
         $\fibX$がalgebraicであるとは，次が成り立つということである．
     \begin{enumerate}[label=(\alph*)]
         \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
@@ -721,6 +722,9 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         一方，Artin stackは1974年の論文\cite{VerDefAlgSt}でDM stackの一般化として定義された．
         我々が扱うAlgebraic stackの定義（したがって多くの文献での``Artin stack"の定義）は，
         原論文のものとは異なる．
+        Artin stackをどのsite上のstackとして定義するか，という部分にも文献に寄って違いがある．
+        \cite{VerDefAlgSt}, \cite{StacksProj}ではfppf siteを考え，
+        \cite{ChAlg}, \cite{ASS}ではetale siteを考える．
     \end{Remark}
     \rest
 
@@ -743,10 +747,18 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \end{enumerate}
 \end{Def}
 
-\begin{Def}[\rep Property of Morphism of Algebraic Stack]
+\begin{Def}[\rep Property of Morphism of Algebraic Stack, \cite{ChAlg} p.33, \cite{IrrOfMg} p.100]
     $\mathcal{P}$をmorphism of schemeの性質であって，
-    local on the source and targetであるものとする．
-    以下の可換図式で，$V \to \fibY, U \to V \times \fibX$はcoverであるとする．
+    smooth local on source and targetであるものとする．
+    あるいは，DM stackを考えるならば
+    etale local on source and targetであるものとする．
+    以下の可換図式で，$V \to \fibY, U \to V \times \fibX$はatlasであるとする
+    \footnote
+    {
+        すなわち，
+        algebraic stack(Artin stack)を考えているならばsmooth surjective morphismを考え，
+        DM stackを考えているならばetale surjective morphismを考える．
+    }．
     \[
     \begin{tikzcd}
         U \ar[r] \ar[rd, "f'"']& V \times \fibX \ar[r]\ar[d]& \fibX \ar[d, "f"]\\
@@ -786,7 +798,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         任意のetale surjective morphism :: $U \to \fibX$について$U$が性質$P$を持つ．
     \item
         $P$をmorphism of schemeの性質であって，
-        local on the source and targetであるものとする．\mnewline
+        local on source and targetであるものとする．\mnewline
         一つの$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
         任意の$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つ．
 \end{enumerate}
