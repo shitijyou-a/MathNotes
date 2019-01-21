@@ -17,11 +17,27 @@ Algebraic stackの具体例としてQuotient stackを扱う．
 この例を通じて特に，
 「diagonal morphism $\Diag \colon \fibX \to \fibX \times_S \fibX$が表現可能とはどういうことか」
 ということを考えたい．
-参考文献として\cite{ChAlg} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS}
+参考文献として\cite{ChAlg} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS} Example 8.1.12を参照する．
 
 \section{Definitions}
 
 \subsection{\tp{$\shG$}{G}-torsor}
+\begin{Def}[Equivariant Morphism]
+    一般のsite :: $\cat{C}$をとり，$\shG$を$\cat{C}$上のsheaf of groupsとする．
+    sheaf :: $\shF$と，
+    $\shG$からの左作用$\alpha \colon \shG \times \shF \to \shF$を組にして
+    $(\shF, \alpha)$と書く．
+    $\shG$からの左作用を持つsheafの間の射$(\shF, \alpha) \to (\shF', \alpha')$とは，
+    sheafの射$f \colon \shF \to \shF'$であって以下が可換図式であるもの．
+    \[
+        \begin{tikzcd}
+            \shG \times \shF \ar[r, "\id \times f"]\ar[d, "\alpha"']& \shG \times \shF' \ar[d, "\alpha'"]\\
+            \shF \ar[r, "f"']& \shF'
+        \end{tikzcd}
+    \]
+    このような射$f$は$\shG$-equivariant morphism（$\shG$同変写像）と呼ばれる．
+\end{Def}
+
 \begin{Def}[$\shG$-Torsor, \cite{ASS} 4.5.1, \cite{StacksProj} Tag 04UJ]
     一般のsite :: $\cat{C}$をとり，$\shG$を$\cat{C}$上のsheaf of groupsとする．
     $\cat{C}$上の$\shG$-torsorとは，
@@ -42,19 +58,11 @@ Algebraic stackの具体例としてQuotient stackを扱う．
             $\langle \pr_1, \alpha \rangle$は$\shP \times \shP$の普遍性と
             $\pr_1, \alpha \colon \shP \times \shG \to \shP$から得られる射である．
     \end{description}
+    $\shG$-torsorの射は$\shG$-equivariant morphismである．
 
-    $\shG \iso \shP$かつ$\alpha$が$\shG$の積写像であるとき，
+    $(\shP, \alpha)$が$\shG$-torsor :: $(\shG, m)$
+    （ただし$m \colon \shG \times \shG \to \shG$は積写像）と同型である時
     $\shG$-torsor :: $(\shP, \alpha)$は自明(trivial)であると言う．
-
-    射$(\shP, \alpha) \to (\shP', \alpha')$は
-    sheafの射$f \colon \shP \to \shP'$であって以下が可換図式であるもの．
-    \[
-        \begin{tikzcd}
-            \shG \times \shP \ar[r, "\id \times f"]\ar[d, "\alpha"']& \shG \times \shP' \ar[d, "\alpha'"]\\
-            \shP \ar[r, "f"']& \shP'
-        \end{tikzcd}
-    \]
-    この射は$\shG$-quivariant morphism（$\shG$同変写像）とも呼ばれる．
 \end{Def}
 
 \begin{Remark}
@@ -75,22 +83,32 @@ Algebraic stackの具体例としてQuotient stackを扱う．
     $\shP$がglobal section\footnote
     {
         前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{StacksProj} Tag 06UN)．
-        なお，$\cat{C}$のunderlying categoryが$\Sch/S$ならば，
-        $\PSh(\cat{C})$のterminal objectは
-        恒等射$\id[S] \colon S \to S$を値に取るconstant presheafである(TODO: check)．
+        $\PSh(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
     }
     を持つことと同値．
+    さらに，$\shP(X) \neq \emptyset$ならば制限$\shP|_{X}$はtrivial.
 \end{Lemma}
 \begin{proof}
     $(\shP, \alpha)$が自明であると仮定すると，
     次のようにglobal sectionが得られる．
-    \[ * \to \shG \iso \shP; \quad * \mapsto e \]
+    \[ 1 \to \shG \iso \shP; \quad * \mapsto e \]
     ただし$e$は$\shG$の単位元である．
 
     $p$を$\shP$のglobal sectionとすると，
     \[ \shG \to \shP; \quad g \mapsto \alpha(g, p) \]
     という射が定義できる．
     これは定義にある条件T2から同型である．
+
+    $s \in \shP(X)$をとれば，schemeの任意の射$\phi \colon U \to X$について
+    \[ 1 \to (\shP|_{X})(U)=\shP(U);\quad * \mapsto \phi^*s \]
+    のようにglobal section :: $1 \to \shP|_{X}$が定まる．
+\end{proof}
+
+\begin{Cor}
+    $\shG$-torsorの任意の射は同型．
+\end{Cor}
+\begin{proof}
+    (TODO)
 \end{proof}
 
 \subsection{Quotient Stack}
@@ -152,11 +170,12 @@ Algebraic stackの具体例としてQuotient stackを扱う．
 
 \section{準備}
 \subsection{Definition of \tp{$\Isom(X, Y)$}{Stack of Isomorphisms}}
+最初に$\fibX$のcleavageを選択せずとも出来る$\Isom$の構成を述べる．
+後の注意で特にsplittingを選択した場合の構成も述べておく．
 \begin{Def}[$\Isom(X, Y)$]
     stackとは限らないfibration :: $\fibX \to \cat{B}$と，
     $U \in \cat{B}$及び$U$上の対象$X, Y \in \fibX$をとる．
     この時，CFG over $\cat{B}/U$:: $\Isom(X, Y)$を以下のように定める．
-    （$\fibX$のcleavageは選択しない構成を取った．）
     \begin{description}
         \item[Object.]
             以下の$4$つ組．
@@ -173,22 +192,22 @@ Algebraic stackの具体例としてQuotient stackを扱う．
                 \to
                 (W \xrightarrow{g} U, g^*X \to X, g^*Y \to Y, g^*X \xrightarrow{\psi} g^*Y)
             \]
-            は，以下の$3$つからなる．
+            は，以下の$2$つからなる．
             \begin{itemize}
                 \item $\cat{B}/U$の射$h \colon V \to W$（したがって$g \circ h=f$が成立），
-                \item $h$のcartesian lifting :: $h^*g^*X \to g^*X, h^*g^*Y \to g^*Y$.
+                \item 射$f^*\psi, \phi$の間のcanonicalな同型射$(h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)$.
             \end{itemize}
     \end{description}
-    $h^*g^*X \to g^*X, h^*g^*Y \to g^*Y$を選択することにより，
-    以下の図式にある赤線で示した射がTriangle Liftingにより一意に定まる．
-    これらの射はすべて同型であることに注意せよ．
+    $(h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)$を選択することで，
+    $h^*g^*X \to X, h^*g^*Y \to Y$が定まる．
+    またTriangle Liftingにより$f^*\psi$も定まる．以下の図式を参考にすると良い．
     \begin{center}
     \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
     \node[mybox] (X) at (0,5){%
         \begin{tikzcd}
-            {} & h^*g^*X\ar[ld] \ar[r, red, "f^*\psi"]\ar[dd, red]& h^*g^*Y \ar[dd, red]\ar[rd]& {} \\
+            {} & h^*g^*X\ar[ld] \ar[r, "h^*\psi"]\ar[dd]& h^*g^*Y \ar[dd]\ar[rd]& {} \\
             X & {} & {} & Y \\
-            {} & f^*X\ar[lu]\ar[r, red, "\phi"']& f^*Y \ar[ru]& {}
+            {} & f^*X\ar[lu]\ar[r, "\phi"']& f^*Y \ar[ru]& {}
         \end{tikzcd}
     };
     \node[mybox] (B) at (0,0){%
@@ -205,9 +224,44 @@ Algebraic stackの具体例としてQuotient stackを扱う．
     \node at (0.3,2.45) {$\pi_{\fibZ}$};
     \end{tikzpicture}
     \end{center}
+
+    fibrationは次のように与えられる．
+    \begin{defmap}
+        \pi \colon & \Isom(X, Y)& \to& \cat{B}/U \\
+        \textbf{Objects:}& (f \colon V \to U, f^*X, f^*Y, \phi \colon f^*X \to f^*Y)& \mapsto& f \\
+        \textbf{Arrows:}& (h \colon V \to W, h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)& \mapsto& h \\
+    \end{defmap}
 \end{Def}
 
-$\fibX$ :: stackの場合は$\Isom(X, Y)$はsheafになる．
+\begin{Remark}\label{rem:simple_isom}
+    $\fibX \to \cat{B}$のsplittingを選んだ場合には$\Isom(X, Y)$の定義は次のように簡単に成る．
+    \begin{description}[labelindent=1cm]
+        \item[Object.]
+             $\cat{B}/U$の対象$f \colon V \to U$と同型$\phi \colon f^*X \to f^*Y$の組．
+
+        \item[Arrow.]
+            射$(f, \phi) \to (g, \psi)$は，
+            $g \circ h=f$を満たす$\cat{B}/U$の射$h$．
+    \end{description}
+    以下では$\Isom(X, Y)$がalgebraic space（これはsheaf）と
+    同型であるかどうかを考えるので，
+    こちらの定義だけを覚えていても問題はない．
+\end{Remark}
+
+\subsection{Propositions}
+\begin{Lemma}
+    任意の$U \in \cat{B}$と$X, Y \in \fibX(U)$について，
+    $\Isom(X, Y)$はcategory fibered in sets.
+\end{Lemma}
+\begin{proof}
+    恒等射上の射は恒等射しかないことを確かめれば良い．
+    $\Isom(X, Y)$の射の定義から，恒等射上の射は次の形になっている．
+    \[ (\id[U], f^*X \to f^*X, f^*Y \to f^*Y) \colon (f, f^*X, f^*Y, \phi) \to (f, f^*X, f^*Y, \psi) \]
+    $f^*X \to f^*X, f^*Y \to f^*Y$はTriangle Liftingから得られるcanonicalなものなので，
+    恒等射である．
+\end{proof}
+
+$\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\Isom(X, Y)$はsheafになる．
 \begin{Lemma}
     一般のsite :: $\cat{C}$とCFG :: $\fibX \to \cat{C}$をとる．
     さらに$\fibX$はsplit fibered categoryであるとする．
@@ -241,9 +295,10 @@ $\fibX$ :: stackの場合は$\Isom(X, Y)$はsheafになる．
 
     以下の図式がpullback diagramであることから分かる．
     \[
-        \begin{tikzcd}[row sep=40pt]
-            \Isom(X, Y) \ar[r, "\pr_{U}"]\ar[d, "\pr_{\fibX}"']& \Sch/U \ar[d, "x \times y"]\\
-        \fibX \ar[r, "\Diag"'] \ar[ru, Rightarrow, "a"]& \fibX \times_{S} \fibX
+    \begin{tikzcd}[row sep=40pt]
+        \Isom(X, Y) \ar[r, "\pr_{U}"]\ar[d, "\pr_{\fibX}"']& \Sch/U \ar[d, "x \times y"]\\
+        \fibX \ar[r, "\Diag"'] & \fibX \times_{S} \fibX
+        \ar[from=2-1, to=1-2, shorten >= 20pt, shorten <= 20pt, Rightarrow, "a"]
     \end{tikzcd}
     \]
     任意の射$\Sch/U \to \fibX \times \fibX$が$x \times y$の形で表されることは，
@@ -265,8 +320,8 @@ $\fibX$ :: stackの場合は$\Isom(X, Y)$はsheafになる．
     \end{defmap}
     自然同型$a$は次で定める．
     \begin{defmap}
-        a_{\xi}\colon & (x \times y) \pr_{U}(\xi)& \to& \Diag \pr_{\fibX}(\xi) \\
-        {}& (f \colon V \to U, f^*X, f^*X, \alpha)& \mapsto& (\id[f^*X], \phi \footnote{$\xi$の要素．})
+        a_{\xi}\colon & ((x \times y) \pr_{U})(\xi)& \to& (\Diag \pr_{\fibX})(\xi) \\
+        {}& (f \colon V \to U, f^*X, f^*X, \alpha)& \mapsto& (\id[f^*X], \phi)
     \end{defmap}
 
     $\Isom(X, Y)$がpullbackであることは，
