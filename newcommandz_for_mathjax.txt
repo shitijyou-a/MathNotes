@@ -13,13 +13,18 @@
 \newcommand {\Q}            {\mathbb{Q}}
 \newcommand {\Z}            {\mathbb{Z}}
 \newcommand {\N}            {\mathbb{N}}
-\newcommand {\cat}          [1]{\mathbf{#1}}
-\newcommand {\id}           [1]{\mathrm{id}_{#1}}
-\newcommand {\Hom}          {\operatorname{Hom}}
-\newcommand {\dom}          {\operatorname{dom}}
-\newcommand {\cod}          {\operatorname{cod}}
-\newcommand {\eq}           {\operatorname{eq}}
-\newcommand {\coeq}         {\operatorname{coeq}}
+\newcommand{\cat}           [1]{\mathbf{#1}}
+\newcommand{\id}            [1][\!]{\mathrm{id}_{#1}}
+\newcommand{\Arr}           {\operatorname{Arr}}
+\newcommand{\Hom}           {\operatorname{Hom}}
+\newcommand{\End}           {\operatorname{End}}
+\newcommand{\Aut}           {\operatorname{Aut}}
+\newcommand{\dom}           {\operatorname{dom}}
+\newcommand{\cod}           {\operatorname{cod}}
+\newcommand{\eq}            {\operatorname{eq}}
+\newcommand{\coeq}          {\operatorname{coeq}}
+\newcommand{\Lan}           {\mathrm{Lan}} %% left Kan extension
+\newcommand{\Ran}           {\mathrm{Ran}} %% right Kan extension
 \newcommand{\open}          [1]{\mathcal{O}_{#1}}
 \newcommand{\closed}        [1]{\mathcal{A}_{#1}}
 \newcommand{\cl}            {\operatorname{cl}}

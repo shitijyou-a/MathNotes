@@ -1,0 +1,45 @@
+\documentclass[a4paper]{jarticle}
+\usepackage{../math_note}
+
+\title{集合論と位相空間論における有用で基礎的な事実のリスト}
+\author{七条 彰紀}
+\begin{document}
+\maketitle
+
+基礎的な集合論・位相空間論を一通り学び終えてより発展的な命題を扱っていても，
+時々「アレが使えると思うんだけど，正確な命題を忘れてしまったな」
+ということがある．
+以下ではそういった事柄を列挙する．
+いずれも，証明は集合論・位相空間論を一通り学び終えていれば簡単なものである．
+
+\begin{screen}
+    以下，$X, Y, \dots$等の大文字は集合あるいは位相空間とし，
+    $f,g,\dots$等小文字はそれらの間の写像とする．
+\end{screen}
+
+\section{集合論}
+    \subsection{射}
+    写像$f \colon X \to Y, g \colon Y \to Z$を考える．
+    \begin{enumerate}
+        \item 合成$g \circ f$が全射ならば$g$も全射．
+        \item 合成$g \circ f$が単射ならば$f$も単射．
+    \end{enumerate}
+
+\section{位相空間論}
+    \subsection{射}
+    写像$f \colon X \to Y, g \colon Y \to Z$を考える．
+    \begin{enumerate}
+        \item 写像$f$が連続であることと$f(\cl_X(A)) \subseteq \cl_Y(f(A))$が成立することは同値．
+    \end{enumerate}
+
+    \subsection{閉包$\cl$}
+    位相空間の部分集合$A, B$と
+    部分集合の族$\{S_{\lambda}\}_{\lambda \in \Lambda}$について次が成立する．
+    \begin{gather}
+        \cl(A \cap B) \subseteq \cl(A) \cap \cl(B), \qquad
+        \cl \left(\bigcap S_{\lambda}\right) \subseteq \bigcap \cl \left( S_{\lambda} \right) \\
+        \cl(A \cup B) = \cl(A) \cup \cl(B), \qquad
+        \cl \left( \bigcup S_{\lambda} \right) \supseteq \bigcup \cl \left( S_{\lambda} \right)
+    \end{gather}
+
+\end{document}
