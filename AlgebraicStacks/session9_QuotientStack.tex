@@ -20,7 +20,6 @@ Algebraic stackの具体例としてQuotient stackを扱う．
 参考文献として\cite{ChAlg} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS} Example 8.1.12を参照する．
 
 \section{Definitions}
-
 \subsection{\tp{$\shG$}{G}-torsor}
 \begin{Def}[Equivariant Morphism]
     一般のsite :: $\cat{C}$をとり，$\shG$を$\cat{C}$上のsheaf of groupsとする．
@@ -79,14 +78,21 @@ Algebraic stackの具体例としてQuotient stackを扱う．
 \end{Remark}
 
 \begin{Lemma}[\cite{StacksProj} Tag 03AI, \cite{ASS} 4.5.1]
-    $\shG$-torsor :: $(\shP, \alpha)$が自明であることと，
-    $\shP$がglobal section\footnote
-    {
-        前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{StacksProj} Tag 06UN)．
-        $\PSh(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
-    }
-    を持つことと同値．
-    さらに，$\shP(X) \neq \emptyset$ならば制限$\shP|_{X}$はtrivial.
+    \enumfix
+    \begin{enumerate}
+        \item 
+        $\shG$-torsor :: $(\shP, \alpha)$が自明であることと，
+        $\shP$がglobal section\footnote
+        {
+            前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{StacksProj} Tag 06UN)．
+            $\PSh(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
+        }
+        を持つことと同値．
+
+        \item $\shP(X) \neq \emptyset$ならば制限$\shP|_{X}$はtrivial.
+
+        \item 同型$\shG|_{X} \to \shP|_{X}$と$\shP(X)$の元は一対一に対応する．
+    \end{enumerate}
 \end{Lemma}
 \begin{proof}
     $(\shP, \alpha)$が自明であると仮定すると，
@@ -108,7 +114,14 @@ Algebraic stackの具体例としてQuotient stackを扱う．
     $\shG$-torsorの任意の射は同型．
 \end{Cor}
 \begin{proof}
-    (TODO)
+    isomorphismはetale local on the targetなので(TODO)，
+    条件T1にあるようなetale cover $\{\phi_i \colon U_i \to X\}$を取れば
+    主張は「trivial $(\phi_i)^*\shG$-torsorの射は同型」という命題に帰着される．
+
+    $\shG$の単位元（射$e \colon ! \to \shG$の像）を$e$と書くことにすると，
+    射$(\phi_i)^*\shG \to (\phi_i)^*\shG$は，$g \mapsto g \cdot f(e)$と書ける．
+    $f(e) \in (\phi_i)^*\shG$も群の元なので逆元が存在する．
+    なので$g' \mapsto g' \cdot f(e)^{-1}$とすれば逆射が作れる．
 \end{proof}
 
 \subsection{Quotient Stack}
@@ -123,8 +136,8 @@ Algebraic stackの具体例としてQuotient stackを扱う．
             以下の$3$つ組．
             \begin{itemize}
                 \item $S$-scheme :: $U$,
-                \item $G_{U}:=G \times_{S} U$-torsor on $\ET(U)$ :: $\shP$,
-                \item $\ftor{G}$-torsorの射$\pi \colon \shP \to X_U:=X \times_{S} U$．
+                \item $G_{U}(:=G \times_{S} U)$-torsor on $\ET(U)$ :: $\shP$,
+                \item $\ftor{G}$-torsorの射$\pi \colon \shP \to X_U(:=X \times_{S} U)$．
             \end{itemize}
         \item[Arrow]
             射$(U, \shP, \pi) \to (U', \shP', \pi')$は
@@ -139,6 +152,15 @@ Algebraic stackの具体例としてQuotient stackを扱う．
     \end{description}
     fibrationは$(U, \shP, \pi) \mapsto U, (f, f^{\flat}) \mapsto f$で与えられる．
 \end{Def}
+
+\begin{Remark}\label{rem:GU}
+    任意の$[U \to S] \in \Sch/S$について，$G_{U}(:=G \times U)$は群になる．
+    単位セクション$e_U \colon ! \to G_{U}$，
+    $e \colon ! \to G$のpullbackから得られる．
+    積$m_U$なども同様．
+    特に射影$\pr_{U} \colon G_{U} \to U$は，
+    smooth morphism :: $G \to S$のpullbackなのでsmooth.
+\end{Remark}
 
 \begin{Lemma}
     $S$ :: scheme,
@@ -165,7 +187,9 @@ Algebraic stackの具体例としてQuotient stackを扱う．
 
 \section{Aim of This Session}
 \begin{Thm}
-    Quotient Stackはalgebraic stackである．
+    $X$ :: algebraic space,
+    $G$ :: smooth group scheme over $S$, acting on $X$とする．
+    Quotient Stack :: $[X/G]$はArtin stackである．
 \end{Thm}
 
 \section{準備}
@@ -330,11 +354,159 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
 \end{proof}
 %% }}}
 
-\begin{Lemma}[\cite{ASS} Exercise 5.G]
-    
+\section{証明}
+\subsection{\tp{$\Diag$}{The Diagonal Morphism} is Representable.}
+示した補題から，
+任意の$U \in \cat{C}$と任意の$G_U$-torsor$\shP_1, \shP_2 \in \fibX(U)$について
+$\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
+これは次のようにして自明な場合に帰着できる．
+
+\step{$\shP_1, \shP_2$が自明な場合に帰着させる．}
+\begin{Lemma}[\cite{ASS} Exc 5.G]\label{lem:F_is_algsp}
+    $U$ :: schemeをとる．
+    sheaf on $\ET(U)$ :: $\shF$に対し，
+    $V \times_{U} \shF$がalgebraic spaceならば，$\shF$はalgebraic space.
 \end{Lemma}
 
-\section{証明}
+\begin{Lemma}\label{lem:UIsom}
+    $X, Y \in \fibX(U)$と$v \colon V \to U$について
+    \[ V \times_{U} \Isom(X, Y) \iso \Isom(v^*X, v^*Y). \]
+\end{Lemma}
+
+\begin{proof}[(補題\ref{lem:F_is_algsp}の証明)]
+    $\shF':=(V \times_{U} \shF) \times_{V} (V \times_{U} \shF)$とおく．
+
+    まずdiagonal morphismの表現可能性を考える．
+    pullback lemmaから次が分かる．
+    \[
+        (V \times_{U} \shF) \times_{V} (V \times_{U} \shF)
+        \iso (V \times_{U} \shF) \times_{U} \shF
+        \iso V \times_{U} (\shF \times_{U} \shF).
+    \]
+    このことから，$\Diag \colon \shF \to \shF \times_{U} \shF$を$V \to Y$でpullbackしたものが
+    $\Diag' \colon \shF' \to \shF' \times \shF'$だと分かる.
+
+    atlasの存在は次のように分かる．
+    $A \to \shF'$を$\shF'$のatlasとする．
+    \[
+    \begin{tikzcd}
+        A \ar[r]& \shF' \ar[r]\ar[d]& \shF \ar[d]\\
+        {} & V \ar[r, "\text{etale, surj.}"']& U
+    \end{tikzcd}
+    \]
+    $V \to Y$がetale surjectiveなので$\shF' \to \shF$もetale surjective.
+    今$A \to \shF'$がetale surjectiveなので，併せて$A \to \shF$がetale surjectiveと分かる．
+\end{proof}
+
+\begin{proof}[(補題\ref{lem:UIsom}の証明)]
+    定義を変形するだけである．
+    \begin{align*}
+        {}& (V \times_{U} (\Isom(X, Y)))(W) \\
+        =&  V(W) \times_{U(W)} \Isom(X, Y)(W) \\
+        =&  \{ (w \colon W \to V, f \colon W \to U, \rho \colon f^*X \isomap f^*Y) \mid u \circ v=f \} \\
+        =&  \{ (w \colon W \to V, \rho \colon w^* u^*X \isomap w^* u^*Y) \} \\
+        =&  \Isom(v^*X, v^*Y)(V)
+    \end{align*}
+\end{proof}
+
+$\shP_1, \shP_2$が自明に成るetale cover :: $\covV$
+\footnote{ i.e. $\Forall{V \in \covV} \shP_1(V), \shP_2(V) \neq \emptyset$. }
+をとり，$v \colon V=\bigsqcup_{V \in \covV} V \to X$とすれば，
+$v^*\shP, v^*\shP_2$は自明な$G_U$-torsorとなる．
+こうして$\shP_1, \shP_2$が自明な場合に議論を帰着させることが出来る．
+
+同型$G_Y \iso \shP_1, G_Y \iso \shP_2$を固定する．
+これらと$\pi_1, \pi_2$を合成して
+\[ \rho_1 \colon G_Y \to X_Y, \quad \rho_2 \colon G_Y \to X_Y \]を得る．
+
+\step{$\shP_1, \shP_2$が自明な場合について証明する．}
+
+$\Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )$がどのようなsheafか考える．
+trivial torsorの任意の自己同型$\phi \colon G_Y \to G_Y$は，
+これがequivariantであることから，$\phi(e)$の左からの積になっている．
+逆に任意の$G_Y$の元を取れば左からの積が自己同型になるから，
+集合$\Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )$は$G_Y$の部分集合である．
+そこで，$g \in G_Y$ (i.e. $g \colon ! \to G_Y$)から得られる
+自己同型$(\cdot g) \colon G_Y \to G_Y$が満たすべき条件を考える．
+
+$[X/G]$の定義から，次が可換である．
+\[
+\begin{tikzcd}
+    G_Y \ar[rr, "(\cdot g)"]\ar[rd, "\rho_1"']& {} & G_Y \ar[ld, "\rho_2"]\\
+    {} & X_Y & {}
+\end{tikzcd}
+\]
+$(\cdot g)$はequivariantだから，この図式が可換であることは$\rho_1(e)=\rho_2(g)$と同値である．
+したがって
+\begin{align*}
+    {}& \Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )(V) \\
+    =&  \{ g \in G_Y(V) \mid \rho_1(e)=\rho_2(g) \} \\
+    =&  \{ (g, x) \in G_Y(V) \times X_Y(V) \mid  (\rho_1(e), \rho_2(g))=(x, x)  \}
+\end{align*}
+これは次のように，fiber productで表現出来る．
+\[
+\begin{tikzcd}
+    \Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ ) \ar[r]\ar[d]& G_Y \ar[d]\\
+    X_Y \ar[r, "\Diag"']& X_Y \times_{Y} X_Y
+\end{tikzcd}
+\]
+射$G_Y \to X_Y \times_{Y} X_Y$は$g \mapsto (\rho_1(e), \rho_2(g))$である．
+この図式がpullback diagramであることは
+$\Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )$がalgebraic spaceであることを意味している．
+
+\subsection{\tp{$[X/G]$}{The Quotient Stack} has an Atlas.}
+射$a \colon X \to [X/G]$を
+trivial $G_X$-torsor :: $(G_X, m_X) \in [X/G](X)$に
+（$2$-Yoneda Lemmaによって）対応する射とする．
+この射$a$がatlasであることを示す．
+$a$がrepresentableであることは$\Diag$がrepresentableであることから分かる．
+$a$がsmooth, surjectiveであることを示す．
+
+以下のpullback diagramを考える．
+\[
+\begin{tikzcd}
+    \cat{P} \ar[r]\ar[d]& X \ar[d, "{(G_X, m_X)}"]\\
+    Y \ar[r, "{(\shP, \pi)}"']& {[X/G]}
+    \ar[from=2-2, to=1-1, phantom, "\text{p.b.}"]
+\end{tikzcd}
+\]
+ただし$Y \to [X/G]$は$a$と同様に$(\shP, \pi) \in [X/G](Y)$に対応する射である．
+$\shP$は作用$\alpha \colon G_Y \times \shP \to \shP$を持つとする．
+
+この時，$\cat{P}$はsheafとして$\shP$と同型である．
+これは次のように同型が得られる．
+まず$\cat{P}(U)$は以下の$3$つの組の集合である．
+\begin{itemize}
+    \item $x \colon U \to X$,
+    \item $y \colon U \to Y$,
+    \item $\rho \colon x^*(G_X, m_X) \isomap y^*(\shP, \pi))$.
+\end{itemize}
+ただし$x,y$について以下が可換．
+\[
+\begin{tikzcd}
+    U \ar[r, "x"]\ar[d, "y"']& X \ar[d]\\
+    Y \ar[r]& S
+\end{tikzcd}
+\]
+上のような$x,y$を一つとり，$x_0, y_0$と名前を付ける．
+すると$(y_0)^*G_Y=(x_0)^*G_X$となる．
+
+次のように同型を定める．
+\begin{defmap}
+    {}&\cat{P}(U)& \to& \shP(U) \\
+    {}&(x, y, \rho)& \mapsto& \rho_{U}(e) \\
+    {}&(x_0, y_0, (y_0)^*\alpha(-, p))& \mapsfrom& p
+\end{defmap}
+$(f^*\shP)(U)=\shP(U)$は$f^*$のcolomitを用いた定義から得られる．
+$x_0, y_0$が存在することと$\cat{P}(U)$の元が存在することは同値であることに注意せよ．
+
+最後に$\shP \to Y$がetale surjectiveであることを確かめる．
+$\shP(Y_i) \neq \emptyset$となる$Y$のcover :: $\{Y_i \to Y\}$をとる．
+$\shP|_{Y_i}$はtrivial torsor :: $G_{Y_i}$と同型となる．
+$\pr_{Y_i} \colon G_{Y_i} \to Y_i$はsmooth surjectiveであり，
+smooth, surjectiveはどちらもetale local on targetな性質なので，
+$\shP \to Y$もetale, surjective．
+（ついでに$\shP$ :: algebraic spaceも分かる．）
 
 \bibliographystyle{jplain}
 \bibliography{reference}
