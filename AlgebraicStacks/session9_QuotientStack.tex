@@ -137,7 +137,7 @@ Algebraic stackの具体例としてQuotient stackを扱う．
             \begin{itemize}
                 \item $S$-scheme :: $U$,
                 \item $G_{U}(:=G \times_{S} U)$-torsor on $\ET(U)$ :: $\shP$,
-                \item $\ftor{G}$-torsorの射$\pi \colon \shP \to X_U(:=X \times_{S} U)$．
+                \item $\ftor{G_U}$-torsorの射$\pi \colon \shP \to X_U(:=X \times_{S} U)$．
             \end{itemize}
         \item[Arrow]
             射$(U, \shP, \pi) \to (U', \shP', \pi')$は
@@ -357,14 +357,14 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
 \section{証明}
 \subsection{\tp{$\Diag$}{The Diagonal Morphism} is Representable.}
 示した補題から，
-任意の$U \in \cat{C}$と任意の$G_U$-torsor$\shP_1, \shP_2 \in \fibX(U)$について
+任意の$U \in \cat{C}$と任意の$G_U$-torsor :: $\shP_1, \shP_2 \in \fibX(U)$について
 $\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
 これは次のようにして自明な場合に帰着できる．
 
 \step{$\shP_1, \shP_2$が自明な場合に帰着させる．}
 \begin{Lemma}[\cite{ASS} Exc 5.G]\label{lem:F_is_algsp}
     $U$ :: schemeをとる．
-    sheaf on $\ET(U)$ :: $\shF$に対し，
+    sheaf on $\ET(U)$ :: $\shF$とetale surjective morphism :: $V \to U$に対し，
     $V \times_{U} \shF$がalgebraic spaceならば，$\shF$はalgebraic space.
 \end{Lemma}
 
