@@ -118,7 +118,7 @@ Algebraic stackの具体例としてQuotient stackを扱う．
     条件T1にあるようなetale cover $\{\phi_i \colon U_i \to X\}$を取れば
     主張は「trivial $(\phi_i)^*\shG$-torsorの射は同型」という命題に帰着される．
 
-    $\shG$の単位元（射$e \colon ! \to \shG$の像）を$e$と書くことにすると，
+    $\shG$の単位元（射$e \colon 1 \to \shG$の像）を$e$と書くことにすると，
     射$(\phi_i)^*\shG \to (\phi_i)^*\shG$は，$g \mapsto g \cdot f(e)$と書ける．
     $f(e) \in (\phi_i)^*\shG$も群の元なので逆元が存在する．
     なので$g' \mapsto g' \cdot f(e)^{-1}$とすれば逆射が作れる．
@@ -149,14 +149,15 @@ Algebraic stackの具体例としてQuotient stackを扱う．
                 {} & X_{U} & {}
             \end{tikzcd}
             \]
+            $\pi$と$f^*\pi'$のcodomain，すなわち$X_U$と$f^*X_{U'}$が一致していることに注意．
     \end{description}
     fibrationは$(U, \shP, \pi) \mapsto U, (f, f^{\flat}) \mapsto f$で与えられる．
 \end{Def}
 
 \begin{Remark}\label{rem:GU}
     任意の$[U \to S] \in \Sch/S$について，$G_{U}(:=G \times U)$は群になる．
-    単位セクション$e_U \colon ! \to G_{U}$，
-    $e \colon ! \to G$のpullbackから得られる．
+    単位セクション$e_U \colon 1 \to G_{U}$，
+    $e \colon 1 \to G$のpullbackから得られる．
     積$m_U$なども同様．
     特に射影$\pr_{U} \colon G_{U} \to U$は，
     smooth morphism :: $G \to S$のpullbackなのでsmooth.
@@ -219,12 +220,12 @@ Algebraic stackの具体例としてQuotient stackを扱う．
             は，以下の$2$つからなる．
             \begin{itemize}
                 \item $\cat{B}/U$の射$h \colon V \to W$（したがって$g \circ h=f$が成立），
-                \item 射$f^*\psi, \phi$の間のcanonicalな同型射$(h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)$.
+                \item 射$h^*\psi, \phi$の間のcanonicalな同型射$(h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)$.
             \end{itemize}
     \end{description}
     $(h^*g^*X \to f^*X, h^*g^*Y \to f^*Y)$を選択することで，
     $h^*g^*X \to X, h^*g^*Y \to Y$が定まる．
-    またTriangle Liftingにより$f^*\psi$も定まる．以下の図式を参考にすると良い．
+    またTriangle Liftingにより$h^*\psi$も定まる．以下の図式を参考にすると良い．
     \begin{center}
     \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
     \node[mybox] (X) at (0,5){%
@@ -426,7 +427,7 @@ trivial torsorの任意の自己同型$\phi \colon G_Y \to G_Y$は，
 これがequivariantであることから，$\phi(e)$の左からの積になっている．
 逆に任意の$G_Y$の元を取れば左からの積が自己同型になるから，
 集合$\Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )$は$G_Y$の部分集合である．
-そこで，$g \in G_Y$ (i.e. $g \colon ! \to G_Y$)から得られる
+そこで，$g \in G_Y$ (i.e. $g \colon 1 \to G_Y$)から得られる
 自己同型$(\cdot g) \colon G_Y \to G_Y$が満たすべき条件を考える．
 
 $[X/G]$の定義から，次が可換である．
@@ -490,6 +491,8 @@ $\shP$は作用$\alpha \colon G_Y \times \shP \to \shP$を持つとする．
 \]
 上のような$x,y$を一つとり，$x_0, y_0$と名前を付ける．
 すると$(y_0)^*G_Y=(x_0)^*G_X$となる．
+$\cat{P}(U)$の元$(x,y, \rho)$が存在するならば，
+$x^*X=y^*X_Y$ゆえに$x,y$は上の可換図式を満たすことに注意せよ．
 
 次のように同型を定める．
 \begin{defmap}
@@ -498,7 +501,6 @@ $\shP$は作用$\alpha \colon G_Y \times \shP \to \shP$を持つとする．
     {}&(x_0, y_0, (y_0)^*\alpha(-, p))& \mapsfrom& p
 \end{defmap}
 $(f^*\shP)(U)=\shP(U)$は$f^*$のcolomitを用いた定義から得られる．
-$x_0, y_0$が存在することと$\cat{P}(U)$の元が存在することは同値であることに注意せよ．
 
 最後に$\shP \to Y$がetale surjectiveであることを確かめる．
 $\shP(Y_i) \neq \emptyset$となる$Y$のcover :: $\{Y_i \to Y\}$をとる．
