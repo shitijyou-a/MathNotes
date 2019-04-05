@@ -55,14 +55,15 @@
     \end{defmap}
     $\pi$は$Q \in Y$を直線 :: $tP+Q$と$H$の交点へ写す写像であった．
     （$P \not \in H$なので$P=1 \cdot P+0 \cdot Q$は予め除いている．）
-    したがって$R \in \pi(Y)$をとると$(\pi^* f)(tP+R)$は$t \in k$について定数．
+    したがって$R \in \pi(Y)$をとると$(\pi^* f)(tP+R)$は$tP+R \in Y$である$t \in k$について定数
+    \footnote{ 言い換えると，$\{ (\pi^* f)(tP+R) \mid t \in k, tP+R \in Y \}$は単元集合． }．
     この値は$f(R)$であるから$\pi^*$は単射である．
     逆に$g \in K$から得られる関数$g(tP+Q)$が$t$について定数ならば，
     $f(R) \ (R \in \pi(Y))$を$g(\pi^{-1}(R))$
     \footnote
     {
         これは$\{ g(tP+R) \mid t \in k, tP+R \in Y \}$に等しい．
-        単元集合なので関数$f$を定めることが出来る．
+        一つ前の脚注同様，これは単元集合なので関数$f$を定めることが出来る．
     }と置くことで
     $g=\pi^*f$となる$f \in L$が取れる．
     以上から，$K$の任意の元$g$について次の条件$\cond(g)$が成立すれば$\pi^*$は同型写像と成る:
@@ -80,7 +81,7 @@
     $P \in \zerosa(y_1,\dots,y_r) \subseteq \affine^n$であれば
     $\cond(\bar{y}_1),\dots,\cond(\bar{y}_r)$は成立する．
     以下，$P$はこのようにとる．
-    $tP+Q \in X$であるような$t$について$\eta(tP+Q)$は次のように成る．
+    $tP+Q \in Y$であるような$t$について$\eta(tP+Q)$は次のように成る．
     \[
         \eta(tP+Q)
         =\sum_{i=r+1}^{n} \eta_i(q_1,\dots,q_r) (tp_i+q_i)
