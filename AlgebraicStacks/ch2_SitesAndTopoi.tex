@@ -4,9 +4,11 @@
 \usepackage{macros}
 
 \begin{document}
-\title{ゼミノート \#2 \\ Sites and Sheaves}
+\title{第2章 \\ Sites and Topoi}
 \author{七条彰紀}
 \maketitle
+\tableofcontents
+\vspace{10pt}
 
 \section{Motivation.}
 scheme, stack等には以下のような包含関係がある．
@@ -31,7 +33,9 @@ algebraic spaceまで定義できる．
 定義だけではspaceのlocalは性質を調べる手段がないため，
 次回は「高次版のsheafの貼り合わせ」と呼べる``Descent theory"を学ぶ．
 
-\section{Definitions : Sites.}
+\section{Sites.}
+
+\subsection{Definitions.}
 以下で導入するGrothendieck topologyは，
 「Sheafを定義するのに必要な位相空間の定義を抽出し，圏論的に一般化したもの」である．
 $X$ :: toplological spaceとし，sheaf on $X$の定義を見なおしてみよう．
@@ -161,8 +165,9 @@ $\Cov$の元には大抵，以下の条件が課される．
     関手(e.g. inverse image functor, direct image functor)を定めるのと同じである．
 \end{Remark}
 
-\section{Examples : Sites.}
-\subsection{Site.}
+\subsection{Examples.}
+
+\subsubsection{Site.}
 \begin{Example}[Classical topology.]
     $X$ :: topological spaceとし，
     $O(X)$を以下のような圏とする．
@@ -258,7 +263,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \end{Def}
 
 
-\subsection{Continuous Functor.}
+\subsubsection{Continuous Functor.}
 \begin{Example}
     $X, X'$ :: topological spaceについて，
     $O(X), O(X')$ :: classical site,
@@ -300,9 +305,10 @@ flat\& locally of finite presentationならば実際にこのように成る．
     （TODO: 要確認．）
 \end{Example}
 
-\section{Definitions : Sheaves.}
+\section{Sheaves.}
+\subsection{Definitions.}
 \begin{Def}[Sheaf, Topos, Morphism of Topoi.]
-    \begin{myenum}{\roman*}
+    \begin{myenum}
     \item
     site :: $S$上のpresheafとは，
     functor :: $\shF \colon S^{op} \to \Sets$のことである．
@@ -341,7 +347,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
         f_* \colon T \to T', \quad f^* \colon T' \to T,
         \quad \phi \colon \Hom_{T}(f^*(-), -) \isomap \Hom_{T'}(-. f_*(-)).
     \]
-\end{myenum}
+    \end{myenum}
 \end{Def}
 
 \begin{Remark}
@@ -375,7 +381,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \end{Def}
 
 \begin{Def}[Ringed Topos.]
-\begin{myenum}{\roman*}
+\begin{myenum}
     \item
     $T$ :: toposと$T$のring object :: $\Lambda$を合わせてringed toposと呼ぶ．
 
@@ -389,7 +395,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \end{myenum}
 \end{Def}
 
-\section{Examples : Sheaves.}
+\subsection{Examples.}
 \begin{Example}
     $X$ :: schemeと，
     $\Sch/X$の部分圏をunderlying categoryとするsite :: $\cat{C}$(e.g. small/big Zariski site)について，
@@ -419,7 +425,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
     このsheafは``structure sheaf of $S$"と呼ばれ，$\ftor{\affine^1_S}$と同型．
 \end{Example}
 
-\section{Propositions : Sheaves.}
+\subsection{Propositions.}
 \begin{Thm}\label{thm:Shff}
     $\cat{C}$ :: siteとする．
     忘却関手
@@ -721,10 +727,10 @@ flat\& locally of finite presentationならば実際にこのように成る．
     参考: \url{https://ncatlab.org/nlab/show/Grothendieck+topos#Giraud}.
 \end{Thm}
 
-\section{Definitions : Points and Stalks.}
+\section{Points and Stalks.}
 以下はsmall/big etale siteのみで使われるものである．
 \begin{Def}[Geometric Point, Etale Neighborhood, \cite{ASS} 1.3.15.]
-\begin{myenum}{\roman*}
+\begin{myenum}
     \item 
     $X$ :: schemeに対し，
     $k$ :: separabely closed fieldを用いて
@@ -787,15 +793,16 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \end{enumerate}
 \end{Def}
 
-\section{Definitions : Morphism of Shaves.}
+\section{Morphism of Shaves.}
+\subsection{Definitions.}
 \begin{Def}[Injective, Surjective]
     （同値な条件を列挙したいので，命題(\ref{prop:inj}, \ref{prop:surj})を参照せよ．）
 \end{Def}
 
-\section{Examples : Morphism of Shaves.}
+\subsection{Examples.}
 （良い例を見つけていない．）
 
-\section{Propositions : Morphism of Shaves.}
+\subsection{Propositions.}
 \begin{Def}[Kernel, Image.]
     （$\im \phi$のcategoricalな定義は\url{https://www.wikiwand.com/en/Image_(category_theory)}等にもある．）
 \end{Def}
@@ -861,9 +868,19 @@ flat\& locally of finite presentationならば実際にこのように成る．
     inj $\iff$ mono, surj $\iff$ epiは上のとおりなので，これらを単に合わせただけである．
 \end{proof}
 
-\section{Definitions : Morphism of Topoi.}
-定義を$2$つ再掲する．
-\begin{Def}
+\section{Topoi.}
+\subsection{Definitions.}
+    
+定義を$4$つ再掲する．
+\begin{Def}[Topos, Morphism of Topoi.]
+    \begin{myenum}
+    \item
+    $T$ :: categoryがtoposであるとは，
+    category of sheaves of sets on a siteと圏同値であるということである．
+    なお，toposの複数形はtopoiである．
+    これはtoposがギリシャ語由来だからである．意味は「場所」である．
+
+    \item
     $T, T'$ :: topoiとする．
     morphism of topoi :: $f \colon T \to T'$とは，
     以下の$3$つの射($2$ functor and $1$ isomorphism.)からなる．
@@ -871,6 +888,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
         f_* \colon T \to T', \quad f^* \colon T' \to T,
         \quad \phi \colon \Hom_{T}(f^*(-), -) \isomap \Hom_{T'}(-. f_*(-)).
     \]
+    \end{myenum}
 \end{Def}
 
 \begin{Def}
@@ -902,7 +920,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \end{enumerate}
 \end{Def}
 
-\section{Propositions : Topoi.}
+\subsection{Propositions.}
 \begin{Prop}
     $\cat{C}, \cat{C}$ :: siteとする．
     $\cat{C}, \cat{C}'$はsmall categoryであると仮定する．

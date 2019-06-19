@@ -5,18 +5,21 @@
 \newcommand{\centerpb}{\ar@{}[lu]|{\text{p.b.}}}
 
 \begin{document}
-\title{ゼミノート \#4 \\ Fibered Categories}
+\title{第3章 \\ Fibered Categories}
 \author{七条彰紀}
 \maketitle
+\tableofcontents
+\vspace{10pt}
 
-\section{Motivation : Fibered Categories}
+\section{Fibered Categories.}
+\subsection{Motivation.}
     ``family"あるいは``object on/over a base space"
     （例えばschemes over a schemeやsheaves on a schemeなど）の
     抽象的な枠組がfibered categoryである．
     今後はfibered categoryが提供する枠組をsheaves on a siteの貼り合わせや
     stackの定義の為に活用する．
 
-\section{Definition : Fibered Categories}
+\subsection{Definitions.}
     $\fibX, \cat{B}$ :: categoryと
     関手$\pi \colon \fibX \to \cat{B}$を考える．
     \begin{itemize}
@@ -221,7 +224,7 @@
     equivalence of fibered categoryは$\FibBP{B}$での$2$-isoである．
 \end{Remark}
 
-\section{Examples : Fibered Categories}
+\subsection{Examples.}
 \begin{Example}
     morphism of schemes :: $f \colon X \to Y$を取る．
     この$f$に対し，$f$のpullbackが成す圏$\Pi(f)$を考えることが出来る．
@@ -266,7 +269,7 @@
     \end{defmap}
 \end{Example}
 
-\section{Propositions : Fibered Categories}
+\subsection{Propositions.}
 \begin{Prop}[\cite{NoteGroTop} Prop3.4]
 \begin{myenum}
 \item
@@ -399,6 +402,115 @@
     \end{center}
 \end{proof}
 %% }}}
+
+\section{Cleavage}
+    Cartesian liftingは普遍性(Triangle Lifting)で特徴づけられている．
+    なので同型を除いて一意であるが，厳密な意味で一意であるというものではない．
+    どのCartesian liftingを用いるか選んだものがCleavage（分裂，劈開）．
+    これはFibered category :: $\fibX$のCartesian arrowのclassを成す．
+    Cleavageとfibration (resp. Fibered category)を併せたものを
+    Cloven fibration (resp. Cloven fibered category)と呼ぶ．
+    選択公理によって，我々は常にFibrationをCloven fibrationにできる．
+
+\subsection{ Split Fibration }
+    CleavageはCartesian arrowのclassであると書いたが，
+    このclassが圏を成すと綺麗である．
+    そのようなCleavageを選べるFibrationをSplit fibrationと呼ぶ．
+
+    \begin{Def}[\cite{ASS}]
+        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
+        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \fibX$のことである．
+        \begin{enumerate}
+            \item
+                $\cat{S}$は$\fibX$の任意の対象を持つ．
+            \item
+                $\cat{S}$の任意の射はcartesian．
+            \item
+                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \fibX$について，
+                $f$上の射$u \to v$がただ一つ存在する．
+                （すなわち，cartesian liftingが一意に存在する．）
+        \end{enumerate}
+        この時，組$(\fibX, \cat{S})$をsplit fibered categoryと呼ぶ．
+    \end{Def}
+
+    任意のFibrationはSplit fibrationとは限らないが，Split fibrationと圏同値である．
+
+    \begin{Thm}
+        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
+        この時，split fibered category over $\cat{B}$ :: $(\tilde{\fibX}, \cat{S})$が存在し，
+        圏同値$\tilde{\fibX} \kequiv \fibX$が成立する．
+    \end{Thm}
+
+    \begin{proof}
+        ここでは
+        圏と部分圏$(\tilde{\fibX}, \cat{S})$及び
+        関手$\Phi \colon \tilde{\fibX} \to \fibX$を構成するにとどめる．
+        （TODO: 
+        これらがそれぞれsplit fibered category over $\cat{B}$とequivalenceであることは
+        ここでは確認しない．）
+
+        以下のように$\tilde{\fibX}$を構成する．
+        \begin{description}[labelindent=1cm]
+            \item[Objects.]
+                object :: $U \in \cat{B}$と
+                morphism of fibered category :: $u \colon \cat{B}/U \to \fibX$の組$(U, u)$.
+
+            \item[Arrows.]
+                射$(V, v) \to (U, u)$は
+                $\cat{B}$の射$g \colon V \to U$と
+                base-preserving isomorphism :: $\alpha \colon v \to u \circ g$の組$(g, \alpha)$.
+                \begin{center}
+                \begin{tikzcd}
+                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
+                    & \cat{B}/U \ar[Rightarrow, from=v, "\alpha"]\ar[r, "u"]
+                    & \fibX
+                \end{tikzcd}
+                \end{center}
+        \end{description}
+
+        まずprojection functorが以下のように定まる．
+        \begin{defmap}
+            \tilde{\pi} \colon & \tilde{\fibX}& \to& \cat{B} \\
+            {}& (U, u)& \mapsto& U
+        \end{defmap}
+        この関手によってfibered categoryの構造が入る．
+
+        さらに次の関手によってequivalenceが与えられる．
+        \begin{defmap}
+            \Phi\colon & \tilde{\fibX}& \to& \fibX \\
+            {}& (U, u)& \mapsto& u(\id[U])
+        \end{defmap}
+        これがequivalenceであることは$2$-Yoneda Lemmaによる．
+
+        最後に，splitting of $\tilde{\pi}$ :: $\cat{S}$が次で定められる．
+        \begin{description}[labelindent=1cm]
+            \item[Objects.]
+                $\tilde{\fibX}$と同じ．
+
+            \item[Arrows.]
+                $\tilde{\fibX}$の射で，$(g, \id)$と表されるもの．
+                すなわち，
+                射$(V, v) \to (U, u)$は$\cat{B}$の射$g \colon V \to U$であって
+                $v=u \circ g$であるもの．
+                \begin{center}
+                \begin{tikzcd}
+                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
+                    & \cat{B}/U \ar[equal, from=v]\ar[r, "u"]
+                    & \fibX
+                \end{tikzcd}
+                \end{center}
+        \end{description}
+    \end{proof}
+
+    \begin{Def}
+        圏$\cat{B}$に対し，
+        \begin{itemize}
+            \item Cloven fibration over $\cat{B}$の圏を$\cFib{B}$,
+            \item Split fibration over $\cat{B}$の圏を$\sFib{B}$
+        \end{itemize}
+        と書く．
+        ぞれぞれ忘却関手$\sFib{B} \to \cFib{B}, \cFib{B} \to \Fib{B}$をもつ．
+    \end{Def}
 
 \section{Fiber of Fibered Categories}
 \subsection{Motivation}
@@ -566,115 +678,6 @@ contravariant functorに成ることが予想される．
 \begin{Cor}
     圏同値$U, V \in \cat{B}$について$Y(U) \simeq Y(V)$と$U \iso V$は同値．
 \end{Cor}
-
-\section{Cleavage}
-    Cartesian liftingは普遍性(Triangle Lifting)で特徴づけられている．
-    なので同型を除いて一意であるが，厳密な意味で一意であるというものではない．
-    どのCartesian liftingを用いるか選んだものがCleavage（分裂，劈開）．
-    これはFibered category :: $\fibX$のCartesian arrowのclassを成す．
-    Cleavageとfibration (resp. Fibered category)を併せたものを
-    Cloven fibration (resp. Cloven fibered category)と呼ぶ．
-    選択公理によって，我々は常にFibrationをCloven fibrationにできる．
-
-\subsection{ Split Fibration }
-    CleavageはCartesian arrowのclassであると書いたが，
-    このclassが圏を成すと綺麗である．
-    そのようなCleavageを選べるFibrationをSplit fibrationと呼ぶ．
-
-    \begin{Def}[\cite{ASS}]
-        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
-        splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \fibX$のことである．
-        \begin{enumerate}
-            \item
-                $\cat{S}$は$\fibX$の任意の対象を持つ．
-            \item
-                $\cat{S}$の任意の射はcartesian．
-            \item
-                任意の$\cat{B}$の射$f \colon U \to V$と$V$上の対象$v \in \fibX$について，
-                $f$上の射$u \to v$がただ一つ存在する．
-                （すなわち，cartesian liftingが一意に存在する．）
-        \end{enumerate}
-        この時，組$(\fibX, \cat{S})$をsplit fibered categoryと呼ぶ．
-    \end{Def}
-
-    任意のFibrationはSplit fibrationとは限らないが，Split fibrationと圏同値である．
-
-    \begin{Thm}
-        $\pi \colon \fibX \to \cat{B}$ :: fibered categoryとする．
-        この時，split fibered category over $\cat{B}$ :: $(\tilde{\fibX}, \cat{S})$が存在し，
-        圏同値$\tilde{\fibX} \kequiv \fibX$が成立する．
-    \end{Thm}
-
-    \begin{proof}
-        ここでは
-        圏と部分圏$(\tilde{\fibX}, \cat{S})$及び
-        関手$\Phi \colon \tilde{\fibX} \to \fibX$を構成するにとどめる．
-        （TODO: 
-        これらがそれぞれsplit fibered category over $\cat{B}$とequivalenceであることは
-        ここでは確認しない．）
-
-        以下のように$\tilde{\fibX}$を構成する．
-        \begin{description}[labelindent=1cm]
-            \item[Objects.]
-                object :: $U \in \cat{B}$と
-                morphism of fibered category :: $u \colon \cat{B}/U \to \fibX$の組$(U, u)$.
-
-            \item[Arrows.]
-                射$(V, v) \to (U, u)$は
-                $\cat{B}$の射$g \colon V \to U$と
-                base-preserving isomorphism :: $\alpha \colon v \to u \circ g$の組$(g, \alpha)$.
-                \begin{center}
-                \begin{tikzcd}
-                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
-                    & \cat{B}/U \ar[Rightarrow, from=v, "\alpha"]\ar[r, "u"]
-                    & \fibX
-                \end{tikzcd}
-                \end{center}
-        \end{description}
-
-        まずprojection functorが以下のように定まる．
-        \begin{defmap}
-            \tilde{\pi} \colon & \tilde{\fibX}& \to& \cat{B} \\
-            {}& (U, u)& \mapsto& U
-        \end{defmap}
-        この関手によってfibered categoryの構造が入る．
-
-        さらに次の関手によってequivalenceが与えられる．
-        \begin{defmap}
-            \Phi\colon & \tilde{\fibX}& \to& \fibX \\
-            {}& (U, u)& \mapsto& u(\id[U])
-        \end{defmap}
-        これがequivalenceであることは$2$-Yoneda Lemmaによる．
-
-        最後に，splitting of $\tilde{\pi}$ :: $\cat{S}$が次で定められる．
-        \begin{description}[labelindent=1cm]
-            \item[Objects.]
-                $\tilde{\fibX}$と同じ．
-
-            \item[Arrows.]
-                $\tilde{\fibX}$の射で，$(g, \id)$と表されるもの．
-                すなわち，
-                射$(V, v) \to (U, u)$は$\cat{B}$の射$g \colon V \to U$であって
-                $v=u \circ g$であるもの．
-                \begin{center}
-                \begin{tikzcd}
-                    \cat{B}/V \ar[r, "g"] \ar[rr, bend right=40mm, "v"'{name=v}]
-                    & \cat{B}/U \ar[equal, from=v]\ar[r, "u"]
-                    & \fibX
-                \end{tikzcd}
-                \end{center}
-        \end{description}
-    \end{proof}
-
-    \begin{Def}
-        圏$\cat{B}$に対し，
-        \begin{itemize}
-            \item Cloven fibration over $\cat{B}$の圏を$\cFib{B}$,
-            \item Split fibration over $\cat{B}$の圏を$\sFib{B}$
-        \end{itemize}
-        と書く．
-        ぞれぞれ忘却関手$\sFib{B} \to \cFib{B}, \cFib{B} \to \Fib{B}$をもつ．
-    \end{Def}
 
 \section{Grothendieck Construction} \label{sec:gro_const}
     今，fibered categoryからfiberとしてpsuedo-functorを構成した．
@@ -965,8 +968,6 @@ contravariant functorに成ることが予想される．
         (TODO: proof of (ii))
     \end{proof}
 
-\bibliographystyle{jplain}
-\bibliography{reference}
 \bibliographystyle{jplain}
 \bibliography{reference}
 \end{document}

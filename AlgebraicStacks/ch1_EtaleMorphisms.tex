@@ -1,5 +1,5 @@
-\documentclass[a4paper]{jsarticle}
-\usepackage{macros, enumitem}
+\documentclass[a4paper, dvipdfmx]{jsarticle}
+\usepackage{macros}
 
 \newcommand{\diag}{\Delta}
 \newcommand{\nl}{\hfill \vspace{-0.5cm}}
@@ -8,7 +8,12 @@
 \title{第1章 \\ Etale Morphisms}
 \author{七条彰紀}
 \maketitle
-\section{定義}
+\tableofcontents
+\vspace{10pt}
+    
+    この章ではetale morphismの定義，例，命題を取り上げる．
+
+\section{Definitions.}
 \begin{Def}[Infinitesimal Thickening, Formally Smooth/Unramified/Etale]
     \begin{enumerate}[label=(\roman*), leftmargin=*]
     \item
@@ -101,7 +106,7 @@ unramifiedについては，finite typeのみ要求する定義もある．
 finitely presentedを要求するのはEGAからのもので，
 我々が主に参照している\cite{ASS}もこの定義を取っている．
 
-\section{定義に対する例}
+\section{Examples.}
 
 \begin{Example}\label{example:not_qsep}
     locally of finite presentationかつquasi-compactだがNOT quasi-separatedである例を挙げる．
@@ -197,7 +202,7 @@ finitely presentedを要求するのはEGAからのもので，
     このことを示すには，Formally etaleであることだけ確かめれば十分．
 \end{Example}
 
-\section{命題}
+\section{Propositions.}
 %%% {{{
 \begin{Prop} \label{prop:stable_property}
 %    $f \colon X \to Y, g \colon Y \to Z$の両方が以下のいずれかの性質$P$を持つとする．
@@ -657,7 +662,7 @@ finitely presentedを要求するのはEGAからのもので，
     このとき，$F$は圏同値である．
 \end{Thm}
 
-\section{定理(\ref{thm:impfunc})の証明．}
+\section{Proof of The Theorem (\ref{thm:impfunc}).}
 \begin{Lemma}
     $R$ :: ring, $f \in R[x]$とする．
     以下のring homomorphismから誘導される$\Spec$間の射は

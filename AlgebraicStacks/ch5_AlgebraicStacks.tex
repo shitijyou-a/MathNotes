@@ -5,13 +5,13 @@
 \newcommand{\rest}{\vspace{5pt}}
 \newcommand{\rep}{{\color{blue}\#}}
 \newcommand{\arpb}{\ar[lu, phantom, "\text{p.b.}"]}
+\newcommand{\Isom}{\cat{Isom}}
 
 \begin{document}
-\title{ゼミノート \#8 \\ Algebraic-ness of Spaces and Stacks}
+\title{第5章 \\ Algebraic Stacks and Spaces}
 \author{七条彰紀}
 \maketitle
 \tableofcontents
-
 \vspace{10pt}
 
 affine scheme, scheme. algebraic space, algebraic stackという貼り合わせの連なりを意識した定義をした後，
@@ -822,7 +822,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     algebraic spaceの場合の繰り返しである．
 \end{proof}
 
-\section{Quotient stack}
+\section{Definition of Quotient stack}
     Algebraic stackの具体例としてQuotient stackを扱う．
     この例を通じて特に，
     「diagonal morphism $\Diag \colon \fibX \to \fibX \times_S \fibX$が表現可能とはどういうことか」
@@ -996,15 +996,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         \]
     \end{proof}
 
-\section{Aim of This Session}
+\section{Quotient Stack is an Artin Stack.}
 \begin{Thm}
     $X$ :: algebraic space,
     $G$ :: smooth group scheme over $S$, acting on $X$とする．
     Quotient Stack :: $[X/G]$はArtin stackである．
 \end{Thm}
 
-\section{準備}
-\subsection{Definition of \tp{$\Isom(X, Y)$}{Stack of Isomorphisms}}
+\subsection{Preparation.}
+\subsubsection{Definition of \tp{$\Isom(X, Y)$}{Stack of Isomorphisms}}
 最初に$\fibX$のcleavageを選択せずとも出来る$\Isom$の構成を述べる．
 後の注意で特にsplittingを選択した場合の構成も述べておく．
 \begin{Def}[$\Isom(X, Y)$]
@@ -1083,7 +1083,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     こちらの定義だけを覚えていても問題はない．
 \end{Remark}
 
-\subsection{Propositions}
+\subsubsection{Propositions}
 \begin{Lemma}
     任意の$U \in \cat{B}$と$X, Y \in \fibX(U)$について，
     $\Isom(X, Y)$はcategory fibered in sets.
@@ -1110,7 +1110,7 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
     (TODO: 出典)
 \end{proof}
 
-\subsection{Representability of Diagonal Morphism.}
+\subsubsection{Representability of Diagonal Morphism.}
 \begin{Remark}
     以下，scheme $S$を固定し，
     特に断らない限りbig etale site :: $\ET(S)$上のstack in groupoidsのみ考える．
@@ -1165,8 +1165,8 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
 \end{proof}
 %% }}}
 
-\section{証明}
-\subsection{\tp{$\Diag$}{The Diagonal Morphism} is Representable.}
+\subsection{Proof.}
+\subsubsection{\tp{$\Diag$}{The Diagonal Morphism} is Representable.}
 示した補題から，
 任意の$U \in \cat{C}$と任意の$G_U$-torsor :: $\shP_1, \shP_2 \in \fibX(U)$について
 $\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
@@ -1265,7 +1265,7 @@ $(\cdot g)$はequivariantだから，この図式が可換であることは$\rh
 この図式がpullback diagramであることは
 $\Isom(\ (G_Y, \rho_1), (G_Y, \rho_2)\ )$がalgebraic spaceであることを意味している．
 
-\subsection{\tp{$[X/G]$}{The Quotient Stack} has an Atlas.}
+\subsubsection{\tp{$[X/G]$}{The Quotient Stack} has an Atlas.}
 射$a \colon X \to [X/G]$を
 trivial $G_X$-torsor :: $(G_X, m_X) \in [X/G](X)$に
 （$2$-Yoneda Lemmaによって）対応する射とする．
@@ -1320,8 +1320,6 @@ smooth, surjectiveはどちらもetale local on targetな性質なので，
 $\shP \to Y$もetale, surjective．
 （ついでに$\shP$ :: algebraic spaceも分かる．）
 
-\bibliographystyle{jplain}
-\bibliography{reference}
 \bibliographystyle{jplain}
 \bibliography{reference}
 \end{document}
