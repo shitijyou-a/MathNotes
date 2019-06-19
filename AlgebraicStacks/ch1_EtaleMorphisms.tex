@@ -1,0 +1,678 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros, enumitem}
+
+\newcommand{\diag}{\Delta}
+\newcommand{\nl}{\hfill \vspace{-0.5cm}}
+
+\begin{document}
+\title{第1章 \\ Etale Morphisms}
+\author{七条彰紀}
+\maketitle
+\section{定義}
+\begin{Def}[Infinitesimal Thickening, Formally Smooth/Unramified/Etale]
+    \begin{enumerate}[label=(\roman*), leftmargin=*]
+    \item
+    $i \colon Y_0' \inclmap Y'$ :: closed embeddingについて，
+    defining ideal :: $\ker i^{\#}$がnilpotent \footnote{i.e. $\Exists{n > 0} (\ker i^{\#})^n=0$}であるとき，
+    $Y_0'$を$Y'$のinfinitesimal thickening（無限小肥大？）と呼ぶ．
+    あるいは$i$をinfinitesimal thickeningと呼ぶ．
+
+    \item
+    $Y'$ :: affine $Y$-scheme, $Y_0' (\inclmap Y')$ :: infinitesimal thickening of $Y'$とする．
+    $f \colon X \to Y$について，以下の図式を見よ．
+    \[\xymatrix{
+        Y_0' \ar@{_{(}->}[d]_-{\text{inf. thi.}} \ar@[red][r]& X \ar[d]^-{f} \\
+        Y' \ar[r] \ar@[blue][ru]& Y
+    }\]
+    この時，次の写像が定まる．
+    \begin{defmap}
+        {}& \Hom_Y(Y', X)& \to& \Hom_Y(Y_0', X) \\
+        {}& {\color{blue}\to}& \mapsto& {\color{red}\to}
+    \end{defmap}
+    この写像がsurjective injective，bijectiveであるとき，
+    それぞれformally smooth, formally unramified, formally etaleという．
+\end{enumerate}
+\end{Def}
+
+\begin{Def}[(Locally) Of Finite Presented Module/Algebra/Sheaf/Morphism]
+    \begin{enumerate}[label=(\roman*), leftmargin=*] \hfill \vspace{-0.5cm}
+    \item
+        $R$-module :: $M$がfinitely presented moduleであるとは，
+        次の完全列が存在すること．
+        \[\xymatrix{
+            A^{\oplus r} \ar[r]& A^{\oplus s} \ar[r]& M \ar[r]& 0
+        }\]
+
+    \item
+        surjective ring homomorphism :: $\phi \colon R[x_1, \dots, x_s] \to A$が存在し，
+        $\ker \phi$がfinitely generated idealであるとき，
+        $A$ :: finitely presented $R$-algebra (of finite presentation over $R$)という．
+
+    \item
+        $\shF$ :: quasi-coherent sheaf on a scheme $X$とする．
+        $\shF$ :: locally finitely presentedとは，
+        任意のaffine open subscheme of $X$ :: $\Spec A \subseteq X$について，
+        $\Gamma(\Spec B, \shF)$がfinitely presented $B$-\underline{module}であること．
+
+    \item
+        $f \colon X \to Y$ :: locally of finite presentationであるとは，
+        任意の$\Spec B \subseteq Y$と$\Spec A \subseteq f^{-1}(\Spec B)$について，
+        $A$ :: finitely presented $B$-algebraであるということ．
+        あるいは（同値な条件として），
+        affine open cover of $Y$ :: $Y=\bigcup_i \Spec B_i$が存在して，
+        任意の$\Spec A_{ij} \subseteq f^{-1}(\Spec B_i)$について，
+        $A_{ij}$ :: finitely presented $B_{i}$-algebraであるということ．
+
+    \item
+        $f \colon X \to Y$がquasi-compactであるとは，
+        任意のaffine open subset of $X$ :: $\Spec A$について$f^{-1}(\Spec A)$ :: quasi-compactであること．
+        あるいは（同値な条件として），
+        affine open cover of $Y$ :: $Y=\bigcup_i \Spec B_i$が存在して，
+        $f^{-1}(\Spec B_i)$ :: quasi-compactであること．
+        
+    \item
+        $f \colon X \to Y$がquasi-separatedであるとは．
+        またdiagonal morphism :: $\Delta \colon X \to X \times_{Y} X$
+        \footnote
+        {
+            $\Delta$は以下のようにpullbackの普遍性から得られる射である．
+            \[\xymatrix{
+                    X \ar@/^5mm/[rr]\ar[rd]\ar@{-->}[r]^-{\Delta}& X \times X \ar[d]\ar[r] & X\ar[d]^-{f} \\
+                {}& X\ar[r]_-{f} & Y \ar@{}[lu]|{\text{p.b.}}
+            }\]
+        }
+        がquasi-compactであること．
+
+    \item
+        $f \colon X \to Y$がlocally of finite presentationかつquasi-compactかつquasi-separatedである時，
+        $f$ :: finitely presentedという．
+\end{enumerate}
+\end{Def}
+環$R$やscheme :: $Y$をnoetherianとすれば，
+(locally) of finite presentationと(locally) of finite typeは同値に成る．
+一般に(locally) of finite presentationの方が強い条件である（例を参照せよ）．
+
+\begin{Def}[Smooth/Unramified/Etale]
+    morphism :: $f \colon X \to Y$は，
+    formally smooth / unramified / etaleかつfinitely presentedならば
+    smooth / unramified / etaleという．
+\end{Def}
+unramifiedについては，finite typeのみ要求する定義もある．
+finitely presentedを要求するのはEGAからのもので，
+我々が主に参照している\cite{ASS}もこの定義を取っている．
+
+\section{定義に対する例}
+
+\begin{Example}\label{example:not_qsep}
+    locally of finite presentationかつquasi-compactだがNOT quasi-separatedである例を挙げる．
+
+    以下のように設定する．
+    \begin{itemize}
+        \item $k$ :: field,
+        \item $Y=\Spec k[x_1,x_2,\dots]$,
+        \item $z=(x_1, x_2, \dots) \in Y$,
+        \item $U=Y-\{z\}$.
+    \end{itemize}
+    この時，$U$はquasi-compactでない．
+    これは$U$ :: quasi-compact $\iff$ $z$ :: finitely generatedからわかる
+    \footnote
+        {
+            私のノート: \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section2_ex.pdf}
+            補題 Ex2.13.2 (II)に証明がある．
+        }．
+
+    $X$を，二つの$Y$のコピーを$U$で貼り合わせたものとし，
+    $X_1, X_2 \subseteq X$をその$Y$のコピーとする．
+    すなわち$X_1, X_2 \iso Y$．
+    この同型を$\phi_i \colon X_i \to Y$と名付ける．
+    このとき，$f \colon X \to Y$を$\phi_1, \phi_2$の$U$に沿った貼り合わせとする．
+    こうすると$f|_{X_i}=\phi_i$となる．
+
+    \paragraph{$f$ :: locally of finite presentation.}
+    $Y$ :: affine schemeで，$f^{-1}(Y)=X_1 \cup X_2$であり，
+    $X_1, X_2 \iso Y$であった．
+    なので$f$ :: locally of finite presentation.
+
+    \paragraph{$f$ :: quasi-compact.}
+    同じく，$X_1, X_2$ :: quasi-compactなので$f^{-1}(Y)=X_1 \cup X_2$がquasi-compact．
+
+    \paragraph{$f$ :: NOT quasi-separated.}
+    $\basesp (X \times_Y X)$と$\diag \colon X \to X \times_Y X$を考えると次のように成る．
+    \[ \diag \colon x \mapsto (\phi_1^{-1}(x), \phi_2^{-1}(x)). \]
+    一方，$X_1 \times_{Y} X_2 (\subset X \times X)$は，$X_1, X_2 (\iso Y)$がaffineなのでaffine.
+    そこで逆像$\diag^{-1}(X_1 \times_{Y} X_2)$を取ると，これは$U$である．
+    既に述べたとおり，これはNOT quasi-compact.
+\end{Example}
+
+\begin{Example}[Smooth (BUT NOT Etale) Morphism.]
+    次のように定める．
+    \begin{defmap}
+        f\colon& \Spec k[x,y]& \to& \Spec k[t] \\
+        {}& (x,y)& \mapsto& x+y
+    \end{defmap}
+    これはaffine schemeの間の射なのでquasi-separated．
+    $f^{-1}(\Spec k[t])=\Spec k[x, y]$がnoetherian schemeなのでfinitely presented．
+    あとはformally smoothであることを示せば良い．
+    （TODO）
+\end{Example}
+    
+\begin{Example}[Unramified (BUT NOT Etale) Morphism.]
+    次のように定める:
+    \begin{defmap}
+        h\colon& \Spec \frac{\C[x,y]}{(x^2-y^3)}& \to& \Spec \C[x] \\
+        {}& (x, y)& \mapsto& x
+    \end{defmap}
+    $f$の場合と同様に，formally unramifiedだけ示せば良い．
+    （TODO）
+\end{Example}
+
+\begin{Example}[Etale Morphism.]
+    次のように定める:
+    \begin{defmap}
+        h\colon& \Spec \Q[u, u^{-1}, y]/(y^d-u)& \to& \Spec \Q[t, t^{-1}] \\
+        {}& (u, y)& \mapsto& u
+    \end{defmap}
+    $A=\Q[t, t^{-1}], B=\Q[u, u^{-1}, y]/(y^d-u)$とおくと．
+    $h$に対応する環準同型は$h^{\#} \colon A \to B; t \mapsto ua \bmod (y^d-u)$．
+    $f$の場合と同様に，formally etaleだけ示せば良い．
+    
+    以下の図式を考える．
+    \[\xymatrix{
+            B \ar@[red][r]^-{\alpha}\ar@[blue][rd]^-{\beta}& R/I \\
+            A \ar[u]^-{h^{\#}} \ar[r]_-{\phi}& R \ar[u]_-{\pi}
+    }\]
+    ここで$I \subseteq R$はイデアルで，$I^N=0$となる整数$N>0$が存在する．
+    与えられた$\alpha$から図式を可換にする$\beta$を構成し，
+    このような$\beta$が$\alpha$に対し唯一つであることを示す．
+    まず$\beta$は$t \in B$の像のみで定まることに注意する．
+    図式が可換であることと，次が成立することは同値．
+    \[ \beta h^{\#}(t)=\beta(u)=\phi(t), \qquad \pi \beta(u)=\alpha(u) \]
+    よって$\beta(u)=\phi(t)$で$\beta$を定めれば良い．
+    このように定めれば後者も成立する．
+    また，この構成から明らかに$\beta$はただ一つ．
+\end{Example}
+
+\begin{Example}[Formally Etale BUT NOT Etale Morphism.]
+    例(\ref{example:not_qsep})のmorphism :: $f \colon X \to Y$がそうである．
+    このことを示すには，Formally etaleであることだけ確かめれば十分．
+\end{Example}
+
+\section{命題}
+%%% {{{
+\begin{Prop} \label{prop:stable_property}
+%    $f \colon X \to Y, g \colon Y \to Z$の両方が以下のいずれかの性質$P$を持つとする．
+    以下に列挙する性質は，stable under base exchangeかつstable under composition．
+    \begin{enumerate}[label=(\arabic*)]
+        \item locally of finite presentation,
+        \item quasi-compact,
+        \item quasi-separated,
+        \item of finite presenration,
+        \item formally smooth,
+        \item formally unramified,
+        \item formally etale,
+        \item smooth,
+        \item unramified,
+        \item etale.
+    \end{enumerate}    
+\end{Prop}
+\begin{proof}
+    証明が必要なのは(1), (2), (3)と(5), (6), (7)である．
+    いずれも簡単なのでここでは証明しない．
+\end{proof}
+
+\begin{Def}[smooth of relative dimension $0$]
+    morphism :: $f \colon X \to Y$について以下が成立する時，
+    $f$ :: smooth of relative dimension $0$と呼ぶ．
+    \begin{enumerate}
+        \item $f$ :: finite type over $k$,
+        \item $f$ :: flat,
+        \item
+            $X' \subseteq X$, $Y' \subseteq Y$を$f(X') \subseteq Y'$を満たすirreducible componentとする． \mbox{} \\
+            この時$\dim X'=\dim Y'+n$,
+        \item 任意の$x \in X$について$\dim_{k(x)} (\shDer_{X/Y} \otimes k(x))=n$．
+    \end{enumerate}
+\end{Def}
+
+\begin{Thm}[\cite{HarAG} Ex.III.10.3] \label{thm:etale_equiv}
+    morphism :: $f \colon X \to Y$について以下は同値．
+    \begin{enumerate}
+        \item $f$ :: etale,
+        \item $f$ :: flat and unramified, 
+        \item $f$ :: smooth of relative dimension $0$.
+    \end{enumerate}
+\end{Thm}
+\begin{proof}
+    (TODO)
+\end{proof}
+
+\begin{Prop}
+    formally smooth/unramified/etaleはlocally on codomainな性質である．
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+%% }}}
+
+\begin{Prop}[\cite{ASS} Prop1.3.6 (i)] \label{prop:dermod}
+    $f \colon X \to Y$をfinite presentation, quasi-separated morphismとする．
+    この時$\shDer_{X/Y}$は次のように成る．
+\begin{enumerate}[label=(\roman*)]
+    \item $f$ :: smooth \quad \ \,$\implies \,\shDer_{X/Y}$ :: locally free sheaf of finite rank.
+    \item $f$ :: unramified $\iff \shDer_{X/Y}=0$.
+    \item $f$ :: etale \qquad \ \ $\implies \, \shDer_{X/Y}=0$.
+\end{enumerate}
+\end{Prop}
+%% {{{
+\begin{proof}
+    証明は\cite{Mat} \S 25の内容を一部使う．
+    特に\S 25始めからThm25.1の直前までがわかっていれば良い．
+
+    主張はlocalなものだから，$X=\Spec B, Y=\Spec A$と仮定して良い．
+    $f$ :: smoothより$B$ :: finitely presented $A$-algebra.
+    $f$に対応する準同型を$\phi \colon A \to B$とする．
+
+    (i)を示すために，$\modDer_{B/A}$ :: projective $B$-moduleを示す
+    （projectiveならばlocally freeであることは\cite{StacksProj} section 10.84に証明がある）．
+    これはすなわち，$B$-moduleの以下の図式に対し，
+    図式を可換にする$\tilde{D} \colon \modDer_{B/A} \to M$が存在するということである．
+    \[\xymatrix{
+        {} & \modDer_{B/A} \ar[d]^-{D}\\
+        M \ar@{->>}[r]^-{t}& N
+    }\]
+    ここで$t$ :: surj.
+    
+    次の図式を考える．
+    \[\xymatrix{
+        B \ar[r]^-{f_D}& B[N] \\
+        A \ar[r]\ar[u]^-{\phi}& B[M]\ar@{->>}[u]
+    }\]
+    ここで$B[M]$は\cite{Mat} \S 25でいう$B \ast M$である
+    \footnote
+    {
+        これらは$B$-algebraで，加群としては$B \oplus M$で，
+        乗法は$(b, m) \cdot (b', m')=(bb', bm'+b'm)$で定まる．
+        重要な特性として，$\pi_M: B[M] \to B; (b, m) \mapsto b$のkernelはsquare-zeroで，
+        $\pi_M$の$A$-algebra section (section which is $A$-albgebra morphism)と
+        $A$-derivation $B \to M$が一対一に対応する．
+    }．
+    $B[N]$も同様．
+    $f_D$は$A$-derivation :: $D$に対応する射$b \mapsto (b, D(b))$である．
+    $B[M] \to B[N]$は$(b, m) \mapsto (b, t(m))$で与えられる射で，
+    したがって全射であり核は$0 \oplus (\ker t)$．
+    これはsquare-zero idealである．
+    そして$\phi$ :: formally smoothであるから，
+    図式を可換にする$B \to B[M]$が存在する．
+    これに対応する$A$-derivationが所望の$\tilde{D}$である．
+
+    (ii)を示す．
+    $R$ :: ring, $I \subseteq R$ :: idealを$I^2=0$を満たすものとする．
+    以下が可換図式だったとしよう．
+    \[\xymatrix{
+        B \ar[r]^-{\theta} \ar[rd]_-{\lambda}& R/I \\
+        A \ar[r]\ar[u]^-{\phi}& R\ar[u]_-{\pi}
+    }\]
+    この時，$\lambda$をlifting of $\theta$と呼ぶ．
+    \cite{Mat} \S 25より
+    \footnote
+    {
+        あるいは私のノート
+        \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section8_ex.pdf}
+        のEx8.6(a)の解答より．
+    }，
+    \[
+        \Hom_A(\modDer_{B/A}, I)
+        =\Der_{A} (B, I)
+        =\{\lambda−\lambda′ | \lambda, \lambda' \text{ :: lifting of $\theta$} \}
+    \]
+    となっている．
+    $\phi$ :: formally unramifiedなので，lifting of $\theta$は一つしか無い．
+    よって$\Hom_A(\modDer_{B/A}, I)=0$．
+    任意の$R, I$についてこれが成立するので，これは$\modDer_{B/A}=0$と同値．
+
+    formally etale $\implies$ formally unramifiedなので(ii)$\implies$(iii)は明らか．
+\end{proof}
+%% }}}
+\begin{Prop}[\cite{ASS} Prop1.3.6 (iii)] \label{prop:smooth_exact}\hfill \vspace{-7mm}
+    \begin{itemize}
+        \item $g \colon X \to Y$をsmooth morphism，
+        \item $i \colon Z \to X$をlocally of finite presented closed embedding
+    \end{itemize}
+    とする．
+    この時，$f=i \circ g \colon Z \to Y$がsmoothであることと，
+    以下の列が完全かつlocally splitであることは同値である．
+    \[\xymatrix{
+        0 \ar[r]& i^*\shI_Z \ar[r]& i^*\shDer_{X/Y} \ar[r]& \shDer_{Z/Y} \ar[r]& 0
+    }\]
+    ただし$\shI_Z=\ker i^{\#}$．
+\end{Prop}
+%% {{{
+\begin{proof}
+    問題はlocalなものであるから，
+    $X=\Spec B, Y=\Spec A, Z=\Spec R=\Spec B/I$とする．
+    この時，主張にある完全列は次のように成る．
+    \[\xymatrix{
+            0 \ar[r]& I/I^2 \ar[r]^-{\delta}& \shDer_{B/A} \otimes_A R \ar[r]& \shDer_{R/A} \ar[r]& 0.
+    }\]
+    ただし$\delta \colon i \bmod I^2 \mapsto d_{B/A}(i) \otimes 1_R$．
+    $d_{B/A}$はderivationである．
+
+    \paragraph{方針．}
+    左端の$0$を除いたものはSecond Fundamental Exact Sequenceとして知られ，
+    \cite{Mat} Thm25.2などで証明されているとおり，常に成立する．
+    また，明らかに$f$ :: locally finitely presented．
+    したがって我々は，
+    \begin{enumerate}[label=(\alph*), leftmargin=*]
+        \item $Z=\Spec B/I \to \Spec A=Y$ :: formally smoothと，
+        \item $\delta$ :: splitが
+    \end{enumerate}
+    同値であることを示せば良い．
+
+    \paragraph{(b)の言い換え : $\delta^*$ :: surj.}
+    最初に(a) $\implies$ (b)を示す．
+    これは任意の$R$-module :: $N$について以下が成立することを示せば良い．
+    \[
+        \delta^*=(- \circ \delta) \colon
+            \Hom_R(\shDer_{B/A} \otimes_A R, N) \iso \Hom_R(\shDer_{B/A}, N) \to \Hom_R(I/I^2, N)
+            \text{ :: surj. }
+    \]
+    （$\iso$はテンソル積の随伴性から得られる．）
+    実際，$N=I/I^2$とすると，
+    $\delta^*$ :: surjから$\delta$のretractionの存在が言える．
+    したがって$\delta$ :: split．
+    splitはinjを意味することに注意．
+
+    \paragraph{問題のさらなる言い換え．}
+    $\delta^*$を具体的に計算すると，示すべきは次のことであることが分かる．
+    \begin{Claim}
+        任意の$\phi \in \Hom_R(I/I^2, N)$に対し，
+        以下を満たす射$\psi \colon B \to R[N]$が存在する．
+        \[\xymatrix@R=10pt{
+                B \ar[r]^-{\psi}& R[N] \ar@{->>}[r]^-{\pr_1}& R & =
+                    & B \ar@{->>}[r]^-{\bmod I}& R \\
+                I \ar@{^{(}->}[r]& B \ar[r]^-{\psi}& R[N] & =
+                    & I \ar[r]^-{\bmod I^2}& I/I^2 \ar[r]^-{\phi}& N \ar@{>->}[r]& R[N]
+        }\]
+    \end{Claim}
+    一行目の等号は$\psi$が$\pi_N$のsectionであることを意味し，
+    二行目の等号は$\pr_2 \circ \psi \colon B \to N$が$\delta^*(\phi)$に等しいことを意味する．
+
+    \paragraph{$\delta^*$ :: surj.}
+    $\psi$は次のように構成する．
+    まず次の可換図式を考える．
+    \[\xymatrix{
+        R \ar@{=}[r]& R \\
+        A \ar[r]\ar[u]& B/I^2 \ar@{->>}[u]_-{\pi}
+    }\]
+    $\pi$は$I/I^2$による剰余をとる写像である．
+    $A \to R$ :: formally smoothから，図式を可換にする射$\sigma \colon R \to B/I^2$が存在する．
+    この射から次のように同型$R[I/I^2] \iso B/I^2$が作れる．
+    \begin{defmap}
+        q\colon & B/I^2& \to& R[I/I^2] \\
+        {}& \tilde{b}& \mapsto& (\pi(\tilde{b}), (\id-\sigma \pi)( \tilde{b} )) \\
+        {}& \pi(r)+\tilde{i}& \mapedfrom& (r, \tilde{i})
+    \end{defmap}
+    これを元に$\psi$を構成する．
+    \[\xymatrix{ B \ar[r]& B/I^2 \ar[r]^{q}& R[I/I^2] \ar[r]^-{\id \oplus \phi}& R[N] }\]
+    これが主張の条件を満たすことは自明．
+
+    \paragraph{(b) $\implies$ (a)の言い換え : $I \subseteq \ker \tilde{h}$にする．}
+    話を切り替えて(b) $\implies$ (a)を証明しよう
+    （これは\cite{Mat}で言及されていない）．
+    $C$ :: $A$-algebra, $J \subset C$ :: ideal with $J^2=0$とし，
+    $D=C/J$とおく．
+    以下の図式(1)を考える．
+    \[
+    (1)\xymatrix{
+        R \ar[r]^-{h}& D \\
+        B \ar[u]& {} \\
+        A \ar[u]\ar[r]& C \ar@{-_>}[uu]
+    }
+    \qquad
+    (2)\xymatrix{
+        R \ar[r]^-{h}& D \\
+        B \ar[u]\ar@{-->}[rd]^-{\tilde{h}}& {} \\
+        A \ar[u]\ar[r]& C \ar[uu]
+    }
+    \]
+    $A \to B$ :: formally smoothなので，図式(2)の破線の射$\tilde{h}$を得る．
+    我々の目的は図式を可換にする$R \to C$を見つけることである．
+    これには，
+    $I \subseteq \ker \tilde{h}$であれば準同型定理から$\tilde{h}=B \to R=B/I \to C$が得られる．
+    
+    \paragraph{問題の言い換え : $\im \kappa_{h}=0$にする．}
+    $\ker (B \to R=B/I)=I$なので$\tilde{h}(I) \subseteq J$．
+    また$J^2=0$なので，
+    $\tilde{h}$から$\kappa_{\tilde{h}} \colon I/I^2 \to J$が誘導される．
+    構成から分かるとおり，示したい$\tilde{h}(I)=0$と$\im \kappa_{\tilde{h}}=0$は同値である．
+    そして我々は，以下の通り，$\im \kappa_{j}=0$となる$h$を選ぶことが出来る．
+
+    \paragraph{$h$の構成．}
+    仮定より$\tilde{\alpha} \circ \delta=\kappa_{\tilde{h}}$を満たす
+    $\tilde{\alpha} \colon \modDer_{B/A} \otimes_A R \to J$が存在する．
+    この$\tilde{\alpha}$を以下のように拡張し，$\alpha \colon B \to J$とする:
+%    \[\xymatrix{
+%        B \ar[r]& B \otimes B \ar[r]& (B \otimes B) \otimes D \ar[r]& (B \oplus \modDer_{B/A}) \otimes D \ar[r]& C \\
+%        b \ar@{|->}[r]& b \otimes 1 \ar@{|->}[r]& (b \otimes 1) \otimes 1_D \ar@{|->}[r]&
+%        (b \otimes 1_D) \oplus \delta(b \bmod J^2) \ar@{|->}[r]& (\alpha \circ \delta) (b \bmod J^2)
+%    }\]
+    \begin{defmap}
+        \alpha \colon & B& \to& J \\
+        {}& b& \mapsto& \tilde{\alpha}(d_{B/A}(b) \otimes 1_R)
+    \end{defmap}
+    $h=\tilde{h}-\alpha$と置いて，$\kappa_h(I/I^2)$を計算する．
+    $i \in I$をとる．
+    \begin{align*}
+        \kappa_{h}(i \bmod I^2)
+        =&\kappa_{\tilde{h}}(i \bmod I^2)-\alpha(d(i) \otimes 1_R) \\
+        =&\kappa_{\tilde{h}}(i \bmod I^2)-(\alpha \circ \delta)(i \bmod I^2) \\
+        =&\kappa_{\tilde{h}}(i \bmod I^2)-\kappa_{\tilde{h}}(i \bmod I^2) \\
+        =&0.
+    \end{align*}
+    以上より，$h(I)=0$が得られる．
+\end{proof}
+%% }}}
+
+\begin{Prop}[\cite{StacksProj}, Tag 02G7] \label{prop:unram_qfinite}
+    $f \colon X \to Y$ :: finitely presentation and quasi-separatedが
+    unramified morphismであることと，以下の条件 (*)は同値:
+    (*)
+    任意の$y \in Y$について，fiber of $f$ at $y$ :: $X_y$は
+    disjoint union of spectra of finite separable field extensions of $k(y)$.
+\end{Prop}
+%% {{{
+\begin{proof}
+    \paragraph{(*) $\implies$ $f$ :: unramified.}
+    最初は$f$ :: unramifiedであることを仮定する．
+    unramifiedはstable under base excange（命題\ref{prop:stable_property}）なので，
+    $Y=\Spec k$の場合を示せば良い．
+
+    定理(\ref{thm:etale_equiv})と\cite{HarAG} Cor III.9.6より，
+    $\dim X=\dim \Spec k=0$．
+    また$X$はfinite type over $k$なのでnoetherian．
+    したがって$X$ :: artinian
+    \footnote{ noetherian schemeの定義にある語``noetherian"を
+                ``artinian"に書き換えたのがartinian schemeの定義である． }．
+    artinian ringの構造定理(\cite{Ati-Mac} Thm8.7)と$X$ :: quasi-compactより，$X$は
+    \[ X=\bigsqcup \Spec A_i \]
+    とdisjointに分解でき，各$A_i$はlocal artinian ringである．
+
+    $\Spec A_i \to \Spec k$ :: unramifiedゆえに$\modDer_{A_i/k}=0$なので，
+    $A_i$ :: reduced
+    \footnote
+    {
+        $x \in A_i$が$x^{N}=0$を満たすとする．
+        $I=\ker(A_i \otimes_k A_i \to A_i)$とすると，
+        $x \otimes x^{N-1} \in I$かつ$\not \in I^2$．
+        ゆえに$\modDer_{A_i/k}=I/I^2 \neq 0$．
+    }．
+    $A_i$の素イデアルは唯一つであるから，$A_i$ :: field．
+    unramifiedはstable under base extensionなので，
+    同様にして$A_i$ :: separable over $k$．
+
+    $A_i$ :: finiely generated $k$-algebraかつ体なので，
+    Zariski's Lemmaにより，$A_i/k$ :: finite algebraic extension．
+    $A_i$ :: separable field over $k$なので，
+    定義より$A_i$ :: finite separable extension.
+
+    \paragraph{$f$ :: unramified $\implies$ (*).}
+    次に命題の条件を仮定する．
+
+    まず$K/k$がfinite separable field extensionであるとする．
+    するとprimitive element theoremより，
+    $\alpha \in K$を用いて$K=k(\alpha)$と書ける．
+    $f \in k[x]$を$\alpha$の最小多項式とすると，
+    以下が成り立つ．
+    \[ 0=d(f(\alpha))=f'(\alpha) \cdot d(\alpha) \in \modDer_{K/k}. \]
+    $K/k$ :: separableより，
+    $f(\alpha)=0$かつ$f'(\alpha) \neq 0$となる．
+    したがって$f'(\alpha)$ :: unit in $\modDer_{K/k}$なので$d(\alpha)=0$．
+    よって$\modDer_{K/k}=K \cdot d(\alpha)=0$．
+
+    $k$-algebra :: $A=\bigoplus_i K_i$を
+    $K_i$ :: finite separable field extension of $k$の直和とする．
+    $\I{p}_i$を第$i$成分以外は$0$である元からなる素イデアルとすると，
+    \[ (\modDer_{A/k})_{\I{p}_i}=\modDer_{A_{\I{p}_i}/k}=\modDer_{K_i/k}=0. \]
+    $\basesp \Spec A=\{ \I{p}_i \}_i$なので，これで$\modDer_{A/k}=0$が示せた．
+
+    最後に，一般のschemeで考える．
+    証明は命題(\ref{prop:dermod})を利用する．
+    $\Spec A \subseteq Y$と$\Spec B \subseteq f^{-1}(\Spec A)$をとり，
+    $\I{p} \in \Spec A$における$f$のfiberを考える．
+    仮定(*)より
+    $B \otimes_{A} k(\I{p})$ :: direct sum of finite separable field extensions of $k$.
+    ここで，上述のことから
+    \[ \modDer_{B \otimes_{A} k(\I{p})/k(\I{p})}=\modDer_{B/A} \otimes_{B} k(\I{p})=0. \]
+    $\I{q} \in \Spec (B \otimes_A k(\I{p})) \homeo f^{-1}(\I{p})$を任意に取ると，
+    \[
+        ( \modDer_{B/A} \otimes_{B} k(\I{p}) )_{\I{q}}
+        =(\modDer_{B/A})_{\I{q}} \otimes_{B} k(\I{p})
+        =(\modDer_{B/A})_{\I{q}}/\I{q}(\modDer_{B/A})_{\I{q}}
+        =0.
+    \]
+    これは局所環$B_{\I{q}} \otimes_A k(\I{p})$上の加群であるから，
+    Nakayama's Lemmaより，$(\modDer_{B/A})_{\I{q}}=0$．
+    $\I{q} \in \Spec (B \otimes_A k(\I{p}))$は任意に取っていたから，
+    これは$\modDer_{B/A}=0$を意味する．
+    命題(\ref{prop:dermod})より，これは$f$ :: unramifiedと同値．
+\end{proof}
+%% }}}
+
+\begin{Thm}[\cite{StacksProj}, Tag 04HM] \label{thm:impfunc}
+    $f \colon X \to Y$をseparated etale morphismとする．
+    $y \in Y$に対し$f^{-1}(y)=\{x_1,\dots,x_n \}$とする
+    （点が有限個であることは命題(\ref{prop:unram_qfinite})による）．
+    etale neighbourhood :: $\nu: (U, u) \to (Y, y)$が存在し，
+    $X_U=X \times_{\nu, Y, f} U$のdisjoint union decomposition :
+    \[ X_U=\bigsqcup_{i, j} V_{i, j} \]
+    について$V_{i, j} \iso U$．
+\end{Thm}
+
+\begin{Remark}
+この定理は代数幾何学版の陰関数定理とも呼べる定理である．
+この現象を根拠にしたスローガン「etale morphismは代数幾何学版locally homeomorphism」がある．
+証明は，この定理だけのために必要な命題が幾つかあるため，
+後の節に行う．
+\end{Remark}
+
+\begin{Prop}(Jacobian criterian) \label{prop:jac_cri}
+    $f \colon X \to Y$を，locally of finite presentationとする．
+    $f$ :: smoothと次の条件(+)は同値である:
+    
+    任意の点$x \in X$について，
+    $x$と$y=f(x) \in Y$の間にaffine neighborhood
+    \[
+        x \in \Spec B \subset X, \qquad y=f(x) \in \Spec A \subseteq Y
+        \qquad (\text{with  }f(\Spec B) \subseteq \Spec A)
+    \]
+    が存在し，ある$n, s\ (s \leq n)$と$f_1, \dots, f_s \in A[x_1, \dots, x_n]$について
+    \[ B \iso \frac{A[x_1, \dots, x_n]}{(f_1, \dots, f_s)}. \]
+    さらに，Jacobian matrix ($n \times s$-matrix)
+    \[ J=\mat{ \frac{\partial f_i}{\partial x_j} }_{i, j} \]
+    は，右逆行列をもつ(i.e. $\Exists{J'} JJ'=I$)．
+    同値な条件として，
+    regular(i.e.行列式がunit element of $B$)な部分$s$正方行列を$J$は持つ．
+
+    さらに，$f$ :: etaleと，この条件で$n=s$であることは同値である．
+\end{Prop}
+%% {{{
+\begin{proof}
+    まずは$(f(x) \in) \Spec A$なる$\Spec A$と
+    $f(\Spec B) \subseteq \Spec A$かつ$x \in \Spec B$なる$\Spec B$を適当に取る．
+    $f$ :: locally of finite presentationから，
+    surjective homomorphism
+    \[ A[x_1, \dots, x_n] \to B \]
+    であってkernel :: $I$が有限生成であると仮定できる．
+
+    命題(\ref{prop:smooth_exact})を
+    $\Spec B \to \Spec A[x_1,\dots,x_n]=\affine^n_A \to \Spec A$に適用すれば，
+    $f$ :: smoothと以下がsplit exact sequenceであることが同値だと分かる.
+    \[\xymatrix{
+        0 \ar[r]& I/I^2 \ar[r]^-{\delta}& \modDer_{A[x_1,\dots,x_n]/A} \otimes_A B \ar[r]& \modDer_{B/A} \ar[r]& 0.
+    }\]
+    特に$\delta$ :: split injectiveが同値である．
+
+    \paragraph{$f$ :: smooth $\implies$ (+).}
+    $\{ f_i \}_{i=1}^s$を$I$の生成元とする．
+    この時，$\delta$は次のように作用する．
+    \[ \mat{\delta(\bar{f}_1) \\ \vdots \\ \delta(f_s)}
+    =\mat{\frac{\partial f_i}{\partial x_j}}_{i,j} \mat{dx_1 \\ \vdots \\ dx_n} \]
+    ここで現れた行列は主張にあるJacobian matrixである．
+    今，命題(\ref{prop:dermod}) (i) と，
+    このexact sequenceの存在から$I/I^2$ :: free moduleである．
+    そしてこのとき$\{ \bar{f}_i \}_i \ (\bar{f}_i=f_i \bmod I^2)$は$I/I^2$の基底と成る．
+    したがって$\{\bar{f}_i\}_i$と$\{dx_j\}_j$はそれぞれの自由加群の基底であるから，
+    $\delta$がsplit injectiveであることは，主張にあるJacobian matrixの条件と同値である．
+
+    \paragraph{$f$ :: smooth $\impliedby$ (+).}
+    $J$がright inverseを持つならば，明らかに$\delta$がsectionを持つ．
+    よって$\delta$ :: split injective.
+    
+    \paragraph{$f$ :: etale $\iff$ (+) and $n=s$.}
+    最初に述べたexact sequenceから，
+    $\modDer_{B/A}$の階数は以下のように成る．
+    \[
+        \rank \modDer_{B/A}
+        =\rank (\modDer_{A[x_1,\dots,x_n]/A} \otimes_A B)-\rank (I/I^2)
+        =n-s.
+    \]
+    したがって$n=s \iff \modDer_{B/A}=0 \iff f$ :: formally unramified.
+    etale$=$smooth and formally etaleなので，証明できた．
+\end{proof}
+%% }}}
+
+\begin{Thm}
+    scheme :: $S$について，
+    category :: $\Et(S)$を以下のように出さめる．
+    \begin{description}
+        \item[Objects] etale morphism :: $Z \to S$,
+        \item[Arrows] $S$-morphism :: $Z \to Z'$.
+    \end{description}
+    
+    $i \colon S_0 \to S$ :: infinitesimal thickeningについて，
+    関手$F$を以下で定める．
+    \begin{defmap}
+        F\colon & \Et(S)& \to& \Et(S_0) \\
+        {}& [Z \to S]& \mapsto& [Z \times_S S_0 \to S_0]
+    \end{defmap}
+    このとき，$F$は圏同値である．
+\end{Thm}
+
+\section{定理(\ref{thm:impfunc})の証明．}
+\begin{Lemma}
+    $R$ :: ring, $f \in R[x]$とする．
+    以下のring homomorphismから誘導される$\Spec$間の射は
+    etaleである．
+    \begin{defmap}
+        \phi\colon & R& \to& R[x, 1/f']/(f) \\
+        {}& r& \mapsto& r \cdot f'
+    \end{defmap}
+\end{Lemma}
+\begin{proof}
+    命題(\ref{prop:jac_cri}) (Jacobian criterion)を利用する．
+    この場合，Jacobian :: $\det \mat{f'}=f'$がunit in $R[x, 1/f'](f)$であるから，
+    この補題が成り立つ．
+\end{proof}
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}

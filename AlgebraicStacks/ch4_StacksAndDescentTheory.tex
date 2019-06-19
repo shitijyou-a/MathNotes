@@ -1,0 +1,913 @@
+\documentclass[a4paper]{jsarticle}
+\usepackage{macros}
+
+\newcommand{\HOM}{\operatorname{HOM}}
+\newcommand{\inj}{\mathrm{inj}}
+\newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\vsim}{\text{\rotatebox{-90}{$\sim$}}}
+
+\begin{document}
+\title{第4章 \\ Stacks and Descent Theory}
+\author{七条彰紀}
+\maketitle
+
+\section{The Category of Descent Data}
+    今回のノートで一貫して用いる記号と記法を定める．
+
+    $\cat{C}$ :: site, 
+    $\pi \colon \fibF \to \cat{C}$ :: fibered categoryを考える
+    \footnote{ ほとんどfiber of $\pi$しか扱わないので，psuedo-functor $\cat{C} \to \Cat$をとっても構わない． }．
+
+    記法を定める．
+    $U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\}_{i \in I} \in \Cov(U)$について，
+    \[ U_{ij}:=U_i \times_U U_j, \quad U_{ijk}:=U_i \times_U U_j \times_U U_k \ \ (i,j,k \in I) \]
+    と書くことにする．
+    また，添字$a,b=i \mor j \mor k$について，
+    fiber productからの射影を
+    \[ \pr_{a} \colon U_{ij} (\mor U_{ijk}) \to U_{a}, \qquad \pr_{a,b} \colon U_{ijk} \to U_{ab} \]
+    とする．
+    さらに$\pr_{i} \colon U_{ij} \to U_{i}$によるpullbackを$(-)|_{U_{ij}}$などと書く．
+
+\subsection{Definition}
+\begin{Def}[$\fibF(\covU)$, \cite{ASS} 4.2.4, \cite{NoteGroTop} Def4.2]
+    圏$\fibF(\covU)$を次のように定める．
+    \begin{description}
+        \item[Object.] \hfill \vspace{-0.2cm}
+            \begin{itemize}
+                \item $\xi_i \in \fibF(U_i)$なる対象のclass $\{\xi_i\}_{i \in I}$と，
+                \item
+                    $\fibF(U_{ij})$中の同型$\sigma_{ij} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}}$の
+                    class $\{\sigma_{ij}\}_{i,j \in I}$
+            \end{itemize}
+            の組$(\{\xi_i\}, \{\sigma_{ij}\})$であって，
+            以下で述べるcocycle conditionを満たすもの．
+            このような組をobject with descent dataと呼ぶ
+            \footnote{ 同型のclass $\{\sigma_{ij}\}$がdescent dataと呼ばれる． }．
+
+        \item[Arrow.] \mnewline
+            射$\{\alpha_i\} \colon (\{\xi_i\}, \{\sigma_{ij}\}) \to (\{\eta_i\}, \{\tau_{ij}\})$とは，
+            $\fibF(U_i)$の射$\alpha_i \colon \xi_i \to \eta_i$のclassであって，\mnewline
+            $\sigma_{ij}, \tau_{ij}$と整合的であるもの．
+            すなわち，任意の$i, j \in I$について以下の図式が可換であるもの．
+            \[\xymatrix{
+                \ar[d]_-{\sigma_{ij}} \xi_j|_{U_{ij}} \ar[r]^-{\alpha_j|_{U_{ij}}}&
+                \eta_j|_{U_{ij}} \ar[d]^-{\tau_{ij}}\\
+                 \xi_i|_{U_{ij}} \ar[r]_-{\alpha_i|_{U_{ij}}}& \eta_i|_{U_{ij}}
+            }\]
+    \end{description}
+
+    \step{cocycle condition}
+    組$(\{\xi_i\}, \{\sigma_{ij}\})$がcocycle conditionを満たすとは，
+    任意の$i,j,k \in I$について以下が成り立つということ．
+    \[ \sigma_{ik}|_{U_{ijk}}=(\sigma_{ij}|_{U_{ijk}}) \circ (\sigma_{jk}|_{U_{ijk}}). \]
+    図式でかけば，圏$\fibF(U_{ijk})$における以下の図式が可換であることと同値．
+    \[\xymatrix@R=70pt{
+         \xi_k|_{U_{ijk}} \ar[rd]_-{\sigma_{ik}|_{U_{ijk}}} \ar[rr]^-{\sigma_{jk}|_{U_{ijk}}}
+            & {}
+            & \xi_j|_{U_{ijk}} \ar[ld]^-{\sigma_{ij}|_{U_{ijk}}} \\
+        {} & \xi_i|_{U_{ijk}} & {}
+    }\]
+\end{Def}
+
+\begin{Remark}
+    この定義に於いてfiber products :: $U_{ij}, U_{ijk}$を暗黙のうちに選択している．
+    たが，どのように選択しても得られる圏は同型に成る．
+    $U_{ij}, U_{ijk}$の選択も込めて
+    $(\{\xi_i\}, \{\xi_{ij}\}, \{\xi_{ijk}\})$を$\fibF(\covU)$の対象とする
+    定義の仕方も有るが，ここでは述べない．
+    詳細は\cite{NoteGroTop} Remark 4.3にある.
+\end{Remark}
+
+\begin{Def}[\cite{NoteGroTop} p.72] \label{def:epsilon}
+    $\xi \in \fibF(U), \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$について，
+    $\fibF(\covU)$の元を以下のデータに対応させる:
+    \begin{itemize}
+        \item $\xi_i:=\phi_i^*\xi$のclass $\{\xi_i\}_{i \in I}$.
+        \item
+            $\xi_i|_{U_{ij}}$と$\xi_j|_{U_{ij}}$が，
+            いずれも
+            \[ \phi_i \circ \pr_i=\phi_j \circ \pr_j \colon U_{ij} \to U \]による$\xi$のpullback
+            であることから得られる
+            標準的同型のclass $\{ \sigma_{ji} \colon \xi_j|_{U_{ij}} \to \xi_i|_{U_{ij}} \}_{i,j}$.
+    \end{itemize}
+    このデータをまとめて$(\{\phi_i^*\xi\}, \mathrm{cano})$などと書く．
+    この対応を$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$と書く．
+    $\fibF(U)$の射$\xi \to \eta$から，
+    $\phi_i$に沿ったpullbackによって$(\{\phi_i^*\xi\}, \mathrm{cano}) \to (\{\phi_i^*\eta\}, \mathrm{cano})$
+    が得られるので，
+    対応$\epsilon_{\covU}$は関手である．
+\end{Def}
+
+\subsection{Example}
+\begin{Example}[\cite{ASS}, 4.2.1]
+    一つの射から成るcover :: $\covU=\{f \colon V \to U\}$について$\fibF(\covU)$を考えてみる．
+    この圏の対象は，
+    \begin{itemize}
+        \item 対象$E \in \fibF(V)$
+        \item $\fibF(V \times_U V)$の中の同型射$\sigma \colon \pr_1^*E \to \pr_2^*E$
+    \end{itemize}
+    の組である．
+\end{Example}
+
+\section{Definition : Prestack / Stack }
+\begin{Def}[Prestack, Stack]
+    関手$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$を用いて以下のように定義する．
+    \begin{enumerate}[label=(\roman*)]
+    \item
+        任意の$U \in \cat{C}, \covU \in \Cov(U)$について$\epsilon_{\covU}$ :: fully faithfullである時，
+        fibered category $\fibF \to \cat{C}$はprestackである，という．
+    \item
+        任意の$U \in \cat{C}, \covU \in \Cov(U)$について$\epsilon_{\covU}$ :: equivalenceである時，
+        fibered category $\fibF \to \cat{C}$はstackである，という．
+    \end{enumerate}
+
+    (pre)stacksの間の射は，fibered categoryとしての射である．
+\end{Def}
+
+\begin{Remark}
+    prestackの定義は以下のように言い換えられる:
+    任意の$U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$をとる．
+    さらに$\xi, \eta \in \fibF(U)$をとり，$\epsilon_{\covU}$による像を
+    \[
+        \epsilon_{\covU}(\xi)=(\{\xi_i\}, \{\sigma_{ij}\}),\quad
+        \epsilon_{\covU}(\eta)=(\{\eta_i\}, \{\tau_{ij}\})
+            \in \fibF(\covU) 
+    \]とする．
+    この時，任意の射
+    $\{\alpha_i\} \colon \epsilon_{\covU}(\xi) \to \epsilon_{\covU}(\xi)$
+    （射$\alpha_i \colon \xi_i \to \eta_i$の集合）について，
+    $\fibF(U)$の射$\alpha \colon \xi \to \eta$が\underline{一意に存在し}，
+    $\alpha_i=(\phi_i)^*\alpha (\iff \{\alpha_i\}=\epsilon_{\covU}(\alpha))$となる．
+
+    標語的に言えば，prestackは「貼り合わせられる射を持つpsuedo-functor」となる．
+    同型射の貼り合わせは同型射であるから，
+    prestackは「貼り合わせが（存在すれば）一意な対象を持つpsuedo-functor」である．
+\end{Remark}
+
+\begin{Remark}
+    このノートでは，
+    fiberが条件を満たすfibered categoryとして(pre)stackは定義されている
+    （fiberを用いずに(pre)stackを定義することも出来るが，今回は採用しなかった）．
+    なので形式上，(pre)stackはfibered categoryを経由せず，特別なpsuedo-functorとして定義できる．
+    しかし実際にそのように定義されることは少ない．
+
+    ではpsuedo-functorとして定義しない積極的な理由はと言うと，
+    実用上，元のfibered categoryにも言及する場合が多いからであると思われる．
+    fiberだけでなく元のfibered categoryに言及する理由については，
+    このセミナーのノート session 4.5
+    \footnote{URL : \url{https://github.com/ShitijyouA/MathNotes/blob/master/AlgebraicStacks/session4_5_FiberedCategoriesContinued.pdf}}，
+    注意2.8を参考にして欲しい．
+\end{Remark}
+
+\begin{Def}[Sub(pre)stack]
+    stack :: $\pi \colon \fibF \to \cat{C}$のsub(pre)stackとは，
+    $\fibF$の部分圏$\fibG$であって，
+    $\pi$と包含関手の合成$\fibG \inclmap \fibF \xrightarrow{\pi} \cat{C}$がfibrationであり，
+    さらにそのfiberが(pre)stackであるもの．
+\end{Def}
+
+\section{Example : Stack}
+\begin{Prop}[\cite{NoteGroTop} Prop4.9]
+    \begin{myenum}
+        \item separated presheaf of sets is a prestack.
+        \item sheaf of sets is a stack.
+    \end{myenum}
+\end{Prop}
+\begin{proof}
+    $\cat{C}$ :: site, $\fibF \colon \cat{C}^{op} \to \Sets$ :: presheafとする．
+    $U \in \cat{C}, \covU=\{U_i \to U\} \in \Cov(U)$を任意に取る．
+
+    今，圏$\fibF(U), \fibF(\covU)$は集合（離散圏）である．
+    なので関手$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$は\underline{写像}である．
+    さらに射$\sigma_{ij}$も恒等射しかないから，
+    $\fibF(\covU)$の対象は，
+    任意の$i,j$について$\xi_i|_{U_{ij}}=\xi_j|_{U_{ij}}$を満たす
+    $\xi_i \in \fibF(U_i)$の族$\{\xi_i\}_i$であると考えて良い．
+    このセミナーノートのsession3の記号を用いれば，
+    $\fibF(\covU)=H^0(\covU, \fibF)$ということに成る．
+
+    二つのデータ$\{\xi_i\}, \{\eta_i\}$の間の射もやはり恒等射しかないから，
+    「関手$\epsilon_{\covU}$がfully faithfulである」という仮定は
+    「写像$\epsilon_{\covU}$が単射である」と言い換えられる．
+    これはすなわち，$\fibF$がseparated presheafであるということである．
+
+    「関手$\epsilon_{\covU}$がessentially surjectiveである」という仮定は
+    「写像$\epsilon_{\covU}$が全射である」と言い換えられるから．
+    $\epsilon_{\covU}$がequivalenceであることは
+    $\fibF(\covU)=H^0(\covU, \fibF)$と$\fibF(U)$の間に全単射が存在するということである．
+    これはすなわち，$\fibF(U)$がsheafであるということである．
+\end{proof}
+
+\begin{Remark}
+    この命題で分かるとおり，
+    prestackはpresheafの抽象化ではなく，separated presheafの抽象化である．
+    そうすると，
+    我々はpsuedo-functor $\cat{B}^{op} \to \Cat$をprestackと呼び，
+    今prestackと呼んでいるものはseparated prestackと呼ぶべきなのかも知れない．
+    我々がそうしないのは，後に定義される``separated stack"との混乱を避けるためである．
+\end{Remark}
+
+以下の二つの例は後にセミナーでも証明を扱う．
+
+\begin{Example}
+    $X \in \cat{C}$に対し，圏$\cat{Shv}/X$を以下のように定める．
+    \begin{description}
+        \item[Objects.] \mnewline
+            $X$への射を持つような$\cat{C}$の対象 :: $U$と，
+            $U$上のsheaf :: $\shU$の組．
+        \item[Arrows.] \mnewline
+            射$(U, \shU) \to (V, \shV)$は，
+            $\cat{C}$の射$f \colon U \to V$と，
+            morphism of sheaves on $V$ :: $f^{\#} \colon \shV \to f_*\shU$の組．
+    \end{description}
+    この時，fibered category :: $\cat{Shv}/X \to \cat{C}/X; \ (U, \shU) \mapsto U$はstackである．
+    この例で考えるsheafをquasi-coherent sheafに制限してて得られる
+    fibered category :: $\cat{QCoh}/X \to \cat{C}/X$もstackである．
+    この二つの例については，このセミナーでも後に証明を扱う．
+\end{Example}
+
+\begin{Example}
+    $X \in \Sch$に対し，圏$\cat{QCoh}/X$を以下のように定める．
+    \begin{description}
+        \item[Objects.] \mnewline
+            $\mathrm{Fpqc}(X)$
+            \footnote{圏$\Sch/X$にfpqc topologyを備えたもの．}の対象 :: $U$と，
+            $U$上のsheaf (on fpqc topology):: $\shU$の組．
+        \item[Arrows.] \mnewline
+            射$(U, \shU) \to (V, \shV)$は，
+            $\cat{C}$の射$f \colon U \to V$と，
+            morphism of sheaves on $V$ :: $f^{\#} \colon \shV \to f_*\shU$の組．
+    \end{description}
+    この時，fibered category :: $\cat{QCoh}/X \to \cat{C}/X; \ (U, \shU) \mapsto U$はstackである．
+\end{Example}
+
+\begin{Example}[\cite{ASS} 4.4.1]
+    以下で定まるfibered categoryはstackである．
+    \begin{defmap}
+    {}& \left\{\parbox{4cm}{\begin{center} pair of scheme over $S$ :: $Y$ \\ and closed imm. $W \inclmap Y$ \end{center}}\right\}& \to& \mathrm{Fppf}(S) \\
+        {}& (Y, W \inclmap Y)& \mapsto& Y
+    \end{defmap}
+\end{Example}
+
+\begin{Example}[\cite{ASS} 4.4.4]
+    以下で定まるfibered categoryはstackである．
+    \begin{defmap}
+    {}& \left\{\parbox{4cm}{\begin{center} pair of scheme over $S$ :: $Y$ \\ and open imm. $W \inclmap Y$ \end{center}}\right\}& \to& \mathrm{Fppf}(S) \\
+        {}& (Y, W \inclmap Y)& \mapsto& Y
+    \end{defmap}
+\end{Example}
+
+以下の二つの例は後に一般化される．
+
+\begin{Example}[\cite{NoteGroTop} \S 4.3.1]
+    arrow category :: $\Sch^{\rightarrow}$の対象を
+    affine morphismに制限したものを圏$\cat{Aff}$とする．
+    以下で定まるfibered categoryはstackである．
+    \begin{defmap}
+        {} & \cat{Aff}& \to& \mathrm{Fppf}(\Spec \Z) \\
+        {}& [ X \to Y ]& \mapsto& Y
+    \end{defmap}
+\end{Example}
+
+\begin{Example}[\cite{ASS} 4.4.15]
+    quasi-compact open imbeddingの後にaffine morphismを合成した射のことを
+    quasi-affine morphismという．
+    arrow category :: $\Sch^{\rightarrow}$の対象を
+    quasi-affine morphismに制限したものを$\cat{QAff}$とする．
+    以下で定まるfibered categoryはstackである．
+    \begin{defmap}
+        {} & \cat{QAff}& \to& \mathrm{Fppf}(\Spec \Z) \\
+        {}& [ X \to Y ]& \mapsto& Y
+    \end{defmap}
+\end{Example}
+
+\section{Proposition : Stack}
+
+\begin{Prop}[\cite{ASS} Prop4.12]
+    二つのequivalentなfibered categoryがあり，
+    かつ一方がstackならば，もう一方もstackである．
+\end{Prop}
+\begin{proof}
+    $\fibF, \fibG$ :: fibered categories over $\cat{C}$とし，
+    $F \colon \fibF \to \fibG$ :: morphism of fibered categoriesとする．
+    この時cover of $U \in \cat{C}$ :: $\covU=\{U_i \to U\}$について$F_{\covU}$を定義する．
+    \begin{defmap}
+        F_{\covU}\colon & \fibF(\covU)& \to& \fibG(\covU) \\
+        \mathbf{Objects:}& (\{\xi_i\}, \{\sigma_{ij}\})& \mapsto& (\{F\xi_i\}, \{F\sigma_{ij}\}) \\
+        \mathbf{Arrows:}& \{\alpha_i\}& \mapsto& \{F\alpha_i\} \\
+    \end{defmap}
+    更に二つの射$F, G \colon \fibF \to \fibG$と
+    その間のbase-preserving natural transformation :: $\rho \colon F \to G$に対し，
+    $\rho_{\covU} \colon F_{\covU} \to G_{\covU}$を次のように定義する．
+    \[ (\rho_{\covU})_{(\{\xi_i\}, \{\sigma_{ij}\})}=\{\rho_{\xi_i}\}. \]
+
+    以上から，$F$がequivalenceならば$F_{\covU}$もquivalenceである．
+    したがって以下のcommutative diagram of weak $2$-category
+    \footnote{ 射の合成の間にnatural isomorphismが存在するという意味で可換． }
+    が得られる．
+    \[\xymatrix{
+            \fibF(U) \ar[r]^-{\epsilon_{\covU}}\ar[d]_-{F}& \fibF(\covU) \ar[d]^-{F_{\covU}}\\
+            \fibG(U) \ar[r]_-{\epsilon_{\covU}}& \fibF(\covU)
+    }\]
+    この可換図式から，主張が得られる．
+\end{proof}
+
+\begin{Prop}[\cite{ASS} Exc 4.I]
+    $\fibF, \fibF'$ :: stack on $\cat{C}$,
+    $f \colon \fibF \to \fibF'$ :: morphism of stacksとする．
+    $f$ :: isomorphismは以下の2条件が成立することと同値．
+    \begin{enumerate}[label=(\alph*)]
+        \item
+            任意の$X \in \cat{C}$について，
+            fiberの間の射$f_X \colon \fibF(X) \to \fibF'(X)$はfully-faithful.
+        \item
+            任意の$X \in \cat{C}$と$x \in \fibF'(X)$について，
+            covering of $X$ :: $\{\phi_i \colon X_i \to X\} \in \Cov(X)$が存在し，
+            全ての$x$のpullback :: $\phi_i^*x \in \fibF'(X_i)$が$\fibF(X_i)$のessential imageに属す．
+    \end{enumerate}
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+
+\begin{Lemma}
+    site :: $\cat{C}$を，
+    空集合のcoverとして空集合を持つ($\emptyset \in \Cov(\emptyset)$)ものとする．
+    $\pi \colon \fibF \to \cat{C}$ :: stackについて，以下の圏同値が成立する．
+    \[ \fibF( \emptyset ) \simeq \cat{1}. \]
+    特に，$\fibF(\emptyset)$の任意の二つの対象の間には，ただ一つの同型射が存在する．
+\end{Lemma}
+\begin{proof}
+    category of descent data :: $\fibF(\covU)$の対象を考える．
+    これは$\covU$で添字付けられた対象の族の二つ組である．
+    なので$\covU=\emptyset$について，
+    $\fibF(\emptyset)$の対象は$(\emptyset, \emptyset)$しかない．
+    射も$\covU$で添字付けられた族であるから，非自明な射は存在しない．
+\end{proof}
+
+この補題の仮定は奇妙に見えるかも知れないが，
+以下の通り，このように仮定しても問題はないし，
+我々が扱う殆どのsiteはこの仮定を満たす．
+
+\begin{Claim}
+    圏$\cat{C}$の任意の対象$U \in \cat{C}$について，
+    命題「$\emptyset \in \Cov(U)$」はGrothendieck topologyの公理（定義）と独立である．
+    すなわち，$\emptyset \in \Cov(U)$としてもしなくても矛盾は生じない．
+\end{Claim}
+\begin{proof}
+    命題「$\emptyset \in \Cov(U)$」を$P$と書く．
+    Grothendieck topologyの定義を見直そう．
+    cover of $\emptyset$ :: $\covU \in \Cov(U)$が満たすべき条件を記号で書き下す．
+    \begin{enumerate}[label=(\alph*)]
+        \item
+            $\Forall{[V \to U] \in \cat{C}/U}
+            \lbra{ \Forall{[U' \to U] \in \covU} {}^{\exists} U' \times_{U} V }
+            \implies \{ U' \times_{U} V \to V \mid [U' \to U] \in \covU \} \in \Cov(V)$.
+
+        \item $\Forall{\covV:=\{ \covU'_{U'} \mid \covU'_{U'} \in \Cov(U')\}_{U' \in \covU}}
+                \{ U'' \to U' \to U \mid
+                    [U' \to U] \in \covU, [U'' \to U'] \in \covU'_{U'} \} \in \Cov(U)$.
+    \end{enumerate}
+    クラス$X$と述語$F$について``$\Forall{x \in X} F(x)$"という文は
+    ``$\Forall{x} \lbra{x \in X \implies F(x)}$の省略形である．
+    したがって，$X=\emptyset$であるとき，
+    ``$\Forall{x \in X} F(x)$"という文は任意の$F$について真．
+    また，$\{ f(x) \mid x \in \emptyset \}=\emptyset$．
+
+    なので，以上の文を$\covU=\emptyset$の場合に考えると（すなわち$P$を仮定すると），
+    いずれも$P$と同値に成る．
+    よって$P \implies P$ということになる．
+    一方，否定$\lnot P$を仮定しても矛盾が生じないことは明らか．
+\end{proof}
+
+\begin{Example}
+    圏$\cat{C}$を$\Sch$の部分圏や$\Sch/S$\ ($S$ :: scheme)とする．
+    morphism of schemesのクラス$\mathcal{P} \subset \Arr(\cat{C})$をとり，
+    以下のように$\cat{C}$上の$\Cov$を定めたとする:
+    \begin{align*}
+        \Cov(U)
+        =&\{
+            \covU \mid
+            \covU \text{ :: jointly surjective family and }
+            \Forall{\phi \in \covU} \phi \in \mathcal{P}
+        \} \\
+        =&\left\{
+            \covU ~\middle|~
+            \bigsqcup_{U' \in \covU}U' \to U \text{ :: surjective}
+            \mand
+            \Forall{\phi} \lbra{ \phi \in \covU \implies \phi \in \mathcal{P} }
+        \right\}.
+    \end{align*}
+    この時，$\bigsqcup_{U' \in \emptyset}U'=\emptyset$なので$\emptyset \in \Cov(\emptyset)$．
+
+    このセミナーで定義したZariski site, etale site, ...などは
+    全てこの主張のように定義されている．
+\end{Example}
+
+\begin{Lemma}
+    圏$\cat{C}$を$\Sch$の部分圏や$\Sch/S$\ ($S$ :: scheme)とする．
+    $U \in \cat{C}, \{U_i \to U\} \in \Cov(U)$をとり，
+    $V=\bigsqcup_{i} U_i$と置く．
+    
+    $\left\{ U_i \to V \right\} \in \Cov(V)$と仮定する
+    \footnote{ 例えば，Zariski topologyより細かい位相ならばこの仮定は成立する．}と
+    $\pi \colon \fibF \to \cat{C}$ :: stackについて，
+    圏同値(TODO: strict $2$-equivalence? ここは$\epsilon$と圏同型の合成)
+    \[ \fibF \left( \bigsqcup_i U_i \right) \simeq \prod_i \fibF(U_i) \]
+    が成立する．
+\end{Lemma}
+\begin{proof}
+    瑣末なことでは有るが: 
+    $\{U_i \to V\}$の添字について，
+    $i \neq j$ならば$U_i \neq U_j$である，と仮定して一般性を失わない．
+
+    $\covU=\{ \inj_i \colon U_i \to V \}(\in \Cov(V))$と置く．
+    次の関手が圏同値であることを示す．
+    \begin{defmap}
+        E \colon& \im \epsilon_{\covU}& \to& \prod_i \fibF(U_i) \\
+        \mathbf{Objects}\colon&
+            (\{(\inj_i)^*\xi\}_i, \{\sigma_{ij}\}_{i, j})& \mapsto& ((\inj_i)^*\xi)_i\\
+        \mathbf{Arrows}\colon& \{\alpha_i\}_i& \mapsto& (\alpha_i)_i
+    \end{defmap}
+    $\xi_i:=(\inj_i)^*$とおく．
+    これが示せれば，$\fibF$ :: stackなので主張も得られる．
+
+    まず，仮定の状況では，
+    injection map (coprojection) :: $U_i \to V$についてのfiber productは
+    次のように成る．
+    \[
+        U_{ij}
+        =U_i \times_V U_j =
+        \begin{cases}{}
+            U_i & (U_i=U_j) \\
+            \emptyset & (U_i \neq U_j).
+        \end{cases}
+    \]
+    
+    \step{$E$ :: essentially surjective.}
+    $i \neq j$の時，
+    $\sigma_{ij}$は$\fibF(U_{ij})=\fibF(\emptyset)$の射であるから，
+    $\xi_i|_{\emptyset}$と$\xi_j|_{\emptyset}$の間に存在するただ一つの射である．
+    一方，$i=j$の時は，
+    $(\pr_i)^*(\inj_i)^*\xi$と$(\pr_j)^*(\inj_j)^*\xi$が完全に等しいので，
+    $\sigma_{ij}=\id[\xi_i]$．
+    以上より，対象同士の次の対応は$\mathrm{Ob}(E)$の逆対応と成る．
+    \begin{defmap}
+        {} & \mathrm{Ob}\left( \prod_i \fibF(U_i) \right)& \to&
+            \mathrm{Ob}\left( \im \epsilon_{\covU} \right) \\
+        {}& (\xi_i)_i& \mapsto&
+            (\{\xi_i\}_i, \{\sigma_{ij}\}_{i \neq j} \cup \{\id[\xi_i]\}_{i}) \\
+    \end{defmap}
+    これは$E$ :: essentially surjectiveを意味する．
+
+    \step{$E$ :: fully-faithfull.}
+    また，上で述べたことから，
+    射$\{\alpha_i\} \colon \epsilon_{\covU}(\xi) \to \epsilon_{\covU}(\eta)$に課された条件が，
+    任意の射の組み合わせ$(\alpha_i \colon \xi_i \to \eta_i)_i$について成立することも分かる
+    （$i \neq j$と$i=j$の場合で証明は異なる）．
+    なので全単射
+    \[
+        \Hom(\epsilon_{\covU}(\xi), \epsilon_{\covU}(\eta))
+        =\Hom((\xi_i)_i, (\eta_i)_i)
+        =\Hom(E(\epsilon_{\covU}(\xi)), E(\epsilon_{\covU}(\eta)))
+    \]
+    が得られる．
+    これは$E$ :: fully-faithfullを意味する．
+\end{proof}
+
+\begin{Thm}[Stackification of category fibered by groupoids.]
+    $\cat{C}$ :: site,
+    $\fibF$ :: category fibered by groupoids over $\cat{C}$とする．
+    この時，
+    $\bar{\fibF}$ :: stack in groupoids over $\cat{C}$と
+    $\theta \colon \fibF \to \bar{\fibF}$ :: morphism of fibered categoryが存在し，
+    \[ (-) \circ \theta \colon \HOM_{\cat{C}}(\bar{\fibF}, -) \to \HOM_{\cat{C}}(\fibF, -) \]
+    が圏同値となる．
+\end{Thm}
+（TODO: これは\cite{ASS} Thm4.6.5からとった．
+しかし，\url{https://stacks.math.columbia.edu/tag/02ZM}に一般の場合が書かれている．
+出来ればこちらを理解したい）
+
+\begin{Example}
+    presheafのstackificationはsheafificationと一致する．
+\end{Example}
+
+\begin{Example}[arXiv:math/0305243v1, Prop3.6]
+    $S$ :: scheme,
+    $\shM$ :: algebraic stack over $\Sch/S$,
+    $\fibG$ :: sheaf in groups over $\Sch/S$, acting on $\shM$とする．
+    この時，$\shM$の$\fibG$によるcategorical quotient :: $\shM/\fibG$は，
+    以下のprestack（$2$-functorとして定義する）:: $\shP$ のstackificationとして定義される．
+    \begin{description}[labelindent=1cm]
+        \item[Objects of $\shP(U)$.] $\shM(U)$の対象と同じ．
+        \item[Arrows of $\shP(U)$.]  $g \in \fibG(T)$と$\shM(U)$の射$g \ast x \to y$の組．
+    \end{description}
+    ただし$U \in \Sch/S$は任意．
+\end{Example}
+
+\section{Motivation}
+    (TODO)
+
+\section{Definition}
+\begin{Def}
+    関手$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$を用いて以下のように定義する．
+    \begin{enumerate}[label=(\roman*)]
+        \item
+            $\epsilon_{\covU}$ :: equivalenceとなる$\covU$をof effective descent for $\fibF$と呼ぶ．
+        \item
+            $\epsilon_{\covU}$の像と同型である$\fibF(\covU)$の対象を，effective dataという．
+    \end{enumerate}
+\end{Def}
+
+\section{Criterion for fpqc Stacks}
+\begin{Thm}[\cite{ASS} Lemma 4.25]\label{thm:fpqccriterion}
+    $S$ :: scheme,
+    $\fibF \to (\Sch/S)$ :: fibrationとする．
+    以下が成り立つとする．
+    \begin{enumerate}[label=(\alph*)]
+        \item $\fibF$はZariski topologyでのstackである．
+        \item
+            任意のflat surjective morphism of affine $S$-scheme :: $V \to U$について，\mnewline
+            $\epsilon_{\{V \to U\}} \colon \fibF(U) \to \fibF(\{V \to U\})$は圏同値．
+    \end{enumerate}
+    この時，$\fibF$はfpqc topologyでのstackである．
+\end{Thm}
+
+\begin{Remark}
+    ``flat"という条件は以下の証明では利用されない．
+\end{Remark}
+
+\subsection{Step 1 / 準備}
+以前示した命題から，
+$\fibF$ :: split fibered categoryと仮定しても一般性を失わないので，
+以下そのように仮定する．
+
+\begin{Lemma}\label{lemma:key}
+    $\cat{C}$をsiteとし，
+    $\fibF \to \cat{C}$を\underline{split} fibrationとする．
+    さらに$U \in \cat{C}$，$\covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$と
+    $\covU$の細分
+    \footnote
+    {
+        細分の定義を確認しておく:
+        任意の$\covV$の元$V_{ij} \to U$に対して$\covU$の元$U_i \to U$が存在し，
+        $V_{ij} \to U$が$U_i \to U$を通して$V_{ij} \to U_i \to U$と分解する．
+        特に射$V_{ij} \to U_{i}$が存在する．
+    }
+    $\covV=\{\psi_{ij} \colon V_{ij} \to U\}$をとる．
+
+    この時，関手$R_{\covU}^{\covV} \colon \fibF(\covU) \to \fibF(\covV)$が存在し，
+    以下は厳密な可換図式である。
+    \[
+        \begin{tikzcd}
+        \fibF(U) \ar[r, "\epsilon_{\covU}"] \ar[d, "\epsilon_{\covV}"']&
+        \fibF(\covU) \ar[ld, "R_{\covU}^{\covV}"] \\
+        \fibF(\covV)
+    \end{tikzcd}
+    \]
+\end{Lemma}
+%% {{{
+\begin{proof}
+    \step{関手$\fibF(\covU) \to \fibF(\covV)$の構成．}
+    細分の定義から，各$i,k$について以下が可換に成る射$\iota_{ik} \colon V_{ik} \to U_{i}$が存在する．
+    \[
+    \begin{tikzcd}
+        V_{ik} \ar[r, "\iota_{ik}"'] \ar[rr, bend left, "\psi_{ik}"]& U_{i} \ar[r, "\phi_i"']& U
+    \end{tikzcd}
+    \]
+    この射$\iota_{ik}$を用いて，
+    関手$R_{\covU}^{\covV}$を次のように定義する。
+    \begin{defmap}
+        R_{\covU}^{\covV} \colon& \fibF(\covU)& \to& \fibF(\covV) \\
+        \mathbf{Objects}& (\{\eta_i\}, \{\sigma_{ij}\})& \mapsto&
+            \left(\{(\iota_{ik})^*\eta_i\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}\right\}\right) \\
+        \mathbf{Arrows}& \{\alpha_i\}& \mapsto& \{(\iota_{ik})^*\alpha_i\}
+    \end{defmap}
+    ここで$\iota_{ik}^{jl}$は，
+    以下の可換図式のようにfiber productの一意性から得られる射である．
+    \begin{center}
+    \begin{tikzcd}[row sep=1.4cm, column sep=0.7cm]
+        V_{ik} \times_U V_{jl}
+        \ar[rr, "\pr_1"]\ar[dd, "\pr_2"']\ar[rd, red, "\iota_{ik}^{jl}"]&&
+        V_{ik} \ar[d, "\iota_{ik}"'] \ar[dd, bend left, "\psi_{ik}"]\\
+        {}& U_{i} \times_U U_{j} \ar[r, "\pr_1"]\ar[d, "\pr_2"']& U_{i} \ar[d, "\phi_i"']\\
+        V_{jl} \ar[r, "\iota_{jl}"]\ar[rr, bend right, "\psi_{jl}"']& U_{j} \ar[r, "\phi_j"]& U
+    \end{tikzcd}
+    \end{center}
+    $\{\sigma_{ij}\}$がcocycle conditionを満たすので，
+    $\left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}\right\}$もcocycle conditionを満たす
+    \footnote
+    {
+        証明はfiber productの普遍性から得られる
+        射$V_{il} \times V_{jm} \times V_{kn} \to U_{i} \times U_{j} \times U_{k}$を用いれば良い．
+    }．
+    同様に$\{(\iota_{ik})^*\alpha_i\}$が$\fibF(\covV)$の射であることも確認できる．
+
+    \step{対象について$R_{\covU}^{\covV}\epsilon_{\covU}=\epsilon_{\covV}.$}
+    $R_{\covU}^{\covV}\epsilon_{\covU}$を計算する．
+    まず$\xi \in \fibF(U)$をとり，$R_{\covU}^{\covV}\epsilon_{\covU}(\xi)$を計算しよう．
+    \begin{align*}
+        R_{\covU}^{\covV}\epsilon_{\covU}(\xi)
+        =&  R_{\covU}^{\covV}\Big( (\{\phi_i^*\xi\}, \{\sigma_{ij}\}) \Big) \\
+        =&  \left(\{(\iota_{ik})^*\phi_i^*\xi\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij} \right\}\right) \\
+        =&  \left(\{(\psi_{ik})^*\xi\}, \left\{\left(\iota_{ik}^{jl}\right)^*\sigma_{ij} \right\}\right)
+    \end{align*}
+    今，$\fibF$ :: split fibered categoryとしているので，
+    \[ \pr_2^*\phi_j^* \xi=(\phi_j \circ \pr_2)^*\xi=(\phi_i \circ \pr_1)^*\xi=\pr_1^*\phi_i^* \xi. \]
+    $\sigma_{ij}$はfiber productの普遍性から得られる
+    $\pr_2^*\phi_j^* \xi$から$\pr_1^*\phi_i^* \xi$への同型であるから，
+    $\sigma_{ij}=\id$．
+    このことと$\fibF$ :: splitから$\left(\iota_{ik}^{jl}\right)^*\sigma_{ij}=\id$も分かる．
+    まとめると，
+    $R_{\covU}^{\covV}\epsilon_{\covU}(\xi)=\left(\{(\psi_{ik})^*\xi\}, \{\id[(\psi_{ik})^*\xi]\}\right)$．
+
+    一方，
+    \[
+        \left(\iota_{ik}^{jl}\right)^*\pr_2^*\phi_j^* \xi
+        =(\psi_{jl} \circ \pr_2)^*\xi
+        =\pr_2^*(\psi_{jl})^*\xi
+        =\pr_1^*(\psi_{ik})^*\xi
+        =(\psi_{ik} \circ \pr_1)^*\xi
+        =\left(\iota_{ik}^{jl}\right)^*\pr_1^*\phi_i^* \xi.
+    \]
+    なので，fiber productの普遍性から得られる
+    $\pr_2^*(\psi_{jl})^*\xi$から$\pr_1^*(\psi_{ik})^*\xi$への同型は$\id$である．
+    したがって
+    $\epsilon_{\covV}(\xi)=\left(\{(\psi_{ik})^*\xi\}, \{\id[(\psi_{ik})^*\xi]\}\right)$となり，
+    $R_{\covU}^{\covV}\epsilon_{\covU}(\xi)=\epsilon_{\covV}(\xi)$．
+    
+    \step{射について$R_{\covU}^{\covV}\epsilon_{\covU}=\epsilon_{\covV}.$}
+    $\fibF(U)$の射$\alpha \colon \xi_1 \to \xi_2$をとる．
+    すると$\fibF$ :: splitなので
+    \[
+        R_{\covU}^{\covV}\epsilon_{\covU}(\alpha)
+        =\{(\iota_{ik})^*\phi_i^*\alpha\}=\{(\phi_i \circ \iota_{ik})^*\alpha\}=\{\psi_{ik}^*\alpha\}
+        =\epsilon_{\covV}(\alpha).
+    \]
+\end{proof}
+%% }}}
+\begin{Remark}
+    $\fibF$ :: splitを仮定しない場合，
+    さらにbase preserving isomorphism ::
+    $R_{\covU}^{\covV}\epsilon_{\covU} \to \epsilon_{\covV}$を構成する必要がある．
+\end{Remark}
+
+%\begin{Lemma}
+%    $\cat{C}, \fibF$等を上の補題のようにする．
+%    $U \in \cat{C}$をとり，$\covU \in \Cov(U)$とする．
+%    さらに$\covV$を$\covU$の細分，$\covW$を$\covV$の細分とする
+%    （したがって$\covW$は$\covU$の細分である）．
+%    この時，次が成立する．
+%    \[ R_{\covV}^{\covW} \circ R_{\covU}^{\covV}=R_{\covU}^{\covW}. \]
+%\end{Lemma}
+%\begin{proof}
+%    明らかなので証明は略す．
+%\end{proof}
+
+\subsection{Step 2 / single morphism coverの場合に帰着させる．}
+    \begin{Cor}[\cite{NoteGroTop} p.87]
+        $\cat{C}, \fibF$等を補題(\ref{lemma:key})の様にとる．
+        $\covU=\{\phi_i \colon V_i \to U\}, V'=\bigsqcup V_i$とする．
+        さらに，$f \colon V' \to U$を$\covU$から誘導される射とする．
+
+        このとき，圏同値 $R_{V' \to U}^{\covU} \colon \fibF(V' \to U) \to \fibF(\covU)$が存在し，
+        合成
+        \[\xymatrix{
+            \fibF(U) \ar[r]^-{\epsilon_{\{f\}}}& \fibF(V' \to U) \ar[r]^-{E}& \fibF(\covU)
+        }\]
+        が関手$\epsilon_{\covU} \colon \fibF(U) \to \fibF(\covU)$と厳密に一致する．
+    \end{Cor}
+    \begin{proof}
+        $\covU$は$\{U' \to U\} \in \Cov(U)$の細分であるから，
+        補題(\ref{lemma:key})から明らか．
+    \end{proof}
+
+    \begin{Remark}
+        ここで，各$\phi_i$がquasi-compact（特にfpqc）であったとしても，
+        誘導される射$f \colon V' \to U$が必ずしもquasi-compactでないことに注意する．
+        例えば$\{\Spec k[x_i] \to \bigsqcup_i \Spec k[x_i]\}_{i \in \N}$を考えれば分かる．
+
+        以上のことに注意すると，我々は次のことを証明することに成る:
+        \begin{Claim}
+            条件(a), (b)が成り立つならば，
+            以下の条件$(*)$を満たす任意のflat surjective morphism :: $f \colon V \to U$について，
+            $\epsilon_{\{f\}} \colon \fibF(U) \to \fibF(f \colon V \to U)$ :: equivalence.
+            \begin{description}
+                \item[$(*)$]
+                    affine Zariski cover :: $U=\bigcup_i U_i$と，
+                    各$i$について$f^{-1}(U_i)$のaffine Zariski cover :: $f^{-1}(U_i)=\bigcup_i V_{ij}$が存在し，
+                    $V_{ij}$ :: quasi-compactかつ$f(V_{ij})=U_i$となる．
+            \end{description}
+        \end{Claim}
+        条件$(*)$は$U, V$ :: locally noetherianであるような
+        任意のfppf morphismについて成立する(\cite{ASS} Cor1.1.6)．
+    \end{Remark}
+
+    \begin{Remark}
+        以下，$\fibF$ :: split fibered categoryとする．
+        session 4.5 定理1.2より，このように仮定しても一般性を失わない．
+    \end{Remark}
+
+\subsection{Step 3 / affine schemeへのquasi-compact morphismの場合．}
+    $f \colon V \to U$を$U$ :: affineであるquasi-compact morphismとする．
+    $\{ V_i \}_i$を$V$のopen affine coverとし，$V'=\bigsqcup_i V_i$とおく．
+    $V'$ :: affineなので，
+    仮定(b)から圏同値$\fibF(U) \simeq \fibF(V' \to U)$が存在する．
+
+    以下の図式$(1)$を考える．
+    $\leftrightarrow$は圏同値を意味する．
+    \[
+    \begin{tikzcd}[row sep=1cm]
+        \fibF(U) \ar[r, "\epsilon_{f}"]\ar[d, leftrightarrow, "\epsilon_{\{V_i \to U\}}"']&
+        \fibF(f \colon V \to U) \ar[ld, "R_{f}^{V_i \to U}"]\\
+        \fibF(\{V_i \to U\}) & \\
+        \fibF(V' \to U) \ar[u, leftrightarrow, "R_{V' \to U}^{\{V_i \to U\}}"']
+        \ar[uu, leftrightarrow, shift left=2mm, bend left=90, rounded corners, "\epsilon_{V' \to U}"]
+    \end{tikzcd}
+    \eqno{(1)}
+    \]
+    ここで関手$\epsilon_{f}$は次で与えられる．
+    ただし$\pr_k \colon V \times_U V \to V$は第$k$成分への射影である．
+    \begin{defmap}
+        \epsilon_{f}\colon & \fibF(U)& \to& \fibF(f \colon V \to U) \\
+        \mathbf{Objects:}& \xi& \mapsto& (f^*\xi, \sigma)\\
+        \mathbf{Arrows:}& \alpha& \mapsto& f^*\alpha
+    \end{defmap}
+    ここで$\sigma \colon \pr_2^*f^*\xi \to \pr_1^*f^*\xi \in \Arr(\fibF(V \times_U V))$は，
+    恒等射$\id[\pr_2^*f^*\xi]$である．
+    これは
+    $\pr_2^*f^*\xi,\pr_1^*f^*\xi$が
+    いずれも$f \circ \pr_2=f \circ \pr_1$による$\xi$のpullbackであることと，
+    $\fibF$ :: splitから得られる
+
+    この図式の可換性から，
+    関手の同型$(R_{f}^{V_i \to U}) \circ \epsilon_{f}=\epsilon_{\{V_i \to U\}}$が得られる
+    （$\fibF$ :: split fibered categoryを利用する）．
+    （よって上の図式$(1)$は可換である．）
+    したがって$\epsilon_{f}$のpsuedo-inverse functor ::
+    $(\epsilon_{\{V_i \to U\}})^{-1} \circ (R_{f}^{V_i \to U})$が得られた．
+
+\subsection{Step 4 / 条件\tp{$(*)$}{(*)}を満たすaffine schemeへの射の場合．}
+    (\cite{NoteGroTop} p.88)
+    仮定$(*)$より，
+    Zariski cover :: $\{\iota_i \colon V_i \to V\}$が存在し，$V_i$ :: quasi-compact．
+    \begin{Remark}
+        前段の議論のうち，図式$(1)$の$\fibF(U) \to \fibF(V' \to U)$が圏同値でない．
+        なので新しい議論が必要である．
+    \end{Remark}
+
+    補題(\ref{lemma:key})から得られる以下の可換図式を考える．
+    \[
+    \begin{tikzcd}[row sep=10mm]
+        \fibF(U) \ar[r, "\epsilon_{f}"]
+        \ar[d, leftrightarrow, "\substack{\epsilon_{V_i \to U} \\ \text{\color{red}equivalence}}"']&
+        \fibF(f \colon V \to U)
+        \ar[ld, "\substack{R_{f}^{V_i \to U} \\ \text{\color{red}essentially surjective \& full}}"]\\
+        \fibF(V_i \to U)
+    \end{tikzcd}
+    \]
+    左にある縦の射はStep 3から圏同値である．
+    したがって$\fibF(V \to U) \to \fibF(V_i \to U)$（定義はおおよそ関手$E$と同様に与えられる）は
+    essentially surjectiveかつfullである．
+    なのでこの関手が更にfaithfullであることが証明できれば，
+    図式の可換性から$\epsilon_{f}$が圏同値であることが証明できる．
+
+    $\fibF(V \to U)$の射$\beta, \beta'$が，$\beta|_{V_i}=\beta'|_{V_i}$を満たすとする．
+    この時，$\beta=\beta'$を証明すれば良い．
+    まず，以下の厳密な可換図式から，
+    任意の添字$j$について
+    $R_{V_i \cup V_j \to U}^{V_i \to U} \colon \fibF(V_i \to U) \to \fibF(V_i \cup V_j \to U)$が圏同値だと分かる．
+    この関手を略して$R$を書くことにする．
+    \[
+    \begin{tikzcd}[row sep=10mm]
+        \fibF(U)
+        \ar[r, leftrightarrow, "\epsilon_{V_i \cup V_j \to U}"]
+        \ar[d, leftrightarrow, "\epsilon_{V_i \to U}"']& 
+        \fibF(V_i \cup V_j \to U) \ar[ld, red, "R\,:=R_{V_i \cup V_j \to U}^{V_i \to U}"]\\
+        \fibF(V_i \to U)
+    \end{tikzcd}
+    \]
+    したがって$R^{-1}$が存在する．
+    関手$R$は
+    $\fibF(V_i \cup V_j \to U)$の射$\beta|_{V_i \cup V_j}$を$\beta|_{V_i}$に一対一に写すのだから，
+    $R^{-1}$は$\beta|_{V_i}$を$\beta|_{V_i \cup V_j}$に一対一に写す．
+
+    さて，以下の関手の合成で$\beta, \beta'$を写す．
+    \[
+    \begin{tikzcd}[column sep=20mm]
+        \fibF(V \to U) \ar[r, "R_{V \to U}^{V_i \to U}"]&
+        \fibF(V_i \to U) \ar[r, "R^{-1}"]&
+        \fibF(V_i \cup V_j \to U) \ar[r, "R_{V_i \cup V_j \to U}^{V_j \to U}"]&
+        \fibF(V_j \to U) 
+    \end{tikzcd}
+    \]
+    $\beta|_{V_i}=\beta'|_{V_i}$を$R^{-1}$で写して
+    $\beta|_{V_i \cup V_j}=\beta'|_{V_i \cup V_j}$が得られる．
+    よって，任意の$j$について
+    \[ \beta|_{V_j}=(\beta|_{V_i \cup V_j})|_{V_j}=(\beta'|_{V_i \cup V_j})|_{V_j}=\beta'|_{V_j} \]
+    が成立する．
+    $\fibF$ :: Zariski stackなので，$\beta=\beta'$．
+
+\subsection{Step 5 / 一般の場合．}
+    条件$(*)$を満たす任意の射$f \colon V \to U$をとり，
+    affine Zarisiki cover :: $\{U_i \to U\}$をとる．
+    さらに$V_i:=f^{-1}(U_i)$とおき，$\phi_i=f|_{V_i}$とおく．
+
+    今，
+    \[ \Phi_i=\epsilon_{V_i \to U_i} \colon \fibF(U_i) \to \fibF(V_i \to U_i) \]と置く．
+    同様に$\Phi_{ij}=\epsilon_{V_{ij} \to U_{ij}}, \Phi_{ijk}=\epsilon_{V_{ijk} \to U_{ijk}}$と置く．
+    この時，以下は厳密な可換図式である．
+    \[
+    \begin{tikzcd}
+        \fibF(U_i) \ar[r, "\res"]\ar[d, "\Phi_{i}"']&
+            \fibF(U_{ij}) \ar[d, "\Phi_{ij}"]\ar[r, "\res"] & \fibF(U_{ijk}) \ar[d, "\Phi_{ijk}"]\\
+        \fibF(V_i \to U_i) \ar[r, "\res"']& \fibF(V_{ij} \to U_{ij}) \ar[r, "\res"']& \fibF(V_{ijk} \to U_{ijk})
+    \end{tikzcd}
+    \eqno{(4)}
+    \]
+    ここで，各$\Phi_{*}$はいずれもStep 4から圏同値である．
+
+    次の関手を考える．
+    \begin{defmap}
+        P_{i}\colon & \fibF(f \colon V \to U)& \to& \fibF(V_i \to U_i) \\
+        \mathbf{Objects}& (\eta, \sigma)& \mapsto& (\eta|_{V_i}, (\gamma_{ii})^*\sigma) \\
+        \mathbf{Arrows}& \alpha& \mapsto& \alpha|_{V_i} \\
+    \end{defmap}
+    同様に$P_{ij} \colon \fibF(f) \to \fibF(V_{ij} \to U_{ij})$を定義する．
+    するとstep 4の結果から$\fibF(U_i) \simeq \fibF(V_i \to U_i)$なので，
+    $\xi_i \in \fibF(U_i)$と同型
+    \[ \alpha_i \colon \Phi_i(\xi_i) \isomap P_i((\eta, \sigma)) \]
+    が得られる．
+    上の図式(4)が可換であることから，
+    \[
+        \alpha_i|_{V_{ij}} \colon
+        \Phi_{ij}(\xi_i|_{V_{ij}})=(\Phi_i(\xi_i))|_{V_{ij}} \isomap P_{ij}((\eta, \sigma))
+    \]
+    すると，
+    \[ \alpha_i^{-1}\alpha_j \colon \Phi_{ij}(\xi_j|_{V_{ij}}) \to \Phi_{ij}(\xi_i|_{V_{ij}}) \]
+    $\Phi_{ij}$ :: equivalenceなので，
+    この同型射の逆像として$\sigma_{ij} \colon \xi_j|_{V_{ij}} \to \xi_i|_{V_{ij}}$が得られる．
+    
+    以上で得られる$(\{\xi_i\}, \{\sigma_{ij}\})$はcocycle conditionを満たすため（TODO），
+    $\fibF(\{U_i \to U\})$のobjectである．
+    $\fibF$ :: Zariski stackなので，これは$\fibF(U)$と圏同値．
+    よって$\xi$が得られる．
+    （TODO: 射についても）
+
+\section{Application : \tp{$\QCoh/S \to \Sch/S$}{QCoh/S -> Sch/S} is a fpqc stack.}
+
+    \begin{Def}
+    $S \in \Sch$に対し，圏$\QCoh/S$を以下のように定める．
+    \begin{description}
+        \item[Objects.] \mnewline
+            $\mathrm{Fpqc}(S)$
+            \footnote{圏$\Sch/S$にfpqc topologyを備えたもの．}の対象 :: $U$と，
+            $U$上のquasi-coherent sheaf (on fpqc topology):: $\shU$の組．
+        \item[Arrows.] \mnewline
+            射$(U, \shU) \to (V, \shV)$は，
+            $\Sch/S$の射$f \colon U \to V$と，
+            morphism of sheaves on $V$ :: $f^{\#} \colon \shV \to f_*\shU$の組．
+    \end{description}
+    この時，$\QCoh/S \to \Sch/S; \ (U, \shU) \mapsto U$はfibrationである．
+    \end{Def}
+
+%    \begin{Def}
+%        $\phi \colon A \to B$を環準同型とする．
+%        $A$-module :: $M$について，
+%        \[
+%            c_M \colon M \otimes_A B \to B \otimes M;\ m \otimes b \mapsto b \otimes m,\qquad 
+%            p_M \colon M \to B \otimes M;\ m \mapsto 1_B \otimes m
+%        \]
+%        と定義する．
+
+%        この時，$\Mod_{\phi}$を以下のように定義する．
+%        \begin{description}
+%            \item[Objects.] $A$-module :: $N$と同型$\psi \colon N \otimes B \to B \otimes N$であって，
+%            \item[Arrows.]
+%        \end{description}
+%        さらに，$\Mod_A \to \Mod_{\phi}$を以下のように定義する．
+%        \begin{defmap}
+%            \epsilon_{\phi}\colon & & \to&  \\
+%            \mathbf{Objects}& & \mapsto& \\
+%            \mathbf{Arrows}& & \mapsto& 
+%        \end{defmap}
+%    \end{Def}
+    
+    $\Mod_A, \Mod_{\phi}, \Mod_A \to \Mod_{\phi}$の定義は
+    \cite{NoteGroTop} \S4.2.1を参照せよ．
+
+    $f \colon V \to U$をflat surjective morphism of $S$-schemesとし，
+    $\phi \colon A \to B$を$f$に対応するfaithfully flatな環準同型とする．
+    この時，$\QCoh(U) \simeq \Mod_A$はよく知られている
+    \footnote{この命題は\cite{HarAG} Cor5.5で詳しく述べられている}．
+    \begin{Claim}
+        $\QCoh(f \colon V \to U) \simeq \Mod_{\phi}$．
+    \end{Claim}
+    したがって$\epsilon_{f} \colon \QCoh(U) \to \QCoh(f \colon V \to U)$は
+    関手$\Mod_A \to \Mod_{\phi}$に対応する．
+    この関手は，可換環論によって圏同値であることが証明される．
+
+\bibliographystyle{jplain}
+\bibliography{reference}
+\end{document}
