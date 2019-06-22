@@ -1,0 +1,76 @@
+\documentclass[]{jsarticle}
+\usepackage{../math_note, enumitem}
+
+\begin{document}
+    \title{層(sheaf)の概観 \\ {\normalsize 代数幾何学に於いて}}
+    \author{七条彰紀}
+    \maketitle
+
+    代数幾何学を始める人のために，またこれから学ぶ人のために書きます．ノートです．当然ですが．
+
+    \section{代数幾何学に於けるsheafという概念}
+    まず代数幾何学でのsheafの立ち位置について書いておきます．
+    sheaf，より一般にstackは代数幾何学の中心的概念です．
+
+    \paragraph{scheme theoryに於いて}
+    scheme theoryでは可換環からschemeという幾何学的な対象を構築します．
+    この構築の際に，可換環論という代数学を記憶しているのがsheafです．
+    可換環が「切り刻まれ貼り合わされて」structure sheafとなっているのです．
+    他にscheme theoryで現れるsheafとしては，scheme上の(quasi-)coherent sheafが重要です．
+    (quasi-)coherent sheafを調べることは，schemeについての情報を得るための基本的な手段です．
+    またscheme上のsheaf cohomologyは，
+    schemeに「変な感じの部分」がどれだけあるかを調べるための重要な道具となっています．
+    （特にetale cohomologyは数論においても重要な位置を占めています．）
+
+    \paragraph{scheme theoryをはみ出す}
+    一方で，schemeだけでは用に足りないことがあります．
+    例えばschemeの群による商を考えることがあります
+    （これは普通の位相空間の群作用による商のようなものです）．
+    定義は圏論的に，普遍性を用いて定義されるのですが，
+    条件を満たすschemeが無い，ということはしょっちゅうです．
+    これに対する一つの解決方法として，
+    schemeの概念を拡張するということが考えられます．
+    圏論的に性質の良い，都合の良い対象まで研究対象に収めようというわけです．
+
+    \paragraph{圏論ちょっとわかる，という人向け}
+    schemeの概念を拡張するには，どのような方策を取るべきでしょうか．
+    当座の目標は「schemeの圏を包含する圏を探す」ということです．
+    全ての極限をschemeの圏に付け加える(pro-scheme)，
+    基礎を担う可換環論を非可換環論やモノイド論まで拡大する，
+    などの手段があります．
+    ですがまた別に，米田の補題を手がかりにする事が出来ます．
+    米田の補題は，
+    米田関手がschemeの圏からscheme上のpresheafの圏への忠実充満関手
+    となることをいっています．
+    schemeの圏を包含する圏として「schemeの圏からscheme上のpresheafの圏」
+    が使える，ということです．
+
+    \paragraph{schemeの一般化に於けるsheaf}
+    この，schemeの一般化(generalized scheme)を考える方向では，
+    sheafが中心概念です．
+    実際にgeneralized schemeの代表であるalgebraic spaceはsheafです．
+    そしてalgebraic spaceの定義に
+    algebraic spaceの位相空間の定義は含まれていません．
+    
+    ちなみに極端なことを言うと，
+    schemeでさえ最初から位相空間無しに定義することが可能です．
+    これは"functorial scheme"などと呼ばれます．
+    もちろんこれは普通の意味のschemeではありませんが，
+    "functorial scheme"から普通のschemeの体裁を整えることも，
+    この逆も可能です．
+
+    \paragraph{さらなる一般化}
+    そしてさらにsheafはstackへ，
+    algebraic spaceはalgebraic stack (Artin/DM stack)へと一般化されます．
+    恐ろしいことにalgebraic spaceにもalgebraic stackに関しても
+    (quasi-)coherent sheafやsheaf cohomologyといった理論が構築されています．
+
+\section{sheafの思想}
+    \paragraph{「局所的に調べ，大域的に知る」}
+    位相空間上のsheafの定義の仕方はいくつか存在しますが，
+    意味が分かりやすいのは``identity axiom"と``gluability axiom"を
+    満たすpreaheafとして定義することだと思います．
+%    （特定の完全列を満たすpresheafとして定義するのは圏論的な取扱いに向いていますし，
+%    etale mapのsectionが成すpresheafとして定義するのはsheafの一歩進んだ理解を促します．）
+
+\end{document}
