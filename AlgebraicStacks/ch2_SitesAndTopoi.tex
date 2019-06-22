@@ -1,4 +1,4 @@
-\documentclass[a4paper]{jsarticle}
+\documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage[dvipdfmx, hiresbb]{graphicx}
 \usepackage{booktabs}
 \usepackage{macros}
@@ -954,8 +954,8 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \[ (\Lan_{f^{op}}\shF)(U)=\Colim\left(\xymatrix{
         (\Comma{U}{f})^{op}=\Comma{f^{op}}{U} \ar[r]^-{\pi_1}& \cat{C}^{op} \ar[r]^-{\shF}& \Sets
     }\right). \]
-    ここで$U \downarrow f^{op}$はComma圏で，$\pi_1$は射影$[f(V) \to U] \mapsto V$である．
-    $f^{op} \downarrow U$は$\cat{C}^{op}$の部分圏だから，特にこれはsmall colimit.
+    ここで$\Comma{f^{op}}{U}$はComma圏で，$\pi_1$は射影$[f(V) \to U] \mapsto V$である．
+    $\Comma{f^{op}}{U}$は$\cat{C}^{op}$の部分圏だから，特にこれはsmall colimit.
     $\Sets$ :: cocompleteなのでこのcolimitは存在する．
 \end{proof}
 
