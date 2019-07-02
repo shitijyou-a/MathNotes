@@ -1,6 +1,10 @@
 \documentclass[]{jsarticle}
 \usepackage{../math_note, enumitem}
 
+\newcommand{\Open}{\mathbf{Open}}
+\newcommand{\Sets}{\mathbf{Sets}}
+\newcommand{\covU}{\mathcal{U}}
+
 \begin{document}
     \title{層(sheaf)の概観 \\ {\normalsize 代数幾何学に於いて}}
     \author{七条彰紀}
@@ -13,12 +17,12 @@
     sheaf，より一般にstackは代数幾何学の中心的概念です．
 
     \paragraph{scheme theoryに於いて}
-    scheme theoryでは可換環からschemeという幾何学的な対象を構築します．
-    この構築の際に，可換環論という代数学を記憶しているのがsheafです．
-    可換環が「切り刻まれ貼り合わされて」structure sheafとなっているのです．
-    他にscheme theoryで現れるsheafとしては，scheme上の(quasi-)coherent sheafが重要です．
+    scheme theory（スキーム論）では可換環からschemeという幾何学的な対象を構築します．
+    この構築の際に，元と成っていた可換環を記憶しているのがsheafです．
+    可換環が「切り刻まれ貼り合わされて」structure sheaf（構造層）となっているのです．
+    他にscheme theoryで現れるsheafとしては，scheme上の(quasi-)coherent sheaf（（準）連接層）が重要です．
     (quasi-)coherent sheafを調べることは，schemeについての情報を得るための基本的な手段です．
-    またscheme上のsheaf cohomologyは，
+    またscheme上のsheaf cohomology（層係数コホモロジー）は，
     schemeに「変な感じの部分」がどれだけあるかを調べるための重要な道具となっています．
     （特にetale cohomologyは数論においても重要な位置を占めています．）
 
@@ -40,37 +44,123 @@
     などの手段があります．
     ですがまた別に，米田の補題を手がかりにする事が出来ます．
     米田の補題は，
-    米田関手がschemeの圏からscheme上のpresheafの圏への忠実充満関手
+    米田関手がschemeの圏からscheme上のpresheaf（前層）の圏への忠実充満関手
     となることをいっています．
     schemeの圏を包含する圏として「schemeの圏からscheme上のpresheafの圏」
     が使える，ということです．
 
     \paragraph{schemeの一般化に於けるsheaf}
-    この，schemeの一般化(generalized scheme)を考える方向では，
+    この，schemeの一般化(generalized scheme; 一般化スキーム)を考える方向では，
     sheafが中心概念です．
-    実際にgeneralized schemeの代表であるalgebraic spaceはsheafです．
+    実際にgeneralized schemeの代表であるalgebraic space（代数的空間）はsheafです．
     そしてalgebraic spaceの定義に
     algebraic spaceの位相空間の定義は含まれていません．
     
     ちなみに極端なことを言うと，
     schemeでさえ最初から位相空間無しに定義することが可能です．
-    これは"functorial scheme"などと呼ばれます．
+    これは"functorial scheme"（関手的スキーム？）などと呼ばれます．
     もちろんこれは普通の意味のschemeではありませんが，
     "functorial scheme"から普通のschemeの体裁を整えることも，
     この逆も可能です．
 
     \paragraph{さらなる一般化}
-    そしてさらにsheafはstackへ，
+    そしてsheafはstack（いわば，圏を値に取るsheaf．スタック）へ，
     algebraic spaceはalgebraic stack (Artin/DM stack)へと一般化されます．
     恐ろしいことにalgebraic spaceにもalgebraic stackに関しても
     (quasi-)coherent sheafやsheaf cohomologyといった理論が構築されています．
 
 \section{sheafの思想}
-    \paragraph{「局所的に調べ，大域的に知る」}
-    位相空間上のsheafの定義の仕方はいくつか存在しますが，
-    意味が分かりやすいのは``identity axiom"と``gluability axiom"を
-    満たすpreaheafとして定義することだと思います．
+    \paragraph{sheafの定義}
+    位相空間上のsheafの定義の仕方は少なくとも$4$つ存在しますが，
+    意味が分かりやすいのは
+    ``identity axiom"（一致公理？）と
+    ``gluability axiom"（接着性公理 or 貼り合わせ可能性公理？）を
+    満たすpreaheaf（前層）として定義することだと思います．
 %    （特定の完全列を満たすpresheafとして定義するのは圏論的な取扱いに向いていますし，
 %    etale mapのsectionが成すpresheafとして定義するのはsheafの一歩進んだ理解を促します．）
+    この定義を以下に述べます．
+    \begin{Def}
+        \hfill \vspace{-0.8cm}
+        \begin{enumerate}[label=(\roman*), leftmargin=*]
+        \item 
+            位相空間$X$に対し，$X$の開集合と包含写像が成す圏を$\Open(X)$とする．
+
+        \item
+            $\Open(X)$から集合の圏$\Sets$への反変関手$\shF \colon \Open(X) \to \Sets$を
+            $X$上のpresheafと呼ぶ．
+
+        \item
+            $X$上のpresheaf :: $\shF$と$U \in \Open(X)$について，
+            $s \in \shF(U)$を$\shF$の$U$上のsectionと呼ぶ．
+        
+        \item
+            $X$の開集合の間に有る包含射$\iota^{U}_{V} \colon U \inclmap V \in \operatorname{Arr} \Open(X)$を考える．
+            $X$上のpresheaf :: $\shF$による$\iota^{U}_{V}$の像を$\res^{U}_{V}(:=\shF(\iota^{U}_{V}))$
+            と表し，restriction map（制限射）と呼ぶ．
+            $s \in \shF(U)$の$\res^{U}_{V}$の像はしばしば$s|_{V}(=\res^{U}_{V}(s))$と表記される．
+
+        \item 
+            さらにpresheaf :: $\shF$が以下の$2$条件を満たす時，$\shF$は（集合の）sheafと呼ばれる．
+            ただし$U \in \Open(X)$を$X$の開集合とし，
+            $\covU=\{ U_i \}_{i \in I}$を$U$の$X$の開集合による被覆
+            \footnote{ すなわち，任意の点$x \in U$に対して，$x \in U_i$を満たす$U_i \in \covU$が存在する． }とする．
+            \begin{description}[labelindent=0.5cm, leftmargin=1cm]
+                \item[\underline{Identity Axiom}] \mbox{}\\
+                    任意の$2$元$s ,t \in \shF(U)$が，
+                    任意の$i$について$s|_{U_i}=t|_{U_i}$であるならば，$s=t$．
+
+                \item[\underline{Gluability Axiom}] \mbox{}\\
+                    $U$の開部分集合上のsectionsの組
+                    $( s_i )_{i \in I} \in \prod_{i \in I} \shF(U_i)$が次を満たすとする．
+                    \[ \Forall{i, j \in I} s_i|_{U_i \cap U_j}=s_j|_{U_i \cap U_j}. \]
+                    この時，全ての$i \in I$について$s|_{U_i}=s_i$であるsection :: $s \in \shF(U)$が存在する．
+                    （identity axiomより，これは一意に存在する．）
+            \end{description}
+        \end{enumerate}
+    \end{Def}
+
+    \paragraph{「局所的に調べ，大域的に知る」}
+    identity axiomとgluability axiomはそれぞれ
+    「$2$つのsectionは，断片（すなわち$s|_{U_i}, t|_{U_i}$）が等しければ，等しい」
+    「sectionの断片（すなわち$s_i$）は貼り合わせられる」と読めます．
+    そのため，この二つの条件は
+    「局所的な情報から大域的な情報が決定される」という気持ちを表現したものだ，
+    と筆者は感じています．
+
+    \paragraph{もう一つの定義}
+    上記定義の$(v)$，
+    すなわちidentity axiomとgluability axiomを次のように述べることも出来ます．
+    \begin{Def}
+        位相空間$X$上のpresheaf :: $\shF$を考える．
+        $U \in \Open(X)$を$X$の開集合とし，
+        $\covU=\{ U_i \}_{i \in I}$を$U$の$X$の開集合による被覆とする．
+        この$U, \covU$に対し，集合$\shF(\covU)$を以下通り定義する．
+        \[
+            \shF(\covU)=
+            \left\{
+                (s_i)_{i \in I} \ \middle|\  \Forall{i, j \in I} s_i|_{U_i \cap U_j}=s_j|_{U_i \cap U_j}
+            \right\}
+        \]
+        $(s_i)_{i \in I}$に課された条件はGluability Axiomで述べられているものと全く同じである．
+        この集合の元をdescent datum（降下データム？）と呼ぶ．
+
+        さて，次のように写像を定める．
+        \begin{defmap}
+            \epsilon_{\covU}\colon & \shF(U)& \to& \shF(\covU) \\
+            {}& s& \mapsto& (s|_{U_i})_{i \in I}
+        \end{defmap}
+        
+        $\shF$がsheafであるとは，
+        \underline{任意の$U, \covU$について$\epsilon_{\covU}$が全単射であるということ．}
+    \end{Def}
+    任意の$U, \covU$について，
+    $\epsilon_{\covU}$が単射であることは$\shF$についてidentity axiomを満たすことと同値です．
+    同じく，全射であることはgluability axiomを満たすことと同値です．
+
+\section{Seafification（層化）}
+    任意のpresheaf :: $\shF$について，対応するsheaf :: $\shF^+$
+    \footnote{ associated sheafという意味で$\shF^a$と書く人も居ます． }が一意に存在します．
+    この対応$\shF \mapsto \shF^+$はsheafification（層化）は呼ばれています．
+    
 
 \end{document}
