@@ -1,0 +1,315 @@
+\documentclass[a4paper, dvipdfmx]{jsarticle}
+\usepackage{macros}
+\newcommand{\vsubseteq}{\text{\rotatebox{-90}{$\subseteq$}}}
+
+\begin{document}
+\title{ゼミノート \#10 \\ Topology and Shaves on Algebraic Stacks}
+\author{七条彰紀}
+\maketitle
+\tableofcontents
+\vspace{10pt}
+
+ここまででartin stackが定義できたが，
+これはschemeで言えばstructure sheafだけ定義したような状態である．
+artin stackのZariski位相空間と，
+（Grothendieck topology上の）sheafを導入する．
+
+\section{Points of Artin Stack}
+いずれも\cite{SP} Tag 04XE, \cite{LMB00} section 5.を参照せよ．
+
+\begin{Def}[\cite{LMB00} section 5]
+    体の$\Spec$からの射
+    $x_1 \colon \Spec k_1 \to \fibX, x_2 \colon \Spec k_2 \to \fibX$について
+    $x_1 \sim x_2$であるとは，
+    ある$k_{12}$ ::  field と
+    以下の$2$-可換図式が存在すること．
+
+    \[
+    \begin{tikzcd}
+        \Spec k_{12} \ar[d]\ar[r]& \Spec k_{1} \ar[d, "x_1"] \\
+        \Spec k_{2} \ar[r, "x_2"']& \fibX
+    \end{tikzcd}
+    \]
+\end{Def}
+
+\begin{Prop}[ \cite{SP} 04XF ]
+    ここで定義した$\sim$は同値関係である．
+\end{Prop}
+\begin{proof}
+    $\sim$は反射律，対称律を満たすことは自明なので，推移律の成立を示す．
+
+    体から$\fibX$への$3$つの射 :: $x_1,x_2,x_3$を考える．
+    これらが$x_1 \sim x_2, x_2 \sim x_3$を同時に満たすとは，
+    体$k_{12}, k_{23}$と次の$2$-可換図式が存在するということである．
+    \[
+    \begin{tikzcd}
+        \Spec k_{12} \ar[r] \ar[d] & \Spec k_2 \ar[d, "x_2"] &  \Spec k_{23} \ar[l] \ar[d] \\
+        \Spec k_1 \ar[r, "x_1"'] &  \fibX &  \Spec k_3 \ar[l, "x_3"]
+    \end{tikzcd}
+    \]
+    この時，$k_{12}, k_{23}$の合成体（すなわち最小の共通の拡大体）を$k_{123}$とする．
+    $k_{12} \cap k_{23}$は$k_{123}$の部分体として$k_{2}$に一致する
+    （あるいは，一致するように$2$つの準同型$k_{12}, k_{23} \to k_{123}$を選ぶ）．
+    すると可換図式は次のように拡張される．
+    \[
+    \begin{tikzcd}
+        {} & \ar[ld] \Spec k_{123} \ar[rd]& {} \\
+        \Spec k_{12} \ar[r] \ar[d] & \Spec k_2 \ar[d, "x_2"] &  \Spec k_{23} \ar[l] \ar[d] \\
+        \Spec k_1 \ar[r, "x_1"'] &  \fibX &  \Spec k_3 \ar[l, "x_3"]
+    \end{tikzcd}
+    \]
+    上の新たな四辺形はschemeの図式として可換なので，
+    このartin stackの拡張後の図式も可換．
+\end{proof}
+
+\begin{Remark}
+    以上の定義はschemeの点に対応している．
+    scheme :: $X$について，
+    体の$Spec$ :: $\Spec k$から$X$への射は
+    点$x \in X$と体の準同型 :: $\phi \colon \kappa(x) \to k$に対応する
+    ( \cite{HarAG} ch II, Ex2.7, \cite{SP} 01J5)．
+    ここで$\kappa(x)$はresidue fieldである．
+    したがって一点$x$に対応する射は$\kappa(x)$から体への準同型の数だけ有る．
+    これらを全て同値なものとする同値関係を定めたい．
+
+    体から$X$への二つの射
+    \[ x_1 \colon \Spec k_1 \to \fibX, \quad x_2 \colon \Spec k_2 \to \fibX \]
+    について，以下は同値．
+    \begin{enumerate}[label=(\alph*), leftmargin=*]
+        \item 
+        位相空間の$2$つの写像$|x_1|, |x_2|$の像が$x$である．
+
+        \item
+        すなわち，体$k_{12}$と次の可換図式が存在する．
+        \[
+        \begin{tikzcd}
+            \Spec k_{12} \ar[d]\ar[r]& \Spec k_{1} \ar[d, "x_1"] \\
+            \Spec k_{2} \ar[r, "x_2"']& X
+        \end{tikzcd}
+        \]
+    \end{enumerate}
+
+    (a) $\implies$ (b)は明らか．
+    (a) $\impliedby$ (b)は次のように示す．
+    まず$k_{12}$は合成体$k_1k_2$と置けば良い．
+    すると包含射$k_1 \inclmap k_{12}, k_2 \inclmap k_{12}$が存在する．
+    体の準同型は単射しか無いから，
+    $x_1, x_2$からそれぞれ得られる$\kappa(x) \to k_1, \kappa(x) \to k_2$は包含射に取り替えられる．
+    包含関係は推移律を満たすから，以下が可換ということに成る．
+    \[
+    \begin{tikzcd}
+        k_{12} & k_{1} \ar[l, hookrightarrow] \\
+        k_{2} \ar[u, hookrightarrow]& \kappa(x) \ar[l, hookrightarrow]\ar[u, hookrightarrow]
+    \end{tikzcd}
+    \]
+    上で述べた，体から$X$への射と$\kappa(x)$から体への射の対応より，
+    これは(b)の可換図式が存在することを意味する．
+\end{Remark}
+
+\begin{Def}[$|\fibX|, |f|$, \cite{SP} 04XG and the below paragraph]
+    points of $\fibX$とは，fieldの$\Spec$から$\fibX$の射の，
+    $\sim$による同値類のことである．
+    set of points of $\fibX$を$|\fibX|$と表す．
+    すなわち，
+    \[ |\fibX|= \{ \Spec k \to \fibX \mid k\text{ :: algebraically closed field } \} / \sim. \]
+
+    射$f \colon \fibX \to \fibY$について，$|f|$を次で定義する．
+    \begin{defmap}
+        |f|\colon & |\fibX|& \to& |\fibY| \\
+        {}& x & \mapsto& f \circ x
+    \end{defmap}
+\end{Def}
+
+\section{Zariski Topology of Artin Stack}
+
+\subsection{Atlases of Artin Stacks}
+    下準備としてartin stackのatlasについて幾つか命題を述べる．
+    最初は読み飛ばして構わない．
+
+    \begin{Lemma}
+        任意のartin stackはatlas by a scheme，
+        すなわちschemeからのsmooth surjective射を持つ．
+    \end{Lemma}
+    \begin{proof}
+        この証明では
+        \textbf{``smooth surjective"を``sm.surj."，``etale surjective"を``et.surj."と略す．}
+
+        artin stackとalgebraic spaceの定義より，
+        \begin{itemize}
+            \item algebraic spaceからartin stackへのsm.surj.射 :: $\alpha \colon X \to \fibX$，
+            \item schemeからalgebraic spaceへのet.surj.射 :: $a \colon U \to X$
+        \end{itemize}
+        が存在する．
+        合成すればschemeからartin stackへのsm.surj.射 :: $\alpha \circ a \colon U \to \fibX$
+        が得られる．
+
+        $\alpha$と$a$ではそれぞれ``smooth surjective"，``etale surjective"の
+        定義の方法が異なるので，
+        射$\alpha \circ a$がsm.surj.であることは調べる必要が有る．
+        schemeからのsm.surj.射 :: $V \to \fibX$をとり，
+        以下のpullback図式を考える．
+        \[
+        \begin{tikzcd}
+            U \times_{\fibX} V \ar[r]\ar[d]& U \ar[d, "a"]\\
+            X \times_{\fibX} V \ar[r]\ar[d]& X \ar[d, "\alpha"]\\
+            V \ar[r]& \fibX
+        \end{tikzcd}
+        \]
+        この図式から次の$3$つが分かる．
+        \begin{itemize}
+            \item $V \to \fibX$はschemeからのsm. surj.射，
+            \item $a \colon U \to X$がsm. surj.なので$U \times V \to X \times V$もsm. surj.，
+            \item $\alpha \colon X \to \fibX$もsm. surj.射．
+        \end{itemize}
+
+        artin stackの射の性質の定義（$\alpha$がsm. surj.であることの定義）から，
+        $U \times V \to X \times V \to V$はsm. surj.．
+        two pullback lemmaも合わせて考えれば，
+        これは$\alpha \circ a$ :: sm. surj.を意味する．
+    \end{proof}
+
+    \begin{Lemma}[\cite{SP} tag 04T1]
+        artin stack :: $\fibX, \fibY$と$\fibY$のatlas :: $V \to \fibY$をとる．
+        morphism of artin stacks :: $f \colon \fibX \to \fibY$に対して，
+        $\fibX$のatlas :: $U \to \fibX$とatlasの間の射 :: $\bar{f} \colon U \to V$が存在し，
+        以下が可換図式となる．
+        \[
+        \begin{tikzcd}
+            {}^{\exists} U \ar[r, "{}^{\exists}\bar{f}"]\ar[d]& {}^{\forall} V \ar[d]\\
+            \fibX \ar[r, "{}^{\forall} f"']& \fibY
+        \end{tikzcd}
+        \]
+
+        schemeの射の性質$P$を，
+        smooth surjective morphismによるcompositionとbase changeで保たれるものとする．
+        \footnote
+        {
+            例えば$P=$ smooth, surjective, flat, locally finite presentation, universally open. 
+            \cite{SP} tag 01V4．
+        }
+        $f$が性質$P$を持つならば$\bar{f}$も性質$P$を持つ．
+    \end{Lemma}
+    \begin{proof}
+        atlas of $\fibX$ :: $U \to \fibX$を適当にとり，次のfiber productをとる．
+        \[
+        \begin{tikzcd}
+            U \times_{\fibY} V \ar[rr]\ar[d]& {} & V \ar[d]\\
+            U \ar[r]& \fibX \ar[r, "f"']& \fibY
+        \end{tikzcd}
+        \]
+        artin stackの定義から$U \times_{\fibY} V$ :: alg. sp.である．
+        またsmooth, surjectiveはstable under base change/compositionなので
+        $U \times_{\fibY} V \to U \to \fibX$はsmooth surjective.
+        よって$\bar{V}=U \times_{\fibY} V, \bar{f}=\pr \colon U \times_{\fibY} V \to V$
+        と置けばこれらが主張の条件を満たす．
+        また，この証明から最後の段落の主張は明らかである．
+    \end{proof}
+
+\subsection{Definitions.}
+
+\begin{Def}[Zariski Topology on Points of Scheme/Algebraic Space/Artin Stack]
+\begin{myenum}
+    \item
+        scheme :: $X$とする．
+        $U \subseteq |X|$が(Zariski) openであるとは，
+        あるopen subscheme of $X$ :: $\bar{U}$が存在して$U=|\bar{U}|$であること.
+
+    \item
+        algebraic spspace :: $X$とし，
+        $A$がschemeであるatlas :: $a \colon A \to X$をとる．
+        $U \subseteq |X|$が(Zariski) open subsetであるとは，
+        $a^{-1}(U)$が$|A|$のopen subsetであること．
+
+    \item
+        artin stactk :: $\fibX$とし，
+        $A$がschemeであるatlas :: $a \colon A \to \fibX$をとる．
+        $U \subseteq |\fibX|$が(Zariski) open subsetであるとは，
+        $a^{-1}(U)$が$|A|$のopen subsetであること．
+\end{myenum}
+\end{Def}
+
+\subsection{Propositions}
+
+\begin{Prop}[\cite{SP} 04XL]
+\begin{myenum}
+    \item
+        artin stack間の任意の射$f \colon \fibX \to \fibY$について，
+        $|f| \colon |\fibX| \to |\fibY|$はcontinuous.
+    \item
+        algebraic spaceからのflat and locally of finite presentation射 :: $f \colon U \to \fibX$
+        に対して，$|f|$はcontinuousかつopen．
+\end{myenum}
+\end{Prop}
+
+(i)の証明は簡単．(ii)はTag  042Sを用いる．
+
+\subsubsection{Open sub-stack maps to open subset bijectively.}
+\begin{Remark}
+    artin stackの射にも``open immersion"であるものは存在するのだから，
+    これを用いてもopen morphismなどの概念が定義できる．
+    この流儀でのopen morphism等の概念と，
+    我々のpoints of artin stack :: $|\fibX|$を使う流儀でのopen morphism等の概念は
+    同値なものである，
+    ということを次の命題(\ref{prop:Uto|U|})で示す．
+
+    points of artin stackを使うと，台集合を$|\fibX|$とする，
+    通常の意味での位相空間が定義できる．
+    その為，位相空間に関する概念を全て取り扱うことが出来る，
+    というのが我々の流儀のアドバンテージである．
+\end{Remark}
+
+\begin{Def}
+    artin stack :: $\fibX$のopen sub-stackとは，
+    $\fibX$の \textbf{strictly full} sub-category :: $\fibU$
+    \footnote{ すなわち$\fibU$は$\fibX$の全ての対象と同型射を含んでいる． }
+    でartin stackであるものであって
+    かつ$\fibX$へのinclusion :: $\fibU \to \fibX$がopen immersionであるもの．
+\end{Def}
+
+\begin{Remark}
+    equivalence of artin stacks :: $f \colon \fibX \to fibY$があっても，
+    open sub-stack of $\fibX$の$f$による像が
+    strictly full sub-categoryであるとは限らないことに注意．
+\end{Remark}
+
+\begin{Prop}[\cite{SP} 06FJ, \cite{LMB00} Cor5.6.1]\label{prop:Uto|U|}
+\begin{myenum}
+    \item $\fibU$がopen sub-stack of $\fibX$ならば$|\fibU|$は$|\fibX|$のopen sub-set.
+    \item open sub-stack of $\fibX$の集まりからの対応$\fibU \mapsto |\fibU|$は一対一．
+\end{myenum}
+\end{Prop}
+
+\subsubsection{Surjectivity.}
+\begin{Lemma}
+    任意のartin stack :: $\fibX, \fibY, \fibZ$について，
+    \[ |\fibZ \times_{\fibY} \fibX| \to |\fibZ| \times _{|\fibY|} |\fibX| \]
+    は全射である.
+\end{Lemma}
+
+\begin{Lemma}
+    $f \colon \fibX \to \fibY$が全射であることと，
+    $|f|\colon |\fibX| \to |\fibY|$が全射であることは同値である．
+\end{Lemma}
+
+\subsubsection{Topological Property of \tp{$|\fibX|$}{|X|}.}
+\begin{Prop}[\cite{LMB00} 5.6.1(iii), 5.7.2]
+    atrin stack :: $\fibX$を考える．
+    位相空間$|\fibX|$について次が成り立つ．
+    \begin{enumerate}
+        \item $|\fibX|$ :: quasi-compact.
+        \item $|\fibX|$ :: sober
+            （すなわち，任意のirreducible componentはただ一つのgeneric pointを持つ．）
+    \end{enumerate}
+\end{Prop}
+
+\begin{Prop}[\cite{LMB00} 5.7]
+    artin stackのquasi-compact射 :: $f \colon \fibX \to \fibY$について，
+    $|f|(\fibX)$ :: stable under specialization.
+\end{Prop}
+
+\section{Sheaves on Algebraic Stacks}
+
+
+\bibliographystyle{jplain}
+\bibliography{../reference}
+\end{document}
