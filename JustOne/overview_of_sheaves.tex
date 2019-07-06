@@ -1,5 +1,9 @@
 \documentclass[]{jsarticle}
 \usepackage{../math_note, enumitem}
+%% for hyperref {{{
+\usepackage[dvipdfmx, colorlinks=true, linkcolor=cyan]{hyperref}
+\usepackage{pxjahyper}
+%% }}}
 
 \newcommand{\Open}{\mathbf{Open}}
 \newcommand{\Sets}{\mathbf{Sets}}
@@ -157,10 +161,27 @@
     $\epsilon_{\covU}$が単射であることは$\shF$についてidentity axiomを満たすことと同値です．
     同じく，全射であることはgluability axiomを満たすことと同値です．
 
-\section{Seafification（層化）}
+\section{Sheafification（層化）}
     任意のpresheaf :: $\shF$について，対応するsheaf :: $\shF^+$
     \footnote{ associated sheafという意味で$\shF^a$と書く人も居ます． }が一意に存在します．
     この対応$\shF \mapsto \shF^+$はsheafification（層化）は呼ばれています．
+    sheafificationも少なくとも$3$つの方法があり，
+    いずれもsheafificationへの異なる直観を与えてくれます．
     
+    \subsection{equalizerを用いたsheafification}
+    参考: \url{ https://github.com/ShitijyouA/MathNotes/blob/master/AlgebraicStacks/ch2_SitesAndTopoi.pdf }
 
+    equalizerを用いたsheafificationは二つの段階を踏みます．
+    identity axiomを満たすpresheaf（separaed presheafと呼ばれます）を作る段階と，
+    gluability axiomも同時に満たすpresheaf（すなわちsheaf）を作る段階です．
+    どちらの段階も同じ操作で行われるのはなかなか面白いです．
+
+    \subsection{etale spaceを用いたsheafification}
+    参考: \url{ https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section1_ex.pdf }
+    Ex1.13 Espace \'etal\'e of a Presheaf.
+
+    \subsection{直接的なsheafification}
+    参考: Robin Hartshorne (1977) ``Algebraic Geometry", GTM52の
+    chapter II Proposition-Definition 1.2の証明．
+    
 \end{document}
