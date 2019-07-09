@@ -1,0 +1,586 @@
+\documentclass[a4paper, dvipdfmx]{jsarticle}
+\usepackage{macros}
+\newcommand{\vsubseteq}{\text{\rotatebox{-90}{$\subseteq$}}}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+
+\begin{document}
+\title{ゼミノート \#10 \\ Topology and Shaves on Algebraic Stacks}
+\author{七条彰紀}
+\maketitle
+\tableofcontents
+\vspace{10pt}
+
+ここまででartin stackが定義できたが，
+これはschemeで言えばstructure sheafだけ定義したような状態である．
+artin stackのZariski位相空間と，
+（Grothendieck topology上の）sheafを導入する．
+
+\section{Points of Artin Stack}
+いずれも\cite{SP} Tag 04XE, \cite{LMB00} section 5.を参照せよ．
+
+\begin{Def}[\cite{LMB00} section 5]
+    体の$\Spec$からの射
+    $x_1 \colon \Spec k_1 \to \fibX, x_2 \colon \Spec k_2 \to \fibX$について
+    $x_1 \sim x_2$であるとは，
+    ある$k_{12}$ ::  field と
+    以下の$2$-可換図式が存在すること．
+
+    \[
+    \begin{tikzcd}
+        \Spec k_{12} \ar[d]\ar[r]& \Spec k_{1} \ar[d, "x_1"] \\
+        \Spec k_{2} \ar[r, "x_2"']& \fibX
+    \end{tikzcd}
+    \]
+\end{Def}
+
+\begin{Prop}[ \cite{SP} 04XF ]
+    ここで定義した$\sim$は同値関係である．
+\end{Prop}
+\begin{proof}
+    $\sim$は反射律，対称律を満たすことは自明なので，推移律の成立を示す．
+
+    体から$\fibX$への$3$つの射 :: $x_1,x_2,x_3$を考える．
+    これらが$x_1 \sim x_2, x_2 \sim x_3$を同時に満たすとは，
+    体$k_{12}, k_{23}$と次の$2$-可換図式が存在するということである．
+    \[
+    \begin{tikzcd}
+        \Spec k_{12} \ar[r] \ar[d] & \Spec k_2 \ar[d, "x_2"] &  \Spec k_{23} \ar[l] \ar[d] \\
+        \Spec k_1 \ar[r, "x_1"'] &  \fibX &  \Spec k_3 \ar[l, "x_3"]
+    \end{tikzcd}
+    \]
+    この時，$k_{12}, k_{23}$の合成体（すなわち最小の共通の拡大体）を$k_{123}$とする．
+    $k_{12} \cap k_{23}$は$k_{123}$の部分体として$k_{2}$に一致する
+    （あるいは，一致するように$2$つの準同型$k_{12}, k_{23} \to k_{123}$を選ぶ）．
+    すると可換図式は次のように拡張される．
+    \[
+    \begin{tikzcd}
+        {} & \ar[ld] \Spec k_{123} \ar[rd]& {} \\
+        \Spec k_{12} \ar[r] \ar[d] & \Spec k_2 \ar[d, "x_2"] &  \Spec k_{23} \ar[l] \ar[d] \\
+        \Spec k_1 \ar[r, "x_1"'] &  \fibX &  \Spec k_3 \ar[l, "x_3"]
+    \end{tikzcd}
+    \]
+    上の新たな四辺形はschemeの図式として可換なので，
+    このartin stackの拡張後の図式も可換．
+\end{proof}
+
+\begin{Remark}\label{rem:sch-points}
+    以上の定義はschemeの点に対応している．
+    scheme :: $X$について，
+    体の$Spec$ :: $\Spec k$から$X$への射は
+    点$x \in X$と体の準同型 :: $\phi \colon \kappa(x) \to k$に対応する
+    ( \cite{HarAG} ch II, Ex2.7, \cite{SP} 01J5)．
+    ここで$\kappa(x)$はresidue fieldである．
+    したがって一点$x$に対応する射は$\kappa(x)$から体への準同型の数だけ有る．
+    これらを全て同値なものとする同値関係を定めたい．
+
+    体から$X$への二つの射
+    \[ x_1 \colon \Spec k_1 \to \fibX, \quad x_2 \colon \Spec k_2 \to \fibX \]
+    について，以下は同値．
+    \begin{enumerate}[label=(\alph*), leftmargin=*]
+        \item 
+        位相空間の$2$つの写像$|x_1|, |x_2|$の像が$x$である．
+
+        \item
+        すなわち，体$k_{12}$と次の可換図式が存在する．
+        \[
+        \begin{tikzcd}
+            \Spec k_{12} \ar[d]\ar[r]& \Spec k_{1} \ar[d, "x_1"] \\
+            \Spec k_{2} \ar[r, "x_2"']& X
+        \end{tikzcd}
+        \]
+    \end{enumerate}
+
+    (a) $\implies$ (b)は明らか．
+    (a) $\impliedby$ (b)は次のように示す．
+    まず$k_{12}$は合成体$k_1k_2$と置けば良い．
+    すると包含射$k_1 \inclmap k_{12}, k_2 \inclmap k_{12}$が存在する．
+    体の準同型は単射しか無いから，
+    $x_1, x_2$からそれぞれ得られる$\kappa(x) \to k_1, \kappa(x) \to k_2$は包含射に取り替えられる．
+    包含関係は推移律を満たすから，以下が可換ということに成る．
+    \[
+    \begin{tikzcd}
+        k_{12} & k_{1} \ar[l, hookrightarrow] \\
+        k_{2} \ar[u, hookrightarrow]& \kappa(x) \ar[l, hookrightarrow]\ar[u, hookrightarrow]
+    \end{tikzcd}
+    \]
+    上で述べた，体から$X$への射と$\kappa(x)$から体への射の対応より，
+    これは(b)の可換図式が存在することを意味する．
+\end{Remark}
+
+\begin{Def}[$|\fibX|, |f|$, \cite{SP} 04XG and the below paragraph]
+    points of $\fibX$とは，fieldの$\Spec$から$\fibX$の射の，
+    $\sim$による同値類のことである．
+    set of points of $\fibX$を$|\fibX|$と表す．
+    すなわち，
+    \[ |\fibX|= \{ \Spec k \to \fibX \mid k\text{ :: algebraically closed field } \} / \sim. \]
+
+    射$f \colon \fibX \to \fibY$について，$|f|$を次で定義する．
+    \begin{defmap}
+        |f|\colon & |\fibX|& \to& |\fibY| \\
+        {}& x & \mapsto& f \circ x
+    \end{defmap}
+\end{Def}
+
+\section{Zariski Topology of Artin Stack}
+
+\subsection{Atlases of Artin Stacks}
+    下準備としてartin stackのatlasについて幾つか命題を述べる．
+    最初は読み飛ばして構わない．
+
+    \begin{Lemma}
+        任意のartin stackはatlas by a scheme，
+        すなわちschemeからのsmooth surjective射を持つ．
+    \end{Lemma}
+    \begin{proof}
+        この証明では
+        \textbf{``smooth surjective"を``sm.surj."，``etale surjective"を``et.surj."と略す．}
+
+        artin stackとalgebraic spaceの定義より，
+        \begin{itemize}
+            \item algebraic spaceからartin stackへのsm.surj.射 :: $\alpha \colon X \to \fibX$，
+            \item schemeからalgebraic spaceへのet.surj.射 :: $a \colon U \to X$
+        \end{itemize}
+        が存在する．
+        合成すればschemeからartin stackへのsm.surj.射 :: $\alpha \circ a \colon U \to \fibX$
+        が得られる．
+
+        $\alpha$と$a$ではそれぞれ``smooth surjective"，``etale surjective"の
+        定義の方法が異なるので，
+        射$\alpha \circ a$がsm.surj.であることは調べる必要が有る．
+        schemeからのsm.surj.射 :: $V \to \fibX$をとり，
+        以下のpullback図式を考える．
+        \[
+        \begin{tikzcd}
+            U \times_{\fibX} V \ar[r]\ar[d]& U \ar[d, "a"]\\
+            X \times_{\fibX} V \ar[r]\ar[d]& X \ar[d, "\alpha"]\\
+            V \ar[r]& \fibX
+        \end{tikzcd}
+        \]
+        この図式から次の$3$つが分かる．
+        \begin{itemize}
+            \item $V \to \fibX$はschemeからのsm. surj.射，
+            \item $a \colon U \to X$がsm. surj.なので$U \times V \to X \times V$もsm. surj.，
+            \item $\alpha \colon X \to \fibX$もsm. surj.射．
+        \end{itemize}
+
+        artin stackの射の性質の定義（$\alpha$がsm. surj.であることの定義）から，
+        $U \times V \to X \times V \to V$はsm. surj.．
+        two pullback lemmaも合わせて考えれば，
+        これは$\alpha \circ a$ :: sm. surj.を意味する．
+    \end{proof}
+
+    \begin{Lemma}[\cite{SP} tag 04T1] \label{lemm:induced_mor_of_atlases}
+        artin stack :: $\fibX, \fibY$と$\fibY$のatlas :: $V \to \fibY$をとる．
+        morphism of artin stacks :: $f \colon \fibX \to \fibY$に対して，
+        $\fibX$のatlas :: $U \to \fibX$とatlasの間の射 :: $\bar{f} \colon U \to V$が存在し，
+        以下が可換図式となる．
+        \[
+        \begin{tikzcd}
+            {}^{\exists} U \ar[r, "{}^{\exists}\bar{f}"]\ar[d]& {}^{\forall} V \ar[d]\\
+            \fibX \ar[r, "{}^{\forall} f"']& \fibY
+        \end{tikzcd}
+        \]
+
+        schemeの射の性質$P$を，
+        smooth surjective morphismによるcompositionとbase changeで保たれるものとする．
+        \footnote
+        {
+            例えば$P=$ smooth, surjective, flat, locally finite presentation, universally open. 
+            \cite{SP} tag 01V4．
+        }
+        $f$が性質$P$を持つならば$\bar{f}$も性質$P$を持つ．
+    \end{Lemma}
+    \begin{proof}
+        atlas of $\fibX$ :: $U \to \fibX$を適当にとり，次のfiber productをとる．
+        \[
+        \begin{tikzcd}
+            U \times_{\fibY} V \ar[rr]\ar[d]& {} & V \ar[d]\\
+            U \ar[r]& \fibX \ar[r, "f"']& \fibY
+        \end{tikzcd}
+        \]
+        artin stackの定義から$U \times_{\fibY} V$ :: alg. sp.である．
+        またsmooth, surjectiveはstable under base change/compositionなので
+        $U \times_{\fibY} V \to U \to \fibX$はsmooth surjective.
+        よって$\bar{V}=U \times_{\fibY} V, \bar{f}=\pr \colon U \times_{\fibY} V \to V$
+        と置けばこれらが主張の条件を満たす．
+        また，この証明から最後の段落の主張は明らかである．
+    \end{proof}
+
+\subsection{Definitions.}
+
+\begin{Def}[Zariski Topology on Points of Scheme/Algebraic Space/Artin Stack]
+\begin{myenum}
+    \item
+        scheme :: $X$とする．
+        $|X|$の(Zariski) open subsetとは，
+        あるopen subscheme of $X$ :: $i \colon U \to X$によって
+        $|i|(|U|)$とかける集合のこと．
+
+    \item
+        algebraic space :: $X$とし，
+        $A$がschemeであるatlas :: $a \colon A \to X$をとる．
+        $U \subseteq |X|$が(Zariski) open subsetであるとは，
+        $|a|^{-1}(U)$が$|A|$のopen subsetであること．
+
+    \item
+        artin stactk :: $\fibX$とし，
+        $A$がschemeであるatlas :: $a \colon A \to \fibX$をとる．
+        $U \subseteq |\fibX|$が(Zariski) open subsetであるとは，
+        $|a|^{-1}(U)$が$|A|$のopen subsetであること．
+\end{myenum}
+\end{Def}
+
+\begin{Def}
+    $P$を位相空間の性質(e.g. irreducible, connected, quasi-compact, ...)とする．
+    artin stack :: $|\fibX|$が$P$であるとは，
+    $|\fibX|$が$P$であるということ．
+
+    $Q$を位相空間の射の性質(e.g. open, closed, dense, ...)とする．
+    artin stackの射 :: $f \colon \fibX \to \fibY$が$Q$であるとは，
+    $|f|$が$Q$であるということ．
+\end{Def}
+
+\begin{Lemma}
+    $X$ :: schemeについて，$|X|$は$X$の台位相空間と一致する．
+    さらにschemeの射 :: $f \colon X \to Y$について，
+    $|f|$は$X$と$Y$の間の台位相空間の射と一致する．
+\end{Lemma}
+\begin{proof}
+    注意(\ref{rem:sch-points})より明らか．
+\end{proof}
+
+\begin{Lemma}
+    artin stactk :: $\fibX$について，
+    $|\fibX|$のZariski topologyはatlasに関わらず一意である．
+\end{Lemma}
+\begin{proof}
+    schemeから$\fibX$へのsmooth surjective morphismを二つとり，
+    それらのfiber productを作る．
+    \[
+    \begin{tikzcd}
+        W \ar[r]\ar[d]& U \ar[d, "u"]\\
+        V \ar[r, "v"']& \fibX \ar[lu, phantom, "\text{p.b.}"]
+    \end{tikzcd}
+    \]
+    artin stackの定義から，$W$ :: scheme.
+    またsmoothならばuniversally openである(\cite{SP} 04XL)から，
+    $W \to U, W \to V$はcontinuous, surjective, open．
+    よって集合の間の射$|W| \to |U|, |W| \to |V|$もcontinuous, surjective, open．
+
+    なので以上の可換図式をたどれば，
+    任意の$O \subseteq |\fibX|$について，
+    $|u|^{-1}(O) \subseteq |U|$がopenであることと$|v|^{-1}(O) \subseteq |V|$がopenであることが
+    同値であると分かる．
+    これは
+    $|\fibX|$のZariski topologyはatlasに関わらず一意であることを意味する．
+\end{proof}
+
+\subsection{Propositions}
+
+\begin{Prop}[\cite{SP} 04XL]
+\begin{myenum}
+    \item
+        artin stack間の任意の射$f \colon \fibX \to \fibY$について，
+        $|f| \colon |\fibX| \to |\fibY|$はcontinuous.
+    \item
+        algebraic spaceからのuniversally open射 :: $f \colon U \to \fibX$
+        に対して，$|f|$はcontinuousかつopen．
+\end{myenum}
+    なお，smooth射はflat and locally of finite presentation射であり，
+    したがってuniversally openである
+    (\cite{SP} tag 01VE, 01VF, 01UA)．
+\end{Prop}
+\begin{proof}
+    (i)は補題(\ref{lemm:induced_mor_of_atlases})を用いれば容易に分かる．
+\end{proof}
+
+\subsubsection{Surjectivity.}
+\begin{Lemma}
+    任意のartin stack :: $\fibX, \fibY, \fibZ$について，
+    \[ |\fibZ \times_{\fibY} \fibX| \to |\fibZ| \times _{|\fibY|} |\fibX| \]
+    は全射である.
+\end{Lemma}
+
+\begin{Lemma}
+    $f \colon \fibX \to \fibY$が全射であることと，
+    $|f|\colon |\fibX| \to |\fibY|$が全射であることは同値である．
+\end{Lemma}
+
+\subsubsection{Open sub-stack maps to open subset bijectively.}
+\begin{Remark}
+    artin stackの射にも``open immersion"であるものは存在するのだから，
+    これを用いてもopen morphismなどの概念が定義できる．
+    この流儀でのopen morphism等の概念と，
+    我々のpoints of artin stack :: $|\fibX|$を使う流儀でのopen morphism等の概念は
+    同値なものである，
+    ということを次の命題(\ref{prop:Uto|U|})で示す．
+
+    points of artin stackを使うと，台集合を$|\fibX|$とする，
+    通常の意味での位相空間が定義できる．
+    その為，位相空間に関する概念を全て取り扱うことが出来る，
+    というのが我々の流儀のアドバンテージである．
+\end{Remark}
+
+\begin{Def}[\cite{SP} 04YM]
+    artin stack :: $\fibX$のopen sub-stackとは，
+    $\fibX$の \textbf{strictly full} sub-category :: $\fibU$
+    \footnote{ すなわち$\fibU$は$\fibX$の全ての対象と同型射を含んでいる． }
+    でartin stackであるものであって
+    かつ$\fibX$へのinclusion :: $\fibU \to \fibX$がopen immersionであるもの．
+    closed sub-stackも同様である．
+\end{Def}
+
+\begin{Remark}
+    equivalence of artin stacks :: $f \colon \fibX \to \fibY$があっても，
+    open sub-stack of $\fibX$の$f$による像が
+    strictly full sub-categoryであるとは限らないことに注意．
+\end{Remark}
+
+\begin{Prop}[\cite{SP} 06FJ, \cite{LMB00} Cor5.6.1]\label{prop:Uto|U|}
+\begin{myenum}
+    \item $\fibU$がopen sub-stack of $\fibX$ならば$|\fibU|$は$|\fibX|$のopen sub-set.
+    \item open sub-stack of $\fibX$の集まりからの対応$\fibU \mapsto |\fibU|$は一対一．
+\end{myenum}
+    これらはclosedについても同様である．
+\end{Prop}
+\begin{proof}
+    (TODO)
+\end{proof}
+
+\subsubsection{Topological Property of \tp{$|\fibX|$}{|X|}.}
+\begin{Prop}[\cite{LMB00} 5.6.1(iii), 5.7.2]
+    atrin stack :: $\fibX$を考える．
+    位相空間$|\fibX|$について次が成り立つ．
+    \begin{enumerate}
+        \item $|\fibX|$ :: quasi-compact.
+        \item $|\fibX|$ :: sober
+            （すなわち，任意のirreducible componentはただ一つのgeneric pointを持つ．）
+    \end{enumerate}
+\end{Prop}
+
+\begin{Prop}[\cite{LMB00} 5.7]
+    artin stackのquasi-compact射 :: $f \colon \fibX \to \fibY$について，
+    $|f|(\fibX)$ :: stable under specialization.
+\end{Prop}
+
+\section{Sheaves on Algebraic Stacks}
+
+\subsection{Definitions}
+artin stack over $S$ :: $\fibX$について，
+schemeからなるbig etale site :: $\ET(\fibX)=(\Sch/\fibX)_{\ET}$を
+我々は考える．
+$\ET(\fibX)$のsheafとtoposは通常と同様に定義する．
+
+\begin{Remark}
+    歴史的にはsmooth morphismをunderlying categoryにとり
+    etale topologyを備え付けるsite, lisse-etale siteが使われている．
+    これはetale cohomologyの点で有利だが，
+    artin stackの射から誘導されるfunctor :: $f^*, f^{-1}, f_*$などが
+    exactで無いといった不満点が有る．
+    このせいでsheaves on schemeの時のアナロジーも働かなくなる．
+    定義も少々面倒なので，我々はbig etale siteを使う．
+\end{Remark}
+
+\begin{Def}
+    site :: $\mathcal{S}$上のsheaf :: $\shF$について，
+    set of global sectionsを以下で定める．
+    \[ \Gamma(\mathcal{S}, \shF)=\Hom_{\Sh(\mathcal{S})}(*, \shF). \]
+    ただし$*$はcategory of sheaves of sets :: $\Sh(\mathcal{S})$の
+    terminal objectである．
+\end{Def}
+
+scheme :: $U$について，$\Gamma(U, \shF)$と$\shF(U)$は異なるものであることに注意せよ．
+
+\begin{Remark}
+    category of sheaves of setsのterminal objectは，
+    単元集合のconstact sheafである．
+    したがってterminal objectとして
+    特に単元集合$\{ \ast \}$のconstant sheafをとると，
+    $s \in \Gamma(\shF)$は
+    \[ \mathcal{S} \ni U \mapsto s_U( \ast ) \in \shF(U) \]
+    という対応を成す．
+    $\mathcal{S}$はscheme上のsiteであれば，
+    $\Gamma(\shF)$の元が自然な方法でglobal sectionに一対一対応する．
+\end{Remark}
+
+\begin{Def}
+    $\fibX$のstructure sheaf :: $\shO_{\fibX}$を次で定める．
+    \[ \ET(\fibX) \ni U \mapsto \Gamma( \ET(U), \shO_{U} ). \]
+\end{Def}
+
+topos :: $\fibX_{\ET}$にstructure sheafを定義することもある．
+
+\begin{Def}[ $u^{p}, {}_p u$ in \cite{SP} 00VC, 00XF ]
+    artin stack over a scheme $S$ :: $\fibX, \fibY$の
+    間の射 :: $f \colon \fibX \to \fibY$を考える．
+    この$f$からtoposの間の射 :: $\fibX_{\ET} \to \fibY_{\ET}$が誘導される．
+
+    まずsheaf :: $\shG \in \fibY_{\ET}$について，
+    \[ (f^{-1} \shG)(\ (U, u)\ )=\shG(\ (U, f \circ u)\ ) \mwhere (U, u) \in \ET(\fibX) \]
+    で$f^{-1}\shG \in \fibX_{\ET}$を定める．
+    同じく，sheaf :: $\shF \in \fibX_{\ET}$について，
+    \[
+        (f_*\shF)(\ (V, v)\ )=\Lim \left( I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \Sch/V \xto{\shF} \Sets \right)
+        \mwhere (V, v) \in \ET(\fibY)
+    \]
+    で$f_*\shF \in \fibY_{\ET}$を定める．
+    
+    ここで$I_{(V,v)}$は次の圏である．
+    \begin{description}
+        \item[\textbf{ Objects: }] 
+        以下の可換図式を満たす射の組$(U \to \fibX, U \to V)$:
+        \[
+        \begin{tikzcd}[sep=15pt]
+            U \ar[r]\ar[d]& V \ar[d, "v"]\\
+            \fibX \ar[r, "f"']& \fibY
+        \end{tikzcd}
+        \]
+
+        \item[\textbf{ Arrows: }] 
+        射$(U \to \fibX, U \to V) \to (U' \to \fibX, U' \to V)$は，
+        以下を可換にする射$U \to U'$である．
+        \[
+        \begin{tikzcd}[sep=15pt]
+            U \ar[rd]\ar[d]& {} \\
+            U' \ar[r]\ar[d]& V \ar[d, "v"]\\
+            \fibX \ar[r, "f"']& \fibY
+        \end{tikzcd}
+        \]
+    \end{description}
+    $(f_*\shG)(\ (V, v)\ )$の定義に有る$I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \Sch/V$は
+    \[ (U \to \fibX, U \to V) \mapsto [U \to V] \in \Sch/V \]
+    で与えられる．
+\end{Def}
+
+\subsection{Propositions}
+\begin{Lemma}[\cite{SP} 06NW]
+    artin stack :: $\fibX, \fibY$と$\shF \in \ET(\fibX), \shG \in \ET(\fibY)$をとる．
+    任意の射$f \colon \fibX \to \fibY$について
+    $f^{-1}\shF, f_*\shG$は確かにsheafである．
+\end{Lemma}
+
+\begin{Prop}[\cite{SP} 00XF]
+    $f^{-1}$は$f_*$のleft adjoint functorである．
+\end{Prop}
+%% {{{
+\begin{proof}
+    $(f \circ) \colon (\Sch/\fibX) \to (\Sch/\fibY)$を
+    $f \colon \fibX \to \fibY$の合成で得られる関手とする．
+    すると関手$f^{-1}$は関手(sheaf) $(\Sch/\fibY) \to \Sets$と$(f \circ)$の合成としてかける．
+
+    これを用いると上の定義は次のように変形できる．
+    \[
+        (f_*\shF)(\ (V,v)\ )
+        =\Lim\Big(  ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\pi_1} (\Sch/\fibY) \xto{\shF} \Sets \Big)
+    \]
+    $((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}}$は
+    圏$(f \circ) \downarrow (V,v)$の双対圏にetale Grothendieck topologyを与えてできるsiteである．
+    また$\pi_1 \colon [(f \circ)(\ (U,u)\ ) \to (V,v)] \mapsto (U,u)$．
+    
+    右辺は各点右Kan拡張$(\Ran_{(f \circ)} \shF)(\ (V,v)\ )$なので，
+    Kan拡張の一般論により随伴性が分かる．
+\end{proof}
+%% }}}
+
+\begin{Prop}[\cite{SP} 06WS]
+    artin stack over a scheme $S$ :: $\fibX, \fibY$を考える．
+    射 :: $f \colon \fibX \to \fibY$とsheaf :: $\shF \in \fibX_{\ET}$について，
+    \[ (f_*\shF)(\ (V, v)\ )=\Gamma( \ET(V \times_{y, \fibY, f} \fibX), \pr_2^{-1} \shF  ). \]
+    ただし$\pr_2 \colon V \times_{y, \fibY, f} \fibX \to \fibX$は射影である．
+\end{Prop}
+%% {{{
+\begin{proof}
+    一般的な次の命題を用いる．証明は省略する．
+    \begin{Lemma}[\url{https://ncatlab.org/nlab/show/limit\#limit_of_a_setvalued_functor}]
+        site :: $\mathcal{S}$上のset-value sheaf :: $\shF$を考える．
+        この時，
+        \[ \Lim \big( \mathcal{S}^{\mathrm{op}} \xto{\shF} \Sets \big)=\Gamma( \mathcal{S}, \shF). \]
+    \end{Lemma}
+    
+    今，一つ前の命題と合わせて
+    \[
+        (f_*\shF)(\ (V, v)\ )
+        =\Lim\Big( ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\shF \circ \pi_1} \Sets \Big)
+        =\Gamma( ((f \circ) \downarrow (V,v))_{\et}, \shF \circ \pi_1).
+    \]
+    なので$((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}}=\ET(V \times_{y, \fibY, f} \fibX)$と
+    $\shF \circ \pi_1=\pr_2^{-1}\shF$を確かめれば良い．
+
+    \paragraph{$((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}}=\ET(V \times_{y, \fibY, f} \fibX)$.}
+    $\ET$や${}^{\mathrm{op}}$の部分は単にsiteとして必要な部分なので，
+    \[ (f \circ) \downarrow (V,v)=\Sch/(V \times_{y, \fibY, f} \fibX) \]
+    を示せば十分．
+    $2$-Yoneda embeddingを用いて証明する．
+
+    対象から見ていく．
+    図式
+    \[
+        \begin{tikzcd}[sep=15pt]
+            U \ar[r]\ar[d]& V \ar[d, "v"]\\
+            \fibX \ar[r, "f"']& \fibY
+        \end{tikzcd}
+    \]
+    を図式$(*)$と呼ぶことにする．
+    圏$(f \circ) \downarrow (V,v)$の対象は
+    \begin{itemize}
+        \item 射$U \to \fibX \xto{f} \fibY$と，
+        \item 図式$(*)$を$2$-可換にする射$U \to V$
+    \end{itemize}
+    の組である．
+    一方，$V \times_{\fibY} \fibX$の対象$(U, x, y, \alpha)$の対象は
+    $2$-Yoneda embeddingによって次のように対応する:
+    \begin{itemize}
+        \item $U \in \Sch/S$がそのままscheme :: $U$に，
+        \item $x \in (\Sch/V)(U)$が射$U \to V$に，
+        \item $y \in \fibX(U)$が射$U \to \fibX$に，
+        \item $\alpha \colon v(x) \isomap f(y)$の存在が図式$(*)$の$2$-可換性に対応する．
+    \end{itemize}
+
+    射についても見ていく．
+    圏$(f \circ) \downarrow (V,v)$の
+    射$(U \to \fibX \to \fibY, U \to V) \to (U' \to \fibX \to \fibY, U' \to V)$は，
+    以下（の特に$U$を頂点とする二つの三角形）を$1$-可換にする射$U \to U'$である．
+    \[
+    \begin{tikzcd}[sep=15pt]
+        U \ar[rrd, bend left=30]\ar[rd]\ar[rdd, bend right=30]& {} & {} \\
+        {} & U' \ar[r]\ar[d]& V \ar[d, "v"]\\
+        {} & \fibX \ar[r, "f"']& \fibY
+    \end{tikzcd}
+    \]
+    $V \times_{\fibY} \fibX$の対象の射
+    \[ (U \to U', \phi_{V} \colon x \to x', \phi_{\fibX} \colon y \to y') \]
+    は，それぞれ
+    \begin{itemize}
+        \item $U \to U'$はそのまま$U \to U'$に，
+        \item $\phi_{V} \colon x \to x'$は$U, U', V$の可換な三角形に，
+        \item $\phi_{\fibX} \colon y \to y'$は$U, U', V$の可換な三角形に
+    \end{itemize}
+    対応する．
+    これらの射が満たす条件は，
+    二つの三角形の可換性と右下の四角形の$2$-可換性とが整合的であることを意味している．
+
+    以上より，所望の圏同値が得られた．
+
+    \paragraph{$\shF \circ \pi_1=\pr_2^{-1}\shF$.}
+    $\pi_1 \colon (f \circ) \downarrow (V,v) \to (\Sch/\fibX), \pr_2 \colon V \times_{\fibY} \fibX \to \fibX$は
+    それぞれ次のように定義されている．
+    \[
+        \pi_1 \colon [(f \circ)(\ (U,u)\ ) \to (V,v)] \mapsto (U,u \colon U \to \fibX), \quad
+        \pr_2 \colon (U, x, y, \alpha) \mapsto y \colon U \to \fibX
+    \]
+    よって$\shF \circ \pi_1=\shF \circ \pr_2=\pr_2^{-1}\shF$．
+    な，$\shF \circ \pi_1$は関手の合成，
+    $\pr_2^{-1}\shF$は関手$\pr_2^{-1}$による像であるが，結局同じものである．
+\end{proof}
+%% }}}
+
+\begin{Remark}
+    lisse-etale siteを採用する場合は，
+    $f^{-1}$はcolimitとして定義される(\cite{LMB00} section 12.5)．
+    これは \cite{SP} 00XFにおける$u_p$であるが，
+    $f_*$とadjointではない（$f^{-1} \dashv f_*$は上で述べた）．
+\end{Remark}
+
+\bibliographystyle{jplain}
+\bibliography{../reference}
+\end{document}
