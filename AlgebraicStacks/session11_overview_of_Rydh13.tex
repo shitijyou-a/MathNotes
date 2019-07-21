@@ -118,9 +118,11 @@ Algebraic stackについては既に私のノート\cite{SAAlgSt}の内容程度
     \end{Thm}
     論文は基本的にalgebraic spaceのgroupoidによる商を扱っており，
     最後の\S 6でそれらがstackの言葉に翻訳される．
+    この方針は$\cite{KM97}$と同じである．
 
     \subsection{証明の構成}
-    証明は以下のような手順を踏んでいる．
+    証明の手順を説明する．
+    未定義の用語がかなり多くなるが，適宜無視して欲しい．
     \[
     \begin{tikzcd}[arrows=Rightarrow]
         \text{$\stX$は$\stX$-finite inertia stackを持つ.}
@@ -131,9 +133,48 @@ Algebraic stackについては既に私のノート\cite{SAAlgSt}の内容程度
             \ar[d, "\text{Thm3.19}"]\\
         \text{$\stX$はstrongly geometric quotientを持つ．}
             \ar[d, "\text{Thm3.8}"]\\
-        \text{$\stX$はcoarse moduli spaceを持つ．} \\
+            \text{$\stX$はcoarse moduli spaceを持つ．(Thm 6.12)}
     \end{tikzcd}
     \]
+    命題番号を見ると，結論に近い部分から述べられていることが分かる．
+
+    また，ここに挙げられていないがcoarse moduli spaceを考える上で重要な命題として次が有る．
+    \begin{Thm}[Part of \cite{Rydh13} Thm 3.16]
+        $R \rightrightarrows X$をgroupoidとし，
+        $q \colon X \to Z$をそのstrongly geometric quotientとする．
+        この時，$q$がuniversally openであり，かつ$q$がproperまたはintegralであれば，
+        $q$はcategorical quotientでもある．
+    \end{Thm}
+
+    全体として，この論文によるD.Rydhの貢献は，
+    geometric quotient等の概念とcategorical quotientの概念，
+    またdescent condtionなどの概念の関係性を解明した点に有ると思う．
+
+    \subsection{中心的概念}
+    上で述べたなかに頻出したとおり，strongly geometric quotientという概念が頻出である．
+    この定義を述べよう．
+    \begin{Def}[strongly geometric quotient, stack version, \cite{Rydh13} Def 6.1]
+        $\stX$をartin stackとし，
+        $q$をalgebraic spaceへの射$q \colon \stX \to Z$とする．
+        次の条件を満たす時，$q$はstrongly geometric quotientと呼ばれる．
+        \begin{itemize}
+            \item $q$ :: universal homeomorphism,
+            \item the diagonal $\Delta_q$ :: universal submersive,
+            \item $q^{\#} \colon \shO_{Z} \to q_*\shO_{\stX}$ :: isomorphism.
+        \end{itemize}
+        最初の二つが成立する時，$q$はstrongly topological quotientと呼ばれる．
+    \end{Def}
+    \cite{Rydh13} Prop3.8（とDef 6.1の上の段落）より，これはcategorical quotientでもある．
+    見ての通り，これはかなり強い条件である．
+    なお，最後の条件が成立するためには，
+    $q$のsmooth射によるpullbackがまたcategorical quotientであることが十分である
+    \footnote
+    {
+        特に$q$がuniform categorical quotientであれば十分．
+        証明には，\cite{SAAlgSt}で証明した
+        $(q_*\shO_{\stX})(U)=\Gamma(U \times_{Z} \stX, \pr_2^{-1}\shO_{\stX})$と，
+        関手$\Gamma(-, \shO_{\stX})$がaffine line :: $\affine_{\Z}^1$で表現可能であることを用いる
+    }．
 
 \bibliographystyle{jplain}
 \bibliography{../references/stacks_reference}
