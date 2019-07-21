@@ -49,7 +49,7 @@ $\cat{B}$ :: categoryとする．
 \end{Prop}
 %% {{{
 \begin{proof}
-    $\FibBP{B}$の射$F \colon \fibX \to \fibZ$と$F \colon \fibY \to \fibZ$をとり，
+    $\FibBP{B}$の射$F \colon \stX \to \stZ$と$F \colon \stY \to \stZ$をとり，
     $F, G$のfiber productを実際に構成する．
 
     \step{圏$\cat{P}$の構成}
@@ -59,19 +59,19 @@ $\cat{B}$ :: categoryとする．
             以下の$4$つ組
             \begin{enumerate}
                 \item $b \in \cat{B}$,
-                \item $x \in \fibX(b)$,
-                \item $y \in \fibY(b)$,
-                \item $\fibZ$の恒等射上の同型射$\alpha \colon Fx \to Gy$.
+                \item $x \in \stX(b)$,
+                \item $y \in \stY(b)$,
+                \item $\stZ$の恒等射上の同型射$\alpha \colon Fx \to Gy$.
             \end{enumerate}
         
         \item[Arrows:] \mnewline
             射$(b, x, y, \alpha) \to (b', x', y', \alpha')$は，
-            二つの射$\phi_{\fibX} \colon x \to x', \phi_{\fibY} \colon y \to y'$であって以下を満たすもの:
-            $\phi_{\fibX}, \phi_{\fibY}$は同じ射$b' \to b$上の射で，
+            二つの射$\phi_{\stX} \colon x \to x', \phi_{\stY} \colon y \to y'$であって以下を満たすもの:
+            $\phi_{\stX}, \phi_{\stY}$は同じ射$b' \to b$上の射で，
             以下の可換図式を満たすもの．
             \[
             \begin{tikzcd}
-                Fx \ar[d, red, "F\phi_{\fibX}"']\ar[r, "\alpha"]& Gy \ar[d, red, "G\phi_{\fibY}"]\\
+                Fx \ar[d, red, "F\phi_{\stX}"']\ar[r, "\alpha"]& Gy \ar[d, red, "G\phi_{\stY}"]\\
                 Fx' \ar[r, "\alpha'"']& Gy'
             \end{tikzcd}
             \]
@@ -110,10 +110,10 @@ $\cat{B}$ :: categoryとする．
         \end{tikzcd}
     };
 
-    \node [above=5pt of X] {in $\fibZ$};
+    \node [above=5pt of X] {in $\stZ$};
     \node [below=5pt of B] {in $\cat{B}$};
     \draw [->, line width=1.5pt] (X) edge (B);
-    \node at (0.3,1.55) {$\pi_{\fibZ}$};
+    \node at (0.3,1.55) {$\pi_{\stZ}$};
     \end{tikzpicture}
     \end{center}
     fibered categoryの間の射はcartesian arrowを保つので$F\chi_x, G\chi_y$もcartesian．
@@ -121,44 +121,44 @@ $\cat{B}$ :: categoryとする．
     $\bar{\alpha}$が同型であることはTriangle Liftingの一意性を用いて容易に証明できる．
     また，この可換図式から$\chi_{\xi}$が$\cat{P}$の射であることも分かる．
 
-    \step{$\fibX, \fibY, \fibZ$がcategory fibered in groupoids(CFG)ならば$\cat{P}$もCFG}
-    $\fibX, \fibY, \fibZ$がCFGならば$\cat{P}$もCFGとなる．
+    \step{$\stX, \stY, \stZ$がcategory fibered in groupoids(CFG)ならば$\cat{P}$もCFG}
+    $\stX, \stY, \stZ$がCFGならば$\cat{P}$もCFGとなる．
     実際，
-    $\phi_{\fibX} \colon x \to x'$と$\phi_{\fibY} \colon y \to y'$の両方がcartesianならば
-    $(\phi_{\fibX}, \phi_{\fibY}) \colon (b, x, y, \alpha) \to (b', x', y', \alpha')$はcartesianである．
+    $\phi_{\stX} \colon x \to x'$と$\phi_{\stY} \colon y \to y'$の両方がcartesianならば
+    $(\phi_{\stX}, \phi_{\stY}) \colon (b, x, y, \alpha) \to (b', x', y', \alpha')$はcartesianである．
 
     \step{$\cat{P}$からの射影写像．}
-    定義から明らかに$\pr_1 \colon \cat{P} \to \fibX, \pr_2 \colon \cat{P} \to \fibY$が定義できる．
+    定義から明らかに$\pr_1 \colon \cat{P} \to \stX, \pr_2 \colon \cat{P} \to \stY$が定義できる．
     射の定義にある可換図式は，
     以下の$A$がnatural transformationであることを意味している．
     \begin{defmap}
         A \colon & F\pr_1& \to& G\pr_2 \\
         {}& (F\pr_1)((b, x, y, \alpha))=Fx& \mapsto& \alpha(Fx)=\alpha((F\pr_1)((b, x, y, \alpha)))
     \end{defmap}
-    $A$がbase-preservingであることは$\alpha$が恒等射上のもの(i.e. $\pi_{\fibZ}(\alpha)=\id$)であることから，
+    $A$がbase-preservingであることは$\alpha$が恒等射上のもの(i.e. $\pi_{\stZ}(\alpha)=\id$)であることから，
     isomorphismであることは$\alpha$が同型であることから示される．
 
     \step{$\cat{P}$ :: fiber product.}
     今，
-    $\fibW \in \FibBP{B}$と
-    射$S \colon \fibW \to \fibX, T \colon \fibW \to \fibY$及び
+    $\stW \in \FibBP{B}$と
+    射$S \colon \stW \to \stX, T \colon \stW \to \stY$及び
     base-preserving isomorphism :: $\delta \colon FS \to GT$をとる．
-    base-preservingなので，任意の$w \in \fibW$について$\pi_{\fibZ}(FS(w))=\pi_{\fibZ}(GT(w))$．
+    base-preservingなので，任意の$w \in \stW$について$\pi_{\stZ}(FS(w))=\pi_{\stZ}(GT(w))$．
     そこで次のように関手が定義できる．
     \begin{defmap}
-        H\colon & \fibW& \to& \cat{P} \\
-        \mathbf{Object}& w& \mapsto& (\pi_{\fibZ}(FS(w)), Sw, Tw, \delta_{w}) \\
+        H\colon & \stW& \to& \cat{P} \\
+        \mathbf{Object}& w& \mapsto& (\pi_{\stZ}(FS(w)), Sw, Tw, \delta_{w}) \\
         \mathbf{Arrow}& [\phi \colon w \to w']& \mapsto& (S\phi \colon Sw \to Sw', T\phi \colon Tw \to Tw')
     \end{defmap}
     このように置くと，$S=\pr_1 H, T=\pr_2 H$となる．
     逆に$S \iso \pr_1 H', T \iso \pr_2 H'$となる
-    関手$H' \colon \fibW \to \cat{P}$は$H$と同型に成ることが直ちに分かる．
+    関手$H' \colon \stW \to \cat{P}$は$H$と同型に成ることが直ちに分かる．
 \end{proof}
 %% }}}
 \begin{Remark}
     session4 命題4.5より，CFGの恒等射上の射は同型射である．
     したがって$\alpha \colon Fx \to Gy$に課せられた条件は，
-    $\fibZ$がCFGならば一つしか無い．
+    $\stZ$がCFGならば一つしか無い．
 \end{Remark}
 
 \begin{Example}
@@ -177,18 +177,18 @@ $\cat{B}$ :: categoryとする．
 我々が扱うのはstackであるから，
 stackという性質がfiber productで保たれていて欲しいが，果たしてそうなる．
 \begin{Prop}[\cite{ASS} Prop 4.6.4]
-    $\fibX, \fibY, \fibZ$ :: stack over $\cat{C}$とし，
-    morphism of stacks :: $F \colon \fibX \to \fibZ, G \colon \fibY \to \fibZ$をとる．
-    この時，$F, G$についてのfiber product :: $\fibX \times_{\fibZ} \fibY$はstackである．
+    $\stX, \stY, \stZ$ :: stack over $\cat{C}$とし，
+    morphism of stacks :: $F \colon \stX \to \stZ, G \colon \stY \to \stZ$をとる．
+    この時，$F, G$についてのfiber product :: $\stX \times_{\stZ} \stY$はstackである．
 \end{Prop}
 したがって結局$\FibBP{B}, \CFG{B}$と，
 stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 我々が実際に扱うのはstack in groupoidsである．
 %% {{{
 \begin{proof}
-    $\fibP=\fibX \times_{\fibZ} \fibY$とおく．
+    $\stP=\stX \times_{\stZ} \stY$とおく．
     $U \in \cat{C}, \covU=\{\phi_i \colon U_i \to U\} \in \Cov(U)$を任意にとり，
-    $\epsilon_{\covU} \colon \fibP(U) \to \fibP(\covU)$を計算する．
+    $\epsilon_{\covU} \colon \stP(U) \to \stP(\covU)$を計算する．
 
     \step{$\epsilon_{\covU}(\xi)$.}
     $\xi=(b, x, y, \alpha)$をとり，$\epsilon_{\covU}(\xi)$を計算する．
@@ -213,10 +213,10 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         \end{tikzcd}
     };
 
-    \node [above=5pt of X] {in $\fibZ$};
+    \node [above=5pt of X] {in $\stZ$};
     \node [below=5pt of B] {in $\cat{B}$};
     \draw [->, line width=1.5pt] (X) edge (B);
-    \node at (0.3,2.45) {$\pi_{\fibZ}$};
+    \node at (0.3,2.45) {$\pi_{\stZ}$};
     \end{tikzpicture}
     \end{center}
     
@@ -233,15 +233,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \end{Remark}
 
 \begin{Def}[Diagonal Map]
-    sheafあるいはstack in groupoids over $S$:: $\fibX/S$（すなわち射$\fibX \to S$）
+    sheafあるいはstack in groupoids over $S$:: $\stX/S$（すなわち射$\stX \to S$）
     のdiagonal map :: $\Diag$とは，
     以下の可換図式に収まる射のことである．
     \[\begin{tikzcd}
-            \fibX \ar[rrd, bend left, "\id"]\ar[rdd, bend right, "\id"']\ar[rd, "\Diag"]&
+            \stX \ar[rrd, bend left, "\id"]\ar[rdd, bend right, "\id"']\ar[rd, "\Diag"]&
                                                             & \\
                                                             &
-        \fibX \times \fibX \ar[r]\ar[d]\ar[rd, phantom, "\text{p.b.}"]& \fibX \ar[d]\\
-          &\fibX \ar[r]& S
+        \stX \times \stX \ar[r]\ar[d]\ar[rd, phantom, "\text{p.b.}"]& \stX \ar[d]\\
+          &\stX \ar[r]& S
     \end{tikzcd}\]
 \end{Def}
 
@@ -277,7 +277,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \end{itemize}
 
         \item
-            (\cite{ChAlg} p.33, \cite{Gomez} p.16)
+            (\cite{LMB00} p.33, \cite{Gomez} p.16)
             $P$をschemeの射の性質とする．
             以下が全て成り立つ時，
             $P$はsmooth (resp. etale) local on source and targetであると呼ばれる．:
@@ -293,7 +293,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{enumerate}
 \end{Def}
 
-\begin{Example}[\cite{StacksProj} Tag 0238]
+\begin{Example}[\cite{SP} Tag 0238]
     etale topologyでの定義を挙げる．
     \begin{description}
     \item[local for the topologyである性質の例] \mnewline
@@ -321,7 +321,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     私が知る限りのものを以下に列挙する．
     \begin{description}
         \item[SP] \mnewline
-            \cite{StacksProj} Tag 04QZ.
+            \cite{SP} Tag 04QZ.
 
         \item[DM] \mnewline
             $X, Y$をschemeとし，
@@ -346,7 +346,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \]
             ただし$X' \to X, Y' \to Y$はcoverである．
             この時，射$f$が$P$であることと，射$f'$が$P$であることは同値．
-            \cite{StacksProj} Tag 04R4でDeligne-Mumfordの定義として参照されている．
+            \cite{SP} Tag 04R4でDeligne-Mumfordの定義として参照されている．
         
         \item[ST] \mnewline
             local on sourceかつlocal on target．
@@ -372,7 +372,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \end{tikzcd}
             \]
             この時，$f$が$P$であることは$f'$が$P$であることと同値．
-            \cite{ChAlg} p.33, \cite{Gomez} p.16で採用されている．
+            \cite{LMB00} p.33, \cite{Gomez} p.16で採用されている．
         
         \item[La'] \mnewline
             $X, Y$ :: schemeとし，射$Y' \to Y, X' \to X$をcoverとする．
@@ -394,7 +394,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                                                 & & & ST \ar[u, Rightarrow]& &
     \end{tikzcd}
     \]
-    SP$\implies$DM$\implies$STは\cite{StacksProj} Tag 04R4による．
+    SP$\implies$DM$\implies$STは\cite{SP} Tag 04R4による．
     SP$\implies$DM$\implies$ST, DM'$\implies$La$\implies$La'の
     それぞれの$\implies$は逆が成り立たないことも分かっている．
     また，DM'とlocal on targetを合わせたものはDMと同値である．
@@ -406,8 +406,8 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \section{Algebraic Space}
 \subsection{Representable Ones.}
     \begin{Def}[Representable Space]
-        stack :: $\fibX$がrepresentable (by scheme)であるとは，
-        あるscheme :: $X$が存在し，$\fibX \iso X=\Sch/X$であるということ．
+        stack :: $\stX$がrepresentable (by scheme)であるとは，
+        あるscheme :: $X$が存在し，$\stX \iso X=\Sch/X$であるということ．
     \end{Def}
 
     \begin{Def}[Representable Morphism of Spaces]
@@ -417,14 +417,14 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{Def}
 
     \begin{Prop}[Representable Diagonal Morphism]
-        $\fibF$ :: stack on $\tau(S)$
+        $\stF$ :: stack on $\tau(S)$
         以下は同値である．
         \begin{enumerate}[label=(\roman*)]
             \item
                 $\Diag \colon \shX \to \shX \times_S \shX$は表現可能．
             \item
                 任意のscheme :: $U$と射$U \to \shX$について，
-                $U \to \fibX$ :: representable.
+                $U \to \stX$ :: representable.
             \item
                 任意のscheme :: $U, V$と射$u \colon U \to \shX, v \colon V \to \shX$について
                 $U \times_{\shX} V$ :: representable.
@@ -453,9 +453,9 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \item
         $\mathcal{P}$をmorphism of schemesの性質で
         local on targetかつstable under base changeであるものとする．
-        この時，representable morphism of spaces :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
-        任意の$U \in \cat{C}$と射$U \to \fibY$について，
-        $\pr \colon \fibX \times_{\fibY} U \to U$
+        この時，representable morphism of spaces :: $f \colon \stX \to \stY$が性質$\mathcal{P}$を持つとは，
+        任意の$U \in \cat{C}$と射$U \to \stY$について，
+        $\pr \colon \stX \times_{\stY} U \to U$
         （に対応するmorphism of algebraic schemes）が性質$\mathcal{P}$を持つということである．
     \end{enumerate}
     \end{Def}
@@ -557,7 +557,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{enumerate}
     \end{Lemma}
     \begin{proof}
-        \cite{StacksProj} Tag 06FM
+        \cite{SP} Tag 06FM
     \end{proof}
 
     \begin{Lemma}
@@ -573,7 +573,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{Lemma}
     %% {{{
     \begin{proof}
-        (a)は\cite{StacksProj} Tag 0CIIを参考にすれば良い．
+        (a)は\cite{SP} Tag 0CIIを参考にすれば良い．
         
         (b)を示す．準備として次を示す．
         \begin{Claim}
@@ -639,28 +639,28 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
 \subsection{Representable Ones}
     \begin{Def}[\rep Representable Stack]
-        stack :: $\fibX$がrepresentableであるとは，
-        あるalgebraic space :: $\shX$が存在し，$\fibX \iso \shX=\int \shX$であるということ．
+        stack :: $\stX$がrepresentableであるとは，
+        あるalgebraic space :: $\shX$が存在し，$\stX \iso \shX=\int \shX$であるということ．
     \end{Def}
 
     \begin{Def}[\rep Representable Morphism of Stacks]
-        morphism of stacks :: $f \colon \fibX \to \fibY$がrepresentableであるとは，
-        任意の$S$-algebraic space :: $U$と$\cat{C}$の射$U \to \fibY$について，
-        fiber product :: $U \times_{\fibY} \fibX$がrepresentableであるということ．
+        morphism of stacks :: $f \colon \stX \to \stY$がrepresentableであるとは，
+        任意の$S$-algebraic space :: $U$と$\cat{C}$の射$U \to \stY$について，
+        fiber product :: $U \times_{\stY} \stX$がrepresentableであるということ．
     \end{Def}
 
     \begin{Lemma}[\rep]\label{lem:repdiag_stack}
-        $\fibX$ :: stack in groupoids on $\cat{C}$とする．
+        $\stX$ :: stack in groupoids on $\cat{C}$とする．
         以下は同値である．
         \begin{enumerate}[label=(\roman*)]
             \item
-                $\Diag \colon \fibX \to \fibX \times_S \fibX$は表現可能．
+                $\Diag \colon \stX \to \stX \times_S \stX$は表現可能．
             \item
-                任意のalgebraic space :: $U$と射$U \to \fibX$について，
-                $U \to \fibX$ :: representable.
+                任意のalgebraic space :: $U$と射$U \to \stX$について，
+                $U \to \stX$ :: representable.
             \item
-                任意のalgebraic space :: $U, V$と射$U \to \fibX, V \to \fibX$について
-                $U \times_{\fibX} V$ :: representable.
+                任意のalgebraic space :: $U, V$と射$U \to \stX, V \to \stX$について
+                $U \times_{\stX} V$ :: representable.
         \end{enumerate}
     \end{Lemma}
 
@@ -669,15 +669,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \begin{enumerate}
     \item
         $\mathcal{P}$をschemeの性質でlocal for etale topologyであるものとする．
-        この時，representable stack :: $\fibX$が性質$\mathcal{P}$を持つとは，
-        $\fibX$をrepresentするalgebraic spaceが性質$\mathcal{P}$を持つということである．
+        この時，representable stack :: $\stX$が性質$\mathcal{P}$を持つとは，
+        $\stX$をrepresentするalgebraic spaceが性質$\mathcal{P}$を持つということである．
 
     \item
         $\mathcal{P}$をmorphism of schemeの性質で
         local on targetかつstable under base changeであるものとする．
-        この時，representable morphism of stacks :: $f \colon \fibX \to \fibY$が性質$\mathcal{P}$を持つとは，
-        任意の$U \in \cat{C}$と射$U \to \fibY$について，
-        $\pr \colon \fibX \times_{\fibY} U \to U$
+        この時，representable morphism of stacks :: $f \colon \stX \to \stY$が性質$\mathcal{P}$を持つとは，
+        任意の$U \in \cat{C}$と射$U \to \stY$について，
+        $\pr \colon \stX \times_{\stY} U \to U$
         （に対応するmorphism of algebraic algebraic spaces）が性質$\mathcal{P}$を持つということである．
     \end{enumerate}
     \end{Def}
@@ -685,11 +685,11 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \subsection{Definition of Algebraic Stack}\label{sec:def-algst}
     \begin{Def}[Algebraic Stack (Artin Stack)]
         $S$ :: schemeとし，
-        $\fibX$をstack on $\ET(S)$とする．
-        $\fibX$がalgebraicであるとは，次が成り立つということである．
+        $\stX$をstack on $\ET(S)$とする．
+        $\stX$がalgebraicであるとは，次が成り立つということである．
     \begin{enumerate}[label=(\alph*)]
-        \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
-        \item algebraic space :: $U$からの\underline{smooth} surjective morphism :: $U \to \fibX$が存在する．
+        \item diagonal morphism :: $\Diag \colon \stX \to \stX \times_{S} \stX$がrepresentableである．
+        \item algebraic space :: $U$からの\underline{smooth} surjective morphism :: $U \to \stX$が存在する．
     \end{enumerate}
         射はstack in groupoidsとしての射である．    
     \end{Def}
@@ -697,11 +697,11 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \begin{Def}[\rep Deligne-Mumford(DM) Stack]
         $S$ :: schemeとし，
-        $\fibX$をstack on $\ET(S)$とする．
-        $\fibX$がalgebraicであるとは，次が成り立つということである．
+        $\stX$をstack on $\ET(S)$とする．
+        $\stX$がalgebraicであるとは，次が成り立つということである．
     \begin{enumerate}[label=(\alph*)]
-        \item diagonal morphism :: $\Diag \colon \fibX \to \fibX \times_{S} \fibX$がrepresentableである．
-        \item algebraic space :: $U$からの\underline{etale} surjective morphism :: $U \to \fibX$が存在する．
+        \item diagonal morphism :: $\Diag \colon \stX \to \stX \times_{S} \stX$がrepresentableである．
+        \item algebraic space :: $U$からの\underline{etale} surjective morphism :: $U \to \stX$が存在する．
     \end{enumerate}
         射はstack in groupoidsとしての射である．    
     \end{Def}
@@ -716,15 +716,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         動機はalgebraic stack $\bar{\mathscr{M}}_g$を通して，
         coarse moduli schemeの性質を調べることだった．
         しばしばDM stackの定義として
-        $\Diag \colon \fibX \to \fibX \times \fibX$はquasi-compactかつseparatedであるものとする．
+        $\Diag \colon \stX \to \stX \times \stX$はquasi-compactかつseparatedであるものとする．
         しかしこれは\cite{IrrOfMg}では要求されて居ない．
 
-        一方，Artin stackは1974年の論文\cite{VerDefAlgSt}でDM stackの一般化として定義された．
+        一方，Artin stackは1974年の論文\cite{Art74}でDM stackの一般化として定義された．
         我々が扱うAlgebraic stackの定義（したがって多くの文献での``Artin stack"の定義）は，
         原論文のものとは異なる．
         Artin stackをどのsite上のstackとして定義するか，という部分にも文献に寄って違いがある．
-        \cite{VerDefAlgSt}, \cite{StacksProj}ではfppf siteを考え，
-        \cite{ChAlg}, \cite{ASS}ではetale siteを考える．
+        \cite{Art74}, \cite{SP}ではfppf siteを考え，
+        \cite{LMB00}, \cite{ASS}ではetale siteを考える．
     \end{Remark}
     \rest
 
@@ -737,22 +737,22 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \item
     $\mathcal{P}$をschemeの性質であって，
     local for etale topologyであるものとする．
-    この時，algebraic stack :: $\fibX$が性質$\mathcal{P}$を持つとは，
-    $\fibX$のあるatlasが性質$\mathcal{P}$を持つということである．
+    この時，algebraic stack :: $\stX$が性質$\mathcal{P}$を持つとは，
+    $\stX$のあるatlasが性質$\mathcal{P}$を持つということである．
 
 \item
-    algebraic stack :: $\fibX$がquasi-compact
+    algebraic stack :: $\stX$がquasi-compact
     \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
-    $\fibX$のあるatlasが性質$\mathcal{P}$を持つということである．
+    $\stX$のあるatlasが性質$\mathcal{P}$を持つということである．
 \end{enumerate}
 \end{Def}
 
-\begin{Def}[\rep Property of Morphism of Algebraic Stack, \cite{ChAlg} p.33, \cite{IrrOfMg} p.100]
+\begin{Def}[\rep Property of Morphism of Algebraic Stack, \cite{LMB00} p.33, \cite{IrrOfMg} p.100]
     $\mathcal{P}$をmorphism of schemeの性質であって，
     smooth local on source and targetであるものとする．
     あるいは，DM stackを考えるならば
     etale local on source and targetであるものとする．
-    以下の可換図式で，$V \to \fibY, U \to V \times \fibX$はatlasであるとする
+    以下の可換図式で，$V \to \stY, U \to V \times \stX$はatlasであるとする
     \footnote
     {
         すなわち，
@@ -761,12 +761,12 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     }．
     \[
     \begin{tikzcd}
-        U \ar[r] \ar[rd, "f'"']& V \times \fibX \ar[r]\ar[d]& \fibX \ar[d, "f"]\\
-        {} & V \ar[r]& \fibY \ar[lu, phantom, "\text{p.b.}"]
+        U \ar[r] \ar[rd, "f'"']& V \times \stX \ar[r]\ar[d]& \stX \ar[d, "f"]\\
+        {} & V \ar[r]& \stY \ar[lu, phantom, "\text{p.b.}"]
     \end{tikzcd}
     \eqno{(PM)}
     \]
-    この時，\underline{morphism of algebraic spaces} :: $f \colon \fibX \to \fibY$が
+    この時，\underline{morphism of algebraic spaces} :: $f \colon \stX \to \stY$が
     性質$\mathcal{P}$を持つとは，
     この可換図式にある$f'$（に対応するmorphism of scheme）が
     性質$\mathcal{P}$を持つということである．
@@ -794,17 +794,17 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \begin{enumerate}
     \item
         $P$をschemeの性質でlocal for etale topologyなものとする．\mnewline
-        一つのetale surjective morphism :: $U \to \fibX$について$U$が性質$P$を持つならば，\mnewline
-        任意のetale surjective morphism :: $U \to \fibX$について$U$が性質$P$を持つ．
+        一つのetale surjective morphism :: $U \to \stX$について$U$が性質$P$を持つならば，\mnewline
+        任意のetale surjective morphism :: $U \to \stX$について$U$が性質$P$を持つ．
     \item
         $P$をmorphism of schemeの性質であって，
         local on source and targetであるものとする．\mnewline
-        一つの$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
-        任意の$V \to \fibY, U \to U \times \fibX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つ．
+        一つの$V \to \stY, U \to U \times \stX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つならば，\mnewline
+        任意の$V \to \stY, U \to U \times \stX$の組み合わせについて図式$(PM)$の$f'$が性質$P$を持つ．
 \end{enumerate}
 \end{Lemma}
 \begin{proof}
-    \cite{StacksProj} Tag 06FM
+    \cite{SP} Tag 06FM
 \end{proof}
 
 \begin{Lemma}[\rep]
@@ -825,9 +825,9 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \section{Definition of Quotient stack}
     Algebraic stackの具体例としてQuotient stackを扱う．
     この例を通じて特に，
-    「diagonal morphism $\Diag \colon \fibX \to \fibX \times_S \fibX$が表現可能とはどういうことか」
+    「diagonal morphism $\Diag \colon \stX \to \stX \times_S \stX$が表現可能とはどういうことか」
     ということを考えたい．
-    参考文献として\cite{ChAlg} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS} Example 8.1.12を参照する．
+    参考文献として\cite{LMB00} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS} Example 8.1.12を参照する．
 
 \subsection{Definitions.}
     \subsubsection{\tp{$\shG$}{G}-torsor}
@@ -847,7 +847,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         このような射$f$は$\shG$-equivariant morphism（$\shG$同変写像）と呼ばれる．
     \end{Def}
 
-    \begin{Def}[$\shG$-Torsor, \cite{ASS} 4.5.1, \cite{StacksProj} Tag 04UJ]
+    \begin{Def}[$\shG$-Torsor, \cite{ASS} 4.5.1, \cite{SP} Tag 04UJ]
         一般のsite :: $\cat{C}$をとり，$\shG$を$\cat{C}$上のsheaf of groupsとする．
         $\cat{C}$上の$\shG$-torsorとは，
         $\cat{C}$上のsheaf :: $\shP$と左作用$\alpha \colon \shG \times \shP \to \shP$の組であって，
@@ -887,14 +887,14 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         ただ一つの$g \in \shG(X)$が存在し，$q=g \ast q=\alpha(g, p)$となる．
     \end{Remark}
 
-    \begin{Lemma}[\cite{StacksProj} Tag 03AI, \cite{ASS} 4.5.1]
+    \begin{Lemma}[\cite{SP} Tag 03AI, \cite{ASS} 4.5.1]
         \enumfix
         \begin{enumerate}
             \item 
             $\shG$-torsor :: $(\shP, \alpha)$が自明であることと，
             $\shP$がglobal section\footnote
             {
-                前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{StacksProj} Tag 06UN)．
+                前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{SP} Tag 06UN)．
                 $\PSh(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
             }
             を持つことと同値．
@@ -981,7 +981,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{Lemma}
     \begin{proof}
         stackであることはsheafの貼り合わせが可能であることに拠る．
-        詳しくは\cite{ASS} 4.2.12, \cite{StacksProj} Tag 04UKを参照せよ．
+        詳しくは\cite{ASS} 4.2.12, \cite{SP} Tag 04UKを参照せよ．
         $[X/G]$がcategory fibered in groupoids(CFG)であることを確かめる．
         これは恒等射上の$[X/G]$の射が同型射であることを確かめれば良い．
 
@@ -1005,11 +1005,11 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
 \subsection{Preparation.}
 \subsubsection{Definition of \tp{$\Isom(X, Y)$}{Stack of Isomorphisms}}
-最初に$\fibX$のcleavageを選択せずとも出来る$\Isom$の構成を述べる．
+最初に$\stX$のcleavageを選択せずとも出来る$\Isom$の構成を述べる．
 後の注意で特にsplittingを選択した場合の構成も述べておく．
 \begin{Def}[$\Isom(X, Y)$]
-    stackとは限らないfibration :: $\fibX \to \cat{B}$と，
-    $U \in \cat{B}$及び$U$上の対象$X, Y \in \fibX$をとる．
+    stackとは限らないfibration :: $\stX \to \cat{B}$と，
+    $U \in \cat{B}$及び$U$上の対象$X, Y \in \stX$をとる．
     この時，CFG over $\cat{B}/U$:: $\Isom(X, Y)$を以下のように定める．
     \begin{description}
         \item[Object.]
@@ -1053,10 +1053,10 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         \end{tikzcd}
     };
 
-    \node [above=5pt of X] {in $\fibZ$};
+    \node [above=5pt of X] {in $\stZ$};
     \node [below=5pt of B] {in $\cat{B}$};
     \draw [->, line width=1.5pt] (X) edge (B);
-    \node at (0.3,2.45) {$\pi_{\fibZ}$};
+    \node at (0.3,2.45) {$\pi_{\stZ}$};
     \end{tikzpicture}
     \end{center}
 
@@ -1069,7 +1069,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \end{Def}
 
 \begin{Remark}\label{rem:simple_isom}
-    $\fibX \to \cat{B}$のsplittingを選んだ場合には$\Isom(X, Y)$の定義は次のように簡単に成る．
+    $\stX \to \cat{B}$のsplittingを選んだ場合には$\Isom(X, Y)$の定義は次のように簡単に成る．
     \begin{description}[labelindent=1cm]
         \item[Object.]
              $\cat{B}/U$の対象$f \colon V \to U$と同型$\phi \colon f^*X \to f^*Y$の組．
@@ -1085,7 +1085,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
 \subsubsection{Propositions}
 \begin{Lemma}
-    任意の$U \in \cat{B}$と$X, Y \in \fibX(U)$について，
+    任意の$U \in \cat{B}$と$X, Y \in \stX(U)$について，
     $\Isom(X, Y)$はcategory fibered in sets.
 \end{Lemma}
 \begin{proof}
@@ -1096,14 +1096,14 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     恒等射である．
 \end{proof}
 
-$\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\Isom(X, Y)$はsheafになる．
+$\stX$ :: stackの場合は（$\stX \to \cat{B}$のsplittingを選べば）$\Isom(X, Y)$はsheafになる．
 \begin{Lemma}
-    一般のsite :: $\cat{C}$とCFG :: $\fibX \to \cat{C}$をとる．
-    さらに$\fibX$はsplit fibered categoryであるとする．
+    一般のsite :: $\cat{C}$とCFG :: $\stX \to \cat{C}$をとる．
+    さらに$\stX$はsplit fibered categoryであるとする．
     以下の二つは互いに同値．
     \begin{enumerate}
-        \item $\fibX$はprestackである．
-        \item 任意の$X, Y \in \fibX$について$\Isom(X, Y)$のfiberはsheafである．
+        \item $\stX$はprestackである．
+        \item 任意の$X, Y \in \stX$について$\Isom(X, Y)$のfiberはsheafである．
     \end{enumerate}
 \end{Lemma}
 \begin{proof}
@@ -1117,27 +1117,27 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
 \end{Remark}
 
 \begin{Lemma}
-    $\fibX$ :: stack in groupoids on $\cat{C}$($=\ET(S)$)とする．
-    この時，$\Diag \colon \fibX \to \fibX \times_{S} \fibX$が表現可能であることと，
-    任意の$U \in \cat{C}$と任意の$X, Y \in \fibX(U)$について
+    $\stX$ :: stack in groupoids on $\cat{C}$($=\ET(S)$)とする．
+    この時，$\Diag \colon \stX \to \stX \times_{S} \stX$が表現可能であることと，
+    任意の$U \in \cat{C}$と任意の$X, Y \in \stX(U)$について
     $\Isom(X, Y)$がalgebraic spaceであることは同値．
 \end{Lemma}
 %% {{{
 \begin{proof}
-    $x,y \colon \Sch/U(=U) \to \fibX$を，
-    $2$-Yoneda Lemmaにより得られる$X, Y \in \fibX(U)$に対応する射とする
+    $x,y \colon \Sch/U(=U) \to \stX$を，
+    $2$-Yoneda Lemmaにより得られる$X, Y \in \stX(U)$に対応する射とする
     \footnote{ 例えば$x$は$f \in \Sch/U$をcartesian lifting $f^*X$へ写す． }．
 
     以下の図式がpullback diagramであることから分かる．
     \[
     \begin{tikzcd}[row sep=40pt]
-        \Isom(X, Y) \ar[r, "\pr_{U}"]\ar[d, "\pr_{\fibX}"']& \Sch/U \ar[d, "x \times y"]\\
-        \fibX \ar[r, "\Diag"'] & \fibX \times_{S} \fibX
+        \Isom(X, Y) \ar[r, "\pr_{U}"]\ar[d, "\pr_{\stX}"']& \Sch/U \ar[d, "x \times y"]\\
+        \stX \ar[r, "\Diag"'] & \stX \times_{S} \stX
         \ar[from=2-1, to=1-2, shorten >= 20pt, shorten <= 20pt, Rightarrow, "a"]
     \end{tikzcd}
     \]
-    任意の射$\Sch/U \to \fibX \times \fibX$が$x \times y$の形で表されることは，
-    $\fibX \times \fibX$の普遍性から得られる．
+    任意の射$\Sch/U \to \stX \times \stX$が$x \times y$の形で表されることは，
+    $\stX \times \stX$の普遍性から得られる．
 
     まず，射と自然同型を定義する．
     $\Isom(X, Y)$から伸びる射は次の関手である．
@@ -1149,13 +1149,13 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
         \textbf{Objects:}& \xi& \mapsto& f \\
         \textbf{Arrows:}& [\xi \to \eta]& \mapsto& h \\
         \hfill \\
-        \pr_{\fibX}& \Isom(X, Y)& \to& \fibX \\
+        \pr_{\stX}& \Isom(X, Y)& \to& \stX \\
         \textbf{Objects:}& \xi& \mapsto& f^*X \\
         \textbf{Arrows:}& [\xi \to \eta]& \mapsto& f^*X \to h^*g^*X
     \end{defmap}
     自然同型$a$は次で定める．
     \begin{defmap}
-        a_{\xi}\colon & ((x \times y) \pr_{U})(\xi)& \to& (\Diag \pr_{\fibX})(\xi) \\
+        a_{\xi}\colon & ((x \times y) \pr_{U})(\xi)& \to& (\Diag \pr_{\stX})(\xi) \\
         {}& (f \colon V \to U, f^*X, f^*X, \alpha)& \mapsto& (\id[f^*X], \phi)
     \end{defmap}
 
@@ -1168,7 +1168,7 @@ $\fibX$ :: stackの場合は（$\fibX \to \cat{B}$のsplittingを選べば）$\I
 \subsection{Proof.}
 \subsubsection{\tp{$\Diag$}{The Diagonal Morphism} is Representable.}
 示した補題から，
-任意の$U \in \cat{C}$と任意の$G_U$-torsor :: $\shP_1, \shP_2 \in \fibX(U)$について
+任意の$U \in \cat{C}$と任意の$G_U$-torsor :: $\shP_1, \shP_2 \in \stX(U)$について
 $\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
 これは次のようにして自明な場合に帰着できる．
 
@@ -1180,7 +1180,7 @@ $\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
 \end{Lemma}
 
 \begin{Lemma}\label{lem:UIsom}
-    $X, Y \in \fibX(U)$と$v \colon V \to U$について
+    $X, Y \in \stX(U)$と$v \colon V \to U$について
     \[ V \times_{U} \Isom(X, Y) \iso \Isom(v^*X, v^*Y). \]
 \end{Lemma}
 
@@ -1321,5 +1321,5 @@ $\shP \to Y$もetale, surjective．
 （ついでに$\shP$ :: algebraic spaceも分かる．）
 
 \bibliographystyle{jplain}
-\bibliography{reference}
+\bibliography{../references/stacks_reference}
 \end{document}
