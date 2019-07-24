@@ -48,7 +48,7 @@
     \begin{center}
     \begin{tabular}{ll}
         \textbf{source and target} & $s,t \colon X_1 \to X_0$ \\ \hline
-        \textbf{composition}       & $c \colon X_1 \times_{s,X_0,t} X_1 \to X_1$ \\ \hline
+        \textbf{composition}       & $c \colon X_1 \times_{t,X_0,s} X_1 \to X_1$ \\ \hline
         \textbf{identity}          & $e \colon X_0 \to X_1$, \\ \hline
         \textbf{inversion}         & $i \colon X_1 \to X_1$.
     \end{tabular}
@@ -63,7 +63,7 @@
             \item $s\circ m=s\circ \pr_{0}$
             \item $t\circ m=t\circ \pr_{1}$
         \end{itemize}
-        ここで$\pr_i \colon X_1\times _{s,X_0,t} X_1\to X_1$は射影．
+        ここで$\pr_i \colon X_1\times _{t,X_0,s} X_1\to X_1$は射影．
     \item
         (Associativity)
         $m\circ (\id[X_1]\times m)=m\circ (m\times \id[X_1]),\ \ 
@@ -167,7 +167,7 @@ $(U, R, s,t,c,e,i)$ ( $(U, R, s,t), U \parto{s}{t} R$ )という記号が使わ�
         \end{itemize}
         fiber product of stacksの構成から，
         $R$の対象は$U(T)\ (T \in \Sch/S)$の二つの対象 :: $u, u'$と
-        $\stX$内の同型$\alpha \colon f(u) \to f(u')$からなることに注意．
+        $\stX$内の同型$\alpha \colon f(u) \to f(u')$からなる$3$つ組であることに注意．
         また，$s,t$ :: smoothにも注意．
     \end{Lemma}
 
