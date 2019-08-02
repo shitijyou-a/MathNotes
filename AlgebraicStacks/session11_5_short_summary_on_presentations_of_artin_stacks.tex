@@ -1,0 +1,184 @@
+\documentclass[a4paper, dvipdfmx]{jsarticle}
+\usepackage{macros}
+
+\newcommand{\parto}[2]{\mathrel{\mathop{\rightrightarrows}^{#1}_{#2}}}
+
+%% changemargin {{{
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+%% }}}
+
+\begin{document}
+\title{ゼミノート \#11.5 \\ Artin Stackのpresentationについての短い概要}
+\author{七条彰紀}
+\maketitle
+\tableofcontents
+\vspace{10pt}
+
+一般にartin stackはalgebraic spaceのgroupoidの商として表現することが出来る．
+これをpresentation of an artin stackと呼ぶ．
+このことについて，基本的な定義と命題をまとめておく．
+（ほとんど\cite{SP}の和訳程度になるだろう．）
+
+\section*{Stacks Project\tp{\cite{SP}}{}の記法について}
+    \cite{SP} section 88.16, 88.17とchapter 72に
+    presentation of an artin stackについての命題が書かれているが，
+    これらだけで読むと良く分からない記法が有るので，意味をまとめた．
+
+    \begin{itemize}
+    \item 
+        algebraic space :: $F$について$\mathcal{S}_F$は
+        $F$からgrothandieck constructionで得られるstackを意味する(\cite{SP} 04M7)．
+
+    \item
+        自然変換の間の演算$\ast$はhorizontal compositionで
+        $\circ$はvertical composition (\cite{SP} 044T)．
+    \end{itemize}
+
+\section{Algebraic Groupoid Space}
+\newpage
+
+\begin{Def}[\cite{ASS}, p.80, \cite{LMB00} 2.4.3, \url{https://en.wikipedia.org/wiki/Groupoid_object}]
+    圏$\cat{C}$をfinite fiber productを持つ圏とする．
+    圏$\cat{C}$の対象$X_0, X_1$と，
+    次の$5$つの射の組 :: $(X_0,X_1, s,t,c,e,i)$を考える．
+    （この組をしばしば$(X_0,X_1,s,t)$や$X_0 \parto{s}{t} X_1$と略す．）
+    \begin{center}
+    \begin{tabular}{ll}
+        \textbf{source and target} & $s,t \colon X_1 \to X_0$ \\ \hline
+        \textbf{composition}       & $c \colon X_1 \times_{t,X_0,s} X_1 \to X_1$ \\ \hline
+        \textbf{identity}          & $e \colon X_0 \to X_1$, \\ \hline
+        \textbf{inversion}         & $i \colon X_1 \to X_1$.
+    \end{tabular}
+    \end{center}
+
+    これらが次を満たす時，groupoid in $\cat{C}$と呼ぶ．
+    なお，以下では$\times_{s,X_0, t}, \times_{s, X_0, \id},..$等を$\times$と略す．
+    \begin{enumerate}[label=(\Alph*)]
+    \item 
+        \begin{itemize}
+            \item $s\circ e=t\circ e=\id[X_0]$
+            \item $s\circ m=s\circ \pr_{0}$
+            \item $t\circ m=t\circ \pr_{1}$
+        \end{itemize}
+        ここで$\pr_i \colon X_1\times _{t,X_0,s} X_1\to X_1$は射影．
+    \item
+        (Associativity)
+        $m\circ (\id[X_1]\times m)=m\circ (m\times \id[X_1]),\ \ 
+        m\circ (\id[X_1]\times m)=m\circ (m\times \id[X_1]),$
+    \item
+        (Identity)
+        $m\circ (e\circ s,\id[X_1])=m\circ (\id[X_1],e\circ t)=\id[X_1]$
+    \item
+        (Inverse)
+        \begin{itemize}
+            \item $i\circ i=\id[X_1]$
+            \item $s\circ i=t,\,t\circ i=s$
+            \item $m\circ (\id[X_1],i)=e\circ s,\,m\circ (i,\id[X_1])=e\circ t$
+            \item $m\circ (\id[X_1],i)=e\circ s,\,m\circ (i,\id[X_1])=e\circ t$
+        \end{itemize}
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}
+    $B$ :: algebraic space over a scheme $S$とする．
+    algebraic space over $B$の圏におけるgroupoid対象を，
+    単にgroupoid in algebraic spaces over $B$という．
+\end{Def}
+
+groupoid in algebraic spaces over $B$には
+$(U, R, s,t,c,e,i)$ ( $(U, R, s,t), U \parto{s}{t} R$ )という記号が使われることが多い．
+
+\section{Quotients of Algebraic Space by Groupoid}
+\begin{Def}
+    任意のscheme over $B$ :: $T$について，
+    組$(U(T), R(T), s_T, t_T, c_T, e_T, i_T)$から次の様に
+    圏$\{U(T)/R(T)\}$ （あるいは$[U/_pR]$と書く）が構成できる．
+    \begin{description}[labelindent=0.5cm, leftmargin=1.5cm]
+        \item[Object] \mnewline
+            $U(T)$の元
+
+        \item[Arrow] \mnewline
+            $u, u' \in U(T)$について，
+            $\Hom_{\{U/R\}(T)}(u, u')=\{\xi \in R(T) \mid s(\xi)=u, t(\xi)=u' \}.$
+
+        \item[Identity Morphism] \mnewline
+            対象$u \in U(T)$のidentity morphismは$e_T(u) \in R(T)$．
+
+        \item[Composition of Morphisms] \mnewline
+            射 :: $\xi \colon u \to u', \eta \colon u' \to u''$の合成$\eta \circ \xi$は
+            $(\eta, \xi) \in R(T) \times_{s_T, U(T), t_T} R(T)$の$c_T$による像．
+
+        \item[Inverse Morphism] \mnewline
+            射$\xi \colon u \to u'$の逆射は$i_T(\xi) \in R(T)$．
+    \end{description}
+
+    関手$\{U(-)/T(-)\} \colon \Sch/B \to (\mathbf{Groupoids})$を
+    Grothendieck constructionでfibered categoryにしたものを$\{U/R\}$と書く．
+    さらにこれをstackificationしたものを$[U/R]$と書き，
+    quotient stack of $U$ by $R$と呼ぶ．
+\end{Def}
+
+一般にquotient stackはalgebraic stackでない．
+
+なお，組$(U,R,s,t,c,e,i)$がgroupoid in algebraic spaces over $B$であることは，
+以下で構成する圏$\{U(T)/R(T)\}$がgroupoidとなることと同値である．
+
+\section{Artin StackからPresentation of an Artin Stackへ}
+    artin stack over a scheme $S$ :: $\stX$とatlas :: $f \colon U \to \stX$をとる．
+    この時，$R:=U \times_{\stX} U$が($s:=\pr_1, t=\pr_2$とすれば)groupoidになっている．
+    特にatlasがsmoothであるから，$s,t \colon R \to U$がsmoothになっている．
+
+    \begin{Thm}[\cite{SP} 04T4, 04T5]
+        artin stack over a scheme $S$ :: $\stX$とatlas :: $f \colon U \to \stX$をとる．
+        するとgroupoid space :: $(U, R, s,t,c,i)$が構成できる．
+        さらに標準的な射 :: $f_{can} \colon [U/R] \to \stX$が存在し，
+        これが圏同値となる．
+    \end{Thm}
+
+    証明の準備として以下の補題を置く．
+
+    \begin{Lemma}[\cite{SP} 04T4 (1)--(3)]\label{lemm:fiberprod}
+        artin stack over a scheme $S$ :: $\stX$とatlas :: $f \colon U \to \stX$をとる．
+        この時，fiber productに関する次の命題が成り立つ．
+        \begin{enumerate}
+            \item
+                $R:=U \times_{f,\stX,f} U$ :: algebraic space.
+            \item
+                標準的圏同型 $U \times_{\stX} U \times_{\stX} U=R \times_{U} R$が成り立つ.
+            \item
+                $U \times U \times U$の第$0$成分と第$2$成分から$R$への射影 :: $\pr_{0,2}$は
+                (ii)の同型により射$\pr_{0,2} \colon R \times R \to R$を誘導する．
+        \end{enumerate}
+    \end{Lemma}
+
+    \begin{Lemma}[\cite{SP} 04T4 (4), 04T5 (1)]
+        この時，groupoid :: $(U, R, s,t,c,i)$が構成できる．
+        より詳しく，$R, s,t,c,i$を次のようにすれば良い．
+        \begin{itemize}
+            \item $R:=U \times_{f,\stX,f} U$,
+            \item $s:=\pr_0 \colon R \to U$,
+            \item $t:=\pr_1 \colon R \to U$,
+            \item $c:=\pr_{0,2} \colon R \times R \to R$,
+            \item $e \colon U \ni u  \mapsto (u,u,\id[f(u)]) \in R$,
+            \item $i \colon R \ni (u,u',\alpha) \mapsto (u',u,\alpha^{-1}) \in R$,
+        \end{itemize}
+        fiber product of stacksの構成から，
+        $R$の対象は$U(T)\ (T \in \Sch/S)$の二つの対象 :: $u, u'$と
+        $\stX$内の同型$\alpha \colon f(u) \to f(u')$からなる$3$つ組であることに注意．
+        また，$s,t$ :: smoothにも注意．
+    \end{Lemma}
+
+    \begin{Lemma}[\cite{SP} 04T4 (5)]
+        $f \colon U \to \stX$から
+        標準的な射 :: $f_{can} \colon [U/R] \to \stX$が誘導される．
+    \end{Lemma}
+    \begin{proof}
+        (\cite{SP} 04T4)の証明内，
+        ``This proves that Groupoids in Spaces, Lemma 044U applies"で始まる段落に
+        $f_{can}$の具体的な構成が記述されている．
+    \end{proof}
+
+\bibliographystyle{jplain}
+\bibliography{../references/stacks_reference}
+\end{document}
