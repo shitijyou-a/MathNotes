@@ -1,6 +1,8 @@
 \documentclass[a4paper, dvipdfmx]{jsarticle}
 \usepackage{macros}
 
+\newcommand{\cons}{\mathrm{cons}}
+
 \begin{document}
 \title{ゼミノート \#12 \\ Quotients of Algebraic Spaces}
 \author{七条彰紀}
@@ -8,9 +10,6 @@
 \tableofcontents
 \vspace{10pt}
 
-このノートでは一貫して，
-$S$ :: algebraic spaceとし，
-groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
 
 \section{Notes on Topology}
 \subsection{Constructible Topology}
@@ -41,16 +40,22 @@ groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
     \item
         $X$のconstructible topologyとは，
         $X$のconstructible setを開基とする位相のことである．
+        $X$のunderlying setに$X$のconstructible topologyを
+        与えた位相空間を$X_{\cons}$と書く．
 
     \item
         有限個とは限らない$X$のconstructible setの，
         和集合をind-constructible subsetと呼び，
         共通部分をpro-constructible subsetと呼ぶ
         \footnote{ ``ind-"はinductive limitを意味し，``pro-"はprojective limitを意味する． }．
+
+    \item
+        map of topological spaces :: $f \colon X \to Y$について，
+        $f^{\cons}$をconstructible topologyでのmapとする．
+        （map of setsとしては$f=f^{\cons}$である．）
     \end{enumerate}
 \end{Def}
 
-次の命題は直ちに分かることなので証明しない．
 \begin{Prop}
     $X$ :: topological spaceとする．
     \begin{enumerate}
@@ -64,22 +69,56 @@ groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
     \item
         $X$のconstructible topologyに於けるopen subsetはind-constructible subsetに限る．
         同様に，closed subsetはpro-constructible subsetに限る．
+
+    \item
+        map of topological spaces :: $f \colon X \to Y$について，
+        $f^{\cons}$ :: continuous.
     \end{enumerate}
 \end{Prop}
+\begin{proof}
+    自明．   
+\end{proof}
 
 \begin{Prop}
     \begin{enumerate}
     \item 
         qcqs($=$quasi-compact and quasi-separated) schemeのpro-constructible subsetは，
-        affine schemeからの射の像に限る(Rydh10, Prop1.1)．
+        affine schemeからの射の像に限る()．
 
     \item
-        locally of finite presentation morphismはconstructible topologyにおいてsubmersive．
+        locally of finite presentation morphismはconstructible topologyにおいてopen．
 
     \item
-         quasi-compact morphismはconstructible topologyにおいてsubmersive．
+         quasi-compact morphismはconstructible topologyにおいてclosed．
     \end{enumerate}
 \end{Prop}
+\begin{proof}
+    (i)はRydh10のProp1.1である．
+    (ii)はChevalley's theoremからの帰結．
+    (iii)はlocallyに調べれば容易に分かる．
+\end{proof}
+
+\begin{Prop}{\cite{Rydh10} Prop1.7}
+    morphism of schemes :: $f \colon X \to Y, g \colon Y' \to Y$を考え，
+    $f$の$g$によるpullbackを$f'$と書く．
+    \begin{enumerate}
+    \item 
+        $P$をopen, closed, submersiveのいずれかとする．
+        $g$がsubmersiveならば，
+        $f'$ :: Pと$f$ :: Pは同値．
+    \item 
+        $P$をuniversally open, universally closed, universally submersive, separatedのいずれかとする．
+        $g$がuniversally submersiveならば，
+        $f'$ :: Pと$f$ :: Pは同値．
+    \item 
+        $g^{\cons}$がuniversally submersiveならば，
+        $f'$ :: quasi-compactと$f$ :: quasi-compactは同値．
+    \end{enumerate}
+\end{Prop}
+\begin{proof}
+    (TODO)
+    (iii)だけ証明を与える．
+\end{proof}
 
 constructible topologyはspectral space
 \footnote
@@ -96,22 +135,45 @@ constructible topologyはspectral space
 \subsection{Equivalence Relation on Topological Space Induced by Groupoid}
 
 \section{Quotients}
-\subsection{Definitions}
+以降は$S$ :: algebraic spaceとし，
+groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
 
+\subsection{Definitions}
 \begin{Def}[equivariant morphism]
+    morphism :: $q \colon X \to Y$について，
+    $q \circ s=q \circ t$であるとき，
+    $q$をequivariant morphismという．
 \end{Def}
 
 \begin{Def}[$j, j_{Y}$]
+    $s,t \colon R \to X$から$X \times_{S} X$の普遍性により得られる
+    射 :: $R \to X \times_{S} X$を$j$と書く．
+
+    また，equivariant morphism :: $q \colon X \to Y$について，
+    $s,t$から$X \times_{Y} X$の普遍性により得られる
+    射 :: $R \to X \times_{Y} X$を$j_{/Y}$と書く．
 \end{Def}
+
+\begin{Remark}
+    fiber productの普遍性から，
+    $j_{/Y}$に$X \times_{Y} X \to X \times_{S} X$を合成すると$j$に一致する．
+\end{Remark}
+
 stabilizerはまたの機会に定義する．
 
 \begin{description}[labelindent=1cm, leftmargin=1.5cm]
     \item[Zariski quotient             ]
+
     \item[Constructible quotient       ]
+
     \item[Topological quotient         ]
+
     \item[Strongly topological quotient]
+
     \item[Geometric quotient           ]
+
     \item[Strongly geometric quotient  ]
+
 \end{description}
 
 \begin{Def}[universal, uniform quotient]
@@ -120,8 +182,22 @@ stabilizerはまたの機会に定義する．
 \begin{Remark}
     geometric quotient in \cite{GIT}
     \begin{itemize}
-        \item 
+        \item $q$ :: surjective and equivariant.
+        \item $\shO_{Y}=(q_* \shO_X)^{R}$.
+        \item 任意の点$y \in Y$について，$q^{-1}(y)$はただ一つのorbitからなる.
+        \item
+            $W_1, W_2 \subseteq X$ :: disjoint closed subsetについて
+            $\cl_Y(q(W_1)), \cl_Y(q(W_2))$ :: disjoint.
     \end{itemize}
+
+    以下のように言い換えても良い．
+    \begin{itemize}
+        \item $q$ :: Zariski quotient.
+        \item $j_{/Y}$ :: surjective.
+        \item $\shO_{Y}=(q_* \shO_X)^{R}$.
+        \item $q$のopen immersionによるpullbackも上記を満たす．
+    \end{itemize}
+    ref. D. Mumford's Geometric Invariant Theory(E.Viehweg)
 \end{Remark}
 
 \subsection{Propositions : Paraphase}
