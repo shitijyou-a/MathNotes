@@ -13,9 +13,87 @@ $S$ :: algebraic spaceとし，
 groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
 
 \section{Notes on Topology}
-\subsection{Submersive Morphism}
-
 \subsection{Constructible Topology}
+以下を参考にした．
+\begin{itemize}
+    \item D.Rydh(2010) ``Submersions and effective descent of étale morphisms"
+    \item Lecture note by B.Conrad,
+        \url{http://virtualmath1.stanford.edu/~conrad/Perfseminar/Notes/L3.pdf}
+    \item \cite{SP} 08YF \url{https://stacks.math.columbia.edu/tag/08YF}
+\end{itemize}
+
+\begin{Def}
+    $X$ :: topological spaceとする．
+    \begin{enumerate}
+    \item 
+        $X$のlocally closed subsetとは，
+        closed subsetとopen subsetの共通部分で表せるsubsetである．
+
+    \item
+        $X$のconstructible setとは，
+        $X$の有限個のlocally closed subsetの和集合で表せるsubsetのことである．
+
+    \item
+        $U \subseteq X$が$X$のlocally constructible setであるとは，
+        $U$のある開被覆$\{U_i\}$について，
+        各$U \cap U_i$がconstructible setである，ということ．
+
+    \item
+        $X$のconstructible topologyとは，
+        $X$のconstructible setを開基とする位相のことである．
+
+    \item
+        有限個とは限らない$X$のconstructible setの，
+        和集合をind-constructible subsetと呼び，
+        共通部分をpro-constructible subsetと呼ぶ
+        \footnote{ ``ind-"はinductive limitを意味し，``pro-"はprojective limitを意味する． }．
+    \end{enumerate}
+\end{Def}
+
+次の命題は直ちに分かることなので証明しない．
+\begin{Prop}
+    $X$ :: topological spaceとする．
+    \begin{enumerate}
+    \item
+        $X$のopen subsetとclosed subsetはconstructible setである．
+
+    \item
+        有限個のconstructible setの和，共通部分はconstructible setである．
+        constructible setの補集合もconstructible setである．
+
+    \item
+        $X$のconstructible topologyに於けるopen subsetはind-constructible subsetに限る．
+        同様に，closed subsetはpro-constructible subsetに限る．
+    \end{enumerate}
+\end{Prop}
+
+\begin{Prop}
+    \begin{enumerate}
+    \item 
+        qcqs($=$quasi-compact and quasi-separated) schemeのpro-constructible subsetは，
+        affine schemeからの射の像に限る(Rydh10, Prop1.1)．
+
+    \item
+        locally of finite presentation morphismはconstructible topologyにおいてsubmersive．
+
+    \item
+         quasi-compact morphismはconstructible topologyにおいてsubmersive．
+    \end{enumerate}
+\end{Prop}
+
+constructible topologyはspectral space
+\footnote
+{
+    spectral spaceとは，以下の性質をもつ位相空間:
+    sober, quasi-compact,
+    the intersection of two quasi-compact opens is quasi-compact,
+    and the collection of quasi-compact opens forms a basis for the topology
+    (\cite{SP} 08FG).
+}
+と共に扱われることが多い．
+例えばqcqs schemeのunderlying spaceはspectralである．
+
+\subsection{Equivalence Relation on Topological Space Induced by Groupoid}
 
 \section{Quotients}
 \subsection{Definitions}
