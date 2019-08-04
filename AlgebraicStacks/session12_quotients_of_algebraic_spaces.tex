@@ -205,12 +205,22 @@ groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
     射 :: $R \to X \times_{Y} X$を$j_{/Y}$と書く．
 \end{Def}
 
+stabilizerはまたの機会に定義する．
+
 \begin{Remark}
     fiber productの普遍性から，
     $j_{/Y}$に$X \times_{Y} X \to X \times_{S} X$を合成すると$j$に一致する．
 \end{Remark}
 
-stabilizerはまたの機会に定義する．
+\begin{Remark}
+    equivariant morphism :: $R \parto{s}{t} X \to Y$は，
+    quotient stackからの射$[X/R] \to Y$に一対一に対応する．
+    (TODO: proof)
+\end{Remark}
+
+
+\begin{Def}
+    equivariant morphism :: $q \colon X \to Y$を考える．
 
 \begin{description}[labelindent=1cm, leftmargin=1.5cm]
     \item[Zariski quotient             ]
@@ -226,6 +236,7 @@ stabilizerはまたの機会に定義する．
     \item[Strongly geometric quotient  ]
 
 \end{description}
+\end{Def}
 
 \begin{Def}[universal, uniform quotient]
 \end{Def}
@@ -252,6 +263,44 @@ stabilizerはまたの機会に定義する．
 \end{Remark}
 
 \subsection{Propositions : Paraphase}
+\begin{Prop}[\cite{Rydh13}, Prop2.3]
+    $R$-equivariant morphism :: $q \colon X \to Y$を考える．
+    以下は同値である．
+    {\samepage
+    \begin{enumerate}
+    \item
+        任意の体$k$と射$y \colon k \to Y$ \footnote{$\Spec k$を$k$と略した．}
+            について$|X \times_{Y} k|$は，\mnewline
+        少なくとも1つの / 多くとも一つの / 丁度一つの，$(R \times_{Y} k)$-orbitを含む．
+    \item
+        $q$ :: surjective / $j_{/Y}$ :: surjective / $q, j_{/Y}$:: surjective.
+    \end{enumerate}
+
+    さらに$q, j_{/Y}$ :: locally of finite type or integralならば，
+    次も上2つと同値．
+    
+    \begin{enumerate}[start=3]
+    \item
+        任意の代数閉体$K$について，$q_K \colon X(K)/R(K) \to Y(K)$は \mnewline
+        surjective / injective / bijective.
+    \end{enumerate}
+    }
+\end{Prop}
+\begin{proof}
+    
+\end{proof}
+
+\begin{Remark}
+    したがってquotientの定義の幾つかは次のように書き換えられる．
+    
+    \begin{tabular}{rcl}
+        $q$ :: univ. Zariski & $\iff$ & $q$ :: univ. submersive and $j_{/Y}$ :: surjective. \\
+        $q$ :: topological & $\iff$ & $q, q^{\cons}$ :: univ. submersive and $j_{/Y}$ :: surjective. \\
+        $q$ :: strongly topological & $\iff$ & $q, q^{\cons},j_{/Y}$ :: univ. submersive
+    \end{tabular}
+\end{Remark}
+Remark 2.5
+Prop2.10
 
 \bibliographystyle{jplain}
 \bibliography{../references/stacks_reference}
