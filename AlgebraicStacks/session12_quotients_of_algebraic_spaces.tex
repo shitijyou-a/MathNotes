@@ -10,14 +10,12 @@
 \tableofcontents
 \vspace{10pt}
 
-
 \section{Notes on Topology}
 \subsection{Constructible Topology}
 以下を参考にした．
 \begin{itemize}
-    \item D.Rydh(2010) ``Submersions and effective descent of étale morphisms"
-    \item Lecture note by B.Conrad,
-        \url{http://virtualmath1.stanford.edu/~conrad/Perfseminar/Notes/L3.pdf}
+    \item \cite{Rydh10} \S1
+    \item \url{http://virtualmath1.stanford.edu/~conrad/Perfseminar/Notes/L3.pdf} by B.Conrad
     \item \cite{SP} 08YF \url{https://stacks.math.columbia.edu/tag/08YF}
 \end{itemize}
 
@@ -83,20 +81,40 @@
     \begin{enumerate}
     \item 
         qcqs($=$quasi-compact and quasi-separated) schemeのpro-constructible subsetは，
-        affine schemeからの射の像に限る()．
+        affine schemeからの射の像に限る．
 
     \item
         locally of finite presentation morphismはconstructible topologyにおいてopen．
 
     \item
          quasi-compact morphismはconstructible topologyにおいてclosed．
+
+    \item
+        $f$ :: surjective morphismで
+        $f$ :: locally of finite presentation or quasi-compactならば
+        $f^{\cons}$ :: submersive.
     \end{enumerate}
 \end{Prop}
 \begin{proof}
     (i)はRydh10のProp1.1である．
     (ii)はChevalley's theoremからの帰結．
     (iii)はlocallyに調べれば容易に分かる．
+    (iv)は(ii), (iii)からの帰結である．
 \end{proof}
+
+\begin{Remark}
+    constructible topologyはspectral space
+    \footnote
+    {
+        spectral spaceとは，以下の性質をもつ位相空間:
+        sober, quasi-compact,
+        the intersection of two quasi-compact opens is quasi-compact,
+        and the collection of quasi-compact opens forms a basis for the topology
+        (\cite{SP} 08FG).
+    }
+    と共に扱われることが多い．
+    例えばqcqs schemeのunderlying spaceはspectralである．
+\end{Remark}
 
 \begin{Prop}{\cite{Rydh10} Prop1.7}
     morphism of schemes :: $f \colon X \to Y, g \colon Y' \to Y$を考え，
@@ -120,22 +138,55 @@
     (iii)だけ証明を与える．
 \end{proof}
 
-constructible topologyはspectral space
-\footnote
-{
-    spectral spaceとは，以下の性質をもつ位相空間:
-    sober, quasi-compact,
-    the intersection of two quasi-compact opens is quasi-compact,
-    and the collection of quasi-compact opens forms a basis for the topology
-    (\cite{SP} 08FG).
-}
-と共に扱われることが多い．
-例えばqcqs schemeのunderlying spaceはspectralである．
+\begin{Remark}
+    おそらく，\cite{Rydh13}はこの命題を利用するために，
+    topological quotientに「$q^{\cons}$ :: universal submersive」を要求している．
+    より詳しく言うと以下の命題で使われている．
+    \begin{Prop}[\cite{Rydh13} Prop2.12 (ii)]
+        $R \parto{s}{t} X$ :: groupoidとし，
+        $q \colon X \to Y$をtopological quotientとする．
+        $j$ :: quasi-compactと，
+        $Y$ :: quasi-separatedかつ$j_{/Y}$ :: quasi-compactは同値．
+    \end{Prop}
+    これを経由して，
+    $X \to S$ :: quasi-separatedならば
+    GC quotient :: $Y \to S$がquasi-separatedであることなどを示している(Prop4.7)．
+\end{Remark}
 
 \subsection{Equivalence Relation on Topological Space Induced by Groupoid}
+$S$ :: algebraic spaceとし，
+groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
+
+topological space :: $|U|$に，次のようにして同値関係$\sim_{R}$を定義する．
+\begin{Def}
+    点$x_1, x_2 \in |X|$について，
+    \[ x_1 \sim_R x_2 \iff \Exists{r \in |R|} |s|(r)=x_1, |t|(r)=x_2 \]
+    と定義する．
+\end{Def}
+$|R \times_{x} R| \to |R| \times_{|X|} |R|$が全射であることを用いると，
+groupoidの定義から，$\sim_R$が同値関係であることが分かる．
+
+\begin{Def}
+    点$x \in |X|$の同値類をorbitと呼び，$R(x)$と書く．
+    $R(x)$は$|t|(|s|^{-1}(x))$と等しい．
+
+    また，$W \subseteq |X|$が$R$-stableであるとは，
+    $W$が$\sim_{R}$についてstableであること．
+    すなわち，
+    \[ \{ x \in |X| \mid \Exists{w \in W} w \sim_R x \}=R \]
+    となること．
+    これは$|s|^{-1}(W)=|t|^{-1}(W)$ in $|R|$とも同値．
+\end{Def}
+
+\begin{Remark}
+    \cite{SP} 04XJには，
+    $S=|X| \times_{|[X/R]|} |X|$とすると位相空間として$|[X/R]|=|X|/S$，
+    という命題が有る．
+\end{Remark}
 
 \section{Quotients}
-以降は$S$ :: algebraic spaceとし，
+
+以降は引き続き$S$ :: algebraic spaceとし，
 groupoid in algebraic $S$-space :: $R \parto{s}{t} X$を考える．
 
 \subsection{Definitions}
@@ -163,7 +214,7 @@ stabilizerはまたの機会に定義する．
 
 \begin{description}[labelindent=1cm, leftmargin=1.5cm]
     \item[Zariski quotient             ]
-
+        
     \item[Constructible quotient       ]
 
     \item[Topological quotient         ]
