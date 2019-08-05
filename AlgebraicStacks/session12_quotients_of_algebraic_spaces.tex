@@ -239,7 +239,23 @@ stabilizerはまたの機会に定義する．
 \end{Def}
 
 \begin{Def}[universal, uniform quotient]
+    $q \colon X \to Y$を上記のいずれかのquotientとする．
+
+    \begin{itemize}
+    \item 
+        任意の射$Y' \to Y$によるpullback :: $q' \colon X \times_Y Y' \to Y'$も
+        同じ種類のquotientであるとき，$q$はuniversalであると言う．
+    \item
+        任意のflat射$Y' \to Y$によるpullback :: $q' \colon X \times_Y Y' \to Y'$も
+        同じ種類のquotientであるとき，$q$はuniformであると言う．
+    \end{itemize}
 \end{Def}
+
+\begin{Remark}
+    $j_{/Y} \colon X \times_{Y} X \to X \times_{S} X$が
+    universally submersiveであることは，
+    $X \times_{Y} X$に適切な位相が入っていることを意味する．
+\end{Remark}
 
 \begin{Remark}
     geometric quotient in \cite{GIT}
@@ -255,17 +271,17 @@ stabilizerはまたの機会に定義する．
     以下のように言い換えても良い．
     \begin{itemize}
         \item $q$ :: Zariski quotient.
-        \item $j_{/Y}$ :: surjective.
         \item $\shO_{Y}=(q_* \shO_X)^{R}$.
         \item $q$のopen immersionによるpullbackも上記を満たす．
     \end{itemize}
-    ref. D. Mumford's Geometric Invariant Theory(E.Viehweg)
+    ref. E.Viehweg ``D. Mumford's Geometric Invariant Theory"．
+    なお，\cite{GIT}の初版では$q$ :: universally submersiveを仮定している．
 \end{Remark}
 
 \subsection{Propositions : Paraphase}
 \begin{Prop}[\cite{Rydh13}, Prop2.3]
     $R$-equivariant morphism :: $q \colon X \to Y$を考える．
-    以下は同値である．
+    以下の$3 \times 3=9$個の命題を考える．
     {\samepage
     \begin{enumerate}
     \item
@@ -274,20 +290,22 @@ stabilizerはまたの機会に定義する．
         少なくとも1つの / 多くとも一つの / 丁度一つの，$(R \times_{Y} k)$-orbitを含む．
     \item
         $q$ :: surjective / $j_{/Y}$ :: surjective / $q, j_{/Y}$:: surjective.
-    \end{enumerate}
-
-    さらに$q, j_{/Y}$ :: locally of finite type or integralならば，
-    次も上2つと同値．
-    
-    \begin{enumerate}[start=3]
     \item
-        任意の代数閉体$K$について，$q_K \colon X(K)/R(K) \to Y(K)$は \mnewline
+        任意の代数閉体$K$について，$\bar{q}_K \colon X(K)/R(K) \to Y(K)$
+        \footnote
+            {
+                $X(K)/R(K)$は$R(K) \parto{s_K}{t_K} X(K)$のcoequalizerで，
+                $\bar{q}_K$はcoequalizerによる$q_K \colon X(K) \to Y(K)$の一意な分解である．
+            }は \mnewline
         surjective / injective / bijective.
     \end{enumerate}
     }
+
+    この時，(iii) $\implies$ (ii) $\iff$ (i)がそれぞれ成り立つ．
+    さらに$q, j_{/Y}$ :: locally of finite type or integralならば，
+    (iii) $\impliedby$ (ii)も成り立つ．
 \end{Prop}
 \begin{proof}
-    
 \end{proof}
 
 \begin{Remark}
@@ -299,8 +317,15 @@ stabilizerはまたの機会に定義する．
         $q$ :: strongly topological & $\iff$ & $q, q^{\cons},j_{/Y}$ :: univ. submersive
     \end{tabular}
 \end{Remark}
-Remark 2.5
+
+\begin{Lemma}
+    Remark 2.5
+    when univ. Zariski quot. is top. quot.?
+\end{Lemma}
+
+\begin{Prop}
 Prop2.10
+\end{Prop}
 
 \bibliographystyle{jplain}
 \bibliography{../references/stacks_reference}
