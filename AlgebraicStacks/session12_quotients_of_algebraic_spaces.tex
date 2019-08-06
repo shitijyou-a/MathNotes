@@ -77,7 +77,7 @@
     自明．   
 \end{proof}
 
-\begin{Prop}
+\begin{Prop} \label{nontrivial_constop}
     \begin{enumerate}
     \item 
         qcqs($=$quasi-compact and quasi-separated) schemeのpro-constructible subsetは，
@@ -116,7 +116,7 @@
     例えばqcqs schemeのunderlying spaceはspectralである．
 \end{Remark}
 
-\begin{Prop}{\cite{Rydh10} Prop1.7}
+\begin{Prop}{\cite{Rydh10} Prop1.7} \label{refrecting_property_of_pullback}
     morphism of schemes :: $f \colon X \to Y, g \colon Y' \to Y$を考え，
     $f$の$g$によるpullbackを$f'$と書く．
     \begin{enumerate}
@@ -349,13 +349,53 @@ stabilizerはまたの機会に定義する．
     \end{tabular}
 \end{Remark}
 
-\begin{Lemma}
-    Remark 2.5
-    when univ. Zariski quot. is top. quot.?
+\begin{Lemma}[\cite{Rydh13} Prop2.4, Remark2.5]
+    $q \colon X \to Y$ :: universal Zariski quotientとする．
+    以下の時，$q$ :: topological quotient.
+    \begin{enumerate}
+        \item $q$ :: quasi-compact,
+        \item $q$ :: locally of finite presentation,
+        \item $q$ :: universally open/closed,
+        \item $s$ :: universally open/closed.
+    \end{enumerate}
 \end{Lemma}
+\begin{proof}
+    $q^{\cons}$ :: univ. submersiveを示す．
+    これには$q^{\cons}$ :: univ. open or univ. closedを示せば十分である．
+    なので(i),(ii)については命題(\ref{nontrivial_constop})から分かる．
+    (iii)について$q^{\cons}$ :: univ. openは自明．
+    (iv)を証明する．
 
-\begin{Prop}
-    Prop2.10
+    $s$ :: univ. open/closedと仮定する．
+    $j_{/Y}$の定義から，$s$は以下のように分解できる．
+    \[
+    \begin{tikzcd}
+        R \ar[r, "j_{/Y}"]& X \times_Y X \ar[r, "\pr"]& X
+    \end{tikzcd}
+    \]
+    一つ前の命題から，今$j_{/Y}$ :: surjectiveとなっている．
+    $U \subseteq X \times_Y X$をopen/closedとすると，
+    $\pr(U)=s(j_{/Y}^{-1}(U))$もopen/closed．
+    よって$\pr$ :: open/closed map.
+    univ. open/closedやsurj.はpullbackで保たれるので，特に$\pr$ :: univ. open/closed.
+    $q$ :: univ. submersiveなので，
+    命題(\ref{refrecting_property_of_pullback})と合わせて$q$ :: univ. open/closedを得る．
+\end{proof}
+
+\begin{Prop}[\cite{Rydh13} Prop2.10]
+    $q \colon X \to Y$ :: equivariantとし，
+    $f \colon Y' \to Y$による$q$のpullbackを$q' \colon X \times_{Y} Y' \to Y'$とする．
+
+    \begin{enumerate}
+        \item $q$ :: topological quotient，ならば$q'$ :: topological quotient.
+        \item $f$ :: flatかつ$q$ :: geometric quotient，ならば$q'$ :: geometric quotient.
+        \item $f$ :: fpqc or fppf 
+            \footnote{faithfully flat and quasi-compactまたはfaithfully flat and locally of finite presentation}
+                かつ$q'$ :: topological / geometric / universal geometric quotientならば，
+                $q$もそうである．
+    \end{enumerate}
+    いずれも``topological"を``strongly topological"に，
+    ``geometric"を``strongly geometric"に置き換えても成立する．
 \end{Prop}
 
 \bibliographystyle{jplain}
