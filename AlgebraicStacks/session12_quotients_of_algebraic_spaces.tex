@@ -218,37 +218,68 @@ stabilizerはまたの機会に定義する．
     (TODO: proof)
 \end{Remark}
 
-
-\begin{Def}
-    equivariant morphism :: $q \colon X \to Y$を考える．
-
-\begin{description}[labelindent=1cm, leftmargin=1.5cm]
-    \item[Zariski quotient             ]
-        
-    \item[Constructible quotient       ]
-
-    \item[Topological quotient         ]
-
-    \item[Strongly topological quotient]
-
-    \item[Geometric quotient           ]
-
-    \item[Strongly geometric quotient  ]
-
-\end{description}
-\end{Def}
-
 \begin{Def}[universal, uniform quotient]
-    $q \colon X \to Y$を上記のいずれかのquotientとする．
+    $q \colon X \to Y$が性質$P$をもつとする．
 
     \begin{itemize}
     \item 
         任意の射$Y' \to Y$によるpullback :: $q' \colon X \times_Y Y' \to Y'$も
-        同じ種類のquotientであるとき，$q$はuniversalであると言う．
+        性質$P$をもつ時，$P$はuniversalであると言う．
     \item
         任意のflat射$Y' \to Y$によるpullback :: $q' \colon X \times_Y Y' \to Y'$も
-        同じ種類のquotientであるとき，$q$はuniformであると言う．
+        性質$P$をもつ時，$P$はuniformであると言う．
     \end{itemize}
+\end{Def}
+
+\begin{Def}
+    equivariant morphism :: $q \colon X \to Y$を考える．
+
+\begin{description}[labelindent=3ex, leftmargin=7ex, style=nextline, font=\textbf]
+    \item[Categorical quotient         ]
+        任意のequivariant morphism :: $r \colon X \to Z$が$q$を介して一意に分解する時，
+        すなわち$\bar{r} \circ q=r$を満たす
+        射 :: $\bar{r} \colon Y \to Z$が一意に存在するとき，
+        $q$をcategorical quotientと呼ぶ．
+
+    \item[Zariski quotient             ]
+        $|q| \colon |X| \to |Y|$がtopological spaceの圏における
+        $|R| \parto{|s|}{|t|} |X|$のcoequalizerである時，
+        $q$をZariski quotientと呼ぶ．
+        同値な言い換えとして，
+        任意の点の$|q|$による逆像が丁度一つのorbitから成り，
+        かつ$|q|$ :: submersiveである，というものが有る．
+
+    \item[Constructible quotient       ]
+        $|q|^{\cons} \colon |X|^{\cons} \to |Y|^{\cons}$がtopological spaceの圏における
+        $|R|^{\cons} \parto{|s|^{\cons}}{|t|^{\cons}} |X|^{\cons}$のcoequalizerである時，
+        $q$をconstructible quotientと呼ぶ．
+        言い換えについてはZariski quotientと同様である．
+
+    \item[Topological quotient         ]
+        $q$ :: universal Zariski \& universal constructible quotientである時，
+        $q$をtopological quotientと呼ぶ．
+
+    \item[Strongly topological quotient]
+        $q$ :: topological quotient かつ $j_{/Y}$ :: universally submersiveである時，
+        $q$をstrongly topological quotientと呼ぶ．
+
+    \item[Geometric quotient           ]
+        $q$がtopological quotientであり，
+        かつ$\shO_{Y}$が$Y_{\ET}$ (category of etale sheaves on $Y$)における$s^*, t^*$のequalizerである時，
+        $q$をgeometric quotientと呼ぶ．
+        \[
+        \begin{tikzcd}
+            \shO_{Y} \ar[r]& q_*\shO_{X}
+                \ar[r, shift left, "s^*"] \ar[r, shift right, "t^*"']& (q \circ s)_* \shO_R
+        \end{tikzcd}
+        \]
+
+    \item[Strongly geometric quotient  ]
+        $q$ :: geometric quotient \& strongly topological quotientであるとき，
+        すなわち$q$ :: geometric quotientかつ$j_{/Y}$ :: universally submersive
+        であるとき，
+        $q$をstrongly geometric quotientと呼ぶ．
+\end{description}
 \end{Def}
 
 \begin{Remark}
@@ -301,9 +332,9 @@ stabilizerはまたの機会に定義する．
     \end{enumerate}
     }
 
-    この時，(iii) $\implies$ (ii) $\iff$ (i)がそれぞれ成り立つ．
+    この時，(i)$ \iff$ (ii) $\impliedby$ (iii)がそれぞれ成り立つ．
     さらに$q, j_{/Y}$ :: locally of finite type or integralならば，
-    (iii) $\impliedby$ (ii)も成り立つ．
+    (ii) $\implies$ (iii)も成り立つ．
 \end{Prop}
 \begin{proof}
 \end{proof}
@@ -324,7 +355,7 @@ stabilizerはまたの機会に定義する．
 \end{Lemma}
 
 \begin{Prop}
-Prop2.10
+    Prop2.10
 \end{Prop}
 
 \bibliographystyle{jplain}
