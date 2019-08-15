@@ -2,6 +2,7 @@
 \usepackage{macros}
 
 \newcommand{\cons}{\mathrm{cons}}
+\newcommand{\centerpb}{\ar[lu, phantom, "\ulcorner"]}
 
 \begin{document}
 \title{ゼミノート \#12 \\ Quotients of Algebraic Spaces}
@@ -283,9 +284,10 @@ stabilizerはまたの機会に定義する．
 \end{Def}
 
 \begin{Remark}
-    $j_{/Y} \colon X \times_{Y} X \to X \times_{S} X$が
-    universally submersiveであることは，
-    $X \times_{Y} X$に適切な位相が入っていることを意味する．
+    strongly topological quotientでは
+    $j_{/Y} \colon R \to X \times_Y X$がuniv. submersiveであるから，
+    $X \times_{Y} X \to X \times_{S} X$もuniv. submersive．
+    このことは$X \times_{Y} X$に「適切な」位相が入っていることを意味する．
 \end{Remark}
 
 \begin{Remark}
@@ -337,6 +339,125 @@ stabilizerはまたの機会に定義する．
     (ii) $\implies$ (iii)も成り立つ．
 \end{Prop}
 \begin{proof}
+    以下で計$6$つの命題の証明を行う．
+    そのために，取り扱う$6$つの命題を以下のようにまとめる．
+    \begin{center}
+    \begin{tabular}{|l|l|l|}
+    \hline
+          & a                       & b                             \\ \hline
+        1 & (i) 少なくとも1つの     & (i) 多くとも一つの            \\ \hline
+        2 & (ii) $q$ :: surjective  & (ii) $j_{/Y}$ :: surjective   \\ \hline
+        3 & (iii) surjective        & (iii) injective               \\ \hline
+    \end{tabular}
+    \end{center}
+    例えば``(1a)"という記号は，(i)に含まれる
+    「任意の体$k$と射$y \colon k \to Y$について$|X \times_{Y} k|$は
+        少なくとも1つの$(R \times_{Y} k)$-orbitを含む．」
+    という命題を意味する．
+
+    体 :: $k$, morphism :: $y \colon \Spec k \to Y$をとる．
+    $\Spec k$を$k$と略し，
+    $X \times_{Y} \Spec k$や$R \times_{Y} k$をそれぞれ$X_y, R_y$と略す．
+
+    \paragraph{(1a) $\implies$ (2a)}
+    仮定より$|X_y| \neq \emptyset$である．
+    この集合から$|q|^{-1}(y)$への写像が存在するので$|q|^{-1}(y) \neq \emptyset$．
+    よって$q$は全射．
+    \[
+    \begin{tikzcd}[]
+        \vert X_y \vert \ar[r]&
+        \vert X \vert \times_{\vert Y \vert} \vert k \vert \ar[r, "\pr_{\vert X \vert}"]&
+        \vert q \vert^{-1}(y)
+    \end{tikzcd}
+    \]
+
+    \paragraph{(2a) $\implies$(1a)}
+    仮定から直ちに次がわかる．
+    \[
+                 q \colon X \to Y \text{ :: surj}
+        \implies y^*q \colon X_y \to k \text{ :: surj}
+        \iff     |y^*q| \text{ :: surj}
+        \iff     \Forall{t \in |\Spec k|}|y^*q|^{-1}(t) \neq \emptyset
+    \]
+
+    $R_y$-equiv. morphismによる一点の逆像は$R_y$-orbitを含む
+        \footnote{ 点$t \in |\Spec k|$について$q_y(t)=q_y(R_y(t))$だから． }から，
+    $|X_y|$は$R_y$-orbit :: $|y^*q|^{-1}(t) \subseteq |X_y|$を含む．
+
+    \paragraph{(2b) $\implies$(1b)}
+    まず，$(X \times_{Y} X) \times_{Y} k \iso X_y \times_{k} X_y$に注意する．
+    以下のpullback図式の$(j_{/Y})_y$を考える．
+    仮定からこれは全射．
+    \[
+    \begin{tikzcd}[column sep=30pt]
+        R_y \ar[r, "(j_{/Y})_y"]\ar[d]& X_y \times_k X_y \ar[r]\ar[d]& k \ar[d, "y"]\\
+        R \ar[r, "j_{/Y}"']& X \times_Y X \ar[r]& Y 
+    \end{tikzcd}
+    \]
+    こうして全射$|R_y| \to |X_y \times_k X_y| \to |X_y| \times_{|k|} |X_y|$が得られる．
+    $j_{/Y}$の定義から，
+    これらと$\pr_{i} \colon |X_y| \times_{|k|} |X_y| \to |X_y|$ ($i=1,2$)を合成すれば
+    それぞれ$|s|, |t|$となる．
+    よって任意の$u,v \in |X_y|$について$|s|(r)=u, |t|(r)=v$となる$r \in |R_y|$が存在する．
+    すなわち，任意の$u,v \in |X_y|$について$u \sim_{R_y} v$．
+
+    \paragraph{(3a) $\implies$(2a)}
+    
+    \paragraph{(1b) or (3b) $\implies$(2b)}
+    $K$ :: algebraically closed fieldとし，
+    $\Spec K$を$K$と略す．
+
+    $z \colon K \to X \times_{Y} X$を任意にとり，
+    $y:=q \circ \pr_i \circ z \in Y(K)$とする．
+    $q \circ \pr_1=q \circ \pr_2$に注意．
+    この$y$で$X \times_Y X \to X \to Y$をpullbackする．
+    すると$z$と$\id[K]$から点$z_y \colon K \to X_y \times_K X_y$が誘導される．
+    \[
+    \begin{tikzcd}[row sep=30pt]
+        K \ar[r, "z_y"]\ar[d, "\id"']
+            \ar[rrr, "\id", rounded corners, to path={(\tikztostart) -- ([yshift=15pt] \tikztostart.north) -- ([yshift=15pt] \tikztotarget.north)\tikztonodes -- (\tikztotarget)}]&
+            X_y \times_K X_y \ar[r, "\pr_{i,y}"]\ar[d]& X_y \ar[r,"q_y"]\ar[d] & K \ar[d, "y"]\\
+        K \ar[r, "z"']
+            \ar[rrr, "y"', rounded corners, to path={(\tikztostart) -- ([yshift=-15pt] \tikztostart.south) -- ([yshift=-15pt] \tikztotarget.south)\tikztonodes -- (\tikztotarget)}]&
+            X \times_Y X \ar[r, "\pr_i"']& X \ar[r, "q"']\centerpb& Y \centerpb
+    \end{tikzcd}
+    \]
+    ここで
+    \[ z_i=\pr_i \circ z \colon K \to X, \qquad z_{i,y}=\pr_{i, y} \circ z_y \colon K \to X_y \]
+    とする．
+    すると$z_{i,y}$は米田の補題により$(z_i, \id[K]) \in X_y(K)=X(K) \times_{Y(K)} K(K)$に対応し，
+    また図式の可換性から$q \circ z_i=y, q_y \circ z_{i,y}=\id[K]$が成り立つ．
+
+    \begin{Claim}
+        (1b)または(3b)を仮定すると，
+        $[z_{i,y}] \in |X_y|$（$[z_{i,y}]$は$z_{i,y}$を含む同値類を意味する）に対し
+        $r \in |R_y|$が存在し，$|s_y|(r)=[z_{1,y}], |t_y|(r)=[z_{2,y}]$を満たす．
+        ただし$s_y, t_y \colon R_y \to X_y$は，それぞれ射影$X_y \to X$による$s,t$のpullbackである．
+    \end{Claim}
+    \begin{proof}
+        (1b)を仮定した場合には自明である．
+        
+        (3b)を仮定した場合にはこれを次のように証明する．
+        以下，米田の補題によって$z_i$に対応する$X(K)$の元を同じく$z_i$で書く．
+        $R(K), Y(K)$の元についても同様とする．
+        まず図式の可換性から$q(z_1)=q(z_2)=y$だから，
+        仮定(3b)より$s(\tilde{r})=z_1, s(\tilde{r})=z_2$を満たす$r \in R(K)$が存在する．
+        こうして得られる射$\tilde{r} \colon K \to R$と$y$のpullbackを考えると，
+        次の図式が得られる．
+        \[
+        \begin{tikzcd}[row sep=30pt]
+            K \ar[r, "\tilde{r}_y"]\ar[d, "\id"']
+                \ar[rrr, "\id", rounded corners, to path={(\tikztostart) -- ([yshift=15pt] \tikztostart.north) -- ([yshift=15pt] \tikztotarget.north)\tikztonodes -- (\tikztotarget)}]&
+                R_y \ar[r, "s_y", shift left]\ar[r, "t_y"', shift right]\ar[d]& X_y \ar[r,"q_y"]\ar[d]& K \ar[d, "y"]\\
+            K \ar[r, "\tilde{r}"']
+                \ar[rr, "z_i"', rounded corners, to path={(\tikztostart) -- ([yshift=-15pt] \tikztostart.south) -- ([yshift=-15pt] \tikztotarget.south)\tikztonodes -- (\tikztotarget)}]&
+                R \ar[r, "s", shift left]\ar[r, "t"', shift right]& X \ar[r, "q"']\centerpb& Y\centerpb
+        \end{tikzcd}
+        \]
+        ここで$\tilde{r}_y$は$\tilde{r}$と$\id[K]$から誘導される射である．
+        すると$X_y$の普遍性から$s_y \circ \tilde{r}_y=z_{1,y}, t_y \circ \tilde{r}_y=z_{2,y}$．
+        よって$r=[\tilde{r}_y]$とすればよい．
+    \end{proof}
 \end{proof}
 
 \begin{Remark}
