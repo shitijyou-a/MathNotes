@@ -435,6 +435,7 @@ stabilizerはまたの機会に定義する．
     \]
     $X \times_Y X$の普遍性から$r \circ j_{/Y}=z$が分かる．
     すなわち，$|j_{/Y}|$は，したがって$j_{/Y}$は全射である．
+
     \paragraph{(1b) $\implies$(2b)}
     一つ前の段落と同じく$z, z_i\ (i=1,2), y$をとる．
     この$y$で$X \times_Y X \to X \to Y$をpullbackする．
@@ -456,26 +457,39 @@ stabilizerはまたの機会に定義する．
 
     \begin{Claim}
         (1b)が成立するならば，
-        任意の点$z$について$(j_{/Y})_y$は全射である．
+        任意の点$z$について$|(j_{/Y})_y|(r)=[z_y]$を満たす$r \in |R_y|$が存在する．
     \end{Claim}
     \begin{proof}
         今，仮定から，
         $r \in |R_y|$が存在し，$|s_y|(r)=[z_{1,y}], |t_y|(r)=[z_{2,y}]$を満たす．
         この$r$の代表元として$\tilde{r} \colon \Spec L \to R_y$をとる．
-        すると$L$と$K$は共通の部分体$K$をもつから，合成体$KL$が存在する．
-        そして$\tilde{r}$と同値な点$\tilde{r}' \colon KL \to L \xto{\tilde{r}} R_y$の$(j_{/Y})_y$による像が，
-        $z_y$と同値な点$z_y' \colon KL \to K \xto{z_y} X_y \times_K X_y$に一致する．
-        以下はそのことをまとめた可換図式である．
+        あとは$z_y, \tilde{r}':=(j_{/Y})_y \circ \tilde{r}$が同値であることを示せば良い．
+        
         \[
         \begin{tikzcd}[row sep=50pt, column sep=40pt]
-            KL \arrow[rr, violet] \arrow[d, violet] \arrow[rrd, dashed]  &                              & K \arrow[d, "z_y" near end] \arrow[rd, red, "z_{1,y}"] \arrow[dd, "z_{2,y}"', near end, bend right=35, blue]          &                    \\
-            L \arrow[r, "\tilde{r}"'] \arrow[rrd, blue] \arrow[rrr, bend left, red, crossing over] & R_y \arrow[r, "(j_{/Y})_y"'] & X_y \times_{K} X_y \arrow[r] \arrow[d]   & X_y \arrow[d, "q_y"] \\
-                                                                         &                              & X_y \arrow[r, "q_y"']                                                               & K                 
+            M_{12} \ar[r]\ar[d]& M_1 \ar[r, green]\ar[ldd]& K \arrow[dd, green, "z_y" near start] \arrow[rdd, red, "z_{1,y}"] \arrow[ddd, "z_{2,y}"', near start, bend right=35, blue] & \\
+            M_2 \ar[d]\ar[rru, green]& &  \\
+            L \arrow[rr, "\tilde{r}'"']& {} & X_y \times_{K} X_y \ar[rd, green]\arrow[r, tail, "\pr_1"] \arrow[d, tail, "\pr_2"'] & X_y \arrow[d, "q_y"] \\
+            {} & & X_y \arrow[r, "q_y"'] & K                 
         \end{tikzcd}
         \]
-        ここで$KL \to K$と$KL \to L$は包含射から誘導されたものなので，
-        赤で示した$2$点の同値関係と青で示した$2$点の同値関係を同時に与える．
-        （TODO: 不安）
+
+        まず$\pr_1 \circ z_y=z_{1,y} \sim \pr_1 \circ \tilde{r'}$なので，
+        点の同値関係の定義より，
+        図式中の体$M_1$と射$M_1 \to K, M_1 \to L$が存在する．
+        そして$M_1$から$X_y \times X_y$を経由して$\pr_1$を通る$2$つのpathが等しい．
+        しかし$\pr_1$ :: monomorphismなので，$M_1$から$X_1 \times X_y$への$2$つのpathが等しい．
+        $M_2$からのpathについても同様である．
+%        まとめて，$M_1 \to K \xto{z_y} X_y \times X_y$と$M_2 \to K \xto{z_y} X_y \times X_y$が等しい．
+
+        ここで緑で示した$2$つのpathに注目する．
+        右下の四角形は可換であるから，この$2$つのpath $M_1 \to K, M_2 \to K$は同値である．
+        よって体$M_{12}$と射$M_{12} \to M_1, M_{12} \to M_2$が存在し，
+        これらと緑のpath（$M_{12}$から右下の$K$へ至るpath）が等しいことがわかる．
+        一方で$z_{y}$のとり方から$K \to X_y \times X_y \to K$は恒等射，特にmonomorphismである．
+        したがって左上に有る$M_{12}, M_1, M_2, K$が成す四角形（潰れて三角形になっているが）は可換である．
+        まとめて，$M_{12}, L, K, X_y \times X_y$が成す正方形は可換であることが分かる．
+        すなわち$z_y$と$\tilde{r}'$は同値．
     \end{proof}
 
     以上から任意の点$z$について$|(j_{/Y})_y|$は全射である．
@@ -490,6 +504,12 @@ stabilizerはまたの機会に定義する．
     よって$j_{/Y}$は全射．
 \end{proof}
 
+\begin{Remark}
+    \cite{Rydh13}では(1b) $\implies$(2b)の証明を，
+    「$z_y, z_{1,y}, z_{2,y}$のresidue fieldが$K$である」ことを用いて証明している．
+    これは\cite{SP} 03K4の``If $X$ is descent"以降を用いていると思われる．
+    今は$X$ :: descentを仮定しないので，かなり面倒な証明になった．
+\end{Remark}
 \begin{Remark}
     したがってquotientの定義の幾つかは次のように書き換えられる．
     
