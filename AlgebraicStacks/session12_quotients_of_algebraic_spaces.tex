@@ -467,27 +467,24 @@ stabilizerはまたの機会に定義する．
         
         \[
         \begin{tikzcd}[row sep=50pt, column sep=40pt]
-            M_{12} \ar[r]\ar[d]& M_1 \ar[r, green]\ar[ldd]& K \arrow[dd, green, "z_y" near start] \arrow[rdd, red, "z_{1,y}"] \arrow[ddd, "z_{2,y}"', near start, bend right=35, blue] & \\
+            M_{12} \ar[r]\ar[d]& M_1 \ar[r, green]\ar[ldd]& K \arrow[dd, tail, "z_y" near start] \arrow[rdd, tail, red, "z_{1,y}"] \arrow[ddd, tail, "z_{2,y}"', near start, bend right=35, blue] & \\
             M_2 \ar[d]\ar[rru, green]& &  \\
-            L \arrow[rr, "\tilde{r}'"']& {} & X_y \times_{K} X_y \ar[rd, green]\arrow[r, tail, "\pr_1"] \arrow[d, tail, "\pr_2"'] & X_y \arrow[d, "q_y"] \\
+            L \arrow[rr, "\tilde{r}'"']& {} & X_y \times_{K} X_y \arrow[r, "\pr_1"] \arrow[d, "\pr_2"'] & X_y \arrow[d, "q_y"] \\
             {} & & X_y \arrow[r, "q_y"'] & K                 
         \end{tikzcd}
         \]
 
-        まず$\pr_1 \circ z_y=z_{1,y} \sim \pr_1 \circ \tilde{r'}$なので，
-        点の同値関係の定義より，
-        図式中の体$M_1$と射$M_1 \to K, M_1 \to L$が存在する．
-        そして$M_1$から$X_y \times X_y$を経由して$\pr_1$を通る$2$つのpathが等しい．
-        しかし$\pr_1$ :: monomorphismなので，$M_1$から$X_1 \times X_y$への$2$つのpathが等しい．
-        $M_2$からのpathについても同様である．
-%        まとめて，$M_1 \to K \xto{z_y} X_y \times X_y$と$M_2 \to K \xto{z_y} X_y \times X_y$が等しい．
+%        まず$\pr_1 \circ z_y=z_{1,y} \sim \pr_1 \circ \tilde{r'}$なので，
+%        点の同値関係の定義より，
+%        図式中の体$M_1$と射$M_1 \to K, M_1 \to L$が存在する．
+%        そして$M_1$から$X_y \times X_y$を経由して$\pr_1$を通る$2$つのpathが等しい．
+%        しかし$\pr_1$ :: monomorphismなので，$M_1$から$X_1 \times X_y$への$2$つのpathが等しい．
+%        $M_2$からのpathについても同様である．
 
-        ここで緑で示した$2$つのpathに注目する．
-        右下の四角形は可換であるから，この$2$つのpath $M_1 \to K, M_2 \to K$は同値である．
+        ここで緑で示した$2$つの射に注目する．
+        $|K|$は一点集合であるから，この$2$つの射（$|K|$の点）$M_1 \to K, M_2 \to K$は同値．
         よって体$M_{12}$と射$M_{12} \to M_1, M_{12} \to M_2$が存在し，
-        これらと緑のpath（$M_{12}$から右下の$K$へ至るpath）が等しいことがわかる．
-        一方で$z_{y}$のとり方から$K \to X_y \times X_y \to K$は恒等射，特にmonomorphismである．
-        したがって左上に有る$M_{12}, M_1, M_2, K$が成す四角形（潰れて三角形になっているが）は可換である．
+        左上に有る$M_{12}, M_1, M_2, K$が成す四角形（潰れて三角形になっているが）が可換になる．
         まとめて，$M_{12}, L, K, X_y \times X_y$が成す正方形は可換であることが分かる．
         すなわち$z_y$と$\tilde{r}'$は同値．
     \end{proof}
