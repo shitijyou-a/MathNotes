@@ -313,6 +313,48 @@ stabilizerはまたの機会に定義する．
 \end{Remark}
 
 \subsection{Propositions : Paraphase}
+
+\begin{Def}
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$のresidue fieldとは，
+    $x$を代表するmonomorphism :: $\Spec k \to X$が存在するような体$k$のことである．
+\end{Def}
+
+\begin{Remark}
+    residue fieldは常に存在するとは限らない．
+    ``descent algebraic space"と呼ばれる重要な種類のalgebraic spaceでは，
+    任意の点がresidue fieldをもつ．
+\end{Remark}
+
+\begin{Lemma}
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$をとり，
+    \begin{itemize}
+        \item $x$を代表するmonomorphism :: $\phi \colon \Spec k \to X$と
+        \item $x$を代表する任意の射 :: $\psi \colon \Spec l \to X$
+    \end{itemize}
+    をとる．
+    この時$\psi$は$\phi$を通じて一意に分解する．
+\end{Lemma}
+\begin{proof}
+    fiber product :: $Y=(\Spec k) \times_{\phi, X, \psi} (\Spec l)$をとる．
+    monoはpullbackで保たれるから$Y \to \Spec l$もmono.
+    よって\cite{SP} 03DPから$Y \iso \Spec l$.
+    \[
+    \begin{tikzcd}
+        Y       \ar[r]\ar[d, tail, "\text{\rotatebox{90}{$\iso$}}"']&   \Spec k \ar[d, tail, "\phi"]\\
+        \Spec l \ar[r, "\psi"']&                                         X
+    \end{tikzcd}
+    \]
+    こうして$\psi$の$\phi$による分解が存在する．
+    $\phi$はmonoなのでこの分解は一意．
+\end{proof}
+
+\begin{Cor}
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$を代表するmonomorphismは高々一つ．
+\end{Cor}
+
 \begin{Prop}[\cite{Rydh13}, Prop2.3]
     $R$-equivariant morphism :: $q \colon X \to Y$を考える．
     以下の$3 \times 3=9$個の命題を考える．
@@ -455,58 +497,60 @@ stabilizerはまたの機会に定義する．
     そこで$z_{i,y}:=\pr_{i,y} \circ z_y$とおく．
     これは$z_{i,y}$が$z_i$と$\id[K]$から誘導されると言っても同じである．
 
-    \begin{Claim}
-        (1b)が成立するならば，
-        任意の点$z$について$|(j_{/Y})_y|(r)=[z_y]$を満たす$r \in |R_y|$が存在する．
+    今，仮定(1b)から，
+    $r \in |R_y|$が存在し，$|s_y|(r)=[z_{1,y}], |t_y|(r)=[z_{2,y}]$を満たす．
+    この$r$の代表元として$\tilde{r} \colon \Spec L \to R_y$をとる．
+
+    \begin{Claim}\label{claim:z_yequiv}
+        $z_y \circ \phi=(j_{/Y})_y \circ \tilde{r}$を満たす
+        射$\phi \colon L \to K$が存在する．
     \end{Claim}
-    \begin{proof}
-        今，仮定から，
-        $r \in |R_y|$が存在し，$|s_y|(r)=[z_{1,y}], |t_y|(r)=[z_{2,y}]$を満たす．
-        この$r$の代表元として$\tilde{r} \colon \Spec L \to R_y$をとる．
-        あとは$z_y, \tilde{r}':=(j_{/Y})_y \circ \tilde{r}$が同値であることを示せば良い．
-        
-        \[
-        \begin{tikzcd}[row sep=50pt, column sep=40pt]
-            M_{12} \ar[r]\ar[d]& M_1 \ar[r, green]\ar[ldd]& K \arrow[dd, tail, "z_y" near start] \arrow[rdd, tail, red, "z_{1,y}"] \arrow[ddd, tail, "z_{2,y}"', near start, bend right=35, blue] & \\
-            M_2 \ar[d]\ar[rru, green]& &  \\
-            L \arrow[rr, "\tilde{r}'"']& {} & X_y \times_{K} X_y \arrow[r, "\pr_1"] \arrow[d, "\pr_2"'] & X_y \arrow[d, "q_y"] \\
-            {} & & X_y \arrow[r, "q_y"'] & K                 
-        \end{tikzcd}
-        \]
 
-%        まず$\pr_1 \circ z_y=z_{1,y} \sim \pr_1 \circ \tilde{r'}$なので，
-%        点の同値関係の定義より，
-%        図式中の体$M_1$と射$M_1 \to K, M_1 \to L$が存在する．
-%        そして$M_1$から$X_y \times X_y$を経由して$\pr_1$を通る$2$つのpathが等しい．
-%        しかし$\pr_1$ :: monomorphismなので，$M_1$から$X_1 \times X_y$への$2$つのpathが等しい．
-%        $M_2$からのpathについても同様である．
-
-        ここで緑で示した$2$つの射に注目する．
-        $|K|$は一点集合であるから，この$2$つの射（$|K|$の点）$M_1 \to K, M_2 \to K$は同値．
-        よって体$M_{12}$と射$M_{12} \to M_1, M_{12} \to M_2$が存在し，
-        左上に有る$M_{12}, M_1, M_2, K$が成す四角形（潰れて三角形になっているが）が可換になる．
-        まとめて，$M_{12}, L, K, X_y \times X_y$が成す正方形は可換であることが分かる．
-        すなわち$z_y$と$\tilde{r}'$は同値．
-    \end{proof}
-
-    以上から任意の点$z$について$|(j_{/Y})_y|$は全射である．
-    このことから$|j_{/Y}|$による像が$z$である点$KL \to R_y \to R$の存在が言える．
+    この主張から，
+    任意の点$z$について$|j_{/Y}|$による像が$z$である点$L \to R_y \to R$の存在が言える．
     \[
         \begin{tikzcd}[column sep=40pt]
-        KL \ar[r]\ar[d, "\tilde{r}'"']& K \ar[d, "z_y"] \ar[dd, bend left=90, "z"]\\
+        L \ar[r]\ar[d, "\tilde{r}"']& K \ar[d, "z_y"] \ar[dd, bend left=90, "z"]\\
         R_y \ar[r, "(j_{/Y})_y"]\ar[d]& X_y \times_{K} X_y \ar[d]\\
         R \ar[r, "j_{/Y}"']& X \times_{Y} X \centerpb
     \end{tikzcd}
     \]
     よって$j_{/Y}$は全射．
+
+    \begin{proof}[(主張\ref{claim:z_yequiv}の証明)]
+        $\tilde{r}':=(j_{/Y})_y \circ \tilde{r}$とおく．
+
+        \[
+        \begin{tikzcd}[row sep=50pt, column sep=40pt]
+            {} & K \ar[d, tail, "z_y" description] \ar[rd, tail, red, "z_{1,y}" description] \ar[dd, tail, "z_{2,y}"' description, near start, bend right=35, blue] & \\
+            L \ar[r, "\tilde{r}'"']\ar[rr, bend left, red]\ar[rd, blue]\ar[ru, shift left, bend left, "\phi_1"]\ar[ru, shift right, bend left,"\phi_2"']& X_y \times_{K} X_y \ar[r, "\pr_1"] \ar[d, "\pr_2"']& X_y \ar[d, "q_y"] \\
+            {} & X_y \ar[r, "q_y"'] & K                 
+        \end{tikzcd}
+        \]
+        仮定$|s_y|(r)=[z_{1,y}]$から赤で示した$2$つの射は同値である．
+        $q_y \circ \,z_{1,y}=q_y \circ \pr_1 \circ \,z_y=\id[K]$，とくにこれがmonoだから$z_{1,y}$ :: mono.
+        したがって補題より$\phi_1 \colon L \to K$が存在し，
+        $\pr_1 \circ \,z_y \circ \phi_1=\pr_1 \circ \,\tilde{r}'$となっている．
+        青で示した$2$つの射についても，
+        同じく$\phi_2 \colon L \to K$が存在し，
+        $\pr_2 \circ \,z_y \circ \phi_2=\pr_2 \circ \,\tilde{r}'$．
+
+        それぞれ$q_y$を合成して，
+        \[
+            q_y \circ \pr_1 \circ \,z_y \circ \phi_1=q_y \circ \pr_1 \circ \,\tilde{r}', \quad
+            q_y \circ \pr_2 \circ \,\tilde{r}'=q_y \circ \pr_2 \circ \,z_y \circ \phi_2.
+        \]
+        $q_y \circ \pr_1=q_y \circ \pr_2$と$q_y \circ \pr_1 \circ \,z_y=q_y \circ \pr_2 \circ \,z_y=\id[K]$から，
+        \[ \phi_1=q_y \circ \pr_1 \circ \,\tilde{r}'=q_y \circ \pr_2 \circ \,\tilde{r}'=\phi_2. \]
+        したがって元の等式は次のように成る．
+        \[
+            \pr_1 \circ\, (z_y \circ \phi_1)=\pr_1 \circ \,\tilde{r}', \qquad
+            \pr_2 \circ\, (z_y \circ \phi_1)=\pr_2 \circ \,\tilde{r}'.
+        \]
+        なので$X_y \times X_y$の普遍性から$z_y \circ \phi_1=\tilde{r}'=(j_{/Y})_y \circ \tilde{r}$．
+    \end{proof}
 \end{proof}
 
-\begin{Remark}
-    \cite{Rydh13}では(1b) $\implies$(2b)の証明を，
-    「$z_y, z_{1,y}, z_{2,y}$のresidue fieldが$K$である」ことを用いて証明している．
-    これは\cite{SP} 03K4の``If $X$ is descent"以降を用いていると思われる．
-    今は$X$ :: descentを仮定しないので，かなり面倒な証明になった．
-\end{Remark}
 \begin{Remark}
     したがってquotientの定義の幾つかは次のように書き換えられる．
     
