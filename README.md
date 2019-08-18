@@ -34,8 +34,13 @@ TeXLiveのpLaTeXでコンパイルしています．
 リバイス
 ---------
 大歓迎．
+下記の連絡先にお願いします．
 
 ライセンス
 -----------
 このノート群のライセンスは
 [CC-BY](https://creativecommons.org/licenses/by/4.0/deed.ja)です．
+
+連絡先
+-------
+twitter: @shitijyou
