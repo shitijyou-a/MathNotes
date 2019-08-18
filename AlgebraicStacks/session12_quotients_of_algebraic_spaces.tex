@@ -339,7 +339,15 @@ stabilizerはまたの機会に定義する．
 \begin{proof}
     fiber product :: $Y=(\Spec k) \times_{\phi, X, \psi} (\Spec l)$をとる．
     monoはpullbackで保たれるから$Y \to \Spec l$もmono.
-    よって\cite{SP} 03DPから$Y \iso \Spec l$.
+    よって\cite{SP} 03DP
+    \footnote
+    {
+        証明を簡単にまとめると次のように成る．
+        (1) 可換代数の命題「体から代数への全射準同型$\phi \colon k \to R$は同型（特に単射）」に帰着させる．
+        (2) $R \to R \otimes_{k} R; r \mapsto r \otimes 1$は，$\tilde{r} \in \phi^{-1}(r)$について$r \otimes 1=\tilde{r} (1 \otimes 1)$なので単射．
+        (3) $R$は体上の代数なのでfree，特にfaithfully flat $k$-module．
+    }
+    から$Y \iso \Spec l$.
     \[
     \begin{tikzcd}
         Y       \ar[r]\ar[d, tail, "\text{\rotatebox{90}{$\iso$}}"']&   \Spec k \ar[d, tail, "\phi"]\\
@@ -481,7 +489,16 @@ stabilizerはまたの機会に定義する．
     \paragraph{(1b) $\implies$(2b)}
     一つ前の段落と同じく$z, z_i\ (i=1,2), y$をとる．
     この$y$で$X \times_Y X \to X \to Y$をpullbackする．
-    すると$z$と$\id[K]$から点$z_y \colon K \to X_y \times_K X_y$が誘導される．
+    そこで$z_{i,y} \colon K \to X_y$を$z_i$と$\id[K]$から誘導される射とする．
+    さらに点$z_y \colon K \to X_y \times_K X_y$を$z_{1,y}, z_{2,y}$から誘導される射とする
+    \footnote
+    {
+        定義の仕方から$q_y \circ \pr_{i,y} \circ z_{y}=\id[K]$が成立する．
+        これは重要な等式で，$z_{i,y}$の後に$z_{y}$を定義したのもこのためである．
+        ここで$z_y$から先に定義すると，
+        $i=1,2$の両方でこの等式が成立することを明言できない．
+    }．
+    明らかに$z_{i,y}=\pr_{i,y} \circ z_y$が成立する．
     \[
     \begin{tikzcd}[row sep=30pt]
         K \ar[d, "\id"']
@@ -494,8 +511,6 @@ stabilizerはまたの機会に定義する．
         R \ar[r, "j_{/Y}"']& X \times_Y X \ar[r, "\pr_i"']\centerpb& X \ar[r, "q"']\centerpb& Y \centerpb
     \end{tikzcd}
     \]
-    そこで$z_{i,y}:=\pr_{i,y} \circ z_y$とおく．
-    これは$z_{i,y}$が$z_i$と$\id[K]$から誘導されると言っても同じである．
 
     今，仮定(1b)から，
     $r \in |R_y|$が存在し，$|s_y|(r)=[z_{1,y}], |t_y|(r)=[z_{2,y}]$を満たす．
@@ -522,16 +537,18 @@ stabilizerはまたの機会に定義する．
 
         \[
         \begin{tikzcd}[row sep=50pt, column sep=40pt]
-            {} & K \ar[d, tail, "z_y" description] \ar[rd, tail, red, "z_{1,y}" description] \ar[dd, tail, "z_{2,y}"' description, near start, bend right=35, blue] & \\
-            L \ar[r, "\tilde{r}'"']\ar[rr, bend left, red]\ar[rd, blue]\ar[ru, shift left, bend left, "\phi_1"]\ar[ru, shift right, bend left,"\phi_2"']& X_y \times_{K} X_y \ar[r, "\pr_1"] \ar[d, "\pr_2"']& X_y \ar[d, "q_y"] \\
+            {} & K \ar[d, "z_y" description] \ar[rd, tail, red, "z_{1,y}" description] \ar[dd, tail, "z_{2,y}"' description, near start, bend right=35, blue] & \\
+            L \ar[r, "\tilde{r}'"']
+                \ar[rr, bend left, red]\ar[rd, blue]\ar[ru, red, dashed, shift left, bend left, "\phi_1"]\ar[ru, blue, dashed, shift right, bend left,"\phi_2"']&
+                X_y \times_{K} X_y \ar[r, "\pr_1"] \ar[d, "\pr_2"']& X_y \ar[d, "q_y"] \\
             {} & X_y \ar[r, "q_y"'] & K                 
         \end{tikzcd}
         \]
-        仮定$|s_y|(r)=[z_{1,y}]$から赤で示した$2$つの射は同値である．
+        仮定$|s_y|(r)=[z_{1,y}]$から赤実線で示した$2$つの射は同値である．
         $q_y \circ \,z_{1,y}=q_y \circ \pr_1 \circ \,z_y=\id[K]$，とくにこれがmonoだから$z_{1,y}$ :: mono.
         したがって補題より$\phi_1 \colon L \to K$が存在し，
         $\pr_1 \circ \,z_y \circ \phi_1=\pr_1 \circ \,\tilde{r}'$となっている．
-        青で示した$2$つの射についても，
+        青実線で示した$2$つの射についても，
         同じく$\phi_2 \colon L \to K$が存在し，
         $\pr_2 \circ \,z_y \circ \phi_2=\pr_2 \circ \,\tilde{r}'$．
 
