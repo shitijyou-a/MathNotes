@@ -43,4 +43,4 @@ TeXLiveのpLaTeXでコンパイルしています．
 
 連絡先
 -------
-twitter: @shitijyou
+twitter: [@shitijyou](https://twitter.com/shitijyou)
