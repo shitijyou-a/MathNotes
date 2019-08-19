@@ -338,6 +338,7 @@ stabilizerはまたの機会に定義する．
 \end{Lemma}
 \begin{proof}
     fiber product :: $Y=(\Spec k) \times_{\phi, X, \psi} (\Spec l)$をとる．
+    $\phi, \psi$が同値であるから，$Y$は空でない．
     monoはpullbackで保たれるから$Y \to \Spec l$もmono.
     よって\cite{SP} 03DP
     \footnote
@@ -354,8 +355,8 @@ stabilizerはまたの機会に定義する．
         \Spec l \ar[r, "\psi"']&                                         X
     \end{tikzcd}
     \]
-    こうして$\psi$の$\phi$による分解が存在する．
-    $\phi$はmonoなのでこの分解は一意．
+    こうして$\psi$の$\phi$を通じた分解が存在する．
+    $\phi$がmonoなのでこの分解は一意．
 \end{proof}
 
 \begin{Cor}
@@ -423,6 +424,7 @@ stabilizerはまたの機会に定義する．
     \]
 
     \paragraph{(2a) $\implies$(1a)}
+    %% {{{
     仮定から直ちに次がわかる．
     \[
                  q \colon X \to Y \text{ :: surj}
@@ -434,8 +436,10 @@ stabilizerはまたの機会に定義する．
     $R_y$-equiv. morphismによる一点の逆像は$R_y$-orbitを含む
         \footnote{ 点$t \in |\Spec k|$について$q_y(t)=q_y(R_y(t))$だから． }から，
     $|X_y|$は$R_y$-orbit :: $|y^*q|^{-1}(t) \subseteq |X_y|$を含む．
+    %% }}}
 
     \paragraph{(3a) $\implies$ (2a)}
+    %% {{{
     $k$の代数閉包を$K$と書く．
     この時，$y$と$k \inclmap K$から誘導される射を合成すると，
     $y$と同値な点$\Spec K \to \Spec k \to X$が得られる．
@@ -444,8 +448,10 @@ stabilizerはまたの機会に定義する．
     すると仮定($X(K)/R(K) \to Y(K)$ ;; surj)と米田の補題により，
     $q \circ z=y$を満たす$z \colon K \to X$が存在する．
     よって$|q|$ :: surj.
+    %% }}}
 
     \paragraph{(2b) $\implies$(1b)}
+    %% {{{
     まず，$(X \times_{Y} X) \times_{Y} k \iso X_y \times_{k} X_y$に注意する．
     以下のpullback図式の$(j_{/Y})_y$を考える．
     仮定からこれは全射．
@@ -461,8 +467,10 @@ stabilizerはまたの機会に定義する．
     それぞれ$|s|, |t|$となる．
     よって任意の$u,v \in |X_y|$について$|s|(r)=u, |t|(r)=v$となる$r \in |R_y|$が存在する．
     すなわち，任意の$u,v \in |X_y|$について$u \sim_{R_y} v$．
+    %% }}}
 
     \paragraph{(3b) $\implies$ (2b)}
+    %% {{{
     点$z \colon \Spec k \to X \times_Y X$を任意に取ると，
     上述のとおり，$k$をその代数閉包$K$に取り替えることが出来る．
     したがってここでは$z \colon \Spec K \to X \times_{Y} X$を扱う．
@@ -485,8 +493,10 @@ stabilizerはまたの機会に定義する．
     \]
     $X \times_Y X$の普遍性から$r \circ j_{/Y}=z$が分かる．
     すなわち，$|j_{/Y}|$は，したがって$j_{/Y}$は全射である．
+    %% }}}
 
     \paragraph{(1b) $\implies$(2b)}
+    %% {{{
     一つ前の段落と同じく$z, z_i\ (i=1,2), y$をとる．
     この$y$で$X \times_Y X \to X \to Y$をpullbackする．
     そこで$z_{i,y} \colon K \to X_y$を$z_i$と$\id[K]$から誘導される射とする．
@@ -566,6 +576,7 @@ stabilizerはまたの機会に定義する．
         \]
         なので$X_y \times X_y$の普遍性から$z_y \circ \phi_1=\tilde{r}'=(j_{/Y})_y \circ \tilde{r}$．
     \end{proof}
+    %% }}}
 \end{proof}
 
 \begin{Remark}
