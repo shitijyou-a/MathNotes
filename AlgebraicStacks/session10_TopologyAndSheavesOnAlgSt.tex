@@ -121,6 +121,56 @@ artin stackのZariski位相空間と，
     \end{defmap}
 \end{Def}
 
+\begin{Def}[\cite{SP} 0EMW]
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$のresidue fieldとは，
+    $x$を代表するmonomorphism :: $\Spec k \to X$が存在するような体$k$のことである．
+\end{Def}
+
+\begin{Remark}
+    residue fieldは常に存在するとは限らない．
+    ``descent algebraic space"と呼ばれる重要な種類のalgebraic spaceでは，
+    任意の点がresidue fieldをもつ．
+\end{Remark}
+
+\begin{Lemma}
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$をとり，
+    \begin{itemize}
+        \item $x$を代表するmonomorphism :: $\phi \colon \Spec k \to X$と
+        \item $x$を代表する任意の射 :: $\psi \colon \Spec l \to X$
+    \end{itemize}
+    をとる．
+    この時$\psi$は$\phi$を通じて一意に分解する．
+\end{Lemma}
+\begin{proof}
+    fiber product :: $Y=(\Spec k) \times_{\phi, X, \psi} (\Spec l)$をとる．
+    $\phi, \psi$が同値であるから，$Y$は空でない．
+    monoはpullbackで保たれるから$Y \to \Spec l$もmono.
+    よって\cite{SP} 03DP
+    \footnote
+    {
+        証明を簡単にまとめると次のように成る．
+        (1) 可換代数の命題「体から代数への全射準同型$\phi \colon k \to R$は同型（特に単射）」に帰着させる．
+        (2) $R \to R \otimes_{k} R; r \mapsto r \otimes 1$は，$\tilde{r} \in \phi^{-1}(r)$について$r \otimes 1=\tilde{r} (1 \otimes 1)$なので単射．
+        (3) $R$は体上の代数なのでfree，特にfaithfully flat $k$-module．
+    }
+    から$Y \iso \Spec l$.
+    \[
+    \begin{tikzcd}
+        Y       \ar[r]\ar[d, tail, "\text{\rotatebox{90}{$\iso$}}"']&   \Spec k \ar[d, tail, "\phi"]\\
+        \Spec l \ar[r, "\psi"']&                                         X
+    \end{tikzcd}
+    \]
+    こうして$\psi$の$\phi$を通じた分解が存在する．
+    $\phi$がmonoなのでこの分解は一意．
+\end{proof}
+
+\begin{Cor}
+    $X$ :: algebraic space over a scheme $S$とする．
+    点$x \in |X|$を代表するmonomorphismは高々一つ．
+\end{Cor}
+
 \section{Zariski Topology of Artin Stack}
 
 \subsection{Atlases of Artin Stacks}
