@@ -171,7 +171,7 @@ artin stackのZariski位相空間と，
     点$x \in |X|$を代表するmonomorphismは高々一つ．
 \end{Cor}
 
-\section{Zariski Topology of Artin Stack}
+\section{Topology on \tp{$|\stX|$}{Set of Points of Artin Stack}}
 
 \subsection{Atlases of Artin Stacks}
     下準備としてartin stackのatlasについて幾つか命題を述べる．
@@ -416,10 +416,36 @@ artin stackのZariski位相空間と，
 \section{Sheaves on Algebraic Stacks}
 
 \subsection{Definitions}
-artin stack over $S$ :: $\stX$について，
-schemeからなるbig etale site :: $\ET(\stX)=(\Sch/\stX)_{\ET}$を
-我々は考える．
-$\ET(\stX)$のsheafとtoposは通常と同様に定義する．
+\begin{Def}
+    artin stack over $S$ :: $\stX$について，
+    $\stX$上のbig etale site :: $\ET(\stX)=(\Sch/\stX)_{\ET}$を次のように定める．
+    \begin{description}
+        \item[\textbf{Objects}]
+            schemeから$\stX$への（任意の）射．
+
+        \item[\textbf{Arrow}]
+            射$[f \colon U \to \stX] \to [g \colon V \to \stX]$は
+            $f=g \circ \phi$を満たすschemeの射$\phi \colon U \to V$．
+
+        \item[\textbf{Covering}]
+            scheme :: $U$からの射$U \to \stX$のcoverは，
+            $U$へのetale射が成すjointly surjectiveな族．
+    \end{description}
+    $\ET(\stX)$のsheafとassociated toposは通常と同様に定義する．
+\end{Def}
+
+\begin{Remark}
+    ここで定義した$\ET(\stX)$は\cite{SP} 06TNで定義されている
+    $\stX_{\acute{e}tale}$と同じものである．
+    このGrothendieck topologyが\cite{SP}で言うinherited topology(\cite{SP} 06NV)であることは，
+    $\stX$がcategory fibered in groupoidsであり，
+    したがって全ての射がcartesian arrow
+    (\cite{SP} 02XJで言うstrongly cartesian morphism)であることから従う．
+
+    \cite{SP} 06TNでは他に
+    big Zariski site on $\stX$, big smooth site on $\stX$なども定義されているが，
+    我々はetale siteのみ考える．
+\end{Remark}
 
 \begin{Remark}
     歴史的にはsmooth morphismをunderlying categoryにとり
