@@ -497,7 +497,7 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
     で$f^{-1}\shG \in \stX_{\ET}$を定める．
     同じく，sheaf :: $\shF \in \stX_{\ET}$について，
     \[
-        (f_*\shF)(\ (V, v)\ )=\Lim \left( I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \Sch/V \xto{\shF} \Sets \right)
+        (f_*\shF)(\ (V, v)\ )=\Lim \left( I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \ET(\stX) \xto{\shF} \Sets \right)
         \mwhere (V, v) \in \ET(\stY)
     \]
     で$f_*\shF \in \stY_{\ET}$を定める．
@@ -505,7 +505,7 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
     ここで$I_{(V,v)}$は次の圏である．
     \begin{description}
         \item[\textbf{ Objects: }] 
-        以下の可換図式を満たす射の組$(U \to \stX, U \to V)$:
+        以下の可換図式を満たす射の組$(U \to V, U \to \stX)$:
         \[
         \begin{tikzcd}[sep=15pt]
             U \ar[r]\ar[d]& V \ar[d, "v"]\\
@@ -514,7 +514,7 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
         \]
 
         \item[\textbf{ Arrows: }] 
-        射$(U \to \stX, U \to V) \to (U' \to \stX, U' \to V)$は，
+        射$(U \to V,U \to \stX) \to (U' \to V,U' \to \stX)$は，
         以下を可換にする射$U \to U'$である．
         \[
         \begin{tikzcd}[sep=15pt]
@@ -524,8 +524,8 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
         \end{tikzcd}
         \]
     \end{description}
-    $(f_*\shG)(\ (V, v)\ )$の定義に有る$I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \Sch/V$は
-    \[ (U \to \stX, U \to V) \mapsto [U \to V] \in \Sch/V \]
+    $(f_*\shG)(\ (V, v)\ )$の定義に有る$I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \ET(\stX)$は
+    \[ (U \to V, U \to \stX) \mapsto [U \to \stX] \in \Sch/\stX \]
     で与えられる．
 \end{Def}
 
