@@ -1,7 +1,4 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
-\usepackage{macros}
-\newcommand{\vsubseteq}{\text{\rotatebox{-90}{$\subseteq$}}}
-\newcommand{\xto}[1]{\xrightarrow{#1}}
+\input{preamble}
 
 \begin{document}
 \title{ゼミノート \#10 \\ Topology and Shaves on Algebraic Stacks}
@@ -460,8 +457,8 @@ artin stackのZariski位相空間と，
 \begin{Def}
     site :: $\mathcal{S}$上のsheaf :: $\shF$について，
     set of global sectionsを以下で定める．
-    \[ \Gamma(\mathcal{S}, \shF)=\Hom_{\Sh(\mathcal{S})}(*, \shF). \]
-    ただし$*$はcategory of sheaves of sets :: $\Sh(\mathcal{S})$の
+    \[ \Gamma(\mathcal{S}, \shF)=\Hom_{\Shv(\mathcal{S})}(*, \shF). \]
+    ただし$*$はcategory of sheaves of sets :: $\Shv(\mathcal{S})$の
     terminal objectである．
 \end{Def}
 
@@ -477,6 +474,18 @@ scheme :: $U$について，$\Gamma(U, \shF)$と$\shF(U)$は異なるもので�
     という対応を成す．
     $\mathcal{S}$はscheme上のsiteであれば，
     $\Gamma(\shF)$の元が自然な方法でglobal sectionに一対一対応する．
+\end{Remark}
+
+\begin{Remark}
+    set of global sectionsは単純なlimitとして書くことが出来る．
+    \[ \Gamma(\siteS, \shF)=\lim_{U \in \siteS} \shF(U). \]
+    詳しくは
+    nLab ( \url{https://ncatlab.org/nlab/show/limit#local_definition_in_terms_of_representable_functors} )
+    あるいは以下で定義されている$\id[*]\shF(=\shF)$を考えても理解できる．
+
+    したがって$S$ :: schemeについて$\siteS=\Zar(S)$あるいは$\ZAR(S)$ならば，
+    $\id[S]$が$\siteS$のterminal objectだから，
+    $\Gamma(\siteS, \shO_{S})=\shO_{S}(S)$となる．
 \end{Remark}
 
 \begin{Def}[\cite{SP} 06TU]
