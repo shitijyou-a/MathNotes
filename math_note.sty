@@ -133,13 +133,18 @@
 \newcommand{\Lan}           {\mathrm{Lan}} %% left Kan extension
 \newcommand{\Ran}           {\mathrm{Ran}} %% right Kan extension
 
-%% add ^{op}. if #1 has super/subscript, \opcat{#1}=(#1)^{op}
+%% add ^{op}. if #1 has super/subscript, \opcat{#1}=(#1)^{op} {{{
 \usepackage{listofitems}
-\newcommand\opcat[1]{%
+\makeatletter
+\newcommand{\opcat@nostar}[1]{%
   \setsepchar{_||^}%
   \expandafter\readlist\expandafter\mymat\expandafter{#1}%
   \ifnum\mymatlen>1\left(#1\right)^{\mathrm{op}}\else#1^{\mathrm{op}}\fi%
 }
+\newcommand{\opcat@star}[1]{#1^{\mathrm{op}}}
+\newcommand{\opcat}{\@ifstar{\opcat@star}{\opcat@nostar}}
+\makeatother
+%% }}}
 
 %% \newcommand{\Lim}            {\varinjlim}
 %% \newcommand{\Colim}          {\varprojlim}
