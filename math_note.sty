@@ -3,11 +3,15 @@
 \usepackage{amsthm}
 \usepackage{ascmac}
 %\usepackage{breqn} %% cause error with xypic package
-\usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage{mathrsfs}
 \usepackage[hyphens]{url}
 \usepackage{bussproofs}
 \usepackage{stmaryrd} %% included in package "texlive-math-extra"
+\usepackage{xparse}
+
+%% setting for enumitem
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
 
 \newtheoremstyle{mathnotestyle}% % Name
     {}%                      % Space above
@@ -101,7 +105,7 @@
 \mathchardef\mdash="2D %% dash in math-mode
 \newcommand{\mor}           {\text{ or }}
 \newcommand{\mand}          {\text{ and }}
-\newcommand{\mwhere}        {~~\text{where}~~}
+\newcommand{\mwhere}        {\quad\text{where}\quad}
 \newcommand{\mnot}          {/\hspace{-1.2ex}} %% different from \not
 
 %% accent
@@ -132,18 +136,19 @@
 \newcommand{\coeq}          {\operatorname{coeq}}
 \newcommand{\Lan}           {\mathrm{Lan}} %% left Kan extension
 \newcommand{\Ran}           {\mathrm{Ran}} %% right Kan extension
+\newcommand{\Comma}         [2]{#1{\downarrow}#2}
 
 %% add ^{op}. if #1 has super/subscript, \opcat{#1}=(#1)^{op} {{{
-\usepackage{listofitems}
-\makeatletter
-\newcommand{\opcat@nostar}[1]{%
-  \setsepchar{_||^}%
-  \expandafter\readlist\expandafter\mymat\expandafter{#1}%
-  \ifnum\mymatlen>1\left(#1\right)^{\mathrm{op}}\else#1^{\mathrm{op}}\fi%
+\usepackage{listofitems, etoolbox}
+\NewDocumentCommand\opcat{s m}{%
+\IfBooleanTF{#1}{{#2}^{\mathrm{op}}}{%
+\setsepchar{(||)/^||_}%
+\expandafter\readlist\expandafter\mymat\expandafter{#2}%
+\ifboolexpr{ test {\ifnumcomp{\listlen\mymat[1]}{>}{1}} or test {\ifnumcomp{\listlen\mymat[-1]}{>}{1}} }%
+    {(#2)^{\mathrm{op}}}%
+    {{#2}^{\mathrm{op}}}%
 }
-\newcommand{\opcat@star}[1]{#1^{\mathrm{op}}}
-\newcommand{\opcat}{\@ifstar{\opcat@star}{\opcat@nostar}}
-\makeatother
+}
 %% }}}
 
 %% \newcommand{\Lim}            {\varinjlim}
@@ -151,6 +156,17 @@
 %% OR
 %% \newcommand{\Lim}            {\operatorname*{lim}}
 %% \newcommand{\Colim}          {\operatorname*{colim}}
+%% \newcommand{\colim}          {\operatorname*{colim}}
+
+%% fundamental categories
+\newcommand{\Set}           {\mathbf{Sets}}     %% category of sets 
+\newcommand{\Ring}          {\mathbf{Ring}}     %% catgory of rings
+\newcommand{\Mod}           {\mathbf{Mod}}      %% category of R-modules
+\newcommand{\Alg}           {\mathbf{Alg}}      %% category of R-algebras
+\newcommand{\Cat}           {\mathbf{Cat}}      %% category of categories
+\newcommand{\Sch}           {\mathbf{Sch}}      %% category of schemes
+\newcommand{\AlgSp}         {\mathbf{AlgSp}}    %% category of algebraic spaces
+%\newcommand{\ArtSt}         {\mathbf{ArtSt}}    %% category of Artin stacks
 
 %% topology theory
 \newcommand{\open}          [1]{\mathcal{O}_{#1}} %% open sets
@@ -284,3 +300,7 @@
 \newcommand{\Exists}        [1]{ {}^{\exists} #1,~~ }
 \newcommand{\lbra}          [1]{\left[#1\right]}
 
+%% Sites and Sheaves
+\newcommand{\Cov}           {\operatorname{Cov}}    %% covering
+\newcommand{\PShv}          {\mathbf{PShv}}         %% category of presheaves (on a site)
+\newcommand{\Shv}           {\mathbf{Shv}}          %% category of sheaves (on a site)
