@@ -138,11 +138,11 @@
 \newcommand{\Ran}           {\mathrm{Ran}} %% right Kan extension
 \newcommand{\Comma}         [2]{#1{\downarrow}#2}
 
-%% add ^{op}. if #1 has super/subscript, \opcat{#1}=(#1)^{op} {{{
+%% add ^{op}. if #1 has superscript, \opcat{#1}=(#1)^{op} {{{
 \usepackage{listofitems, etoolbox}
 \NewDocumentCommand\opcat{s m}{%
 \IfBooleanTF{#1}{{#2}^{\mathrm{op}}}{%
-\setsepchar{(||)/^||_}%
+\setsepchar{(||)/^}%
 \expandafter\readlist\expandafter\mymat\expandafter{#2}%
 \ifboolexpr{ test {\ifnumcomp{\listlen\mymat[1]}{>}{1}} or test {\ifnumcomp{\listlen\mymat[-1]}{>}{1}} }%
     {(#2)^{\mathrm{op}}}%
