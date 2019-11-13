@@ -138,11 +138,19 @@
 \newcommand{\Ran}           {\mathrm{Ran}} %% right Kan extension
 \newcommand{\Comma}         [2]{#1{\downarrow}#2}
 
-%% add ^{op}. if #1 has superscript, \opcat{#1}=(#1)^{op} {{{
+%% add ^{op}. if #1 has super/subscript, \opcat{#1}=(#1)^{op} {{{
 \usepackage{listofitems, etoolbox}
+\makeatletter
+\@ifpackagelater{listofitems}{2019/03/03}{}
+{\errmessage{ if you use listofitems v1.61<, the command opcat will stop compile in some cases. read comment in math_note.sty. }}
+%% if the version of listofitems is less than 1.61, 
+%% \opcat{(single math symbol)} (example: \opcat{\phi}) will stop compile.
+%% you should use \opcat* in that case.
+\makeatother
+
 \NewDocumentCommand\opcat{s m}{%
 \IfBooleanTF{#1}{{#2}^{\mathrm{op}}}{%
-\setsepchar{(||)/^}%
+\setsepchar{(||)/^||_}%
 \expandafter\readlist\expandafter\mymat\expandafter{#2}%
 \ifboolexpr{ test {\ifnumcomp{\listlen\mymat[1]}{>}{1}} or test {\ifnumcomp{\listlen\mymat[-1]}{>}{1}} }%
     {(#2)^{\mathrm{op}}}%
@@ -159,7 +167,7 @@
 %% \newcommand{\colim}          {\operatorname*{colim}}
 
 %% fundamental categories
-\newcommand{\Set}           {\mathbf{Set}}     %% category of sets 
+\newcommand{\Set}           {\mathbf{Sets}}     %% category of sets 
 \newcommand{\Ring}          {\mathbf{Ring}}     %% catgory of rings
 \newcommand{\Mod}           {\mathbf{Mod}}      %% category of R-modules
 \newcommand{\Alg}           {\mathbf{Alg}}      %% category of R-algebras
