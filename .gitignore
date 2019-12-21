@@ -2,7 +2,7 @@
 /junks/
 /PDF
 /AlgGeo_PDF
-/ExistenceOfModuli
+## /ExistenceOfModuli
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
