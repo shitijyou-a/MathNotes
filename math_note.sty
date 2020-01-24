@@ -18,7 +18,7 @@
     {}%                      % Space below
     {\normalfont}%           % Body font
     {}%                      % Indent amount
-    {\bf}%                   % Theorem head font
+    {\bfseries}%             % Theorem head font
     {}%                      % Punctuation after theorem head
     {\newline}%              % Space after theorem head, ' ', or \newline
     {}%                      % Theorem head spec (can be left empty, meaning `normal')
@@ -50,7 +50,8 @@
 %% \footnote => †1, †2, †3, ...
 \renewcommand\thefootnote{\dag\arabic{footnote}}
 
-%% \kenten {{{
+%% \kenten (use in (u)platex) {{{
+%% if you want to use \kenten in luatex, see pxrubrica package
 \makeatletter
 \def\kenten#1{%
    \ifvmode\leavevmode\else\hskip\kanjiskip\fi
@@ -118,11 +119,19 @@
 \newcommand{\ccheck}[1]{#1\sidecheck\sidecheck}
 
 %% fundamental spaces
+\ifluatex
+\AtBeginDocument{\def\C{\mathbb{C}}}
+\AtBeginDocument{\def\R{\mathbb{R}}}
+\AtBeginDocument{\def\Q{\mathbb{Q}}}
+\AtBeginDocument{\def\Z{\mathbb{Z}}}
+\AtBeginDocument{\def\N{\mathbb{N}}}
+\else
 \newcommand{\C}             {\mathbb{C}}
 \newcommand{\R}             {\mathbb{R}}
 \newcommand{\Q}             {\mathbb{Q}}
 \newcommand{\Z}             {\mathbb{Z}}
 \newcommand{\N}             {\mathbb{N}}
+\fi
 
 %% general category theory
 \newcommand{\cat}           [1]{\mathbf{#1}}
