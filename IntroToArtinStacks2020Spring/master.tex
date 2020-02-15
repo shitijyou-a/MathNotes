@@ -20,7 +20,6 @@
     \newpage
 
 \section{導入}
-\subsection{動機}
     ここで扱うArtinスタックと代数的空間は，スキームの一般化である．
     これらはモジュライ問題を扱う中で現れるので，ここから始めよう．
 
@@ -50,6 +49,25 @@
     この後にDeligne--Mumford スタックを Artin が\cite{Artin74}で一般化した．
     更に一般化したものを我々は Artin スタックと呼んで取り扱う．
 
+    代数的空間と Artin スタックを扱うことの必要性は商を考えることでも感じられる．
+    スキームの群スキームの作用による商は，しばしばスキームにならないが，
+    代数的空間か Artin スタックに成る．
+    
+    例えば無限群$\Z$に拠る次のような作用を考える．
+    \[ \Spec \Z \times_{\Spec \Z} \affine^1_{k} \to \affine^1_{k}; \qquad (x, n) \mapsto x+n. \]
+    ここで体$k$は標数$0$とする．
+    この作用に拠る商がスキームでないことは，例えば\cite{Olsson16}で証明されている．
+    他の有名な例として広中による例がある．
+    こちらについては\cite{HarAG} Appendix B, Example 3.4.3などを参照して欲しい．
+    ここに上げた二つの例はいずれも代数的空間であることが知られている．
+
+    一般に，スキーム$S$上の群スキーム$G$の$S$上のスキーム$X$への作用
+    $\rho \colon G \times_{S} X \to X$を考えることにしよう．
+    この作用$\rho$による商が代数的空間であるためには，$\rho$がエタール射であれば十分である．
+    さらに$\rho$が滑らかな射であれば，代数的空間ではないかも知れないが，
+    Artin スタックになる．
+    後者の証明は\cite{Olsson16}か\cite{SA18a} 定理7.1にある．
+
 \subsection{この入門書の構成}
     景 (site) から始める．
     景は，位相空間の定義から層を定義するために必要なものを取り出し，
@@ -59,7 +77,7 @@
     その次にスタック (stack) を扱う．
     層は集合の圏への関手であるが，スタックは圏の圏への関手と見ることが出来る．
     そのため，標語的に「圏を値に取る層」とも呼ばれる．
-    スタックはファイバー圏 (fibered category) を用いて定義するため，
+    スタックはファイブレーション (fibration) を用いて定義するため，
     以下ではこちらを先に導入する．
 
     その後，代数的空間 (algebraic space)を定義する．
@@ -76,9 +94,10 @@
     圏の（余）極限についての準備をした後，
     Artin スタックの射から誘導される層・茎の射を定義する．
 
-    最後に亜群代数的空間 (groupoid in algebraic spaces) を導入する．
-    これは群スキームの一般化である．
-    最後にArtin スタックを代数的空間の商として見る方法を提供する．
+    最後の2節は Artin スタックと代数的空間の関係を述べる．
+    亜群代数的空間 (groupoid in algebraic spaces) の節では，
+    Artin スタックを代数的空間の商として見る方法を提供する．
+    そして最後に Artin スタックが代数的空間であるための必要十分条件を与える．
 
 \subsection{用語と仮定} \label{ssec:term_conv}
     文献によって定義が異なる概念・用語・記号について，
@@ -116,6 +135,7 @@
             到達不能基数の存在を仮定する．
             こういった集合論に関する仮定については\cite{Shulman08}を参照することを勧める．
     \end{enumerate}
+    \newpage
 
 \section{Grothendieck位相，景，層，トポス}
     \subsection{Grothendieck位相と景}
@@ -494,6 +514,140 @@
         \]
     \end{Remark}
 
+    \begin{Prop}[\cite{FGAexp} chapter 5]\cite*{Vistoli07}
+    \begin{myenum}
+    \item
+        デカルト射の合成はデカルト射である．
+    \item
+        ファイブレーション$\pi \colon \cat{X} \to \cat{B}$を考える．
+        $\cat{X}$の射$\phi \colon x \to y, \psi \colon y \to z$について，
+        射$\psi \circ \phi, \psi$がデカルト射ならば$\psi$もデカルト射．
+    \end{myenum}
+    \end{Prop}
+    \begin{proof}
+        三角持ち上げのみを用いて証明できる．
+        簡単なので証明は省略する．
+    \end{proof}
+
+    次の命題の証明はデカルト持ち上げと三角持ち上げの使い方をよく示している．
+    \begin{Prop}
+        $\pi \colon \stX \to \cat{B}$をファイブレーションとする．
+        $\stX$の射$x \to y$は以下のような二つの射の合成$x \to z \to y$に分解できる．
+        \begin{itemize}
+            \item 恒等射$\id[\pi(x)]$上の射$x \to z$，
+            \item 射$\pi(x \to y)$上のデカルト射$z \to y$．
+        \end{itemize}
+    \end{Prop}
+    %% {{{
+    \begin{proof}
+        $\pi(\phi)$のデカルト持ち上げとして以下の図式(1)の$z$と$z \to y$を得る．
+        さらに三角持ち上げにより図式(2)の通り$\id[\pi(x)]$上の射$x \to z$を得る．
+        \begin{center}
+        \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
+        \node[mybox] (X) at (0,3){%
+            \begin{tikzcd}
+                {} & x \ar[rd, "\phi"]& {} \\
+                \color{red}z \ar[rr, red, "\text{cart.}"']&{}& y
+            \end{tikzcd}
+        };
+        \node[mybox] (B) at (0,0){%
+            \begin{tikzcd}
+                {} & \pi(x) \ar[rd, "\pi(\phi)"]\ar[ld, "\id"']& {} \\
+                \color{red}\pi(x) \ar[rr, red, "\pi(\phi)"'] &{}& \pi(y)
+            \end{tikzcd}
+        };
+
+        \node [above=5pt of X] {in $\cat{X}$};
+        \node [below=5pt of B] {in $\cat{B}$};
+        \draw [->, line width=1.5pt] (X) edge (B);
+        \node at (0.3,1.55) {$\pi$};
+    %    \draw (4,4) -- (4,-1);
+        \node at (-3,4) {($1$)};
+        \end{tikzpicture}
+        \qquad \qquad
+        \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
+        \node[mybox] (X) at (0,3){%
+            \begin{tikzcd}
+                {} & x \ar[rd] \ar[ld, blue, "\exists_1"']& {} \\
+                z \ar[rr, "\text{cart.}"'] &{}& y
+            \end{tikzcd}
+        };
+        \node[mybox] (B) at (0,0){%
+            \begin{tikzcd}
+                {} & \pi(x) \ar[rd, "\pi(\phi)"]\ar[ld, blue, "\id"']& {} \\
+                \pi(x) \ar[rr, "\pi(\phi)"'] &{}& \pi(y)
+            \end{tikzcd}
+        };
+
+        \node [above=5pt of X] {in $\cat{X}$};
+        \node [below=5pt of B] {in $\cat{B}$};
+        \draw [->, line width=1.5pt] (X) edge (B);
+        \node at (0.3,1.55) {$\pi$};
+        \node at (-3,4) {($2$)};
+        \end{tikzpicture}
+        \end{center}
+    \end{proof}
+    %%}}}
+
+    \begin{Prop}\label{prop:iso_over_iso}
+        $\pi \colon \cat{X} \to \cat{B}$をファイブレーションとする．
+        $\cat{X}$の任意のデカルト射$\phi \colon x \to y$について，
+        $\phi$が同型射であることと$\Phi:=\pi(\phi)$が同型射であることは同値．
+    \end{Prop}
+    %% {{{
+    \begin{proof}
+        以下の図式(1)に三角持ち上げを用いれば，
+        $\phi \circ \psi=\id[y]$なる射$\psi \colon y \to x$を得る．
+        さらに図式(2)に於いて，
+        $\phi \circ \id[x]=\phi=\phi \circ \psi \circ \phi$と三角持ち上げの一意性から
+        $\psi \circ \phi=\id[x]$を得る．
+        \begin{center}
+        \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
+        \node[mybox] (X) at (0,3){%
+            \begin{tikzcd}
+                {} & y \ar[rd, "\id"]& {} \\
+                x \ar[rr, red, "\phi\text{ :: cart.}"']&{}& y
+            \end{tikzcd}
+        };
+        \node[mybox] (B) at (0,0){%
+            \begin{tikzcd}
+                {} & \pi(y) \ar[rd, "\id"]\ar[ld, "\Phi^{-1}"']& {} \\
+                \pi(x) \ar[rr, "\Phi"'] &{}& \pi(y)
+            \end{tikzcd}
+        };
+
+        \node [above=5pt of X] {in $\cat{X}$};
+        \node [below=5pt of B] {in $\cat{B}$};
+        \draw [->, line width=1.5pt] (X) edge (B);
+        \node at (0.3,1.55) {$\pi$};
+    %    \draw (4,4) -- (4,-1);
+        \node at (-3,4) {($1$)};
+        \end{tikzpicture}
+        \qquad \qquad
+        \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
+        \node[mybox] (X) at (0,3){%
+            \begin{tikzcd}
+                {} & x \ar[ld, blue, "\psi \circ \phi"'] \ar[ld, shift left=1mm, "\id"] \ar[rd, "\phi"]& {} \\
+                x \ar[rr, "\phi"'] &{}& y
+            \end{tikzcd}
+        };
+        \node[mybox] (B) at (0,0){%
+            \begin{tikzcd}
+                {} & \pi(x) \ar[ld, "\Phi^{-1} \circ \Phi=\id"']\ar[rd, "\Phi"]& {} \\
+                \pi(x) \ar[rr, "\Phi"'] &{}& \pi(y)
+            \end{tikzcd}
+        };
+
+        \node [above=5pt of X] {in $\cat{X}$};
+        \node [below=5pt of B] {in $\cat{B}$};
+        \draw [->, line width=1.5pt] (X) edge (B);
+        \node at (0.3,1.55) {$\pi$};
+        \node at (-3,4) {($2$)};
+        \end{tikzpicture}
+        \end{center}
+    \end{proof}
+    %% }}}
+
     \begin{Remark}\label{remark:cleavage}
         ファイブレーション $\pi \colon \cat{X} \to \cat{B}$を考える．
         $\cat{X}$の任意の対象$x$と$\cat{B}$の射$\phi \colon b' \to \pi(x)$に対し，
@@ -518,6 +672,7 @@
         しかし，任意のファイブレーション$\pi$に対して，
         $\pi$と同値なファイブレーション$\tilde{\cat{X}} \to \cat{B}$と
         ファイバー$\tilde{\cat{X}}(-)$が関手に成る裂開の組が存在する（\cite{FGAexp} 第$3$章）．
+        このようなファイブレーションと裂開の組は``split fibration"と呼ばれる．
         ここでファイバー$\tilde{\cat{X}}(-)$が関手に成るということを言い換えれば，
         デカルト持ち上げを2回繰り返して得られる$\phi^*\psi^*x$と
         一度にデカルト持ち上げした$(\psi \circ \phi)^*x$が等しい ($\phi^*\psi^*x=(\psi \circ \phi)^*x$)
@@ -570,6 +725,18 @@
         $f_{b} \colon \cat{X}(b) \to \cat{G}(b)$と書く．
     \end{Def}
     
+    \begin{Remark}
+    標語的には次のように定義されている．
+    \[
+        \stX_b=\stX(b) := \text{``}
+        \pi^{-1} \left(
+        \begin{tikzcd}
+            b \arrow[loop, distance=2em, in=325, out=35, "\id"]
+        \end{tikzcd}
+    \right)\text{"}
+    \]
+    \end{Remark}
+
     \begin{Def}[Grothendieck 構成; Grothendieck construction]
         関手$F \colon \opcat{\cat{B}} \to \Cat/\cat{B}$について，
         以下のように圏$\int F$を定義する．
@@ -584,7 +751,7 @@
             {}& F& \mapsto& \int F
         \end{defmap}
     \end{Def}
-    この構成$\int F$は「要素の圏 (the category of elements)」とも呼ばれている．
+    この構成$\int F$は要素の圏 (the category of elements) とも呼ばれている．
 
     \begin{Example}
         スキーム$S$について，
@@ -592,11 +759,11 @@
         これは例(\ref{example:rep_fibration})で触れたものである．
     \end{Example}
 
-    \begin{Lemma}[\cite{Olsson16} Proposition 3.2.8]
+    \begin{Lemma}[\cite{Olsson16} Prop 3.2.8]
         Grothendieck 構成$\int$は狭義$2$同値 (strict $2$-equivalence) を与える．
         逆はファイバーを取る操作である．
     \end{Lemma}
-    したがって関手の理論とファイブレーション（と裂割）の組の理論は互いに翻訳できる．
+    したがって関手の理論とsplit fibration（注意(\ref{remark:cleavage})）の理論は互いに翻訳できる．
 
     以下ではしばしば暗黙のうちに Grothendieck 構成を用い，
     層をファイブレーションとして扱う．
@@ -2096,6 +2263,15 @@
         この時，Artin スタック$[X/R]$と$\stX$は圏同値である．
     \end{Lemma}
 
+    もう少し特殊な状況では，亜群代数的空間の商が代数的空間と成る．
+    \begin{Lemma}[\cite{SP} 02WW]
+        亜群代数的空間$R \parto{s}{t} X$の射$s,t$がエタール射であるとき
+        \footnote{ この時，$s,t$はエタールな同値関係 (\'{e}tale equivalence relation)を定めるという． }，
+        次の前層の層化は代数的空間である．
+        \[ \FPPF(S) \ni U \mapsto X(U)/\{ (s_U(r), t_U(r))  \in X(U) \times X(U) \mid r \in R(U) \} \in \Set. \]
+    \end{Lemma}
+    この補題に現れる層と商スタックの関係は明らかであろう．
+
     亜群代数的空間の位相空間について述べておく．
     これらは亜群代数的空間の商を考える上で重要である．
 
@@ -2158,6 +2334,38 @@
         以上から$a'$は全単射で連続な埋め込み写像であるから，同相写像．
     \end{proof}
 
+\section{Artin スタックと代数的空間の間}
+    この入門の最後として，Artin スタックが代数的空間であることの判定法を紹介する．
+
+    \begin{Def}[自己同型群の前層, \cite{Olsson16} 3.4.7]
+        スキーム$S$ \tablefootnote{ 節(\ref{ssec:term_conv})を参照せよ．}上のスキーム$B$に対し，
+        Artin スタック$\stX \to \cat{B}=\FPPF(\Sch/S)$の対象$x \in \stX(B)$をとる．
+        この時， fppf 大景$\FPPF(\Sch/B)$上の前層$\shAut_{\stX}(x)$を次のように定める．
+        \begin{defmap}
+            \shAut_{\stX}(x) \colon & \FPPF(\Sch/B)& \to& \Set \\
+            \textbf{対象:}& [\, f \colon U \to B \,]& \mapsto& f^*x \\
+            \textbf{射:}& [\, \tau \colon U' \to U \,]& \mapsto& \tau^*
+        \end{defmap}
+        これは層に成っている．
+    \end{Def}
+    
+    \begin{Lemma}
+        層$\shAut_{\stX}(x)$の定義にある記号を用いる．
+        米田の補題により$x$に対応する射を$\tilde{x} \colon \Sch/B \to \stX$とすると，
+        層$\shAut_{\stX}(x)$は
+        対角射$\Delta \colon \stX \times_{S} \stX \to \stX$の
+        $\tilde{x}$による引き戻しである．
+        特に Artin スタックの定義より，$\shAut_{\stX}(x)$は代数的空間．
+    \end{Lemma}
+    \begin{proof}
+        命題(\ref{prop:St_GrSt_has_fibprod})で述べたスタックのファイバー積の構成から直ちに分かる．
+    \end{proof}
+
+    \begin{Prop}[\cite{Conrad07} Thm2.2.5]
+         Artin スタック$\stX$について，
+        その任意の幾何学的点が自明な自己同型群の層を持つことと，
+        $\stX$と同型な代数的空間が存在することは同値．
+    \end{Prop}
 
     \printbibliography[title=参考文献]
 \end{document}
