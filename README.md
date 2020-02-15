@@ -10,6 +10,7 @@ MathNotes
 * Hartshorne_AG_Ch2 -- 同じくChapter IIに関連するノート群．
 * Moduli_of_Curves -- Harris, Morrison ``Moduli of Curves"のセミナーのためのノート群．
 * SeminorForAlgebraicStacks -- M.Olsson ``Algebraic Spaces and Stacks"のセミナーのためのノート群．
+* IntroToArtinStacks2020Spring -- Artin スタック（代数的スタック）への入門．上記セミナーより整理されている．
 * SylowTheorem -- Sylowの定理のできるだけself-containedな証明と応用．
 * HilbeltsNullstellensatz -- Hilbertの零点定理の証明．
 * BernsteinTheorem -- 濃度論におけるBernsteinの定理の気が済むまでわかりやすくした証明．

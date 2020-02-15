@@ -1,0 +1,188 @@
+\RequirePackage[]{silence}
+%%% Warning Filter (1) {{{
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
+
+\usepackage[]{../math_note}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[luatex]{graphicx}
+\usepackage{here}
+\usepackage{tikz}
+\usetikzlibrary{cd, positioning, arrows}
+\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+
+%% appendix {{{
+\usepackage[toc]{appendix}
+\renewcommand{\appendixname}{付録}
+\renewcommand{\appendixtocname}{付録}
+\renewcommand{\appendixpagename}{付録}
+%% }}}
+
+%% myenum environment {{{
+\newenvironment{myenum}[1][\roman*]
+{\hfill \vspace{-0.8cm}\begin{enumerate}[label=(#1), labelindent=1cm]}
+{\end{enumerate}}
+%% }}}
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
+
+%%% mdframed {{{
+\usepackage[framemethod=tikz]{mdframed}
+
+\mdfdefinestyle{GrayVertialBar}%
+{innerlinecolor=lightgray,
+innerlinewidth=5.0pt,
+outerlinewidth=0pt,
+middlelinewidth=0pt,
+innertopmargin=0pt,
+innerleftmargin=15pt,
+skipabove=\baselineskip,
+bottomline=false,topline=false,rightline=false}
+  
+\surroundwithmdframed[style=GrayVertialBar]{Def}
+\surroundwithmdframed[style=GrayVertialBar]{Def*}
+\surroundwithmdframed[style=GrayVertialBar]{Claim}
+\surroundwithmdframed[style=GrayVertialBar]{Lemma}
+\surroundwithmdframed[style=GrayVertialBar]{Prop}
+\surroundwithmdframed[style=GrayVertialBar]{Thm}
+\surroundwithmdframed[style=GrayVertialBar]{Thm*}
+\surroundwithmdframed[style=GrayVertialBar]{Cor}
+%%% }}}
+
+% {{{ footnoteをmdframedの外側に作る
+% https://differentialengine.wordpress.com/2018/02/27/latexmdframed-%E7%92%B0%E5%A2%83%E3%81%AE%E5%A4%96%E3%81%AB%E8%84%9A%E6%B3%A8%E3%82%92%E7%BD%AE%E3%81%8F%E6%96%B9%E6%B3%95tablefootnote/
+\usepackage{tablefootnote}
+ 
+\makeatletter
+\AfterEndEnvironment{mdframed}{%
+\tfn@tablefootnoteprintout%
+\gdef\tfn@fnt{0}%
+}
+\makeatother
+% }}}
+
+%%% Warning Filter (2) {{{
+\WarningFilter{mdframed}{You got a bad break}
+\WarningFilter{tablefootnote}{LuaTeX and hyperref package used:}
+%%% }}}
+
+%% category
+\newcommand{\ArtSt}{\cat{ArtSt}}
+\newcommand{\Fib}[1]{\cat{Fib}(\cat{#1})}
+\newcommand{\cFib}[1]{\cat{cFib}(\cat{#1})}
+\newcommand{\sFib}[1]{\cat{sFib}(\cat{#1})}
+\newcommand{\FibBP}[1]{\cat{Fib}^{\mathrm{bp}}(\cat{#1})}
+\newcommand{\CFG}[1]{\cat{CFG}(\cat{#1})}
+\newcommand{\St}[1]{\cat{St}(\cat{#1})}
+\newcommand{\GrSt}[1]{\cat{GrSt}(\cat{#1})}
+\newcommand{\HOM}{\operatorname{HOM}}
+
+\newcommand{\Lim}{\operatorname*{lim}}
+\newcommand{\Colim}{\operatorname*{colim}}
+\newcommand{\colim}{\operatorname*{colim}}
+
+\newcommand{\kiso}[1][{}]{\overset{#1}{\iso}}
+\newcommand{\kequiv}[1][{}]{\overset{#1}{\simeq}}
+
+%% derivation
+\newcommand{\shDer}{\Omega}
+\newcommand{\modDer}{\Omega}
+\newcommand{\Der}{\mathrm{Der}}
+
+%% functor
+\newcommand{\ftor}[1]{\underline{#1}}
+\newcommand{\ftorSh}{\mathit{Shff}}
+\newcommand{\ftorFgt}{\mathit{Fgt}}
+
+%% sites
+\newcommand{\siteS}{\mathcal{S}}
+\newcommand{\siteT}{\mathcal{T}}
+\newcommand{\et}{\mathrm{et}}
+\newcommand{\ET}{\mathrm{ET}}
+\newcommand{\Zar}{\mathrm{Zar}}
+\newcommand{\ZAR}{\mathrm{ZAR}}
+\newcommand{\fppf}{\mathrm{fppf}}
+\newcommand{\FPPF}{\mathrm{FPPF}}
+\newcommand{\FPQC}{\mathrm{FPQC}}
+\newcommand{\SM}{\mathrm{SM}}
+
+%% covers
+\newcommand{\covU}{\mathcal{U}}
+\newcommand{\covV}{\mathcal{V}}
+\newcommand{\covW}{\mathcal{W}}
+
+%% utility
+\newcommand{\mnewline}{\mbox{}\newline}
+\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
+\newcommand{\parto}[2]{\mathrel{\mathop{\rightrightarrows}^{#1}_{#2}}}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\rbox}[2]{\text{\rotatebox{#1}{$#2$}}}
+\newcommand{\step}[1]{\paragraph{\underline{#1}}}
+
+%% {{{ fibered categories
+\newcommand{\fib}[1]{\mathscr{#1}}
+\newcommand{\fibA}{\fib{A}}
+\newcommand{\fibB}{\fib{B}}
+\newcommand{\fibC}{\fib{C}}
+\newcommand{\fibD}{\fib{D}}
+\newcommand{\fibE}{\fib{E}}
+\newcommand{\fibF}{\fib{F}}
+\newcommand{\fibG}{\fib{G}}
+\newcommand{\fibH}{\fib{H}}
+\newcommand{\fibI}{\fib{I}}
+\newcommand{\fibJ}{\fib{J}}
+\newcommand{\fibK}{\fib{K}}
+\newcommand{\fibL}{\fib{L}}
+\newcommand{\fibM}{\fib{M}}
+\newcommand{\fibN}{\fib{N}}
+\newcommand{\fibO}{\fib{O}}
+\newcommand{\fibP}{\fib{P}}
+\newcommand{\fibQ}{\fib{Q}}
+\newcommand{\fibR}{\fib{R}}
+\newcommand{\fibS}{\fib{S}}
+\newcommand{\fibT}{\fib{T}}
+\newcommand{\fibU}{\fib{U}}
+\newcommand{\fibV}{\fib{V}}
+\newcommand{\fibW}{\fib{W}}
+\newcommand{\fibX}{\fib{X}}
+\newcommand{\fibY}{\fib{Y}}
+\newcommand{\fibZ}{\fib{Y}}
+%% }}}
+
+%% {{{ stacks 
+\newcommand{\st}[1]{\mathcal{#1}}
+\newcommand{\stA}{\st{A}}
+\newcommand{\stB}{\st{B}}
+\newcommand{\stC}{\st{C}}
+\newcommand{\stD}{\st{D}}
+\newcommand{\stE}{\st{E}}
+\newcommand{\stF}{\st{F}}
+\newcommand{\stG}{\st{G}}
+\newcommand{\stH}{\st{H}}
+\newcommand{\stI}{\st{I}}
+\newcommand{\stJ}{\st{J}}
+\newcommand{\stK}{\st{K}}
+\newcommand{\stL}{\st{L}}
+\newcommand{\stM}{\st{M}}
+\newcommand{\stN}{\st{N}}
+\newcommand{\stO}{\st{O}}
+\newcommand{\stP}{\st{P}}
+\newcommand{\stQ}{\st{Q}}
+\newcommand{\stR}{\st{R}}
+\newcommand{\stS}{\st{S}}
+\newcommand{\stT}{\st{T}}
+\newcommand{\stU}{\st{U}}
+\newcommand{\stV}{\st{V}}
+\newcommand{\stW}{\st{W}}
+\newcommand{\stX}{\st{X}}
+\newcommand{\stY}{\st{Y}}
+\newcommand{\stZ}{\st{Z}}
+%% }}}
+
+\newcommand{\inj}{\operatorname{inj}}
+\newcommand{\lift}{\operatorname{lift}}
+\newcommand{\shAut}{\mathcal{A}ut}
+\newcommand{\simpt}{\sim_{\mathrm{pt}}}
