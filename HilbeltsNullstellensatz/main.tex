@@ -1,130 +1,162 @@
-\documentclass[a4paper]{jsarticle}
+\RequirePackage[]{silence}
+%%% Warning Filter {{{
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
 \usepackage{../math_note}
-\usepackage[all]{xy}
 
-\newcommand{\kx}{k[\mathbf{x}]}
-
-\title{Hilbert's Nullstellensatz}
-\author{七条彰紀}
+\newcommand{\step}[1]{\paragraph{\underline{#1}}}
+\newcommand{\xz}{\boldsymbol{x}}
+\newcommand{\az}{\boldsymbol{a}}
 
 \begin{document}
-    この記事では文字$\mathbf{x}$を一貫して不定元を表すために使う．
-    $\mathbf{x}=(x_1, \dots, x_d)$とする．
+    \title{Hilbert の零点定理}
+    \author{七条 彰紀}
+    \maketitle
+    このノートでは，Hilbert の零点定理（独: Hilbert's nullstellensatz）の，
+    Zariski の補題を用いた証明を扱う．
+   
+    以下では文字$x, \xz$を一貫して不定元を表すために使う．
+    $\xz=(x_1, \dots, x_d)$とする．
 
-
-
-\section{The Statement}
-    \begin{Thm}[Hilbert's Nullstellensatz (weak form)]
-        $k$を代数閉体とする．この時，以下で定まる対応$\mu$は全単射である．
+\section{導入}
+    \subsection{定理}
+    \begin{Thm}[Hilbertの零点定理, 弱形]
+        $k$を代数閉体とする．
+        多項式環$k[\xz]=k[x_1,\dots,x_d]$の極大イデアルが成す集合を$\Max(k[\xz])$と書く．
+        この時，以下で定まる対応$\mu$は全単射である．
         \begin{defmap}
-            \mu:& k^d& \to& \Max(\kx) \\ 
+            \mu:& k^d& \to& \Max(k[\xz]) \\ 
             {}& (a_1, \dots, a_d)& \mapsto& (x_1-a_1, \dots, x_d-a_d)
         \end{defmap}
     \end{Thm}
 
-    \begin{Thm}[Hilbert's Nullstellensatz (strong form)]
-        $k$を代数閉体とする．任意のイデアル$\I{a} \subsetneq \kx$に対して
-        \[ \defs \zeros(\I{a})=\sqrt{\I{a}} \]が成立する．
+    \begin{Def}
+        $k$を代数閉体，$d$を正の整数とする．
+        \begin{enumerate}
+        \item 
+            $k[\xz]=k[x_1,\dots,x_d]$のイデアル$\I{a} \subsetneq k[\xz]$に対して，
+            \[ \zeros(\I{a})=\{ p \in k^d \mid \Forall{f \in \I{a}} f(p)=0 \} \]
+            とおく．
+
+        \item
+            $k^d$の部分集合$Z$に対して，
+            \[ \defs(Z)=\{ f \in k[\xz] \mid \Forall{p \in Z} f(p)=0 \} \]
+            とおく．
+            $\defs(Z)$は$k[\xz]$のイデアルに成っている．
+
+        \item
+            環$R$のイデアル$I$に対して，
+            \[ \sqrt{I}=\{ r \in R \mid \Exists{n > 0} r^n \in I \} \]
+            とおく．
+            $\sqrt{I}$は$R$のイデアルに成っている．
+        \end{enumerate}
+    \end{Def}
+
+    \begin{Thm}[Hilbertの零点定理, 強形]
+        $k$を代数閉体，$d$を正の整数とする．
+        $k[\xz]=k[x_1,\dots,x_d]$の任意のイデアル$\I{a} \subsetneq k[\xz]$に対して，
+        \[ \defs(\zeros(\I{a}))=\sqrt{\I{a}} \]
+        が成立する．
     \end{Thm}
 
-    \subsection{Another Forms of The Two Statements}
+    \subsection{別の定式化}
     以上の二つの定理が「弱形」「強形」と並べられる理由は今ひとつ理解りにくい．
-    Terence Taoは自身のブログ``What's New"にHilbert's Nullstellensatzを扱った記事を掲載している\cite{tao}．
+    Terence Taoは自身のブログ``Whatの New"にHilbertの 零点定理を扱った記事を掲載している\cite{tao}．
     それによると，以上の二つのステートメントはそれぞれ次のように言い換えられる．
 
-    \begin{Thm}[Hilbert's Nullstellensatz (weak form) by Terence Tao]
-        $k$を代数閉体とし，多項式$P_1, \dots, P_m \in \kx$をとる．
+    \begin{Thm}[Hilbertの零点定理, 弱形 by T.Tao]
+        $k$を代数閉体とし，多項式$P_1, \dots, P_m \in k[\xz]$をとる．
         この時，以下のちょうど一方が成立する．
-        \begin{enumerate}[1.]
-            \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
+        \begin{enumerate}[label=\arabic*.]
+            \item 方程式系$P_1(\xz)=\ldots=P_m(\xz)=0$が解$\xz=(a_1, \dots, a_d) \in k^d$を持つ．
             \item$P_1 Q_1 + \ldots + P_m Q_m=1$を満たす多項式$Q_1,\ldots,Q_m \in k[x]$が存在する．
         \end{enumerate}
     \end{Thm}
 
-    \begin{Thm}[Hilbert's Nullstellensatz (strong form) by Terence Tao]
-        $k$を代数閉体とし，多項式$P_1, \dots, P_m, R\in \kx$をとる．
+    \begin{Thm}[Hilbertの零点定理, 強形 by T.Tao]
+        $k$を代数閉体とし，多項式$P_1, \dots, P_m, R\in k[\xz]$をとる．
         この時，以下のちょうど一方が成立する．
-        \begin{enumerate}[1.]
-            \item 方程式系$P_1(\mathbf{x})=\ldots=P_m(\mathbf{x})=0, R(\mathbf{x}) \neq 0$が解$\mathbf{x}=(a_1, \dots, a_d) \in k^d$を持つ．
-            \item$P_1 Q_1 + \ldots + P_m Q_m=R^r$を満たす多項式$Q_1,\ldots,Q_m \in \kx$と非負整数$r$が存在する．
+        \begin{enumerate}[label=\arabic*.]
+            \item 方程式系$P_1(\xz)=\ldots=P_m(\xz)=0, R(\xz) \neq 0$が解$\xz=(a_1, \dots, a_d) \in k^d$を持つ．
+            \item$P_1 Q_1 + \ldots + P_m Q_m=R^r$を満たす多項式$Q_1,\ldots,Q_m \in k[\xz]$と非負整数$r$が存在する．
         \end{enumerate}
     \end{Thm}
-    このようにweak formはstrong formで$R=1$とした場合であることは明白である．
-    したがってstrong form $\implies$ weak formが分かる．
+    このように弱形は強形で$R=1$とした場合であることは明白である．
+    したがって強形 $\implies$ 弱形が分かる．
 
-\section{Prepare for The Proofs}
+\section{証明のための準備}
     \input{zariski_lemma}
     \input{noether_normalization_thm}
 
-\section{Proof of The Weak Form}
-    \subsection{From Zariski Lemma.}
-    \paragraph{$(x_1-a_1, \dots, x_d-a_d) \in \Max(\kx)$.}
+    どうせなら使用したNoether normalization theoremと
+    \cite{atimac} Prop5.7の証明も書いてself-containedにしたいところである．
+    これはTODOとする．
+
+\section{弱形の証明}
+    \step{$(x_1-a_1, \dots, x_d-a_d)$は極大イデアル.}
     各$x_i$を$x_i \mapsto a_i$と写す写像を考える．
     明らかにこれは全射で，$\ker = (x_1-a_1, \dots, x_d-a_d)$．
-    準同型定理から$\kx/(x_1-a_1, \dots, x_d-a_d) \cong k$が得られる．
-    剰余環が体になったので，$(x_1-a_1, \dots, x_d-a_d)$は$\Max(\kx)$の元．
+    準同型定理から$k[\xz]/(x_1-a_1, \dots, x_d-a_d) \cong k$が得られる．
+    剰余環が体になったので，$(x_1-a_1, \dots, x_d-a_d)$は$k[\xz]$の極大イデアル．
 
-    \paragraph{$\mu$ :: injective.}
+    \step{$\mu$は単射.}
     自明である．
 
-    \paragraph{$\mu$ :: surjective.}
-    $\I{m} \in \Max(\kx)$を任意に取る．
-    この時$L=\kx/\I{m}$は体．
+    \step{$\mu$は全射.}
+    多項式環$k[\xz]$の極大イデアル$\I{m} \in \Max(k[\xz])$を任意に取る．
+    この時，剰余$L=k[\xz]/\I{m}$は体．
     しかも$\tilde{a}_i=x_i+\I{m}$とおけば$L=k[\{\tilde{a}_i\}_{i=1}^d]$と書けるから，$L$は有限生成$k$-代数．
-    Zariski's Lemmaより，$L/k$は有限代数拡大である．
+    Zariskiの補題より，$L/k$は有限代数拡大である．
     $k$は代数的閉体であったから，$L \cong k$となり，よって各$\tilde{a}_i$は$k$の元$a_i$に対応する．
-    こうして点$\mathbf{a}=(a_1,\dots,a_d)$が得られた．
+    こうして点$\az=(a_1,\dots,a_d)$が得られた．
     再び$x_i \mapsto a_i$という写像(像は$k[\{a_i\}_{i=1}^d]=k$)に準同型定理を用いれば，
-    \[ \kx/\mu(\mathbf{a}) \cong k[\{a_i\}_{i=1}^d] \cong k[\{\tilde{a}_i\}_{i=1}^d]=\kx/\I{m} \]
+    \[ k[\xz]/\mu(\az) \cong k[\{a_i\}_{i=1}^d] \cong k[\{\tilde{a}_i\}_{i=1}^d]=k[\xz]/\I{m} \]
     という同型が構成できる．
-    したがって$\I{m}=\mu(\mathbf{a})$．
+    したがって$\I{m}=\mu(\az)$．
 
-\section{Proof of The Strong Form}
-    \subsection{From Zariski Lemma.}
-    $\sqrt{\I{a}} \subseteq \defs \zeros (\I{a})$は明らか．
-    逆に$f \not \in \sqrt{\I{a}}$として$f \not \in \defs \zeros (\I{a})$を示す．
+\section{強形の証明}
+    $\sqrt{\I{a}} \subseteq \defs(\zeros(\I{a}))$は明らか．
+    逆に$f \not \in \sqrt{\I{a}}$として$f \not \in \defs(\zeros(\I{a}))$を示す．
 
-    \paragraph{素イデアル$\I{p}$の存在．}
+    \step{素イデアル$\I{p}$の存在．}
     $\sqrt{\I{a}}$は$\I{a}$を含む素イデアル全体の共通部分であるから，
     この時$\I{a} \subseteq \I{p}, f \not \in \I{p}$なる素イデアル$\I{p}$が存在する．
 
-    \paragraph{体$L$の構成．}
-    $\bar{f}=f+\I{p} (\neq 0)$とし，$C=(\kx/\I{p})_f=(\kx/\I{p})[1/\bar{f}]$とする．
+    \step{体$L$の構成．}
+    $\bar{f}=f+\I{p} (\neq 0)$とし，$C=(k[\xz]/\I{p})_f=(k[\xz]/\I{p})[1/\bar{f}]$とする．
     さらに$\I{m}$を$C$の極大イデアルとおく．
-    すると体$L=C/\I{m}=(\kx/\I{p})_f/\I{m}$は
+    すると体$L=C/\I{m}=(k[\xz]/\I{p})_f/\I{m}$は
     $\tilde{a}_i=\frac{x_i+\I{p}}{1}+\I{m}$で生成される有限生成$k$-代数．
 
-    \paragraph{$\mathbf{a} \in \zeros(\I{a})$かつ$f(\mathbf{a}) \neq 0$なる点$\mathbf{a}$を得る．}
-    Zariski's Lemmaより，$L/k$は有限代数拡大である．
+    \step{$\az \in \zeros(\I{a})$かつ$f(\az) \neq 0$なる点$\az$を得る．}
+    Zariskiの補題より，$L/k$は有限代数拡大である．
     $k$は代数的閉体であったから，$L \cong k$となり，
     よって各$\tilde{a}_i$は$k$の元$a_i$に対応する．
-    こうして点$\mathbf{a}=(a_1,\dots,a_d)$が得られた．
+    こうして点$\az=(a_1,\dots,a_d)$が得られた．
     ここで以下の準同型を考える．
     \[
-        \phi: \kx \to \kx/\I{p} \to (\kx/\I{p})_f=C \to C/\I{m} \cong k;
+        \phi: k[\xz] \to k[\xz]/\I{p} \to (k[\xz]/\I{p})_f=C \to C/\I{m} \cong k;
     ~~ x_i \mapsto x_i+\I{p} \mapsto \frac{x_i+\I{p}}{1} \mapsto \frac{x_i+\I{p}}{1}+\I{m}=\tilde{a}_i \mapsto a_i.
     \]
     これは代入写像．
     繋いでいる写像はすべて準同型なので，
     $g \in \I{p}$は$C$の零元$\frac{0+\I{p}}{1}$へ写り，最終的に零元$0$へ写る．
     同様に，$f$は$C$の単元$\frac{f+\I{p}}{1}$へ写り，最終的に単元へ写る．
-    つまり$g \in \I{p}$について$\phi(g)=g(\mathbf{a})=0$で，$\phi(f)=f(\mathbf{a})$は単元．
-    よって$\mathbf{a} \in \zeros(\I{p}) \subset \zeros(\I{a})$かつ$f(\mathbf{a}) \neq 0$．
+    つまり$g \in \I{p}$について$\phi(g)=g(\az)=0$で，$\phi(f)=f(\az)$は単元．
+    よって$\az \in \zeros(\I{p}) \subset \zeros(\I{a})$かつ$f(\az) \neq 0$．
 
-\section{TODO}
-    どうせなら使用したNoether normalization theoremと\cite{atimac}, 
-    Prop5.7の証明も書いてself-containedにしたい．
-
+\section{その他の証明方針}
     重要定理だけあって，証明の方針はかなり多い．
-    これらも参考文献を整理したい．
     \begin{enumerate}
-        \item $k[\mathbf{x}]$がJacobson ringであることを用いる証明，
-        \item 幾何的なNoether normalization theoremを用いる証明，
-        \item Rabinowitsch's Trickを用いる証明，
-        \item Artin-Tate Lemmaを用いる証明(\cite{atimac}, Prop7.9)，
-        \item valuation ringを用いる証明(\cite{atimac}, Cor5.24)，
-        \item Chevalley's theorem about constructable setを用いる証明，
-        \item TaoとEnrique Arrondoによる終結式を用いる証明，
+        \item 多項式環$k[\xz]$が Jacobson 環であることを用いる証明，
+        \item 幾何的な Noether normalization theorem を用いる証明，
+        \item Rabinowitsch's Trick を用いる証明，
+        \item Artin-Tate の補題を用いる証明(\cite{atimac}, Prop7.9)，
+        \item 付置環を用いる証明(\cite{atimac}, Cor5.24)，
+        \item Chevalley's theorem about constructable set を用いる証明，
+        \item Terence Tao と Enrique Arrondo による終結式を用いる証明，
         \item モデル理論的な証明．
     \end{enumerate}
 
@@ -143,5 +175,4 @@
         ''A one-line undergraduate proof of Zariski's lemma and Hilbert's nullstellensatz"
         \url{http://arxiv.org/abs/1506.08376}
 \end{thebibliography}
-
 \end{document}
