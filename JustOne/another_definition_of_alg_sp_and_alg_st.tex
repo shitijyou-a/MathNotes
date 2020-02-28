@@ -1,0 +1,166 @@
+\RequirePackage[]{silence}
+%%% Warning Filter (1) {{{
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
+\usepackage{../math_note}
+\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\addbibresource{reference.bib}
+
+\newcommand{\introword}[2]{{\bfseries #1} (#2) }
+\newcommand{\ZAR}   {\mathrm{ZAR}}
+\newcommand{\ET}    {\mathrm{ET}}
+\newcommand{\SM}    {\mathrm{SM}}
+\newcommand{\FPPF}  {\mathrm{FPPF}}
+\newcommand{\FPQC}  {\mathrm{FPQC}}
+
+\begin{document}
+\title{スキーム・代数的空間・代数的スタックの別定義}
+\author{七条 彰紀}
+\maketitle
+
+\begin{abstract}
+    可換環の圏から出発して，
+    スキーム，代数的空間，代数的スタックをチャート付き層あるいはチャート付きスタックとして定義する．
+    「チャート付き対象」は多様体やスキームと言った対象の定義の様式を一般化したものである．
+    それぞれチャート付き対象の様式での定義を述べた後，
+    それらが通常使われる定義と同値であることを述べる．
+    読者はすでにスキーム，代数的空間，代数的スタックの定義を熟知しているものとする．
+\end{abstract}
+
+\section{思想：チャート付き幾何的対象}
+多様体は通常，以下のように定義される．
+
+\begin{Def}[\introword{多様体}{manifold}の開被覆]
+    位相空間$X$を考える．
+    \begin{enumerate}
+        \item
+            位相空間の射$f \colon X \to Y$が\introword{開埋め込み}{open immersion}であるとは，
+            \begin{itemize}
+                \item $f(X)$が位相空間$Y$の開部分集合であり，
+                \item かつ$f$から誘導される射$X \to f(X)$が同相射である，
+            \end{itemize}
+            ということ．
+
+        \item
+            位相空間の射の族$\{ u_i \colon U_i \to X \}_{i \in I}$が
+            開被覆であるとは，
+            任意の点$x \in X$に対して$x \in u_i(U_i)$なる$i \in I$が存在するということ．
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}[ユークリッド空間によるチャート付き位相空間としての実多様体]
+    位相空間$X$が$m$次元実多様体であるとは，
+    ユークリッド空間$\R^m$の開部分集合からの射からなる
+    開被覆$\{ U_i \to X \}_{i \in I}$が存在するということ．
+\end{Def}
+
+一方，スキームはアフィンスキームによる開被覆を持つ局所環付き空間として定義されるのであった．
+
+\begin{Def}[\introword{局所環付き空間}{locally ringed space}の開被覆]
+    局所環付き空間$(X, \shO_{X})$を考える．
+    \begin{enumerate}
+        \item
+            局所環付き空間の射$(f, f^{\#}) \colon (X, \shO_{X}) \to (Y, \shO_{Y})$が
+            \introword{開埋め込み}{open immersion}であるとは，
+            \begin{itemize}
+                \item $f(X)$が位相空間$Y$の開部分集合であり，
+                \item かつ$f$から誘導される射$X \to f(X)$が同相射であり，
+                \item かつ層の射$f^{\#}|_{f(X)} \colon \shO_{Y}|_{f(X)}=\shO_{f(X)} \to \shO_{X}$が同型射である，
+            \end{itemize}
+            ということ．
+
+        \item
+            局所環付き空間の射の族$\{ (u_i, u_i^{\#}) \colon (U_i, \shO_{U_i}) \to (X, \shO_{X}) \}_{i \in I}$が
+            開被覆であるとは，
+            任意の点$x \in X$に対して$x \in u_i(U_i)$なる$i \in I$が存在するということ．
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}[アフィンスキームによるチャート付き局所環付き空間としてのスキーム]
+    局所環付き空間$(X, \shO_{X})$がスキームであるとは，
+    アフィンスキームからの射からなる開被覆$\{ \Spec R_i \to (X, \shO_{X}) \}_{i \in I}$が
+    存在するということ．
+\end{Def}
+
+ここに共通して見られるのは，多様体とスキームはどちらも
+「既によく知られている幾何的対象で被覆できる種類の幾何的対象」である，ということである．
+このような幾何的対象は\cite{Lin16}で圏論的に取り扱われていて，
+\introword{チャート付き対象}{charted object}と呼ばれている．
+
+多様体は特別な位相空間，スキームは特別な局所環付き空間として定義されている．
+一方，代数的空間と代数的スタックはそれぞれ特別な層，特別なスタックとして定義される．
+スキームも特別な層として，可換環の圏から構成することが出来る．
+この際に古典的な意味の位相空間は必要でない．
+そして代数的空間と代数的スタックもチャート付き対象の形で定義することが出来る．
+
+\section{環の景}
+
+単位的可換環（以下，環）の圏を$\Ring$と書く．
+もちろんこの圏には零環が属す．
+非可換環は扱わない．
+
+圏$\opcat{\Ring}$の射の性質として
+開埋め込み，エタール射，滑らかな射, fppf 射，fpqc 射を定義する．
+
+\begin{Def}[環の開埋め込み，エタール射，滑らかな射, fppf 射，fpqc 射]
+    環の射$\phi \colon R' \to R$を考える．
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}[環の景]
+    $\ZAR, \ET, \SM, \FPPF, \FPQC$
+\end{Def}
+
+\begin{Def}[層としてのアフィンスキーム]
+    affine schemeは$\ZAR$の表現可能層．
+\end{Def}
+
+\section{スキーム，代数的空間，代数的スタック}
+
+\subsection{表現可能な射による被覆}
+\begin{Def}
+    表現可能な層，射
+    表現可能な射の性質
+\end{Def}
+
+\begin{Def}
+    層の射による被覆
+\end{Def}
+
+\subsection{スキーム}
+\begin{Def}[チャート付き層としてのスキーム]
+%schemeはaffine schemeによるopen coverを持つ$\ZAR(R)$上の層
+\end{Def}
+
+\begin{Prop}
+    スキームの景$\ZAR(\Spec \Z)$は$\ZAR$と同型
+\end{Prop}
+
+\subsection{代数的空間}
+\begin{Def}[チャート付き層としての代数的空間]
+%alg. sp.はaffine schemeによるetale coverを持つ$\FPPF(R)$上の層
+\end{Def}
+
+\begin{Prop}
+    代数的空間のdiagonal mapは表現可能
+\end{Prop}
+
+\subsection{代数的スタック}
+\begin{Def}[チャート付きスタックとしての代数的スタック]
+%art. st. はschemeによるamooth coverを持つ$\FPPF(R)$上のスタック
+\end{Def}
+
+\begin{Prop}
+    代数的スタックのdiagonal mapは表現可能
+\end{Prop}
+
+\section{考えられる変種}
+% stack charted by rep. et. mor. from scheme
+
+\printbibliography[title=参考文献]
+\end{document}
