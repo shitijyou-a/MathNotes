@@ -5,16 +5,18 @@
 %%% }}}
 \documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
 \usepackage{../math_note}
+\usepackage{here, booktabs}
 \usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
 \usepackage[backend=biber, style=alphabetic]{biblatex}
 \addbibresource{reference.bib}
 
 \newcommand{\introword}[2]{{\bfseries #1} (#2) }
-\newcommand{\ZAR}   {\mathrm{ZAR}}
-\newcommand{\ET}    {\mathrm{ET}}
-\newcommand{\SM}    {\mathrm{SM}}
-\newcommand{\FPPF}  {\mathrm{FPPF}}
-\newcommand{\FPQC}  {\mathrm{FPQC}}
+\newcommand{\ftor}[1]{\underline{#1}}
+\newcommand{\ZAR}   {\Ring_{\mathrm{ZAR}}}
+\newcommand{\ET}    {\Ring_{\mathrm{ET}}}
+\newcommand{\SM}    {\Ring_{\mathrm{SM}}}
+\newcommand{\FPPF}  {\Ring_{\mathrm{FPPF}}}
+\newcommand{\FPQC}  {\Ring_{\mathrm{FPQC}}}
 
 \begin{document}
 \title{スキーム・代数的空間・代数的スタックの別定義}
@@ -103,25 +105,91 @@
 非可換環は扱わない．
 
 圏$\opcat{\Ring}$の射の性質として
-開埋め込み，エタール射，滑らかな射, fppf 射，fpqc 射を定義する．
+開埋め込み，fppf 射，fpqc 射を定義する．
+環と加群の定義，
+モノ射，エピ射，
+（忠実）平坦，（形式的に）滑らかな・不分岐・エタールな射，
+有限表示射の定義は既知とする．
 
-\begin{Def}[環の開埋め込み，エタール射，滑らかな射, fppf 射，fpqc 射]
-    環の射$\phi \colon R' \to R$を考える．
-    \begin{enumerate}
-        \item 
-    \end{enumerate}
+\begin{Def}[環の開埋め込み射]
+    環の射（準同型）$\phi \colon R' \to R$を考える．
+    環の射$\phi \colon R' \to R$が平坦，モノ，有限表示であるとき
+    $\phi$は開埋め込みであるという．
+\end{Def}
+通常の意味の開埋め込みとこの定義の関係は \cite{SP} 025G を参照せよ．
+
+\begin{Def}[合併的に全射; jointly surjective]
+    $\opcat{\Ring}$の射の族$\{\phi_i \colon S_i \to R\}_{i \in I}$が合併的に全射であるとは，
+    誘導される位相空間の射$\bigsqcup_{i \in I} \Spec S_i \to \Spec R$が全射であるということ．
+    言い換えれば，任意の素イデアル$\I{p}$について
+    $\phi_{i}^{-1}(\I{q})=\I{p}$となる添字$i \in I$と素イデアル$\I{q}$が存在するということ．
 \end{Def}
 
-\begin{Def}[環の景]
-    $\ZAR, \ET, \SM, \FPPF, \FPQC$
+\begin{Def}[環のZariski / 平滑 / エタール / fppf 景]
+    $\opcat{\Ring}$に次のように Grothendieck 位相を定義する．
+
+    記号$\mu$を表(\ref{table:top_tau_and_mu})にあるいずれかの組とする．
+    圏$\opcat{\Ring}$の対象$R$に対して，
+    $\mu$である$\opcat{\Ring}$の射の集合$\{S_i \to R\}_i$であって
+    合併的に全射であるものを全体のクラスを$\Cov(R)$とする．
+
+    以上で定まる景の名前と記号は表(\ref{table:top_tau_and_mu})のとおりとする．
+    $\Cov(R)$の元はこの景における$R$の被覆と呼ばれる．
 \end{Def}
 
-\begin{Def}[層としてのアフィンスキーム]
-    affine schemeは$\ZAR$の表現可能層．
+\begin{table}[htb]
+\centering
+\caption{環の景の名前，記号，対象の種類，被覆の種類}
+\label{table:top_tau_and_mu}
+\begin{tabular}{@{}llll@{}}
+    \toprule
+    名前 & 記号 & $\mu$ \\ \midrule
+    Zariski 大景 & $\ZAR$ & 開埋め込み射 \\
+    平滑 大景 & $\SM$ & 平滑 (smooth) 射 \\
+    エタール大景 & $\ET$ & エタール射 \\
+    fppf 大景 & $\FPPF$ & 平坦かつ局所有限表示な射 \\
+    fpqc 大景 & $\FPQC$ & 平坦射 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{Remark}
+    平坦な環の射$\phi \colon S \to R$について次が同値であることに注意．
+    \begin{itemize}
+        \item $\phi$は忠実平坦である．
+        \item $\phi$から誘導される射$\Spec R \to \Spec S$は全射である．
+    \end{itemize}
+    したがって環$R \in \Ring$の$\FPQC$における被覆$\{S_i \to R\}_{i \in I}$について，
+    ここから誘導される射$\prod_{i \in I} S_i \to R$は忠実平坦である．
+    上で定義した景の被覆はいずれも平坦な射から成るので，
+    いずれの景でも同様にして忠実平坦射が得られる．
+\end{Remark}
+
+\begin{Def}
+    $\Ring$上の前層の圏を$\PShv(\opcat{\Ring})=\Set^{\opcat{\Ring}}$と書く．
+    景$\mathcal{S}$上の層の圏を$\Shv(\mathcal{S})$と書く．
 \end{Def}
+
+\begin{Def}[表現可能関手]
+    環$R \in \opcat{\Ring}$について，関手$\ftor{R}$を次のように定義する．
+    \begin{defmap}
+        \ftor{R}\colon & \opcat{\Ring}& \to& \Set \\
+        \textbf{\underline{対象}:}& S& \mapsto& \Hom_{\opcat{\Ring}}(S,R) \\
+        \textbf{\underline{射}:}& \psi& \mapsto& (\circ \psi)
+    \end{defmap}
+    この関手$\ftor{R}$を環$R$で表現される関手という．
+\end{Def}
+
+\begin{Lemma}
+    任意の環$A \in \opcat{\Ring}$について，
+    関手$\ftor{A} \colon \opcat{\Ring} \to \Set$は
+    景$\ZAR, \ET, \SM, \FPPF$上の層である．
+\end{Lemma}
+\begin{proof}
+    \cite{SP} 023Pを参照せよ．
+\end{proof}
 
 \section{スキーム，代数的空間，代数的スタック}
-
+    以下，$\FPPF$上の層を考える．
 \subsection{表現可能な射による被覆}
 \begin{Def}
     表現可能な層，射
@@ -133,6 +201,10 @@
 \end{Def}
 
 \subsection{スキーム}
+\begin{Def}
+    環で表現される$\FPPF$上の層をアフィンスキームと呼ぶ．
+\end{Def}
+
 \begin{Def}[チャート付き層としてのスキーム]
 %schemeはaffine schemeによるopen coverを持つ$\ZAR(R)$上の層
 \end{Def}
