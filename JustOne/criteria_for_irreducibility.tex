@@ -1,8 +1,15 @@
-\documentclass[a4j]{jsarticle}
+\RequirePackage[]{silence}
+%%% Warning Filter (1) {{{
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
 \usepackage{../math_note}
+\usepackage{here, booktabs}
+\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
 
 \title{多項式の既約性判定法}
-\author{七条　彰紀}
+\author{七条 彰紀}
 
 \begin{document}
 \maketitle
@@ -124,16 +131,20 @@
 \end{Example}
 
 次もまた別の判定法である．
-\begin{Thm}[Cohn's Criterion]
+\begin{Thm}[Genelization of A. Cohn's Criterion]
     $b \in \Z_{\geq 2}$と$p(x)=a_{k}x^{k}+a_{k-1}x^{k-1}+\cdots +a_{1}x+a_{0}$は
     $0 \leq a_{i}\leq b-1$を満たすとする．
     $p(b)$が素数ならば，$p(x)$は$\Z[x]$の既約元である．
 \end{Thm}
+\begin{proof}
+    Ram Murty (2002) ``Prime Numbers and Irreducible Polynomials"
+    \url{https://www.researchgate.net/publication/228571012_Prime_Numbers_and_Irreducible_Polynomials} にある．
+\end{proof}
+
 証明は難しい．
-詳細は\url{https://www.wikiwand.com/en/Cohn's_irreducibility_criterion} を参照のこと．
-なお，「$0 \leq a_{i} \leq b-1$」という条件は必ずしも最良ではない．
-例えば「$p(10)$が素数かつ$0 \leq a_{i} \leq N$ならば$p(x)$は既約」が成り立つ最大の$N$は
-\[ N=49598666989151226098104244512918 \]
-である(Michael Filaseta and Samuel Gross, \url{ https://doi.org/10.1016/j.jnt.2013.11.001 })．
+
+次の論文はこの命題に関連するもので，私が好きな題名のものである：
+Michael Filaseta and Samuel Gross ``49598666989151226098104244512918"
+( \url{https://doi.org/10.1016/j.jnt.2013.11.001} )
 
 \end{document}
