@@ -1,18 +1,59 @@
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{ascmac}
-%\usepackage{breqn} %% cause error with xypic package
-\usepackage{enumitem}
-\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb,amsthm,ascmac,stmaryrd,mathrsfs}
+\usepackage{xparse, here, booktabs, xcolor}
 \usepackage[hyphens]{url}
+\ifluatex
+\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
+\fi
+
+%% settings for tikz-cd
+\usepackage{tikz}
+\usetikzlibrary{cd, babel, positioning, arrows}
+
+%%% mdframed {{{
+\usepackage[framemethod=tikz]{mdframed}
+
+\mdfdefinestyle{GrayVertialBar}%
+{innerlinecolor=lightgray,
+innerlinewidth=5.0pt,
+outerlinewidth=0pt,
+middlelinewidth=0pt,
+innertopmargin=0pt,
+innerleftmargin=15pt,
+skipabove=\baselineskip,
+bottomline=false,topline=false,rightline=false}
+  
+\surroundwithmdframed[style=GrayVertialBar]{Def}
+\surroundwithmdframed[style=GrayVertialBar]{Def*}
+\surroundwithmdframed[style=GrayVertialBar]{Claim}
+\surroundwithmdframed[style=GrayVertialBar]{Lemma}
+\surroundwithmdframed[style=GrayVertialBar]{Prop}
+\surroundwithmdframed[style=GrayVertialBar]{Thm}
+\surroundwithmdframed[style=GrayVertialBar]{Thm*}
+\surroundwithmdframed[style=GrayVertialBar]{Cor}
+%%% }}}
+
+% {{{ footnoteをmdframedの外側に作る
+% https://differentialengine.wordpress.com/2018/02/27/latexmdframed-%E7%92%B0%E5%A2%83%E3%81%AE%E5%A4%96%E3%81%AB%E8%84%9A%E6%B3%A8%E3%82%92%E7%BD%AE%E3%81%8F%E6%96%B9%E6%B3%95tablefootnote/
+\usepackage{tablefootnote}
+ 
+\makeatletter
+\AfterEndEnvironment{mdframed}{%
+\tfn@tablefootnoteprintout%
+\gdef\tfn@fnt{0}%
+}
+\makeatother
+% }}}
+
+\ifluatex
+\RequirePackage[]{silence}
+%%% Warning Filter (2) {{{
+\WarningFilter{mdframed}{You got a bad break}
+\WarningFilter{tablefootnote}{LuaTeX and hyperref package used:}
+%%% }}}
+\fi
+
+%% theorem-like environments {{{
 \usepackage{bussproofs}
-\usepackage{stmaryrd} %% included in package "texlive-math-extra"
-\usepackage{xparse}
-
-%% setting for enumitem
-\setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
-
 \newtheoremstyle{mathnotestyle}% % Name
     {}%                      % Space above
     {}%                      % Space below
@@ -34,7 +75,17 @@
 \newtheorem{Cor}[Thm]{系}
 \newtheorem{Remark}[Thm]{注意}
 \newtheorem{Example}[Thm]{例}
+%% }}}
+\renewcommand{\proofname}{\textnormal{(証明)}}
+\renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}
 
+%% setting for enumitem {{{
+\usepackage{enumitem}
+
+%% defualt settings for enumerate enviroment
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
+
+%% fix space before enumerate/itemize/description environments
 %% usage: \begin{Thm} \enumfix \begin{enumerate}
 %% https://tex.stackexchange.com/questions/46357
 \makeatletter
@@ -43,36 +94,10 @@
  \noindent \par\nobreak\vskip-\parskip\vskip-\baselineskip\hrule\@height\z@
 \fi}
 \makeatother
-
-\renewcommand{\proofname}{\textnormal{(証明)}}
-\renewcommand{\qedsymbol}{\rule[-2pt]{5pt}{10pt}}
+%% }}}
 
 %% \footnote => †1, †2, †3, ...
 \renewcommand\thefootnote{\dag\arabic{footnote}}
-
-%% \kenten (use in (u)platex) {{{
-%% if you want to use \kenten in luatex, see pxrubrica package
-\makeatletter
-\def\kenten#1{%
-   \ifvmode\leavevmode\else\hskip\kanjiskip\fi
-   \setbox1=\hbox to \z@{・\hss}% 「・」は全角の中黒
-   \ht1=.63zw
-   \@kenten#1\end}
-\def\@kenten#1{%
-   \ifx#1\end \let\next=\relax \else
-     \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
-     \let\next=\@kenten
-   \fi\next}
-
-\def\rensuji#1{\hskip\xkanjiskip
-  \hbox to 1zw{\yoko\hss#1\hss}\hskip\xkanjiskip\relax}
-
-\makeatother
-%% }}}
-
-%% \mapedfrom {{{
-\newcommand{\mapedfrom}{\mapsfrom} %% from stmaryrd.sty
-%% }}}
 
 %% defmap environment {{{
 \usepackage{array}   % for \newcolumntype macro
@@ -89,7 +114,7 @@
 %    \end{defmap}
 %% }}}
 
-%% for problem of "underfull \hbox” when typesetting url in footnote
+%% for problem of "underfull \hbox” when typesetting url in footnote {{{
 %% https://tex.stackexchange.com/questions/339682
 \makeatletter
 \g@addto@macro{\UrlBreaks}{%
@@ -102,9 +127,12 @@
 \do\O\do\P\do\Q\do\R\do\S\do\T\do\U%
 \do\V\do\W\do\X\do\Y\do\Z}
 \makeatother
+%% }}}
 
-%% symbols
+%% symbols {{{
+
 \mathchardef\mdash="2D %% dash in math-mode
+\newcommand{\mapedfrom}     {\mapsfrom} %% from stmaryrd.sty
 \newcommand{\mor}           {\text{ or }}
 \newcommand{\mand}          {\text{ and }}
 \newcommand{\mwhere}        {\quad\text{where}\quad}
@@ -193,13 +221,9 @@
 \newcommand{\opint}         {\operatorname{int}} %% !!CAUTION!! THIS IS NOT \int ! \int is already defined.
 \newcommand{\pr}            {\operatorname{pr}} %% projection map(from a product space)
 \newcommand{\codim}         {\operatorname{codim}}
-\newcommand{\ClosedIn}      {\text{ :: closed in }}
-\newcommand{\OpenIn}        {\text{ :: open in }}
-\newcommand{\emb}           {\operatorname{emb}} %% embedding map
-\newcommand{\incl}          {\operatorname{incl}} %% inclusion map
 
 %% abelian category
-%\newcommand {\ker}          {\operatorname{ker}}
+%\newcommand {\ker}          {\operatorname{ker}} %% already defined
 \newcommand{\coker}         {\operatorname{coker}}
 \newcommand{\im}            {\operatorname{im}}
 \newcommand{\coim}          {\operatorname{coim}}
@@ -322,3 +346,5 @@
 \newcommand{\Cov}           {\operatorname{Cov}}    %% covering
 \newcommand{\PShv}          {\mathbf{PShv}}         %% category of presheaves (on a site)
 \newcommand{\Shv}           {\mathbf{Shv}}          %% category of sheaves (on a site)
+
+%% }}} %% the end of defs of symbols
