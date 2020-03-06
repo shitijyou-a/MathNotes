@@ -1,22 +1,40 @@
 \RequirePackage[]{silence}
-%%% Warning Filter (1) {{{
 \WarningFilter{latexfont}{Font shape}
 \WarningFilter{latexfont}{Some font shapes were not available}
-%%% }}}
 \documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
+
 \usepackage{../math_note}
-\usepackage{here, booktabs}
-\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
 \usepackage[backend=biber, style=alphabetic]{biblatex}
 \addbibresource{reference.bib}
 
 \newcommand{\introword}[2]{{\bfseries #1} (#2) }
 \newcommand{\ftor}[1]{\underline{#1}}
-\newcommand{\ZAR}   {\Ring_{\mathrm{ZAR}}}
-\newcommand{\ET}    {\Ring_{\mathrm{ET}}}
-\newcommand{\SM}    {\Ring_{\mathrm{SM}}}
-\newcommand{\FPPF}  {\Ring_{\mathrm{FPPF}}}
-\newcommand{\FPQC}  {\Ring_{\mathrm{FPQC}}}
+
+\newcommand{\ZAR}   {\opcat{\Ring}_{\mathrm{ZAR}}}
+\newcommand{\ET}    {\opcat{\Ring}_{\mathrm{ET}}}
+\newcommand{\SM}    {\opcat{\Ring}_{\mathrm{SM}}}
+\newcommand{\FPPF}  {\opcat{\Ring}_{\mathrm{FPPF}}}
+\newcommand{\FPQC}  {\opcat{\Ring}_{\mathrm{FPQC}}}
+
+\newcommand{\stX}{\mathcal{X}}
+\newcommand{\stY}{\mathcal{Y}}
+\newcommand{\stZ}{\mathcal{Z}}
+
+\newcommand{\Aff}{\cat{Aff}}
+
+%% \allowbreak {{{
+\makeatletter
+\def\old@comma{,}
+\catcode`\,=13
+\def,{%
+  \ifmmode%
+    \old@comma\discretionary{}{}{}%
+  \else%
+    \old@comma%
+  \fi%
+}
+\makeatother
+%% }}}
 
 \begin{document}
 \title{スキーム・代数的空間・代数的スタックの別定義}
@@ -111,19 +129,49 @@
 （忠実）平坦，（形式的に）滑らかな・不分岐・エタールな射，
 有限表示射の定義は既知とする．
 
-\begin{Def}[環の開埋め込み射]
+\begin{Def}[環の開埋め込み射]\label{def:open_imm_ring}
     環の射（準同型）$\phi \colon R' \to R$を考える．
     環の射$\phi \colon R' \to R$が平坦，モノ，有限表示であるとき
     $\phi$は開埋め込みであるという．
 \end{Def}
 通常の意味の開埋め込みとこの定義の関係は \cite{SP} 025G を参照せよ．
 
-\begin{Def}[合併的に全射; jointly surjective]
-    $\opcat{\Ring}$の射の族$\{\phi_i \colon S_i \to R\}_{i \in I}$が合併的に全射であるとは，
-    誘導される位相空間の射$\bigsqcup_{i \in I} \Spec S_i \to \Spec R$が全射であるということ．
-    言い換えれば，任意の素イデアル$\I{p}$について
-    $\phi_{i}^{-1}(\I{q})=\I{p}$となる添字$i \in I$と素イデアル$\I{q}$が存在するということ．
+\begin{Def}[幾何的被覆]\label{def:geo_cov}
+    $\Ring$の射の族$\{\phi_i \colon R \to S_i\}_{i \in I}$が環$R$の幾何的被覆であるとは，
+    任意の体$k$と任意の射$S_i \to k$に対して，
+    添字$i \in I$，体$k$と射$R \to k', k' \to k$が存在し，
+    これらが以下のように可換図式を成すということ．
+    \[
+    \begin{tikzcd}
+        R \ar[r, "\exists"]\ar[d, "\phi_i"']& k' \ar[d, "\exists"]\\
+        S_i \ar[r, "\forall"']& k
+    \end{tikzcd}
+    \]
+
+    一つの射からなる族$\{f \colon S \to R\}$が幾何的被覆であるとき，
+    射$f$は幾何的全射であるという．
 \end{Def}
+
+\begin{Remark}
+    この定義に有る図式は双対圏$\opcat{\Ring}$で描いたほうが分かりやすいかも知れない．
+    \[
+    \begin{tikzcd}
+        k' \ar[r, "\exists"]\ar[d, "\exists"']& S_i \ar[d, "\phi"]\\
+        k \ar[r, "\forall"']& R
+    \end{tikzcd}
+    \]
+    この図式では$\Spec$が省略されていると考えれば，
+    射$k \to R$は$R$の$k$有理点だと解釈できる．
+\end{Remark}
+
+\begin{Lemma}\label{lemma:geo_cov_is_stable_under_base_change}
+    環$R$の幾何的被覆$\{ R \to S_i \}$と環の射$R \to R'$を任意にとる．
+    これらから得られる射の族$\{ R' \to R' \otimes_{R} S_i \}$は
+    $R'$の幾何的全射である．
+\end{Lemma}
+\begin{proof}
+    テンソル積の普遍性を用いれば，圏論的な議論だけで証明できる．
+\end{proof}
 
 \begin{Def}[環のZariski / 平滑 / エタール / fppf 景]
     $\opcat{\Ring}$に次のように Grothendieck 位相を定義する．
@@ -169,6 +217,101 @@
     景$\mathcal{S}$上の層の圏を$\Shv(\mathcal{S})$と書く．
 \end{Def}
 
+\begin{Lemma}
+    記号$\tau$を Zariski, ET, SM, FPPF, FPQC のいずれかとする．
+    $\PShv(\opcat{\Ring}_{\tau})$と$\Shv(\opcat{\Ring}_{\tau})$は
+    完備 (complete) かつ余完備 (cocomplete) である．
+\end{Lemma}
+\begin{proof}
+    完備性は引き戻し (pullback) と終対象 (terminal object) の存在と同値であり，
+    余完備性は押し出し (pushout) と始対象 (initinal object) の存在と同値である．
+    %% TODO
+\end{proof}
+
+\section{代数幾何的な空間的対象の構成方法}
+代数的空間や代数的スタックの文脈における「表現可能な射」や「表現可能な射による被覆」を一般化する．
+
+次のような二つの圏$\cat{C}, \cat{S}$を考える．
+\[ \opcat{\Ring} \subseteq \cat{C} \subseteq \cat{S} \]   
+この包含関係は対象と射について単射的な関手によって与えるものとする．
+例えば米田関手によって$\opcat{\Ring} \subseteq \PShv(\FPPF)$などが考えられる．
+
+圏$\cat{S}$の射が成す任意の cospan （訳語不明） $x \rightarrow z \leftarrow y$について，
+ファイバー積 $x \times_{z} y$が存在するものとする．
+
+\begin{Def}[$\cat{C}$で表現可能; $\cat{C}$-representable]
+    圏$\cat{S}$の対象が$\cat{C}$表現可能とは，
+    その対象が$\cat{C}$（の適当な単射的関手による像）に属しているということ．
+
+    圏$\cat{S}$の射$x \to y$が$\cat{C}$表現可能であるとは，
+    $\cat{C}$の対象から$y$への任意の射$c \to y (c \in \mathrm{Ob}\cat{C})$について
+    ファイバー積$x \times_{y} c$が$\cat{C}$表現可能である，
+    ということ．
+\end{Def}
+
+\begin{Example}
+    次の場合に「$\cat{C}$で表現可能」の定義を書き下してみる．
+    \[ \cat{C}=\opcat{\Ring} \xrightarrow{\text{米田関手}} \PShv(\FPPF)=\cat{S} \]
+    $\PShv(\FPPF)$の射$F \to G$が$\opcat{\Ring}$表現可能であるとは，
+    任意の環からの射$\Hom_{\Ring}(-,A)=\ftor{A} \to G$について，
+    ファイバー積$F \times_{G} \ftor{A}$が環で表現可能である
+    （ある環$R$から得られる前層$\ftor{R}$と同型である）ということ．
+\end{Example}
+
+\begin{Def}[$\cat{S}$に於ける幾何的被覆]
+    圏$\cat{S}$の射の族$\{ f_i \colon x_i \to x \}_{i \in I}$が
+    $x \in \mathrm{Ob} \cat{S}$の幾何学的被覆であるとは，
+    体$k \in \opcat{\Ring} \subset \cat{S}$から$x$への任意の射$k \to x$について，
+    次の可換図式を成す添字$i \in I$，体$k'$と射$k' \to x_i, k' \to k$が存在する．
+    \[
+    \begin{tikzcd}
+        k' \ar[r, "\exists"]\ar[d, "\exists"']& x_i \ar[d, "f_i"]\\
+        k \ar[r, "\forall"']& x
+    \end{tikzcd}
+    \]
+\end{Def}
+
+\begin{Def}[$\cat{C}, E$-representable cover]
+    $E$を圏$\cat{C}$の射の部分クラスとする．
+    対象$x \in \mathrm{Ob}\cat{S}$の$\cat{C}, E$-representable coverとは，
+    次の条件を満たす$\cat{S}$の射の族$\{ f_i \colon x_i \to x \}_{i \in I}$である．
+    \begin{itemize}
+        \item $\{ f_i \colon x_i \to x \}_{i \in I}$は幾何的被覆である．
+        \item 任意の$i \in I$について$x_i$は$\cat{C}$の対象である．
+        \item 任意の$i \in I$について$\cat{C}$で表現可能である．
+        \item
+            任意の$i \in I$と任意の$\cat{C}$の対象からの射$c \to x$について，
+            引き戻しで得られる$\cat{C}$の射$x_i \times_{x} c \to c$は$E$に属す．
+    \end{itemize}
+\end{Def}
+
+\begin{Def}
+    $\opcat{\Ring} \subseteq \cat{C} \subseteq \cat{S}$と$\cat{C}$の射のクラス$E$について，
+    $\cat{C}, E$-representable coverを持つ$\cat{S}$の対象を
+    $\cat{S}$の$\cat{C}, E$チャート付き代数的空間対象 ($\cat{C}, E$-charted algebraically space object) という．
+    $\cat{C}, E$チャート付き代数的空間対象の射は$\cat{S}$の対象としての射である．
+\end{Def}
+
+本当は「チャート付き代数的空間」と名付けたいが，これは特殊な代数的空間と紛らわしいため，
+以上のように名付けた．
+
+以上の定義を$\Ring$を使わずに行う場合，
+問題と成るのは幾何的被覆 %%TODO
+
+\begin{Def}[チャート付き代数的空間対象（の射）の代数的性質]
+\end{Def}
+
+\section{スキーム，代数的空間，代数的スタック}
+    以下，fppf 大景$\FPPF$上の層を考える．
+
+\subsection{アフィンスキーム}
+アフィンスキームの圏は$\opcat{\Ring}$から米田関手を用いて構成される．
+
+\begin{Def}
+    $\Ring$上の前層の圏を$\PShv(\opcat{\Ring})=\Set^{\opcat{\Ring}}$と書く．
+    景$\mathcal{S}$上の層の圏を$\Shv(\mathcal{S})$と書く．
+\end{Def}
+
 \begin{Def}[表現可能関手]
     環$R \in \opcat{\Ring}$について，関手$\ftor{R}$を次のように定義する．
     \begin{defmap}
@@ -188,34 +331,32 @@
     \cite{SP} 023Pを参照せよ．
 \end{proof}
 
-\section{スキーム，代数的空間，代数的スタック}
-    以下，$\FPPF$上の層を考える．
-\subsection{表現可能な射による被覆}
 \begin{Def}
-    表現可能な層，射
-    表現可能な射の性質
-\end{Def}
-
-\begin{Def}
-    層の射による被覆
+    環で表現可能な fppf 大景$\FPPF$上の層をアフィンスキームと呼ぶ．
+    アフィンスキームの射は層としての射とする．
+    アフィンスキームの圏を$\Aff (\subset \Shv(\FPPF))$と書く．
 \end{Def}
 
 \subsection{スキーム}
-\begin{Def}
-    環で表現される$\FPPF$上の層をアフィンスキームと呼ぶ．
-\end{Def}
+    スキームは，アフィンスキームからの表現可能な開埋め込み射による幾何的被覆を持つ層である．
 
 \begin{Def}[チャート付き層としてのスキーム]
-%schemeはaffine schemeによるopen coverを持つ$\ZAR(R)$上の層
+    $\opcat{\Ring} \subseteq \Aff \subseteq \Shv(\FPPF)$を考える．
+    ただし最初の包含関係は米田関手によって与えられる．
+    $\mathbf{OpImm}$をアフィンスキームの開埋め込み射が成すクラスとする．
+    層の圏$\Shv(\FPPF)$の$\Aff, \mathbf{OpImm}$チャート付き代数的空間対象をスキームという．
+    スキームの圏を$\cat{Sch}$と書く．
 \end{Def}
 
 \begin{Prop}
-    スキームの景$\ZAR(\Spec \Z)$は$\ZAR$と同型
+    スキームの景は$\ZAR$と同型
 \end{Prop}
 
 \subsection{代数的空間}
 \begin{Def}[チャート付き層としての代数的空間]
-%alg. sp.はaffine schemeによるetale coverを持つ$\FPPF(R)$上の層
+    $\opcat{\Ring} \subseteq \cat{Sch} \subseteq \Shv(\FPPF)$を考える．
+    ただし最初の包含関係は米田関手によって与えられる．
+    $\mathbf{Et}$をスキームのエタール射が成すクラスとする．
 \end{Def}
 
 \begin{Prop}
@@ -223,12 +364,26 @@
 \end{Prop}
 
 \subsection{代数的スタック}
+\begin{Def}[代数的空間で表現可能なスタック]
+\end{Def}
+
+\begin{Def}[代数的空間で表現可能な射]
+\end{Def}
+
+\begin{Def}[代数的空間で表現可能な被覆]
+\end{Def}
+
 \begin{Def}[チャート付きスタックとしての代数的スタック]
+    $\FPPF$上の亜群のスタック$\stX$が代数的スタックであるとは，
+    代数的空間からの表現可能な射がなす被覆
+    $\{ \phi_i \colon \ftor{S}_i \to \shX \}_{i \in I}$であって，
+    全ての$i \in I$について$\phi_i$が\underline{エタール射}であるものが存在する，
+    ということ．
 %art. st. はschemeによるamooth coverを持つ$\FPPF(R)$上のスタック
 \end{Def}
 
 \begin{Prop}
-    代数的スタックのdiagonal mapは表現可能
+    代数的スタックのdiagonal mapは代数的空間で表現可能．
 \end{Prop}
 
 \section{考えられる変種}
