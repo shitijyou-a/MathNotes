@@ -1,18 +1,24 @@
-\documentclass[a4j, 10pt]{jarticle}
+%% {{{
+\RequirePackage[]{silence}
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsarticle}
 \usepackage{../math_note}
+
+\newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
 \newcommand{\powerset}{\mathcal{P}}
 
-\title{Cantor-Schr\"{o}der-Bernsteinの定理}
-\author{七条 彰紀}
-
 \begin{document}
+    \title{Cantor-Bernstein-Schr\"{o}derの定理}
+    \author{七条 彰紀}
     \maketitle
     
     以下で述べる証明は，\cite{thebook}にある証明を徹底的に詳述したものである．
     教育的な証明とも言えるだろう．
     この証明の歴史については\cite{cbt}のPart IVが参考になる．
     特に，ここでの証明はChapter 35(pp.343-353)にある
-    Tarski’s Fixed-Point Theoremを応用したものに近いと思われる．
+    Tarski's Fixed-Point Theoremを応用したものに近いと思われる．
 
     \section{定理}
     \begin{Thm}[表現1]
@@ -45,7 +51,7 @@
     これらの命題は集合と写像について書いた本なら
     どれにでも書かれているようなものである．
 
-    \subsection{全単射$h$の構成方法}
+    \subsection{全単射\tp{$h$}{h}の構成方法}
     $f, g^{-1} \colon M \to N$とする．
     $M$から$N$への全単射$h$を作る方法として，
     $M$の各元が$M$の部分集合$S$に属すか属さないかによって
@@ -58,7 +64,7 @@
         \end{cases}
     \]
     ただし$S \subset M$は以下の3つの条件を満たす．
-    \begin{enumerate}[(a)]
+    \begin{enumerate}[label=(\alph*)]
     \setlength{\itemindent}{3em}
         \item $f(S) \cup g^{-1}(M \setminus S)=N$.
         \item $M \setminus S \subseteq g(N)$.
@@ -69,7 +75,7 @@
     この二つを組み合わせることで全単射が作れそうだ，というのがこの構成の着想である．
     しかし$f, g^{-1}$が互いをうまく補い合えるかどうかは自明でない．
 
-    \subsection{写像$F$}
+    \subsection{写像\tp{$F$}{F}}
     写像$F$を以下のように定義する．
     \begin{defmap}
         F:& \powerset(M)& \to& \powerset(N) \\ 
@@ -85,7 +91,7 @@
     \end{align*}
     したがって，我々は$F$の不動点$S_0$を構成すれば良い．
 
-    \subsection{写像$F$はどうやって着想されるのか}
+    \subsection{写像\tp{$F$}{F}はどうやって着想されるのか}
     (a) $f(S) \cup g^{-1}(M \setminus S)=N$に注目する．
     この式は$g^{-1}$を用いているが，これを取り除く方針で式変形をする．
     これは丁度直前のsubsectionにおける変形を逆転させたものである．
@@ -106,7 +112,7 @@
     示したい命題(a)からはじめて荒っぽい式変形を行い着想を得る，
     という，数学者の仕事が見える証明である．
 
-    \subsection{$F$の不動点}
+    \subsection{\tp{$F$}{F}の不動点}
     以上の議論から，我々は写像$F$の不動点さえ求めれば全単射$h$が構成できることがわかった．
     また，$F$について次が成り立つ．
     \[ \Forall{I,J \subseteq M} I \subseteq J \implies F(I) \subseteq F(J) \]
@@ -121,10 +127,10 @@
     \end{align*}
     このことを用いて2つの証明を述べる．
 
-    \subsection{$F$の不動点が存在することの証明(非構成的)}
-    Tarski’s Fixed-Point Theoremを用いる．
+    \subsection{\tp{$F$}{F}の不動点が存在することの証明(非構成的)}
+    Tarski's Fixed-Point Theoremを用いる．
 
-    \subsection{$F$の不動点が存在することの証明(構成的)}
+    \subsection{\tp{$F$}{F}の不動点が存在することの証明(構成的)}
     明らかに$M \supseteq F(M)$なので，両辺を繰り返し$F$で写せば
     \[ M \supseteq F(M) \supseteq F^2(M) \supseteq \cdots. \]
     が得られる．
@@ -157,5 +163,4 @@
         ``Proofs of the Cantor-Bernstein theorem. A mathematical excursion''
         Science Networks. Historical Studies 45, Springer Basel.
     \end{thebibliography}
-
 \end{document}
