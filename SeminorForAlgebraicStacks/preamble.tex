@@ -1,28 +1,20 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
+\RequirePackage[]{silence}
+%%% Warning Filter (1) {{{
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Some font shapes were not available}
+%%% }}}
+\documentclass[lualatex, ja=standard, a4paper]{bxjsreport}
 
 \usepackage[]{../math_note}
-%% including belows:
-%\usepackage{amsmath}
-%\usepackage{amssymb}
-%\usepackage{amsthm}
-%\usepackage{ascmac}
-%\usepackage{enumitem}
-%\usepackage{mathrsfs}
-%\usepackage[hyphens]{url}
-%\usepackage{bussproofs}
-%\usepackage{stmaryrd} %% included in package "texlive-math-extra"
-
-\usepackage{xparse}
-\usepackage[dvipdfmx, hiresbb]{graphicx}
-\usepackage{xcolor}
 \usepackage{booktabs}
-\usepackage[all, pdf, 2cell, cmtip]{xy}
+\usepackage{xcolor}
+\usepackage[luatex]{graphicx}
+\usepackage{here}
 \usepackage{tikz}
 \usetikzlibrary{cd, positioning, arrows}
-%% for hyperref {{{
-\usepackage[dvipdfmx, colorlinks=true, linkcolor=black]{hyperref}
-\usepackage{pxjahyper}
-%% }}}
+\usepackage[luatex, pdfencoding=auto, colorlinks=true, allcolors=black]{hyperref}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\addbibresource{reference.bib}
 
 %% environment: question/problem {{{
 \usepackage{chngcntr}
@@ -52,8 +44,6 @@
 \newenvironment{myenum}[1][\roman*]
 {\hfill \vspace{-0.8cm}\begin{enumerate}[label=(#1), labelindent=1cm]}
 {\end{enumerate}}
-
-\newcommand{\step}[1]{\paragraph{\bf #1}}
 
 \setenumerate{label=(\roman*),itemsep=3pt,topsep=7pt}
 
@@ -102,6 +92,7 @@
 \newcommand{\tp}[2]{\texorpdfstring{#1}{#2}}
 \newcommand{\parto}[2]{\mathrel{\mathop{\rightrightarrows}^{#1}_{#2}}}
 \newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\step}[1]{\paragraph{\bf #1}}
 
 %% {{{ fibered categories
 \newcommand{\fib}[1]{\mathscr{#1}}
@@ -162,3 +153,4 @@
 \newcommand{\stY}{\st{Y}}
 \newcommand{\stZ}{\st{Z}}
 %% }}}
+

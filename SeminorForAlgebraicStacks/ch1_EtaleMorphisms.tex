@@ -1,5 +1,4 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
-\usepackage{macros}
+\input{preamble}
 
 \newcommand{\diag}{\Delta}
 \newcommand{\nl}{\hfill \vspace{-0.5cm}}
@@ -25,10 +24,12 @@
     \item
     $Y'$ :: affine $Y$-scheme, $Y_0' (\inclmap Y')$ :: infinitesimal thickening of $Y'$とする．
     $f \colon X \to Y$について，以下の図式を見よ．
-    \[\xymatrix{
-        Y_0' \ar@{_{(}->}[d]_-{\text{inf. thi.}} \ar@[red][r]& X \ar[d]^-{f} \\
-        Y' \ar[r] \ar@[blue][ru]& Y
-    }\]
+    \[
+    \begin{tikzcd}
+        Y_0' \ar[d, hook, "\text{inf. thi.}"'] \ar[r, red]& X \ar[d]^-{f} \\
+        Y' \ar[r] \ar[ru, blue]& Y
+    \end{tikzcd}
+    \]
     この時，次の写像が定まる．
     \begin{defmap}
         {}& \Hom_Y(Y', X)& \to& \Hom_Y(Y_0', X) \\
@@ -44,9 +45,11 @@
     \item
         $R$-module :: $M$がfinitely presented moduleであるとは，
         次の完全列が存在すること．
-        \[\xymatrix{
+        \[
+        \begin{tikzcd}
             A^{\oplus r} \ar[r]& A^{\oplus s} \ar[r]& M \ar[r]& 0
-        }\]
+        \end{tikzcd}
+        \]
 
     \item
         surjective ring homomorphism :: $\phi \colon R[x_1, \dots, x_s] \to A$が存在し，
@@ -81,10 +84,12 @@
         \footnote
         {
             $\Delta$は以下のようにpullbackの普遍性から得られる射である．
-            \[\xymatrix{
-                    X \ar@/^5mm/[rr]\ar[rd]\ar@{-->}[r]^-{\Delta}& X \times X \ar[d]\ar[r] & X\ar[d]^-{f} \\
-                {}& X\ar[r]_-{f} & Y \ar@{}[lu]|{\text{p.b.}}
-            }\]
+            \[
+            \begin{tikzcd}
+                X \ar[rr, shift left=5mm]\ar[rd]\ar[r, dashed, "\Delta"]& X \times X \ar[d]\ar[r] & X\ar[d, "f"] \\
+                {}& X \ar[r, "f"'] & Y \ar[lu, phantom, "\text{p.b.}"]
+            \end{tikzcd}
+            \]
         }
         がquasi-compactであること．
 
@@ -182,9 +187,13 @@ finitely presentedを要求するのはEGAからのもので，
     $f$の場合と同様に，formally etaleだけ示せば良い．
     
     以下の図式を考える．
+    \[
+    \begin{tikzcd}
+        B \ar[r, red, "\alpha"]\ar[rd, blue, "\beta"]& R/I \\
+        A \ar[u, "h^{\#}"] \ar[r, "\phi"']& R \ar[u, "\pi"']
+    \end{tikzcd}
+    \]
     \[\xymatrix{
-            B \ar@[red][r]^-{\alpha}\ar@[blue][rd]^-{\beta}& R/I \\
-            A \ar[u]^-{h^{\#}} \ar[r]_-{\phi}& R \ar[u]_-{\pi}
     }\]
     ここで$I \subseteq R$はイデアルで，$I^N=0$となる整数$N>0$が存在する．
     与えられた$\alpha$から図式を可換にする$\beta$を構成し，
@@ -281,17 +290,21 @@ finitely presentedを要求するのはEGAからのもので，
     （projectiveならばlocally freeであることは\cite{SP} section 10.84に証明がある）．
     これはすなわち，$B$-moduleの以下の図式に対し，
     図式を可換にする$\tilde{D} \colon \modDer_{B/A} \to M$が存在するということである．
-    \[\xymatrix{
+    \[
+    \begin{tikzcd}
         {} & \modDer_{B/A} \ar[d]^-{D}\\
-        M \ar@{->>}[r]^-{t}& N
-    }\]
+        M \ar[r, two heads, "t"]& N
+    \end{tikzcd}
+    \]
     ここで$t$ :: surj.
     
     次の図式を考える．
-    \[\xymatrix{
-        B \ar[r]^-{f_D}& B[N] \\
-        A \ar[r]\ar[u]^-{\phi}& B[M]\ar@{->>}[u]
-    }\]
+    \[
+    \begin{tikzcd}
+        B \ar[r, "f_{D}"]& B[N] \\
+        A \ar[r]\ar[u, "\phi"]& B[M]\ar[u, two heads]
+    \end{tikzcd}
+    \]
     ここで$B[M]$は\cite{Mat} \S 25でいう$B \ast M$である
     \footnote
     {
@@ -313,10 +326,12 @@ finitely presentedを要求するのはEGAからのもので，
     (ii)を示す．
     $R$ :: ring, $I \subseteq R$ :: idealを$I^2=0$を満たすものとする．
     以下が可換図式だったとしよう．
-    \[\xymatrix{
-        B \ar[r]^-{\theta} \ar[rd]_-{\lambda}& R/I \\
-        A \ar[r]\ar[u]^-{\phi}& R\ar[u]_-{\pi}
-    }\]
+    \[
+    \begin{tikzcd}
+        B \ar[r, "\theta"] \ar[rd, "\lambda"]& R/I \\
+        A \ar[r]\ar[u, "\phi"]& R\ar[u, "\pi"']
+    \end{tikzcd}
+    \]
     この時，$\lambda$をlifting of $\theta$と呼ぶ．
     \cite{Mat} \S 25より
     \footnote
@@ -346,9 +361,11 @@ finitely presentedを要求するのはEGAからのもので，
     とする．
     この時，$f=i \circ g \colon Z \to Y$がsmoothであることと，
     以下の列が完全かつlocally splitであることは同値である．
-    \[\xymatrix{
+    \[
+    \begin{tikzcd}
         0 \ar[r]& i^*\shI_Z \ar[r]& i^*\shDer_{X/Y} \ar[r]& \shDer_{Z/Y} \ar[r]& 0
-    }\]
+    \end{tikzcd}
+    \]
     ただし$\shI_Z=\ker i^{\#}$．
 \end{Prop}
 %% {{{
@@ -679,6 +696,5 @@ finitely presentedを要求するのはEGAからのもので，
     この補題が成り立つ．
 \end{proof}
 
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}
