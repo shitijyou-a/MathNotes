@@ -9,16 +9,18 @@
 
 \section{Motivation.}
 scheme, stack等には以下のような包含関係がある．
-\[\xymatrix{
-    {} & \text{Algebraic Stack} \ar@{^{(}->}[r]& \text{Stack} \ar@{^{(}->}[r]& \text{Presheaf of Grupoids} \\
-    \text{Scheme} \ar@{^{(}->}[r]\ar@{^{(}->}[ru]& \text{Algebraic Space} \ar@{^{(}->}[r]\ar@{^{(}->}[u]&
-        \text{Space} \ar@{^{(}->}[r]\ar@{^{(}->}[u]& \text{Presheaf of Sets} \ar@{^{(}->}[u]
-}\]
+\[
+\begin{tikzcd}[arrows=hook]
+    {} & \text{Algebraic Stack} \ar[r]& \text{Stack} \ar[r]& \text{Presheaf of Grupoids} \\
+    \text{Scheme} \ar[r]\ar[ru]& \text{Algebraic Space} \ar[r]\ar[u]&
+        \text{Space} \ar[r]\ar[u]& \text{Presheaf of Sets} \ar[u]
+\end{tikzcd}
+\]
 最終的にセミナーを通じて我々が定義したいのはalgebraic stackであるが，
 今回はそれよりも定義が簡素な``space"を定義する．
 先にspaceの定義文を示そう．
 
-\begin{Def}[Space, \cite{GomezAS} p.26]
+\begin{Def}[Space, \cite{Gomez99} p.26]
     $S$ :: schemeとする．
     Space over $S$ (or $S$-space)とは，
     big etale site over $S$上にある，集合のsheafである．
@@ -109,10 +111,10 @@ $\Cov$の元には大抵，以下の条件が課される．
     $\cat{C}/X$のunderlying categoryはslice cageory :: $\cat{C}/X$である．
     したがって対象は$\cat{C}$内の$X$への射である．
     Grothendieck topology :: $\Cov$は，
-    \[
-        \{ [U_i \to X] \to [U \to X] \}_i \in \Cov([U \to X])
-        \implies \{U_i \to U\} \in \Cov(U).
-    \]
+    \begin{gather*}
+        \{ [U_i \to X] \to [U \to X] \}_i \in \Cov([U \to X]) \\
+        \implies \{ U_i \to U \} \in \Cov(U).
+    \end{gather*}
     のように定められる．
 \end{Def}
 
@@ -124,18 +126,17 @@ $\Cov$の元には大抵，以下の条件が課される．
     まずundrelying categoryは$(\id[\cat{C}] \downarrow F)$である．
     したがって対象は$X \to F(\delta) \ (\delta \in \Delta)$である．
     $\Cov$は以下のように定める．
-    \[
+    \begin{gather*}
         \left\{
-        \vcenter{
-        \xymatrix@R=8pt{
-            X'_i \ar[d]\ar[r]^-{f_i^{\flat}}& X \ar[d]\\
-            F(\delta_i) \ar[r]_-{F(f_i)}& F(\delta)
-        }}
-        \right\} \in \Cov([X \to F(\delta)])
+        \begin{tikzcd}[row sep=8pt, ampersand replacement=\&]
+            X'_i \ar[d]\ar[r, "f_i^{\flat}"]\& X \ar[d]\\
+            F(\delta_i) \ar[r, "F(f_i)"']\& F(\delta)
+        \end{tikzcd}
+        \right\} \in \Cov([X \to F(\delta)]) \\
         \implies
         f_i \colon \delta \to \delta_i \text{ :: iso. and }
         \{f_i^{\flat} \colon X'_i \to X \} \in \Cov(X).
-    \]
+    \end{gather*}
 \end{Def}
 
 \begin{Def}[Continuous Functor.]
@@ -163,7 +164,6 @@ $\Cov$の元には大抵，以下の条件が課される．
 \end{Remark}
 
 \subsection{Examples.}
-
 \subsubsection{Site.}
 \begin{Example}[Classical topology.]
     $X$ :: topological spaceとし，
@@ -190,50 +190,45 @@ Grothendieck topology ($\Cov$)からなるから，
 \begin{center}
      \includegraphics[width=5cm]{./images/site.pdf}
 \end{center}
-すなわち，以下の未完成な定義文をテンプレートとする，一連の定義文の群がある．
-\begin{Def}[$***$ site]
-    $X$ :: schemeについて，
-    圏$\cat{C}$を以下で定める．
-    \begin{description}[labelindent=5mm]
-        \item[対象] (a)である射$U \to X$.
-        \item[射]   二つの対象の間の射$[U \to X] \to [U' \to X]$は，$X$-morphism :: $U \to U'$.
-    \end{description}
-    $[U \to X] \in \cat{C}$に対して，
-    $\Cov(U)$を(b)である射の集まり$\{U_i \to U\}_i$であって
-    jointly surjective familyであるものの集まりとする．
 
-    以上の$\cat{C}$と$\Cov$からなるsiteを $***$ site of $X$と呼ぶ．
+\begin{Def}[Zariski/平滑/エタール/fppf/fpqc 景]\label{def:zar_et_fppf_site}
+    記号(a), (b)を表(\ref{table:top_tau_and_mu})にあるいずれかの組とする．
+
+    スキーム$X$について，$\Sch/X$の充満部分圏$\cat{C}$を次のように定める．
+    \begin{description}[labelindent=5mm]
+        \item[\underline{対象}]
+            (a)であるスキームの射$U \to X$.
+        \item[\underline{射}]
+            二つの対象の間の射$[\,U \to X\,] \to [\,U' \to X\,]$は，$X$上の射$U \to U'$.
+    \end{description}
+    圏$\cat{C}$の対象$U \xto{u} X$ ($(U,u)$または$U$と書く)に対して，
+    $\Cov((U,u))$を(b)であるスキームの射の集合$\{U_i \to U\}_i$であって
+    合併的に全射であるもの全体のクラスとする．
+
+    以上の圏$\cat{C}$と$\Cov$で定まる景の名前と記号は
+    表(\ref{table:top_tau_and_mu})のとおりとする．
 \end{Def}
+
+\begin{table}[htb]
+\centering
+\caption{景の名前，記号，対象の種類，被覆の種類}
+\label{table:top_tau_and_mu}
+\begin{tabular}{@{}llll@{}}
+    \toprule
+    名前 & 記号 & (a) & (b) \\ \midrule
+    Zariski 大景 & $\ZAR(X)$ & 任意 & 開埋め込み射 \\
+    Zariski 小景 & $\Zar(X)$ & 開埋め込み射 & 開埋め込み射 \\
+    平滑 大景 & $\SM(X)$ & 任意 & 平滑 (smooth) 射 \\
+    エタール大景 & $\ET(X)$ & 任意 & エタール射 \\
+    エタール小景 & $\et(X)$ & エタール射 & エタール射 \\
+    fppf 大景 & $\FPPF(X)$ & 任意 & 平坦かつ局所有限表示な射 \\
+    fpqc 大景 & $\FPQC(X)$ & 任意 & 平坦かつ準コンパクトな射 \\ \bottomrule
+\end{tabular}
+\end{table}
 
 Grothendieck topologyの定義から分かるとおり，
 性質(b)がstable under base change \& compositionであれば，
 以上のテンプレートはsiteの定義文と成る．
-
-\begin{samepage}
-\begin{Def}
-    以上の定義文テンプレートを用いて，(a), (b)と各siteの定義を以下のように対応させる．
-    (a)が``--"とある箇所は「$\Sch/X$の任意の射」を意味する．
-    さらに，``open inclusion"はZariski開集合の間にある包含射のことである
-    （したがってsmall Zariski siteのunderlying categoryにはZariski開集合しか無い）．
-
-\begin{table}[ht]
-\begin{tabular}{c|lllllll}
-\toprule
-    $***$ & small Zariski  & big Zariski    & small etale & big etale\\ \midrule
-    (a)   & open immersion & --             & etale       & --       \\
-    (b)   & open immersion & open immersion& etale       & etale    \\ \hline \hline
-    $***$ & lisse-etale & smooth & fppf                                   & fpqc                  \\ \midrule
-    (a)   & smooth      & smooth & --                                     & --                    \\
-    (b)   & etale       & smooth & flat\&locally of finite presentation & flat\&quasi-compact \\ \bottomrule
-\end{tabular}
-\end{table}
-
-    図の再掲:
-    \begin{center}
-         \includegraphics[width=5cm]{./images/site.pdf}
-    \end{center}
-\end{Def}
-\end{samepage}
 
 \begin{Remark}
 ``fppf"は
@@ -243,22 +238,6 @@ flat\& locally of finite presentationならば実際にこのように成る．
 同様に``fpqc"は``fid\`{e}lement plat et quasi-compact"（仏語）すなわち
 ``faithfully flat and quasi-compact"の略である．
 \end{Remark}
-
-\begin{Def}
-    $***$ site of $X$の記号を以下のように定める．
-\begin{table}[ht]
-\begin{tabular}{c|lllllllll@{}}
-    \toprule
-    $***$ & small Zariski     & big Zariski       & small etale      & big etale\\ \midrule
-    名前    & $\mathrm{Zar}(X)$ & $\mathrm{ZAR}(X)$ & $\mathrm{Et}(X)$ & $\mathrm{ET}(X)$ \\ \hline \hline
-    $***$ & lisse-etale         & smooth           & fppf               & fpqc               \\ \midrule
-    名前    & $\mathrm{Lis\mdash Et}(X)$ & $\mathrm{Sm}(X)$ & $\mathrm{Fppf}(X)$ & $\mathrm{Fpqc}(X)$ \\ \bottomrule
-\end{tabular}
-\end{table}
-
-    \cite{SP}ではbig Zariski site of $X$を$(\Sch/X)_{Zariski}$などと書く．
-\end{Def}
-
 
 \subsubsection{Continuous Functor.}
 \begin{Example}
@@ -316,10 +295,12 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \item
     presheaf on $S$ :: $\shF$がsheafであるとは，
     以下の図式がequalizer diagramであるということ．
-    \[\xymatrix{
+    \[
+    \begin{tikzcd}
         \shF(U) \ar[r]& \prod_{i \in I} \shF(U_i)
-            \ar@<1mm>[r]\ar@<-1mm>[r]& \prod_{(i,j) \in I \times I} \shF(U_i \times_U U_j)
-    }\]
+            \ar[r, shift left=1mm]\ar[r, shift right=1mm]& \prod_{(i,j) \in I \times I} \shF(U_i \times_U U_j)
+    \end{tikzcd}
+    \]
     ここで右の並行射は$\res_{U_i}^{U_i \times U_j}, \res_{U_j}^{U_i \times U_j}$である．
 
     \item
@@ -426,7 +407,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \begin{Thm}\label{thm:Shff}
     $\cat{C}$ :: siteとする．
     忘却関手
-    \[ \ftorFgt \colon \Shv\cat{C}) \to \PShv\cat{C}). \]
+    \[ \ftorFgt \colon \Shv(\cat{C}) \to \PShv(\cat{C}). \]
     はleft adjoint functor :: $\ftorSh$を持つ．
 \end{Thm}
 %% {{{
@@ -441,11 +422,12 @@ flat\& locally of finite presentationならば実際にこのように成る．
     $\shF \in \PShv\cat{C})$と，
     $X \in \cat{C}$のcover :: $\covU=\{U_i \to X\} \in \Cov(X)$に対し，
     \[ H^0(\covU, \shF)=\text{equalizer of }\left[
-        \vcenter{\xymatrix{
-        \prod_{i \in I} \shF(U_i)
-        \ar@<1mm>[r]^-{} \ar@<-1mm>[r]_-{}&
-        \prod_{(i,j) \in I \times I} \shF(U_i \times_X U_j)
-    }} \right] \]
+        \begin{tikzcd}
+            \prod_{i \in I} \shF(U_i)
+            \ar[r, shift left=1mm] \ar[r, shift right=1mm]&
+            \prod_{(i,j) \in I \times I} \shF(U_i \times_X U_j)
+        \end{tikzcd}
+     \right] \]
     ここで二つの並行射は
     それぞれ$\res_{U_i}^{U_i \times U_j}, \res_{U_j}^{U_i \times U_j}$である．
     すなわち，ここにある並行射はsheafの定義にあるものである．
@@ -504,23 +486,30 @@ flat\& locally of finite presentationならば実際にこのように成る．
     適当に$(\tilde{s}_U)_{U \in \covU} \in H^0(\covU, \shF)$をとり，
     $s=\iota_{\covU}\big((\tilde{s}_U)_{U \in \covU}\big) \in \shF^+(X)$とする．
     \[
-    \xymatrix
-    {
-        s \ar[r]^-{\res_{X}^{U_0}}& s|_{U_0} \\
-        (\tilde{s}_U)_{U \in \covU}
-        \ar[u]\ar[r]^-{\prod \res_{U}^{U \times U_0}}\ar@/_5mm/[rd]_-{\pr_{U_0}}
-        &(\tilde{s}_U|_{U \times U_0})_{U \in \covU} \ar[u]\\
-            & \tilde{s}_{U_0}\ar@/_15mm/[uu]_-{\theta} \ar[u]^-{\prod \res_{U_0}^{U \times U_0}} 
-    }
+        \begin{tikzcd}[arrows=maps to]
+        s \ar[r, "\res_{X}^{U_0}"]& s|_{U_0} \\
+        (\tilde{s}_U)_{U \in \covU} &(\tilde{s}_U|_{U \times U_0})_{U \in \covU} \ar[u]\\
+        {} & \tilde{s}_{U_0}
+        \ar[from=2-1, to=1-1]
+        \ar[from=2-1, to=2-2, "\prod \res_{U}^{U \times U_0}"]
+        \ar[from=2-1, to=3-2, "\pr_{U_0}"']
+        \ar[from=3-2, to=2-2, "\prod \res_{U_0}^{U \times U_0}"']
+        \ar[from=3-2, to=1-2, near end, "\theta", rounded corners, 
+            to path={ (\tikztostart.east) -- ([xshift=1.3cm]\tikztostart.east)
+                -- ([xshift=1.25cm]\tikztotarget.east) -- (\tikztotarget.east) }]
+    \end{tikzcd}
     \qquad \qquad
-    \xymatrix
-    {
+    \begin{tikzcd}
         \shF^+(U) \ar[r]& \shF^+(U_0) \\
-        H^0(\covU, \shF) \ar@{>->}[u]\ar[r]\ar@/_5mm/[rd]
-            & H^0(\covU \times U_0, \shF) \ar@{>->}[u]\\
-            & \shF(U_0) \ar@/_15mm/[uu]_-{\theta} \ar[u] 
-    }
+        H^0(\covU, \shF) \ar[u, tail]\ar[r]\ar[rd] & H^0(\covU \times U_0, \shF) \ar[u, tail]\\
+        {} & \shF(U_0) \ar[u]
+        \ar[from=3-2, to=1-2, "\theta"', rounded corners, 
+            to path={ (\tikztostart.east) -- ([xshift=1cm]\tikztostart.east)
+                -- ([xshift=1cm]\tikztotarget.east) -- (\tikztotarget.east) }]
+    \end{tikzcd}
     \]
+    どちらも右に有る大きく曲がった射は$\theta$である．
+
     $(\tilde{s}_U)_{U \in \covU}$から$(\tilde{s}_U|_{U \times U_0})_{U \in \covU}$への$2$本の射が
     一致するのは，$H^0(\covU, \shF)$の定義から従う
     \[ \tilde{s}_{U}|_{U \times U_0}=\tilde{s}_{U_0}|_{U \times U_0} \]
@@ -613,10 +602,12 @@ flat\& locally of finite presentationならば実際にこのように成る．
     \[ \theta(\tilde{s}_{i,j})=s_i|_{U_{i,j}} \]
     となる$\{ U_{i,j} \to U_i \} \in \Cov(U_i)$と$\tilde{s}_{i,j} \in \shF(U_{i,j})$がとれる．
     各被覆の包含関係は以下の通り．
-    \[\xymatrix{
-            U_{i,j} \times_X U_{i',j'} \ar[r]\ar[rd]& U_{i,j} \ar[r]& U_i \ar[r]& X \\
-            {} & U_i \times_X U_j \ar[ru]
-    }\]
+    \[
+    \begin{tikzcd}
+        U_{i,j} \times_X U_{i',j'} \ar[r]\ar[rd]& U_{i,j} \ar[r]& U_i \ar[r]& X \\
+        {} & U_i \times_X U_j \ar[ru]
+    \end{tikzcd}
+    \]
     $(*)$から，
     \[
         \theta(\tilde{s}_{i,j}|_{U_{i,j} \times U_{i',j'}})
@@ -642,26 +633,28 @@ flat\& locally of finite presentationならば実際にこのように成る．
     そのUMPを見よう．
     $\shF \in \PShv\cat{C}), \shG \in \Shv\cat{C})$とする．
     $\theta \colon \id[\Shv(X)] \to \ftorSh$のnaturalityから，次の可換図式が得られる．
-    \[\xymatrix{
+    \[
+    \begin{tikzcd}
         \shF \ar[r] \ar[d]& \ftorSh \shF \ar[d]\\
-        \shG \ar[r]^-{\sim}& \ftorSh \shG
-    }\]
+        \shG \ar[r, "\sim"]& \ftorSh \shG
+    \end{tikzcd}
+    \]
     $\theta_{\shG}\colon \shG \to \ftorSh \shG$ :: isoだから，
     $\shF \to \shG$から$\ftorSh \shF \to \shG$が得られた．
     次に，以下で示す可換図式(1)が与えられたとしよう．
     全体を$\ftorSh$で写し，$\ftorSh|_{\Shv(X)} \cong \id[\Shv(X)]$を用いて可換図式(2)が得られる．
     \[
     (1)
-    \xymatrix{
-        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
-        \shF \ar[u]^-{\alpha_{\shF}} \ar[ur]_-{\phi} & {}
-    }
+    \begin{tikzcd}
+        \ftorSh \shF \ar[r, bend left=0.5mm, "f"] \ar[r, bend right=0.5mm, "g"']& \shG \\
+        \shF \ar[u, "\alpha_{\shF}"] \ar[ur, "\phi"'] & {}
+    \end{tikzcd}
     \qquad\qquad
     (2)
-    \xymatrix{
-        \ftorSh \shF \ar@<0.5mm>[r]^-{f} \ar@<-0.5mm>[r]_-{g}& \shG \\
-        \ftorSh \shF \ar@{=}[u] \ar[ur]_-{\ftorSh \phi} & {}
-    }
+    \begin{tikzcd}
+        \ftorSh \shF \ar[r, bend left=0.5mm, "f"] \ar[r, bend right=0.5mm, "g"']& \shG \\
+        \ftorSh \shF \ar[u, "\alpha_{\shF}"] \ar[ur, "\ftorSh \phi"'] & {}
+    \end{tikzcd}
     \]
     したがって$f=g$．
     以上でexistence \& uniquenessが示せた．
@@ -671,7 +664,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
     私のノート
     \footnote{\cite{HarAG} ch.I sec.1の演習問題への解答: 
         \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section1_ex.pdf}}
-    のEx1.12で$\theta$のUMP(universal map property, \cite{Awodey})から
+    のEx1.12で$\theta$のUMP(universal map property, \cite{Awodey10})から
     left adjointnessを証明している．
 \end{proof}
 %% }}}
@@ -686,9 +679,9 @@ flat\& locally of finite presentationならば実際にこのように成る．
 \end{proof}
 
 以下の$2$つはセミナー内で将来証明を扱う．
-\begin{Thm}[\cite{ASS} 4.1.2]
+\begin{Thm}[\cite{Olsson16} 4.1.2]
     $X \to Y$ :: morphism of schemesとする．
-    representable sheaf :: $\ftor{X}$は$\mathrm{Fppf}(Y)$上のsheafである．
+    representable sheaf :: $\ftor{X}$は$\FPPF(Y)$上のsheafである．
     したがってfppf topologyより荒い位相を持つsite，
     特にbig etale site :: $\ET(Y)$でもsheafである．
 \end{Thm}
@@ -700,7 +693,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
     証明は（各点）左Kan拡張を用いて，
     \[ \shP=(\Lan_{y}y)(\shP)=\Colim(\Comma{y}{\shP} \to^{\pi_1} \cat{C} \to^{y} \PShv\cat{C})). \]
     ここで$y \colon \cat{C} \to \PShv\cat{C})$は米田埋め込みである．
-    （\cite{Awodey} Prop8.10でも同じ命題が証明されている．）
+    （\cite{Awodey10} Prop8.10でも同じ命題が証明されている．）
 \end{proof}
 
 \begin{Remark}
@@ -726,7 +719,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
 
 \section{Points and Stalks.}
 以下はsmall/big etale siteのみで使われるものである．
-\begin{Def}[Geometric Point, Etale Neighborhood, \cite{ASS} 1.3.15.]
+\begin{Def}[Geometric Point, Etale Neighborhood, \cite{Olsson16} 1.3.15.]
 \begin{myenum}
     \item 
     $X$ :: schemeに対し，
@@ -737,10 +730,12 @@ flat\& locally of finite presentationならば実際にこのように成る．
     geometric point :: $\bar{x} \colon \Spec k \to X$について，
     $\bar{x}$のetale neighborhoodとは
     $U \to X$がetaleであるような以下の可換図式のことである．
-    \[\xymatrix{
+    \[
+    \begin{tikzcd}
         {} & U \ar[d]\\
-        \Spec k \ar[r]_-{\bar{x}} \ar[ru]& X
-    }\]
+        \Spec k \ar[r, "\bar{x}"'] \ar[ru]& X
+    \end{tikzcd}
+    \]
 
     \item
     geometric point :: $\bar{x} \colon \Spec k \to X$について，
@@ -748,12 +743,12 @@ flat\& locally of finite presentationならば実際にこのように成る．
     この時，$U_1$と$U_2$の間の射とは，
     以下の図式を可換にするmorphism of schemes :: $\eta \colon U_1 \to U_2$のことである．
     \begin{equation*}
-    \begin{xy}
-        (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
-        (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
-        \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
-        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
-    \end{xy}
+%    \begin{xy}
+%        (0,17.32) *{U_1}="U1", (20, 17.32) *{U_2}="U2",
+%        (-20, 3) *{\Spec k}="k", (10,0) *{X}="X",
+%        \ar "U1";"X" \ar "U2";"X" \ar "U1";"U2"^{\eta}
+%        \ar "k";"U1" \ar|(.59)\hole "k";"U2" \ar "k";"X"
+%    \end{xy}
     \end{equation*}
 \end{myenum}
 \end{Def}
@@ -771,7 +766,7 @@ flat\& locally of finite presentationならば実際にこのように成る．
     我々は以上の定義のみ用いる．
 \end{Remark}
 
-\begin{Def}[Stalk, \cite{ASS} 1.3.15.]
+\begin{Def}[Stalk, \cite{Olsson16} 1.3.15.]
     $X$ :: scheme,
     $\shF \in \et(X)$あるいは$\shF \in \ET(X)$とする．
     さらに$\bar{x} \colon \Spec k \to X$ :: geometric pointとする．
@@ -836,9 +831,11 @@ flat\& locally of finite presentationならば実際にこのように成る．
 
     \step{$\phi$ :: surj $\implies$ $\phi$ :: epi.}
     以下の図式を考える．
-    \[\xymatrix{
-        \shF \ar[r]^-{\phi}& \shG \ar@<1mm>[r]^-{\alpha} \ar@<-1mm>[r]_-{\beta}& \shH
-    }\]
+    \[
+    \begin{tikzcd}
+        \shF \ar[r, "\phi"]& \shG \ar[r, shift left=1mm, "\alpha"] \ar[r, shift right=1mm, "\beta"']& \shH
+    \end{tikzcd}
+    \]
     さらに，$\alpha \circ \phi=\beta \circ \phi$であると仮定する．
     示したいのは$\alpha=\beta$である．
     したがって任意の$U \in \cat{C}$上の
@@ -951,13 +948,15 @@ flat\& locally of finite presentationならば実際にこのように成る．
     なので(i)のみ示す．
 
     $f \colon \cat{C} \to \cat{C}'$と$\shF \in \PShv\cat{C})$について，
-    $f_* \shF$はKan拡張の言葉（記号は\cite{CWM}のもの）を用いて$(\opcat{f})^{-1} \shF$と書ける．
+    $f_* \shF$はKan拡張の言葉（記号は\cite{MacLane10}のもの）を用いて$(\opcat{f})^{-1} \shF$と書ける．
     ここで$\opcat{f} \colon \opcat{\cat{C}} \to \opcat{\cat{C}'}$は射の反転で得られる関手である．
     したがって，$f_*$の左随伴は左Kan拡張$\Lan_{\opcat{f}}$である．
     各点左Kan拡張を計算すると，
-    \[ \opcat{(\Lan_{f}}\shF)(U)=\Colim\left(\xymatrix{
-                \opcat{\Comma{U}{f}}=\Comma{\opcat{f}}{U} \ar[r]^-{\pi_1}& \opcat{\cat{C}} \ar[r]^-{\shF}& \Set
-    }\right). \]
+    \[ \opcat{(\Lan_{f}}\shF)(U)=\Colim\left(
+        \begin{tikzcd}
+            \opcat{\Comma{U}{f}}=\Comma{\opcat{f}}{U} \ar[r, "\pi_1"]& \opcat{\cat{C}} \ar[r, "\shF"]& \Set
+        \end{tikzcd}
+    \right). \]
     ここで$\Comma{\opcat{f}}{U}$はComma圏で，$\pi_1$は射影$[f(V) \to U] \mapsto V$である．
     $\Comma{\opcat{f}}{U}$は$\opcat{\cat{C}}$の部分圏だから，特にこれはsmall colimit.
     $\Set$ :: cocompleteなのでこのcolimitは存在する．
@@ -990,6 +989,5 @@ flat\& locally of finite presentationならば実際にこのように成る．
     任意の圏をsmallとする．
 \end{Remark}
 
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}

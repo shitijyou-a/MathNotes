@@ -1,7 +1,4 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
-\usepackage{macros}
-
-\newcommand{\parto}[2]{\mathrel{\mathop{\rightrightarrows}^{#1}_{#2}}}
+\input{preamble}
 
 %% changemargin {{{
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
@@ -38,7 +35,7 @@
 \section{Algebraic Groupoid Space}
 \newpage
 
-\begin{Def}[\cite{ASS}, p.80, \cite{LMB00} 2.4.3, \url{https://en.wikipedia.org/wiki/Groupoid_object}]
+\begin{Def}[\cite{Olsson16}, p.80, \cite{LMB} 2.4.3, \url{https://en.wikipedia.org/wiki/Groupoid_object}]
     圏$\cat{C}$をfinite fiber productを持つ圏とする．
     圏$\cat{C}$の対象$X_0, X_1$と，
     次の$5$つの射の組 :: $(X_0,X_1, s,t,c,e,i)$を考える．
@@ -179,6 +176,5 @@ $(U, R, s,t,c,e,i)$ ( $(U, R, s,t), U \parto{s}{t} R$ )という記号が使わ�
         $f_{can}$の具体的な構成が記述されている．
     \end{proof}
 
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}

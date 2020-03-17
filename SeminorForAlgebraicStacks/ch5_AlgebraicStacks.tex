@@ -1,5 +1,4 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
-\usepackage{macros}
+\input{preamble}
 
 \newcommand{\Diag}{\Delta}
 \newcommand{\rest}{\vspace{5pt}}
@@ -43,7 +42,7 @@ $\cat{B}$ :: categoryとする．
 \end{description}
 
 重要なのは次の存在命題である．
-\begin{Prop}[\cite{Gomez} p.10]
+\begin{Prop}[\cite{Gomez99} p.10]
     任意の圏$\cat{C}$について，
     $\FibBP{B}$と$\CFG{B}$はfibered productを持つ．
 \end{Prop}
@@ -176,7 +175,7 @@ $\cat{B}$ :: categoryとする．
 
 我々が扱うのはstackであるから，
 stackという性質がfiber productで保たれていて欲しいが，果たしてそうなる．
-\begin{Prop}[\cite{ASS} Prop 4.6.4]
+\begin{Prop}[\cite{Olsson16} Prop 4.6.4]
     $\stX, \stY, \stZ$ :: stack over $\cat{C}$とし，
     morphism of stacks :: $F \colon \stX \to \stZ, G \colon \stY \to \stZ$をとる．
     この時，$F, G$についてのfiber product :: $\stX \times_{\stZ} \stY$はstackである．
@@ -246,7 +245,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 \end{Def}
 
 \section{Local Property of Scheme/Morphism of Them}
-\begin{Def}[\cite{IrrOfMg} p.100, Local Property for the topology.]
+\begin{Def}[\cite{DM69} p.100, Local Property for the topology.]
     $S$ :: schemeとし，$(\Sch/S)$上のsite :: $\cat{C}$を考える．
     $X, Y$ :: schemeとし，
     $\{\phi_i \colon X_i \to X\} \in \Cov(X), \{\psi_i \colon Y_i \to Y\} \in \Cov(Y)$を任意に取る．
@@ -266,7 +265,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             $f \colon X \to Y$が$P$であることは，
                 全ての$\pr_2 \colon X \times_Y Y_i \to Y_i$が$P$であることと同値．
         \item
-            (\cite{ASS} 5.1.3)
+            (\cite{Olsson16} 5.1.3)
             $P$をschemeの射の性質とする．
             以下が全て成り立つ時，$P$はstableであると呼ばれる．
             \begin{itemize}
@@ -277,7 +276,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \end{itemize}
 
         \item
-            (\cite{LMB00} p.33, \cite{Gomez} p.16)
+            (\cite{LMB} p.33, \cite{Gomez99} p.16)
             $P$をschemeの射の性質とする．
             以下が全て成り立つ時，
             $P$はsmooth (resp. etale) local on source and targetであると呼ばれる．:
@@ -334,7 +333,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \end{tikzcd}
             \]
             この時，射$f$が$P$であることと，全ての射$f_i$が$P$であることは同値．
-            \cite{IrrOfMg}, p.100より．
+            \cite{DM69}, p.100より．
         
         \item[DM'] \mnewline
             以下のschemeの可換図式が成立しているとする．
@@ -360,7 +359,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
                 \item local on source,
                 \item local on target．
             \end{itemize}
-            \cite{ASS} Def 5.1.3, 5.4.11で採用されている．
+            \cite{Olsson16} Def 5.1.3, 5.4.11で採用されている．
 
         \item[La] \mnewline
             $X, Y$ :: schemeとし，射$Y' \to Y, X' \to Y' \times X$をcoverとする．
@@ -372,7 +371,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
             \end{tikzcd}
             \]
             この時，$f$が$P$であることは$f'$が$P$であることと同値．
-            \cite{LMB00} p.33, \cite{Gomez} p.16で採用されている．
+            \cite{LMB} p.33, \cite{Gomez99} p.16で採用されている．
         
         \item[La'] \mnewline
             $X, Y$ :: schemeとし，射$Y' \to Y, X' \to X$をcoverとする．
@@ -462,7 +461,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
 \subsection{Definition of Algebraic Space}
     \begin{Def}[Algebraic Space]
-        $S$ :: schemeとし，$\shX$をspace over $S$（すなわちbig etale site $\Et(S)$上のsheaf）とする．
+        $S$ :: schemeとし，$\shX$をspace over $S$（すなわちbig etale site $\ET(S)$上のsheaf）とする．
         $\shX$がalgebraicであるとは，次が成り立つということである．
     \begin{enumerate}
         \item diagonal morphism :: $\Diag \colon \shX \to \shX \times_{S} \shX$がrepresentableである．
@@ -485,7 +484,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
     \item
         algebraic stack :: $\shX$がquasi-compact
-        \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
+        \tablefootnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
         $\shX$のあるatlasが性質$\mathcal{P}$を持つということである．
     \end{enumerate}
     \end{Def}
@@ -712,19 +711,19 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         我々が採用するalgebraic stackの定義は，しばしばArtin stackの定義として参照される．
 
         歴史的には，DM stackの方が先に定義された．
-        これは1969年の論文\cite{IrrOfMg}でのことである．
+        これは1969年の論文\cite{DM69}でのことである．
         動機はalgebraic stack $\bar{\mathscr{M}}_g$を通して，
         coarse moduli schemeの性質を調べることだった．
         しばしばDM stackの定義として
         $\Diag \colon \stX \to \stX \times \stX$はquasi-compactかつseparatedであるものとする．
-        しかしこれは\cite{IrrOfMg}では要求されて居ない．
+        しかしこれは\cite{DM69}では要求されて居ない．
 
-        一方，Artin stackは1974年の論文\cite{Art74}でDM stackの一般化として定義された．
+        一方，Artin stackは1974年の論文\cite{Artin74}でDM stackの一般化として定義された．
         我々が扱うAlgebraic stackの定義（したがって多くの文献での``Artin stack"の定義）は，
         原論文のものとは異なる．
         Artin stackをどのsite上のstackとして定義するか，という部分にも文献に寄って違いがある．
-        \cite{Art74}, \cite{SP}ではfppf siteを考え，
-        \cite{LMB00}, \cite{ASS}ではetale siteを考える．
+        \cite{Artin74}, \cite{SP}ではfppf siteを考え，
+        \cite{LMB}, \cite{Olsson16}ではetale siteを考える．
     \end{Remark}
     \rest
 
@@ -742,18 +741,18 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
 \item
     algebraic stack :: $\stX$がquasi-compact
-    \footnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
+    \tablefootnote{ 明らかに，これはlocal for etale topologyではない． }であるとは，
     $\stX$のあるatlasが性質$\mathcal{P}$を持つということである．
 \end{enumerate}
 \end{Def}
 
-\begin{Def}[\rep Property of Morphism of Algebraic Stack, \cite{LMB00} p.33, \cite{IrrOfMg} p.100]
+\begin{Def}[\rep Property of Morphism of Algebraic Stack, \cite{LMB} p.33, \cite{DM69} p.100]
     $\mathcal{P}$をmorphism of schemeの性質であって，
     smooth local on source and targetであるものとする．
     あるいは，DM stackを考えるならば
     etale local on source and targetであるものとする．
     以下の可換図式で，$V \to \stY, U \to V \times \stX$はatlasであるとする
-    \footnote
+    \tablefootnote
     {
         すなわち，
         algebraic stack(Artin stack)を考えているならばsmooth surjective morphismを考え，
@@ -827,7 +826,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     この例を通じて特に，
     「diagonal morphism $\Diag \colon \stX \to \stX \times_S \stX$が表現可能とはどういうことか」
     ということを考えたい．
-    参考文献として\cite{LMB00} 1.3.2, \cite{IrrOfMg} Example 4.8, \cite{ASS} Example 8.1.12を参照する．
+    参考文献として\cite{LMB} 1.3.2, \cite{DM69} Example 4.8, \cite{Olsson16} Example 8.1.12を参照する．
 
 \subsection{Definitions.}
     \subsubsection{\tp{$\shG$}{G}-torsor}
@@ -847,7 +846,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         このような射$f$は$\shG$-equivariant morphism（$\shG$同変写像）と呼ばれる．
     \end{Def}
 
-    \begin{Def}[$\shG$-Torsor, \cite{ASS} 4.5.1, \cite{SP} Tag 04UJ]
+    \begin{Def}[$\shG$-Torsor, \cite{Olsson16} 4.5.1, \cite{SP} Tag 04UJ]
         一般のsite :: $\cat{C}$をとり，$\shG$を$\cat{C}$上のsheaf of groupsとする．
         $\cat{C}$上の$\shG$-torsorとは，
         $\cat{C}$上のsheaf :: $\shP$と左作用$\alpha \colon \shG \times \shP \to \shP$の組であって，
@@ -887,15 +886,15 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
         ただ一つの$g \in \shG(X)$が存在し，$q=g \ast q=\alpha(g, p)$となる．
     \end{Remark}
 
-    \begin{Lemma}[\cite{SP} Tag 03AI, \cite{ASS} 4.5.1]
+    \begin{Lemma}[\cite{SP} Tag 03AI, \cite{Olsson16} 4.5.1]
         \enumfix
         \begin{enumerate}
             \item 
             $\shG$-torsor :: $(\shP, \alpha)$が自明であることと，
-            $\shP$がglobal section\footnote
+            $\shP$がglobal section\tablefootnote
             {
-                前層の圏$\PSh(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{SP} Tag 06UN)．
-                $\PSh(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
+                前層の圏$\PShv(\cat{C})$のterminal objectから$\shP$への射のこと(\cite{SP} Tag 06UN)．
+                $\PShv(\cat{C})$のterminal objectは自明群で定まるconstant sheafである．
             }
             を持つことと同値．
 
@@ -935,7 +934,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{proof}
 
     \subsubsection{Quotient Stack}
-    \begin{Def}[Quotient Stack, \cite{ASS} Example 8.1.12]
+    \begin{Def}[Quotient Stack, \cite{Olsson16} Example 8.1.12]
         $X$ :: algebraic space,
         $G$ :: smooth group scheme over $S$, acting on $X$とする．
         すなわち左作用$\alpha \colon \ftor{G} \times X \to X$が存在するものとする．
@@ -981,7 +980,7 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
     \end{Lemma}
     \begin{proof}
         stackであることはsheafの貼り合わせが可能であることに拠る．
-        詳しくは\cite{ASS} 4.2.12, \cite{SP} Tag 04UKを参照せよ．
+        詳しくは\cite{Olsson16} 4.2.12, \cite{SP} Tag 04UKを参照せよ．
         $[X/G]$がcategory fibered in groupoids(CFG)であることを確かめる．
         これは恒等射上の$[X/G]$の射が同型射であることを確かめれば良い．
 
@@ -1022,11 +1021,11 @@ stackの圏及びstack in groupoidsの圏はfiber productを持つ．
 
         \item[Arrow.]
             射
-            \[
-                (V \xrightarrow{f} U, f^*X \to X, f^*Y \to Y, f^*X \xrightarrow{\phi} f^*Y)
-                \to
+            \begin{gather}
+                (V \xrightarrow{f} U, f^*X \to X, f^*Y \to Y, f^*X \xrightarrow{\phi} f^*Y) \\
+                \hspace{2cm} \to
                 (W \xrightarrow{g} U, g^*X \to X, g^*Y \to Y, g^*X \xrightarrow{\psi} g^*Y)
-            \]
+            \end{gather}
             は，以下の$2$つからなる．
             \begin{itemize}
                 \item $\cat{B}/U$の射$h \colon V \to W$（したがって$g \circ h=f$が成立），
@@ -1173,7 +1172,7 @@ $\Isom(\shP_1, \shP_2)$がalgebraic spaceであることは同値である．
 これは次のようにして自明な場合に帰着できる．
 
 \step{$\shP_1, \shP_2$が自明な場合に帰着させる．}
-\begin{Lemma}[\cite{ASS} Exc 5.G]\label{lem:F_is_algsp}
+\begin{Lemma}[\cite{Olsson16} Exc 5.G]\label{lem:F_is_algsp}
     $U$ :: schemeをとる．
     sheaf on $\ET(U)$ :: $\shF$とetale surjective morphism :: $V \to U$に対し，
     $V \times_{U} \shF$がalgebraic spaceならば，$\shF$はalgebraic space.
@@ -1320,6 +1319,5 @@ smooth, surjectiveはどちらもetale local on targetな性質なので，
 $\shP \to Y$もetale, surjective．
 （ついでに$\shP$ :: algebraic spaceも分かる．）
 
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}

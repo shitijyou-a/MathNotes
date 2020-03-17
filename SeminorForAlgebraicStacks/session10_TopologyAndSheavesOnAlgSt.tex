@@ -13,9 +13,9 @@ artin stackのZariski位相空間と，
 （Grothendieck topology上の）sheafを導入する．
 
 \section{Points of Artin Stack}
-いずれも\cite{SP} Tag 04XE, \cite{LMB00} section 5.を参照せよ．
+いずれも\cite{SP} Tag 04XE, \cite{LMB} section 5.を参照せよ．
 
-\begin{Def}[\cite{LMB00} section 5]
+\begin{Def}[\cite{LMB} section 5]
     体の$\Spec$からの射
     $x_1 \colon \Spec k_1 \to \stX, x_2 \colon \Spec k_2 \to \stX$について
     $x_1 \sim x_2$であるとは，
@@ -383,7 +383,7 @@ artin stackのZariski位相空間と，
     strictly full sub-categoryであるとは限らないことに注意．
 \end{Remark}
 
-\begin{Prop}[\cite{SP} 06FJ, \cite{LMB00} Cor5.6.1]\label{prop:Uto|U|}
+\begin{Prop}[\cite{SP} 06FJ, \cite{LMB} Cor5.6.1]\label{prop:Uto|U|}
 \begin{myenum}
     \item $\stU$がopen sub-stack of $\stX$ならば$|\stU|$は$|\stX|$のopen sub-set.
     \item open sub-stack of $\stX$の集まりからの対応$\stU \mapsto |\stU|$は一対一．
@@ -395,7 +395,7 @@ artin stackのZariski位相空間と，
 \end{proof}
 
 \subsubsection{Topological Property of \tp{$|\stX|$}{|X|}.}
-\begin{Prop}[\cite{LMB00} 5.6.1(iii), 5.7.2]
+\begin{Prop}[\cite{LMB} 5.6.1(iii), 5.7.2]
     atrin stack :: $\stX$を考える．
     位相空間$|\stX|$について次が成り立つ．
     \begin{enumerate}
@@ -405,7 +405,7 @@ artin stackのZariski位相空間と，
     \end{enumerate}
 \end{Prop}
 
-\begin{Prop}[\cite{LMB00} 5.7]
+\begin{Prop}[\cite{LMB} 5.7]
     artin stackのquasi-compact射 :: $f \colon \stX \to \stY$について，
     $|f|(\stX)$ :: stable under specialization.
 \end{Prop}
@@ -506,7 +506,7 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
     で$f^{-1}\shG \in \stX_{\ET}$を定める．
     同じく，sheaf :: $\shF \in \stX_{\ET}$について，
     \[
-        (f_*\shF)(\ (V, v)\ )=\Lim \left( I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \ET(\stX) \xto{\shF} \Sets \right)
+        (f_*\shF)(\ (V, v)\ )=\Lim \left( I_{(V,v)}^{\mathrm{op}} \xto{\pr_2} \ET(\stX) \xto{\shF} \Set \right)
         \mwhere (V, v) \in \ET(\stY)
     \]
     で$f_*\shF \in \stY_{\ET}$を定める．
@@ -552,12 +552,12 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
 \begin{proof}
     $(f \circ) \colon (\Sch/\stX) \to (\Sch/\stY)$を
     $f \colon \stX \to \stY$の合成で得られる関手とする．
-    すると関手$f^{-1}$は関手(sheaf) $(\Sch/\stY) \to \Sets$と$(f \circ)$の合成としてかける．
+    すると関手$f^{-1}$は関手(sheaf) $(\Sch/\stY) \to \Set$と$(f \circ)$の合成としてかける．
 
     これを用いると上の定義は次のように変形できる．
     \[
         (f_*\shF)(\ (V,v)\ )
-        =\Lim\Big(  ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\pi_1} (\Sch/\stY) \xto{\shF} \Sets \Big)
+        =\Lim\Big(  ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\pi_1} (\Sch/\stY) \xto{\shF} \Set \Big)
     \]
     $((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}}$は
     圏$(f \circ) \downarrow (V,v)$の双対圏にetale Grothendieck topologyを与えてできるsiteである．
@@ -580,13 +580,13 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
     \begin{Lemma}[\url{https://ncatlab.org/nlab/show/limit\#limit_of_a_setvalued_functor}]
         site :: $\mathcal{S}$上のset-value sheaf :: $\shF$を考える．
         この時，
-        \[ \Lim \big( \mathcal{S}^{\mathrm{op}} \xto{\shF} \Sets \big)=\Gamma( \mathcal{S}, \shF). \]
+        \[ \Lim \big( \mathcal{S}^{\mathrm{op}} \xto{\shF} \Set \big)=\Gamma( \mathcal{S}, \shF). \]
     \end{Lemma}
     
     今，一つ前の命題と合わせて
     \[
         (f_*\shF)(\ (V, v)\ )
-        =\Lim\Big( ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\shF \circ \pi_1} \Sets \Big)
+        =\Lim\Big( ((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}} \xto{\shF \circ \pi_1} \Set \Big)
         =\Gamma( ((f \circ) \downarrow (V,v))_{\et}, \shF \circ \pi_1).
     \]
     なので$((f \circ) \downarrow (V,v))_{\et}^{\mathrm{op}}=\ET(V \times_{y, \stY, f} \stX)$と
@@ -662,12 +662,10 @@ $\shO_{\stX}$が確かにsheafであることは\cite{SP} 03DTで証明されて
 
 \begin{Remark}
     lisse-etale siteを採用する場合は，
-    $f^{-1}$はcolimitとして定義される(\cite{LMB00} section 12.5)．
+    $f^{-1}$はcolimitとして定義される(\cite{LMB} section 12.5)．
     これは \cite{SP} 00XFにおける$u_p$であるが，
     $f_*$とadjointではない（$f^{-1} \dashv f_*$は上で述べた）．
 \end{Remark}
 
-
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}

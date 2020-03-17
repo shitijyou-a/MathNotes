@@ -1,8 +1,5 @@
-\documentclass[a4paper, dvipdfmx]{jsarticle}
-\usepackage{macros}
-
+\input{preamble}
 \newcommand{\HOM}{\operatorname{HOM}}
-\newcommand{\centerpb}{\ar@{}[lu]|{\text{p.b.}}}
 
 \begin{document}
 \title{第3章 \\ Fibered Categories}
@@ -32,7 +29,7 @@
     \end{itemize}
 
     \newpage
-\begin{Def}[Cartesian Arrow, Cartesian Lifting, Cartesian Functor, Base Preserving Natural Transformation, \cite{ASS} and \cite{IntroFibCat}]
+\begin{Def}[Cartesian Arrow, Cartesian Lifting, Cartesian Functor, Base Preserving Natural Transformation, \cite{Olsson16} and \cite{Noohi12}]
 \begin{myenum}
 \item
     以下の性質（Triangle Liftingという）を満たす
@@ -89,7 +86,7 @@
 \item
     $y \in \stX, u \to \pi(y) \in \cat{B}$に対し，
     以下の図式を満たす
-    \footnote{すなわち，$\pi(x)=u, \pi(x \to y)=u \to \pi(y)$を満たす．}
+    \tablefootnote{すなわち，$\pi(x)=u, \pi(x \to y)=u \to \pi(y)$を満たす．}
     \underline{$x \in \stX$とcartesian arrow :: $x \to y \in \stX$}を，
     cartesian lifting(or cleavage) of $u \to \pi(y)$と呼ぶ．
     \begin{center}
@@ -122,7 +119,7 @@
     $\pi \colon \stX \to \cat{B}, \pi' \colon \stX' \to \cat{B}$について，
     $\stX$と$\stX'$の間の射(morphism of fibered categories, cartesian functor)とは，
     functor :: $g \colon \stX \to \stX'$であって，
-    $\pi, \pi'$と整合的\footnote{ すなわち$\pi' \circ g=\pi$を満たす. }であり，
+    $\pi, \pi'$と整合的\tablefootnote{ すなわち$\pi' \circ g=\pi$を満たす. }であり，
     cartesian arrowをcartesian arrowに写すもの．
 
 \item
@@ -210,7 +207,7 @@
     別のmorphism $h \colon \stX' \to \stX$が存在し，
     $h \circ g$と$\id[\stX]$，$g \circ h$と$\id[\stX']$の間に
     base-preserving isomorphismが存在すること
-    \footnote{ 基本的にはcategory of equivalenceの定義と同じである． }．
+    \tablefootnote{ 基本的にはcategory of equivalenceの定義と同じである． }．
     \[ h \circ g \kiso[2] \id[\stX], g \circ h \kiso[2] \id[\stX']. \]
     二つのfibrered categoryがequivalentであるとは，
     二つの間にequivalence of fibered categoryが存在するということである．
@@ -232,14 +229,23 @@
     \begin{description}[labelindent=1cm]
         \item[Object.]
             pullback diagram :: 
-            $\vcenter{\xymatrix{ P \ar[r]\ar[d]& X \ar[d]^-{f}\\ Z \ar[r]& Y \centerpb }}$.
+            $\begin{tikzcd}
+                P \ar[r]\ar[d]& X \ar[d, "f"]\\
+                Z \ar[r]& Y
+                \ar[lu, phantom, "\text{p.b.}"]
+            \end{tikzcd}$
         \item[Arrow.]
             pullback diagramと整合的な射の組$(Z \to Z', P \to P')$．
     \end{description}
     $\Pi(f)$から次のようにprojectionが定まる．
     \begin{defmap}
         \pi\colon & \Pi(f)& \to& \Sch/Y \\
-        {}& \vcenter{\xymatrix{ P \ar[r]\ar[d]& X \ar[d]^-{f}\\ Z \ar[r]& Y \centerpb }}& \mapsto& [ Z \to Y ]
+        {}& \begin{tikzcd}
+                P \ar[r]\ar[d]& X \ar[d, "f"]\\
+                Z \ar[r]& Y 
+                \ar[lu, phantom, "\text{p.b.}"]
+            \end{tikzcd}
+        & \mapsto& [ Z \to Y ]
     \end{defmap}
     ここで注意したいのは，
     $\Pi(f)$はpullback of $f$の同型類や代表ではなく，pullback of $f$全てであることである．
@@ -255,7 +261,10 @@
         \item[Arrow.]
             射$[x \to u] \to [y \to v]$は
             次の図式を可換にする$x \to y, u \to v$の組: 
-            $\vcenter{\xymatrix{ x \ar@{-->}[r]\ar[d]& y \ar[d]\\ u \ar@{-->}[r]& v }}$
+            $\begin{tikzcd}
+                x \ar[r, dashed]\ar[d]& y \ar[d]\\
+                u \ar[r, dashed]& v
+            \end{tikzcd}$.
     \end{description}
     するとCartesian Liftingは$\cat{C}$がpullbackを持つことを意味し，
     Triangle Liftingはpullbackの普遍性を意味する．
@@ -270,7 +279,7 @@
 \end{Example}
 
 \subsection{Propositions.}
-\begin{Prop}[\cite{NoteGroTop} Prop3.4]
+\begin{Prop}[\cite{Vistoli07} Prop3.4]
 \begin{myenum}
 \item
     cartesian arrowの合成はcartesian arrowである．
@@ -417,7 +426,7 @@
     このclassが圏を成すと綺麗である．
     そのようなCleavageを選べるFibrationをSplit fibrationと呼ぶ．
 
-    \begin{Def}[\cite{ASS}]
+    \begin{Def}[\cite{Olsson16}]
         $\pi \colon \stX \to \cat{B}$ :: fibered categoryとする．
         splitting of $\pi$とは，以下を満たすsubcategory :: $\cat{S} \subset \stX$のことである．
         \begin{enumerate}
@@ -534,9 +543,9 @@
     \[
         \stX_b=\stX(b):=``
         \pi^{-1} \left(
-        \vcenter{\xymatrix{
-            b \ar@(ur,dr)^-{\id}
-        }}
+        \begin{tikzcd}
+            b \ar[loop right, "\id"]
+        \end{tikzcd}
         \right)"
     \]
     
@@ -682,7 +691,7 @@ contravariant functorに成ることが予想される．
 \section{Grothendieck Construction} \label{sec:gro_const}
     今，fibered categoryからfiberとしてpsuedo-functorを構成した．
     実はこの逆が出来る．
-    \begin{Def}[Grothendieck Construction, \cite{ASS}, \cite{IntroFibCat}]
+    \begin{Def}[Grothendieck Construction, \cite{Olsson16}, \cite{Noohi12}]
         psuedo-functor :: $P \colon \cat{B} \to \Cat/\cat{B}$について，
         以下のように圏$\int P$を定義する．
         \begin{description}[labelindent=1cm]
@@ -705,7 +714,7 @@ contravariant functorに成ることが予想される．
     \end{Example}
 
     \begin{Example}
-        presheaf of set :: $F \colon \cat{C} \to \Sets$は
+        presheaf of set :: $F \colon \cat{C} \to \Set$は
         $\bigsqcup_{c \in \cat{C}} F(c)$に対応する．
     \end{Example}
 
@@ -738,7 +747,7 @@ contravariant functorに成ることが予想される．
         weak $2$-equivalenceとなる．
     \end{Thm}
     \begin{proof}
-        \cite{NoteGroTop} \S 3.1.3に詳しい証明がある．
+        \cite{Vistoli07} \S 3.1.3に詳しい証明がある．
         あるいは，
         P. T. Johnstone
             ``Sketches of an Elephant: A Topos Theory Compendium vol.1 (Oxford Logic Guides 43)"
@@ -835,10 +844,10 @@ contravariant functorに成ることが予想される．
             \node [below=5pt of B] {in $\cat{B}$};
             \draw [->, line width=1.5pt] (X) edge (B);
             \node at (0.3,1.55) {$\pi$};
-            \draw (4,4) -- (4,-1);
+            \draw (3.7,4) -- (3.7,-1);
             \node at (-3,4) {($1$)};
             \end{tikzpicture}
-            \qquad \qquad
+            \qquad
             \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
             \node[mybox] (X) at (0,3){%
                 \begin{tikzcd}
@@ -865,7 +874,7 @@ contravariant functorに成ることが予想される．
         \item
             $y \in \stX, u \to \pi(y) \in \cat{B}$に対し，
             以下の図式を満たす
-            \footnote{すなわち，$\pi(x)=u, \pi(x \to y)=u \to \pi(y)$を満たす．}
+            \tablefootnote{すなわち，$\pi(x)=u, \pi(x \to y)=u \to \pi(y)$を満たす．}
             \underline{$x \in \stX$と射$x \to y \in \stX$}が存在する．
             \begin{center}
             \begin{tikzpicture}[mybox/.style={draw, inner sep=5pt}]
@@ -888,11 +897,9 @@ contravariant functorに成ることが予想される．
             \end{center}
         \end{enumerate}
     \end{Def}
-
     \begin{proof}
         \cite{SP} 003V\footnote{ \url{https://stacks.math.columbia.edu/tag/003V} }.
     \end{proof}
-
 
 \section{Equivalence of Fibered Categories}
     Fibered categoryの一般論の最後に，
@@ -933,10 +940,10 @@ contravariant functorに成ることが予想される．
         \end{description}
     \end{Prop}
     \begin{proof}
-        \cite{Awodey} Prop7.26を参照せよ．
+        \cite{Awodey10} Prop7.26を参照せよ．
     \end{proof}
 
-    \begin{Prop}[\cite{ASS} Prop3.1.18, 3.1.10]
+    \begin{Prop}[\cite{Olsson16} Prop3.1.18, 3.1.10]
         $b \in \cat{B}$について，
         $g$を$\stX(b)$に制限して得られる関手を$g_b \colon \stX(b) \to \stX'(b)$とする．
         \begin{enumerate}[label=(\alph*)]
@@ -944,7 +951,7 @@ contravariant functorに成ることが予想される．
                 $\iff$ 任意の$b \in \cat{B}$について，$g_{b}$ :: fully faithful.
         \item $g$ :: equivalence
                 $\iff$ 任意の$b \in \cat{B}$について，$g_{b}$ :: equivalence
-                    \footnote{こちらは通常の圏同値}.
+                    \tablefootnote{こちらは通常の圏同値}.
     \end{enumerate}
     \end{Prop}
     \begin{proof}
@@ -968,6 +975,5 @@ contravariant functorに成ることが予想される．
         (TODO: proof of (ii))
     \end{proof}
 
-\bibliographystyle{jplain}
-\bibliography{../references/stacks_reference}
+\printbibliography[title=参考文献]
 \end{document}
