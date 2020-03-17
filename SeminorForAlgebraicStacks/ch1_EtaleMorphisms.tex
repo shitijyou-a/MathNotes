@@ -17,7 +17,7 @@
     \begin{enumerate}[label=(\roman*), leftmargin=*]
     \item
     $i \colon Y_0' \inclmap Y'$ :: closed embeddingについて，
-    defining ideal :: $\ker i^{\#}$がnilpotent \footnote{i.e. $\Exists{n > 0} (\ker i^{\#})^n=0$}であるとき，
+    defining ideal :: $\ker i^{\#}$がnilpotent \tablefootnote{i.e. $\Exists{n > 0} (\ker i^{\#})^n=0$}であるとき，
     $Y_0'$を$Y'$のinfinitesimal thickening（無限小肥大？）と呼ぶ．
     あるいは$i$をinfinitesimal thickeningと呼ぶ．
 
@@ -26,7 +26,7 @@
     $f \colon X \to Y$について，以下の図式を見よ．
     \[
     \begin{tikzcd}
-        Y_0' \ar[d, hook, "\text{inf. thi.}"'] \ar[r, red]& X \ar[d]^-{f} \\
+        Y_0' \ar[d, hook, "\text{inf. thi.}"'] \ar[r, red]& X \ar[d, "f"] \\
         Y' \ar[r] \ar[ru, blue]& Y
     \end{tikzcd}
     \]
@@ -81,13 +81,13 @@
     \item
         $f \colon X \to Y$がquasi-separatedであるとは．
         またdiagonal morphism :: $\Delta \colon X \to X \times_{Y} X$
-        \footnote
+        \tablefootnote
         {
             $\Delta$は以下のようにpullbackの普遍性から得られる射である．
             \[
-            \begin{tikzcd}
-                X \ar[rr, shift left=5mm]\ar[rd]\ar[r, dashed, "\Delta"]& X \times X \ar[d]\ar[r] & X\ar[d, "f"] \\
-                {}& X \ar[r, "f"'] & Y \ar[lu, phantom, "\text{p.b.}"]
+            \begin{tikzcd}[ampersand replacement=\&]
+                X \ar[rr, bend left=45]\ar[rd]\ar[r, dashed, "\Delta"]\& X \times X \ar[d]\ar[r] \& X\ar[d, "f"] \\
+                {}\& X \ar[r, "f"'] \& Y \ar[lu, phantom, "\text{p.b.}"]
             \end{tikzcd}
             \]
         }
@@ -109,7 +109,7 @@
 \end{Def}
 unramifiedについては，finite typeのみ要求する定義もある．
 finitely presentedを要求するのはEGAからのもので，
-我々が主に参照している\cite{ASS}もこの定義を取っている．
+我々が主に参照している\cite{Olsson16}もこの定義を取っている．
 
 \section{Examples.}
 
@@ -126,10 +126,10 @@ finitely presentedを要求するのはEGAからのもので，
     この時，$U$はquasi-compactでない．
     これは$U$ :: quasi-compact $\iff$ $z$ :: finitely generatedからわかる
     \footnote
-        {
-            私のノート: \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section2_ex.pdf}
-            補題 Ex2.13.2 (II)に証明がある．
-        }．
+    {
+        私のノート: \url{https://github.com/ShitijyouA/MathNotes/blob/master/Hartshorne_AG_Ch2/section2_ex.pdf}
+        補題 Ex2.13.2 (II)に証明がある．
+    }．
 
     $X$を，二つの$Y$のコピーを$U$で貼り合わせたものとし，
     $X_1, X_2 \subseteq X$をその$Y$のコピーとする．
@@ -193,8 +193,6 @@ finitely presentedを要求するのはEGAからのもので，
         A \ar[u, "h^{\#}"] \ar[r, "\phi"']& R \ar[u, "\pi"']
     \end{tikzcd}
     \]
-    \[\xymatrix{
-    }\]
     ここで$I \subseteq R$はイデアルで，$I^N=0$となる整数$N>0$が存在する．
     与えられた$\alpha$から図式を可換にする$\beta$を構成し，
     このような$\beta$が$\alpha$に対し唯一つであることを示す．
@@ -268,7 +266,7 @@ finitely presentedを要求するのはEGAからのもので，
 \end{proof}
 %% }}}
 
-\begin{Prop}[\cite{ASS} Prop1.3.6 (i)] \label{prop:dermod}
+\begin{Prop}[\cite{Olsson16} Prop1.3.6 (i)] \label{prop:dermod}
     $f \colon X \to Y$をfinite presentation, quasi-separated morphismとする．
     この時$\shDer_{X/Y}$は次のように成る．
 \begin{enumerate}[label=(\roman*)]
@@ -279,7 +277,7 @@ finitely presentedを要求するのはEGAからのもので，
 \end{Prop}
 %% {{{
 \begin{proof}
-    証明は\cite{Mat} \S 25の内容を一部使う．
+    証明は\cite{Matsumura87} \S 25の内容を一部使う．
     特に\S 25始めからThm25.1の直前までがわかっていれば良い．
 
     主張はlocalなものだから，$X=\Spec B, Y=\Spec A$と仮定して良い．
@@ -292,7 +290,7 @@ finitely presentedを要求するのはEGAからのもので，
     図式を可換にする$\tilde{D} \colon \modDer_{B/A} \to M$が存在するということである．
     \[
     \begin{tikzcd}
-        {} & \modDer_{B/A} \ar[d]^-{D}\\
+        {} & \modDer_{B/A} \ar[d, "D"], \ar[ld, dashed, "\tilde{D}"'] \\
         M \ar[r, two heads, "t"]& N
     \end{tikzcd}
     \]
@@ -305,7 +303,7 @@ finitely presentedを要求するのはEGAからのもので，
         A \ar[r]\ar[u, "\phi"]& B[M]\ar[u, two heads]
     \end{tikzcd}
     \]
-    ここで$B[M]$は\cite{Mat} \S 25でいう$B \ast M$である
+    ここで$B[M]$は\cite{Matsumura87} \S 25でいう$B \ast M$である
     \footnote
     {
         これらは$B$-algebraで，加群としては$B \oplus M$で，
@@ -333,7 +331,7 @@ finitely presentedを要求するのはEGAからのもので，
     \end{tikzcd}
     \]
     この時，$\lambda$をlifting of $\theta$と呼ぶ．
-    \cite{Mat} \S 25より
+    \cite{Matsumura87} \S 25より
     \footnote
     {
         あるいは私のノート
@@ -353,7 +351,7 @@ finitely presentedを要求するのはEGAからのもので，
     formally etale $\implies$ formally unramifiedなので(ii)$\implies$(iii)は明らか．
 \end{proof}
 %% }}}
-\begin{Prop}[\cite{ASS} Prop1.3.6 (iii)] \label{prop:smooth_exact}\hfill \vspace{-7mm}
+\begin{Prop}[\cite{Olsson16} Prop1.3.6 (iii)] \label{prop:smooth_exact}\hfill \vspace{-7mm}
     \begin{itemize}
         \item $g \colon X \to Y$をsmooth morphism，
         \item $i \colon Z \to X$をlocally of finite presented closed embedding
@@ -373,15 +371,17 @@ finitely presentedを要求するのはEGAからのもので，
     問題はlocalなものであるから，
     $X=\Spec B, Y=\Spec A, Z=\Spec R=\Spec B/I$とする．
     この時，主張にある完全列は次のように成る．
-    \[\xymatrix{
-            0 \ar[r]& I/I^2 \ar[r]^-{\delta}& \shDer_{B/A} \otimes_A R \ar[r]& \shDer_{R/A} \ar[r]& 0.
-    }\]
+    \[
+    \begin{tikzcd}
+        0 \ar[r]& I/I^2 \ar[r, "\delta"]& \shDer_{B/A} \otimes_A R \ar[r]& \shDer_{R/A} \ar[r]& 0.
+    \end{tikzcd}
+    \]
     ただし$\delta \colon i \bmod I^2 \mapsto d_{B/A}(i) \otimes 1_R$．
     $d_{B/A}$はderivationである．
 
     \paragraph{方針．}
     左端の$0$を除いたものはSecond Fundamental Exact Sequenceとして知られ，
-    \cite{Mat} Thm25.2などで証明されているとおり，常に成立する．
+    \cite{Matsumura87} Thm25.2などで証明されているとおり，常に成立する．
     また，明らかに$f$ :: locally finitely presented．
     したがって我々は，
     \begin{enumerate}[label=(\alph*), leftmargin=*]
@@ -409,12 +409,14 @@ finitely presentedを要求するのはEGAからのもので，
     \begin{Claim}
         任意の$\phi \in \Hom_R(I/I^2, N)$に対し，
         以下を満たす射$\psi \colon B \to R[N]$が存在する．
-        \[\xymatrix@R=10pt{
-                B \ar[r]^-{\psi}& R[N] \ar@{->>}[r]^-{\pr_1}& R & =
-                    & B \ar@{->>}[r]^-{\bmod I}& R \\
-                I \ar@{^{(}->}[r]& B \ar[r]^-{\psi}& R[N] & =
-                    & I \ar[r]^-{\bmod I^2}& I/I^2 \ar[r]^-{\phi}& N \ar@{>->}[r]& R[N]
-        }\]
+        \[
+        \begin{tikzcd}[row sep=10pt]
+            B \ar[r, "\psi"]& R[N] \ar[r, two heads, "\pr_1"]& R & =
+                & B \ar[r, two heads]^-{\bmod I}& R \\
+            I \ar[r, hook]& B \ar[r, "\psi"]& R[N] & =
+                & I \ar[r, "\bmod I^2"]& I/I^2 \ar[r, "\phi"]& N \ar[r, tail]& R[N]
+        \end{tikzcd}
+        \]
     \end{Claim}
     一行目の等号は$\psi$が$\pi_N$のsectionであることを意味し，
     二行目の等号は$\pr_2 \circ \psi \colon B \to N$が$\delta^*(\phi)$に等しいことを意味する．
@@ -422,10 +424,12 @@ finitely presentedを要求するのはEGAからのもので，
     \paragraph{$\delta^*$ :: surj.}
     $\psi$は次のように構成する．
     まず次の可換図式を考える．
-    \[\xymatrix{
-        R \ar@{=}[r]& R \\
-        A \ar[r]\ar[u]& B/I^2 \ar@{->>}[u]_-{\pi}
-    }\]
+    \[
+    \begin{tikzcd}
+        R \ar[r, equal]& R \\
+        A \ar[r]\ar[u]& B/I^2 \ar[u, two heads, "\pi"']
+    \end{tikzcd}
+    \]
     $\pi$は$I/I^2$による剰余をとる写像である．
     $A \to R$ :: formally smoothから，図式を可換にする射$\sigma \colon R \to B/I^2$が存在する．
     この射から次のように同型$R[I/I^2] \iso B/I^2$が作れる．
@@ -435,27 +439,33 @@ finitely presentedを要求するのはEGAからのもので，
         {}& \pi(r)+\tilde{i}& \mapedfrom& (r, \tilde{i})
     \end{defmap}
     これを元に$\psi$を構成する．
-    \[\xymatrix{ B \ar[r]& B/I^2 \ar[r]^{q}& R[I/I^2] \ar[r]^-{\id \oplus \phi}& R[N] }\]
+    \[
+    \begin{tikzcd}
+        B \ar[r]& B/I^2 \ar[r, "q"]& R[I/I^2] \ar[r, "\id \oplus \phi"]& R[N]
+    \end{tikzcd}
+    \]
     これが主張の条件を満たすことは自明．
 
     \paragraph{(b) $\implies$ (a)の言い換え : $I \subseteq \ker \tilde{h}$にする．}
     話を切り替えて(b) $\implies$ (a)を証明しよう
-    （これは\cite{Mat}で言及されていない）．
+    （これは\cite{Matsumura87}で言及されていない）．
     $C$ :: $A$-algebra, $J \subset C$ :: ideal with $J^2=0$とし，
     $D=C/J$とおく．
     以下の図式(1)を考える．
     \[
-    (1)\xymatrix{
-        R \ar[r]^-{h}& D \\
+    (1)
+    \begin{tikzcd}
+        R \ar[r, "h"]^-{h}& D \\
         B \ar[u]& {} \\
-        A \ar[u]\ar[r]& C \ar@{-_>}[uu]
-    }
+        A \ar[u]\ar[r]& C \ar[uu, "dashed"]
+    \end{tikzcd}
     \qquad
-    (2)\xymatrix{
-        R \ar[r]^-{h}& D \\
-        B \ar[u]\ar@{-->}[rd]^-{\tilde{h}}& {} \\
+    (2)
+    \begin{tikzcd}
+        R \ar[r, "h"]^-{h}& D \\
+        B \ar[u]\ar[rd, dashed, "\tilde{h}"]& {} \\
         A \ar[u]\ar[r]& C \ar[uu]
-    }
+    \end{tikzcd}
     \]
     $A \to B$ :: formally smoothなので，図式(2)の破線の射$\tilde{h}$を得る．
     我々の目的は図式を可換にする$R \to C$を見つけることである．
@@ -515,7 +525,7 @@ finitely presentedを要求するのはEGAからのもので，
     したがって$X$ :: artinian
     \footnote{ noetherian schemeの定義にある語``noetherian"を
                 ``artinian"に書き換えたのがartinian schemeの定義である． }．
-    artinian ringの構造定理(\cite{Ati-Mac} Thm8.7)と$X$ :: quasi-compactより，$X$は
+    artinian ringの構造定理(\cite{MA06} Thm8.7)と$X$ :: quasi-compactより，$X$は
     \[ X=\bigsqcup \Spec A_i \]
     とdisjointに分解でき，各$A_i$はlocal artinian ringである．
 
@@ -629,9 +639,11 @@ finitely presentedを要求するのはEGAからのもので，
     命題(\ref{prop:smooth_exact})を
     $\Spec B \to \Spec A[x_1,\dots,x_n]=\affine^n_A \to \Spec A$に適用すれば，
     $f$ :: smoothと以下がsplit exact sequenceであることが同値だと分かる.
-    \[\xymatrix{
-        0 \ar[r]& I/I^2 \ar[r]^-{\delta}& \modDer_{A[x_1,\dots,x_n]/A} \otimes_A B \ar[r]& \modDer_{B/A} \ar[r]& 0.
-    }\]
+    \[
+    \begin{tikzcd}
+        0 \ar[r]& I/I^2 \ar[r, "\delta"]& \modDer_{A[x_1,\dots,x_n]/A} \otimes_A B \ar[r]& \modDer_{B/A} \ar[r]& 0.
+    \end{tikzcd}
+    \]
     特に$\delta$ :: split injectiveが同値である．
 
     \paragraph{$f$ :: smooth $\implies$ (+).}
@@ -665,7 +677,7 @@ finitely presentedを要求するのはEGAからのもので，
 
 \begin{Thm}
     scheme :: $S$について，
-    category :: $\Et(S)$を以下のように出さめる．
+    category :: $\ET(S)$を以下のように出さめる．
     \begin{description}
         \item[Objects] etale morphism :: $Z \to S$,
         \item[Arrows] $S$-morphism :: $Z \to Z'$.
@@ -674,27 +686,10 @@ finitely presentedを要求するのはEGAからのもので，
     $i \colon S_0 \to S$ :: infinitesimal thickeningについて，
     関手$F$を以下で定める．
     \begin{defmap}
-        F\colon & \Et(S)& \to& \Et(S_0) \\
+        F \colon & \ET(S)& \to& \ET(S_0) \\
         {}& [Z \to S]& \mapsto& [Z \times_S S_0 \to S_0]
     \end{defmap}
     このとき，$F$は圏同値である．
 \end{Thm}
 
-\section{Proof of The Theorem (\ref{thm:impfunc}).}
-\begin{Lemma}
-    $R$ :: ring, $f \in R[x]$とする．
-    以下のring homomorphismから誘導される$\Spec$間の射は
-    etaleである．
-    \begin{defmap}
-        \phi\colon & R& \to& R[x, 1/f']/(f) \\
-        {}& r& \mapsto& r \cdot f'
-    \end{defmap}
-\end{Lemma}
-\begin{proof}
-    命題(\ref{prop:jac_cri}) (Jacobian criterion)を利用する．
-    この場合，Jacobian :: $\det \mat{f'}=f'$がunit in $R[x, 1/f'](f)$であるから，
-    この補題が成り立つ．
-\end{proof}
-
-\printbibliography[title=参考文献]
 \end{document}
